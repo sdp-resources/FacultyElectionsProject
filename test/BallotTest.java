@@ -16,4 +16,18 @@ public class BallotTest {
   public void isCreatedBallotEmpty (){
     assertEquals(true, ballot.isEmpty());
   }
+
+  @Test
+  public void addingCandidateResultInNonEmptyBallot() {
+    Profile testProfile = new Profile("name", "department");
+    ballot.add(testProfile);
+    assertEquals(false, ballot.isEmpty());
+  }
+
+  @Test
+  public void candidateAddedToBallotList(){
+    Profile testProfile = new Profile("name","department");
+    ballot.add(testProfile);
+
+  }
 }
