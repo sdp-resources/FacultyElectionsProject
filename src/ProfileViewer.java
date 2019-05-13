@@ -8,7 +8,6 @@ public class ProfileViewer {
     profileView.put("Username", profile.getUsername());
     profileView.put("Department" , profile.getDepartment());
     profileView.put("Contract", profile.getContract());
-
   }
 
   public String getValueFromMap(String request) {
