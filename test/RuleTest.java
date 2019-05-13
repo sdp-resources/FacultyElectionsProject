@@ -99,4 +99,42 @@ public class RuleTest {
 
     assertEquals(Rule.TenureRequirements.NonTenured, rule.getTenureRequirement());
   }
+
+  @Test
+  public void CanSetDivisionRequirementToAtLarge()
+  {
+    rule.setDivisionRequirement(Rule.Divisions.AtLarge);
+
+    assertEquals(Rule.Divisions.AtLarge, rule.getDivisionRequirement());
+  }
+
+  @Test
+  public void CanSetDivisionRequirementToArtsAndLetters()
+  {
+    rule.setDivisionRequirement(Rule.Divisions.ArtsAndLetters);
+
+    assertEquals(Rule.Divisions.ArtsAndLetters, rule.getDivisionRequirement());
+  }
+
+  @Test
+  public void CanSetDivisionRequirementToSocialSciences()
+  {
+    rule.setDivisionRequirement(Rule.Divisions.SocialSciences);
+
+    assertEquals(Rule.Divisions.SocialSciences, rule.getDivisionRequirement());
+  }
+
+  @Test
+  public void CanSetDivisionRequirementToHumanities(){
+    rule.setDivisionRequirement(Rule.Divisions.Humanities);
+
+    assertEquals(Rule.Divisions.Humanities, rule.getDivisionRequirement());
+  }
+
+  @Test
+  public void CanSetDivisionRequirementToNaturalSciences(){
+    rule.setDivisionRequirement(Rule.Divisions.NaturalSciences);
+
+    assertEquals(Rule.Divisions.NaturalSciences, rule.getDivisionRequirement());
+  }
 }
