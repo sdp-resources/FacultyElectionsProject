@@ -1,21 +1,31 @@
 import org.junit.Test;
+import org.junit.Before;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class ProfileViewerTests {
+  ProfileViewer profileView;
+
+  @Before
+  public void setup() {
+    Profile profile = new Profile("Frank","CS");
+    profile.setContract("inactive");
+    profileView = new ProfileViewer(profile);
+  }
+
   @Test
   public void ableToGetNameFromProfile() {
-    Profile inactiveProfileNamedFrank = new Profile("Frank", "inactive");
-    ProfileViewer view = new ProfileViewer(inactiveProfileNamedFrank);
-    assertEquals(view.name, inactiveProfileNamedFrank.getName());
+    assertEquals("Frank", profileView.name);
   }
 
   @Test
   public void ableToGetStatusFromProfile() {
-    Profile profile = new Profile("Frank", "sabbatical");
-    ProfileViewer view = new ProfileViewer(profile);
-    assertFalse(view.isActive);
+    assertFalse(profileView.status);
+  }
+
+  @Test
+  public void ableToGetDepartmentFromProfile() {
+    assertEquals("CS", profileView.department);
   }
 }
 

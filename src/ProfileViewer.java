@@ -1,10 +1,12 @@
 public class ProfileViewer {
   public String name;
-  public boolean isActive;
+  public boolean status;
+  public String department;
 
   public ProfileViewer(Profile profile){
+    department = profile.getDepartment();
     name = profile.getName();
-    isActive = determineIfProfileIsActive(profile.contract);
+    status = determineIfProfileIsActive(profile.contract);
   }
 
   private boolean determineIfProfileIsActive(String status) {
