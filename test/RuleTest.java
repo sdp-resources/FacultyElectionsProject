@@ -1,21 +1,30 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class RuleTest {
-  @Test
-  public void CanCreateRuleThatRequiresActiveMembers()
+  private Rule rule;
+
+  @Before
+  public void setup()
   {
-    Rule rule = new Rule();
+    rule = new Rule();
+  }
+
+
+  @Test
+  public void CanSetRuleToRequireActiveMembers()
+  {
+
     rule.setRequiresActive(true);
 
     assertEquals(true, rule.getRequiresActive());
   }
 
   @Test
-  public void CanCreateRuleThatDoesNotRequireActiveMembers()
+  public void CanSetRuleToNotRequireActiveMembers()
   {
-    Rule rule = new Rule();
     rule.setRequiresActive(false);
 
     assertEquals(false, rule.getRequiresActive());
