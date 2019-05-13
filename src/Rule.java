@@ -4,6 +4,7 @@ public class Rule {
   private int yearsPerTerm;
   private int consecutiveTermsBeforeCooldown;
   private TenureRequirements tenureRequirement;
+  private Divisions divisionRequirement;
 
   public void setRequiresActive(boolean b) {
     requiresActive = b;
@@ -45,5 +46,15 @@ public class Rule {
     return tenureRequirement;
   }
 
+  public void setDivisionRequirement(Divisions divisionRequirement) {
+    this.divisionRequirement = divisionRequirement;
+  }
+
+  public Divisions getDivisionRequirement() {
+    return divisionRequirement;
+  }
+
   public enum TenureRequirements { Tenured, NonTenured, None }
+
+  public enum Divisions { ArtsAndLetters, SocialSciences, Humanities, NaturalSciences, AtLarge}
 }
