@@ -9,18 +9,19 @@ import static org.junit.Assert.assertThat;
 public class TestCommitteeAndSeats {
 
   private Committee committee;
-  private ArrayList<Seat> members;
+  private ArrayList<Seat> seats;
 
   @Before
   public void setup() {
     committee = new Committee();
-    members = new ArrayList<>();
+    seats = new ArrayList<>();
   }
 
   @Test
   public void committeeHasNameNoSeatsNoDescription() {
     String name = "CCCC";
     committee.setName(name);
+
     assertThat(committee.getName(), is("CCCC"));
   }
 
@@ -28,20 +29,20 @@ public class TestCommitteeAndSeats {
   public void addDescriptionToCommittee() {
     String description = "nothing";
     committee.setDescription(description);
+
     assertThat(committee.getDescription(), is("nothing"));
   }
 
   @Test
   public void committeeHasZeroSeats() {
-    committee.setCommitteeSize(0);
-    assertThat(committee.getSeatSize(), is(0));
+    assertThat(committee.getCommitteeSize(), is(0));
   }
 
   @Test
-  public void seatExists() {
-    Seat seat1 = new Seat();
-    committee.setMember(seat1);
-    assertThat(committee.getMember(0), is(seat1));
+  public void committeeHasOneSeat() {
+    Seat seat = new Seat();
+    committee.addMember(0, seat);
 
+    assertThat(committee.getCommitteeSize(), is(1));
   }
 }
