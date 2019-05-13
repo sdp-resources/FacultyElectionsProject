@@ -1,12 +1,15 @@
 
 public class Profile {
   String name;
+  String username;
   String department;
   String contract;
 
-  public Profile(String name, String department) {
+  public Profile(String name, String username,String department, String contract) {
     this.name = name;
     this.department = department;
+    this.username = username;
+    this.contract = contract;
   }
 
   public String getName() {
@@ -31,5 +34,13 @@ public class Profile {
 
   public void setDepartment(String newDepartment) {
     department = newDepartment;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String newUsername) {
+    username = newUsername;
   }
 }
