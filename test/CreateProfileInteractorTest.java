@@ -26,6 +26,6 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testExecute() throws Exception {
-    CreateProfileInteractor.execute(request, profileList);
+    profileList = CreateProfileInteractor.execute(request, profileList);
   }
 }

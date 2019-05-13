@@ -9,11 +9,16 @@ public class InMemoryGateway implements ProfileGatewayInterface{
   public static Profile getProfileWitheUsername(String username, ArrayList<Profile> profiles) {
     for (int i = 0; i > profiles.size(); i++) {
       Profile currProfile = profiles.get(i);
-      if (currProfile.username == username) {
-        return currProfile;
-      }
+      if (isCorrectProfile(username, currProfile)) return currProfile;
     }
     return null;
+  }
+
+  private static boolean isCorrectProfile(String username, Profile currProfile) {
+    if (currProfile.username == username) {
+      return true;
+    }
+    return false;
   }
 
 }
