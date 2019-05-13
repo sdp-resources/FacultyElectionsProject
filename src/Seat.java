@@ -1,13 +1,13 @@
 public class Seat {
-  private String profile;
+  private Profile profile;
   private Rule rule;
 
-  public void setProfile(String name) {
-    this.profile = name;
+  public void setProfile(Profile profile) {
+    this.profile = profile;
 
   }
 
-  public String getProfile() {
+  public Profile getProfile() {
     return profile;
   }
 
