@@ -49,10 +49,10 @@ public class TestCommitteeAndSeats {
 
   @Test
   public void setProfileOnSeat(){
-    String name = "Jan";
-    seat.setProfile(name);
+    Profile profile = new Profile("Skiadas","skiadas", "Natural Science", "tenured");
+    seat.setProfile(profile);
 
-    assertThat(seat.getProfile(),is("Jan"));
+    assertThat(seat.getProfile(), is(profile));
   }
 
   @Test
@@ -62,6 +62,6 @@ public class TestCommitteeAndSeats {
     seat.setRule(rule);
 
     assertThat(rule.getRequiresActive(),is(true));
-    assertThat(seat.getRule(),is(rule));
+    assertThat(seat.getRule(), is(rule));
   }
 }
