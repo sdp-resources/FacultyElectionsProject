@@ -31,7 +31,3 @@ public class ProfileViewerTests {
     assertEquals("inactive", profileViewer.getValueFromMap("Contract"));
   }
 }
-
-
-
-
