@@ -11,4 +11,13 @@ public class RuleTest {
 
     assertEquals(true, rule.getRequiresActive());
   }
+
+  @Test
+  public void CanCreateRuleThatDoesNotRequireActiveMembers()
+  {
+    Rule rule = new Rule();
+    rule.setRequiresActive(false);
+
+    assertEquals(false, rule.getRequiresActive());
+  }
 }
