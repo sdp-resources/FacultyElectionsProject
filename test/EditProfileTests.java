@@ -1,6 +1,5 @@
 import org.junit.Before;
 import org.junit.Test;
-import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,6 +22,10 @@ public class EditProfileTests {
     assertEquals("SCI", profile.getDepartment());
   }
 
-
+  @Test
+  public void readAndSetContractType() {
+    profile.setContract("Tenured");
+    assertEquals("Tenured",profile.getContract());
+  }
 
 }

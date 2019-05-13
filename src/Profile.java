@@ -1,6 +1,8 @@
+
 public class Profile {
   String name;
   String department;
+  String contract;
 
   public Profile(String name, String department) {
     this.name = name;
@@ -15,4 +17,11 @@ public class Profile {
     return department;
   }
 
+  public String getContract() {
+    return contract;
+  }
+
+  public void setContract(String contractType) {
+    contract = contractType;
+  }
 }
