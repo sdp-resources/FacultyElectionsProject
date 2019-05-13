@@ -2,5 +2,7 @@ import java.util.ArrayList;
 
 public interface ProfileGatewayInterface {
   public ArrayList<Profile> getProfiles();
-  public Profile getProfileWitheUsername(String username);
+  public static Profile getProfileWitheUsername(String username, ArrayList<Profile> profiles){
+    return profiles.get(0);
+  }
 }
