@@ -4,8 +4,7 @@ public class Committee {
   private String name;
   private String description;
   private int committeeSize;
-  private Seat seat;
-  private ArrayList<Seat> members;
+  private ArrayList<Seat> seats = new ArrayList<>();
 
   public void setName(String name) {
     this.name = name;
@@ -23,19 +22,11 @@ public class Committee {
     return description;
   }
 
-  public void setCommitteeSize(int committeeSize) {
-    this.committeeSize = committeeSize;
+  public int getCommitteeSize() {
+    return seats.size();
   }
 
-  public int getSeatSize() {
-    return committeeSize;
-  }
-
-  public void setMember(Seat seat) {
-    this.members.add(seat);
-  }
-
-  public Seat getMember(int i) {
-    return members.get(i);
+  public void addMember(int i, Seat seat) {
+    this.seats.add(i, seat);
   }
 }
