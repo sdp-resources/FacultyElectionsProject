@@ -3,8 +3,10 @@ import org.junit.Test;
 public class UpdateRuleInteractorTest {
   @Test
   public void canExecuteInteractorWithDummyRequest(){
-    UpdateRuleInteractor interactor = new UpdateRuleInteractor();
+    UpdateRuleGatewaySpy spy = new UpdateRuleGatewaySpy();
+    UpdateRuleInteractor interactor = new UpdateRuleInteractor(spy);
 
+    int ruleID = 1;
     boolean requiresActive = false;
     boolean requiresOneYearCooldown = false;
     int yearsPerTerm = 0;
@@ -12,7 +14,7 @@ public class UpdateRuleInteractorTest {
     Rule.TenureRequirements tenureRequirement = Rule.TenureRequirements.None;
     Rule.Divisions division = Rule.Divisions.AtLarge;
 
-    interactor.execute(new UpdateRuleRequest(requiresActive, requiresOneYearCooldown,
+    interactor.execute(new UpdateRuleRequest(ruleID, requiresActive, requiresOneYearCooldown,
                                              yearsPerTerm, consecutiveTermsBeforeCooldown,
                                              tenureRequirement, division));
   }

@@ -1,5 +1,11 @@
 public class UpdateRuleInteractor {
 
-  public static void execute(UpdateRuleRequest request) { }
+  public UpdateRuleInteractor(UpdateRuleGateway gateway) {
+
+  }
+
+  public static void execute(UpdateRuleRequest request) {
+
+  }
 
 }
