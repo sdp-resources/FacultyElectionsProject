@@ -10,7 +10,7 @@ public class QueryTest {
 
   @Before
   public void setUp() throws Exception {
-    profile = new Profile("Todd", "Art");
+    profile = new Profile("Todd", "SmithT", "Art", "contract");
   }
 
   @Test
