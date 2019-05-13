@@ -22,4 +22,9 @@ public class Ballot extends AbstractList {
   public Object get(int i) {
     return profiles.get(i);
   }
+
+  public void remove(Profile profile){
+    profiles.remove(profile);
+    size--;
+  }
 }
