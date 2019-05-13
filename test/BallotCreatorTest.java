@@ -13,7 +13,10 @@ public class BallotCreatorTest {
 
   @Test
   public void EmptyBallot(){
-    BallotCreator ballotcreator = new BallotCreator();
-
+    Ballot ballot = ballotCreator.getBallot(new AlwaysFalseQuery());
+    assertTrue(ballot.isEmpty());
   }
+
+
+
 }
