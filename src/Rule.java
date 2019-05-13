@@ -1,9 +1,11 @@
 public class Rule {
-  public void setRequiresActive(boolean b) {
+  private boolean requiresActive;
 
+  public void setRequiresActive(boolean b) {
+    requiresActive = b;
   }
 
   public boolean getRequiresActive() {
-    return true;
+    return requiresActive;
   }
 }
