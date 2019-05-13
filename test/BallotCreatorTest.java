@@ -1,13 +1,19 @@
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BallotCreatorTest {
 
-  @Test
+  private BallotCreator ballotCreator;
 
-  public void newBallotIsCreated(){
-    BallotCreator ballotCreator = new BallotCreator();
+  @Before
+  public void setUp() throws Exception {
+    ballotCreator = new BallotCreator();
   }
 
+  @Test
+  public void EmptyBallot(){
+    BallotCreator ballotcreator = new BallotCreator();
 
+  }
 }
