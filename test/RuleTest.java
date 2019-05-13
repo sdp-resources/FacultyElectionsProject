@@ -43,4 +43,20 @@ public class RuleTest {
 
     assertEquals(false, rule.getRequiresOneYearCooldown());
   }
+
+  @Test
+  public void CanSetNumberOfYearsPerTermTo1()
+  {
+    rule.setYearsPerTerm(1);
+
+    assertEquals(1, rule.getYearsPerTerm());
+  }
+
+  @Test
+  public void CanSetNumberOfYearsPerTermTo3()
+  {
+    rule.setYearsPerTerm(3);
+
+    assertEquals(3, rule.getYearsPerTerm());
+  }
 }
