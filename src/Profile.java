@@ -24,4 +24,12 @@ public class Profile {
   public void setContract(String contractType) {
     contract = contractType;
   }
+
+  public void setName(String newName) {
+    name = newName;
+  }
+
+  public void setDepartment(String newDepartment) {
+    department = newDepartment;
+  }
 }

@@ -28,4 +28,16 @@ public class EditProfileTests {
     assertEquals("Tenured",profile.getContract());
   }
 
+  @Test
+  public void canSetProfileName() {
+    profile.setName("Bill Mill");
+    assertEquals("Bill Mill", profile.getName());
+  }
+
+  @Test
+  public void canSetDepartment() {
+    profile.setDepartment("PLS");
+    assertEquals("PLS",profile.getDepartment());
+  }
+
 }
