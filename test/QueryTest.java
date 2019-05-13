@@ -1,21 +1,27 @@
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class QueryTest {
 
-  @Test
-  public void createQuery(){
-    Query query = new Query();
+  private Query query;
+  private Profile profile;
+
+  @Before
+  public void setUp() throws Exception {
+    profile = new Profile("Todd", "Art");
   }
 
   @Test
   public void ProfileIsAlwaysFalse(){
-    Query query = new Query();
-    Profile profile = new Profile("Todd", "Art");
+    query = new AlwaysFalseQuery();
     assertFalse(query.isProfileValid(profile));
-
   }
 
+  @Test
+  public void ProfileIsAlwaysTrue(){
+    query = new AlwaysTrueQuery();
+    assertTrue(query.isProfileValid(profile));
+  }
 }

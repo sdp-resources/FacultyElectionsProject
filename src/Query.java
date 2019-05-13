@@ -1,7 +1,4 @@
-public class Query {
+public interface Query {
+  boolean isProfileValid(Profile profile);
 
-  public boolean isProfileValid(Profile profile){
-    return false;
-  }
-  
 }
