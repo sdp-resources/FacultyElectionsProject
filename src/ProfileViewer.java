@@ -1,23 +1,17 @@
+import java.util.*;
+
 public class ProfileViewer {
-  public String name;
-  public boolean status;
-  public String department;
+  Map<String,String> profileView = new HashMap<String,String>();
 
   public ProfileViewer(Profile profile){
-    department = profile.getDepartment();
-    name = profile.getName();
-    status = determineIfProfileIsActive(profile.contract);
+    profileView.put("Name", profile.getName());
+    profileView.put("Username", profile.getUsername());
+    profileView.put("Department" , profile.getDepartment());
+    profileView.put("Contract", profile.getContract());
+
   }
 
-  private boolean determineIfProfileIsActive(String status) {
-    switch (status) {
-      case "inactive":
-        return false;
-      case "sabbatical":
-        return false;
-      case "tenure":
-        return true;
-    }
-    return false;
+  public String getValueFromMap(String request) {
+    return profileView.get(request);
   }
 }

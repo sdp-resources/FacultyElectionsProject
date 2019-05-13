@@ -1,31 +1,34 @@
 import org.junit.Test;
 import org.junit.Before;
-
 import static org.junit.Assert.*;
 
 public class ProfileViewerTests {
-  ProfileViewer profileView;
+  ProfileViewer profileViewer;
 
   @Before
   public void setup() {
-    Profile profile = new Profile("Frank","CS");
-    profile.setContract("inactive");
-    profileView = new ProfileViewer(profile);
+    Profile profile = new Profile("Frank","admin","CS","inactive");
+    profileViewer = new ProfileViewer(profile);
   }
 
   @Test
-  public void ableToGetNameFromProfile() {
-    assertEquals("Frank", profileView.name);
+  public void ableToGetNameFromMap() {
+    assertEquals("Frank", profileViewer.getValueFromMap("Name"));
   }
 
   @Test
-  public void ableToGetStatusFromProfile() {
-    assertFalse(profileView.status);
+  public void abletoGetUsernameFromMap() {
+    assertEquals("admin",profileViewer.getValueFromMap("Username"));
   }
 
   @Test
-  public void ableToGetDepartmentFromProfile() {
-    assertEquals("CS", profileView.department);
+  public void ableToGetDepartmentFromMap() {
+    assertEquals("CS", profileViewer.getValueFromMap("Department"));
+  }
+
+  @Test
+  public void ableToGetContractFromMap() {
+    assertEquals("inactive", profileViewer.getValueFromMap("Contract"));
   }
 }
 
