@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Committee {
   private String name;
   private String description;
-  private int committeeSize;
   private ArrayList<Seat> seats = new ArrayList<>();
 
   public void setName(String name) {
