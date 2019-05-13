@@ -14,7 +14,7 @@ public class RuleTest {
 
 
   @Test
-  public void CanSetRuleToRequireActiveMembers()
+  public void CanSetRuleRequiresActiveMembers()
   {
 
     rule.setRequiresActive(true);
@@ -23,10 +23,24 @@ public class RuleTest {
   }
 
   @Test
-  public void CanSetRuleToNotRequireActiveMembers()
+  public void CanSetRuleDoesNotRequireActiveMembers()
   {
     rule.setRequiresActive(false);
 
     assertEquals(false, rule.getRequiresActive());
+  }
+
+  @Test
+  public void CanSetRequiresOneYearCooldown(){
+    rule.setRequiresOneYearCooldown(true);
+
+    assertEquals(true, rule.getRequiresOneYearCooldown());
+  }
+
+  @Test
+  public void CanSetDoesNotRequireOneYearCooldown(){
+    rule.setRequiresOneYearCooldown(false);
+
+    assertEquals(false, rule.getRequiresOneYearCooldown());
   }
 }
