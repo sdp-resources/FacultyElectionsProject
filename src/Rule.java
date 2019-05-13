@@ -2,6 +2,8 @@ public class Rule {
   private boolean requiresActive;
   private boolean requiresOneYearCooldown;
   private int yearsPerTerm;
+  private int consecutiveTermsBeforeCooldown;
+  private TenureRequirements tenureRequirement;
 
   public void setRequiresActive(boolean b) {
     requiresActive = b;
@@ -26,4 +28,22 @@ public class Rule {
   public int getYearsPerTerm() {
     return yearsPerTerm;
   }
+
+  public void setConsecutiveTermsBeforeCooldown(int consecutiveTermsBeforeCooldown) {
+    this.consecutiveTermsBeforeCooldown = consecutiveTermsBeforeCooldown;
+  }
+
+  public int getConsecutiveTermsBeforeCooldown() {
+    return consecutiveTermsBeforeCooldown;
+  }
+
+  public void setTenureRequirement(TenureRequirements tenureRequirement) {
+    this.tenureRequirement = tenureRequirement;
+  }
+
+  public TenureRequirements getTenureRequirement() {
+    return tenureRequirement;
+  }
+
+  public enum TenureRequirements { Tenured, NonTenured, None }
 }
