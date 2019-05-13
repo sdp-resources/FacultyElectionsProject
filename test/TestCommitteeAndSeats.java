@@ -10,11 +10,13 @@ public class TestCommitteeAndSeats {
 
   private Committee committee;
   private ArrayList<Seat> seats;
+  private Seat seat;
 
   @Before
   public void setup() {
     committee = new Committee();
     seats = new ArrayList<>();
+    seat = new Seat();
   }
 
   @Test
@@ -40,9 +42,26 @@ public class TestCommitteeAndSeats {
 
   @Test
   public void committeeHasOneSeat() {
-    Seat seat = new Seat();
     committee.addMember(0, seat);
 
     assertThat(committee.getCommitteeSize(), is(1));
+  }
+
+  @Test
+  public void setProfileOnSeat(){
+    String name = "Jan";
+    seat.setProfile(name);
+
+    assertThat(seat.getProfile(),is("Jan"));
+  }
+
+  @Test
+  public void setRuleOnSeat(){
+    Rule rule = new Rule();
+    rule.setRequiresActive(true);
+    seat.setRule(rule);
+
+    assertThat(rule.getRequiresActive(),is(true));
+    assertThat(seat.getRule(),is(rule));
   }
 }
