@@ -25,9 +25,16 @@ public class BallotTest {
   }
 
   @Test
-  public void candidateAddedToBallotList(){
-    Profile testProfile = new Profile("name","department");
+  public void addingOneCandidateIncreasesSizeByOne(){
+    Profile testProfile = new Profile("name", "department");
     ballot.add(testProfile);
+    assertEquals(1, ballot.size());
+  }
 
+  @Test
+  public void canGetCandidateFromBallotByIndexing(){
+    Profile testProfile = new Profile("name", "department");
+    ballot.add(testProfile);
+    assertEquals(testProfile, ballot.get(0));
   }
 }
