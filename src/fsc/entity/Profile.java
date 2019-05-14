@@ -6,7 +6,7 @@ public class Profile {
   String department;
   String contract;
 
-  public Profile(String name, String username,String department, String contract) {
+  public Profile(String name, String username, String department, String contract) {
     this.name = name;
     this.department = department;
     this.username = username;

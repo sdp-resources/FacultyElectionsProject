@@ -19,13 +19,13 @@ public class QueryTest {
   }
 
   @Test
-  public void ProfileIsAlwaysFalse(){
+  public void ProfileIsAlwaysFalse() {
     query = new AlwaysFalseQuery();
     assertFalse(query.isProfileValid(profile));
   }
 
   @Test
-  public void ProfileIsAlwaysTrue(){
+  public void ProfileIsAlwaysTrue() {
     query = new AlwaysTrueQuery();
     assertTrue(query.isProfileValid(profile));
   }

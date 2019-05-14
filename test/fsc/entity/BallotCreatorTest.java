@@ -24,7 +24,7 @@ public class BallotCreatorTest {
   }
 
   @Test
-  public void whenGivenAlwaysFalseQuery_GetEmptyBallot(){
+  public void whenGivenAlwaysFalseQuery_GetEmptyBallot() {
     Ballot ballot = ballotCreator.getBallot(new AlwaysFalseQuery());
     assertTrue(ballot.isEmpty());
   }

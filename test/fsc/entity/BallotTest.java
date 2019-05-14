@@ -15,7 +15,7 @@ public class BallotTest {
   }
 
   @Test
-  public void isCreatedBallotEmpty (){
+  public void isCreatedBallotEmpty() {
     assertEquals(true, ballot.isEmpty());
   }
 
@@ -26,28 +26,28 @@ public class BallotTest {
   }
 
   @Test
-  public void addingOneCandidateIncreasesSizeByOne(){
+  public void addingOneCandidateIncreasesSizeByOne() {
     Profile testProfile = createAndAddOneProfile();
     assertEquals(1, ballot.size());
   }
 
   @Test
-  public void canGetCandidateFromBallotByIndexing(){
+  public void canGetCandidateFromBallotByIndexing() {
     Profile testProfile = createAndAddOneProfile();
     assertEquals(testProfile, ballot.get(0));
   }
 
   @Test
-  public void addingMultipleCandidateIncreasesSize(){
+  public void addingMultipleCandidateIncreasesSize() {
     createAndAddManyProfiles();
     assertEquals(3, ballot.size());
   }
 
   @Test
-  public void checkingMultipleCandidateOfBallot(){
+  public void checkingMultipleCandidateOfBallot() {
     Profile testProfile1 = new Profile("name1", "username1", "department1", "contract1");
-    Profile testProfile2 = new Profile("name2", "username2","department2", "contract2");
-    Profile testProfile3 = new Profile("name3", "username3","department3", "contract3");
+    Profile testProfile2 = new Profile("name2", "username2", "department2", "contract2");
+    Profile testProfile3 = new Profile("name3", "username3", "department3", "contract3");
     ballot.add(testProfile1);
     ballot.add(testProfile2);
     ballot.add(testProfile3);
@@ -57,7 +57,7 @@ public class BallotTest {
   }
 
   @Test
-  public void removeOneCandidateMakesBallotEmpty(){
+  public void removeOneCandidateMakesBallotEmpty() {
     Profile testProfile = new Profile("name", "username", "department", "contract");
     ballot.add(testProfile);
     ballot.remove(testProfile);
@@ -65,8 +65,8 @@ public class BallotTest {
   }
 
   @Test
-  public void candidateIsRemovedFromBallot(){
-    Profile testProfile1 = new Profile("name1", "username1","department1", "contract1");
+  public void candidateIsRemovedFromBallot() {
+    Profile testProfile1 = new Profile("name1", "username1", "department1", "contract1");
     Profile testProfile2 = new Profile("name2", "username2", "department2", "contract2");
     ballot.add(testProfile1);
     ballot.add(testProfile2);
@@ -74,9 +74,8 @@ public class BallotTest {
     assertEquals(testProfile2, ballot.get(0));
   }
 
-
   @Test
-  public void removeOneCandidateDecreasesSizeByOne(){
+  public void removeOneCandidateDecreasesSizeByOne() {
     Profile testProfile = new Profile("name", "username", "department", "contract");
     ballot.add(testProfile);
     ballot.remove(testProfile);
@@ -90,7 +89,7 @@ public class BallotTest {
   }
 
   private void createAndAddManyProfiles() {
-    Profile testProfile1 = new Profile("name1", "username1","department1", "contract1");
+    Profile testProfile1 = new Profile("name1", "username1", "department1", "contract1");
     Profile testProfile2 = new Profile("name2", "username2", "department2", "contract2");
     Profile testProfile3 = new Profile("name3", "username3", "department3", "contract3");
     ballot.add(testProfile1);

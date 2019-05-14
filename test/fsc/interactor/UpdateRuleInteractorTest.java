@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class UpdateRuleInteractorTest {
   @Test
-  public void canExecuteInteractorWithDummyRequest(){
+  public void canExecuteInteractorWithDummyRequest() {
     UpdateRuleGatewaySpy spy = new UpdateRuleGatewaySpy();
     UpdateRuleInteractor interactor = new UpdateRuleInteractor(spy);
 
@@ -18,8 +18,8 @@ public class UpdateRuleInteractorTest {
     Rule.TenureRequirements tenureRequirement = Rule.TenureRequirements.None;
     Rule.Divisions division = Rule.Divisions.AtLarge;
 
-    interactor.execute(new UpdateRuleRequest(ruleID, requiresActive, requiresOneYearCooldown,
-                                             yearsPerTerm, consecutiveTermsBeforeCooldown,
-                                             tenureRequirement, division));
+    interactor.execute(
+          new UpdateRuleRequest(ruleID, requiresActive, requiresOneYearCooldown, yearsPerTerm,
+                                consecutiveTermsBeforeCooldown, tenureRequirement, division));
   }
 }

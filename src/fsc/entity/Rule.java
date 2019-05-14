@@ -56,7 +56,7 @@ public class Rule {
     return divisionRequirement;
   }
 
-  public enum TenureRequirements { Tenured, NonTenured, None }
+  public enum TenureRequirements {Tenured, NonTenured, None}
 
-  public enum Divisions { ArtsAndLetters, SocialSciences, Humanities, NaturalSciences, AtLarge}
+  public enum Divisions {ArtsAndLetters, SocialSciences, Humanities, NaturalSciences, AtLarge}
 }

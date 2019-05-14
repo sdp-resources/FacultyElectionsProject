@@ -9,9 +9,8 @@ import java.util.ArrayList;
 public class CreateProfileInteractor {
 
   public static ArrayList<Profile> execute(
-        CreateProfileRequest request,
-        ArrayList<Profile> profiles)
-        throws Exception {
+        CreateProfileRequest request, ArrayList<Profile> profiles
+  ) throws Exception {
     if (InMemoryGateway.getProfileWitheUsername(request.username, profiles) != null) {
       throw new Exception("UsernameAlreadyUsed");
     }
@@ -20,6 +19,5 @@ public class CreateProfileInteractor {
     profiles.add(profile);
     return profiles;
   }
-
 
 }

@@ -4,6 +4,7 @@ import fsc.entity.Profile;
 import fsc.interactor.ProfileViewer;
 import org.junit.Test;
 import org.junit.Before;
+
 import static org.junit.Assert.*;
 
 public class ProfileViewerTests {
@@ -22,7 +23,7 @@ public class ProfileViewerTests {
 
   @Test
   public void abletoGetUsernameFromMap() {
-    assertEquals("admin",profileViewer.getValueFromMap("Username"));
+    assertEquals("admin", profileViewer.getValueFromMap("Username"));
   }
 
   @Test

@@ -50,7 +50,7 @@ public class TestCommitteeAndSeats {
   }
 
   @Test
-  public void setProfileOnSeat(){
+  public void setProfileOnSeat() {
     Profile profile = new Profile("Skiadas", "skiadas", "Natural Science", "tenured");
     seat.setProfile(profile);
 
@@ -58,12 +58,12 @@ public class TestCommitteeAndSeats {
   }
 
   @Test
-  public void setRuleOnSeat(){
+  public void setRuleOnSeat() {
     Rule rule = new Rule();
     rule.setRequiresActive(true);
     seat.setRule(rule);
 
-    assertThat(rule.getRequiresActive(),is(true));
+    assertThat(rule.getRequiresActive(), is(true));
     assertThat(seat.getRule(), is(rule));
   }
 }

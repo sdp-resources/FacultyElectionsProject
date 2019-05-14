@@ -25,7 +25,7 @@ public class Ballot extends AbstractList {
     return profiles.get(i);
   }
 
-  public void remove(Profile profile){
+  public void remove(Profile profile) {
     profiles.remove(profile);
     size--;
   }
