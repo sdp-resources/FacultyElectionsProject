@@ -3,7 +3,15 @@ package fsc.request;
 import fsc.entity.Profile;
 
 public class AddToBallotRequest {
-  public AddToBallotRequest(String id, Profile profile) {
+  private final String ballotID;
+  private final Profile profile;
 
+  public AddToBallotRequest(String ballotID, Profile profile) {
+    this.ballotID = ballotID;
+    this.profile = profile;
+  }
+
+  public String getBallotID() {
+    return ballotID;
   }
 }
