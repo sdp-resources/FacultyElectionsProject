@@ -1,8 +1,8 @@
 package fsc.entity;
 
 import fsc.gateway.Gateway;
-import fsc.query.AlwaysFalseQuery;
-import fsc.query.AlwaysTrueQuery;
+import fsc.entity.query.AlwaysFalseQuery;
+import fsc.entity.query.AlwaysTrueQuery;
 import org.junit.Before;
 import org.junit.Test;
 

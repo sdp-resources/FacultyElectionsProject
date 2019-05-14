@@ -1,4 +1,4 @@
-package fsc.query;
+package fsc.entity.query;
 
 import fsc.entity.Profile;
 

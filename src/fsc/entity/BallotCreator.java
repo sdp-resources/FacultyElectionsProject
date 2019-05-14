@@ -1,7 +1,7 @@
 package fsc.entity;
 
 import fsc.gateway.Gateway;
-import fsc.query.Query;
+import fsc.entity.query.Query;
 
 public class BallotCreator {
 

@@ -1,9 +1,8 @@
 package fsc.entity;
 
-import fsc.entity.Profile;
-import fsc.query.AlwaysFalseQuery;
-import fsc.query.AlwaysTrueQuery;
-import fsc.query.Query;
+import fsc.entity.query.AlwaysFalseQuery;
+import fsc.entity.query.AlwaysTrueQuery;
+import fsc.entity.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 
