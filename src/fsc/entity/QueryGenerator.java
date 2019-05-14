@@ -1,11 +1,8 @@
 package fsc.entity;
 
-import fsc.entity.query.AlwaysTrueQuery;
-import fsc.entity.query.AttributeQuery;
-import fsc.entity.query.Query;
+import fsc.entity.query.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 public class QueryGenerator {
   public Query generate(JSONObject root) {

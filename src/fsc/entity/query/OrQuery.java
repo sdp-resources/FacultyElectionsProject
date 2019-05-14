@@ -1,5 +1,6 @@
-package fsc.entity;
+package fsc.entity.query;
 
+import fsc.entity.Profile;
 import fsc.entity.query.Query;
 
 public class OrQuery implements Query {
