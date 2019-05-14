@@ -2,28 +2,25 @@ package fsc.interactor;
 
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
+import fsc.gateway.Gateway;
 import fsc.request.AddToBallotRequest;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.AbstractList;
-import java.util.ArrayList;
 
-public class EditBallotInteractorTest {
+public class AddToBallotInteractorTest {
 
   private Profile profile;
   private AbstractList<Profile> profiles;
 
-  @Before
-  public void makeAddToBallotRequest() {
-    Profile profile = new Profile("name1", "username1", "department1", "contract1");
+  @Test
+  public void NoBallet() {
     Ballot ballot = new Ballot();
     AddToBallotRequest request = new AddToBallotRequest(ballot.getID(), profile);
-  }
+    NoBallotGatewaySpy gateway = new NoBallotGatewaySpy();
+    AddToBallotInteractor inter = new AddToBallotInteractor(gateway);
+    AddToBallotResponse response = inter.execute(request);
 
-  @Test
-  public void testExecute() {
-    profiles = EditBallotInteractor.execute(profile);
   }
 
 }
