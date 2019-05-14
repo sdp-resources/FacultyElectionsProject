@@ -54,15 +54,15 @@ public class QueryGeneratorTest {
   @Test
   public void queryRequiresArtAndTenuredExpectOnlyJoe()
   {
-    JSONObject root = new JSONObject();
+    JSONObject and = new JSONObject();
     JSONObject department = new JSONObject();
     department.put("department", "Art");
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
-    root.put("and", new JSONArray( new JSONObject[] { department, contract }));
+    and.put("and", new JSONArray( new JSONObject[] { department, contract }));
 
-    Query query = queryGenerator.generate(root);
+    Query query = queryGenerator.generate(and);
 
     assertTrue(query.isProfileValid(joeProfile));
     assertFalse(query.isProfileValid(janeProfile));
@@ -73,19 +73,44 @@ public class QueryGeneratorTest {
   @Test
   public void queryRequiresArtOrTenuredExpectJoeSallyAndSam()
   {
-    JSONObject root = new JSONObject();
+    JSONObject or = new JSONObject();
     JSONObject department = new JSONObject();
     department.put("department", "Art");
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
-    root.put("or", new JSONArray( new JSONObject[] { department, contract }));
+    or.put("or", new JSONArray( new JSONObject[] { department, contract }));
 
-    Query query = queryGenerator.generate(root);
+    Query query = queryGenerator.generate(or);
 
     assertTrue(query.isProfileValid(joeProfile));
     assertFalse(query.isProfileValid(janeProfile));
     assertTrue(query.isProfileValid(sallyProfile));
     assertTrue(query.isProfileValid(samProfile));
+  }
+
+  @Test
+  public void queryRequiresTenured_And_ArtOrLibrarian()
+  {
+    JSONObject contract = new JSONObject();
+    contract.put("contract", "tenured");
+
+    JSONObject art = new JSONObject();
+    art.put("department", "Art");
+    JSONObject librarian = new JSONObject();
+    librarian.put("department", "Librarian");
+
+    JSONObject or = new JSONObject();
+    or.put("or", new JSONArray( new JSONObject[] { art, librarian } ));
+
+    JSONObject and = new JSONObject();
+    and.put("and", new JSONArray( new JSONObject[] { contract, or }));
+
+    Query query = queryGenerator.generate(and);
+
+    assertTrue(query.isProfileValid(joeProfile));
+    assertFalse(query.isProfileValid(janeProfile));
+    assertTrue(query.isProfileValid(sallyProfile));
+    assertFalse(query.isProfileValid(samProfile));
   }
 }
