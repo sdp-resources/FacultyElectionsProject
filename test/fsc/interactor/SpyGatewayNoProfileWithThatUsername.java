@@ -18,7 +18,7 @@ public class SpyGatewayNoProfileWithThatUsername implements ProfileGatewayInterf
     return null;
   }
 
-  public Profile getProfileWitheUsername(String username, ArrayList<Profile> profiles) {
+  public Profile getProfileWithUsername(String username) {
     submittedUsername = username;
     return null;
   }

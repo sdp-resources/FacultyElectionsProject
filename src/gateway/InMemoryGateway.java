@@ -21,8 +21,8 @@ public class InMemoryGateway implements ProfileGatewayInterface {
     profileList.add(newProfile);
   }
 
-  public Profile getProfileWitheUsername(String username, ArrayList<Profile> profiles) {
-    for (Profile currProfile : profiles) {
+  public Profile getProfileWithUsername(String username) {
+    for (Profile currProfile : profileList) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
     return null;

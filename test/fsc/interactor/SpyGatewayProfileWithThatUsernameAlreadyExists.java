@@ -18,7 +18,7 @@ public class SpyGatewayProfileWithThatUsernameAlreadyExists implements ProfileGa
     return null;
   }
 
-  public Profile getProfileWitheUsername(String username, ArrayList<Profile> profiles) {
+  public Profile getProfileWithUsername(String username) {
     submittedUsername = username;
     return null;
   }
