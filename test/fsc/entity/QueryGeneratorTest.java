@@ -28,7 +28,7 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void ProfileWithNameJoeIsValidWithQueryAskingForJoe()
+  public void profileWithNameJoeIsValidWithQueryAskingForJoe()
   {
 
     JSONObject jsonObject = new JSONObject();
@@ -40,7 +40,7 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void ProfileNameWithNameJaneIsNOTValidWithQueryAskingForJoe()
+  public void profileNameWithNameJaneIsNOTValidWithQueryAskingForJoe()
   {
 
     JSONObject jsonObject = new JSONObject();
@@ -52,7 +52,7 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void makeJsonObjectWithAndQueryChecksBoth()
+  public void queryRequiresArtAndTenuredExpectOnlyJoe()
   {
     JSONObject root = new JSONObject();
     JSONObject department = new JSONObject();
@@ -70,5 +70,22 @@ public class QueryGeneratorTest {
     assertFalse(query.isProfileValid(samProfile));
   }
 
+  @Test
+  public void queryRequiresArtOrTenuredExpectJoeSallyAndSam()
+  {
+    JSONObject root = new JSONObject();
+    JSONObject department = new JSONObject();
+    department.put("department", "Art");
+    JSONObject contract = new JSONObject();
+    contract.put("contract", "tenured");
 
+    root.put("or", new JSONArray( new JSONObject[] { department, contract }));
+
+    Query query = queryGenerator.generate(root);
+
+    assertTrue(query.isProfileValid(joeProfile));
+    assertFalse(query.isProfileValid(janeProfile));
+    assertTrue(query.isProfileValid(sallyProfile));
+    assertTrue(query.isProfileValid(samProfile));
+  }
 }

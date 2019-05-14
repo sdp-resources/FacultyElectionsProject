@@ -14,16 +14,12 @@ public class QueryGenerator {
     switch (firstKey)
     {
       case "and":
-        Query[] queries = getQueriesFromJSONArray((JSONArray) root.get("and"));
-
-        return new AndQuery(queries);
+        return new AndQuery(getQueriesFromJSONArray((JSONArray) root.get("and")));
       case "or":
-        break;
+        return new OrQuery(getQueriesFromJSONArray((JSONArray) root.get("or")));
       default:
         return new AttributeQuery(firstKey, root.getString(firstKey));
     }
-    return new AlwaysTrueQuery();
-
   }
 
   private Query[] getQueriesFromJSONArray(JSONArray array) {
