@@ -14,4 +14,8 @@ public class AddToBallotRequest {
   public String getBallotID() {
     return ballotID;
   }
+
+  public Profile getProfile(){
+    return profile;
+  }
 }

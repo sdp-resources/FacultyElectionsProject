@@ -15,5 +15,4 @@ import fsc.request.AddToBallotRequest;
         }
         return null;
       }
-
 }
