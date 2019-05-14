@@ -18,4 +18,6 @@ public class AttributeQuery implements Query {
     if (key.equals("contract")) return profile.getContract().equals(value);
     return false;
   }
+
+  public String getFormattedString() { return key + " = " + value; }
 }

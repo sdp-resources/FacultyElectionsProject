@@ -63,4 +63,38 @@ public class QueryTest {
 
     assertTrue(query.isProfileValid(profile));
   }
+
+  @Test
+  public void SingleAttributeQueryFormatString()
+  {
+    Query query = new AttributeQuery("contract", "tenured");
+
+    assertEquals("contract = tenured", query.getFormattedString());
+  }
+
+  @Test
+  public void AndWithThreeItemsFormatsString()
+  {
+    query = new AndQuery(new Query[] { new AlwaysTrueQuery(), new AlwaysFalseQuery(), new AttributeQuery("contract", "tenured") });
+
+    assertEquals("(true AND false AND contract = tenured)", query.getFormattedString());
+  }
+
+  @Test
+  public void OrWithThreeItemsFormatsString()
+  {
+    query = new OrQuery(new Query[] { new AlwaysTrueQuery(), new AlwaysFalseQuery(),
+                                new AttributeQuery("contract", "tenured") });
+
+    assertEquals("(true OR false OR contract = tenured)", query.getFormattedString());
+  }
+
+  @Test
+  public void AndWithOrInsideFormatsString()
+  {
+    query = new AndQuery(new Query[] { new AlwaysTrueQuery(),
+                                       new OrQuery(new Query[] { new AlwaysTrueQuery(), new AlwaysFalseQuery() } )  });
+
+    assertEquals("(true AND (true OR false))", query.getFormattedString());
+  }
 }

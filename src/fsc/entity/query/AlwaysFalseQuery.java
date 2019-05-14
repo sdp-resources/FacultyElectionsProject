@@ -8,4 +8,5 @@ public class AlwaysFalseQuery implements Query {
     return false;
   }
 
+  public String getFormattedString() { return "false"; }
 }

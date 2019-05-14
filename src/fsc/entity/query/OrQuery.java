@@ -18,4 +18,16 @@ public class OrQuery implements Query {
 
     return false;
   }
+
+  public String getFormattedString()
+  {
+    String output = "(";
+    for(int i = 0; i < queries.length; i++)
+    {
+      output += queries[i].getFormattedString();
+      if (i < queries.length - 1) output += " OR ";
+    }
+    output += ")";
+    return output;
+  }
 }

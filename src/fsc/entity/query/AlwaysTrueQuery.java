@@ -7,4 +7,6 @@ public class AlwaysTrueQuery implements Query {
   public boolean isProfileValid(Profile profile) {
     return true;
   }
+
+  public String getFormattedString() { return "true"; }
 }
