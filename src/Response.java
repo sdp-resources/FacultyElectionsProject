@@ -1,1 +1,3 @@
-public interface Response {}
+public interface Response {
+
+}

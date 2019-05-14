@@ -5,12 +5,14 @@ import fsc.gateway.ProfileGatewayInterface;
 import fsc.request.CreateProfileRequest;
 import fsc.entity.Profile;
 import gateway.InMemoryGateway;
+import spark.Response;
 
 import java.util.ArrayList;
 
 public class CreateProfileInteractor {
 
   private static ProfileGatewayInterface gateway;
+
 
   public CreateProfileInteractor(ProfileGatewayInterface gateway) {
     this.gateway = gateway;
@@ -24,6 +26,7 @@ public class CreateProfileInteractor {
     Profile profile = new Profile(request.name, request.username, request.department,
                                   request.contract);
     gateway.addProfile(profile);
+    //Response goodResponse = new Response();
     return gateway.profileList;
   }
 
