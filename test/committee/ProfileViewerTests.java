@@ -1,3 +1,7 @@
+package committee;
+
+import committee.Profile;
+import committee.ProfileViewer;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -7,7 +11,7 @@ public class ProfileViewerTests {
 
   @Before
   public void setup() {
-    Profile profile = new Profile("Frank","admin","CS","inactive");
+    Profile profile = new Profile("Frank", "admin", "CS", "inactive");
     profileViewer = new ProfileViewer(profile);
   }
 

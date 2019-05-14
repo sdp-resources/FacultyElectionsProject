@@ -1,3 +1,6 @@
+package committee;
+
+import committee.Profile;
 import org.junit.Before;
 import org.junit.Test;
 

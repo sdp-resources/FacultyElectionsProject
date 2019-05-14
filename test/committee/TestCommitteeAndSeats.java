@@ -1,3 +1,6 @@
+package committee;
+
+import committee.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,7 +52,7 @@ public class TestCommitteeAndSeats {
 
   @Test
   public void setProfileOnSeat(){
-    Profile profile = new Profile("Skiadas","skiadas", "Natural Science", "tenured");
+    Profile profile = new Profile("Skiadas", "skiadas", "Natural Science", "tenured");
     seat.setProfile(profile);
 
     assertThat(seat.getProfile(), is(profile));

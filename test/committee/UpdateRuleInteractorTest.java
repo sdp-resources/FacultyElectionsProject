@@ -1,3 +1,6 @@
+package committee;
+
+import committee.*;
 import org.junit.Test;
 
 public class UpdateRuleInteractorTest {

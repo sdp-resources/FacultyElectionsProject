@@ -1,3 +1,7 @@
+package committee;
+
+import committee.Ballot;
+import committee.Profile;
 import org.junit.Before;
 import org.junit.Test;
 
