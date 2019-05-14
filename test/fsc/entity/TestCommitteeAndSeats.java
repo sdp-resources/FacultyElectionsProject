@@ -1,5 +1,7 @@
 package fsc.entity;
 
+import fsc.entity.query.AlwaysTrueQuery;
+import fsc.entity.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,12 +60,10 @@ public class TestCommitteeAndSeats {
   }
 
   @Test
-  public void setRuleOnSeat() {
-    Rule rule = new Rule();
-    rule.setRequiresActive(true);
-    seat.setRule(rule);
+  public void setDefaultQueryOnSeat() {
+    Query query = new AlwaysTrueQuery();
+    seat.setDefaultQuery(query);
 
-    assertThat(rule.getRequiresActive(), is(true));
-    assertThat(seat.getRule(), is(rule));
+    assertThat(seat.getDefaultQuery(), is(query));
   }
 }

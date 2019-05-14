@@ -1,8 +1,10 @@
 package fsc.entity;
 
+import fsc.entity.query.Query;
+
 public class Seat {
   private Profile profile;
-  private Rule rule;
+  private Query defaultQuery;
 
   public void setProfile(Profile profile) {
     this.profile = profile;
@@ -13,11 +15,11 @@ public class Seat {
     return profile;
   }
 
-  public void setRule(Rule rule) {
-    this.rule = rule;
+  public void setDefaultQuery(Query defaultQuery) {
+    this.defaultQuery = defaultQuery;
   }
 
-  public Rule getRule() {
-    return rule;
+  public Query getDefaultQuery() {
+    return defaultQuery;
   }
 }
