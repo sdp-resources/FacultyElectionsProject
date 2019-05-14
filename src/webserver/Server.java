@@ -18,6 +18,23 @@ public class Server {
     staticFiles.location("/public");
     get("/", Server::serveIndex);
     post("/login", Server::processLogin);
+    get("/profile", Server::showAllProfilesPage);
+    post("/profile", Server::createProfile);
+    get("/profile/:username", Server::getProfile);
+  }
+
+  private static Object getProfile(Request req, Response res) {
+    // TODO
+    return null;
+  }
+
+  private static Object createProfile(Request req, Response res) {
+    // TODO
+    return null;
+  }
+
+  private static Object showAllProfilesPage(Request req, Response res) {
+    return serveTemplate("/profilesList.handlebars", new HashMap<>());
   }
 
   private static Object serveIndex(Request req, Response res) {
