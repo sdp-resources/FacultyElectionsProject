@@ -21,7 +21,7 @@ public class EditProfileTests {
 
   @Test
   public void readProfileUsername() {
-    assertEquals("Adam Jones", profile.getUsername());
+    assertEquals("jonesa", profile.getUsername());
   }
 
   @Test
