@@ -1,7 +1,5 @@
 package fsc.entity;
 
-import fsc.entity.Profile;
-
 import java.util.*;
 
 public class ProfileToHashMapConverter {
@@ -19,6 +17,6 @@ public class ProfileToHashMapConverter {
   }
 
   public HashMap<String, String> createHashMap() {
-    return null;
+    return (HashMap<String, String>) profileView;
   }
 }
