@@ -34,6 +34,7 @@ public class Server {
   }
 
   private static Object showAllProfilesPage(Request req, Response res) {
+    // TODO: No profiles yet
     return serveTemplate("/profilesList.handlebars", new HashMap<>());
   }
 

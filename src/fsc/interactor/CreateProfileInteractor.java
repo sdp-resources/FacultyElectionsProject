@@ -26,7 +26,7 @@ public class CreateProfileInteractor {
     Profile profile = new Profile(request.name, request.username, request.department,
                                   request.contract);
     gateway.addProfile(profile);
-    //Response goodResponse = new Response();
+    //fsc.response.Response goodResponse = new fsc.response.Response();
     return gateway.profileList;
   }
 

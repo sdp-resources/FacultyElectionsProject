@@ -1,4 +1,4 @@
-package gateway;
+package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGatewayInterface;

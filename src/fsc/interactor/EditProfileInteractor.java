@@ -2,9 +2,8 @@ package fsc.interactor;
 
 import fsc.gateway.Gateway;
 import fsc.request.EditProfileRequest;
-import fsc.entity.Profile;
-import gateway.InMemoryGateway;
-import java.util.HashMap;
+import fsc.response.FailedSearchResponse;
+import fsc.response.Response;
 
 public class EditProfileInteractor {
   private Gateway gateway;

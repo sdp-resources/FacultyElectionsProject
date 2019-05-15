@@ -2,8 +2,6 @@ package fsc.interactor;
 
 import fsc.gateway.ProfileGatewayInterface;
 import fsc.request.CreateProfileRequest;
-import gateway.SpyGatewayNoProfileWithThatUsername;
-import gateway.SpyGatewayProfileWithThatUsernameAlreadyExists;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -21,7 +21,7 @@ public class EditProfileInteractorTest {
 //    request = new EditProfileRequest("Username", "B");
 //    Gateway fakeGateway = new NoProfileGatewaySpy();
 //    EditProfileInteractor interactor = new EditProfileInteractor(fakeGateway);
-//    Response response = interactor.execute(request);
+//    fsc.response.Response response = interactor.execute(request);
 //    assertTrue(response instanceof FailedSearchResponse);
 //  }
 }

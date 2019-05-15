@@ -2,8 +2,9 @@ package fsc.interactor;
 
 import fsc.gateway.Gateway;
 import fsc.request.AddToBallotRequest;
+import fsc.response.AddToBallotResponse;
 
-    public class AddToBallotInteractor {
+public class AddToBallotInteractor {
       public AddToBallotInteractor(Gateway gateway) {
 
       }

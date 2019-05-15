@@ -2,8 +2,8 @@ package fsc.interactor;
 
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
-import fsc.gateway.Gateway;
 import fsc.request.AddToBallotRequest;
+import fsc.response.AddToBallotResponse;
 import org.junit.Test;
 
 import java.util.AbstractList;
