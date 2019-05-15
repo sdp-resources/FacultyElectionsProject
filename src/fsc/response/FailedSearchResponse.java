@@ -1,7 +1,8 @@
 package fsc.response;
 
-public class FailedSearchResponse implements Response {
-  public String FailedSearchResponse() {
-    return "No username exists";
+public class FailedSearchResponse extends spark.Response implements Response {
+
+  public FailedSearchResponse() {
+
   }
 }
