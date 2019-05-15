@@ -19,9 +19,9 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     return null;
   }
 
-  public Profile getProfileWithUsername(String username) {
+  public Profile getProfileWithUsername(String username) throws Exception {
     submittedUsername = username;
-    return null;
+    throw new Exception("No Profile with that name Here");
   }
 
   public Profile addProfile(Profile profile) {

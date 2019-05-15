@@ -21,11 +21,11 @@ public class InMemoryGateway implements ProfileGatewayInterface {
     profileList.add(newProfile);
   }
 
-  public Profile getProfileWithUsername(String username) {
+  public Profile getProfileWithUsername(String username) throws Exception {
     for (Profile currProfile : profileList) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
-    return null;
+    throw new Exception("No Profile With that Username");
   }
 
   public Profile addProfile(Profile profile) {

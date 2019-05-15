@@ -18,13 +18,14 @@ public class CreateProfileInteractor {
 
   public Response execute(
         CreateProfileRequest request) throws Exception {
-    if (gateway.getProfileWithUsername(request.username) != null) {
-      return new FailedAddedProfileResponse();
+    try{ gateway.getProfileWithUsername(request.username);}
+    catch (Exception e) {
+      Profile profile = new Profile(request.name, request.username, request.department,
+                                    request.contract);
+      gateway.addProfile(profile);
+      return new SuccessfullyAddedProfileResponse();
     }
-    Profile profile = new Profile(request.name, request.username, request.department,
-                                  request.contract);
-    gateway.addProfile(profile);
-    return new SuccessfullyAddedProfileResponse();
+    return new FailedAddedProfileResponse();
   }
 
 }

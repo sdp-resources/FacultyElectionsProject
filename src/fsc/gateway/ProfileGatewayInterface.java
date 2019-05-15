@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface ProfileGatewayInterface {
   public ArrayList<Profile> profileList = null;
   public ArrayList<Profile> getProfiles();
-  public Profile getProfileWithUsername(String username);
+  public Profile getProfileWithUsername(String username) throws Exception;
   public Profile addProfile(Profile profile);
   public void clearProfileList();
   Profile getProfile(String userName);
