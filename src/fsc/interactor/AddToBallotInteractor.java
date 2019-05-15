@@ -10,17 +10,11 @@ public class AddToBallotInteractor {
       public AddToBallotInteractor(BallotGateway gateway) { this.gateway = gateway; }
 
       public AddToBallotResponse execute(AddToBallotRequest request) {
-        String ballotID = request.getBallotID();
-        /*try{
-          Ballot ballot = gateway.getBallot(ballotID);
-
-        }*/
-
         return null;
       }
 
 
-  private class NoBallotException extends Exception {
+  public class NoBallotException extends Exception {
 
   }
 }

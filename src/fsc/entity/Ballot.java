@@ -2,13 +2,11 @@ package fsc.entity;
 
 import java.util.ArrayList;
 import java.util.AbstractList;
-import java.util.UUID;
 
 public class Ballot extends AbstractList {
 
   private AbstractList<Profile> profiles = new ArrayList<>();
   private int size = 0;
-  private String id = UUID.randomUUID().toString();
 
   public int size() {
     return size;
@@ -32,7 +30,4 @@ public class Ballot extends AbstractList {
     size--;
   }
 
-  public String getID() {
-    return id;
-  }
 }

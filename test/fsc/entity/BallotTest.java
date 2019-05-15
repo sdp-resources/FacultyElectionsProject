@@ -98,10 +98,5 @@ public class BallotTest {
     ballot.add(testProfile3);
   }
 
-  @Test
-  public void ballotHasID() {
-    String id = ballot.getID();
-    assertEquals(ballot.getID(), id);
-  }
 
 }
