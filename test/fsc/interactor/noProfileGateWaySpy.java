@@ -11,6 +11,10 @@ public class noProfileGateWaySpy implements ProfileGatewayInterface {
     return null;
   }
 
+  public Profile getProfileWithUsername(String username) {
+    return null;
+  }
+
   public Profile getProfileWitheUsername(
         String username, ArrayList<Profile> profiles
   ) {

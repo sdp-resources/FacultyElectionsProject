@@ -5,12 +5,14 @@ public class Profile {
   public String username;
   String department;
   String contract;
+  Boolean active;
 
   public Profile(String name, String username, String department, String contract) {
     this.name = name;
     this.department = department;
     this.username = username;
     this.contract = contract;
+    this.active = true;
   }
 
   public String getName() {
@@ -25,6 +27,12 @@ public class Profile {
     return contract;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
+  public Boolean isActive() {return active;}
+
   public void setContract(String contractType) {
     contract = contractType;
   }
@@ -35,10 +43,6 @@ public class Profile {
 
   public void setDepartment(String newDepartment) {
     department = newDepartment;
-  }
-
-  public String getUsername() {
-    return username;
   }
 
   public void setUsername(String newUsername) {

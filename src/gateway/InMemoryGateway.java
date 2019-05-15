@@ -36,6 +36,10 @@ public class InMemoryGateway implements ProfileGatewayInterface {
 
   }
 
+  public Profile getProfile(String userName) {
+    return null;
+  }
+
   private static boolean isCorrectProfile(String username, Profile currProfile) {
     if (currProfile.username == username) {
       return true;

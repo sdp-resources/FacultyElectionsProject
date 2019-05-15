@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class EditProfileTests {
 
@@ -55,6 +56,11 @@ public class EditProfileTests {
     String newUsername = "millb";
     profile.setUsername(newUsername);
     assertEquals(newUsername, profile.getUsername());
+  }
+
+  @Test
+  public void isActive() {
+    assertTrue(profile.isActive());
   }
 
 }

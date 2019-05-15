@@ -1,15 +1,16 @@
-package fsc.interactor;
+package fsc.Mocks;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGatewayInterface;
 
 import java.util.ArrayList;
 
-public class SpyGatewayNoProfileWithThatUsername implements ProfileGatewayInterface {
+public class SpyGatewayProfileWithThatUsernameAlreadyExists implements ProfileGatewayInterface {
   public static ArrayList<Profile> profileList;
   public static String submittedUsername;
+  public static Profile dummyProfile = new Profile("a","b","c","d");
 
-  public SpyGatewayNoProfileWithThatUsername(){
+  public SpyGatewayProfileWithThatUsernameAlreadyExists(){
     this.profileList = null;
   }
 
@@ -20,7 +21,7 @@ public class SpyGatewayNoProfileWithThatUsername implements ProfileGatewayInterf
 
   public Profile getProfileWithUsername(String username) {
     submittedUsername = username;
-    return null;
+    return dummyProfile;
   }
 
   public Profile addProfile(Profile profile) {
@@ -31,5 +32,7 @@ public class SpyGatewayNoProfileWithThatUsername implements ProfileGatewayInterf
 
   }
 
+  public Profile getProfile(String userName) {
+    return null;
+  }
 }
-

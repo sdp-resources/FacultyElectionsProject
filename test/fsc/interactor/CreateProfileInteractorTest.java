@@ -1,5 +1,7 @@
 package fsc.interactor;
 
+import fsc.Mocks.SpyGatewayNoProfileWithThatUsername;
+import fsc.Mocks.SpyGatewayProfileWithThatUsernameAlreadyExists;
 import fsc.gateway.ProfileGatewayInterface;
 import fsc.request.CreateProfileRequest;
 import fsc.response.FailedAddedProfileResponse;
