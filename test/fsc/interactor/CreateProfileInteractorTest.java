@@ -45,7 +45,7 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testWrongDivision() throws  Exception {
-    SpyGatewayInvalidDivision gateway = new SpyGatewayInvalidDivision();
+    InvalidDivisionProfileGatewaySpy gateway = new InvalidDivisionProfileGatewaySpy();
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("ART", gateway.submittedDivision);

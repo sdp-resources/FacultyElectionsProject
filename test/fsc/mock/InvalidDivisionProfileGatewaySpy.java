@@ -5,12 +5,12 @@ import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
 
-public class SpyGatewayInvalidDivision implements ProfileGateway {
+public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
   public ArrayList<Profile> profileList;
   public String submittedUsername;
   public String submittedDivision;
 
-  public SpyGatewayInvalidDivision(){
+  public InvalidDivisionProfileGatewaySpy(){
     this.profileList = null;
   }
 
