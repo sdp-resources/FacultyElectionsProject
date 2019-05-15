@@ -1,4 +1,4 @@
-package fsc.interactor;
+package fsc.response;
 
 import fsc.response.Response;
 

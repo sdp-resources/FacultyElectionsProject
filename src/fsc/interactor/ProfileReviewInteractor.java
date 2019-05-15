@@ -3,7 +3,9 @@ package fsc.interactor;
 import fsc.entity.Profile;
 import fsc.entity.ProfileToHashMapConverter;
 import fsc.gateway.ProfileGateway;
+import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
+import fsc.response.ProfileViewerResponse;
 import fsc.response.Response;
 
 import java.util.HashMap;

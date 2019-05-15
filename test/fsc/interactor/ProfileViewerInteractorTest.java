@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.mock.NoProfileExistsProfileGatewaySpy;

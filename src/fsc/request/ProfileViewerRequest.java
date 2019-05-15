@@ -1,4 +1,4 @@
-package fsc.interactor;
+package fsc.request;
 
 public class ProfileViewerRequest {
   public String userName;
