@@ -5,14 +5,14 @@ import fsc.gateway.ProfileGatewayInterface;
 
 import java.util.ArrayList;
 
-public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewayInterface {
+public class SpyGatewayInvalidDivision implements ProfileGatewayInterface {
   public ArrayList<Profile> profileList;
   public String submittedUsername;
+  public String submittedDivision;
 
-  public NoProfileWithThatUsernameProfileGatewaySpy(){
+  public SpyGatewayInvalidDivision(){
     this.profileList = null;
   }
-
 
 
   public ArrayList<Profile> getProfiles() {
@@ -28,12 +28,11 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     return null;
   }
 
-  public void clearProfileList() {
-
-  }
+  public void clearProfileList() {}
 
   public Boolean isValidDivision(String division) {
-    return true;
+    submittedDivision = division;
+    return false;
   }
 
   public Profile getProfile(String userName) {
@@ -41,4 +40,3 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   }
 
 }
-

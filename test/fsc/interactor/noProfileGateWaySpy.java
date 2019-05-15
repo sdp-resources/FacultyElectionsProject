@@ -29,6 +29,10 @@ public class noProfileGateWaySpy implements ProfileGatewayInterface {
 
   }
 
+  public Boolean isValidDivision(String division) {
+    return null;
+  }
+
   public Profile getProfile(String userName) {
     return null;
   }

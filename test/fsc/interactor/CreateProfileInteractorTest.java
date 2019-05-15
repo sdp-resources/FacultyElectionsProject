@@ -1,7 +1,9 @@
 package fsc.interactor;
 
-import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
-import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
+import fsc.mock.*;
+import fsc.gateway.ProfileGatewayInterface;
+import fsc.mock.SpyGatewayNoProfileWithThatUsername;
+import fsc.mock.SpyGatewayProfileWithThatUsernameAlreadyExists;
 import fsc.request.CreateProfileRequest;
 import fsc.response.FailedAddedProfileResponse;
 import fsc.response.SuccessfullyAddedProfileResponse;
@@ -27,7 +29,7 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testCorrectExecute() throws Exception {
-    NoProfileWithThatUsernameProfileGatewaySpy gateway = new NoProfileWithThatUsernameProfileGatewaySpy();
+    SpyGatewayNoProfileWithThatUsername gateway = new SpyGatewayNoProfileWithThatUsername();
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);
@@ -36,11 +38,17 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testWrongUsernameExecute() throws Exception {
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
+    SpyGatewayProfileWithThatUsernameAlreadyExists gateway = new SpyGatewayProfileWithThatUsernameAlreadyExists();
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertTrue(response instanceof FailedAddedProfileResponse);
+  }
 
-
+  @Test
+  public void testWrongDivision() throws  Exception {
+    SpyGatewayInvalidDivision gateway = new SpyGatewayInvalidDivision();
+    interactor = new CreateProfileInteractor(gateway);
+    response = interactor.execute(request);
+    assertEquals("ART", gateway.submittedDivision);
   }
 }

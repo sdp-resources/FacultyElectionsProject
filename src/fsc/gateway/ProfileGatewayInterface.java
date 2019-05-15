@@ -10,5 +10,7 @@ public interface ProfileGatewayInterface {
   public Profile getProfileWithUsername(String username) throws Exception;
   public Profile addProfile(Profile profile);
   public void clearProfileList();
+  public Boolean isValidDivision(String division);
   Profile getProfile(String userName);
+
 }

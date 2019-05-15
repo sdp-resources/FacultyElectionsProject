@@ -20,10 +20,12 @@ public class CreateProfileInteractor {
         CreateProfileRequest request) throws Exception {
     try{ gateway.getProfileWithUsername(request.username);}
     catch (Exception e) {
-      Profile profile = new Profile(request.name, request.username, request.department,
-                                    request.contract);
-      gateway.addProfile(profile);
-      return new SuccessfullyAddedProfileResponse();
+      if (gateway.isValidDivision(request.division)) {
+        Profile profile = new Profile(request.name, request.username, request.division,
+                                      request.contract);
+        gateway.addProfile(profile);
+        return new SuccessfullyAddedProfileResponse();
+      }
     }
     return new FailedAddedProfileResponse();
   }

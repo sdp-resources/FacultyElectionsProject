@@ -36,6 +36,10 @@ public class InMemoryGateway implements ProfileGatewayInterface {
 
   }
 
+  public Boolean isValidDivision(String division) {
+    return false;
+  }
+
   public Profile getProfile(String userName) {
     return null;
   }
