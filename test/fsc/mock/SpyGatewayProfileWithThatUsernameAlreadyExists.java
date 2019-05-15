@@ -1,4 +1,4 @@
-package fsc.Mocks;
+package fsc.mock;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGatewayInterface;

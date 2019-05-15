@@ -1,4 +1,4 @@
-package fsc.Mocks;
+package fsc.mock;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGatewayInterface;
@@ -6,8 +6,8 @@ import fsc.gateway.ProfileGatewayInterface;
 import java.util.ArrayList;
 
 public class SpyGatewayNoProfileWithThatUsername implements ProfileGatewayInterface {
-  public static ArrayList<Profile> profileList;
-  public static String submittedUsername;
+  public ArrayList<Profile> profileList;
+  public String submittedUsername;
 
   public SpyGatewayNoProfileWithThatUsername(){
     this.profileList = null;

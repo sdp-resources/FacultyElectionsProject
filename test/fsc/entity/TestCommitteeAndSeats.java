@@ -1,6 +1,6 @@
 package fsc.entity;
 
-import fsc.entity.query.AlwaysTrueQuery;
+import fsc.mock.AlwaysTrueQueryStub;
 import fsc.entity.query.Query;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class TestCommitteeAndSeats {
 
   @Test
   public void setDefaultQueryOnSeat() {
-    Query query = new AlwaysTrueQuery();
+    Query query = new AlwaysTrueQueryStub();
     seat.setDefaultQuery(query);
 
     assertThat(seat.getDefaultQuery(), is(query));

@@ -1,8 +1,9 @@
-package fsc.entity.query;
+package fsc.mock;
 
 import fsc.entity.Profile;
+import fsc.entity.query.Query;
 
-public class AlwaysTrueQuery implements Query {
+public class AlwaysTrueQueryStub implements Query {
 
   public boolean isProfileValid(Profile profile) {
     return true;
