@@ -5,7 +5,7 @@ import java.util.Map;
 public class EditProfileRequest {
 
   public final String username;
-  private final Map<String, String> changes;
+  public final Map<String, String> changes;
 
   public EditProfileRequest(String username, Map<String,String> changes) {
     this.username = username;

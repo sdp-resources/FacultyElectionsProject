@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.mock.noProfileGateWaySpy;
 import fsc.response.Response;
 import fsc.mock.NoProfileExistsProfileGatewaySpy;
 import org.junit.Test;
