@@ -2,8 +2,11 @@ package fsc.interactor;
 
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
+import fsc.mock.NoBallotGatewayStub;
 import fsc.request.AddToBallotRequest;
 import fsc.response.AddToBallotResponse;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -21,10 +24,10 @@ public class AddToBallotInteractorTest {
   public void addingToNoBallot() throws AddToBallotInteractor.NoBallotException {
     Ballot ballot = new Ballot();
     AddToBallotRequest request = new AddToBallotRequest(ballot, profile);
-    BallotGatewaySpy gateway = new BallotGatewaySpy();
+    NoBallotGatewayStub gateway = new NoBallotGatewayStub();
     AddToBallotInteractor inter = new AddToBallotInteractor(gateway);
-    AddToBallotResponse response = inter.execute(request);
-    assertEquals("No ballot", response);
+    Response response = inter.execute(request);
+    assertEquals( "No ballot", ((ErrorResponse) response).response);
   }
 
 }
