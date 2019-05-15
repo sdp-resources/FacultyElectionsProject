@@ -9,4 +9,5 @@ public interface ProfileGateway {
   Profile getProfileFromUsername(String username);
   List<Profile> getAllProfiles();
   Profile addProfile(Profile profile);
+  boolean isValidDivision(String division);
 }

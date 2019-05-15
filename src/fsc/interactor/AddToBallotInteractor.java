@@ -10,7 +10,7 @@ public class AddToBallotInteractor {
 
       public AddToBallotInteractor(AddToBallotGatewayInterface gateway) { this.gateway = gateway; }
 
-      public AddToBallotResponse execute(AddToBallotRequest request) throws NoBallotException {
+      public AddToBallotResponse execute(AddToBallotRequest request) {
         String ballotID = request.getBallotID();
         /*try{
           Ballot ballot = gateway.getBallot(ballotID);

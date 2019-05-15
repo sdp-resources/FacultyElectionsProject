@@ -21,7 +21,11 @@ public class AddToBallotInteractorTest {
   public void NoBallot() {
     Ballot ballot = new Ballot();
     AddToBallotRequest request = new AddToBallotRequest(ballot.getID(), profile);
-    GatewayDummy gateway = new GatewayDummy();
+    AddToBallotGatewayInterface gateway = new AddToBallotGatewayInterface() {
+      public Ballot getBallot(String id) {
+        return null;
+      }
+    };
     AddToBallotInteractor inter = new AddToBallotInteractor(gateway);
     AddToBallotResponse response = inter.execute(request);
 

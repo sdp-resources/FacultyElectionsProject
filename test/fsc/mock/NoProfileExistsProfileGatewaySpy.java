@@ -23,4 +23,8 @@ public class NoProfileExistsProfileGatewaySpy implements ProfileGateway {
   public Profile addProfile(Profile profile) {
     return null;
   }
+
+  public boolean isValidDivision(String division) {
+    return false;
+  }
 }

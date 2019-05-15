@@ -1,11 +1,11 @@
 package fsc.mock;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
 
-public class SpyGatewayInvalidDivision implements ProfileGatewayInterface {
+public class SpyGatewayInvalidDivision implements ProfileGateway {
   public ArrayList<Profile> profileList;
   public String submittedUsername;
   public String submittedDivision;
@@ -15,7 +15,7 @@ public class SpyGatewayInvalidDivision implements ProfileGatewayInterface {
   }
 
 
-  public ArrayList<Profile> getProfiles() {
+  public ArrayList<Profile> getAllProfiles() {
     return null;
   }
 
@@ -30,12 +30,12 @@ public class SpyGatewayInvalidDivision implements ProfileGatewayInterface {
 
   public void clearProfileList() {}
 
-  public Boolean isValidDivision(String division) {
+  public boolean isValidDivision(String division) {
     submittedDivision = division;
     return false;
   }
 
-  public Profile getProfile(String userName) {
+  public Profile getProfileFromUsername(String userName) {
     return null;
   }
 

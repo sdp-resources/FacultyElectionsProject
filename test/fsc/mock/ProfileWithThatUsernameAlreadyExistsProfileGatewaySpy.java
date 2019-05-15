@@ -28,7 +28,7 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
     return null;
   }
 
-  public Boolean isValidDivision(String division) {
+  public boolean isValidDivision(String division) {
     return true;
   }
 

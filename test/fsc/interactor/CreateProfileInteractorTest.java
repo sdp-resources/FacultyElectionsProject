@@ -1,7 +1,6 @@
 package fsc.interactor;
 
 import fsc.mock.*;
-import fsc.gateway.ProfileGatewayInterface;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;

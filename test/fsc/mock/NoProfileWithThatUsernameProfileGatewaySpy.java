@@ -20,9 +20,9 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     return null;
   }
 
-  public Profile getProfileFromUsername(String username) throws Exception {
+  public Profile getProfileFromUsername(String username) {
     submittedUsername = username;
-    throw new Exception("No Profile with that name Here");
+    throw new RuntimeException("No Profile with that name Here");
   }
 
   public Profile addProfile(Profile profile) {
@@ -37,7 +37,7 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
 
   }
 
-  public Boolean isValidDivision(String division) {
+  public boolean isValidDivision(String division) {
     return true;
   }
 }

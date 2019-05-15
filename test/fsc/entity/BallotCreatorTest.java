@@ -70,5 +70,9 @@ public class BallotCreatorTest {
       return null;
     }
 
+    public boolean isValidDivision(String division) {
+      return false;
+    }
+
   }
 }

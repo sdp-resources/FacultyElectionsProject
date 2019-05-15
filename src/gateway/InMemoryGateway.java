@@ -21,18 +21,18 @@ public class InMemoryGateway implements ProfileGateway {
     profileList.add(newProfile);
   }
 
-  public Profile getProfileFromUsername(String username) throws Exception {
+  public Profile getProfileFromUsername(String username) {
     for (Profile currProfile : profileList) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
-    throw new Exception("No Profile With that Username");
+    throw new RuntimeException("No Profile With that Username");
   }
 
   public Profile addProfile(Profile profile) {
     return null;
   }
 
-  public Boolean isValidDivision(String division) {
+  public boolean isValidDivision(String division) {
     return false;
   }
 

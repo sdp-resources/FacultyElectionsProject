@@ -17,4 +17,8 @@ public class GatewayDummy implements Gateway {
   public Profile addProfile(Profile profile) {
     return null;
   }
+
+  public boolean isValidDivision(String division) {
+    return false;
+  }
 }
