@@ -1,11 +1,14 @@
 package fsc.interactor;
 
 import fsc.Main;
+import fsc.Response.ResponseInterface;
 import fsc.gateway.ProfileGatewayInterface;
 import fsc.request.CreateProfileRequest;
 import fsc.entity.Profile;
+import fsc.response.FailedAddedProfileResponse;
+import fsc.response.SuccessfullyAddedProfileResponse;
 import gateway.InMemoryGateway;
-import spark.Response;
+import fsc.response.Response;
 
 import java.util.ArrayList;
 
@@ -18,16 +21,15 @@ public class CreateProfileInteractor {
     this.gateway = gateway;
   }
 
-  public ArrayList<Profile> execute(
+  public Response execute(
         CreateProfileRequest request) throws Exception {
-    if (gateway.getProfileWitheUsername(request.username, gateway.profileList) != null) {
-      throw new Exception("Username Already Used!");
+    if (gateway.getProfileWithUsername(request.username) != null) {
+      return new FailedAddedProfileResponse();
     }
     Profile profile = new Profile(request.name, request.username, request.department,
                                   request.contract);
     gateway.addProfile(profile);
-    //fsc.response.Response goodResponse = new fsc.response.Response();
-    return gateway.profileList;
+    return new SuccessfullyAddedProfileResponse();
   }
 
 }
