@@ -1,6 +1,6 @@
 package fsc.entity;
 
-import fsc.gateway.Gateway;
+import fsc.gateway.ProfileGateway;
 import fsc.mock.AlwaysFalseQueryStub;
 import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
@@ -14,13 +14,13 @@ import static org.junit.Assert.*;
 public class BallotCreatorTest {
 
   private BallotCreator ballotCreator;
-  private Gateway mockGateway;
+  private ProfileGateway mockGateway;
 
   @Before
   public void setUp() throws Exception {
     ballotCreator = new BallotCreator();
     mockGateway = makeGateway();
-    ballotCreator.setGateway(mockGateway);
+    ballotCreator.setProfileGateway(mockGateway);
   }
 
   @Test
@@ -42,11 +42,11 @@ public class BallotCreatorTest {
     assertEquals(list2.size(), list1.size());
   }
 
-  private Gateway makeGateway() {
+  private ProfileGateway makeGateway() {
     return new MockGateway();
   }
 
-  private class MockGateway implements Gateway {
+  private class MockGateway implements ProfileGateway {
     Profile profile1 = new Profile("name1", "username1", "dept", "contract");
     Profile profile2 = new Profile("name2", "username2", "dept", "contract");
     Profile profile3 = new Profile("name3", "username3", "dept", "contract");
@@ -58,8 +58,17 @@ public class BallotCreatorTest {
       allProfiles.add(profile3);
     }
 
+    public Profile getProfileFromUsername(String username) {
+      return null;
+    }
+
     public List<Profile> getAllProfiles() {
       return allProfiles;
     }
+
+    public Profile addProfile(Profile profile) {
+      return null;
+    }
+
   }
 }

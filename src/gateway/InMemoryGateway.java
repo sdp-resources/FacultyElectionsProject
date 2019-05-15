@@ -1,11 +1,11 @@
 package gateway;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
 
-public class InMemoryGateway implements ProfileGatewayInterface {
+public class InMemoryGateway implements ProfileGateway {
 
   public static ArrayList<Profile> profileList;
 
@@ -13,7 +13,7 @@ public class InMemoryGateway implements ProfileGatewayInterface {
     this.profileList = null;
   }
 
-  public ArrayList<Profile> getProfiles() {
+  public ArrayList<Profile> getAllProfiles() {
     return profileList;
   }
 
@@ -21,7 +21,7 @@ public class InMemoryGateway implements ProfileGatewayInterface {
     profileList.add(newProfile);
   }
 
-  public Profile getProfileWithUsername(String username) throws Exception {
+  public Profile getProfileFromUsername(String username) throws Exception {
     for (Profile currProfile : profileList) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
@@ -32,16 +32,8 @@ public class InMemoryGateway implements ProfileGatewayInterface {
     return null;
   }
 
-  public void clearProfileList() {
-
-  }
-
   public Boolean isValidDivision(String division) {
     return false;
-  }
-
-  public Profile getProfile(String userName) {
-    return null;
   }
 
   private static boolean isCorrectProfile(String username, Profile currProfile) {

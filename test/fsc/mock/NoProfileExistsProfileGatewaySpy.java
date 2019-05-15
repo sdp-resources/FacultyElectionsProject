@@ -1,11 +1,17 @@
 package fsc.mock;
 
 import fsc.entity.Profile;
-import fsc.gateway.Gateway;
+import fsc.gateway.ProfileGateway;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class GatewayDummy implements Gateway {
+public class NoProfileExistsProfileGatewaySpy implements ProfileGateway {
+
+  public ArrayList<Profile> getProfiles() {
+    return null;
+  }
+
   public Profile getProfileFromUsername(String username) {
     return null;
   }

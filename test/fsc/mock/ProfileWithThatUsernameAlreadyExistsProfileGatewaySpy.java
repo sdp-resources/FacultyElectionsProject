@@ -1,11 +1,11 @@
 package fsc.mock;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
 
-public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGatewayInterface {
+public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGateway {
   public static ArrayList<Profile> profileList;
   public static String submittedUsername;
   public static Profile dummyProfile = new Profile("a","b","c","d");
@@ -15,21 +15,17 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
   }
 
 
-  public ArrayList<Profile> getProfiles() {
+  public ArrayList<Profile> getAllProfiles() {
     return null;
   }
 
-  public Profile getProfileWithUsername(String username) {
+  public Profile getProfileFromUsername(String username) {
     submittedUsername = username;
     return dummyProfile;
   }
 
   public Profile addProfile(Profile profile) {
     return null;
-  }
-
-  public void clearProfileList() {
-
   }
 
   public Boolean isValidDivision(String division) {

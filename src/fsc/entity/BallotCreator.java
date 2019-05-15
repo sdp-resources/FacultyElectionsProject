@@ -1,11 +1,11 @@
 package fsc.entity;
 
-import fsc.gateway.Gateway;
 import fsc.entity.query.Query;
+import fsc.gateway.ProfileGateway;
 
 public class BallotCreator {
 
-  private Gateway gateway;
+  private ProfileGateway profileGateway;
 
   public Ballot getBallot(Query query) {
     Ballot ballot = new Ballot();
@@ -14,14 +14,14 @@ public class BallotCreator {
   }
 
   private void addValidProfilesToBallot(Query query, Ballot ballot) {
-    for (Profile profile : gateway.getAllProfiles()) {
+    for (Profile profile : profileGateway.getAllProfiles()) {
       if (query.isProfileValid(profile)) {
         ballot.add(profile);
       }
     }
   }
 
-  public void setGateway(Gateway gateway) {
-    this.gateway = gateway;
+  public void setProfileGateway(ProfileGateway profileGateway) {
+    this.profileGateway = profileGateway;
   }
 }

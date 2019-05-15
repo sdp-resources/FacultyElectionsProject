@@ -1,20 +1,20 @@
 package fsc.interactor;
 
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 import fsc.request.EditProfileRequest;
 import fsc.response.FailedSearchResponse;
 import fsc.response.Response;
 import fsc.response.SuccessfullyEditedResponse;
 
 public class EditProfileInteractor {
-  private ProfileGatewayInterface gateway;
+  private ProfileGateway gateway;
 
-  public EditProfileInteractor(ProfileGatewayInterface gateway) {
+  public EditProfileInteractor(ProfileGateway gateway) {
     this.gateway = gateway;
   }
 
   private boolean usernameExists(String username) throws Exception {
-    try {gateway.getProfileWithUsername(username);}
+    try {gateway.getProfileFromUsername(username);}
     catch (Exception e) {
       return true;
     }

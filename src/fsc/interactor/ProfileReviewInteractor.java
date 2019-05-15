@@ -1,14 +1,17 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 import fsc.response.Response;
+
+import java.util.HashMap;
 
 public class ProfileReviewInteractor {
   public String userName;
-  public ProfileGatewayInterface gateway;
+  public HashMap<String, String> userInfo = null;
+  public ProfileGateway gateway;
 
-  public ProfileReviewInteractor(ProfileGatewayInterface gateway){
+  public ProfileReviewInteractor(ProfileGateway gateway){
     this.gateway = gateway;
   }
 
@@ -23,7 +26,7 @@ public class ProfileReviewInteractor {
   }
 
   private Response tryCreateProfileResponse() {
-    Profile profile = gateway.getProfile(userName);
+    Profile profile = gateway.getProfileFromUsername(userName);
     ProfileViewer profileInfo = new ProfileViewer(profile);
     return new ProfileViewerResponse(profileInfo.createHashMap());
   }
