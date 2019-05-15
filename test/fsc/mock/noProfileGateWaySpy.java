@@ -1,23 +1,17 @@
 package fsc.mock;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class noProfileGateWaySpy implements ProfileGatewayInterface {
+public class noProfileGateWaySpy implements ProfileGateway {
 
-  public ArrayList<Profile> getProfiles() {
+  public Profile getProfileFromUsername(String username) {
     return null;
   }
 
-  public Profile getProfileWithUsername(String username) {
-    return null;
-  }
-
-  public Profile getProfileWitheUsername(
-        String username, ArrayList<Profile> profiles
-  ) {
+  public List<Profile> getAllProfiles() {
     return null;
   }
 
@@ -29,8 +23,8 @@ public class noProfileGateWaySpy implements ProfileGatewayInterface {
 
   }
 
-  public Boolean isValidDivision(String division) {
-    return null;
+  public boolean isValidDivision(String division) {
+    return false;
   }
 
   public Profile getProfile(String userName) {

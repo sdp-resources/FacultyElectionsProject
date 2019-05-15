@@ -1,7 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 import fsc.mock.noProfileGateWaySpy;
 import fsc.request.EditProfileRequest;
 import fsc.response.FailedSearchResponse;
@@ -29,19 +29,18 @@ public class EditProfileInteractorTest {
     Map<String,String> changes = new HashMap<>();
     changes.put("Contract","Tenured");
     request = new EditProfileRequest("Username", changes);
-    ProfileGatewayInterface fakeGateway = new noProfileGateWaySpy();
+    noProfileGateWaySpy fakeGateway = new noProfileGateWaySpy();
     EditProfileInteractor interactor = new EditProfileInteractor(fakeGateway);
     Response response = interactor.execute(request);
     assertTrue(response instanceof FailedSearchResponse);
   }
 
-  @Test
-  public void profileGetsEdited() throws Exception {
-    Map<String, String> changes = new HashMap<>();
-    changes.put("Contract", "Untenured");
-    request = new EditProfileRequest("rossB12", changes);
-    ProfileGatewayInterface fakeGateway = new noProfileGateWaySpy();
-
-
-  }
+//  @Test
+//  public void profileGetsEdited() throws Exception {
+//    Map<String, String> changes = new HashMap<>();
+//    changes.put("Contract", "Untenured");
+//    request = new EditProfileRequest("rossB12", changes);
+//    profileWasEditedGatewaySpy fakegateway = new noProfileGateWaySpy();
+//
+//  }
 }

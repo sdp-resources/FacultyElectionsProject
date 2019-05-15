@@ -1,7 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.gateway.ProfileGatewayInterface;
+import fsc.gateway.ProfileGateway;
 import fsc.request.EditProfileRequest;
 import fsc.response.FailedSearchResponse;
 import fsc.response.Response;
@@ -10,9 +10,9 @@ import fsc.response.SuccessfullyEditedResponse;
 import java.util.Map;
 
 public class EditProfileInteractor {
-  private ProfileGatewayInterface gateway;
+  private ProfileGateway gateway;
 
-  public EditProfileInteractor(ProfileGatewayInterface gateway) {
+  public EditProfileInteractor(ProfileGateway gateway) {
     this.gateway = gateway;
   }
 
@@ -25,7 +25,7 @@ public class EditProfileInteractor {
   }
 
   private boolean usernameExists(String username) throws Exception {
-      if (gateway.getProfileWithUsername(username) != null){
+      if (gateway.getProfileFromUsername(username) != null){
         System.out.println(username);
         return true;
     }
@@ -33,7 +33,7 @@ public class EditProfileInteractor {
   }
 
   private Profile editUsernameWithRequest(EditProfileRequest request) throws Exception {
-    Profile profile = gateway.getProfileWithUsername(request.username);
+    Profile profile = gateway.getProfileFromUsername(request.username);
     String change = getCorrectChangeString(request.changes);
     updateProfileBasedOnChangeString(change,profile);
     return profile;
