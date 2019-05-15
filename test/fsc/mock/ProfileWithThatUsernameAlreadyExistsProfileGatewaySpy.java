@@ -5,12 +5,12 @@ import fsc.gateway.ProfileGatewayInterface;
 
 import java.util.ArrayList;
 
-public class SpyGatewayProfileWithThatUsernameAlreadyExists implements ProfileGatewayInterface {
+public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGatewayInterface {
   public static ArrayList<Profile> profileList;
   public static String submittedUsername;
   public static Profile dummyProfile = new Profile("a","b","c","d");
 
-  public SpyGatewayProfileWithThatUsernameAlreadyExists(){
+  public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(){
     this.profileList = null;
   }
 

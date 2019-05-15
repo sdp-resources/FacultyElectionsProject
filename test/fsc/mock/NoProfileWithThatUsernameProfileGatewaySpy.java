@@ -14,6 +14,7 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   }
 
 
+
   public ArrayList<Profile> getProfiles() {
     return null;
   }
