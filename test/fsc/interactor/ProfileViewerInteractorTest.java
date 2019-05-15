@@ -26,5 +26,10 @@ public class ProfileViewerInteractorTest {
     Response response = viewInteractor.execute(request);
    // assertTrue(response.userInfo instanceof HashMap<String, String>);
     assertTrue(response instanceof ProfileReviewInteractor.ErrorResponse);
+    /*
+    This test is currently not working. It is passing but for the wrong reason. It should return
+    an appropriate response but instead is receiving an ErrorResponse similar to the one in the
+    previous test.
+     */
   }
 }
