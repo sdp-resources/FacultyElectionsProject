@@ -21,13 +21,16 @@ public class CreateProfileInteractor {
     try{ gateway.getProfileWithUsername(request.username);}
     catch (Exception e) {
       if (gateway.isValidDivision(request.division)) {
-        Profile profile = new Profile(request.name, request.username, request.division,
-                                      request.contract);
-        gateway.addProfile(profile);
+        gateway.addProfile(makeProfileFromRequest(request));
         return new SuccessfullyAddedProfileResponse();
       }
     }
     return new FailedAddedProfileResponse();
+  }
+
+  private Profile makeProfileFromRequest(CreateProfileRequest request) {
+    return new Profile(request.name, request.username, request.division,
+                                        request.contract);
   }
 
 }

@@ -13,9 +13,10 @@ public class EditProfileInteractor {
     this.gateway = gateway;
   }
 
-  private boolean usernameExists(String username){
-      if (gateway.getProfileWithUsername(username) != null){
-        return true;
+  private boolean usernameExists(String username) throws Exception {
+    try {gateway.getProfileWithUsername(username);}
+    catch (Exception e) {
+      return true;
     }
     return false;
   }
