@@ -58,7 +58,7 @@ public class BallotTest {
 
   @Test
   public void removeOneCandidateMakesBallotEmpty(){
-    Profile testProfile = new Profile("name", "username", "department", "contract");
+    Profile testProfile = new Profile("name", "username", "division", "contract");
     ballot.add(testProfile);
     ballot.remove(testProfile);
     assertEquals(true, ballot.isEmpty());
@@ -77,14 +77,14 @@ public class BallotTest {
 
   @Test
   public void removeOneCandidateDecreasesSizeByOne(){
-    Profile testProfile = new Profile("name", "username", "department", "contract");
+    Profile testProfile = new Profile("name", "username", "division", "contract");
     ballot.add(testProfile);
     ballot.remove(testProfile);
     assertEquals(0, ballot.size());
   }
 
   private Profile createAndAddOneProfile() {
-    Profile testProfile = new Profile("name", "username", "department", "contract");
+    Profile testProfile = new Profile("name", "username", "division", "contract");
     ballot.add(testProfile);
     return testProfile;
   }

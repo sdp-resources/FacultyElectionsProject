@@ -10,7 +10,7 @@ public class ProfileViewer {
   public ProfileViewer(Profile profile) {
     profileView.put("Name", profile.getName());
     profileView.put("Username", profile.getUsername());
-    profileView.put("Department", profile.getDepartment());
+    profileView.put("Department", profile.getDivision());
     profileView.put("Contract", profile.getContract());
   }
 

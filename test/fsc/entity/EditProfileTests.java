@@ -3,8 +3,7 @@ package fsc.entity;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class EditProfileTests {
 
@@ -26,8 +25,8 @@ public class EditProfileTests {
   }
 
   @Test
-  public void readDepartment() {
-    assertEquals("SCI", profile.getDepartment());
+  public void readDivision() {
+    assertEquals("SCI", profile.getDivision());
   }
 
   @Test
@@ -45,10 +44,10 @@ public class EditProfileTests {
   }
 
   @Test
-  public void canSetDepartment() {
+  public void canSetDivision() {
     String newDepartment = "PLS";
-    profile.setDepartment(newDepartment);
-    assertEquals(newDepartment, profile.getDepartment());
+    profile.setDivision(newDepartment);
+    assertEquals(newDepartment, profile.getDivision());
   }
 
   @Test
@@ -59,7 +58,19 @@ public class EditProfileTests {
   }
 
   @Test
-  public void isActive() {
+  public void isProfileActive() {
+    assertTrue(profile.isActive());
+  }
+
+  @Test
+  public void canSetInactive() {
+    profile.setInactive();
+    assertFalse(profile.isActive());
+  }
+
+  @Test
+  public void canSetActive() {
+    profile.setActive();
     assertTrue(profile.isActive());
   }
 

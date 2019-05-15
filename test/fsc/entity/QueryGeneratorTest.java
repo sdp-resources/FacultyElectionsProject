@@ -56,7 +56,7 @@ public class QueryGeneratorTest {
   {
     JSONObject and = new JSONObject();
     JSONObject department = new JSONObject();
-    department.put("department", "Art");
+    department.put("division", "Art");
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
@@ -75,7 +75,7 @@ public class QueryGeneratorTest {
   {
     JSONObject or = new JSONObject();
     JSONObject department = new JSONObject();
-    department.put("department", "Art");
+    department.put("division", "Art");
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
@@ -96,9 +96,9 @@ public class QueryGeneratorTest {
     contract.put("contract", "tenured");
 
     JSONObject art = new JSONObject();
-    art.put("department", "Art");
+    art.put("division", "Art");
     JSONObject librarian = new JSONObject();
-    librarian.put("department", "Librarian");
+    librarian.put("division", "Librarian");
 
     JSONObject or = new JSONObject();
     or.put("or", new JSONArray( new JSONObject[] { art, librarian } ));

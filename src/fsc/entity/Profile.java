@@ -3,13 +3,13 @@ package fsc.entity;
 public class Profile {
   String name;
   public String username;
-  String department;
+  String division;
   String contract;
   Boolean active;
 
-  public Profile(String name, String username, String department, String contract) {
+  public Profile(String name, String username, String division, String contract) {
     this.name = name;
-    this.department = department;
+    this.division = division;
     this.username = username;
     this.contract = contract;
     this.active = true;
@@ -19,8 +19,8 @@ public class Profile {
     return name;
   }
 
-  public String getDepartment() {
-    return department;
+  public String getDivision() {
+    return division;
   }
 
   public String getContract() {
@@ -41,11 +41,15 @@ public class Profile {
     name = newName;
   }
 
-  public void setDepartment(String newDepartment) {
-    department = newDepartment;
+  public void setDivision(String newDepartment) {
+    division = newDepartment;
   }
 
   public void setUsername(String newUsername) {
     username = newUsername;
   }
+
+  public void setInactive() { active = false;  }
+
+  public void setActive() { active = true; }
 }

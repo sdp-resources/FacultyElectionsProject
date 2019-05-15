@@ -14,7 +14,7 @@ public class AttributeQuery implements Query {
 
   public boolean isProfileValid(Profile profile) {
     if (key.equals("name")) return profile.getName().equals(value);
-    if (key.equals("department")) return profile.getDepartment().equals(value);
+    if (key.equals("department")) return profile.getDivision().equals(value);
     if (key.equals("contract")) return profile.getContract().equals(value);
     return false;
   }
