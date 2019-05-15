@@ -1,6 +1,6 @@
 package fsc.interactor;
 
-import fsc.mock.noProfileGateWaySpy;
+import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.mock.NoProfileExistsProfileGatewaySpy;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class ProfileViewerInteractorTest {
     NoProfileExistsProfileGatewaySpy gateway = new NoProfileExistsProfileGatewaySpy();
     ProfileReviewInteractor viewInteractor = new ProfileReviewInteractor(gateway);
     Response response = viewInteractor.execute(request);
-    assertTrue(response instanceof ProfileReviewInteractor.ErrorResponse);
+    assertTrue(response instanceof ErrorResponse);
   }
 
 }

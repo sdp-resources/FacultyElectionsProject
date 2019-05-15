@@ -2,6 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
+import fsc.response.ErrorResponse;
 import fsc.response.Response;
 
 import java.util.HashMap;
@@ -31,10 +32,4 @@ public class ProfileReviewInteractor {
     return new ProfileViewerResponse(profileInfo.createHashMap());
   }
 
-  public class ErrorResponse implements Response {
-    public String response;
-    public ErrorResponse(String s) {
-      response = s;
-    }
-  }
 }
