@@ -24,7 +24,7 @@ public class EditProfileInteractor {
     return new FailedSearchResponse();
   }
 
-  private boolean usernameExists(String username) throws Exception {
+  private boolean usernameExists(String username) {
       if (gateway.getProfileFromUsername(username) != null){
         System.out.println(username);
         return true;
@@ -32,7 +32,7 @@ public class EditProfileInteractor {
     return false;
   }
 
-  private Profile editUsernameWithRequest(EditProfileRequest request) throws Exception {
+  private Profile editUsernameWithRequest(EditProfileRequest request) {
     Profile profile = gateway.getProfileFromUsername(request.username);
     String change = getCorrectChangeString(request.changes);
     updateProfileBasedOnChangeString(change,profile);

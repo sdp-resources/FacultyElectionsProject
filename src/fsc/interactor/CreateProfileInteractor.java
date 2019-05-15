@@ -17,7 +17,7 @@ public class CreateProfileInteractor {
   }
 
   public Response execute(
-        CreateProfileRequest request) throws Exception {
+        CreateProfileRequest request) {
     try{ gateway.getProfileFromUsername(request.username);}
     catch (Exception e) {
       if (gateway.isValidDivision(request.division)) {
