@@ -5,7 +5,7 @@ import fsc.entity.Profile;
 import java.util.*;
 
 public class ProfileViewer {
-  Map<String, String> profileView = new HashMap<String, String>();
+  public Map<String, String> profileView = new HashMap<String, String>();
 
   public ProfileViewer(Profile profile) {
     profileView.put("Name", profile.getName());
@@ -16,5 +16,9 @@ public class ProfileViewer {
 
   public String getValueFromMap(String request) {
     return profileView.get(request);
+  }
+
+  public HashMap<String, String> createHashMap() {
+    return null;
   }
 }

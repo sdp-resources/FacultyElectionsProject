@@ -10,4 +10,5 @@ public interface ProfileGatewayInterface {
   public Profile getProfileWitheUsername(String username, ArrayList<Profile> profiles);
   public Profile addProfile(Profile profile);
   public void clearProfileList();
+  Profile getProfile(String userName);
 }
