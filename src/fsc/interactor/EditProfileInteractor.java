@@ -16,30 +16,29 @@ public class EditProfileInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(EditProfileRequest request) {
-    if(usernameExists(request.username)){
+  public Response execute(EditProfileRequest request) throws Exception {
+    if(ifUsernameExists(request.username)){
       editUsernameWithRequest(request);
       return new SuccessfullyEditedResponse();
     }
     return new FailedSearchResponse();
   }
 
-  private boolean usernameExists(String username) {
+  private boolean ifUsernameExists(String username) throws Exception {
       if (gateway.getProfileFromUsername(username) != null){
-        System.out.println(username);
         return true;
     }
     return false;
   }
 
-  private Profile editUsernameWithRequest(EditProfileRequest request) {
+  private Profile editUsernameWithRequest(EditProfileRequest request) throws Exception {
     Profile profile = gateway.getProfileFromUsername(request.username);
-    String change = getCorrectChangeString(request.changes);
-    updateProfileBasedOnChangeString(change,profile);
+    String change = getChange(request.changes);
+    updateProfileBasedOnChange(change, profile);
     return profile;
   }
 
-  private void updateProfileBasedOnChangeString(String change, Profile profile) {
+  private void updateProfileBasedOnChange(String change, Profile profile) {
     switch(change){
       case "Contract":
         profile.setContract(change);
@@ -50,7 +49,7 @@ public class EditProfileInteractor {
     }
   }
 
-  private String getCorrectChangeString(Map<String, String> changes) {
+  private String getChange(Map<String, String> changes) {
     return changes.get(changes.keySet().toArray()[0]);
   }
 
