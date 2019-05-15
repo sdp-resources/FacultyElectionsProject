@@ -2,6 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGatewayInterface;
+import fsc.response.Response;
 
 import java.util.HashMap;
 
@@ -14,7 +15,7 @@ public class ProfileReviewInteractor {
     this.gateway = gateway;
   }
 
-  public ProfileViewerResponse execute(ProfileViewerRequest request) throws noProfileException {
+  public Response execute(ProfileViewerRequest request) {
     userName = request.userName;
     try{
       Profile profile = gateway.getProfile(userName);
@@ -24,13 +25,20 @@ public class ProfileReviewInteractor {
       return response;
     }
     catch (Exception e){
-      throw new noProfileException("No profile found!");
+      return new ErrorResponse("No profile found!");
+    }
+  }
+  public class NoProfileException extends RuntimeException {
+    public String noProfile;
+    public NoProfileException(String s) {
+      noProfile = s;
     }
   }
 
-  private class noProfileException extends Throwable {
-    public noProfileException(String e) {
-
+  public class ErrorResponse implements Response {
+    public String response;
+    public ErrorResponse(String s) {
+      response = s;
     }
   }
 }
