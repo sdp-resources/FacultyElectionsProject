@@ -1,9 +1,6 @@
 package fsc.interactor;
 
-import fsc.mock.SpyGatewayNoProfileWithThatUsername;
-import fsc.mock.SpyGatewayProfileWithThatUsernameAlreadyExists;
-import fsc.gateway.ProfileGatewayInterface;
-import fsc.mock.SpyGatewayNoProfileWithThatUsername;
+import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.SpyGatewayProfileWithThatUsernameAlreadyExists;
 import fsc.request.CreateProfileRequest;
 import fsc.response.FailedAddedProfileResponse;
@@ -30,7 +27,7 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testCorrectExecute() throws Exception {
-    SpyGatewayNoProfileWithThatUsername gateway = new SpyGatewayNoProfileWithThatUsername();
+    NoProfileWithThatUsernameProfileGatewaySpy gateway = new NoProfileWithThatUsernameProfileGatewaySpy();
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);

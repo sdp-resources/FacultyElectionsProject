@@ -5,11 +5,11 @@ import fsc.gateway.ProfileGatewayInterface;
 
 import java.util.ArrayList;
 
-public class SpyGatewayNoProfileWithThatUsername implements ProfileGatewayInterface {
+public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewayInterface {
   public ArrayList<Profile> profileList;
   public String submittedUsername;
 
-  public SpyGatewayNoProfileWithThatUsername(){
+  public NoProfileWithThatUsernameProfileGatewaySpy(){
     this.profileList = null;
   }
 
