@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
+import fsc.entity.ProfileToHashMapConverter;
 import fsc.gateway.ProfileGateway;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -28,7 +29,7 @@ public class ProfileReviewInteractor {
 
   private Response tryCreateProfileResponse() {
     Profile profile = gateway.getProfileFromUsername(userName);
-    ProfileViewer profileInfo = new ProfileViewer(profile);
+    ProfileToHashMapConverter profileInfo = new ProfileToHashMapConverter(profile);
     return new ProfileViewerResponse(profileInfo.createHashMap());
   }
 

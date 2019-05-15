@@ -1,13 +1,13 @@
-package fsc.interactor;
+package fsc.entity;
 
 import fsc.entity.Profile;
 
 import java.util.*;
 
-public class ProfileViewer {
+public class ProfileToHashMapConverter {
   public Map<String, String> profileView = new HashMap<String, String>();
 
-  public ProfileViewer(Profile profile) {
+  public ProfileToHashMapConverter(Profile profile) {
     profileView.put("Name", profile.getName());
     profileView.put("Username", profile.getUsername());
     profileView.put("Department", profile.getDivision());

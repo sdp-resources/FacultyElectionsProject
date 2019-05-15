@@ -16,7 +16,7 @@ public class EditProfileInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(EditProfileRequest request) throws Exception {
+  public Response execute(EditProfileRequest request) {
     if(usernameExists(request.username)){
       editUsernameWithRequest(request);
       return new SuccessfullyEditedResponse();
