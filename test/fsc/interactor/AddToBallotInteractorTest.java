@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
-import fsc.mock.GatewayDummy;
+import fsc.gateway.BallotGateway;
 import fsc.request.AddToBallotRequest;
 import fsc.response.AddToBallotResponse;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class AddToBallotInteractorTest {
   public void NoBallot() {
     Ballot ballot = new Ballot();
     AddToBallotRequest request = new AddToBallotRequest(ballot.getID(), profile);
-    AddToBallotGatewayInterface gateway = new AddToBallotGatewayInterface() {
+    BallotGateway gateway = new BallotGateway() {
       public Ballot getBallot(String id) {
         return null;
       }

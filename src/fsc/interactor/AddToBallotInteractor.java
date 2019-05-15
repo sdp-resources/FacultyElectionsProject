@@ -1,14 +1,13 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
-import fsc.gateway.Gateway;
+import fsc.gateway.BallotGateway;
 import fsc.request.AddToBallotRequest;
 import fsc.response.AddToBallotResponse;
 
 public class AddToBallotInteractor {
-  public AddToBallotGatewayInterface gateway;
+  public BallotGateway gateway;
 
-      public AddToBallotInteractor(AddToBallotGatewayInterface gateway) { this.gateway = gateway; }
+      public AddToBallotInteractor(BallotGateway gateway) { this.gateway = gateway; }
 
       public AddToBallotResponse execute(AddToBallotRequest request) {
         String ballotID = request.getBallotID();
