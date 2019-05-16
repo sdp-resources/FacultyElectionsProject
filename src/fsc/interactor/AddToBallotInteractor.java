@@ -5,9 +5,7 @@ import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.AddToBallotRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessfullyAddedProfileResponse;
+import fsc.response.*;
 
 public class AddToBallotInteractor {
   private BallotGateway ballotGateway;
@@ -43,6 +41,6 @@ public class AddToBallotInteractor {
 
     //ballot.add(profile);
 
-    return new SuccessfullyAddedProfileResponse();
+    return new SuccessfullyAddedProfileToBallotResponse();
   }
 }

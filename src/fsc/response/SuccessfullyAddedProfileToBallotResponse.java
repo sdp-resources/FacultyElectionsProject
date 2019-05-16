@@ -1,5 +1,5 @@
 package fsc.response;
 
-public class SuccessfullyAddedProfileToBallotResponse {
+public class SuccessfullyAddedProfileToBallotResponse implements Response {
 
 }
