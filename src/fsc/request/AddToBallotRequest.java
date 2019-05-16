@@ -4,17 +4,17 @@ import fsc.entity.Ballot;
 import fsc.entity.Profile;
 
 public class AddToBallotRequest {
-  private final Profile profile;
-  private final Ballot ballot;
+  private final String profileUsername;
+  private final String ballotID;
 
-  public AddToBallotRequest(Ballot ballot, Profile profile) {
-    this.ballot = ballot;
-    this.profile = profile;
+  public AddToBallotRequest(String ballotID, String profileUsername) {
+    this.ballotID = ballotID;
+    this.profileUsername = profileUsername;
   }
 
-  public Ballot getBallot() {return ballot;}
+  public String getBallotID() {return ballotID;}
 
-  public Profile getProfile(){
-    return profile;
+  public String getProfileUsername(){
+    return profileUsername;
   }
 }

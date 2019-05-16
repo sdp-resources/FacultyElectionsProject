@@ -7,6 +7,8 @@ import fsc.request.AddToBallotRequest;
 import fsc.response.AddToBallotResponse;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -17,17 +19,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddToBallotInteractorTest {
 
-  private Profile profile;
-  private AbstractList<Profile> profiles;
+  private String ballotID = "98705439870539870";
+  private String profileUsername = "hayfieldj";
 
   @Test
-  public void addingToNoBallot() throws AddToBallotInteractor.NoBallotException {
-    Ballot ballot = new Ballot();
-    AddToBallotRequest request = new AddToBallotRequest(ballot, profile);
+  public void addingToNoBallot() {
+    AddToBallotRequest request = new AddToBallotRequest(ballotID, profileUsername);
     NoBallotGatewayStub gateway = new NoBallotGatewayStub();
     AddToBallotInteractor inter = new AddToBallotInteractor(gateway);
     Response response = inter.execute(request);
     assertEquals( "No ballot", ((ErrorResponse) response).response);
   }
 
+  @Ignore
+  @Test
+  public void addingNotRealProfile()
+  {
+    var AddToBallotRequest = new AddToBallotRequest(ballotID, profileUsername);
+  }
 }

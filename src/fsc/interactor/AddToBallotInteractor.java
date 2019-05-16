@@ -14,9 +14,4 @@ public class AddToBallotInteractor {
       public Response execute(AddToBallotRequest request) {
         return new ErrorResponse("No ballot");
       }
-
-
-  public class NoBallotException extends Exception {
-
-  }
 }
