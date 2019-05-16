@@ -25,9 +25,14 @@ public class Ballot extends AbstractList {
     return profiles.get(i);
   }
 
-  public void remove(Profile profile) {
-    profiles.remove(profile);
+  public void remove(Profile profile) throws NoProfileInBallotException {
+    if (!profiles.remove(profile))
+    {
+      throw new NoProfileInBallotException();
+    }
+
     size--;
   }
 
+  public class NoProfileInBallotException extends Exception {}
 }
