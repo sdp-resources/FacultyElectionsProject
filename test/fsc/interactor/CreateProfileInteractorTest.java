@@ -19,11 +19,9 @@ public class CreateProfileInteractorTest {
   CreateProfileInteractor interactor;
   Response response;
 
-
   @Before
   public void setup() {
-     request =  new CreateProfileRequest("Joe Hayfield", "hayfieldj", "ART",
-                                                            "Part-Time");
+    request = new CreateProfileRequest("Joe Hayfield", "hayfieldj", "ART", "Part-Time");
   }
 
   @Test
@@ -41,13 +39,5 @@ public class CreateProfileInteractorTest {
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertTrue(response instanceof FailedAddedProfileResponse);
-  }
-
-  @Test
-  public void testWrongDivision() throws  Exception {
-    InvalidDivisionProfileGatewaySpy gateway = new InvalidDivisionProfileGatewaySpy();
-    interactor = new CreateProfileInteractor(gateway);
-    response = interactor.execute(request);
-    assertEquals("ART", gateway.submittedDivision);
   }
 }

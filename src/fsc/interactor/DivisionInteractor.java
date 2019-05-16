@@ -1,19 +1,24 @@
 package fsc.interactor;
 
 import fsc.gateway.DivisionGateway;
-import fsc.gateway.Gateway;
 import fsc.request.AddDivisionRequest;
+import fsc.response.FailedtoAddDivision;
+import fsc.response.SuccessfullyAddedDivision;
+import fsc.response.Response;
 
 public class DivisionInteractor {
 
-  private final DivisionGateway gateway;
+  public static DivisionGateway gateway;
 
   public DivisionInteractor(DivisionGateway gateway) {
     this.gateway = gateway;
   }
 
-  //public void execute(AddDivisionRequest request) throws Exception {
-    //try (gateway.getDivisionWithName(request.name))
-      //catch
-  //}
+  public static Response execute(AddDivisionRequest request) throws Exception {
+    try { gateway.getDivisionWithName(request.name);}
+    catch (Exception e) {
+      return new SuccessfullyAddedDivision();
+    }
+    return new FailedtoAddDivision();
+  }
 }

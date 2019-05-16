@@ -20,11 +20,9 @@ public class CreateProfileInteractor {
         CreateProfileRequest request) {
     try{ gateway.getProfileFromUsername(request.username);}
     catch (Exception e) {
-      if (gateway.isValidDivision(request.division)) {
-        gateway.addProfile(makeProfileFromRequest(request));
-        return new SuccessfullyAddedProfileResponse();
+      gateway.addProfile(makeProfileFromRequest(request));
+      return new SuccessfullyAddedProfileResponse();
       }
-    }
     return new FailedAddedProfileResponse();
   }
 
