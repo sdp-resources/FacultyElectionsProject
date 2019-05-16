@@ -8,7 +8,6 @@ public class Seat {
 
   public void setProfile(Profile profile) {
     this.profile = profile;
-
   }
 
   public Profile getProfile() {

@@ -7,6 +7,12 @@ public class Committee {
   private String description;
   private ArrayList<Seat> seats = new ArrayList<>();
 
+  public Committee(String name, String description)
+  {
+    this.name = name;
+    this.description = description;
+  }
+
   public void setName(String name) {
     this.name = name;
   }

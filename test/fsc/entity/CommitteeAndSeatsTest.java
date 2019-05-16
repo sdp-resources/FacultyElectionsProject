@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TestCommitteeAndSeats {
+public class CommitteeAndSeatsTest {
 
   private Committee committee;
   private ArrayList<Seat> seats;
@@ -18,7 +18,7 @@ public class TestCommitteeAndSeats {
 
   @Before
   public void setup() {
-    committee = new Committee();
+    committee = new Committee("cccc", "xxxx");
     seats = new ArrayList<>();
     seat = new Seat();
   }
