@@ -4,6 +4,7 @@ out/*
 \.idea/workspace\.xml
 \.idea/encodings\.xml
 
+report
 # Compiled class file
 *.class
 
