@@ -17,6 +17,7 @@ public class DivisionInteractor {
   public static Response execute(AddDivisionRequest request) throws Exception {
     try { gateway.getDivisionWithName(request.name);}
     catch (Exception e) {
+      gateway.addDivision(request.name);
       return new SuccessfullyAddedDivision();
     }
     return new FailedtoAddDivision();

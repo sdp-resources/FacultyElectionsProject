@@ -2,7 +2,9 @@ package fsc.interactor;
 
 import fsc.gateway.DivisionGateway;
 import fsc.mock.AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy;
+import fsc.mock.DivisionWithThatNameAlreadyExistsGatewaySpy;
 import fsc.request.AddDivisionRequest;
+import fsc.response.FailedtoAddDivision;
 import fsc.response.Response;
 import fsc.response.SuccessfullyAddedDivision;
 import org.junit.Before;
@@ -29,5 +31,15 @@ public class DivisionInteractorTest {
     Response response = DivisionInteractor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
     assertTrue(response instanceof SuccessfullyAddedDivision);
+  }
+
+  @Test
+  public void testAlreadyExistsExecute() throws Exception {
+    DivisionWithThatNameAlreadyExistsGatewaySpy testGateway =
+          new DivisionWithThatNameAlreadyExistsGatewaySpy();
+    interactor = new DivisionInteractor(testGateway);
+    Response response = DivisionInteractor.execute(request);
+    assertEquals("ENG", testGateway.submittedDivisionName);
+    assertTrue(response instanceof FailedtoAddDivision);
   }
 }
