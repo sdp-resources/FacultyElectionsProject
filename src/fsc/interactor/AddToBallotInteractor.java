@@ -47,7 +47,7 @@ public class AddToBallotInteractor {
     }
     catch (BallotGateway.CannotSaveBallotException e)
     {
-      return new ErrorResponse("");
+      return new ErrorResponse("Ballot save failed");
     }
 
     return new SuccessfullyAddedProfileToBallotResponse();

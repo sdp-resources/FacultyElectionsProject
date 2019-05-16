@@ -53,12 +53,16 @@ public class AddToBallotInteractorTest {
     assertEquals("No profile with that username", ((ErrorResponse) response).response);
   }
 
-  @Ignore
   @Test
   public void ballotGatewaySaveFailedReturnsErrorResponse()
   {
-    BallotGateway ballotGateway;
-    ProfileGateway profileGateway = new ProfileGatewayDummy();
+    BallotGateway ballotGateway = new AlwaysFailsSaveBallotGatewayStub();
+    ProfileGateway profileGateway = new ProfileGatewayStub();
+
+    AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
+    Response response = interactor.execute(request);
+
+    assertEquals("Ballot save failed", ((ErrorResponse) response).response);
   }
 
   @Test
