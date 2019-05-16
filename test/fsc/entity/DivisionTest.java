@@ -1,11 +1,24 @@
 package fsc.entity;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class DivisionTest {
 
-  @Test
-  public void createDivisionTest() {
-    Division testDivision = new Division("SCI");
+  Division testDivision;
+
+  @Before
+  public void setup() {
+    testDivision = new Division("SCI");
   }
+
+
+  @Test
+  public void getDivisionName() {
+    assertEquals("SCI", testDivision.getDivisionName());
+  }
+
+
 }

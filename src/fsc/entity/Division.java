@@ -6,4 +6,8 @@ public class Division {
   public Division(String newDivisionName) {
     this.divisionName = newDivisionName;
   }
+
+  public String getDivisionName() {
+    return divisionName;
+  }
 }
