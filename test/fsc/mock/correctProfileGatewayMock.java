@@ -10,9 +10,11 @@ public class correctProfileGatewayMock implements ProfileGateway {
   public Profile getProfile(){
     return testProfile;
   }
+  public static String submittedUsername;
 
   public Profile getProfileFromUsername(String username) {
-    return null;
+    submittedUsername = username;
+    return testProfile;
   }
 
   public List<Profile> getAllProfiles() {

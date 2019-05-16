@@ -4,7 +4,6 @@ import fsc.entity.Profile;
 import fsc.entity.ProfileToHashMapConverter;
 import fsc.gateway.ProfileGateway;
 import fsc.request.ProfileViewerRequest;
-import fsc.response.ErrorResponse;
 import fsc.response.ProfileViewerResponse;
 import fsc.response.Response;
 
@@ -14,6 +13,11 @@ public class ProfileReviewInteractor {
   public String userName;
   public HashMap<String, String> userInfo = null;
   public ProfileGateway gateway;
+  private ProfileToHashMapConverter converter = new ProfileToHashMapConverter();
+
+  public void setConverter(ProfileToHashMapConverter converter) {
+    this.converter = converter;
+  }
 
   public ProfileReviewInteractor(ProfileGateway gateway){
     this.gateway = gateway;
@@ -34,8 +38,8 @@ public class ProfileReviewInteractor {
       return new ErrorResponse("No profile found!");
     }
 
-    ProfileToHashMapConverter profileInfo = new ProfileToHashMapConverter(profile);
-    return new ProfileViewerResponse(profileInfo.createHashMap());
+    ProfileToHashMapConverter profileInfo = converter;
+    return new ProfileViewerResponse(profileInfo.createHashMap(profile));
   }
 
   public class ErrorResponse implements Response {
