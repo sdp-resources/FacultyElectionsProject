@@ -1,6 +1,5 @@
 package fsc.gateway;
 
-import fsc.entity.ViewDivisions;
 
 import java.util.ArrayList;
 
