@@ -1,6 +1,12 @@
 package fsc.gateway;
 
+import fsc.entity.ViewDivisions;
+
+import java.util.ArrayList;
+
 public interface DivisionGateway {
-  public  void getDivisionWithName(String divisionName) throws Exception;
+  ArrayList<String> getDivisionList();
+  public void getDivisionWithName(String divisionName) throws Exception;
   public void addDivision(String divsion);
+
 }

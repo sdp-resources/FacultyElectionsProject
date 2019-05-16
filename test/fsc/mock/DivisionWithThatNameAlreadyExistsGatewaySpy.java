@@ -14,6 +14,10 @@ public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGate
     this.divisionList = null;
   }
 
+  public ArrayList<String> getDivisionList() {
+    return null;
+  }
+
   public void getDivisionWithName(String divisionName) throws Exception {
     submittedDivisionName = divisionName;
   }
