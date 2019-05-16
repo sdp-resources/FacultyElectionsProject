@@ -16,9 +16,14 @@ public class DivisionTest {
 
 
   @Test
-  public void getDivisionName() {
+  public void getDivisionNameTest() {
     assertEquals("SCI", testDivision.getDivisionName());
   }
 
+  @Test
+  public void setDivisionNameTest() {
+    testDivision.setDivisionName("ART");
+    assertEquals("ART", testDivision.getDivisionName());
+  }
 
 }

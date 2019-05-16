@@ -10,4 +10,8 @@ public class Division {
   public String getDivisionName() {
     return divisionName;
   }
+
+  public void setDivisionName(String newDivisionName) {
+    divisionName = newDivisionName;
+  }
 }
