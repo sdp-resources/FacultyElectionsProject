@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ElectionCreatorTest {
@@ -30,6 +31,7 @@ public class ElectionCreatorTest {
   public void canCreateElection(){
     ElectionCreator election = new ElectionCreator();
     election.add("m", "o");
+    /// create getCommittee, getSeat etc.
   }
 
   private Gateway makeGateway() {
@@ -62,6 +64,14 @@ public class ElectionCreatorTest {
 
     public boolean isValidDivision(String division) {
       return false;
+    }
+
+    public String addContractType(String string) {
+      return null;
+    }
+
+    public void getContractTypeFromProfile(String contract_type) {
+
     }
   }
 

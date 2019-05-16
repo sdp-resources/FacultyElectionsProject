@@ -1,5 +1,6 @@
 package fsc.gateway;
 
-public interface Gateway extends ProfileGateway {
+public interface Gateway extends ProfileGateway, ContractTypeGateway {
+
 
 }
