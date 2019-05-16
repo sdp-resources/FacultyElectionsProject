@@ -21,16 +21,19 @@ public class ProfileReviewInteractor {
 
   public Response execute(ProfileViewerRequest request) {
     userName = request.userName;
-    try{
-      return tryCreateProfileResponse();
-    }
-    catch (Exception e){
-      return new ErrorResponse("No profile found!");
-    }
+    return tryCreateProfileResponse();
   }
 
   private Response tryCreateProfileResponse() {
-    Profile profile = gateway.getProfileFromUsername(userName);
+    Profile profile;
+    try {
+      profile = gateway.getProfileFromUsername(userName);
+    }
+    catch (ProfileGateway.InvalidProfileUsernameException e)
+    {
+      return new ErrorResponse("No profile found!");
+    }
+
     ProfileToHashMapConverter profileInfo = new ProfileToHashMapConverter(profile);
     return new ProfileViewerResponse(profileInfo.createHashMap());
   }

@@ -1,18 +1,14 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
-import fsc.entity.Profile;
-import fsc.mock.NoBallotGatewayStub;
+import fsc.gateway.BallotGateway;
+import fsc.gateway.ProfileGateway;
+import fsc.mock.*;
 import fsc.request.AddToBallotRequest;
-import fsc.response.AddToBallotResponse;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-
-import java.util.AbstractList;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,16 +21,35 @@ public class AddToBallotInteractorTest {
   @Test
   public void addingToNoBallot() {
     AddToBallotRequest request = new AddToBallotRequest(ballotID, profileUsername);
-    NoBallotGatewayStub gateway = new NoBallotGatewayStub();
-    AddToBallotInteractor inter = new AddToBallotInteractor(gateway);
+
+    NoBallotExistsBallotGatewayStub noBallotBallotGateway = new NoBallotExistsBallotGatewayStub();
+    ProfileGateway dummyProfileGateway = new ProfileGatewayDummy();
+
+    AddToBallotInteractor inter = new AddToBallotInteractor(noBallotBallotGateway,
+                                                            dummyProfileGateway);
     Response response = inter.execute(request);
-    assertEquals( "No ballot", ((ErrorResponse) response).response);
+
+    assertEquals( "No ballot with that ID", ((ErrorResponse) response).response);
+  }
+
+  @Test
+  public void addingNotRealProfile()
+  {
+    AddToBallotRequest addToBallotRequest = new AddToBallotRequest(ballotID, profileUsername);
+
+    BallotGateway dummyBallotGateway = new BallotGatewayDummy();
+    ProfileGateway noProfileProfileGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
+
+    AddToBallotInteractor interactor = new AddToBallotInteractor(dummyBallotGateway, noProfileProfileGateway);
+    Response response = interactor.execute(addToBallotRequest);
+
+    assertEquals("No profile with that username", ((ErrorResponse) response).response);
   }
 
   @Ignore
   @Test
-  public void addingNotRealProfile()
+  public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse()
   {
-    var AddToBallotRequest = new AddToBallotRequest(ballotID, profileUsername);
+
   }
 }

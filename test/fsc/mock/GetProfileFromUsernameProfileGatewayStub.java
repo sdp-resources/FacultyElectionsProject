@@ -3,13 +3,11 @@ package fsc.mock;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class NoProfileExistsProfileGatewaySpy implements ProfileGateway {
-
+public class GetProfileFromUsernameProfileGatewayStub implements ProfileGateway {
   public Profile getProfileFromUsername(String username) throws InvalidProfileUsernameException {
-    throw new InvalidProfileUsernameException();
+    return new Profile("Adam Jones", "jonesa", "SCI", "Tenured");
   }
 
   public List<Profile> getAllProfiles() {
