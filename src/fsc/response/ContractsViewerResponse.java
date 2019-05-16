@@ -1,10 +1,10 @@
 package fsc.response;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ContractsViewerResponse {
-  ArrayList<String> contracts;
-  public void ContractsViewerResonse(ArrayList<String> contracts){
+public class ContractsViewerResponse implements Response{
+  List<String> contracts;
+  public void ContractsViewerResonse(List<String> contracts){
     this.contracts = contracts;
   }
 }
