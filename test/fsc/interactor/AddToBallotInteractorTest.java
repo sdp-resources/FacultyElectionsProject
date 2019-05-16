@@ -1,7 +1,5 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
-import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
@@ -55,15 +53,35 @@ public class AddToBallotInteractorTest {
     assertEquals("No profile with that username", ((ErrorResponse) response).response);
   }
 
+  @Ignore
+  @Test
+  public void ballotGatewaySaveFailedReturnsErrorResponse()
+  {
+    BallotGateway ballotGateway;
+    ProfileGateway profileGateway = new ProfileGatewayDummy();
+  }
+
   @Test
   public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse()
   {
-    BallotGateway ballotGateway = new GetBallotFromIDBallotGatewayStub();
-    ProfileGateway profileGateway = new GetProfileFromUsernameProfileGatewayStub();
+    BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();
+    ProfileGateway profileGateway = new ProfileGatewayStub();
 
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
     Response response = interactor.execute(request);
 
     assertTrue(response instanceof SuccessfullyAddedProfileToBallotResponse);
+  }
+
+  @Test
+  public void gatewayGetsBallotWithChanges()
+  {
+    var ballotGateway = new GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy();
+    var profileGateway = new ProfileGatewayStub();
+
+    AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
+    Response response = interactor.execute(request);
+
+    assertEquals(profileGateway.Profile, ballotGateway.SavedBallot.get(0));
   }
 }

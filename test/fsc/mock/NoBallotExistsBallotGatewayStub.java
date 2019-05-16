@@ -7,4 +7,8 @@ public class NoBallotExistsBallotGatewayStub implements BallotGateway {
   public Ballot getBallot(String ballotID) throws InvalidBallotIDException {
     throw new InvalidBallotIDException();
   }
+
+  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+
+  }
 }

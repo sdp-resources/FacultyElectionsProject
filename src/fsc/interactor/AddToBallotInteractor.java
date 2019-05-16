@@ -39,7 +39,16 @@ public class AddToBallotInteractor {
       return new ErrorResponse("No profile with that username");
     }
 
-    //ballot.add(profile);
+    ballot.add(profile);
+
+    try
+    {
+      ballotGateway.saveBallot(ballot);
+    }
+    catch (BallotGateway.CannotSaveBallotException e)
+    {
+      return new ErrorResponse("");
+    }
 
     return new SuccessfullyAddedProfileToBallotResponse();
   }
