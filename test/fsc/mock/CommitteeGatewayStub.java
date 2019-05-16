@@ -4,10 +4,11 @@ import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommitteeGatewayStub implements CommitteeGateway {
 
-  ArrayList<Committee> committees;
+  private List<Committee> committees = new ArrayList<>();
 
   public CommitteeGatewayStub(){
     committees.add(new Committee("aaaa","aaaa"));
@@ -17,10 +18,9 @@ public class CommitteeGatewayStub implements CommitteeGateway {
   }
 
   public void getCommitteeFromCommitteeName(String name) {
-
   }
 
   public void addCommittee(Committee makeCommitteeFromRequest) {
-
+    committees.add(makeCommitteeFromRequest);
   }
 }
