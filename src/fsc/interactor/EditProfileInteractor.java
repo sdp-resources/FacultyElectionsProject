@@ -55,6 +55,15 @@ public class EditProfileInteractor {
       case "Division":
         profile.setDivision(changeField);
         break;
+      case "Username":
+        profile.setUsername(changeField);
+        break;
+      case "Inactive":
+        profile.setActive();
+        break;
+      case "Active":
+        profile.setInactive();
+        break;
     }
     return profile;
   }
