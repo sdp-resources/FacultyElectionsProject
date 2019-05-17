@@ -1,17 +1,19 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
-import fsc.request.AddToBallotRequest;
 import fsc.request.RemoveFromBallotRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
-import org.junit.Assert;
+import fsc.response.SuccessfullyRemovedProfileFromBallotResponse;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RemoveFromBallotInteractorTest {
 
@@ -54,7 +56,8 @@ public class RemoveFromBallotInteractorTest {
   public void removeFromEmptyBallot()
   {
     BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub();
+    ProfileGateway profileGateway = new ProfileGatewayStub(
+          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
 
     RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(ballotGateway,
                                                                            profileGateway);
@@ -67,12 +70,26 @@ public class RemoveFromBallotInteractorTest {
   public void ballotGatewayRemoveSaveFailed(){
 
     BallotGateway ballotGateway = new AlwaysFailsSaveBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub();
+    ProfileGateway profileGateway = new ProfileGatewayStub(
+          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
 
     RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(ballotGateway,
                                                                       profileGateway);
     Response response = interactor.execute(request);
 
     assertEquals("Ballot save failed", ((ErrorResponse) response).response);
+  }
+
+  @Test
+  public void profileRemovedFromBallotGivesSuccesfullyRemovedResponse(){
+    Profile profile = new Profile("Banana", "Apple", "Art", "Tenured");
+    BallotWithProfileStub ballotGateway = new BallotWithProfileStub(profile);
+    ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
+    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(ballotGateway,
+                                                                           profileGateway);
+    Response response = interactor.execute(request);
+
+    assertFalse(ballotGateway.ballot.contains(profile));
+    assertTrue(response instanceof SuccessfullyRemovedProfileFromBallotResponse);
   }
 }

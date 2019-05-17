@@ -8,6 +8,7 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.RemoveFromBallotRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
+import fsc.response.SuccessfullyRemovedProfileFromBallotResponse;
 
 public class RemoveFromBallotInteractor {
   private BallotGateway ballotGateway;
@@ -55,19 +56,13 @@ public class RemoveFromBallotInteractor {
     try
     {
       ballot.remove(profile);
+      return new SuccessfullyRemovedProfileFromBallotResponse();
     }
     catch (Ballot.NoProfileInBallotException e)
     {
       return new ErrorResponse("Ballot does not contain profile");
     }
 
-
-
-
-
-
-
-    return new ErrorResponse("");
   }
 
 }

@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
@@ -56,7 +57,8 @@ public class AddToBallotInteractorTest {
   public void ballotGatewaySaveFailedReturnsErrorResponse()
   {
     BallotGateway ballotGateway = new AlwaysFailsSaveBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub();
+    ProfileGateway profileGateway = new ProfileGatewayStub(
+          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
 
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
     Response response = interactor.execute(request);
@@ -68,7 +70,8 @@ public class AddToBallotInteractorTest {
   public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse()
   {
     BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub();
+    ProfileGateway profileGateway = new ProfileGatewayStub(
+          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
 
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
     Response response = interactor.execute(request);
@@ -80,11 +83,12 @@ public class AddToBallotInteractorTest {
   public void gatewayGetsBallotWithChanges()
   {
     var ballotGateway = new GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy();
-    var profileGateway = new ProfileGatewayStub();
+    var profileGateway = new ProfileGatewayStub(
+          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
 
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals(profileGateway.profile1, ballotGateway.SavedBallot.get(0));
+    assertEquals(profileGateway.getAProfile(), ballotGateway.SavedBallot.get(0));
   }
 }

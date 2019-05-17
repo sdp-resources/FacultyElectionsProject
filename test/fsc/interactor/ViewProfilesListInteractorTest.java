@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
@@ -15,10 +16,11 @@ public class ViewProfilesListInteractorTest {
 
   @Ignore
   @Test
-  public void canMakeProfilesListInteractor()
-  {
-    ProfileGatewayStub profileGateway = new ProfileGatewayStub();
-
+  public void canMakeProfilesListInteractor() {
+    ProfileGatewayStub profileGateway = new ProfileGatewayStub(
+          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"),
+          new Profile("Boogie Arrowood", "arrowoodb", "ART", "Tenured"),
+          new Profile("Gabe Beck", "beckg", "ART", "Tenured"));
 
     ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGateway);
 

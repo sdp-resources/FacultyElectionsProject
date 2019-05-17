@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.mock.*;
 import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
@@ -26,10 +27,10 @@ public class ViewProfileInteractorTest {
   public void validUsernameReturnsCorrectViewableProfile() {
     ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
     Context.instance.profileToViewableProfileConverter = converterSpy;
+    Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
+    ValidProfileGatewaySpy gatewaySpy = new ValidProfileGatewaySpy(profile);
 
-    ValidProfileGatewaySpy gatewaySpy = new ValidProfileGatewaySpy();
-
-    ProfileViewerRequest request = new ProfileViewerRequest("BoogieA14");
+    ProfileViewerRequest request = new ProfileViewerRequest(profile.getUsername());
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     ViewProfileResponse response = (ViewProfileResponse) viewInteractor.execute(request);
 
