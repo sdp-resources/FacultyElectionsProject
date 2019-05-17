@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.response.CreateCommitteeResponse;
-
 public class CreateCommitteeRequest {
   public String name;
   public String description;

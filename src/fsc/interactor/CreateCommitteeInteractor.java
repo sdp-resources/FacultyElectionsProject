@@ -3,9 +3,7 @@ package fsc.interactor;
 import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 import fsc.request.CreateCommitteeRequest;
-import fsc.response.CreateCommitteeResponse;
-import fsc.response.FailedToAddCommitteeResponse;
-import fsc.response.SuccessfullyAddedCommitteeResponse;
+import fsc.response.*;
 
 public class CreateCommitteeInteractor {
   public CommitteeGateway gateway;
@@ -14,7 +12,7 @@ public class CreateCommitteeInteractor {
     this.gateway = gateway;
   }
 
-  public CreateCommitteeResponse execute(CreateCommitteeRequest request) {
+  public Response execute(CreateCommitteeRequest request) {
     try{ gateway.getCommitteeFromCommitteeName(request.name);}
     catch (Exception e) {
       gateway.addCommittee(makeCommitteeFromRequest(request));
