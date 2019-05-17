@@ -17,10 +17,10 @@ public class ViewableProfileTest {
 
     ViewableProfile viewableProfile = new ViewableProfile(name, username, division, contract);
 
-    assertEquals(name, viewableProfile.Name);
-    assertEquals(username, viewableProfile.Username);
-    assertEquals(division, viewableProfile.Division);
-    assertEquals(contract, viewableProfile.Contract);
+    assertEquals(name, viewableProfile.name);
+    assertEquals(username, viewableProfile.username);
+    assertEquals(division, viewableProfile.division);
+    assertEquals(contract, viewableProfile.contract);
   }
 
   @Test

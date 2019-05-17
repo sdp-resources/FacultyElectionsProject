@@ -7,16 +7,16 @@ import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.ProfileViewerResponse;
 import fsc.response.Response;
+import fsc.service.ProfileToViewableProfileConverter;
 
 import java.util.HashMap;
 
 public class ViewProfileInteractor {
   public String userName;
-  public HashMap<String, String> userInfo = null;
   public ProfileGateway gateway;
-  private ProfileToHashMapConverter converter = new ProfileToHashMapConverter();
+  private ProfileToViewableProfileConverter converter = new ProfileToViewableProfileConverter();
 
-  public void setConverter(ProfileToHashMapConverter converter) {
+  public void setConverter(ProfileToViewableProfileConverter converter) {
     this.converter = converter;
   }
 
@@ -39,6 +39,6 @@ public class ViewProfileInteractor {
       return new ErrorResponse("No profile found!");
     }
 
-    return new ProfileViewerResponse(converter.createHashMap(profile));
+    return new ProfileViewerResponse(converter.convert(profile));
   }
 }
