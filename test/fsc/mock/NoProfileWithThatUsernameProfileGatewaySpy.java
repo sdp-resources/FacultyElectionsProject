@@ -40,5 +40,9 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   public boolean isValidDivision(String division) {
     return true;
   }
+
+  public void updateProfile(Profile profile) {
+
+  }
 }
 

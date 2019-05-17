@@ -18,10 +18,15 @@ public class EditProfileInteractor {
 
   public Response execute(EditProfileRequest request) throws Exception {
     if(ifUsernameExists(request.username)){
-      editUsernameWithRequest(request);
+      Profile profile = editUsernameWithRequest(request);
+      updateProfileInGateway(profile);
       return new SuccessfullyEditedResponse();
     }
     return new FailedSearchResponse();
+  }
+
+  private void updateProfileInGateway(Profile profile) {
+    gateway.updateProfile(profile);
   }
 
   private boolean ifUsernameExists(String username) throws Exception {
@@ -33,24 +38,27 @@ public class EditProfileInteractor {
 
   private Profile editUsernameWithRequest(EditProfileRequest request) throws Exception {
     Profile profile = gateway.getProfileFromUsername(request.username);
-    String change = getChange(request.changes);
-    updateProfileBasedOnChange(change, profile);
+    String changeKey = getChangeKey(request.changes);
+    String changeField = request.changes.get(changeKey);
+    profile = updateProfileWithChanges(changeKey,changeField,profile);
     return profile;
   }
 
-  private void updateProfileBasedOnChange(String change, Profile profile) {
-    switch(change){
+  private Profile updateProfileWithChanges(String changeKey, String changeField, Profile profile) {
+    switch(changeKey){
       case "Contract":
-        profile.setContract(change);
+        profile.setContract(changeField);
       case "Name":
-        profile.setName(change);
+        profile.setName(changeField);
       case "Division":
-        profile.setDivision(change);
+        profile.setDivision(changeField);
     }
+    return profile;
   }
 
-  private String getChange(Map<String, String> changes) {
-    return changes.get(changes.keySet().toArray()[0]);
+  private String getChangeKey(Map<String, String> changes) {
+    Object key = changes.keySet().toArray()[0];
+    return key.toString();
   }
 
 

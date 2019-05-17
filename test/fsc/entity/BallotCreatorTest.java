@@ -74,5 +74,9 @@ public class BallotCreatorTest {
       return false;
     }
 
+    public void updateProfile(Profile profile) {
+
+    }
+
   }
 }

@@ -26,4 +26,8 @@ public class ProfileGatewayStub implements ProfileGateway {
   public boolean isValidDivision(String division) {
     return false;
   }
+
+  public void updateProfile(fsc.entity.Profile profile) {
+
+  }
 }

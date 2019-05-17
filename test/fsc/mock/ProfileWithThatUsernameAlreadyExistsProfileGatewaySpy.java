@@ -32,6 +32,10 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
     return true;
   }
 
+  public void updateProfile(Profile profile) {
+
+  }
+
   public Profile getProfile(String userName) {
     return null;
   }

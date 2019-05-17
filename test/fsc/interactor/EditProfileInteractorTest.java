@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.mock.noProfileGateWaySpy;
 import fsc.mock.profileWasEditedGatewaySpy;
 import fsc.request.EditProfileRequest;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 public class EditProfileInteractorTest {
 
@@ -35,12 +37,24 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void profileGetsEdited() throws Exception {
+  public void canTakeProfile() throws Exception {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     Response response = interactor.execute(request);
     assertTrue(response instanceof SuccessfullyEditedResponse);
+  }
+
+  @Test
+  public void checkProfileforEdits() throws Exception {
+    changes.put("Contract", "Untenured");
+    request = new EditProfileRequest("rossB12", changes);
+    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
+    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    interactor.execute(request);
+    profile = fakegateway.getProfileFromUsername("rossB12");
+    assertNotEquals("Tenured", profile.getContract());
   }
 }

@@ -66,6 +66,10 @@ public class ElectionCreatorTest {
       return false;
     }
 
+    public void updateProfile(Profile profile) {
+
+    }
+
     public String addContractType(String string) {
       return null;
     }
