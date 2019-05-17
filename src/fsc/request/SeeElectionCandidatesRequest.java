@@ -1,7 +1,7 @@
 package fsc.request;
 
-import fsc.entity.Ballot;
+import fsc.entity.Election;
 
 public class SeeElectionCandidatesRequest {
-  public SeeElectionCandidatesRequest(Ballot ballot) {}
+  public SeeElectionCandidatesRequest(Election election) {}
 }
