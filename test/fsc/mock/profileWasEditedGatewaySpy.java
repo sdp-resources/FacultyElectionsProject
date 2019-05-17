@@ -6,7 +6,7 @@ import fsc.gateway.ProfileGateway;
 import java.util.List;
 
 public class profileWasEditedGatewaySpy implements ProfileGateway {
-  String providedUsername;
+  static public String providedUsername;
   Profile providedProfile = new Profile("Bob Ross", "rossB12","Arts and Letters", "Tenured");
 
   public Profile getProfileFromUsername(String username) {

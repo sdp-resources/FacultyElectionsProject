@@ -25,21 +25,18 @@ public class EditProfileInteractor {
     return new FailedSearchResponse();
   }
 
-  private void updateProfileInGateway(Profile profile) {
-    gateway.saveProfile(profile);
-  }
-
-  private boolean ifUsernameExists(String username) throws Exception {
-      if (gateway.getProfileFromUsername(username) != null){
-        return true;
-    }
-    return false;
-  }
-
   private Profile editProfileWithRequest(EditProfileRequest request) throws Exception {
     Profile profile = gateway.getProfileFromUsername(request.username);
-    String changeKey = getChangeKey(request.changes);
-    String changeField = request.changes.get(changeKey);
+    Map changesMap = request.changes;
+    for (Object key : changesMap.keySet()) {
+      profile = updateProfileField(profile, changesMap, key);
+    }
+    return profile;
+  }
+
+  private Profile updateProfileField(Profile profile, Map changesMap, Object key) {
+    String changeKey = key.toString();
+    String changeField = changesMap.get(key).toString();
     profile = updateProfileWithChanges(changeKey,changeField,profile);
     return profile;
   }
@@ -58,20 +55,32 @@ public class EditProfileInteractor {
       case "Username":
         profile.setUsername(changeField);
         break;
-      case "Inactive":
-        profile.setActive();
-        break;
       case "Active":
-        profile.setInactive();
+        if(isTrue(changeField)){
+          profile.setActive();
+        }
+        break;
+      case "Inactive":
+        if(isTrue(changeField)){
+          profile.setInactive();
+        }
         break;
     }
     return profile;
   }
 
-  private String getChangeKey(Map<String, String> changes) {
-    Object key = changes.keySet().toArray()[0];
-    return key.toString();
+  private boolean isTrue(String changeField) {
+    return Boolean.parseBoolean(changeField);
   }
 
+  private boolean ifUsernameExists(String username) throws Exception {
+    if (gateway.getProfileFromUsername(username) != null){
+      return true;
+    }
+    return false;
+  }
 
+  private void updateProfileInGateway(Profile profile) {
+    gateway.saveProfile(profile);
+  }
 }

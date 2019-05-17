@@ -8,19 +8,18 @@ import fsc.response.FailedSearchResponse;
 import fsc.response.Response;
 import fsc.response.SuccessfullyEditedResponse;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class EditProfileInteractorTest {
 
   EditProfileRequest request;
-  Map<String,String> changes;
+  Map<String,Object> changes;
 
   @Before
   public void setup(){
@@ -48,7 +47,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void checkProfileforContractEdit() throws Exception {
+  public void canEditSingleField() throws Exception {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
@@ -59,27 +58,39 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void checkProfileforDivisionEdit() throws Exception {
-    changes.put("Division", "Computer Science");
-    request = new EditProfileRequest("rossB12", changes);
-    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
-    Profile profile = fakegateway.getProfileFromUsername("rossB12");
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
-    interactor.execute(request);
-    assertNotEquals("Arts and Letters", profile.getDivision());
-  }
-
-  @Test
-  public void checkProfileforNameEdit() throws Exception {
+  public void canHandleMultipleChanges() throws Exception {
     changes.put("Name", "Bill Mill");
+    changes.put("Division", "Science");
+    changes.put("Contract", "Sabbatical");
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
     Profile profile = fakegateway.getProfileFromUsername("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
     assertNotEquals("Bob Ross", profile.getName());
+    assertNotEquals("Tenured", profile.getContract());
+    assertNotEquals("Arts and Letters", profile.getDivision());
   }
 
+  @Test
+  public void canHandleBooleanChanges() throws Exception {
+    changes.put("Inactive", true);
+    request = new EditProfileRequest("rossB12", changes);
+    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
+    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    interactor.execute(request);
+    assertFalse(profile.isActive());
+  }
 
+  @Test
+  public void spyRemembersUsername() throws Exception {
+    changes.put("Inactive", "True");
+    request = new EditProfileRequest("rossB12", changes);
+    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
+    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    interactor.execute(request);
+    assertEquals(request.username, profileWasEditedGatewaySpy.providedUsername);
+  }
 
 }
