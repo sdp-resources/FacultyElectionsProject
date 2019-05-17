@@ -44,12 +44,27 @@ public class RemoveFromBallotInteractor {
 
     try
     {
+      ballotGateway.saveBallot(ballot);
+    }
+    catch (BallotGateway.CannotSaveBallotException e)
+    {
+      return new ErrorResponse("Ballot save failed");
+    }
+
+
+    try
+    {
       ballot.remove(profile);
     }
     catch (Ballot.NoProfileInBallotException e)
     {
       return new ErrorResponse("Ballot does not contain profile");
     }
+
+
+
+
+
 
 
     return new ErrorResponse("");

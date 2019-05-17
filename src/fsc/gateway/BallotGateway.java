@@ -1,6 +1,7 @@
 package fsc.gateway;
 
 import fsc.entity.Ballot;
+import fsc.entity.Profile;
 
 public interface BallotGateway {
   Ballot getBallot(String id) throws InvalidBallotIDException;

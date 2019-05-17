@@ -1,6 +1,7 @@
 package fsc.mock;
 
 import fsc.entity.Ballot;
+import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 
 public class AlwaysFailsSaveBallotGatewayStub implements BallotGateway {
@@ -10,5 +11,9 @@ public class AlwaysFailsSaveBallotGatewayStub implements BallotGateway {
 
   public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
     throw new CannotSaveBallotException();
+  }
+
+  public void remove(Profile profile) throws Ballot.NoProfileInBallotException {
+
   }
 }
