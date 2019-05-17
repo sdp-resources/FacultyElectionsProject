@@ -29,8 +29,6 @@ public class ViewProfileInteractorTest {
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gateway);
     Response response = viewInteractor.execute(request);
     assertEquals("BoogieA14", gateway.submittedUsername);
-//    assert()
     assertTrue(response instanceof ProfileViewerResponse);
-
   }
 }

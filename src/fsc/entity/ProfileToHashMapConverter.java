@@ -3,11 +3,6 @@ package fsc.entity;
 import java.util.*;
 
 public class ProfileToHashMapConverter {
-
-  public ProfileToHashMapConverter() {
-
-  }
-
   public Map<String, String> createHashMap(Profile profile) {
     Map<String, String> profileView = new HashMap<String, String>();
     profileView.put("Username", profile.getUsername());
