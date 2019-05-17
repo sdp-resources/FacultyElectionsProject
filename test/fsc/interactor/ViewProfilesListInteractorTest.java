@@ -1,35 +1,55 @@
 package fsc.interactor;
 
+import fsc.mock.AllProfilesGatewaySpy;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
 import fsc.response.ViewProfilesListResponse;
-import fsc.viewable.ViewableProfile;
-import org.junit.Ignore;
-import org.junit.Test;
+import fsc.service.Context;
+import fsc.service.ProfileToViewableProfileConverter;
+import org.junit.*;
 
 import static junit.framework.TestCase.assertTrue;
 
 public class ViewProfilesListInteractorTest {
 
-  @Ignore
+  @Before
+  public void setup()
+  {
+    saveConverter();
+  }
+
   @Test
   public void canMakeProfilesListInteractor() {
-    ProfileGatewayStub profileGateway = new ProfileGatewayStub(
-          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"),
-          new Profile("Boogie Arrowood", "arrowoodb", "ART", "Tenured"),
-          new Profile("Gabe Beck", "beckg", "ART", "Tenured"));
+    AllProfilesGatewaySpy profileGatewaySpy = new AllProfilesGatewaySpy();
 
-    ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGateway);
+    ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
 
     ViewProfilesListRequest request = new ViewProfilesListRequest();
 
     Response response = interactor.execute(request);
 
+    assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
     assertTrue(response instanceof ViewProfilesListResponse);
+  }
 
+  @After
+  public void Teardown()
+  {
+    restoreConverter();
+  }
+
+  private ProfileToViewableProfileConverter savedConverter;
+  private void saveConverter()
+  {
+    savedConverter = Context.instance.profileToViewableProfileConverter;
+  }
+
+  private void restoreConverter()
+  {
+    Context.instance.profileToViewableProfileConverter = savedConverter;
   }
 
 }
