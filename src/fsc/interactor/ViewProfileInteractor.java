@@ -10,7 +10,7 @@ import fsc.response.Response;
 
 import java.util.HashMap;
 
-public class ProfileReviewInteractor {
+public class ViewProfileInteractor {
   public String userName;
   public HashMap<String, String> userInfo = null;
   public ProfileGateway gateway;
@@ -20,7 +20,7 @@ public class ProfileReviewInteractor {
     this.converter = converter;
   }
 
-  public ProfileReviewInteractor(ProfileGateway gateway){
+  public ViewProfileInteractor(ProfileGateway gateway){
     this.gateway = gateway;
   }
 
