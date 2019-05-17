@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.request.ProfileViewerRequest;
+import fsc.response.ErrorResponse;
 import fsc.response.ProfileViewerResponse;
 import fsc.response.Response;
 import fsc.mock.NoProfileExistsProfileGatewaySpy;
@@ -18,7 +19,7 @@ public class ProfileViewerInteractorTest {
     NoProfileExistsProfileGatewaySpy gateway = new NoProfileExistsProfileGatewaySpy();
     ProfileReviewInteractor viewInteractor = new ProfileReviewInteractor(gateway);
     Response response = viewInteractor.execute(request);
-    assertTrue(response instanceof ProfileReviewInteractor.ErrorResponse);
+    assertTrue(response instanceof ErrorResponse);
   }
 
   @Test
