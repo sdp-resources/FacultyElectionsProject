@@ -6,7 +6,7 @@ import fsc.response.ContractsViewerResponse;
 
 import java.util.List;
 
-public class ContractsViewerInteractor {
+public class  ContractsViewerInteractor {
   private final ContractsViewerGateway gateway;
 
   public ContractsViewerInteractor(ContractsViewerGateway gateway){
