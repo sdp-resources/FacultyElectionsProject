@@ -39,5 +39,4 @@ public class CreateCommitteeInteractorTest {
     assertEquals("cccc", gateway.submittedCommitteeName);
     assertTrue(response instanceof FailedToAddCommitteeResponse);
   }
-
 }

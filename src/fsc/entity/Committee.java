@@ -33,7 +33,7 @@ public class Committee {
     return seats.size();
   }
 
-  public void addMember(int i, Seat seat) {
-    this.seats.add(i, seat);
+  public void addMember(Seat seat) {
+    seats.add(seat);
   }
 }
