@@ -67,9 +67,9 @@ public class EditProfileInteractorTest {
     Profile profile = fakegateway.getProfileFromUsername("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertNotEquals("Bob Ross", profile.getName());
-    assertNotEquals("Tenured", profile.getContract());
-    assertNotEquals("Arts and Letters", profile.getDivision());
+    assertEquals("Bill Mill", profile.getName());
+    assertEquals("Sabbatical", profile.getContract());
+    assertEquals("Science", profile.getDivision());
   }
 
   @Test
@@ -93,4 +93,13 @@ public class EditProfileInteractorTest {
     assertEquals(request.username, profileWasEditedGatewaySpy.providedUsername);
   }
 
+  @Test
+  public void spyCanTellProfileHasBeenEdited() throws Exception {
+    changes.put("Inactive", "True");
+    request = new EditProfileRequest("rossB12", changes);
+    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
+    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    interactor.execute(request);
+    assertTrue(profileWasEditedGatewaySpy.profileHasBeenEdited);
+  }
 }
