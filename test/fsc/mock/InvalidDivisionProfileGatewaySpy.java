@@ -21,7 +21,7 @@ public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
 
   public Profile getProfileWithUsername(String username) throws Exception {
     submittedUsername = username;
-    throw new Exception("No Profile with that name Here");
+    throw new Exception("No profile1 with that name Here");
   }
 
   public Profile addProfile(Profile profile) {

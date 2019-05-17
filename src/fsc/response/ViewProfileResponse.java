@@ -7,9 +7,9 @@ import javax.swing.text.View;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileViewerResponse implements Response {
+public class ViewProfileResponse implements Response {
   public ViewableProfile viewableProfile;
-  public ProfileViewerResponse(ViewableProfile viewableProfile){
+  public ViewProfileResponse(ViewableProfile viewableProfile){
     this.viewableProfile = viewableProfile;
   }
 }

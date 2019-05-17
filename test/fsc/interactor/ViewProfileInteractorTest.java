@@ -1,34 +1,75 @@
 package fsc.interactor;
 
+import fsc.mock.*;
 import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
-import fsc.response.ProfileViewerResponse;
+import fsc.response.ViewProfileResponse;
 import fsc.response.Response;
-import fsc.mock.NoProfileExistsProfileGatewaySpy;
-import fsc.mock.correctProfileGatewayMock;
 
+import fsc.service.Context;
+import fsc.service.ProfileToViewableProfileConverter;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ViewProfileInteractorTest {
-  @Test
-  public void RequestErrorTest_NoUsername() {
-    ProfileViewerRequest request = new ProfileViewerRequest("BoogieA14");
-    NoProfileExistsProfileGatewaySpy gateway = new NoProfileExistsProfileGatewaySpy();
-    ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gateway);
-    Response response = viewInteractor.execute(request);
-    assertTrue(response instanceof ErrorResponse);
+  @Before
+  public void setup()
+  {
+    saveConverter();
   }
 
   @Test
-  public void validRequest(){
+  public void validUsernameReturnsCorrectViewableProfile() {
+    ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
+    Context.instance.profileToViewableProfileConverter = converterSpy;
+
+    ValidProfileGatewaySpy gatewaySpy = new ValidProfileGatewaySpy();
+
     ProfileViewerRequest request = new ProfileViewerRequest("BoogieA14");
-    correctProfileGatewayMock gateway = new correctProfileGatewayMock();
-    ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gateway);
-    Response response = viewInteractor.execute(request);
-    assertEquals("BoogieA14", gateway.submittedUsername);
-    assertTrue(response instanceof ProfileViewerResponse);
+    ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
+    ViewProfileResponse response = (ViewProfileResponse) viewInteractor.execute(request);
+
+    assertEquals(request.username, gatewaySpy.usernameReceived);
+    assertEquals(gatewaySpy.profileSent, converterSpy.profileReceived);
+    assertEquals(response.viewableProfile,
+                 Context.instance.profileToViewableProfileConverter.convert(converterSpy.profileReceived));
+  }
+
+  @Test
+  public void invalidUsernameDoesNotContinueReturnsErrorResponse()
+  {
+    ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
+    Context.instance.profileToViewableProfileConverter = converterSpy;
+
+    InvalidProfileGatewaySpy gatewaySpy = new InvalidProfileGatewaySpy();
+
+    ProfileViewerRequest request = new ProfileViewerRequest("BoogieA14");
+    ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
+    ErrorResponse response = (ErrorResponse) viewInteractor.execute(request);
+
+    assertEquals(request.username, gatewaySpy.usernameReceived);
+    assertEquals(null, converterSpy.profileReceived);
+    assertEquals("No profile found!", response.response);
+  }
+
+  @After
+  public void Teardown()
+  {
+    restoreConverter();
+  }
+
+  private ProfileToViewableProfileConverter savedConverter;
+  private void saveConverter()
+  {
+    savedConverter = Context.instance.profileToViewableProfileConverter;
+  }
+
+  private void restoreConverter()
+  {
+    Context.instance.profileToViewableProfileConverter = savedConverter;
   }
 }

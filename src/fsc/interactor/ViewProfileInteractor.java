@@ -1,31 +1,24 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.entity.ProfileToHashMapConverter;
 import fsc.gateway.ProfileGateway;
 import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
-import fsc.response.ProfileViewerResponse;
+import fsc.response.ViewProfileResponse;
 import fsc.response.Response;
-import fsc.service.ProfileToViewableProfileConverter;
-
-import java.util.HashMap;
+import fsc.service.Context;
 
 public class ViewProfileInteractor {
   public String userName;
   public ProfileGateway gateway;
-  private ProfileToViewableProfileConverter converter = new ProfileToViewableProfileConverter();
 
-  public void setConverter(ProfileToViewableProfileConverter converter) {
-    this.converter = converter;
-  }
 
   public ViewProfileInteractor(ProfileGateway gateway){
     this.gateway = gateway;
   }
 
   public Response execute(ProfileViewerRequest request) {
-    userName = request.userName;
+    userName = request.username;
     return tryCreateProfileResponse();
   }
 
@@ -39,6 +32,6 @@ public class ViewProfileInteractor {
       return new ErrorResponse("No profile found!");
     }
 
-    return new ProfileViewerResponse(converter.convert(profile));
+    return new ViewProfileResponse(Context.instance.profileToViewableProfileConverter.convert(profile));
   }
 }

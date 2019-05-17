@@ -8,7 +8,6 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessfullyAddedProfileToBallotResponse;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -86,6 +85,6 @@ public class AddToBallotInteractorTest {
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals(profileGateway.Profile, ballotGateway.SavedBallot.get(0));
+    assertEquals(profileGateway.profile1, ballotGateway.SavedBallot.get(0));
   }
 }
