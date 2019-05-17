@@ -25,44 +25,20 @@ public class RemoveFromBallotInteractor {
     Ballot ballot;
     Profile profile;
 
-    try
-    {
+    try {
       ballot = ballotGateway.getBallot(request.getBallotID());
-    }
-    catch (BallotGateway.InvalidBallotIDException e)
-    {
-      return new ErrorResponse("No ballot with that ID");
-    }
-
-    try
-    {
       profile = profileGateway.getProfileFromUsername(request.getProfileUsername());
-    }
-    catch (ProfileGateway.InvalidProfileUsernameException e)
-    {
-      return new ErrorResponse("No profile with that username");
-    }
-
-    try
-    {
       ballotGateway.saveBallot(ballot);
-    }
-    catch (BallotGateway.CannotSaveBallotException e)
-    {
-      return new ErrorResponse("Ballot save failed");
-    }
-
-
-    try
-    {
       ballot.remove(profile);
       return new SuccessfullyRemovedProfileFromBallotResponse();
-    }
-    catch (Ballot.NoProfileInBallotException e)
-    {
+    } catch (BallotGateway.InvalidBallotIDException e) {
+      return new ErrorResponse("No ballot with that ID");
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
+      return new ErrorResponse("No profile with that username");
+    } catch (BallotGateway.CannotSaveBallotException e) {
+      return new ErrorResponse("Ballot save failed");
+    } catch (Ballot.NoProfileInBallotException e) {
       return new ErrorResponse("Ballot does not contain profile");
     }
-
   }
-
 }
