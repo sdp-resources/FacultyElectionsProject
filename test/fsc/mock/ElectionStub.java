@@ -1,8 +1,6 @@
 package fsc.mock;
 
-import fsc.entity.Ballot;
-import fsc.entity.Committee;
-import fsc.entity.Election;
+import fsc.entity.*;
 
 public class ElectionStub extends Election {
   private final Ballot ballot;

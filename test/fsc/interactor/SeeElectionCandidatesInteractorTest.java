@@ -3,6 +3,7 @@ package fsc.interactor;
 import fsc.entity.*;
 import fsc.mock.*;
 import fsc.request.SeeElectionCandidatesRequest;
+import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,11 +23,13 @@ public class SeeElectionCandidatesInteractorTest {
   }
 
   @Test
-  public void returnsElectionCandidates() {
+  public void NoElectionCandidates() {
     ElectionStub election = new ElectionStub(ballot, committee);
     SeeElectionCandidatesRequest request = new SeeElectionCandidatesRequest(election);
     BallotGatewaySpy gateway = new BallotGatewaySpy();
     SeeElectionCandidatesInteractor interactor = new SeeElectionCandidatesInteractor(gateway);
     Response response = interactor.execute(request);
+
+    assert(response instanceof ErrorResponse);
   }
 }

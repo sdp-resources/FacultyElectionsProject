@@ -9,6 +9,4 @@ public class Election {
   public boolean doesExist(){
     return true;
   }
-
-
 }
