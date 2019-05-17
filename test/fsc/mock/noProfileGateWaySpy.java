@@ -27,7 +27,7 @@ public class noProfileGateWaySpy implements ProfileGateway {
     return false;
   }
 
-  public void updateProfile(Profile profile) {
+  public void saveProfile(Profile profile) {
 
   }
 

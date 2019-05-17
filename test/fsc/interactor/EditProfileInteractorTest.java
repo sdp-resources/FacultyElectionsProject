@@ -8,6 +8,7 @@ import fsc.response.FailedSearchResponse;
 import fsc.response.Response;
 import fsc.response.SuccessfullyEditedResponse;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -47,14 +48,38 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void checkProfileforEdits() throws Exception {
+  public void checkProfileforContractEdit() throws Exception {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
     Profile profile = fakegateway.getProfileFromUsername("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    profile = fakegateway.getProfileFromUsername("rossB12");
     assertNotEquals("Tenured", profile.getContract());
   }
+
+  @Test
+  public void checkProfileforDivisionEdit() throws Exception {
+    changes.put("Division", "Computer Science");
+    request = new EditProfileRequest("rossB12", changes);
+    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
+    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    interactor.execute(request);
+    assertNotEquals("Arts and Letters", profile.getDivision());
+  }
+
+  @Test
+  public void checkProfileforNameEdit() throws Exception {
+    changes.put("Name", "Bill Mill");
+    request = new EditProfileRequest("rossB12", changes);
+    profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
+    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    interactor.execute(request);
+    assertNotEquals("Bob Ross", profile.getName());
+  }
+
+
+
 }

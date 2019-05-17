@@ -41,7 +41,7 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     return true;
   }
 
-  public void updateProfile(Profile profile) {
+  public void saveProfile(Profile profile) {
 
   }
 }

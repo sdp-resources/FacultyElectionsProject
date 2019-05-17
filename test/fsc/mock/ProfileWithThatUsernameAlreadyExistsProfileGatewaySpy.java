@@ -32,7 +32,7 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
     return true;
   }
 
-  public void updateProfile(Profile profile) {
+  public void saveProfile(Profile profile) {
 
   }
 

@@ -18,7 +18,7 @@ public class EditProfileInteractor {
 
   public Response execute(EditProfileRequest request) throws Exception {
     if(ifUsernameExists(request.username)){
-      Profile profile = editUsernameWithRequest(request);
+      Profile profile = editProfileWithRequest(request);
       updateProfileInGateway(profile);
       return new SuccessfullyEditedResponse();
     }
@@ -26,7 +26,7 @@ public class EditProfileInteractor {
   }
 
   private void updateProfileInGateway(Profile profile) {
-    gateway.updateProfile(profile);
+    gateway.saveProfile(profile);
   }
 
   private boolean ifUsernameExists(String username) throws Exception {
@@ -36,7 +36,7 @@ public class EditProfileInteractor {
     return false;
   }
 
-  private Profile editUsernameWithRequest(EditProfileRequest request) throws Exception {
+  private Profile editProfileWithRequest(EditProfileRequest request) throws Exception {
     Profile profile = gateway.getProfileFromUsername(request.username);
     String changeKey = getChangeKey(request.changes);
     String changeField = request.changes.get(changeKey);
@@ -48,10 +48,13 @@ public class EditProfileInteractor {
     switch(changeKey){
       case "Contract":
         profile.setContract(changeField);
+        break;
       case "Name":
         profile.setName(changeField);
+        break;
       case "Division":
         profile.setDivision(changeField);
+        break;
     }
     return profile;
   }

@@ -27,7 +27,7 @@ public class ProfileGatewayStub implements ProfileGateway {
     return false;
   }
 
-  public void updateProfile(fsc.entity.Profile profile) {
+  public void saveProfile(fsc.entity.Profile profile) {
 
   }
 }

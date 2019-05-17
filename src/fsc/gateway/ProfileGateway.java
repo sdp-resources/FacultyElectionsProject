@@ -10,6 +10,6 @@ public interface ProfileGateway {
   List<Profile> getAllProfiles();
   Profile addProfile(Profile profile);
   boolean isValidDivision(String division);
-  void updateProfile(Profile profile);
+  void saveProfile(Profile profile);
   class InvalidProfileUsernameException extends Exception {}
 }

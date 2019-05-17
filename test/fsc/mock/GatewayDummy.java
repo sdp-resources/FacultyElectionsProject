@@ -22,7 +22,7 @@ public class GatewayDummy implements Gateway {
     return false;
   }
 
-  public void updateProfile(Profile profile) {
+  public void saveProfile(Profile profile) {
 
   }
 
