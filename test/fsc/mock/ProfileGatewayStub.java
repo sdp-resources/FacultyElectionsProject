@@ -21,8 +21,6 @@ public class ProfileGatewayStub implements ProfileGateway {
   }
 
   public List<Profile> getAllProfiles() {
-    List<Profile> profiles = new ArrayList<Profile>();
-    profiles.add(profile);
     return profiles;
   }
 
