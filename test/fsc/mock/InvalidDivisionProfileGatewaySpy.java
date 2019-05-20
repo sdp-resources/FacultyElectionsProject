@@ -24,9 +24,7 @@ public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
     throw new Exception("No profile with that name Here");
   }
 
-  public Profile addProfile(Profile profile) {
-    return null;
-  }
+  public void addProfile(Profile profile) { }
 
   public void clearProfileList() {}
 

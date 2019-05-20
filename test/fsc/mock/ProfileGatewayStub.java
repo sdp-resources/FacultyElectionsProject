@@ -1,6 +1,5 @@
 package fsc.mock;
 
-import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 
@@ -24,9 +23,7 @@ public class ProfileGatewayStub implements ProfileGateway {
     return profiles;
   }
 
-  public Profile addProfile(Profile profile) {
-    return null;
-  }
+  public void addProfile(Profile profile) { }
 
   public boolean isValidDivision(String division) {
     return false;

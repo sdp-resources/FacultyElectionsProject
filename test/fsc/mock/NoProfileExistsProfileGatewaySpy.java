@@ -3,7 +3,6 @@ package fsc.mock;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NoProfileExistsProfileGatewaySpy implements ProfileGateway {
@@ -16,9 +15,7 @@ public class NoProfileExistsProfileGatewaySpy implements ProfileGateway {
     return null;
   }
 
-  public Profile addProfile(Profile profile) {
-    return null;
-  }
+  public void addProfile(Profile profile) { }
 
   public boolean isValidDivision(String division) {
     return false;

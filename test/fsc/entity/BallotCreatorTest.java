@@ -66,9 +66,7 @@ public class BallotCreatorTest {
       return allProfiles;
     }
 
-    public Profile addProfile(Profile profile) {
-      return null;
-    }
+    public void addProfile(Profile profile) { }
 
     public boolean isValidDivision(String division) {
       return false;

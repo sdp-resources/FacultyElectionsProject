@@ -28,8 +28,8 @@ public class InMemoryGateway implements ProfileGateway {
     throw new RuntimeException("No Profile With that Username");
   }
 
-  public Profile addProfile(Profile profile) {
-    return null;
+  public void addProfile(Profile profile) {
+    profileList.add(profile);
   }
 
   public boolean isValidDivision(String division) {

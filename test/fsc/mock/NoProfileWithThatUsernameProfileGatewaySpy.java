@@ -25,9 +25,7 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     throw new InvalidProfileUsernameException();
   }
 
-  public Profile addProfile(Profile profile) {
-    return null;
-  }
+  public void addProfile(Profile profile) { }
 
   public List<Profile> getAllProfiles() {
     return null;
