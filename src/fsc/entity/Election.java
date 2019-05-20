@@ -4,11 +4,11 @@ public class Election {
 
   private Ballot ballot = new Ballot();
   // should have status:preparing, declined, voting, closed-can be enums //
-  private Committee committee;
-  private Seat seat;
+  private String committee;
+  private String seat;
   private int ID;
 
-  public Election(Seat seat, Committee committee)
+  public Election(String seat, String committee)
   {
     this.seat = seat;
     this. committee = committee;
@@ -18,11 +18,11 @@ public class Election {
     return ID;
   }
 
-  public Seat getSeat(){
+  public String getSeat(){
     return seat;
   }
 
-  public Committee getCommittee(){
+  public String getCommittee(){
     return committee;
   }
 

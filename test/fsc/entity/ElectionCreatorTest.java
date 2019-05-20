@@ -21,13 +21,13 @@ public class ElectionCreatorTest {
     Committee committee = new Committee("f", "g");
     Seat seat = new Seat();
     Ballot ballot = new Ballot();
-    election = new Election(1, seat, committee, ballot);
+    election = new Election("a", "b");
   }
 
   @Test
-  public void validCommittee(){
-    assertEquals("f", election.getCommittee().getName());
-    assertEquals("g", election.getCommittee().getDescription());
+  public void validElection(){
+    assertEquals("a", election.getSeat());
+    assertEquals("b", election.getCommittee());
   }
 
 

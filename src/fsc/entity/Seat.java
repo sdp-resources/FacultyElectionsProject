@@ -5,10 +5,14 @@ import fsc.entity.query.Query;
 public class Seat {
   private Profile profile;
   private Query defaultQuery;
-  private String name;
+  private String seatName;
 
   public Seat(){
-    this.name = name;
+    this.seatName = seatName;
+  }
+
+  public String getSeatName(){
+    return this.seatName;
   }
 
   public void setProfile(Profile profile) {

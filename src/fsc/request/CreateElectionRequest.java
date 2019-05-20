@@ -1,10 +1,10 @@
 package fsc.request;
 
 public class CreateElectionRequest {
-  public String seat;
-  public String committee;
+  public String seatName;
+  public String committeeName;
   public CreateElectionRequest(String seat, String committee){
-    this.seat = seat;
-    this. committee = committee;
+    this.seatName = seat;
+    this. committeeName = committee;
   }
 }

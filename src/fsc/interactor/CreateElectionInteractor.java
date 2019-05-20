@@ -1,7 +1,6 @@
 package fsc.interactor;
 
 import fsc.entity.Election;
-import fsc.entity.Seat;
 import fsc.gateway.ElectionGateway;
 import fsc.request.CreateElectionRequest;
 import fsc.response.*;
@@ -14,16 +13,17 @@ public class CreateElectionInteractor {
   }
 
   public CreateElectionResponse execute(CreateElectionRequest request) {
-    try{ Seat seat = gateway.getSeatFromSeatName(request.seat); }
+    try{ gateway.getSeatFromSeatName(request.seatName); }
     catch (Exception e){
-      gateway.addElection(makeElectionFromRequest(request));
+      gateway.createElection(makeElectionFromRequest(request));
       return new SuccessfullyCreatedElectionResponse();
     }
     return new FailedToCreateElectionResponse();
+
   }
 
   private Election makeElectionFromRequest(CreateElectionRequest request) {
-    return new Election(request.seat, request.committee);
+    return new Election(request.seatName, request.committeeName);
   }
 
 }
