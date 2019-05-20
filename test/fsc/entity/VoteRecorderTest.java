@@ -23,14 +23,14 @@ public class VoteRecorderTest {
   @Test
   public void getProfileTest(){
   Profile profile = new Profile ("Dan Smith", "DanSmith3", "Com", "Tenured");
-  VoteRecorder voteRecord = new VoteRecorder(profile, vote);
+  VoteRecord voteRecord = new VoteRecord(profile, vote, 1);
   assertEquals(profile, voteRecord.getProfile());
   }
 
   @Test
   public void getVoteTest(){
     Profile profile = new Profile ("Dan Smith", "DanSmith3", "Com", "Tenured");
-    VoteRecorder voteRecord = new VoteRecorder(profile, vote);
+    VoteRecord voteRecord = new VoteRecord(profile, vote, 1);
     assertEquals(vote, voteRecord.getVote());
   }
 
@@ -38,9 +38,18 @@ public class VoteRecorderTest {
   public void getCalendarTest(){
     Profile profile = new Profile ("Dan Smith", "DanSmith3", "Com", "Tenured");
     Date expectedDate = Calendar.getInstance().getTime();
-    VoteRecorder voteRecord = new VoteRecorder(profile, vote);
+    VoteRecord voteRecord = new VoteRecord(profile, vote, 1);
     assertTrue(voteRecord.getDate().after(expectedDate));
   }
+
+  @Test
+  public void getElectionIDTest(){
+    Profile profile = new Profile ("Dan Smith", "DanSmith3", "Com", "Tenured");
+    Date expectedDate = Calendar.getInstance().getTime();
+    VoteRecord voteRecord = new VoteRecord(profile, vote, 1);
+    assertEquals(1, voteRecord.getElectionID());
+  }
+
 
 
 }
