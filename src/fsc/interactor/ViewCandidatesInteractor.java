@@ -11,15 +11,11 @@ public class ViewCandidatesInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(ViewCandidatesRequest request) {
-    try{
-      if (gateway.getBallot(request.electionID) != null) {
-
-      }
+  public Response execute(ViewCandidatesRequest request) throws Exception {
+    if (gateway.getBallot(request.electionID) == null) {
+      return new ErrorResponse("There are no candidates");
     }
-    catch (Exception e) {
-
-    }
-    return new ErrorResponse("There are no candidates");
+    //ViewCandidates();
+    return new SuccessfullyViewedCandidatesResponse();
   }
 }

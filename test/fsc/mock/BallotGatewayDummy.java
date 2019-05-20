@@ -13,6 +13,10 @@ public class BallotGatewayDummy implements BallotGateway {
 
   }
 
+  public void viewBallot(String id) {
+
+  }
+
   public void remove(Profile profile) throws Ballot.NoProfileInBallotException {
 
   }

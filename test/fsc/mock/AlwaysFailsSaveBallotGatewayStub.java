@@ -13,6 +13,10 @@ public class AlwaysFailsSaveBallotGatewayStub implements BallotGateway {
     throw new CannotSaveBallotException();
   }
 
+  public void viewBallot(String id) {
+
+  }
+
   public void remove(Profile profile) throws Ballot.NoProfileInBallotException {
 
   }

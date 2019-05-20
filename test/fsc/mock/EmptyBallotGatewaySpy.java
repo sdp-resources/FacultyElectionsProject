@@ -1,24 +1,14 @@
 package fsc.mock;
 
 import fsc.entity.Ballot;
-import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 
-public class BallotWithProfileStub implements BallotGateway {
-
-  public final Ballot ballot;
-
-  public BallotWithProfileStub(Profile profile) {
-    ballot = new Ballot();
-    ballot.add(profile);
-  }
-
+public class EmptyBallotGatewaySpy implements BallotGateway {
   public Ballot getBallot(String id) throws InvalidBallotIDException {
-    return ballot;
+    return null;
   }
 
   public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
-
 
   }
 

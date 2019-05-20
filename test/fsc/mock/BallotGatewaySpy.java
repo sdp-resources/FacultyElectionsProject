@@ -3,9 +3,13 @@ package fsc.mock;
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
+import fsc.viewable.ViewableProfile;
+
+import java.util.List;
 
 public class BallotGatewaySpy implements BallotGateway {
 
+  public static List<ViewableProfile> viewableList;
   private final Ballot ballot;
 
   public BallotGatewaySpy() {
@@ -20,6 +24,10 @@ public class BallotGatewaySpy implements BallotGateway {
   }
 
   public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+
+  }
+
+  public void viewBallot(String id) {
 
   }
 }

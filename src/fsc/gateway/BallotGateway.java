@@ -6,6 +6,7 @@ import fsc.entity.Profile;
 public interface BallotGateway {
   Ballot getBallot(String id) throws InvalidBallotIDException;
   void saveBallot(Ballot ballot) throws CannotSaveBallotException;
+  void viewBallot(String id);
   class InvalidBallotIDException extends Exception {}
   class CannotSaveBallotException extends Exception {}
 }

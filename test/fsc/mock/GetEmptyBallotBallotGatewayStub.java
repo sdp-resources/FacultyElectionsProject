@@ -11,4 +11,8 @@ public class GetEmptyBallotBallotGatewayStub implements BallotGateway {
   public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
 
   }
+
+  public void viewBallot(String id) {
+
+  }
 }
