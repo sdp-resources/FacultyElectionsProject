@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.gateway.CommitteeGateway;
+import fsc.mock.gateway.committee.RejectingCommitteeGatewayStub;
 import fsc.request.EditCommitteeRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -15,7 +16,8 @@ public class EditCommitteeInteractorTest {
 
   @Test
   public void changeOnNonexistantCommitteeGivesErrorResponse(){
-    EditCommitteeInteractor interactor = new EditCommitteeInteractor();
+    CommitteeGateway gateway = new RejectingCommitteeGatewayStub();
+    EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
     String name = "Steering";
     Map<String, Object> changes = new HashMap();
     changes.put("name", "steering wheel");
