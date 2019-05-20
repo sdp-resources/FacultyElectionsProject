@@ -3,6 +3,9 @@ package fsc.mock;
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
+import fsc.viewable.ViewableProfile;
+
+import java.util.List;
 
 public class NoBallotExistsBallotGatewayStub implements BallotGateway {
   public Ballot getBallot(String ballotID) throws InvalidBallotIDException {
@@ -13,8 +16,8 @@ public class NoBallotExistsBallotGatewayStub implements BallotGateway {
 
   }
 
-  public void viewBallot(String id) {
-
+  public List<ViewableProfile> viewBallot(String id) {
+    return null;
   }
 
   public void remove(Profile profile) throws Ballot.NoProfileInBallotException {

@@ -2,6 +2,9 @@ package fsc.mock;
 
 import fsc.entity.Ballot;
 import fsc.gateway.BallotGateway;
+import fsc.viewable.ViewableProfile;
+
+import java.util.List;
 
 public class EmptyBallotGatewaySpy implements BallotGateway {
   public Ballot getBallot(String id) throws InvalidBallotIDException {
@@ -12,7 +15,7 @@ public class EmptyBallotGatewaySpy implements BallotGateway {
 
   }
 
-  public void viewBallot(String id) {
-
+  public List<ViewableProfile> viewBallot(String id) {
+    return null;
   }
 }

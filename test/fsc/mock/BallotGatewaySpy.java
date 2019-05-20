@@ -27,7 +27,7 @@ public class BallotGatewaySpy implements BallotGateway {
 
   }
 
-  public void viewBallot(String id) {
-
+  public List<ViewableProfile> viewBallot(String id) {
+    return null;
   }
 }
