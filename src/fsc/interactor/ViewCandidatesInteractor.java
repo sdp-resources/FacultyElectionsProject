@@ -27,12 +27,15 @@ public class ViewCandidatesInteractor {
   private Response ViewCandidates(ViewCandidatesRequest request) throws BallotGateway.InvalidBallotIDException {
     Ballot ballot = gateway.getBallot(request.electionID);
     List<ViewableProfile> viewableCandidates = new ArrayList<>();
+    convertBallotToListOfViewableProfiles(ballot, viewableCandidates);
+    return new SuccessfullyViewedCandidatesResponse(viewableCandidates);
+  }
+
+  private void convertBallotToListOfViewableProfiles(Ballot ballot, List<ViewableProfile> viewableCandidates) {
     ViewableProfile viewableProfile;
     for (Profile profile : ballot) {
-      viewableProfile = new ViewableProfile(profile.getName(), profile.getUsername(),
-                                            profile.getDivision(), profile.getContract());
+      viewableProfile = new ViewableProfile(profile.getName(), profile.getUsername(), profile.getDivision(), profile.getContract());
       viewableCandidates.add(viewableProfile);
     }
-    return new SuccessfullyViewedCandidatesResponse(viewableCandidates);
   }
 }

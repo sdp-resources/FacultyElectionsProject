@@ -8,8 +8,6 @@ import fsc.viewable.ViewableProfile;
 import java.util.List;
 
 public class BallotGatewaySpy implements BallotGateway {
-
-  public static List<ViewableProfile> viewableList;
   private final Ballot ballot;
 
   public BallotGatewaySpy() {

@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import fsc.viewable.ViewableProfile;
 
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ViewCandidatesInteractorTest {
   private Profile profile;
   private Election election;
   private String electionId;
-  private List<ViewableProfile> viewableList = new ArrayList<>();
+  private List<ViewableProfile> testList = new ArrayList<>();
   private ViewableProfile profile1;
   private ViewableProfile profile2;
   private ViewableProfile profile3;
@@ -63,17 +62,17 @@ public class ViewCandidatesInteractorTest {
 
   @Test
   public void canViewABallot() throws Exception {
-    viewableList.add(profile1);
-    viewableList.add(profile2);
-    viewableList.add(profile3);
-    viewableList.add(profile4);
+    testList.add(profile1);
+    testList.add(profile2);
+    testList.add(profile3);
+    testList.add(profile4);
     ViewCandidatesRequest request = new ViewCandidatesRequest(electionId);
     BallotGatewaySpy gateway = new BallotGatewaySpy();
     ballot = gateway.getBallot(electionId);
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
-    interactor.execute(request);
+    SuccessfullyViewedCandidatesResponse response = (SuccessfullyViewedCandidatesResponse) interactor.execute(request);
 
-    //assertEquals(viewableList, BallotGatewaySpy.viewableList);
+    assertEquals(testList, response.viewableProfiles);
 
   }
 }
