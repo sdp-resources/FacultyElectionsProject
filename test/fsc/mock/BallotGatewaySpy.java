@@ -3,12 +3,10 @@ package fsc.mock;
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
-import fsc.viewable.ViewableProfile;
-
-import java.util.List;
 
 public class BallotGatewaySpy implements BallotGateway {
   private final Ballot ballot;
+  public boolean canGetBallot = false;
 
   public BallotGatewaySpy() {
     this.ballot = new Ballot();
@@ -18,6 +16,7 @@ public class BallotGatewaySpy implements BallotGateway {
     this.ballot.add(new Profile("John Collins", "collins", "Natural Science", "Tenured"));
   }
   public Ballot getBallot(String id) throws InvalidBallotIDException {
+    canGetBallot = true;
     return ballot;
   }
 

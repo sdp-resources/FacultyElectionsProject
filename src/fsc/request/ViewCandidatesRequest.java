@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.entity.Election;
-
 public class ViewCandidatesRequest {
   public String electionID;
 
