@@ -3,9 +3,6 @@ package fsc.mock;
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
-import fsc.viewable.ViewableProfile;
-
-import java.util.List;
 
 public class BallotWithProfileStub implements BallotGateway {
 
@@ -25,7 +22,4 @@ public class BallotWithProfileStub implements BallotGateway {
 
   }
 
-  public List<ViewableProfile> viewBallot(List<ViewableProfile> list) {
-    return null;
-  }
 }

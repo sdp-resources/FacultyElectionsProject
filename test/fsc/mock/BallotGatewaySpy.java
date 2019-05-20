@@ -27,8 +27,4 @@ public class BallotGatewaySpy implements BallotGateway {
 
   }
 
-  public List<ViewableProfile> viewBallot(List<ViewableProfile> list) {
-    viewableList = list;
-    return viewableList;
-  }
 }

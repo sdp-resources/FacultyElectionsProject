@@ -2,9 +2,6 @@ package fsc.mock;
 
 import fsc.entity.Ballot;
 import fsc.gateway.BallotGateway;
-import fsc.viewable.ViewableProfile;
-
-import java.util.List;
 
 public class GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy implements BallotGateway {
   public Ballot SavedBallot;
@@ -17,7 +14,4 @@ public class GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy implements Ballo
     SavedBallot = ballot;
   }
 
-  public List<ViewableProfile> viewBallot(List<ViewableProfile> list) {
-    return null;
-  }
 }
