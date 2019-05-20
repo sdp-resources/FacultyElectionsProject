@@ -22,17 +22,19 @@ public class ViewCandidatesInteractor {
       return new ErrorResponse("There are no candidates");
     }
     ViewCandidates(request);
+
     return new SuccessfullyViewedCandidatesResponse();
   }
 
-  private List<ViewableProfile> ViewCandidates(ViewCandidatesRequest request) throws BallotGateway.InvalidBallotIDException {
+  private void ViewCandidates(ViewCandidatesRequest request) throws BallotGateway.InvalidBallotIDException {
     Ballot ballot = gateway.getBallot(request.electionID);
     List<ViewableProfile> viewableCandidates = new ArrayList<>();
+    ViewableProfile viewableProfile;
     for (Profile profile : ballot) {
-
+      viewableProfile = new ViewableProfile(profile.getName(), profile.getUsername(),
+                                            profile.getDivision(), profile.getContract());
+      viewableCandidates.add(viewableProfile);
     }
-
-
-    return viewableCandidates;
+    gateway.viewBallot(viewableCandidates);
   }
 }

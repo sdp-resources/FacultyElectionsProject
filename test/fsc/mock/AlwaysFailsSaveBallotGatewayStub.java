@@ -16,7 +16,7 @@ public class AlwaysFailsSaveBallotGatewayStub implements BallotGateway {
     throw new CannotSaveBallotException();
   }
 
-  public List<ViewableProfile> viewBallot(String id) {
+  public List<ViewableProfile> viewBallot(List<ViewableProfile> list) {
     return null;
   }
 

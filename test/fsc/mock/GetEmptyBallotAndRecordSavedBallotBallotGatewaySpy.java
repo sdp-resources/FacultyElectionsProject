@@ -17,7 +17,7 @@ public class GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy implements Ballo
     SavedBallot = ballot;
   }
 
-  public List<ViewableProfile> viewBallot(String id) {
+  public List<ViewableProfile> viewBallot(List<ViewableProfile> list) {
     return null;
   }
 }
