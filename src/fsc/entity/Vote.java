@@ -21,4 +21,20 @@ public class Vote {
   public List<Profile> getRankedList() {
     return listOfVotes;
   }
+
+  public void addMultipleVote(List<Profile> listOfCandidates) {
+    for (Profile profile: listOfCandidates){
+      this.addSingleVote(profile);
+    }
+  }
+
+  public void removeProfileFromVote(Profile profile) {
+    listOfVotes.remove(profile);
+  }
+
+  public void removeMultipleVotes(List<Profile> listOfRemovals) {
+    for (Profile profile: listOfRemovals){
+      this.removeProfileFromVote(profile);
+    }
+  }
 }
