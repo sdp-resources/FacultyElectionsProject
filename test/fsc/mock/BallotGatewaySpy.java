@@ -28,6 +28,6 @@ public class BallotGatewaySpy implements BallotGateway {
   }
 
   public List<ViewableProfile> viewBallot(String id) {
-    return null;
+    return viewableList;
   }
 }

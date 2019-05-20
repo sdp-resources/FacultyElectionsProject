@@ -3,22 +3,20 @@ package fsc.entity;
 import java.util.ArrayList;
 import java.util.AbstractList;
 
-public class Ballot extends AbstractList {
+public class Ballot extends AbstractList<Profile> {
 
   private AbstractList<Profile> profiles = new ArrayList<>();
-  private int size = 0;
 
   public int size() {
-    return size;
+    return profiles.size();
   }
 
   public boolean isEmpty() {
     return profiles.isEmpty();
   }
 
-  public void add(Profile profile) {
-    profiles.add(profile);
-    size++;
+  public boolean add(Profile profile) {
+    return profiles.add(profile);
   }
 
   public Profile get(int i) {
@@ -31,7 +29,6 @@ public class Ballot extends AbstractList {
       throw new NoProfileInBallotException();
     }
 
-    size--;
   }
 
   public class NoProfileInBallotException extends Exception {}
