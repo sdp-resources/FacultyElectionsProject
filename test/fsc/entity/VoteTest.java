@@ -98,7 +98,4 @@ public class VoteTest {
     expectedList.add(profile1);
     assertEquals(expectedList, vote.getRankedList());
   }
-
-
-
 }
