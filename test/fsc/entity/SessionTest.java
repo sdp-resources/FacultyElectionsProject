@@ -10,7 +10,7 @@ public class SessionTest {
 
   @Before
   public void setup() {
-    session = new Session("Admin","admin", "random-string");
+    session = new Session("Administrator","admin", "random-string");
   }
 
   @Test
@@ -25,7 +25,6 @@ public class SessionTest {
 
   @Test
   public void canGetSessionRole() {
-    assertEquals("Admin",session.getRole());
+    assertEquals("Administrator",session.getRole());
   }
-
 }
