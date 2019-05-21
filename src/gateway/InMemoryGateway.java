@@ -8,8 +8,9 @@ import java.util.List;
 
 public class InMemoryGateway implements Gateway {
 
-  public ArrayList<Profile> profiles = new ArrayList<>();
+  private List<Profile> profiles = new ArrayList<>();
   private List<String> contractTypes = new ArrayList<>();
+  private List<String> divisions = new ArrayList<>();
 
   public InMemoryGateway() {
     profiles.add(new Profile("Haris", "skiadas", "Math", "tenured"));
@@ -17,22 +18,18 @@ public class InMemoryGateway implements Gateway {
   }
 
   public ArrayList<Profile> getAllProfiles() {
-    return profiles;
+    return new ArrayList<>(profiles);
   }
 
-  public Profile getProfile(String username) {
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
     for (Profile currProfile : profiles) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
-    throw new RuntimeException("No Profile With that Username");
+    throw new InvalidProfileUsernameException();
   }
 
   public void addProfile(Profile profile) {
     profiles.add(profile);
-  }
-
-  public boolean isValidDivision(String division) {
-    return false;
   }
 
   private static boolean isCorrectProfile(String username, Profile currProfile) {
@@ -45,31 +42,23 @@ public class InMemoryGateway implements Gateway {
   }
 
   public List<String> getContractTypes() {
-    return null;
-  }
-
-  public void checkIfContractTypeExist(String contract_type) throws InvalidContractTypeException {
-
-  }
-
-  public ArrayList<String> getDivisionList() {
-    return null;
-  }
-
-  public List<String> getAllDivisions() {
-    return null;
-  }
-
-  public String getDivision(String divisionName) throws Exception {
-    return divisionName;
+    return new ArrayList<>(contractTypes);
   }
 
   public void addDivision(String division) {
+    divisions.add(division);
+  }
 
+  public String getDivision(String divisionName) throws Exception {
+    return null;
   }
 
   public Boolean hasDivision(String divisionName) {
-    return true;
+    return divisions.contains(divisionName);
+  }
+
+  public List<String> getAllDivisions() {
+    return new ArrayList<>(divisions);
   }
 
   public Ballot getBallot(String id) throws InvalidBallotIDException {
@@ -80,23 +69,19 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public Seat getSeat(String seatName) throws InvalidSeatNameException {
-    return null;
-  }
-
   public void addElection(Election makeElectionFromRequest) {
 
   }
 
-  public Committee getCommitteeFromCommitteeName(String committeeName)
-        throws InvalidCommitteeNameException {
+  public Committee getCommitteeFromCommitteeName(String committeeName) {
     return null;
   }
 
-  public VoteRecord getVoteRecord() {
-    return null;
+  public void addCommittee(Committee committee) {
+
   }
-    public void recordVote (VoteRecord voteRecord){}
+
+  public void recordVote (VoteRecord voteRecord){}
 
     public void save () { }
 
