@@ -15,11 +15,18 @@ public class DivisionInteractor {
   }
 
   public static Response execute(AddDivisionRequest request) throws Exception {
-    try { gateway.getDivision(request.name);}
-    catch (Exception e) {
-      gateway.addDivision(request.name);
-      return new SuccessfullyAddedDivision();
+    if (gateway.hasDivision(request.name)){
+      return new FailedtoAddDivision();
     }
-    return new FailedtoAddDivision();
+    gateway.addDivision(request.name);
+    return new SuccessfullyAddedDivision();
+
+
+//    try { gateway.getDivision(request.name);}
+//    catch (Exception e) {
+//      gateway.addDivision(request.name);
+//      return new SuccessfullyAddedDivision();
+//    }
+//    return new FailedtoAddDivision();
   }
 }

@@ -6,7 +6,7 @@ import fsc.gateway.DivisionGateway;
 import java.util.ArrayList;
 
 public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements DivisionGateway {
-  ArrayList<Division> divisionList;
+  ArrayList<Division> divisionList ;
   public String submittedDivisionName;
 
   public void AddDivisionWhereOneDoesNotAlreadyExistGatewaySpyArrayList() {
@@ -17,11 +17,15 @@ public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements Divisio
     return null;
   }
 
-  public void getDivision(String divisionName) throws Exception {
+  public String getDivision(String divisionName) throws Exception {
     submittedDivisionName = divisionName;
     throw new Exception("No Division With That name Found");
   }
 
   public void addDivision(String division) {
+  }
+
+  public Boolean hasDivision(String divisionName) {
+    return true;
   }
 }

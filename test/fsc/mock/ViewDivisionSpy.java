@@ -14,12 +14,16 @@ public class ViewDivisionSpy implements DivisionGateway {
     return divisionList;
   }
 
-  public void getDivision(String divisionName) throws Exception {
-
+  public String getDivision(String divisionName) throws Exception {
+    return null;
   }
 
   public void addDivision(String division) {
     divisionList.add(division);
 
+  }
+
+  public Boolean hasDivision(String divisionName) {
+    return null;
   }
 }

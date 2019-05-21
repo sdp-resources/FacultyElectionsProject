@@ -2,6 +2,7 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.gateway.Gateway;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,20 +53,24 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public ArrayList<String> getAllDivisions() {
+  public ArrayList<String> getDivisionList() {
     return null;
   }
 
-  public void getDivisionWithName(String divisionName) throws Exception {
-
+  public List<String> getAllDivisions() {
+    return null;
   }
 
-  public void getDivision(String divisionName) throws Exception {
-
+  public String getDivision(String divisionName) throws Exception {
+  return divisionName;
   }
 
   public void addDivision(String division) {
 
+  }
+
+  public Boolean hasDivision(String divisionName) {
+    return true;
   }
 
   public Ballot getBallot(String id) throws InvalidBallotIDException {

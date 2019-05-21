@@ -19,10 +19,15 @@ public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGate
     return null;
   }
 
-  public void getDivision(String divisionName) throws Exception {
+  public String getDivision(String divisionName) throws Exception {
     submittedDivisionName = divisionName;
+    return submittedDivisionName;
   }
 
   public void addDivision(String division) {
+  }
+
+  public Boolean hasDivision(String divisionName) {
+    return null;
   }
 }

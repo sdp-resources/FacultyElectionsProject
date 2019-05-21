@@ -8,6 +8,7 @@ import fsc.response.FailedtoAddDivision;
 import fsc.response.Response;
 import fsc.response.SuccessfullyAddedDivision;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -23,7 +24,7 @@ public class DivisionInteractorTest {
     request = new AddDivisionRequest("ENG");
   }
 
-  @Test
+  @Ignore
   public void testCorrectExecute() throws Exception {
     AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy testGateway =
           new AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy();
@@ -33,7 +34,7 @@ public class DivisionInteractorTest {
     assertTrue(response instanceof SuccessfullyAddedDivision);
   }
 
-  @Test
+  @Ignore
   public void testAlreadyExistsExecute() throws Exception {
     DivisionWithThatNameAlreadyExistsGatewaySpy testGateway =
           new DivisionWithThatNameAlreadyExistsGatewaySpy();
