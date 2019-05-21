@@ -18,8 +18,8 @@ public class ViewDivisionSpy implements DivisionGateway {
 
   }
 
-  public void addDivision(String divsion) {
-    divisionList.add(divsion);
+  public void addDivision(String division) {
+    divisionList.add(division);
 
   }
 }

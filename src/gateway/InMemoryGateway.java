@@ -60,7 +60,7 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public void addDivision(String divsion) {
+  public void addDivision(String division) {
 
   }
 

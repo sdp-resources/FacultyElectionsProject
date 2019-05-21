@@ -22,6 +22,6 @@ public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGate
     submittedDivisionName = divisionName;
   }
 
-  public void addDivision(String divsion) {
+  public void addDivision(String division) {
   }
 }

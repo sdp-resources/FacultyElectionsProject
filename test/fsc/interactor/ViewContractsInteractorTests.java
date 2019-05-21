@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-public class ContractsViewerInteractorTests {
+public class ViewContractsInteractorTests {
 
   @Test
   public void RequestTest() {
     ContractsViewerRequest request = new ContractsViewerRequest();
     ContractTypesGatewayStub gateway = new ContractTypesGatewayStub();
-    ContractsViewerInteractor interactor = new ContractsViewerInteractor(gateway);
+    ViewContractsInteractor interactor = new ViewContractsInteractor(gateway);
     ContractsViewerResponse response = interactor.execute(request);
 
     ArrayList<String> contracts = new ArrayList<>();

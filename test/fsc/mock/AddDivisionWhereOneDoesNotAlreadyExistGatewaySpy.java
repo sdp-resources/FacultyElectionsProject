@@ -22,6 +22,6 @@ public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements Divisio
     throw new Exception("No Division With That name Found");
   }
 
-  public void addDivision(String divsion) {
+  public void addDivision(String division) {
   }
 }
