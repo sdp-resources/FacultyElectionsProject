@@ -7,11 +7,11 @@ import fsc.gateway.DivisionGateway;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGateway {
+public class ExistingDivisionGatewaySpy implements DivisionGateway {
   ArrayList<Division> divisionList;
   public String submittedDivisionName;
 
-  public void DivisionWithThatNameAlreadyExistsGatewaySpy() {
+  public void ExistingDivisionGatewaySpy() {
     this.divisionList = null;
   }
 
