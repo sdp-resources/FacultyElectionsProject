@@ -6,11 +6,11 @@ import fsc.response.FailedtoAddDivision;
 import fsc.response.SuccessfullyAddedDivision;
 import fsc.response.Response;
 
-public class DivisionInteractor {
+public class AddDivisionInteractor {
 
   public static DivisionGateway gateway;
 
-  public DivisionInteractor(DivisionGateway gateway) {
+  public AddDivisionInteractor(DivisionGateway gateway) {
     this.gateway = gateway;
   }
 
@@ -19,14 +19,7 @@ public class DivisionInteractor {
       return new FailedtoAddDivision();
     }
     gateway.addDivision(request.name);
+    gateway.save();
     return new SuccessfullyAddedDivision();
-
-
-//    try { gateway.getDivision(request.name);}
-//    catch (Exception e) {
-//      gateway.addDivision(request.name);
-//      return new SuccessfullyAddedDivision();
-//    }
-//    return new FailedtoAddDivision();
   }
 }

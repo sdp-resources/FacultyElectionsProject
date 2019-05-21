@@ -23,6 +23,10 @@ public class ViewDivisionStub implements DivisionGateway {
 
   }
 
+  public void save() {
+
+  }
+
   public Boolean hasDivision(String divisionName) {
     return null;
   }

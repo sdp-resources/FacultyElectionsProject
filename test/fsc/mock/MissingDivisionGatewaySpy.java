@@ -24,6 +24,10 @@ public class MissingDivisionGatewaySpy implements DivisionGateway {
   public void addDivision(String division) {
   }
 
+  public void save() {
+
+  }
+
   public Boolean hasDivision(String divisionName) {
     submittedDivisionName = divisionName;
     return false;
