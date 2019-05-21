@@ -82,8 +82,8 @@ public class AddToBallotInteractorTest {
   @Test
   public void gatewayGetsBallotWithChanges()
   {
-    var ballotGateway = new GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy();
-    var profileGateway = new ProfileGatewayStub(
+    GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy ballotGateway = new GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy();
+    ProfileGatewayStub profileGateway = new ProfileGatewayStub(
           new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
 
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);

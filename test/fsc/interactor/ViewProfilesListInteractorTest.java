@@ -30,7 +30,7 @@ public class ViewProfilesListInteractorTest {
 
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
-    var converterSpy = new ProfileToViewableProfileConverterSpy();
+    ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
     Context.instance.profileToViewableProfileConverter = converterSpy;
 
     AllProfilesGatewaySpy profileGatewaySpy = new AllProfilesGatewaySpy(profile1, profile2, profile3);
