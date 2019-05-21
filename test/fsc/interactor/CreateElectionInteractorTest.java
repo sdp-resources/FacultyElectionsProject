@@ -5,6 +5,7 @@ import fsc.mock.ElectingWithEverythingCorrectGatewaySpy;
 import fsc.request.CreateElectionRequest;
 import fsc.response.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -30,7 +31,7 @@ public class CreateElectionInteractorTest {
     response = interactor.execute(request);
     assertEquals("Cool committee", gateway.submittedCommitteeName);
     assertTrue(response instanceof SuccessfullyCreatedElectionResponse);
-    assertTrue(gateway.addedElection.getSeat().getSeatName() == request.seatName);
+    assertEquals(request.seatName, gateway.addedElection.getSeat().getName());
     assertTrue(gateway.addedElection.getCommittee().getName() == request.committeeName);
     assertTrue(gateway.addedElection.getID() == 1);
   }
