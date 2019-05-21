@@ -18,7 +18,6 @@ public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements Divisio
   }
 
   public String getDivision(String divisionName) throws Exception {
-    submittedDivisionName = divisionName;
     throw new Exception("No Division With That name Found");
   }
 
@@ -26,6 +25,7 @@ public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements Divisio
   }
 
   public Boolean hasDivision(String divisionName) {
-    return true;
+    submittedDivisionName = divisionName;
+    return false;
   }
 }

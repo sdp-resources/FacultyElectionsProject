@@ -24,7 +24,7 @@ public class DivisionInteractorTest {
     request = new AddDivisionRequest("ENG");
   }
 
-  @Ignore
+  @Test
   public void testCorrectExecute() throws Exception {
     AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy testGateway =
           new AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy();
@@ -34,7 +34,7 @@ public class DivisionInteractorTest {
     assertTrue(response instanceof SuccessfullyAddedDivision);
   }
 
-  @Ignore
+  @Test
   public void testAlreadyExistsExecute() throws Exception {
     DivisionWithThatNameAlreadyExistsGatewaySpy testGateway =
           new DivisionWithThatNameAlreadyExistsGatewaySpy();

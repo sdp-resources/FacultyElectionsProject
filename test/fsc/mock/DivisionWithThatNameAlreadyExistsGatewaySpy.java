@@ -20,14 +20,14 @@ public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGate
   }
 
   public String getDivision(String divisionName) throws Exception {
-    submittedDivisionName = divisionName;
-    return submittedDivisionName;
+    return divisionName;
   }
 
   public void addDivision(String division) {
   }
 
   public Boolean hasDivision(String divisionName) {
-    return null;
+    submittedDivisionName = divisionName;
+    return true;
   }
 }
