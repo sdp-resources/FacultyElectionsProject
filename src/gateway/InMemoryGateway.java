@@ -49,7 +49,7 @@ public class InMemoryGateway implements Gateway {
     contractTypes.add(contractType);
   }
 
-  public void getContractTypeFromProfile(String contract_type) throws InvalidContractTypeException {
+  public void checkIfContractTypeExist(String contract_type) throws InvalidContractTypeException {
 
   }
 

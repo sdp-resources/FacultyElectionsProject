@@ -15,13 +15,12 @@ public class CreateContractTypeInteractor {
         CreateContractTypeRequest request) {
     try
     {
-      gateway.getContractTypeFromProfile(request.contract_type);
+      gateway.addContractType(request.contract_type);
     }
     catch (Exception e) {
-      gateway.addContractType(makeContractTypeFromRequest(request));
-      return new SuccessfullyAddedContractTypeResponse();
+      return new FailedAddedContractTypeResponse();
     }
-    return new FailedAddedContractTypeResponse();
+    return new SuccessfullyAddedContractTypeResponse();
 }
 
   private String makeContractTypeFromRequest(CreateContractTypeRequest request) {

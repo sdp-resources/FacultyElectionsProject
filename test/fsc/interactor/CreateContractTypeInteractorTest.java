@@ -1,8 +1,9 @@
 package fsc.interactor;
 
-import fsc.mock.NoSuchContractTypeContractTypeGatewaySpy;
+import fsc.mock.succesfullyAddedContractTypeSpy;
 import fsc.request.CreateContractTypeRequest;
 import fsc.response.Response;
+import fsc.response.SuccessfullyAddedContractTypeResponse;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -20,11 +21,12 @@ public class CreateContractTypeInteractorTest {
   }
 
   @Test
-  public void testCorrectExecute() throws Exception {
-    NoSuchContractTypeContractTypeGatewaySpy gateway = new NoSuchContractTypeContractTypeGatewaySpy();
+  public void succesfullyAddedContract() throws Exception {
+    succesfullyAddedContractTypeSpy gateway = new succesfullyAddedContractTypeSpy();
     interactor = new CreateContractTypeInteractor(gateway);
     response = interactor.execute(request);
     assertEquals(CONTRACT_TYPE, gateway.submittedContractType);
+    assert(response instanceof SuccessfullyAddedContractTypeResponse);
   }
 
 }
