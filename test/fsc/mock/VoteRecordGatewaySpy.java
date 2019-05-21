@@ -6,9 +6,10 @@ import fsc.gateway.VoteRecordGateway;
 public class VoteRecordGatewaySpy implements VoteRecordGateway {
   public String username = "wilsonT";
   public Boolean boolTestVar = false;
+  public VoteRecord voteRecord;
 
-  public VoteRecord recordVote() {
+  public void recordVote(VoteRecord voteRecord) {
     boolTestVar = true;
-    return null;
+    this.voteRecord = voteRecord;
   }
 }

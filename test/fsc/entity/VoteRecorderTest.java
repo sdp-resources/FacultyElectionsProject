@@ -12,12 +12,12 @@ import static org.junit.Assert.assertTrue;
 public class VoteRecorderTest {
 
   private Ballot ballot;
-  private Vote vote;
+  private String vote;
 
   @Before
   public void setUp() throws Exception {
     ballot = new Ballot();
-    vote = new Vote(ballot);
+    vote = "";
   }
 
   @Test

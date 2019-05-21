@@ -3,5 +3,5 @@ package fsc.gateway;
 import fsc.entity.VoteRecord;
 
 public interface VoteRecordGateway {
-  public VoteRecord recordVote();
+  public void recordVote(VoteRecord voteRecord);
 }

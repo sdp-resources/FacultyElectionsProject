@@ -1,5 +1,7 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
+import fsc.entity.VoteRecord;
 import fsc.gateway.ProfileGateway;
 import fsc.gateway.VoteRecordGateway;
 import fsc.mock.NoProfileExistsProfileGatewaySpy;
@@ -61,6 +63,20 @@ public class VoteInteractorTest {
     interactor.execute(request);
 
     assertTrue(((VoteRecordGatewaySpy) voteGateway).boolTestVar);
+  }
+
+  @Test
+  public void canRecordAVote() throws Exception {
+    VoteRecordRequest request = new VoteRecordRequest(username, date, vote, electionID);
+    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
+    VoteRecordGateway voteGateway = new VoteRecordGatewaySpy();
+    VoteInteractor interactor = new VoteInteractor(voteGateway, profileGateway);
+    interactor.execute(request);
+
+    Profile profile = profileGateway.getProfile(username);
+    VoteRecord testRecord = new VoteRecord(profile,vote,electionID);
+
+    assertTrue(((VoteRecordGatewaySpy) voteGateway).voteRecord.equals(testRecord));
   }
 
 }

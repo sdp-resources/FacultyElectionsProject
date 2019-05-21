@@ -2,19 +2,20 @@ package fsc.entity;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class VoteRecord {
 
   private final Profile profile;
-  private final Vote vote;
+  private final String vote;
   private final int electionID;
   private Date date;
 
-  public VoteRecord(Profile profile, Vote vote, int electionID) {
+  public VoteRecord(Profile profile, String vote, int electionID) {
     this(profile, Calendar.getInstance().getTime(), vote, electionID);
   }
 
-  public VoteRecord(Profile profile, Date date, Vote vote, int electionID){
+  public VoteRecord(Profile profile, Date date, String vote, int electionID){
     this.profile = profile;
     this.vote = vote;
     this.date = date;
@@ -25,7 +26,7 @@ public class VoteRecord {
     return profile;
   }
 
-  public Vote getVote() {
+  public String getVote() {
     return vote;
   }
 
@@ -35,5 +36,17 @@ public class VoteRecord {
 
   public int getElectionID() {
     return electionID;
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    VoteRecord that = (VoteRecord) o;
+    return electionID == that.electionID && Objects.equals(profile, that.profile) && Objects.equals(
+          vote, that.vote) && Objects.equals(date, that.date);
+  }
+
+  public int hashCode() {
+    return Objects.hash(profile, vote, electionID, date);
   }
 }
