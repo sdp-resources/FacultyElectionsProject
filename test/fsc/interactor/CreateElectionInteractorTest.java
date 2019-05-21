@@ -30,6 +30,9 @@ public class CreateElectionInteractorTest {
     response = interactor.execute(request);
     assertEquals("Cool committee", gateway.submittedCommitteeName);
     assertTrue(response instanceof SuccessfullyCreatedElectionResponse);
+    assertTrue(gateway.addedElection.getSeat().getSeatName() == request.seatName);
+    assertTrue(gateway.addedElection.getCommittee().getName() == request.committeeName);
+    assertTrue(gateway.addedElection.getID() == 1);
   }
 
 

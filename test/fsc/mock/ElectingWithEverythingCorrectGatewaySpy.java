@@ -15,6 +15,7 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
   public ArrayList<Committee> committees = new ArrayList<Committee>();
   public String submittedCommitteeName;
   public CreateElectionRequest request;
+  public Election addedElection;
 
   public ElectingWithEverythingCorrectGatewaySpy(CreateElectionRequest request){
     this.request = request;
@@ -33,8 +34,13 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
     return committee;
   }
 
-  public void addElection(Election election) {
+  public void save() {
 
+  }
+
+  public void addElection(Election election) {
+    this.addedElection = election;
+    addedElection.setID(1);
   }
 
   public void createElection(Election makeElectionFromRequest) {

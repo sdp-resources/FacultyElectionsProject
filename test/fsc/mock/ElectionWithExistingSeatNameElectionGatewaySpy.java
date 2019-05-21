@@ -29,6 +29,9 @@ public class ElectionWithExistingSeatNameElectionGatewaySpy implements ElectionG
     return null;
   }
 
+  public void save() {
+
+  }
 
 }
 

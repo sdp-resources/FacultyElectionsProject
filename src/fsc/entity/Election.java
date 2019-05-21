@@ -24,6 +24,8 @@ public class Election {
     return ID;
   }
 
+  public void setID(int ID) {this.ID = ID;}
+
   public Seat getSeat(){
     return seat;
   }
