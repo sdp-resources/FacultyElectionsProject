@@ -38,7 +38,7 @@ public class VoteInteractor {
     int electionID = request.electionID;
     Profile profile = profileGateway.getProfile(username);
 
-    return new VoteRecord(profile,vote,electionID);
+    return new VoteRecord(profile,date, vote,electionID);
   }
 
 }

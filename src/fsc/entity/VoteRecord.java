@@ -2,7 +2,6 @@ package fsc.entity;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 public class VoteRecord {
 
@@ -38,15 +37,4 @@ public class VoteRecord {
     return electionID;
   }
 
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    VoteRecord that = (VoteRecord) o;
-    return electionID == that.electionID && Objects.equals(profile, that.profile) && Objects.equals(
-          vote, that.vote) && Objects.equals(date, that.date);
-  }
-
-  public int hashCode() {
-    return Objects.hash(profile, vote, electionID, date);
-  }
 }

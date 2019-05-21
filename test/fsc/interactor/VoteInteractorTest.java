@@ -4,18 +4,19 @@ import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ProfileGateway;
 import fsc.gateway.VoteRecordGateway;
-import fsc.mock.*;
+import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
+import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
+import fsc.mock.VoteRecordGatewaySpy;
 import fsc.request.VoteRecordRequest;
 import fsc.response.AddedNewVoteResponse;
 import fsc.response.ProfileDoesNotExistResponse;
 import fsc.response.Response;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import java.util.Date;
 
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class VoteInteractorTest {
   String username;
@@ -64,7 +65,7 @@ public class VoteInteractorTest {
     assertTrue(((VoteRecordGatewaySpy) voteGateway).boolTestVar);
   }
 
-  @Ignore
+  @Test
   public void canRecordAVote() throws Exception {
     VoteRecordRequest request = new VoteRecordRequest(username, date, vote, electionID);
     ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
@@ -73,10 +74,12 @@ public class VoteInteractorTest {
     interactor.execute(request);
 
     Profile profile = profileGateway.getProfile(username);
-    VoteRecord testRecord = new VoteRecord(profile,vote,electionID);
-    System.out.println(testRecord.toString());
+    VoteRecord testRecord = ((VoteRecordGatewaySpy) voteGateway).voteRecord;
 
-    assertTrue(((VoteRecordGatewaySpy) voteGateway).voteRecord.equals(testRecord));
+    assertEquals(testRecord.getProfile(), profile);
+    assertEquals(testRecord.getDate(), date);
+    assertEquals(testRecord.getVote(), vote);
+    assertEquals(testRecord.getElectionID(), electionID);
   }
 
 }
