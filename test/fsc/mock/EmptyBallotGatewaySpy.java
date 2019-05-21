@@ -12,4 +12,8 @@ public class EmptyBallotGatewaySpy implements BallotGateway {
 
   }
 
+  public void save() {
+
+  }
+
 }

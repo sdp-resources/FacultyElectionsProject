@@ -2,6 +2,7 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.gateway.Gateway;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class InMemoryGateway implements Gateway {
   }
 
   public void saveProfile(Profile profile) {
-
+    save();
   }
 
   private static boolean isCorrectProfile(String username, Profile currProfile) {
@@ -83,4 +84,6 @@ public class InMemoryGateway implements Gateway {
   public VoteRecord getVoteRecord() {
     return null;
   }
+
+  public void save() { }
 }

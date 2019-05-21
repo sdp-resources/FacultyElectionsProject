@@ -24,4 +24,8 @@ public class BallotGatewaySpy implements BallotGateway {
 
   }
 
+  public void save() {
+
+  }
+
 }
