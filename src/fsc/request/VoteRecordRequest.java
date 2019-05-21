@@ -1,6 +1,5 @@
 package fsc.request;
 
-import fsc.entity.Profile;
 import fsc.entity.Vote;
 
 import java.util.Date;

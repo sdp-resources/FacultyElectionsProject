@@ -24,6 +24,17 @@ public class VoteInteractor {
       return new AddedNewVoteResponse();
     }
 
+
+
+
+
+
+
+
+
+
+
+
   public Response executeBadID(VoteRecordRequest request) throws Exception {
     try {profileGateway.getProfile(request.username);} catch (Exception e) {
       return new ProfileDoesNotExistResponse();
