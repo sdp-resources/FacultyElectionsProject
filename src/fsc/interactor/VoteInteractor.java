@@ -22,8 +22,12 @@ public class VoteInteractor {
     catch (Exception e) {
       return new ProfileDoesNotExistResponse();
     }
+      voteGateway.recordVote();
       return new AddedNewVoteResponse();
     }
+
+
+
   }
 
 

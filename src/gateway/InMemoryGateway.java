@@ -84,7 +84,7 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public VoteRecord getVoteRecord() {
+  public VoteRecord recordVote() {
     return null;
   }
 

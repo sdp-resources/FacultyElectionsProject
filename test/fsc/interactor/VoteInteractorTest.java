@@ -10,10 +10,10 @@ import fsc.response.AddedNewVoteResponse;
 import fsc.response.ProfileDoesNotExistResponse;
 import fsc.response.Response;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import java.util.Date;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 public class VoteInteractorTest {
@@ -51,4 +51,16 @@ public class VoteInteractorTest {
 
     assertTrue(response instanceof ProfileDoesNotExistResponse);
   }
+
+  @Test
+  public void voteRecordSpyFunctionality() throws Exception {
+    VoteRecordRequest request = new VoteRecordRequest(username, date, vote, electionID);
+    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
+    VoteRecordGateway voteGateway = new VoteRecordGatewaySpy();
+    VoteInteractor interactor = new VoteInteractor(voteGateway, profileGateway);
+    interactor.execute(request);
+
+    assertTrue(((VoteRecordGatewaySpy) voteGateway).boolTestVar);
+  }
+
 }
