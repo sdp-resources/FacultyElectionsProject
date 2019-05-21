@@ -5,7 +5,7 @@ import fsc.gateway.Gateway;
 
 import java.util.List;
 
-public class GatewayDummy implements Gateway {
+public abstract class GatewayDummy implements Gateway {
   public Profile getProfileFromUsername(String username) {
     return null;
   }
@@ -24,8 +24,7 @@ public class GatewayDummy implements Gateway {
 
   }
 
-  public String addContractType(String string) {
-    return null;
+  public void addContractType(String string) {
   }
 
   public void getContractTypeFromProfile(String contract_type) {

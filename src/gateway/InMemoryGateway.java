@@ -44,8 +44,8 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public String addContractType(String string) {
-    return null;
+  public void addContractType(String contractType) {
+    contractTypes.add(contractType);
   }
 
   public void getContractTypeFromProfile(String contract_type) throws InvalidContractTypeException {
