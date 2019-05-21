@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public interface DivisionGateway {
   ArrayList<String> getDivisionList();
-  public void getDivision(String divisionName) throws Exception;
+  public String getDivision(String divisionName) throws Exception;
   public void addDivision(String divsion);
+  public Boolean hasDivision(String divisionName);
 }
