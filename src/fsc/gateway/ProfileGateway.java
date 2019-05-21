@@ -2,7 +2,6 @@ package fsc.gateway;
 
 import fsc.entity.Profile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ProfileGateway {
