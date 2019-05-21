@@ -16,6 +16,7 @@ public class CreateCommitteeInteractor {
     try{ gateway.getCommitteeFromCommitteeName(request.name);}
     catch (Exception e) {
       gateway.addCommittee(makeCommitteeFromRequest(request));
+      gateway.save();
       return new SuccessfullyAddedCommitteeResponse();
     }
     return new FailedToAddCommitteeResponse();

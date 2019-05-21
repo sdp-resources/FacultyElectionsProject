@@ -9,7 +9,11 @@ public class CommitteeGatewayDummy implements CommitteeGateway {
     return null;
   }
 
-  public void addCommittee(Committee makeCommitteeFromRequest) {
+  public void addCommittee(Committee committee) {
+
+  }
+
+  public void save() {
 
   }
 }

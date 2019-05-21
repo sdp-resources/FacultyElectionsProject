@@ -23,7 +23,11 @@ public class CommitteeGatewaySpy implements CommitteeGateway {
     throw new NoCommitteeWithThatNameException();
   }
 
-  public void addCommittee(Committee makeCommitteeFromRequest) {
-    committees.add(makeCommitteeFromRequest);
+  public void addCommittee(Committee committee) {
+    committees.add(committee);
+  }
+
+  public void save() {
+
   }
 }

@@ -31,6 +31,7 @@ public class EditCommitteeInteractor {
       updateProfile(committee, field, request.changes.get(field));
     }
 
+    committeeGateway.save();
     return new SuccessResponse();
   }
 
