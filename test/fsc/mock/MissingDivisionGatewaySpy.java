@@ -5,11 +5,11 @@ import fsc.gateway.DivisionGateway;
 
 import java.util.ArrayList;
 
-public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements DivisionGateway {
+public class MissingDivisionGatewaySpy implements DivisionGateway {
   ArrayList<Division> divisionList ;
   public String submittedDivisionName;
 
-  public void AddDivisionWhereOneDoesNotAlreadyExistGatewaySpyArrayList() {
+  public void MissingDivisionGatewaySpy() {
     this.divisionList = null;
   }
 
