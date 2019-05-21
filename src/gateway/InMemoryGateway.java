@@ -1,35 +1,34 @@
 package gateway;
 
 import fsc.entity.Profile;
+import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
 
-public class InMemoryGateway implements ProfileGateway {
+public class InMemoryGateway implements ProfileGateway, Gateway {
 
-  public static ArrayList<Profile> profileList;
+  public ArrayList<Profile> profiles = new ArrayList<>();
 
   public InMemoryGateway() {
-    this.profileList = null;
+    this.profiles = new ArrayList<>();
+    profiles.add(new Profile("Haris", "skiadas", "Math", "tenured"));
+    profiles.add(new Profile("Theresa", "wilson", "CS", "tenured"));
   }
 
   public ArrayList<Profile> getAllProfiles() {
-    return profileList;
-  }
-
-  public void addToProfiles(Profile newProfile) {
-    profileList.add(newProfile);
+    return profiles;
   }
 
   public Profile getProfileFromUsername(String username) {
-    for (Profile currProfile : profileList) {
+    for (Profile currProfile : profiles) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
     throw new RuntimeException("No Profile With that Username");
   }
 
   public void addProfile(Profile profile) {
-    profileList.add(profile);
+    profiles.add(profile);
   }
 
   public boolean isValidDivision(String division) {
@@ -45,4 +44,11 @@ public class InMemoryGateway implements ProfileGateway {
 
   }
 
+  public String addContractType(String string) {
+    return null;
+  }
+
+  public void getContractTypeFromProfile(String contract_type) throws InvalidContractTypeException {
+
+  }
 }
