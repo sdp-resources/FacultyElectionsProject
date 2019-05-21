@@ -9,8 +9,8 @@ public class AlwaysFailsSaveBallotGatewayStub implements BallotGateway {
     return new Ballot();
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
-    throw new CannotSaveBallotException();
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
+    throw new CannotAddBallotException();
   }
 
   public void save() {

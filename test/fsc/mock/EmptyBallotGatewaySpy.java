@@ -8,7 +8,7 @@ public class EmptyBallotGatewaySpy implements BallotGateway {
     return null;
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
 
   }
 

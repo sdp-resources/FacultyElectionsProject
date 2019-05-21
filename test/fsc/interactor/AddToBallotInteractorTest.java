@@ -54,19 +54,6 @@ public class AddToBallotInteractorTest {
   }
 
   @Test
-  public void ballotGatewaySaveFailedReturnsErrorResponse()
-  {
-    BallotGateway ballotGateway = new AlwaysFailsSaveBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub(
-          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
-
-    AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
-    Response response = interactor.execute(request);
-
-    assertEquals("Ballot save failed", ((ErrorResponse) response).response);
-  }
-
-  @Test
   public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse()
   {
     BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();

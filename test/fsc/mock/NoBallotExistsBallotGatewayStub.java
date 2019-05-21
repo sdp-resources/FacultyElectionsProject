@@ -9,7 +9,7 @@ public class NoBallotExistsBallotGatewayStub implements BallotGateway {
     throw new InvalidBallotIDException();
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
 
   }
 

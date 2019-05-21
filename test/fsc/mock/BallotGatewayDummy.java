@@ -9,7 +9,7 @@ public class BallotGatewayDummy implements BallotGateway {
     return null;
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
 
   }
 

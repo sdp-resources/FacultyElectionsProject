@@ -25,13 +25,11 @@ public class AddToBallotInteractor {
       ballot = ballotGateway.getBallot(request.getBallotID());
       profile = profileGateway.getProfile(request.getProfileUsername());
       ballot.add(profile);
-      ballotGateway.saveBallot(ballot);
+      ballotGateway.save();
     } catch (BallotGateway.InvalidBallotIDException e) {
       return new ErrorResponse("No ballot with that ID");
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return new ErrorResponse("No profile with that username");
-    } catch (BallotGateway.CannotSaveBallotException e) {
-      return new ErrorResponse("Ballot save failed");
     }
     return new SuccessfullyAddedProfileToBallotResponse();
   }

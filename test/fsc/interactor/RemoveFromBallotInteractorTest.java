@@ -67,20 +67,6 @@ public class RemoveFromBallotInteractorTest {
   }
 
   @Test
-  public void ballotGatewayRemoveSaveFailed(){
-
-    BallotGateway ballotGateway = new AlwaysFailsSaveBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub(
-          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
-
-    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(ballotGateway,
-                                                                      profileGateway);
-    Response response = interactor.execute(request);
-
-    assertEquals("Ballot save failed", ((ErrorResponse) response).response);
-  }
-
-  @Test
   public void profileRemovedFromBallotGivesSuccesfullyRemovedResponse(){
     Profile profile = new Profile("Banana", "Apple", "Art", "Tenured");
     BallotWithProfileStub ballotGateway = new BallotWithProfileStub(profile);

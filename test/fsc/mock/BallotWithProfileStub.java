@@ -17,7 +17,7 @@ public class BallotWithProfileStub implements BallotGateway {
     return ballot;
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
 
 
   }

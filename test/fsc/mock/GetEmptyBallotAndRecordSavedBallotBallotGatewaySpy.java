@@ -7,10 +7,11 @@ public class GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy implements Ballo
   public Ballot SavedBallot;
 
   public Ballot getBallot(String id) throws InvalidBallotIDException {
-    return new Ballot();
+    SavedBallot = new Ballot();
+    return SavedBallot;
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
     SavedBallot = ballot;
   }
 

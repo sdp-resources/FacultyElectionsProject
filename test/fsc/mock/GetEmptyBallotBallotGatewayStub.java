@@ -8,7 +8,7 @@ public class GetEmptyBallotBallotGatewayStub implements BallotGateway {
     return new Ballot();
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
 
   }
 

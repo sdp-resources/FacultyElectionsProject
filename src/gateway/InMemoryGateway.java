@@ -2,7 +2,6 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.gateway.Gateway;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +72,7 @@ public class InMemoryGateway implements Gateway {
     return null;
   }
 
-  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {
 
   }
 
