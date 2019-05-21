@@ -20,6 +20,10 @@ public class ProfileGatewayDummy implements ProfileGateway {
 
   }
 
+  public void saveProfile(Profile profile) {
+
+  }
+
   public boolean isValidDivision(String division) {
     return false;
   }

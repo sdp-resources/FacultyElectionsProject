@@ -1,7 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.noProfileGateWaySpy;
+import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.profileWasEditedGatewaySpy;
 import fsc.request.EditProfileRequest;
 import fsc.response.FailedSearchResponse;
@@ -30,7 +30,7 @@ public class EditProfileInteractorTest {
   public void noProfileExistsException() throws Exception {
     changes.put("Contract","Tenured");
     request = new EditProfileRequest("dummyUsername", changes);
-    noProfileGateWaySpy fakeGateway = new noProfileGateWaySpy();
+    NoProfileWithThatUsernameProfileGatewaySpy fakeGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
     EditProfileInteractor interactor = new EditProfileInteractor(fakeGateway);
     Response response = interactor.execute(request);
     assertTrue(response instanceof FailedSearchResponse);

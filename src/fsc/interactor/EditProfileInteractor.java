@@ -17,12 +17,13 @@ public class EditProfileInteractor {
   }
 
   public Response execute(EditProfileRequest request) throws Exception {
-    if(ifUsernameExists(request.username)){
+    try{
       Profile profile = editProfileWithRequest(request);
-      updateProfileInGateway();
+      updateProfileInGateway(profile);
       return new SuccessfullyEditedResponse();
+    } catch (Exception e){
+      return new FailedSearchResponse();
     }
-    return new FailedSearchResponse();
   }
 
   private Profile editProfileWithRequest(EditProfileRequest request) throws Exception {
@@ -74,13 +75,15 @@ public class EditProfileInteractor {
   }
 
   private boolean ifUsernameExists(String username) throws Exception {
+
     if (gateway.getProfile(username) != null){
       return true;
     }
     return false;
   }
 
-  private void updateProfileInGateway() {
+
+  private void updateProfileInGateway(Profile profile) {
     gateway.save();
   }
 }

@@ -30,4 +30,8 @@ public class profileWasEditedGatewaySpy implements ProfileGateway {
   {
     profileHasBeenEdited = true;
   }
+
+  public void saveProfile(Profile profile) {
+
+  }
 }

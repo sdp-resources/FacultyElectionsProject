@@ -28,6 +28,10 @@ public class ProfileGatewayStub implements ProfileGateway {
 
   }
 
+  public void saveProfile(Profile profile) {
+
+  }
+
   public boolean isValidDivision(String division) {
     return false;
   }

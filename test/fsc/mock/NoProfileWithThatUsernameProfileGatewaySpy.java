@@ -14,8 +14,6 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     this.profileList = null;
   }
 
-
-
   public ArrayList<Profile> getProfiles() {
     return null;
   }
@@ -28,6 +26,10 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   public void addProfile(Profile profile) { }
 
   public void save() {
+
+  }
+
+  public void saveProfile(Profile profile) {
 
   }
 

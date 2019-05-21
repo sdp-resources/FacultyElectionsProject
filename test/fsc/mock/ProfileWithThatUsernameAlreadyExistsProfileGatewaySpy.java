@@ -30,8 +30,5 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
 
   }
 
-  public boolean isValidDivision(String division) {
-    return true;
-  }
 
 }
