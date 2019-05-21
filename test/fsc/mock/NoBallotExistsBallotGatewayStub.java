@@ -13,6 +13,10 @@ public class NoBallotExistsBallotGatewayStub implements BallotGateway {
 
   }
 
+  public void save() {
+
+  }
+
   public void remove(Profile profile) throws Ballot.NoProfileInBallotException {
 
   }

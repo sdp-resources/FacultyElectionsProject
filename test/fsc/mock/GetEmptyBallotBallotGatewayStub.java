@@ -12,4 +12,8 @@ public class GetEmptyBallotBallotGatewayStub implements BallotGateway {
 
   }
 
+  public void save() {
+
+  }
+
 }

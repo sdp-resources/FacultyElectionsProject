@@ -22,4 +22,8 @@ public class BallotWithProfileStub implements BallotGateway {
 
   }
 
+  public void save() {
+
+  }
+
 }
