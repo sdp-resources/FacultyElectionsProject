@@ -1,6 +1,6 @@
 package fsc.interactor;
 
-import fsc.mock.ViewDivisionSpy;
+import fsc.mock.ViewDivisionStub;
 import fsc.request.ViewDivisionRequest;
 import fsc.response.Response;
 import fsc.response.ViewDivisionResponse;
@@ -30,7 +30,7 @@ public class ViewDivisionsTest {
   @Test
   public void sendRequestToGetValidResponseBack(){
     request = new ViewDivisionRequest();
-    ViewDivisionSpy gateway = new ViewDivisionSpy();
+    ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);
     assertTrue(response instanceof ViewDivisionResponse);
@@ -40,7 +40,7 @@ public class ViewDivisionsTest {
   @Test
   public void gatewayDivisionListEqualsOurDivisionList(){
     request = new ViewDivisionRequest();
-    ViewDivisionSpy gateway = new ViewDivisionSpy();
+    ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);
     gateway.addDivision("Banana");

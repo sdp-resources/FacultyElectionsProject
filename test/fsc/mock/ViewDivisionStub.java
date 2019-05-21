@@ -4,7 +4,7 @@ import fsc.gateway.DivisionGateway;
 
 import java.util.ArrayList;
 
-public class ViewDivisionSpy implements DivisionGateway {
+public class ViewDivisionStub implements DivisionGateway {
 
   ArrayList<String> divisionList = new ArrayList<String>();
 
