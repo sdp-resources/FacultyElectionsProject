@@ -39,7 +39,8 @@ public class VoteRecorderTest {
     Profile profile = new Profile ("Dan Smith", "DanSmith3", "Com", "Tenured");
     Date expectedDate = Calendar.getInstance().getTime();
     VoteRecord voteRecord = new VoteRecord(profile, vote, 1);
-    assertTrue(voteRecord.getDate().after(expectedDate));
+    long diffInMillies = Math.abs(expectedDate.getTime() - voteRecord.getDate().getTime());
+    assertTrue(diffInMillies < 2000);
   }
 
   @Test
