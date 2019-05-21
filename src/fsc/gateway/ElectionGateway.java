@@ -5,7 +5,9 @@ import fsc.entity.Election;
 import fsc.entity.Seat;
 
 public interface ElectionGateway {
-  Seat getSeat(String seatName) throws InvalidSeatNameException;
-  void addElection(Election election);
+  Committee getCommitteeFromCommitteeName(String committeeName) throws InvalidCommitteeNameException;
   class InvalidSeatNameException extends Exception {}
+  class InvalidCommitteeNameException extends Exception {}
+  void addElection(Election election);
+
 }

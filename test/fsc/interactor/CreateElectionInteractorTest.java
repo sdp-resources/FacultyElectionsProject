@@ -1,8 +1,7 @@
 package fsc.interactor;
 
-import fsc.gateway.ElectionGateway;
 import fsc.mock.ElectionWithExistingSeatNameElectionGatewaySpy;
-import fsc.mock.NoElectionWithThatSeatNameElectionGatewaySpy;
+import fsc.mock.ElectingWithEverythingCorrectGatewaySpy;
 import fsc.request.CreateElectionRequest;
 import fsc.response.*;
 import org.junit.Before;
@@ -24,20 +23,16 @@ public class CreateElectionInteractorTest {
 
   @Test
   public void testCorrectExecute() throws Exception {
-    NoElectionWithThatSeatNameElectionGatewaySpy gateway =
-          new NoElectionWithThatSeatNameElectionGatewaySpy();
+
+    ElectingWithEverythingCorrectGatewaySpy gateway =
+          new ElectingWithEverythingCorrectGatewaySpy(request);
     interactor = new CreateElectionInteractor(gateway);
     response = interactor.execute(request);
-    assertEquals("President", gateway.submittedSeatName);
+    assertEquals("Cool committee", gateway.submittedCommitteeName);
     assertTrue(response instanceof SuccessfullyCreatedElectionResponse);
   }
 
-  @Test
-  public void alreadyUsedSeatName() throws Exception {
-    ElectionWithExistingSeatNameElectionGatewaySpy gateway =
-          new ElectionWithExistingSeatNameElectionGatewaySpy();
-    interactor = new CreateElectionInteractor(gateway);
-    response = interactor.execute(request);
-    assertTrue(response instanceof FailedToCreateElectionResponse);
-  }
+
+
+
 }

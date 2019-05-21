@@ -61,7 +61,7 @@ public class InMemoryGateway implements Gateway {
   }
 
   public String getDivision(String divisionName) throws Exception {
-  return divisionName;
+    return divisionName;
   }
 
   public void addDivision(String division) {
@@ -88,8 +88,16 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public void recordVote(VoteRecord voteRecord) {
+  public Committee getCommitteeFromCommitteeName(String committeeName)
+        throws InvalidCommitteeNameException {
+    return null;
   }
 
-  public void save() { }
-}
+  public VoteRecord getVoteRecord() {
+    return null;
+  }
+    public void recordVote (VoteRecord voteRecord){}
+
+    public void save () { }
+
+  }

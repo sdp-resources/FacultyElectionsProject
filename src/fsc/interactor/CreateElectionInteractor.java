@@ -1,6 +1,7 @@
 package fsc.interactor;
 
-import fsc.entity.Election;
+import fsc.entity.*;
+import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
 import fsc.request.CreateElectionRequest;
 import fsc.response.*;
@@ -8,22 +9,25 @@ import fsc.response.*;
 public class CreateElectionInteractor {
   public ElectionGateway gateway;
 
-  public CreateElectionInteractor(ElectionGateway gateway){
+  public CreateElectionInteractor(ElectionGateway gateway) {
     this.gateway = gateway;
   }
 
-  public CreateElectionResponse execute(CreateElectionRequest request) {
-    try{ gateway.getSeat(request.seatName); }
-    catch (Exception e){
-      gateway.addElection(makeElectionFromRequest(request));
-      return new SuccessfullyCreatedElectionResponse();
-    }
-    return new FailedToCreateElectionResponse();
+  public CreateElectionResponse execute(CreateElectionRequest request) throws Exception {
 
+
+    try {
+      Committee committee = gateway.getCommitteeFromCommitteeName(request.committeeName);
+      Seat seat = committee.getSeat(request.seatName);
+      Ballot ballot = makeBallotFromSeat(seat);
+      gateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));
+      return new SuccessfullyCreatedElectionResponse();
+    } catch (ElectionGateway.InvalidCommitteeNameException r) { return new FailedToCreateElectionResponse();}
   }
 
-  private Election makeElectionFromRequest(CreateElectionRequest request) {
-    return new Election(request.seatName, request.committeeName);
+  private Ballot makeBallotFromSeat(Seat seat) {
+    BallotCreatorStub ballotCreator = new BallotCreatorStub();
+    return ballotCreator.getBallot(seat.getDefaultQuery());
   }
 
 }

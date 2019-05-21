@@ -20,7 +20,8 @@ public class CommitteeAndSeatsTest {
   public void setup() {
     committee = new Committee("cccc", "xxxx");
     seats = new ArrayList<>();
-    seat = new Seat();
+    AlwaysTrueQueryStub queryStub = new AlwaysTrueQueryStub();
+    seat = new Seat("a", queryStub);
   }
 
   @Test

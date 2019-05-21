@@ -1,15 +1,14 @@
 package fsc.mock;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
-import fsc.entity.Seat;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
 import java.util.ArrayList;
 
 public class ElectionWithExistingSeatNameElectionGatewaySpy implements ElectionGateway {
   private ArrayList<Seat> seats;
-  public static Seat dummySeat = new Seat();
+  public static AlwaysTrueQueryStub queryStub = new AlwaysTrueQueryStub();
+  public static Seat dummySeat = new Seat("a", queryStub);
   public String submittedSeatName;
 
   public ElectionWithExistingSeatNameElectionGatewaySpy(){
@@ -24,4 +23,12 @@ public class ElectionWithExistingSeatNameElectionGatewaySpy implements ElectionG
   public void addElection(Election makeElectionFromRequest) {
 
   }
+
+  public Committee getCommitteeFromCommitteeName(String committeeName)
+        throws InvalidCommitteeNameException {
+    return null;
+  }
+
+
 }
+

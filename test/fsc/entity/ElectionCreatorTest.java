@@ -1,7 +1,10 @@
 package fsc.entity;
 
+import fsc.entity.query.AttributeQuery;
+import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.Gateway;
+import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,18 +18,17 @@ public class ElectionCreatorTest {
 
   private Election election;
   private ElectionGateway mockGateway;
+  Seat seat;
+  Committee committee;
 
   @Before
   public void setUp() {
     Committee committee = new Committee("f", "g");
-    Seat seat = new Seat();
+    AlwaysTrueQueryStub queryStub = new AlwaysTrueQueryStub();
+    Seat seat = new Seat("a", queryStub);
     Ballot ballot = new Ballot();
-    election = new Election("a", "b");
+    AttributeQuery query = new AttributeQuery("a", "b");
+    election = new Election(seat, committee, query, ballot);
   }
 
-  @Test
-  public void validElection(){
-    assertEquals("a", election.getSeat());
-    assertEquals("b", election.getCommittee());
-  }
 }

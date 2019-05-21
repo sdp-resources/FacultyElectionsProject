@@ -13,6 +13,15 @@ public class Committee {
     this.description = description;
   }
 
+  public Seat getSeat(String seatName) throws Exception {
+    for (int i = 0; i < seats.size(); i++) {
+      if (seats.get(i).getSeatName().equals(seatName)) {
+        return seats.get(i);
+      }
+    }
+    throw new Exception();
+  }
+
   public void setName(String name) {
     this.name = name;
   }

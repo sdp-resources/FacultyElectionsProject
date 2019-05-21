@@ -7,8 +7,10 @@ public class Seat {
   private Query defaultQuery;
   private String seatName;
 
-  public Seat(){
+  public Seat(String seatName, Query defaultQuery){
+
     this.seatName = seatName;
+    this.defaultQuery = defaultQuery;
   }
 
   public String getSeatName(){
