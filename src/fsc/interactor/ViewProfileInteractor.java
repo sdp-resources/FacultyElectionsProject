@@ -29,7 +29,7 @@ public class ViewProfileInteractor {
     }
     catch (ProfileGateway.InvalidProfileUsernameException e)
     {
-      return new ErrorResponse("No profile found!");
+      return new ErrorResponse(ErrorResponse.NO_PROFILE_FOUND);
     }
 
     return new ViewProfileResponse(Context.instance.profileToViewableProfileConverter.convert(profile));

@@ -11,6 +11,8 @@ import fsc.response.SuccessfullyAddedProfileToBallotResponse;
 import org.junit.Before;
 import org.junit.Test;
 
+import static fsc.response.ErrorResponse.NO_BALLOT_WITH_THAT_ID;
+import static fsc.response.ErrorResponse.NO_PROFILE_WITH_THAT_USERNAME;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
@@ -38,7 +40,7 @@ public class AddToBallotInteractorTest {
                                                             dummyProfileGateway);
     Response response = inter.execute(request);
 
-    assertEquals( "No ballot with that ID", ((ErrorResponse) response).response);
+    assertEquals( NO_BALLOT_WITH_THAT_ID, ((ErrorResponse) response).response);
   }
 
   @Test
@@ -50,7 +52,7 @@ public class AddToBallotInteractorTest {
     AddToBallotInteractor interactor = new AddToBallotInteractor(dummyBallotGateway, noProfileProfileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals("No profile with that username", ((ErrorResponse) response).response);
+    assertEquals(NO_PROFILE_WITH_THAT_USERNAME, ((ErrorResponse) response).response);
   }
 
   @Test

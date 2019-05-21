@@ -5,7 +5,6 @@ import fsc.mock.*;
 import fsc.request.ProfileViewerRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.ViewProfileResponse;
-import fsc.response.Response;
 
 import fsc.service.Context;
 import fsc.service.ProfileToViewableProfileConverter;
@@ -17,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ViewProfileInteractorTest {
+
   @Before
   public void setup()
   {
@@ -54,7 +54,7 @@ public class ViewProfileInteractorTest {
 
     assertEquals(request.username, gatewaySpy.usernameReceived);
     assertEquals(null, converterSpy.profileReceived);
-    assertEquals("No profile found!", response.response);
+    assertEquals(ErrorResponse.NO_PROFILE_FOUND, response.response);
   }
 
   @After

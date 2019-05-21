@@ -27,9 +27,9 @@ public class AddToBallotInteractor {
       ballot.add(profile);
       ballotGateway.save();
     } catch (BallotGateway.InvalidBallotIDException e) {
-      return new ErrorResponse("No ballot with that ID");
+      return new ErrorResponse(ErrorResponse.NO_BALLOT_WITH_THAT_ID);
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return new ErrorResponse("No profile with that username");
+      return new ErrorResponse(ErrorResponse.NO_PROFILE_WITH_THAT_USERNAME);
     }
     return new SuccessfullyAddedProfileToBallotResponse();
   }
