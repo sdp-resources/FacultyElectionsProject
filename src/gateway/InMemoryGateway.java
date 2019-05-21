@@ -2,16 +2,16 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.gateway.Gateway;
-import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryGateway implements Gateway {
 
   public ArrayList<Profile> profiles = new ArrayList<>();
+  private List<String> contractTypes = new ArrayList<>();
 
   public InMemoryGateway() {
-    this.profiles = new ArrayList<>();
     profiles.add(new Profile("Haris", "skiadas", "Math", "tenured"));
     profiles.add(new Profile("Theresa", "wilson", "CS", "tenured"));
   }
