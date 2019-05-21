@@ -23,7 +23,7 @@ public class AddToBallotInteractor {
 
     try {
       ballot = ballotGateway.getBallot(request.getBallotID());
-      profile = profileGateway.getProfileFromUsername(request.getProfileUsername());
+      profile = profileGateway.getProfile(request.getProfileUsername());
       ballot.add(profile);
       ballotGateway.saveBallot(ballot);
     } catch (BallotGateway.InvalidBallotIDException e) {

@@ -26,7 +26,7 @@ public class EditProfileInteractor {
   }
 
   private Profile editProfileWithRequest(EditProfileRequest request) throws Exception {
-    Profile profile = gateway.getProfileFromUsername(request.username);
+    Profile profile = gateway.getProfile(request.username);
     Map changesMap = request.changes;
     for (Object key : changesMap.keySet()) {
       profile = updateProfileField(profile, changesMap, key);
@@ -74,7 +74,7 @@ public class EditProfileInteractor {
   }
 
   private boolean ifUsernameExists(String username) throws Exception {
-    if (gateway.getProfileFromUsername(username) != null){
+    if (gateway.getProfile(username) != null){
       return true;
     }
     return false;

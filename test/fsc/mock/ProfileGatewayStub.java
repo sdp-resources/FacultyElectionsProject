@@ -15,7 +15,7 @@ public class ProfileGatewayStub implements ProfileGateway {
     this.profiles = Arrays.asList(profiles);
   }
 
-  public Profile getProfileFromUsername(String username) throws InvalidProfileUsernameException {
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
     return profiles.get(0);
   }
 

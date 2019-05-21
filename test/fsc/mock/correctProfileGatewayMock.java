@@ -12,7 +12,7 @@ public class correctProfileGatewayMock implements ProfileGateway {
   }
   public static String submittedUsername;
 
-  public Profile getProfileFromUsername(String username) {
+  public Profile getProfile(String username) {
     submittedUsername = username;
     return testProfile;
   }

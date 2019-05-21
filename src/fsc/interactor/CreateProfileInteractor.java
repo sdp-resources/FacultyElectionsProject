@@ -18,7 +18,7 @@ public class CreateProfileInteractor {
 
   public Response execute(
         CreateProfileRequest request) {
-    try{ gateway.getProfileFromUsername(request.username);}
+    try{ gateway.getProfile(request.username);}
     catch (Exception e) {
       gateway.addProfile(makeProfileFromRequest(request));
       return new SuccessfullyAddedProfileResponse();

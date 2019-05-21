@@ -25,13 +25,13 @@ public class InMemoryGatewayTest {
   @Test
   public void addedProfile_canBeFound() {
     gateway.addProfile(profile);
-    Profile returnedProfile = gateway.getProfileFromUsername(USERNAME);
+    Profile returnedProfile = gateway.getProfile(USERNAME);
     assertEquals(profile, returnedProfile);
   }
 
   @Test(expected=RuntimeException.class)
   public void missingProfile_cannotBeFound() {
     gateway.addProfile(profile);
-    gateway.getProfileFromUsername(OTHER_USERNAME);
+    gateway.getProfile(OTHER_USERNAME);
   }
 }

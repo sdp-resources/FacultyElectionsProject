@@ -25,7 +25,7 @@ public class ViewProfileInteractor {
   private Response tryCreateProfileResponse() {
     Profile profile;
     try {
-      profile = gateway.getProfileFromUsername(userName);
+      profile = gateway.getProfile(userName);
     }
     catch (ProfileGateway.InvalidProfileUsernameException e)
     {

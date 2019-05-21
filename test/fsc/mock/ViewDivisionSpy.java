@@ -14,7 +14,7 @@ public class ViewDivisionSpy implements DivisionGateway {
     return divisionList;
   }
 
-  public void getDivisionWithName(String divisionName) throws Exception {
+  public void getDivision(String divisionName) throws Exception {
 
   }
 

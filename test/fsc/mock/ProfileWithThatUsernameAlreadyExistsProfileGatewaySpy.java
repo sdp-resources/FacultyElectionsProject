@@ -19,7 +19,7 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
     return null;
   }
 
-  public Profile getProfileFromUsername(String username) {
+  public Profile getProfile(String username) {
     submittedUsername = username;
     return dummyProfile;
   }
@@ -34,7 +34,4 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
 
   }
 
-  public Profile getProfile(String userName) {
-    return null;
-  }
 }

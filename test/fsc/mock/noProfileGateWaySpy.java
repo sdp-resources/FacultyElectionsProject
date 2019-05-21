@@ -7,7 +7,7 @@ import java.util.List;
 
 public class noProfileGateWaySpy implements ProfileGateway {
 
-  public Profile getProfileFromUsername(String username) {
+  public Profile getProfile(String username) {
     return null;
   }
 
@@ -29,7 +29,4 @@ public class noProfileGateWaySpy implements ProfileGateway {
 
   }
 
-  public Profile getProfile(String userName) {
-    return null;
-  }
 }

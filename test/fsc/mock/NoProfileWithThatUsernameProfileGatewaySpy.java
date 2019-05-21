@@ -20,7 +20,7 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     return null;
   }
 
-  public Profile getProfileFromUsername(String username) throws InvalidProfileUsernameException {
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
     submittedUsername = username;
     throw new InvalidProfileUsernameException();
   }

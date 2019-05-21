@@ -2,8 +2,6 @@ package fsc.mock;
 
 import fsc.entity.Profile;
 
-import java.util.List;
-
 public class ValidProfileGatewaySpy extends ProfileGatewayStub {
   public String usernameReceived;
   public Profile profileSent;
@@ -12,9 +10,9 @@ public class ValidProfileGatewaySpy extends ProfileGatewayStub {
     super(profiles);
   }
 
-  public Profile getProfileFromUsername(String username) throws InvalidProfileUsernameException {
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
     usernameReceived = username;
-    profileSent = super.getProfileFromUsername(username);
+    profileSent = super.getProfile(username);
     return profileSent;
   }
 }

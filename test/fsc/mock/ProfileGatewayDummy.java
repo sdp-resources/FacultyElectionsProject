@@ -6,7 +6,7 @@ import fsc.gateway.ProfileGateway;
 import java.util.List;
 
 public class ProfileGatewayDummy implements ProfileGateway {
-  public Profile getProfileFromUsername(String username) {
+  public Profile getProfile(String username) {
     return null;
   }
 

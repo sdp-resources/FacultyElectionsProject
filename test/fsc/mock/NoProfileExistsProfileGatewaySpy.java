@@ -7,7 +7,7 @@ import java.util.List;
 
 public class NoProfileExistsProfileGatewaySpy implements ProfileGateway {
 
-  public Profile getProfileFromUsername(String username) throws InvalidProfileUsernameException {
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
     throw new InvalidProfileUsernameException();
   }
 

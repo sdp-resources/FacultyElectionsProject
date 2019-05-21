@@ -17,7 +17,7 @@ public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements Divisio
     return null;
   }
 
-  public void getDivisionWithName(String divisionName) throws Exception {
+  public void getDivision(String divisionName) throws Exception {
     submittedDivisionName = divisionName;
     throw new Exception("No Division With That name Found");
   }

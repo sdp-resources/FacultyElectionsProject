@@ -18,14 +18,14 @@ public class VoteInteractor {
   }
 
   public Response executeGoodID(VoteRecordRequest request) throws Exception {
-    try {profileGateway.getProfileFromUsername(request.username);} catch (Exception e) {
+    try {profileGateway.getProfile(request.username);} catch (Exception e) {
       return new ProfileDoesNotExistResponse();
     }
       return new AddedNewVoteResponse();
     }
 
   public Response executeBadID(VoteRecordRequest request) throws Exception {
-    try {profileGateway.getProfileFromUsername(request.username);} catch (Exception e) {
+    try {profileGateway.getProfile(request.username);} catch (Exception e) {
       return new ProfileDoesNotExistResponse();
     }
       return  new AddedNewVoteResponse();

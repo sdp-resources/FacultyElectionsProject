@@ -51,7 +51,7 @@ public class EditProfileInteractorTest {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
-    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    Profile profile = fakegateway.getProfile("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
     assertNotEquals("Tenured", profile.getContract());
@@ -64,7 +64,7 @@ public class EditProfileInteractorTest {
     changes.put("Contract", "Sabbatical");
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
-    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    Profile profile = fakegateway.getProfile("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
     assertEquals("Bill Mill", profile.getName());
@@ -77,7 +77,7 @@ public class EditProfileInteractorTest {
     changes.put("Inactive", true);
     request = new EditProfileRequest("rossB12", changes);
     profileWasEditedGatewaySpy fakegateway = new profileWasEditedGatewaySpy();
-    Profile profile = fakegateway.getProfileFromUsername("rossB12");
+    Profile profile = fakegateway.getProfile("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
     assertFalse(profile.isActive());

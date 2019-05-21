@@ -58,7 +58,7 @@ public class BallotCreatorTest {
       allProfiles.add(profile3);
     }
 
-    public Profile getProfileFromUsername(String username) {
+    public Profile getProfile(String username) {
       return null;
     }
 

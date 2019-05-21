@@ -20,7 +20,7 @@ public class InMemoryGateway implements Gateway {
     return profiles;
   }
 
-  public Profile getProfileFromUsername(String username) {
+  public Profile getProfile(String username) {
     for (Profile currProfile : profiles) {
       if (isCorrectProfile(username, currProfile)) return currProfile;
     }
@@ -56,7 +56,7 @@ public class InMemoryGateway implements Gateway {
     return null;
   }
 
-  public void getDivisionWithName(String divisionName) throws Exception {
+  public void getDivision(String divisionName) throws Exception {
 
   }
 

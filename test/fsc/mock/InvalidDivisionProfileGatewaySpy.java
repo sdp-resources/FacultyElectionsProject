@@ -37,7 +37,7 @@ public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
 
   }
 
-  public Profile getProfileFromUsername(String userName) {
+  public Profile getProfile(String userName) {
     return null;
   }
 

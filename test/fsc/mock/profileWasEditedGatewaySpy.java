@@ -11,7 +11,7 @@ public class profileWasEditedGatewaySpy implements ProfileGateway {
 
   Profile providedProfile = new Profile("Bob Ross", "rossB12","Arts and Letters", "Tenured");
 
-  public Profile getProfileFromUsername(String username) {
+  public Profile getProfile(String username) {
     providedUsername = username;
     return providedProfile;
   }

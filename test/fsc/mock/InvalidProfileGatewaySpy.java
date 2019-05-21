@@ -7,7 +7,7 @@ public class InvalidProfileGatewaySpy extends ProfileGatewayStub{
   public String usernameReceived;
 
   @Override
-  public Profile getProfileFromUsername(String username) throws InvalidProfileUsernameException {
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
     usernameReceived = username;
     throw new ProfileGateway.InvalidProfileUsernameException();
   }
