@@ -1,15 +1,15 @@
 package fsc.interactor;
 
-import fsc.gateway.ContractsViewerGateway;
+import fsc.gateway.ContractTypeGateway;
 import fsc.request.ContractsViewerRequest;
 import fsc.response.ContractsViewerResponse;
 
 import java.util.List;
 
 public class ViewContractsInteractor {
-  private final ContractsViewerGateway gateway;
+  private final ContractTypeGateway gateway;
 
-  public ViewContractsInteractor(ContractsViewerGateway gateway){
+  public ViewContractsInteractor(ContractTypeGateway gateway){
     this.gateway = gateway;
   }
 
