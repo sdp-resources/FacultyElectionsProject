@@ -15,7 +15,7 @@ public class CreateElectionInteractor {
   public CreateElectionResponse execute(CreateElectionRequest request) {
     try{ gateway.getSeat(request.seatName); }
     catch (Exception e){
-      gateway.createElection(makeElectionFromRequest(request));
+      gateway.addElection(makeElectionFromRequest(request));
       return new SuccessfullyCreatedElectionResponse();
     }
     return new FailedToCreateElectionResponse();

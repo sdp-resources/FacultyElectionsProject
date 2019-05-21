@@ -6,6 +6,6 @@ import fsc.entity.Seat;
 
 public interface ElectionGateway {
   Seat getSeat(String seatName) throws InvalidSeatNameException;
-  void createElection(Election makeElectionFromRequest);
+  void addElection(Election election);
   class InvalidSeatNameException extends Exception {}
 }

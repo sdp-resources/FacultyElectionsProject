@@ -30,7 +30,7 @@ public class NoElectionWithThatSeatNameElectionGatewaySpy implements ElectionGat
     throw new InvalidSeatNameException();
   }
 
-  public void createElection(Election makeElectionFromRequest) {
+  public void addElection(Election makeElectionFromRequest) {
 
   }
 

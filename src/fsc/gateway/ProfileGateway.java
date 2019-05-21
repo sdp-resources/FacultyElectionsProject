@@ -9,7 +9,6 @@ public interface ProfileGateway {
   Profile getProfile(String username) throws InvalidProfileUsernameException;
   List<Profile> getAllProfiles();
   void addProfile(Profile profile);
-  boolean isValidDivision(String division);
   void saveProfile(Profile profile);
   class InvalidProfileUsernameException extends Exception {}
 }

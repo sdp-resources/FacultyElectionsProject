@@ -76,7 +76,7 @@ public class InMemoryGateway implements Gateway {
     return null;
   }
 
-  public void createElection(Election makeElectionFromRequest) {
+  public void addElection(Election makeElectionFromRequest) {
 
   }
 

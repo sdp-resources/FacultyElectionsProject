@@ -21,7 +21,7 @@ public class ElectionWithExistingSeatNameElectionGatewaySpy implements ElectionG
     return dummySeat;
   }
 
-  public void createElection(Election makeElectionFromRequest) {
+  public void addElection(Election makeElectionFromRequest) {
 
   }
 }
