@@ -1,12 +1,12 @@
 package gateway;
 
-import fsc.entity.Profile;
+import fsc.entity.*;
 import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway;
 
 import java.util.ArrayList;
 
-public class InMemoryGateway implements ProfileGateway, Gateway {
+public class InMemoryGateway implements Gateway {
 
   public ArrayList<Profile> profiles = new ArrayList<>();
 
@@ -50,5 +50,37 @@ public class InMemoryGateway implements ProfileGateway, Gateway {
 
   public void getContractTypeFromProfile(String contract_type) throws InvalidContractTypeException {
 
+  }
+
+  public ArrayList<String> getDivisionList() {
+    return null;
+  }
+
+  public void getDivisionWithName(String divisionName) throws Exception {
+
+  }
+
+  public void addDivision(String divsion) {
+
+  }
+
+  public Ballot getBallot(String id) throws InvalidBallotIDException {
+    return null;
+  }
+
+  public void saveBallot(Ballot ballot) throws CannotSaveBallotException {
+
+  }
+
+  public Seat getSeatFromSeatName(String seatName) throws InvalidSeatNameException {
+    return null;
+  }
+
+  public void createElection(Election makeElectionFromRequest) {
+
+  }
+
+  public VoteRecord getVoteRecord() {
+    return null;
   }
 }

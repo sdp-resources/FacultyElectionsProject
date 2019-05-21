@@ -29,30 +29,4 @@ public class ElectionCreatorTest {
     assertEquals("a", election.getSeat());
     assertEquals("b", election.getCommittee());
   }
-
-
-
-
-
-
-
-    public void addProfile(Profile profile) { }
-
-    public boolean isValidDivision(String division) {
-      return false;
-    }
-
-    public void saveProfile(Profile profile) {
-
-    }
-
-    public String addContractType(String string) {
-      return null;
-    }
-
-    public void getContractTypeFromProfile(String contract_type) {
-
-    }
-  }
-
 }
