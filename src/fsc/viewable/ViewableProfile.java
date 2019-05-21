@@ -17,6 +17,11 @@ public class ViewableProfile {
     this.contract = contract;
   }
 
+  public String getName() { return name; }
+  public String getUsername() { return username; }
+  public String getDivision() { return division; }
+  public String getContract() { return contract; }
+
   public static ViewableProfile from(Profile profile) {
     return new ViewableProfile(profile.getName(), profile.getUsername(),
                                profile.getDivision(), profile.getContract());
