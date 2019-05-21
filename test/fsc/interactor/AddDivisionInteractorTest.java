@@ -1,7 +1,6 @@
 package fsc.interactor;
 
 import fsc.gateway.DivisionGateway;
-import fsc.mock.DivisionWithThatNameAlreadyExistsGatewaySpy;
 import fsc.mock.MissingDivisionGatewaySpy;
 import fsc.mock.MissingDivisionGatewaySpy;
 import fsc.mock.ExistingDivisionGatewaySpy;
@@ -16,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AddDivisionInteractorTest {
-  public DivisionGateway testGateway;
   public AddDivisionRequest request;
   public AddDivisionInteractor interactor;
 
@@ -37,14 +35,10 @@ public class AddDivisionInteractorTest {
 
   @Test
   public void testAlreadyExistsExecute() throws Exception {
-    DivisionWithThatNameAlreadyExistsGatewaySpy testGateway =
-          new DivisionWithThatNameAlreadyExistsGatewaySpy();
-    interactor = new AddDivisionInteractor(testGateway);
-    Response response = AddDivisionInteractor.execute(request);
     ExistingDivisionGatewaySpy testGateway =
           new ExistingDivisionGatewaySpy();
-    interactor = new DivisionInteractor(testGateway);
-    Response response = DivisionInteractor.execute(request);
+    interactor = new AddDivisionInteractor(testGateway);
+    Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
     assertTrue(response instanceof FailedtoAddDivision);
   }
