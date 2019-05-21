@@ -17,16 +17,16 @@ public class noProfileGateWaySpy implements ProfileGateway {
 
   public void addProfile(Profile profile) { }
 
+  public void save() {
+
+  }
+
   public void clearProfileList() {
 
   }
 
   public boolean isValidDivision(String division) {
     return false;
-  }
-
-  public void saveProfile(Profile profile) {
-
   }
 
 }

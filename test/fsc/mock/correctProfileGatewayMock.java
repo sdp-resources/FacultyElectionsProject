@@ -27,7 +27,7 @@ public class correctProfileGatewayMock implements ProfileGateway {
     return false;
   }
 
-  public void saveProfile(Profile profile) {
+  public void save() {
 
   }
 }

@@ -27,6 +27,10 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
 
   public void addProfile(Profile profile) { }
 
+  public void save() {
+
+  }
+
   public List<Profile> getAllProfiles() {
     return null;
   }
@@ -39,8 +43,5 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     return true;
   }
 
-  public void saveProfile(Profile profile) {
-
-  }
 }
 

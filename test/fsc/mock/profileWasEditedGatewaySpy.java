@@ -26,8 +26,8 @@ public class profileWasEditedGatewaySpy implements ProfileGateway {
     return false;
   }
 
-  public void saveProfile(Profile profile) {
+  public void save()
+  {
     profileHasBeenEdited = true;
-    providedProfile = profile;
   }
 }

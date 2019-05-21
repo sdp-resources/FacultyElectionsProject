@@ -3,7 +3,6 @@ package fsc.mock;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,12 +24,12 @@ public class ProfileGatewayStub implements ProfileGateway {
 
   public void addProfile(Profile profile) { }
 
-  public boolean isValidDivision(String division) {
-    return false;
+  public void save() {
+
   }
 
-  public void saveProfile(fsc.entity.Profile profile) {
-
+  public boolean isValidDivision(String division) {
+    return false;
   }
 
   public Profile getAProfile() {

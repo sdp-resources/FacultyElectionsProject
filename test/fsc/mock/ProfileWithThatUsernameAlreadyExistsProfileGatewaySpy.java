@@ -26,12 +26,12 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
 
   public void addProfile(Profile profile) { }
 
-  public boolean isValidDivision(String division) {
-    return true;
+  public void save() {
+
   }
 
-  public void saveProfile(Profile profile) {
-
+  public boolean isValidDivision(String division) {
+    return true;
   }
 
 }

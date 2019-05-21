@@ -19,7 +19,7 @@ public class EditProfileInteractor {
   public Response execute(EditProfileRequest request) throws Exception {
     if(ifUsernameExists(request.username)){
       Profile profile = editProfileWithRequest(request);
-      updateProfileInGateway(profile);
+      updateProfileInGateway();
       return new SuccessfullyEditedResponse();
     }
     return new FailedSearchResponse();
@@ -80,7 +80,7 @@ public class EditProfileInteractor {
     return false;
   }
 
-  private void updateProfileInGateway(Profile profile) {
-    gateway.saveProfile(profile);
+  private void updateProfileInGateway() {
+    gateway.save();
   }
 }
