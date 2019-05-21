@@ -19,7 +19,7 @@ public class NoElectionWithThatSeatNameElectionGatewaySpy implements ElectionGat
     return seats;
   }
 
-  public Seat getSeatFromSeatName(String seatName) throws InvalidSeatNameException {
+  public Seat getSeat(String seatName) throws InvalidSeatNameException {
     submittedSeatName = seatName;
     for (int i = 0; i <= seats.size(); i++){
       if (seats.get(i).toString().equals(seatName)) {

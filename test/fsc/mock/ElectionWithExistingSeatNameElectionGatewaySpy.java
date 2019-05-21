@@ -16,7 +16,7 @@ public class ElectionWithExistingSeatNameElectionGatewaySpy implements ElectionG
     this.seats = seats;
   }
 
-  public Seat getSeatFromSeatName(String seatName) throws InvalidSeatNameException {
+  public Seat getSeat(String seatName) throws InvalidSeatNameException {
     submittedSeatName = seatName;
     return dummySeat;
   }

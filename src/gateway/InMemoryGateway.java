@@ -72,7 +72,7 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public Seat getSeatFromSeatName(String seatName) throws InvalidSeatNameException {
+  public Seat getSeat(String seatName) throws InvalidSeatNameException {
     return null;
   }
 

@@ -13,7 +13,7 @@ public class CreateElectionInteractor {
   }
 
   public CreateElectionResponse execute(CreateElectionRequest request) {
-    try{ gateway.getSeatFromSeatName(request.seatName); }
+    try{ gateway.getSeat(request.seatName); }
     catch (Exception e){
       gateway.createElection(makeElectionFromRequest(request));
       return new SuccessfullyCreatedElectionResponse();
