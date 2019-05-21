@@ -10,7 +10,7 @@ public class ViewDivisionSpy implements DivisionGateway {
 
 
 
-  public ArrayList<String> getDivisionList() {
+  public ArrayList<String> getAllDivisions() {
     return divisionList;
   }
 

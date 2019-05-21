@@ -45,7 +45,7 @@ public class ViewDivisionsTest {
     response = interactor.execute(request);
     gateway.addDivision("Banana");
     gateway.addDivision("Tree");
-    assertEquals(testList, gateway.getDivisionList());
+    assertEquals(testList, gateway.getAllDivisions());
   }
 
 }

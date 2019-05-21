@@ -53,8 +53,12 @@ public class InMemoryGateway implements Gateway {
 
   }
 
-  public ArrayList<String> getDivisionList() {
+  public ArrayList<String> getAllDivisions() {
     return null;
+  }
+
+  public void getDivisionWithName(String divisionName) throws Exception {
+
   }
 
   public void getDivision(String divisionName) throws Exception {

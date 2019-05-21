@@ -1,10 +1,10 @@
 package fsc.gateway;
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DivisionGateway {
-  ArrayList<String> getDivisionList();
+  List<String> getAllDivisions();
   public String getDivision(String divisionName) throws Exception;
   public void addDivision(String divsion);
   public Boolean hasDivision(String divisionName);

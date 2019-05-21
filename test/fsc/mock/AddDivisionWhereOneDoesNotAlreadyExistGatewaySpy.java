@@ -13,7 +13,7 @@ public class AddDivisionWhereOneDoesNotAlreadyExistGatewaySpy implements Divisio
     this.divisionList = null;
   }
 
-  public ArrayList<String> getDivisionList() {
+  public ArrayList<String> getAllDivisions() {
     return null;
   }
 

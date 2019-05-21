@@ -5,6 +5,7 @@ import fsc.entity.Division;
 import fsc.gateway.DivisionGateway;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGateway {
   ArrayList<Division> divisionList;
@@ -14,7 +15,7 @@ public class DivisionWithThatNameAlreadyExistsGatewaySpy implements DivisionGate
     this.divisionList = null;
   }
 
-  public ArrayList<String> getDivisionList() {
+  public List<String> getAllDivisions() {
     return null;
   }
 
