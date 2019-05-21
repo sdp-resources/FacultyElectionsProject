@@ -32,13 +32,12 @@ public class VoteInteractor {
     }
 
   private VoteRecord createVoteObject(VoteRecordRequest request) throws ProfileGateway.InvalidProfileUsernameException {
-    String username = request.username;
     Date date = request.date;
     String vote = request.vote;
     int electionID = request.electionID;
-    Profile profile = profileGateway.getProfile(username);
+    Profile profile = profileGateway.getProfile(request.username);
 
-    return new VoteRecord(profile,date, vote,electionID);
+    return new VoteRecord(profile,date, vote, electionID);
   }
 
 }
