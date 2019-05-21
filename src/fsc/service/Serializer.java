@@ -44,4 +44,8 @@ public class Serializer {
     String description = jsonObject.getString("description");
     return new Committee(name, description);
   }
+
+  public String seatToString(Seat seat) {
+    return null;
+  }
 }

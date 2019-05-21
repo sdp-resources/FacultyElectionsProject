@@ -15,7 +15,7 @@ public class Committee {
 
   public Seat getSeat(String seatName) throws Exception {
     for (int i = 0; i < seats.size(); i++) {
-      if (seats.get(i).getSeatName().equals(seatName)) {
+      if (seats.get(i).getName().equals(seatName)) {
         return seats.get(i);
       }
     }

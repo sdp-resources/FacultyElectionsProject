@@ -2,6 +2,9 @@ package fsc.service;
 
 import fsc.entity.Committee;
 import fsc.entity.Profile;
+import fsc.entity.Seat;
+import fsc.entity.query.Query;
+import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +20,7 @@ public class SerializerTest {
   }
 
   @Test
-  public void profileToStringGivesExpectedString()
+  public void profileToString()
   {
     String name = "Joe Average";
     String username = "averagej";
@@ -76,7 +79,7 @@ public class SerializerTest {
   }
 
   @Test
-  public void committeeToStringGivesExpectedResult()
+  public void committeeToString()
   {
     String name = "Steering";
     String description = "Drives the car";
@@ -90,7 +93,7 @@ public class SerializerTest {
   }
 
   @Test
-  public void stringToCommitteeGivesExpectedResult()
+  public void stringToCommittee()
   {
     String name = "Steering";
     String description = "Drives the car";
