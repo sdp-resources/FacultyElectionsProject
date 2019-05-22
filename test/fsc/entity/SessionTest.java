@@ -3,28 +3,37 @@ package fsc.entity;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import static junit.framework.TestCase.*;
+import static org.junit.Assert.assertFalse;
 
 public class SessionTest {
   Session session;
 
-  @Before
-  public void setup() {
-    session = new Session("Administrator","admin", "random-string");
+  @Test
+  public void javaDatesWeird()
+  {
+    assertFalse(Calendar.getInstance() == Calendar.getInstance());
+    assertFalse(new GregorianCalendar() == new GregorianCalendar());
   }
 
   @Test
-  public void canGetSessionToken() {
-    assertEquals("random-string",session.getToken());
-  }
+  public void canCreateSession()
+  {
+    String role = "Administrator";
+    String username = "admin";
+    String token = "random-string";
 
-  @Test
-  public void canGetSessionUsername() {
-    assertEquals("admin",session.getUsername());
-  }
+    Calendar expirationTime = Calendar.getInstance();
+    expirationTime.add(Calendar.MINUTE, 10);
 
-  @Test
-  public void canGetSessionRole() {
-    assertEquals("Administrator",session.getRole());
+    session = new Session(role, username, token, expirationTime);
+
+    assertEquals(token, session.getToken());
+    assertEquals(username, session.getUsername());
+    assertEquals(role, session.getRole());
+    assertEquals(expirationTime, session.getExpirationTime());
   }
 }
