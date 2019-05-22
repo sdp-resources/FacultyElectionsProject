@@ -1,3 +1,3 @@
 package fsc.response;
 
-public class viewDTSResponse {}
+public class viewDTSResponse implements Response {}
