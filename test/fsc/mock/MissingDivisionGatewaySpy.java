@@ -17,10 +17,6 @@ public class MissingDivisionGatewaySpy implements DivisionGateway {
     return null;
   }
 
-  public String getDivision(String divisionName) throws Exception {
-    throw new Exception("No Division With That name Found");
-  }
-
   public void addDivision(String division) {
   }
 

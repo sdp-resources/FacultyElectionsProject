@@ -14,10 +14,6 @@ public class ViewDivisionStub implements DivisionGateway {
     return divisionList;
   }
 
-  public String getDivision(String divisionName) throws Exception {
-    return null;
-  }
-
   public void addDivision(String division) {
     divisionList.add(division);
 

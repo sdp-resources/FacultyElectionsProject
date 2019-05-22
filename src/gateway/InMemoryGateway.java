@@ -53,10 +53,6 @@ public class InMemoryGateway implements Gateway {
     divisions.add(division);
   }
 
-  public String getDivision(String divisionName) throws Exception {
-    return null;
-  }
-
   public Boolean hasDivision(String divisionName) {
     return divisions.contains(divisionName);
   }

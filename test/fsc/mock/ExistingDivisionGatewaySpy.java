@@ -19,10 +19,6 @@ public class ExistingDivisionGatewaySpy implements DivisionGateway {
     return null;
   }
 
-  public String getDivision(String divisionName) throws Exception {
-    return divisionName;
-  }
-
   public void addDivision(String division) {
   }
 
