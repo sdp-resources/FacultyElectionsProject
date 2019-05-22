@@ -12,10 +12,7 @@ public class CommitteeGatewaySpy implements CommitteeGateway {
   public static String submittedCommitteeName;
 
   public CommitteeGatewaySpy(){
-    committees.add(new Committee("aaaa","aaaa"));
-    committees.add(new Committee("bbbb","bbbb"));
-    committees.add(new Committee("cccc","cccc"));
-    committees.add(new Committee("dddd","dddd"));
+
   }
 
   public Committee getCommitteeFromCommitteeName(String name) throws NoCommitteeWithThatNameException {
