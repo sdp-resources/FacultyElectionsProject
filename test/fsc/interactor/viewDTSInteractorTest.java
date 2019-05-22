@@ -10,7 +10,7 @@ public class viewDTSInteractorTest {
   @Test
   public void canGetDTSFormforUser() throws ErrorResponse {
     String username = "a";
-    Object electionID = 1;
+    String electionID = "1";
     ViewDTSRequest request = new ViewDTSRequest(username, electionID);
     viewDTSGateWayDummy gateway = new viewDTSGateWayDummy();
     viewDTSInteractor interactor =  new viewDTSInteractor(gateway);
