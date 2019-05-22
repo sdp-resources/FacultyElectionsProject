@@ -2,7 +2,7 @@ package fsc.request;
 
 import fsc.response.Response;
 
-public class RemoveFromBallotRequest implements Response {
+public class RemoveFromBallotRequest extends Request {
   private final String profileUsername;
   private final String ballotID;
 

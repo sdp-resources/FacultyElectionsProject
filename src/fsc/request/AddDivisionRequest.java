@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class AddDivisionRequest {
+public class AddDivisionRequest extends Request {
 
   public final String name;
 

@@ -1,4 +1,4 @@
 package fsc.request;
 
-public class ContractsViewerRequest {
+public class ContractsViewerRequest extends Request {
 }

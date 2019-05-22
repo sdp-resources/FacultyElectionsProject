@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class LoginRequest {
+public class LoginRequest extends Request {
   public final String username;
   public final String password;
 

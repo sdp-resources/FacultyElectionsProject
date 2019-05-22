@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class CreateProfileRequest {
+public class CreateProfileRequest extends Request {
   public final String name;
   public final String username;
   public final String division;

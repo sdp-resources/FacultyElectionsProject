@@ -2,7 +2,7 @@ package fsc.request;
 
 import java.util.Map;
 
-public class EditCommitteeRequest {
+public class EditCommitteeRequest extends Request {
   public String name;
   public Map<String, Object> changes;
 

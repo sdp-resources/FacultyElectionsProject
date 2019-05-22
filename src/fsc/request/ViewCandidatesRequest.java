@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class ViewCandidatesRequest {
+public class ViewCandidatesRequest extends Request {
   public String electionID;
 
   public ViewCandidatesRequest(String electionID) {

@@ -1,3 +1,3 @@
 package fsc.request;
 
-public class ViewProfilesListRequest {}
+public class ViewProfilesListRequest extends Request {}

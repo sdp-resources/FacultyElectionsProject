@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class CreateElectionRequest {
+public class CreateElectionRequest extends Request {
   public String seatName;
   public String committeeName;
   public CreateElectionRequest(String seat, String committee){

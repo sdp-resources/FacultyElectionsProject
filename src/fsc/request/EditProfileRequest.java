@@ -2,7 +2,7 @@ package fsc.request;
 
 import java.util.Map;
 
-public class EditProfileRequest {
+public class EditProfileRequest extends Request {
 
   public final String username;
   public final Map<String, Object> changes;

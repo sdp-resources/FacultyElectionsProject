@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class viewDTSRequest {
+public class viewDTSRequest extends Request {
   public String username;
   public Object electionID;
 

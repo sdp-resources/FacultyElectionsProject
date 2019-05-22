@@ -2,7 +2,7 @@ package fsc.request;
 
 import java.util.Date;
 
-public class VoteRecordRequest {
+public class VoteRecordRequest extends Request {
   public final String username;
   public final Date date;
   public final String vote;

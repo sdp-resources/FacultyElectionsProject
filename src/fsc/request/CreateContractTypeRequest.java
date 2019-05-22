@@ -1,6 +1,6 @@
 package fsc.request;
 
-public class CreateContractTypeRequest {
+public class CreateContractTypeRequest extends Request {
 
   public final String contract_type;
 
