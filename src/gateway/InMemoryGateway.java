@@ -95,6 +95,7 @@ public class InMemoryGateway implements Gateway {
     JSONObject json = readJson(file);
     addContractTypes(gateway, json);
     addDivisions(gateway, json);
+    addProfiles(gateway, json);
     return gateway;
   }
 
@@ -116,5 +117,18 @@ public class InMemoryGateway implements Gateway {
     }
   }
 
+  private static void addProfiles(InMemoryGateway gateway, JSONObject json) {
+    for (Object s : json.getJSONArray("profiles")) {
+      gateway.addProfile(makeProfile((JSONObject) s));
+    }
 
+  }
+
+  private static Profile makeProfile(JSONObject json) {
+    String name = json.getString("name");
+    String username = json.getString("username");
+    String division = json.getString("division");
+    String contractType = json.getString("contract");
+    return new Profile(name, username, division, contractType);
+  }
 }

@@ -4,5 +4,25 @@
   ],
   "divisions": [
     "Arts and Letters", "Humanities", "Natural Sciences", "Social Sciences"
+  ],
+  "profiles": [
+    {
+      "name": "Haris Skiadas",
+      "username": "skiadas",
+      "division": "Natural Sciences",
+      "contract": "tenured"
+    },
+    {
+      "name": "Theresa Wilson",
+      "username": "wilsont",
+      "division": "Natural Sciences",
+      "contract": "tenure-track"
+    },
+    {
+      "name": "Kate Johnson",
+      "username": "johnsonk",
+      "division": "Humanities",
+      "contract": "tenured"
+    }
   ]
 }
