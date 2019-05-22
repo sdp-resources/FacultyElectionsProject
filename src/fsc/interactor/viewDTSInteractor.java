@@ -1,10 +1,10 @@
 package fsc.interactor;
 
+import fsc.entity.Ballot;
+import fsc.entity.Profile;
 import fsc.gateway.Gateway;
 import fsc.request.viewDTSRequest;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
-import fsc.response.viewDTSResponse;
+import fsc.response.*;
 
 public class viewDTSInteractor {
 
@@ -14,8 +14,16 @@ public class viewDTSInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(viewDTSRequest request) {
-    Response response = new SuccessResponse();
-    return response;
+  public Response execute(viewDTSRequest request) throws ErrorResponse {
+    try{
+      Profile profile = gateway.getProfile(request.username);
+      Ballot ballot = gateway.getBallot(request.electionID.toString());
+      ballot.contains(profile);
+    }
+    catch(Exception e){
+      throw new ErrorResponse("No Profile Exist");
+    }
+
+    return new SuccessResponse();
   }
 }

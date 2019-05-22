@@ -2,9 +2,9 @@ package fsc.request;
 
 public class viewDTSRequest {
   public String username;
-  public Integer electionID;
+  public Object electionID;
 
-  public viewDTSRequest(String username, Integer electionID){
+  public viewDTSRequest(String username, Object electionID){
     this.username = username;
     this.electionID = electionID;
   }

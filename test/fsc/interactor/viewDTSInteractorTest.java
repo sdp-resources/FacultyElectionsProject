@@ -2,23 +2,19 @@ package fsc.interactor;
 
 import fsc.mock.viewDTSGateWayDummy;
 import fsc.request.viewDTSRequest;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
-import fsc.response.viewDTSResponse;
+import fsc.response.*;
 import org.junit.Test;
 
 public class viewDTSInteractorTest {
 
   @Test
-  public void canGetDTSFormforUser(){
+  public void canGetDTSFormforUser() throws ErrorResponse {
     String username = "a";
-    Integer electionID = 1;
+    Object electionID = 1;
     viewDTSRequest request = new viewDTSRequest(username, electionID);
     viewDTSGateWayDummy gateway = new viewDTSGateWayDummy();
     viewDTSInteractor interactor =  new viewDTSInteractor(gateway);
     Response response = interactor.execute(request);
-
-    assert(response instanceof SuccessResponse);
   }
 
 }
