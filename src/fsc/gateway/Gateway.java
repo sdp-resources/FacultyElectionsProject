@@ -1,7 +1,7 @@
 package fsc.gateway;
 
 public interface Gateway extends ProfileGateway, ContractTypeGateway, DivisionGateway,
-                                       BallotGateway, ElectionGateway, VoteRecordGateway,
+                                       BallotGateway, ElectionGateway,
                                        CommitteeGateway {
 
 }

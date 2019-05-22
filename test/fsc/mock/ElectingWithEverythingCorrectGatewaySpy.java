@@ -1,8 +1,6 @@
 package fsc.mock;
 
-import fsc.entity.Committee;
-import fsc.entity.Election;
-import fsc.entity.Seat;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.interactor.CreateElectionInteractor;
 import fsc.request.CreateElectionRequest;
@@ -41,6 +39,10 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
   public void addElection(Election election) {
     this.addedElection = election;
     addedElection.setID(1);
+  }
+
+  public void recordVote(VoteRecord voteRecord) {
+
   }
 
   public void createElection(Election makeElectionFromRequest) {

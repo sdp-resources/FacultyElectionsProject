@@ -1,8 +1,8 @@
 package fsc.gateway;
 
-import fsc.entity.Committee;
-import fsc.entity.Election;
-import fsc.entity.Seat;
+import fsc.entity.VoteRecord;
+
+import fsc.entity.*;
 
 public interface ElectionGateway {
   Committee getCommitteeFromCommitteeName(String committeeName) throws InvalidCommitteeNameException;
@@ -10,5 +10,7 @@ public interface ElectionGateway {
   class InvalidCommitteeNameException extends Exception {}
   void save();
   void addElection(Election election);
+
+    void recordVote(VoteRecord voteRecord);
 
 }

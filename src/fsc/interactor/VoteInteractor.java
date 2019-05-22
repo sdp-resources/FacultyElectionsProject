@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.VoteRecord;
 import fsc.gateway.ProfileGateway;
-import fsc.gateway.VoteRecordGateway;
+import fsc.gateway.ElectionGateway;
 import fsc.response.ProfileDoesNotExistResponse;
 import fsc.request.VoteRecordRequest;
 import fsc.response.Response;
@@ -12,9 +12,9 @@ import fsc.response.AddedNewVoteResponse;
 public class VoteInteractor {
 
   private final ProfileGateway profileGateway;
-  VoteRecordGateway voteGateway;
+  ElectionGateway voteGateway;
 
-  public VoteInteractor(VoteRecordGateway voteRecordGateway, ProfileGateway profileGateway) {
+  public VoteInteractor(ElectionGateway voteRecordGateway, ProfileGateway profileGateway) {
     this.voteGateway = voteRecordGateway;
     this.profileGateway = profileGateway;
   }
