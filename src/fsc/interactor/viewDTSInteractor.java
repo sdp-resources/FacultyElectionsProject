@@ -3,7 +3,7 @@ package fsc.interactor;
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.Gateway;
-import fsc.request.viewDTSRequest;
+import fsc.request.ViewDTSRequest;
 import fsc.response.*;
 
 public class viewDTSInteractor {
@@ -14,7 +14,7 @@ public class viewDTSInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(viewDTSRequest request) throws ErrorResponse {
+  public Response execute(ViewDTSRequest request) throws ErrorResponse {
     try{
       Profile profile = gateway.getProfile(request.username);
       Ballot ballot = gateway.getBallot(request.electionID.toString());
