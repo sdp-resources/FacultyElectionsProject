@@ -9,6 +9,7 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
   public static ArrayList<Profile> profileList;
   public static String submittedUsername;
   public static Profile dummyProfile = new Profile("a","b","c","d");
+  public Profile profileSent;
 
   public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(){
     this.profileList = null;
@@ -21,7 +22,8 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
 
   public Profile getProfile(String username) {
     submittedUsername = username;
-    return dummyProfile;
+    profileSent = dummyProfile;
+    return profileSent;
   }
 
   public void addProfile(Profile profile) { }

@@ -28,13 +28,13 @@ public class ViewProfileInteractorTest {
     ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
     Context.instance.profileToViewableProfileConverter = converterSpy;
     Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
-    ValidProfileGatewaySpy gatewaySpy = new ValidProfileGatewaySpy(profile);
+    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
 
     ProfileViewerRequest request = new ProfileViewerRequest(profile.getUsername());
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     ViewProfileResponse response = (ViewProfileResponse) viewInteractor.execute(request);
 
-    assertEquals(request.username, gatewaySpy.usernameReceived);
+    assertEquals(request.username, gatewaySpy.submittedUsername);
     assertEquals(gatewaySpy.profileSent, converterSpy.profileReceived);
     assertEquals(response.viewableProfile,
                  Context.instance.profileToViewableProfileConverter.convert(converterSpy.profileReceived));
