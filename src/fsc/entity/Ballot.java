@@ -7,6 +7,16 @@ public class Ballot extends AbstractList<Profile> {
 
   private AbstractList<Profile> profiles = new ArrayList<>();
 
+  public String ballotID;
+
+  public String getBallotID(String ballotID) {
+    return ballotID;
+  }
+
+  public void setBallotID(String ballotID) {
+    this.ballotID = ballotID;
+  }
+
   public int size() {
     return profiles.size();
   }
