@@ -7,30 +7,43 @@ import java.util.ArrayList;
 
 public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGateway {
   public static ArrayList<Profile> profileList;
-  public static String submittedUsername;
-  public static Profile dummyProfile = new Profile("a","b","c","d");
+  public static String providedUsername;
+  public static Profile dummyProfile = new Profile("a", "b", "c", "d");
   public Profile profileSent;
+  Profile providedProfile;
+  static public Boolean profileHasBeenEdited = false;
 
-  public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(){
+
+
+  public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(Profile profile) {
+    this.providedProfile = profile;
     this.profileList = null;
   }
-
 
   public ArrayList<Profile> getAllProfiles() {
     return null;
   }
 
   public Profile getProfile(String username) {
-    submittedUsername = username;
+    providedUsername = username;
     profileSent = dummyProfile;
     return profileSent;
   }
 
-  public void addProfile(Profile profile) { }
-
-  public void save() {
+  public void addProfile(Profile profile) {
 
   }
 
+  public void save() {
+    profileHasBeenEdited = true;
+  }
 
 }
+
+    //public boolean isValidDivision(String division) {
+    //return false;
+    //}
+
+    //public void saveProfile(Profile profile) {
+
+

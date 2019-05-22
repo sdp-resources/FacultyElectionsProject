@@ -17,6 +17,8 @@ import static org.junit.Assert.assertTrue;
 
 public class ViewProfileInteractorTest {
 
+  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+
   @Before
   public void setup()
   {
@@ -28,13 +30,13 @@ public class ViewProfileInteractorTest {
     ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
     Context.instance.profileToViewableProfileConverter = converterSpy;
     Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
+    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
 
     ProfileViewerRequest request = new ProfileViewerRequest(profile.getUsername());
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     ViewProfileResponse response = (ViewProfileResponse) viewInteractor.execute(request);
 
-    assertEquals(request.username, gatewaySpy.submittedUsername);
+    assertEquals(request.username, gatewaySpy.providedUsername);
     assertEquals(gatewaySpy.profileSent, converterSpy.profileReceived);
     assertEquals(response.viewableProfile,
                  Context.instance.profileToViewableProfileConverter.convert(converterSpy.profileReceived));

@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.mock.*;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
@@ -18,6 +19,7 @@ public class CreateProfileInteractorTest {
   CreateProfileRequest request;
   CreateProfileInteractor interactor;
   Response response;
+  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Before
   public void setup() {
@@ -35,7 +37,7 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testWrongUsernameExecute() throws Exception {
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy();
+    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertTrue(response instanceof FailedAddedProfileResponse);

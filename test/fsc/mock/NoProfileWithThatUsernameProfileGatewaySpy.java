@@ -26,7 +26,6 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   public void addProfile(Profile profile) { }
 
   public void save() {
-
   }
 
   public void saveProfile(Profile profile) {

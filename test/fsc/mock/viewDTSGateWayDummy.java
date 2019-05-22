@@ -77,6 +77,5 @@ public class viewDTSGateWayDummy implements Gateway {
   }
 
   public void save() {
-
   }
 }
