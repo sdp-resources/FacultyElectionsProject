@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.mock.*;
-import fsc.request.ProfileViewerRequest;
+import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.ViewProfileResponse;
 
@@ -32,7 +32,7 @@ public class ViewProfileInteractorTest {
     Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
 
-    ProfileViewerRequest request = new ProfileViewerRequest(profile.getUsername());
+    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     ViewProfileResponse response = (ViewProfileResponse) viewInteractor.execute(request);
 
@@ -50,7 +50,7 @@ public class ViewProfileInteractorTest {
 
     InvalidProfileGatewaySpy gatewaySpy = new InvalidProfileGatewaySpy();
 
-    ProfileViewerRequest request = new ProfileViewerRequest("BoogieA14");
+    ViewProfileRequest request = new ViewProfileRequest("BoogieA14");
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     ErrorResponse response = (ErrorResponse) viewInteractor.execute(request);
 
