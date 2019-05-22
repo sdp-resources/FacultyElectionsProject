@@ -1,12 +1,12 @@
 package fsc.service.authorizer;
 
 import fsc.entity.Authorization;
-import fsc.entity.NotAuthorized;
+import fsc.entity.NotAuthorizedAuthorization;
 
 public class RejectingAuthorizerStub extends AuthorizerDummy {
   @Override
   public Authorization authorize(String username, String password)
   {
-    return new NotAuthorized();
+    return new NotAuthorizedAuthorization();
   }
 }

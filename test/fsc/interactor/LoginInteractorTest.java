@@ -2,6 +2,7 @@ package fsc.interactor;
 
 import fsc.gateway.SessionGateway;
 import fsc.mock.gateway.session.SessionGatewayDummy;
+import fsc.mock.gateway.session.SessionGatewaySpy;
 import fsc.request.LoginRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.LoginResponse;
@@ -12,6 +13,7 @@ import fsc.service.authorizer.RejectingAuthorizerStub;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginInteractorTest {
   @Test
@@ -35,16 +37,18 @@ public class LoginInteractorTest {
     String password = "1234";
     LoginRequest request =  new LoginRequest(username,password);
 
-
     String expectedRole = "Admin";
     String expectedToken = "jlksdfgj";
     Authorizer authorizer = new AcceptingAuthorizerStub(expectedRole, expectedToken);
-    SessionGateway sessionGateway = new SessionGatewayDummy();
+    SessionGatewaySpy sessionGateway = new SessionGatewaySpy();
     LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer);
 
     LoginResponse response = (LoginResponse) loginInteractor.execute(request);
 
     assertEquals(expectedRole, response.role);
     assertEquals(expectedToken, response.token);
+    assertEquals(sessionGateway.addedSession.getToken(), response.token);
+    assertEquals(sessionGateway.addedSession.getRole(), response.role);
+    assertTrue(sessionGateway.saveCalled);
   }
 }

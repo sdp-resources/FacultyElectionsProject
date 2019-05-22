@@ -2,7 +2,7 @@ package fsc.entity;
 
 import java.util.Calendar;
 
-public class Authorized implements  Authorization
+public class AuthorizedAuthorization implements  Authorization
 {
   public boolean isAuthorized() { return true; }
   public final String username;
@@ -10,7 +10,7 @@ public class Authorized implements  Authorization
   public final String role;
   public final Calendar expirationTime;
 
-  public Authorized(String role, String username, String token, Calendar expirationTime)
+  public AuthorizedAuthorization(String role, String username, String token, Calendar expirationTime)
   {
     this.role = role;
     this.username = username;
