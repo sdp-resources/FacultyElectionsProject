@@ -15,7 +15,7 @@ public class ExistingDivisionGatewaySpy implements DivisionGateway {
     this.divisionList = null;
   }
 
-  public List<String> getAllDivisions() {
+  public List<String> getAvailableDivisions() {
     return null;
   }
 

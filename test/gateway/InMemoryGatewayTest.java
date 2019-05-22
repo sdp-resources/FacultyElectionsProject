@@ -50,13 +50,13 @@ public class InMemoryGatewayTest {
   @Test
   public void addedContractTypes_appearInContractTypeList() {
     gateway.addContractType(A_CONTRACT_TYPE);
-    assertThat(gateway.getContractTypes(), hasItem(A_CONTRACT_TYPE));
+    assertThat(gateway.getAvailableContractTypes(), hasItem(A_CONTRACT_TYPE));
   }
 
   @Test
   public void addedDivisions_appearInDivisionList() {
     gateway.addDivision(NATURAL_SCIENCES_DIVISION);
-    assertThat(gateway.getAllDivisions(), hasItem(NATURAL_SCIENCES_DIVISION));
+    assertThat(gateway.getAvailableDivisions(), hasItem(NATURAL_SCIENCES_DIVISION));
     assertThat(gateway.hasDivision(NATURAL_SCIENCES_DIVISION), is(true));
   }
 }

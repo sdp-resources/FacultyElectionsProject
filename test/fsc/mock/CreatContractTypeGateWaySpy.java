@@ -23,7 +23,7 @@ public class CreatContractTypeGateWaySpy implements ContractTypeGateway {
     curentContractTypes.add(contractType);
   }
 
-  public List<String> getContractTypes() {
+  public List<String> getAvailableContractTypes() {
     return null;
   }
 }

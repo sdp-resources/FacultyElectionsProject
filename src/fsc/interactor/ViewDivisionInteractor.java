@@ -15,7 +15,7 @@ public class ViewDivisionInteractor {
   }
 
   public Response execute(ViewDivisionRequest request){
-    gateway.getAllDivisions();
+    gateway.getAvailableDivisions();
     return new ViewDivisionResponse();
   }
 

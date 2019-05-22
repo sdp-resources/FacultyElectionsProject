@@ -45,7 +45,7 @@ public class InMemoryGateway implements Gateway {
     contractTypes.add(contractType);
   }
 
-  public List<String> getContractTypes() {
+  public List<String> getAvailableContractTypes() {
     return new ArrayList<>(contractTypes);
   }
 
@@ -57,7 +57,7 @@ public class InMemoryGateway implements Gateway {
     return divisions.contains(divisionName);
   }
 
-  public List<String> getAllDivisions() {
+  public List<String> getAvailableDivisions() {
     return new ArrayList<>(divisions);
   }
 

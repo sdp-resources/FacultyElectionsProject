@@ -13,7 +13,7 @@ public class MissingDivisionGatewaySpy implements DivisionGateway {
     this.divisionList = null;
   }
 
-  public ArrayList<String> getAllDivisions() {
+  public ArrayList<String> getAvailableDivisions() {
     return null;
   }
 

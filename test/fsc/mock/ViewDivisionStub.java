@@ -10,7 +10,7 @@ public class ViewDivisionStub implements DivisionGateway {
 
 
 
-  public ArrayList<String> getAllDivisions() {
+  public ArrayList<String> getAvailableDivisions() {
     return divisionList;
   }
 

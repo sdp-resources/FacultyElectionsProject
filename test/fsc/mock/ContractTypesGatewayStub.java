@@ -20,7 +20,7 @@ public class ContractTypesGatewayStub implements ContractTypeGateway {
 
   }
 
-  public ArrayList<String> getContractTypes() {
+  public ArrayList<String> getAvailableContractTypes() {
     return contracts;
   }
 }

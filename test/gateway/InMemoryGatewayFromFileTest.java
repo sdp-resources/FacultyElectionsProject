@@ -33,16 +33,16 @@ public class InMemoryGatewayFromFileTest {
   @Test
   public void canReadContractTypes() {
     List<String> types = List.of("administrative", "visiting", "tenure-track", "tenured");
-    assertThat(gateway.getContractTypes(), is(types));
+    assertThat(gateway.getAvailableContractTypes(), is(types));
   }
 
   @Test
   public void canReadDivisions() {
     List<String> divisions = List.of("Arts and Letters", "Humanities", "Natural Sciences", "Social Sciences");
     for (String type : divisions) {
-      assertThat(gateway.getAllDivisions(), hasItem(type));
+      assertThat(gateway.getAvailableDivisions(), hasItem(type));
     }
-    assertThat(gateway.getAllDivisions(), is(divisions));
+    assertThat(gateway.getAvailableDivisions(), is(divisions));
   }
 
   @Test
