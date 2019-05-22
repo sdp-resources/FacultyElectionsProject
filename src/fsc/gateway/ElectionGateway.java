@@ -10,7 +10,6 @@ public interface ElectionGateway {
   class InvalidCommitteeNameException extends Exception {}
   void save();
   void addElection(Election election);
-
-    void recordVote(VoteRecord voteRecord);
+  void recordVote(VoteRecord voteRecord);
 
 }

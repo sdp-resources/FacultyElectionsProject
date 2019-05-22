@@ -14,6 +14,7 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
   public String submittedCommitteeName;
   public CreateElectionRequest request;
   public Election addedElection;
+  public boolean hasSaved = false;
 
   public ElectingWithEverythingCorrectGatewaySpy(CreateElectionRequest request){
     this.request = request;
@@ -33,19 +34,16 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
   }
 
   public void save() {
-
+    hasSaved = true;
   }
 
   public void addElection(Election election) {
     this.addedElection = election;
     addedElection.setID(1);
+    hasSaved = false;
   }
 
   public void recordVote(VoteRecord voteRecord) {
-
-  }
-
-  public void createElection(Election makeElectionFromRequest) {
 
   }
 

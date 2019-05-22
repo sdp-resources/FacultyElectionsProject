@@ -20,7 +20,8 @@ public class CreateElectionInteractor {
       Committee committee = gateway.getCommitteeFromCommitteeName(request.committeeName);
       Seat seat = committee.getSeat(request.seatName);
       Ballot ballot = makeBallotFromSeat(seat);
-      gateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));
+      gateway.addElection( new Election(seat, committee, seat.getDefaultQuery(), ballot));
+      gateway.save();
       return new SuccessfullyCreatedElectionResponse();
     } catch (ElectionGateway.InvalidCommitteeNameException r) { return new FailedToCreateElectionResponse();}
   }

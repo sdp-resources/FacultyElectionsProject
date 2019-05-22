@@ -10,6 +10,7 @@ public class Election {
   private Seat seat;
   private int ID;
 
+
   private Query defaultQuery;
 
   public Election(Seat seat, Committee committee, Query query, Ballot ballot)

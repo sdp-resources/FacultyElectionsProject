@@ -34,6 +34,7 @@ public class CreateElectionInteractorTest {
     assertEquals(request.seatName, gateway.addedElection.getSeat().getName());
     assertTrue(gateway.addedElection.getCommittee().getName() == request.committeeName);
     assertTrue(gateway.addedElection.getID() == 1);
+    assertTrue(gateway.hasSaved);
   }
 
 
