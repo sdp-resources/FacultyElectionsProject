@@ -1,8 +1,5 @@
 package fsc.request;
 
-import fsc.entity.Ballot;
-import fsc.entity.Profile;
-
 public class AddToBallotRequest extends Request {
   private final String profileUsername;
   private final String ballotID;
