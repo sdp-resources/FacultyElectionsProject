@@ -8,7 +8,7 @@ import fsc.response.ViewDivisionResponse;
 
 public class ViewDivisionInteractor {
 
-  private static DivisionGateway gateway;
+  private DivisionGateway gateway;
 
   public ViewDivisionInteractor(DivisionGateway gateway){
     this.gateway = gateway;
