@@ -2,7 +2,12 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.gateway.Gateway;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +18,8 @@ public class InMemoryGateway implements Gateway {
   private List<String> divisions = new ArrayList<>();
 
   public InMemoryGateway() {
-    profiles.add(new Profile("Haris", "skiadas", "Math", "tenured"));
-    profiles.add(new Profile("Theresa", "wilson", "CS", "tenured"));
+//    profiles.add(new Profile("Haris", "skiadas", "Math", "tenured"));
+//    profiles.add(new Profile("Theresa", "wilson", "CS", "tenured"));
   }
 
   public ArrayList<Profile> getAllProfiles() {
@@ -83,6 +88,33 @@ public class InMemoryGateway implements Gateway {
 
   public void recordVote (VoteRecord voteRecord){}
 
-    public void save () { }
+  public void save () { }
 
+  public static InMemoryGateway fromFile(File file) throws FileNotFoundException {
+    InMemoryGateway gateway = new InMemoryGateway();
+    JSONObject json = readJson(file);
+    addContractTypes(gateway, json);
+    addDivisions(gateway, json);
+    return gateway;
   }
+
+  private static JSONObject readJson(File file) throws FileNotFoundException {
+    FileReader reader = new FileReader(file);
+    JSONTokener tokener = new JSONTokener(reader);
+    return new JSONObject(tokener);
+  }
+
+  private static void addContractTypes(InMemoryGateway gateway, JSONObject json) {
+    for (Object s : json.getJSONArray("contractTypes")) {
+      gateway.addContractType((String) s);
+    }
+  }
+
+  private static void addDivisions(InMemoryGateway gateway, JSONObject json) {
+    for (Object s : json.getJSONArray("divisions")) {
+      gateway.addDivision((String) s);
+    }
+  }
+
+
+}

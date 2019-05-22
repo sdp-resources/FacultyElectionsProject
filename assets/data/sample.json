@@ -1,0 +1,8 @@
+{
+  "contractTypes": [
+    "administrative", "visiting", "tenure-track", "tenured"
+  ],
+  "divisions": [
+    "Arts and Letters", "Humanities", "Natural Sciences", "Social Sciences"
+  ]
+}
