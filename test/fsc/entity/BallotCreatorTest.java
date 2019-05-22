@@ -37,7 +37,7 @@ public class BallotCreatorTest {
 
   private void assertSameLists(List list1, List<Profile> list2) {
     for (Profile profile : list2) {
-      assertTrue(list1.contains(profile));
+      assertTrue(list2.contains(profile));
     }
     assertEquals(list2.size(), list1.size());
   }

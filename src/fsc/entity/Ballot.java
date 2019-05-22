@@ -2,10 +2,12 @@ package fsc.entity;
 
 import java.util.ArrayList;
 import java.util.AbstractList;
+import java.util.List;
 
 public class Ballot extends AbstractList<Profile> {
 
   private AbstractList<Profile> profiles = new ArrayList<>();
+  private List<Candidate> candidates = new ArrayList<>();
 
   public String ballotID;
 
@@ -21,24 +23,32 @@ public class Ballot extends AbstractList<Profile> {
     return profiles.size();
   }
 
+  public int sizeCandidates(){return candidates.size();}
+
   public boolean isEmpty() {
-    return profiles.isEmpty();
+    return candidates.isEmpty();
   }
 
   public boolean add(Profile profile) {
+    candidates.add(new Candidate(profile));
     return profiles.add(profile);
   }
 
-  public Profile get(int i) {
-    return profiles.get(i);
+  public Candidate getCandidate(int i) {
+    return candidates.get(i);
   }
 
+  public Profile get(int i) {return profiles.get(i);}
+
   public void remove(Profile profile) throws NoProfileInBallotException {
-    if (!profiles.remove(profile))
-    {
+    if (!profiles.remove(profile)) {
       throw new NoProfileInBallotException();
     }
-
+    for (int i = 0; i < candidates.size(); i++) {
+      if (candidates.get(i).getProfile() == profile) {
+        candidates.remove(i);
+      }
+    }
   }
 
   public class NoProfileInBallotException extends Exception {}

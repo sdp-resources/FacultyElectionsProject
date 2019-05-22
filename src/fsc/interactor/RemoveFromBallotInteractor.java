@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Ballot;
+import fsc.entity.Candidate;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
@@ -26,8 +27,9 @@ public class RemoveFromBallotInteractor {
 
     try {
       ballot = ballotGateway.getBallot(request.getBallotID());
-      profile = profileGateway.getProfile(request.getProfileUsername());
-      ballot.remove(profile);
+      Profile candidate = profileGateway.getProfile(request.getProfileUsername());
+
+      ballot.remove(candidate);
       ballotGateway.save();
       return new SuccessfullyRemovedProfileFromBallotResponse();
     } catch (BallotGateway.InvalidBallotIDException e) {

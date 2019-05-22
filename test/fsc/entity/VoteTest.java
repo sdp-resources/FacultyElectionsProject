@@ -23,29 +23,30 @@ public class VoteTest {
 
   @Test
   public void voteForOnePerson(){
-    Profile profile = new Profile("Sam", "sam55", "Art", "tenured");
-    ballot.add(profile);
+    Profile candidate = new Profile("Sam", "sam55", "Art", "tenured");
+    ballot.add(candidate);
     Vote vote = new Vote(ballot);
-    vote.addSingleVote(profile);
+    vote.addSingleVote(candidate);
     List<Profile> expectedList = new ArrayList<>();
-    expectedList.add(profile);
+    expectedList.add(candidate);
     assertEquals(expectedList, vote.getRankedList());
   }
 
   @Test
   public void voteForMoreThanOnePerson() {
-    Profile profile1 = new Profile("Sam", "sam55", "Art", "tenured");
-    Profile profile2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile profile3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
+    Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
+    Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
+    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM",
+                                                     "Untenured");
 
-    ballot.add(profile1);
-    ballot.add(profile2);
-    ballot.add(profile3);
+    ballot.add(candidate1);
+    ballot.add(candidate2);
+    ballot.add(candidate3);
 
     Vote vote = new Vote(ballot);
     ArrayList<Profile> voteList = new ArrayList<>();
-    voteList.add(profile3);
-    voteList.add(profile2);
+    voteList.add(candidate3);
+    voteList.add(candidate2);
 
     vote.addMultipleVote(voteList);
     assertEquals(voteList, vote.getRankedList());
@@ -53,49 +54,51 @@ public class VoteTest {
 
   @Test
   public void removeOnePerson() {
-    Profile profile1 = new Profile("Sam", "sam55", "Art", "tenured");
-    Profile profile2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile profile3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
+    Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
+    Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
+    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM",
+                                                     "Untenured");
 
-    ballot.add(profile1);
-    ballot.add(profile2);
-    ballot.add(profile3);
+    ballot.add(candidate1);
+    ballot.add(candidate2);
+    ballot.add(candidate3);
 
     Vote vote = new Vote(ballot);
     ArrayList<Profile> voteList = new ArrayList<>();
-    voteList.add(profile3);
-    voteList.add(profile2);
+    voteList.add(candidate3);
+    voteList.add(candidate2);
 
     vote.addMultipleVote(voteList);
-    vote.removeProfileFromVote(profile2);
+    vote.removeProfileFromVote(candidate2);
 
     List<Profile> expectedList = new ArrayList<>();
-    expectedList.add(profile3);
+    expectedList.add(candidate3);
     assertEquals(expectedList, vote.getRankedList());
   }
 
   @Test
   public void removeMultiplePeople(){
-    Profile profile1 = new Profile("Sam", "sam55", "Art", "tenured");
-    Profile profile2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile profile3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
+    Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
+    Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
+    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM",
+                                                     "Untenured");
 
-    ballot.add(profile1);
-    ballot.add(profile2);
-    ballot.add(profile3);
+    ballot.add(candidate1);
+    ballot.add(candidate2);
+    ballot.add(candidate3);
 
     Vote vote = new Vote(ballot);
     ArrayList<Profile> voteList = new ArrayList<>();
-    voteList.add(profile3);
-    voteList.add(profile2);
-    voteList.add(profile1);
+    voteList.add(candidate3);
+    voteList.add(candidate2);
+    voteList.add(candidate1);
 
     vote.addMultipleVote(voteList);
-    voteList.remove(profile1);
+    voteList.remove(candidate1);
     vote.removeMultipleVotes(voteList);
 
     List<Profile> expectedList = new ArrayList<>();
-    expectedList.add(profile1);
+    expectedList.add(candidate1);
     assertEquals(expectedList, vote.getRankedList());
   }
 }

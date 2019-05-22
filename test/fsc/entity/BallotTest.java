@@ -21,81 +21,91 @@ public class BallotTest {
 
   @Test
   public void addingCandidateResultInNonEmptyBallot() throws Ballot.NoProfileInBallotException {
-    Profile testProfile = createAndAddOneProfile();
+    Profile testCandidate = createAndAddOneCandidate();
     assertEquals(false, ballot.isEmpty());
   }
 
   @Test
   public void addingOneCandidateIncreasesSizeByOne() throws Ballot.NoProfileInBallotException {
-    Profile testProfile = createAndAddOneProfile();
+    Profile testCandidate = createAndAddOneCandidate();
     assertEquals(1, ballot.size());
   }
 
   @Test
   public void canGetCandidateFromBallotByIndexing() throws Ballot.NoProfileInBallotException {
-    Profile testProfile = createAndAddOneProfile();
-    assertEquals(testProfile, ballot.get(0));
+    Profile testCandidate = createAndAddOneCandidate();
+    assertEquals(testCandidate, ballot.get(0));
   }
 
   @Test
   public void addingMultipleCandidateIncreasesSize() throws Ballot.NoProfileInBallotException {
-    createAndAddManyProfiles();
+    createAndAddManyCandidates();
     assertEquals(3, ballot.size());
   }
 
   @Test
   public void checkingMultipleCandidateOfBallot(){
-    Profile testProfile1 = new Profile("name1", "username1", "department1", "contract1");
-    Profile testProfile2 = new Profile("name2", "username2","department2", "contract2");
-    Profile testProfile3 = new Profile("name3", "username3","department3", "contract3");
-    ballot.add(testProfile1);
-    ballot.add(testProfile2);
-    ballot.add(testProfile3);
-    assertEquals(testProfile1, ballot.get(0));
-    assertEquals(testProfile2, ballot.get(1));
-    assertEquals(testProfile3, ballot.get(2));
+    Profile testCandidate1 = new Profile("name1", "username1", "department1",
+                                                   "contract1");
+    Profile testCandidate2 = new Profile("name2", "username2","department2",
+                                                         "contract2");
+    Profile testCandidate3 = new Profile("name3", "username3","department3",
+                                                         "contract3");
+    ballot.add(testCandidate1);
+    ballot.add(testCandidate2);
+    ballot.add(testCandidate3);
+    assertEquals(testCandidate1, ballot.get(0));
+    assertEquals(testCandidate2, ballot.get(1));
+    assertEquals(testCandidate3, ballot.get(2));
   }
 
   @Test
   public void removeOneCandidateMakesBallotEmpty() throws Ballot.NoProfileInBallotException{
-    Profile testProfile = new Profile("name", "username", "division", "contract");
-    ballot.add(testProfile);
-    ballot.remove(testProfile);
+    Profile testCandidate = new Profile("name", "username", "division", "contract");
+    ballot.add(testCandidate);
+    ballot.remove(testCandidate);
     assertEquals(true, ballot.isEmpty());
   }
 
   @Test
   public void candidateIsRemovedFromBallot() throws Ballot.NoProfileInBallotException{
-    Profile testProfile1 = new Profile("name1", "username1","department1", "contract1");
-    Profile testProfile2 = new Profile("name2", "username2", "department2", "contract2");
-    ballot.add(testProfile1);
-    ballot.add(testProfile2);
-    ballot.remove(testProfile1);
-    assertEquals(testProfile2, ballot.get(0));
+    Profile testCandidate1 = new Profile("name1", "username1", "department1",
+                                                         "contract1");
+    Profile testCandidate2 = new Profile("name2", "username2","department2",
+                                                         "contract2");
+    ballot.add(testCandidate1);
+    ballot.add(testCandidate2);
+    ballot.remove(testCandidate1);
+    assertEquals(testCandidate2, ballot.get(0));
   }
 
 
   @Test
   public void removeOneCandidateDecreasesSizeByOne() throws Ballot.NoProfileInBallotException{
-    Profile testProfile = new Profile("name", "username", "division", "contract");
-    ballot.add(testProfile);
-    ballot.remove(testProfile);
+    Profile testCandidate = new Profile("name", "username", "division", "contract");
+    ballot.add(testCandidate);
+    ballot.remove(testCandidate);
     assertEquals(0, ballot.size());
+    assertEquals(0, ballot.sizeCandidates());
   }
 
-  private Profile createAndAddOneProfile() throws Ballot.NoProfileInBallotException {
-    Profile testProfile = new Profile("name", "username", "division", "contract");
-    ballot.add(testProfile);
-    return testProfile;
+  private Profile createAndAddOneCandidate() throws Ballot.NoProfileInBallotException {
+    Profile testCandidate = new Profile("name", "username", "division",
+                                                        "contract");
+    ballot.add(testCandidate);
+    return testCandidate;
   }
 
-  private void createAndAddManyProfiles() throws Ballot.NoProfileInBallotException {
-    Profile testProfile1 = new Profile("name1", "username1","department1", "contract1");
-    Profile testProfile2 = new Profile("name2", "username2", "department2", "contract2");
-    Profile testProfile3 = new Profile("name3", "username3", "department3", "contract3");
-    ballot.add(testProfile1);
-    ballot.add(testProfile2);
-    ballot.add(testProfile3);
+  private void createAndAddManyCandidates() throws Ballot.NoProfileInBallotException {
+    Profile testCandidate1 = new Profile("name1", "username1","department1",
+                                             "contract1");
+    Profile testCandidate2 = new Profile("name2", "username2","department2",
+                                                         "contract2");
+    Profile testCandidate3 =new Profile("name3", "username3","department3",
+                                                         "contract3");
+    ballot.add(testCandidate1);
+    ballot.add(testCandidate2);
+    ballot.add(testCandidate3);
   }
 
 
