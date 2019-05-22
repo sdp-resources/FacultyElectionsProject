@@ -2,12 +2,9 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.gateway.Gateway;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +14,16 @@ public class InMemoryGateway implements Gateway {
   private List<String> contractTypes = new ArrayList<>();
   private List<String> divisions = new ArrayList<>();
 
-  public InMemoryGateway() {
-//    profiles.add(new Profile("Haris", "skiadas", "Math", "tenured"));
-//    profiles.add(new Profile("Theresa", "wilson", "CS", "tenured"));
+  public static InMemoryGateway fromJSONFile(File file) throws FileNotFoundException {
+    return fromReader(new JSONElectionDataReader(file));
+  }
+
+  private static InMemoryGateway fromReader(ElectionDataReader dataReader) {
+    InMemoryGateway gateway = new InMemoryGateway();
+    dataReader.getContractTypes().forEach(gateway::addContractType);
+    dataReader.getDivisions().forEach(gateway::addDivision);
+    dataReader.getProfiles().forEach(gateway::addProfile);
+    return gateway;
   }
 
   public ArrayList<Profile> getAllProfiles() {
@@ -28,18 +32,13 @@ public class InMemoryGateway implements Gateway {
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     for (Profile currProfile : profiles) {
-      if (isCorrectProfile(username, currProfile)) return currProfile;
+      if (username.equals(currProfile.username)) return currProfile;
     }
     throw new InvalidProfileUsernameException();
   }
 
   public void addProfile(Profile profile) {
     profiles.add(profile);
-  }
-
-  private static boolean isCorrectProfile(String username, Profile currProfile) {
-    return (currProfile.username.equals(username));
-
   }
 
   public void addContractType(String contractType) {
@@ -70,65 +69,18 @@ public class InMemoryGateway implements Gateway {
     return null;
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {}
 
-  }
-
-  public void addElection(Election makeElectionFromRequest) {
-
-  }
+  public void addElection(Election makeElectionFromRequest) {}
 
   public Committee getCommitteeFromCommitteeName(String committeeName) {
     return null;
   }
 
-  public void addCommittee(Committee committee) {
+  public void addCommittee(Committee committee) {}
 
-  }
+  public void recordVote(VoteRecord voteRecord) {}
 
-  public void recordVote (VoteRecord voteRecord){}
+  public void save() {}
 
-  public void save () { }
-
-  public static InMemoryGateway fromFile(File file) throws FileNotFoundException {
-    InMemoryGateway gateway = new InMemoryGateway();
-    JSONObject json = readJson(file);
-    addContractTypes(gateway, json);
-    addDivisions(gateway, json);
-    addProfiles(gateway, json);
-    return gateway;
-  }
-
-  private static JSONObject readJson(File file) throws FileNotFoundException {
-    FileReader reader = new FileReader(file);
-    JSONTokener tokener = new JSONTokener(reader);
-    return new JSONObject(tokener);
-  }
-
-  private static void addContractTypes(InMemoryGateway gateway, JSONObject json) {
-    for (Object s : json.getJSONArray("contractTypes")) {
-      gateway.addContractType((String) s);
-    }
-  }
-
-  private static void addDivisions(InMemoryGateway gateway, JSONObject json) {
-    for (Object s : json.getJSONArray("divisions")) {
-      gateway.addDivision((String) s);
-    }
-  }
-
-  private static void addProfiles(InMemoryGateway gateway, JSONObject json) {
-    for (Object s : json.getJSONArray("profiles")) {
-      gateway.addProfile(makeProfile((JSONObject) s));
-    }
-
-  }
-
-  private static Profile makeProfile(JSONObject json) {
-    String name = json.getString("name");
-    String username = json.getString("username");
-    String division = json.getString("division");
-    String contractType = json.getString("contract");
-    return new Profile(name, username, division, contractType);
-  }
 }

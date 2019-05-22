@@ -20,7 +20,7 @@ public class InMemoryGatewayFromFileTest {
   @Before
   public void setUp() throws Exception {
     file = new File("assets/data/sample.json");
-    gateway = InMemoryGateway.fromFile(file);
+    gateway = InMemoryGateway.fromJSONFile(file);
   }
 
   @Test
