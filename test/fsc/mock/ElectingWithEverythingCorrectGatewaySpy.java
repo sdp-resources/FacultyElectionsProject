@@ -21,6 +21,10 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
     this.request = request;
   }
 
+  public ElectingWithEverythingCorrectGatewaySpy() {
+
+  }
+
   public ArrayList<Seat> getSeats() {
     return seats;
   }

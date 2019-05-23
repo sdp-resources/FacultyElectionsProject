@@ -28,6 +28,10 @@ public class DTSGateWayDummy implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    return null;
+  }
+
   public Profile getProfile(String username) throws InvalidProfileUsernameException {return null; }
 
   public List<Profile> getAllProfiles() {return null; }

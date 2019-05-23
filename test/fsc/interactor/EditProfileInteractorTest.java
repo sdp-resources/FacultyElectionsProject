@@ -8,7 +8,6 @@ import fsc.response.FailedSearchResponse;
 import fsc.response.Response;
 import fsc.response.SuccessfullyEditedResponse;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;

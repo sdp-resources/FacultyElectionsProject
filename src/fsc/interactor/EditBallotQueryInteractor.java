@@ -17,24 +17,15 @@ public class EditBallotQueryInteractor{
   public Object execute(EditBallotQueryRequest request) throws Exception {
     try {
       Election election = gateway.getElectionFromElectionID(request.electionID);
-      BallotCreatorStub ballotCreator = new BallotCreatorStub();
+      BallotCreator ballotCreator = new BallotCreator();
+      election.setDefaultQuery(request.query);
       Ballot ballot = ballotCreator.getBallot(election.getDefaultQuery());
       election.setBallot(ballot);
-      //election.setDefaultQuery();
-
-      updateElectionInGateway(election);
+      gateway.save();
       return new SuccessfullyEditedResponse();
     } catch (Exception e) {
       return FailedSearchResponse;
     }
 
   }
-
-  private void updateElectionInGateway(Election election) {
-  }
-
-  private void updateBAllotWithChanges() {
-    gateway.save();
-  }
-
 }

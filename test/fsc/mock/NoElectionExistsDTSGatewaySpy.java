@@ -56,6 +56,10 @@ public class NoElectionExistsDTSGatewaySpy implements Gateway {
 
   }
 
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    return null;
+  }
+
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     return null;
   }
