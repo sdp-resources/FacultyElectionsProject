@@ -6,15 +6,18 @@ import fsc.request.LoginRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.LoginResponse;
 import fsc.response.Response;
+import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 
 public class LoginInteractor {
   private SessionGateway sessionGateway;
   private Authorizer authorizer;
+  private Authenticator authenticator;
 
-  public LoginInteractor(SessionGateway sessionGateway, Authorizer authorizer) {
+  public LoginInteractor(SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator) {
     this.sessionGateway = sessionGateway;
     this.authorizer = authorizer;
+    this.authenticator = authenticator;
   }
 
   public Response execute(LoginRequest request) {
