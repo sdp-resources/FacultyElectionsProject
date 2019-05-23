@@ -6,6 +6,8 @@ import fsc.request.ViewDivisionRequest;
 import fsc.response.Response;
 import fsc.response.ViewDivisionResponse;
 
+import java.util.List;
+
 public class ViewDivisionInteractor {
 
   private DivisionGateway gateway;
@@ -15,8 +17,9 @@ public class ViewDivisionInteractor {
   }
 
   public Response execute(ViewDivisionRequest request){
-    gateway.getAvailableDivisions();
-    return new ViewDivisionResponse();
+    String divisionName = request.divisionName;
+    List<String> listOfDivisions = gateway.getAvailableDivisions();
+    return new ViewDivisionResponse(listOfDivisions);
   }
 
 }

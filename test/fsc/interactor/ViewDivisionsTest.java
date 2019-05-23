@@ -22,14 +22,14 @@ public class ViewDivisionsTest {
 
   @Before
   public void setup(){
-    testList.add("Banana");
-    testList.add("Tree");
+    testList.add("SCI");
+    testList.add("ART");
 
   }
 
   @Test
   public void sendRequestToGetValidResponseBack(){
-    request = new ViewDivisionRequest();
+    request = new ViewDivisionRequest("SCI");
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);
@@ -39,13 +39,14 @@ public class ViewDivisionsTest {
 
   @Test
   public void gatewayDivisionListEqualsOurDivisionList(){
-    request = new ViewDivisionRequest();
+    request = new ViewDivisionRequest("SCI");
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);
-    gateway.addDivision("Banana");
-    gateway.addDivision("Tree");
+    gateway.addDivision("SCI");
+    gateway.addDivision("ART");
     assertEquals(testList, gateway.getAvailableDivisions());
+    assertEquals(testList, ((ViewDivisionResponse)response).divisions);
   }
 
 }
