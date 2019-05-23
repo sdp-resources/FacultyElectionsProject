@@ -6,6 +6,7 @@ import fsc.request.ViewDTSRequest;
 import fsc.response.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ViewDTSInteractorTest {
@@ -19,8 +20,8 @@ public class ViewDTSInteractorTest {
     ViewDTSInteractor interactor =  new ViewDTSInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assertTrue(gateway.profile.username == username);
-    assertTrue(gateway.candidate.getStatus() == Candidate.Status.NoAnswer);
+    assertEquals(gateway.profile.username, username);
+    assertEquals(gateway.candidate.getStatus(), Candidate.Status.NoAnswer);
     assertTrue(response instanceof ViewDTSResponse);
   }
 
