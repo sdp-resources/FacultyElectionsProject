@@ -1,28 +1,28 @@
 package fsc.mock;
 
-import fsc.entity.Election;
-import fsc.entity.VoteRecord;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
-public class VoteRecordGatewaySpy implements ElectionGateway {
-  public String username = "wilsonT";
-  public Boolean boolTestVar = false;
-  public VoteRecord voteRecord;
+public class ElectionGatewaySpy implements ElectionGateway{
+  public Election addedElection;
+  public boolean hasSaved = false;
 
   public void save() {
-
+    hasSaved = true;
   }
 
   public void addElection(Election election) {
-
+    this.addedElection = election;
+    addedElection.setID(1);
+    hasSaved = false;
   }
 
   public void recordVote(VoteRecord voteRecord) {
-    boolTestVar = true;
-    this.voteRecord = voteRecord;
+
   }
 
   public Election getElectionFromElectionID(String electionID) throws Exception {
     return null;
   }
+
 }

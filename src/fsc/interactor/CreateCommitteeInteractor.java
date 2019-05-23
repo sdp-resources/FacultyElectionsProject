@@ -17,9 +17,9 @@ public class CreateCommitteeInteractor {
     catch (Exception e) {
       gateway.addCommittee(makeCommitteeFromRequest(request));
       gateway.save();
-      return new SuccessfullyAddedCommitteeResponse();
+      return new SuccessResponse();
     }
-    return new FailedToAddCommitteeResponse();
+    return new ErrorResponse("Failed to create committee");
   }
 
   private Committee makeCommitteeFromRequest(CreateCommitteeRequest request) {

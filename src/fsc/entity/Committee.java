@@ -13,13 +13,13 @@ public class Committee {
     this.description = description;
   }
 
-  public Seat getSeat(String seatName) throws Exception {
+  public Seat getSeat(String seatName) throws UnknownSeatNameException {
     for (int i = 0; i < seats.size(); i++) {
       if (seats.get(i).getName().equals(seatName)) {
         return seats.get(i);
       }
     }
-    throw new Exception();
+    throw new UnknownSeatNameException();
   }
 
   public void setName(String name) {
@@ -45,4 +45,6 @@ public class Committee {
   public void addMember(Seat seat) {
     seats.add(seat);
   }
+
+  public class UnknownSeatNameException extends Exception {}
 }

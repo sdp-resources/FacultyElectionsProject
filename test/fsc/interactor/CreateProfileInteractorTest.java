@@ -1,15 +1,12 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.*;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;
-import fsc.response.FailedAddedProfileResponse;
-import fsc.response.SuccessfullyAddedProfileResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
-import fsc.response.Response;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -27,19 +24,19 @@ public class CreateProfileInteractorTest {
   }
 
   @Test
-  public void testCorrectExecute() throws Exception {
+  public void testCorrectExecute() {
     NoProfileWithThatUsernameProfileGatewaySpy gateway = new NoProfileWithThatUsernameProfileGatewaySpy();
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);
-    assertTrue(response instanceof SuccessfullyAddedProfileResponse);
+    assertTrue(response instanceof SuccessResponse);
   }
 
   @Test
-  public void testWrongUsernameExecute() throws Exception {
+  public void testWrongUsernameExecute() {
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
-    assertTrue(response instanceof FailedAddedProfileResponse);
+    assertEquals("Profile with that username already exists", ((ErrorResponse)response).message);
   }
 }

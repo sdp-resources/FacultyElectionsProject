@@ -1,29 +1,32 @@
 package fsc.mock.gateway.committee;
 
 import fsc.entity.Committee;
+import fsc.entity.Seat;
+import fsc.mock.AlwaysTrueQueryStub;
 
-import java.util.List;
+public class AcceptingCommitteeGatewaySpy extends CommitteeGatewayDummy {
+  public String committeeNameRequested = null;
+  public Committee committeeAdded = null;
+  public Committee returnedCommittee = null;
 
-public class AcceptingCommitteeGatewaySpy extends AcceptingCommitteeGatewayStub {
-  public List<String> committeeNamesRequested;
-  public List<Committee> committeesAdded;
-
-  public AcceptingCommitteeGatewaySpy(Committee committee)
-  {
-    super(committee);
+  public Committee getCommitteeFromCommitteeName(String name) {
+    committeeNameRequested = name;
+    returnedCommittee = new CommitteeStub(name, "Description");
+    return returnedCommittee;
   }
 
   @Override
-  public Committee getCommitteeFromCommitteeName(String name)
-  {
-    committeeNamesRequested.add(name);
-    return super.getCommitteeFromCommitteeName(name);
+  public void addCommittee(Committee committee) {
+    committeeAdded = committee;
   }
 
-  @Override
-  public void addCommittee(Committee committee)
-  {
-    committeesAdded.add(committee);
-    super.addCommittee(committee);
+  private class CommitteeStub extends Committee {
+    public CommitteeStub(String name, String description) {
+      super(name, description);
+    }
+
+    public Seat getSeat(String seatName) {
+      return new Seat(seatName, new AlwaysTrueQueryStub());
+    }
   }
 }

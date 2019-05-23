@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.entity.Session;
 import fsc.gateway.SessionGateway;
 import fsc.mock.AcceptingAuthenticatorDummy;
 import fsc.mock.gateway.session.SessionGatewayDummy;
@@ -32,7 +31,7 @@ public class LoginInteractorTest {
 
     ErrorResponse response = (ErrorResponse) loginInteractor.execute(request);
 
-    assertEquals("Invalid username or password", response.response);
+    assertEquals("Invalid username or password", response.message);
   }
 
   @Test

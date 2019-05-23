@@ -5,7 +5,7 @@ import fsc.gateway.CommitteeGateway;
 
 public class CommitteeGatewayDummy implements CommitteeGateway {
   public Committee getCommitteeFromCommitteeName(String name)
-        throws NoCommitteeWithThatNameException {
+        throws UnknownCommitteeException {
     return null;
   }
 

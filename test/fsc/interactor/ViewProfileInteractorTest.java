@@ -56,7 +56,7 @@ public class ViewProfileInteractorTest {
 
     assertEquals(request.username, gatewaySpy.usernameReceived);
     assertEquals(null, converterSpy.profileReceived);
-    assertEquals(ErrorResponse.NO_PROFILE_FOUND, response.response);
+    assertEquals(ErrorResponse.NO_PROFILE_FOUND, response.message);
   }
 
   @After

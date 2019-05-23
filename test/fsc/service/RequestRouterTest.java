@@ -1,12 +1,10 @@
 package fsc.service;
 
 import fsc.entity.Profile;
-import fsc.gateway.DivisionGateway;
 import fsc.interactor.AddDivisionInteractor;
 import fsc.interactor.ViewProfileInteractor;
 import fsc.mock.MissingDivisionGatewaySpy;
 import fsc.mock.ProfileGatewayStub;
-import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.request.AddDivisionRequest;
 import fsc.request.ViewProfileRequest;
 import fsc.response.*;
@@ -33,7 +31,7 @@ public class RequestRouterTest {
     requestRouter = new RequestRouter();
     AddDivisionRequest addDivisionRequest = new AddDivisionRequest("SQUAD");
     ErrorResponse response = (ErrorResponse) requestRouter.execute(addDivisionRequest);
-    assertEquals("No interactor can handle that request", response.response);
+    assertEquals("No interactor can handle that request", response.message);
   }
 
   @Test

@@ -9,7 +9,7 @@ public class SessionGatewayDummy implements SessionGateway {
 
   }
 
-  public Session getSession(String token) {
+  public Session getSession(String token) throws SessionGateway.NoSessionWithThatTokenException {
     return null;
   }
 

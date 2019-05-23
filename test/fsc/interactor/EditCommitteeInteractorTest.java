@@ -1,8 +1,7 @@
 package fsc.interactor;
 
-import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
-import fsc.mock.gateway.committee.AcceptingCommitteeGatewayStub;
+import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewayStub;
 import fsc.request.EditCommitteeRequest;
 import fsc.response.SuccessResponse;
@@ -29,7 +28,7 @@ public class EditCommitteeInteractorTest {
 
     ErrorResponse response = (ErrorResponse) interactor.execute(request);
 
-    assertEquals("No committee with that name", response.response);
+    assertEquals("No committee with that name", response.message);
   }
 
   @Test
@@ -37,43 +36,39 @@ public class EditCommitteeInteractorTest {
   {
     String originalName = "steering";
     String newName = "steering wheel";
-    String description = "Turns the car";
 
-    Map<String, Object> changes = new HashMap();
+    Map<String, Object> changes = new HashMap<>();
     changes.put("name", newName);
     EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
 
-    Committee initialCommittee = new Committee(originalName, description);
-    CommitteeGateway gateway = new AcceptingCommitteeGatewayStub(initialCommittee);
+    AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
     EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
 
     Response response = interactor.execute(request);
 
     assertTrue(response instanceof SuccessResponse);
-    assertEquals(newName, initialCommittee.getName());
+    assertEquals(newName, gateway.returnedCommittee.getName());
   }
 
   @Test
   public void canMakeMultipleChanges(){
     String originalName = "steering";
     String newName = "steering wheel";
-    String description = "Turns the car";
     String newDescription = "This turns the car real well.";
 
-    Map<String, Object> changes = new HashMap();
+    Map<String, Object> changes = new HashMap<>();
     changes.put("name", newName);
     changes.put("description", newDescription);
     EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
 
-    Committee initialCommittee = new Committee(originalName, description);
-    CommitteeGateway gateway = new AcceptingCommitteeGatewayStub(initialCommittee);
+    AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
     EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
 
     Response response = interactor.execute(request);
 
     assertTrue(response instanceof SuccessResponse);
-    assertEquals(newName, initialCommittee.getName());
-    assertEquals(newDescription, initialCommittee.getDescription());
+    assertEquals(newName, gateway.returnedCommittee.getName());
+    assertEquals(newDescription, gateway.returnedCommittee.getDescription());
   }
 }
 

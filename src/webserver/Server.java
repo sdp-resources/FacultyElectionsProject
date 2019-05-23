@@ -56,8 +56,8 @@ public class Server {
       fsc.response.Response response = interactor.execute(request);
       System.out.println(response);
       res.redirect("/profile");
-      //      if (response instanceof FailedAddedProfileResponse) {
-      //      } else if (response instanceof SuccessfullyAddedProfileResponse) {
+      //      if (message instanceof FailedAddedProfileResponse) {
+      //      } else if (message instanceof SuccessfullyAddedProfileResponse) {
       //        res.redirect("")
       //      }
     } catch (Exception e) {

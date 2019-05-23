@@ -6,7 +6,7 @@ import fsc.gateway.CommitteeGateway;
 public class CommitteeAlreadyExistsCommitteeGatewaySpy implements CommitteeGateway {
   public static String submittedCommitteeName;
 
-  public Committee getCommitteeFromCommitteeName(String name) throws NoCommitteeWithThatNameException {
+  public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException {
     submittedCommitteeName = name;
     return null;
   }

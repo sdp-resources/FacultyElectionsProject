@@ -3,13 +3,13 @@ package fsc.response;
 import java.util.List;
 import java.util.Objects;
 
-public class ContractsViewerResponse implements Response{
+public class ViewContractsResponse implements Response{
   List<String> contracts;
 
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ContractsViewerResponse that = (ContractsViewerResponse) o;
+    ViewContractsResponse that = (ViewContractsResponse) o;
     return Objects.equals(contracts, that.contracts);
   }
 
@@ -17,7 +17,7 @@ public class ContractsViewerResponse implements Response{
     return Objects.hash(contracts);
   }
 
-  public ContractsViewerResponse(List<String> contracts){
+  public ViewContractsResponse(List<String> contracts){
     this.contracts = contracts;
   }
 }

@@ -3,11 +3,8 @@ package fsc.interactor;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ProfileGateway;
 import fsc.gateway.ElectionGateway;
-import fsc.response.ProfileDoesNotExistResponse;
+import fsc.response.*;
 import fsc.request.VoteRecordRequest;
-import fsc.response.Response;
-import fsc.response.AddedNewVoteResponse;
-
 
 public class VoteInteractor {
 
@@ -25,7 +22,7 @@ public class VoteInteractor {
       return new ProfileDoesNotExistResponse();
     }
     voteGateway.recordVote(createVoteObject(request));
-      return new AddedNewVoteResponse();
+      return new SuccessResponse();
     }
 
   private VoteRecord createVoteObject(VoteRecordRequest request) throws ProfileGateway.InvalidProfileUsernameException {

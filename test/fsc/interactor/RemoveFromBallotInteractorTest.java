@@ -36,7 +36,7 @@ public class RemoveFromBallotInteractorTest {
                                                             dummyProfileGateway);
     Response response = inter.execute(request);
 
-    assertEquals("No ballot with that ID", ((ErrorResponse)response).response);
+    assertEquals("No ballot with that ID", ((ErrorResponse)response).message);
   }
 
   @Test
@@ -49,7 +49,7 @@ public class RemoveFromBallotInteractorTest {
                                                              noProfileProfileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals("No profile with that username", ((ErrorResponse)response).response);
+    assertEquals("No profile with that username", ((ErrorResponse)response).message);
   }
 
   @Test
@@ -63,7 +63,7 @@ public class RemoveFromBallotInteractorTest {
                                                                            profileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals("Ballot does not contain profile", ((ErrorResponse)response).response);
+    assertEquals("Ballot does not contain profile", ((ErrorResponse)response).message);
   }
 
   @Test

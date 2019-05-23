@@ -15,9 +15,9 @@ public class CommitteeGatewaySpy implements CommitteeGateway {
 
   }
 
-  public Committee getCommitteeFromCommitteeName(String name) throws NoCommitteeWithThatNameException {
+  public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException {
     submittedCommitteeName = name;
-    throw new NoCommitteeWithThatNameException();
+    throw new UnknownCommitteeException();
   }
 
   public void addCommittee(Committee committee) {

@@ -2,16 +2,17 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
-import fsc.gateway.ProfileGateway;
 import fsc.gateway.ElectionGateway;
+import fsc.gateway.ProfileGateway;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.mock.VoteRecordGatewaySpy;
 import fsc.request.VoteRecordRequest;
-import fsc.response.AddedNewVoteResponse;
 import fsc.response.ProfileDoesNotExistResponse;
+import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.Date;
 
 import static junit.framework.TestCase.assertTrue;
@@ -42,7 +43,7 @@ public class VoteInteractorTest {
     ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
 
-    assertTrue(interactor.execute(request) instanceof AddedNewVoteResponse);
+    assertTrue(interactor.execute(request) instanceof SuccessResponse);
   }
 
   @Test

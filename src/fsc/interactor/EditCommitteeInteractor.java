@@ -21,7 +21,7 @@ public class EditCommitteeInteractor {
     {
       committee = committeeGateway.getCommitteeFromCommitteeName(request.name);
     }
-    catch (CommitteeGateway.NoCommitteeWithThatNameException e)
+    catch (CommitteeGateway.UnknownCommitteeException e)
     {
       return new ErrorResponse("No committee with that name");
     }

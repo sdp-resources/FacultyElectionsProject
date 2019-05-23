@@ -18,9 +18,9 @@ public class CreateContractTypeInteractor {
       gateway.addContractType(request.contract_type);
     }
     catch (Exception e) {
-      return new FailedAddedContractTypeResponse();
+      return new ErrorResponse("Contract already exists");
     }
-    return new SuccessfullyAddedContractTypeResponse();
+    return new SuccessResponse();
 }
 
   private String makeContractTypeFromRequest(CreateContractTypeRequest request) {

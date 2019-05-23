@@ -1,13 +1,9 @@
 package fsc.interactor;
 
-import fsc.gateway.DivisionGateway;
-import fsc.mock.MissingDivisionGatewaySpy;
-import fsc.mock.MissingDivisionGatewaySpy;
 import fsc.mock.ExistingDivisionGatewaySpy;
+import fsc.mock.MissingDivisionGatewaySpy;
 import fsc.request.AddDivisionRequest;
-import fsc.response.FailedtoAddDivision;
-import fsc.response.Response;
-import fsc.response.SuccessfullyAddedDivision;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +20,7 @@ public class AddDivisionInteractorTest {
   }
 
   @Test
-  public void testCorrectExecute() throws Exception {
+  public void testCorrectExecute() {
     MissingDivisionGatewaySpy testGateway =
           new MissingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
@@ -34,12 +30,12 @@ public class AddDivisionInteractorTest {
   }
 
   @Test
-  public void testAlreadyExistsExecute() throws Exception {
+  public void testAlreadyExistsExecute() {
     ExistingDivisionGatewaySpy testGateway =
           new ExistingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
-    assertTrue(response instanceof FailedtoAddDivision);
+    assertEquals("Division already exists", ((ErrorResponse) response).message);
   }
 }

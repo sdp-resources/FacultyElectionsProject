@@ -3,19 +3,25 @@ package fsc.entity;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 public class SessionTest {
   AuthorizedSession session;
 
   @Test
-  public void javaDatesWeird()
-  {
+  public void javaDatesWeird() throws InterruptedException {
     assertFalse(Calendar.getInstance() == Calendar.getInstance());
     assertFalse(new GregorianCalendar() == new GregorianCalendar());
+
+    Calendar calendar = Calendar.getInstance();
+    Date initalTime = calendar.getTime();
+    Thread.sleep(100);
+    assertEquals(initalTime, calendar.getTime());
   }
 
   @Test

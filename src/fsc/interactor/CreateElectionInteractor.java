@@ -1,29 +1,33 @@
 package fsc.interactor;
 
 import fsc.entity.*;
-import fsc.entity.query.Query;
+import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
 import fsc.request.CreateElectionRequest;
 import fsc.response.*;
 
 public class CreateElectionInteractor {
-  public ElectionGateway gateway;
+  public ElectionGateway electionGateway;
+  private CommitteeGateway committeeGateway;
 
-  public CreateElectionInteractor(ElectionGateway gateway) {
-    this.gateway = gateway;
+  public CreateElectionInteractor(ElectionGateway electionGateway, CommitteeGateway committeeGateway) {
+    this.electionGateway = electionGateway;
+    this.committeeGateway = committeeGateway;
   }
 
-  public CreateElectionResponse execute(CreateElectionRequest request) throws Exception {
-
-
+  public Response execute(CreateElectionRequest request) {
     try {
-      Committee committee = gateway.getCommitteeFromCommitteeName(request.committeeName);
+      Committee committee = committeeGateway.getCommitteeFromCommitteeName(request.committeeName);
       Seat seat = committee.getSeat(request.seatName);
       Ballot ballot = makeBallotFromSeat(seat);
-      gateway.addElection( new Election(seat, committee, seat.getDefaultQuery(), ballot));
-      gateway.save();
+      electionGateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));
+      electionGateway.save();
       return new SuccessfullyCreatedElectionResponse();
-    } catch (ElectionGateway.InvalidCommitteeNameException r) { return new FailedToCreateElectionResponse();}
+    } catch (CommitteeGateway.UnknownCommitteeException e) {
+      return ErrorResponse.invalidCommitteeName();
+    } catch (Committee.UnknownSeatNameException e) {
+      return ErrorResponse.unknownSeatName();
+    }
   }
 
   private Ballot makeBallotFromSeat(Seat seat) {

@@ -4,9 +4,7 @@ import fsc.entity.Profile;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.request.EditProfileRequest;
-import fsc.response.FailedSearchResponse;
-import fsc.response.Response;
-import fsc.response.SuccessfullyEditedResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +33,7 @@ public class EditProfileInteractorTest {
     NoProfileWithThatUsernameProfileGatewaySpy fakeGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
     EditProfileInteractor interactor = new EditProfileInteractor(fakeGateway);
     Response response = interactor.execute(request);
-    assertTrue(response instanceof FailedSearchResponse);
+    assertEquals("No profile with that username exists", ((ErrorResponse)response).message);
   }
 
   @Test
@@ -46,7 +44,7 @@ public class EditProfileInteractorTest {
           new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     Response response = interactor.execute(request);
-    assertTrue(response instanceof SuccessfullyEditedResponse);
+    assertTrue(response instanceof SuccessResponse);
   }
 
   @Test

@@ -40,7 +40,7 @@ public class AddToBallotInteractorTest {
                                                             dummyProfileGateway);
     Response response = inter.execute(request);
 
-    assertEquals( NO_BALLOT_WITH_THAT_ID, ((ErrorResponse) response).response);
+    assertEquals( NO_BALLOT_WITH_THAT_ID, ((ErrorResponse) response).message);
   }
 
   @Test
@@ -52,7 +52,7 @@ public class AddToBallotInteractorTest {
     AddToBallotInteractor interactor = new AddToBallotInteractor(dummyBallotGateway, noProfileProfileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals(NO_PROFILE_WITH_THAT_USERNAME, ((ErrorResponse) response).response);
+    assertEquals(NO_PROFILE_WITH_THAT_USERNAME, ((ErrorResponse) response).message);
   }
 
   @Test

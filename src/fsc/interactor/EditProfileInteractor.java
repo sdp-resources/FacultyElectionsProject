@@ -3,9 +3,7 @@ package fsc.interactor;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.request.EditProfileRequest;
-import fsc.response.FailedSearchResponse;
-import fsc.response.Response;
-import fsc.response.SuccessfullyEditedResponse;
+import fsc.response.*;
 
 import java.util.Map;
 
@@ -20,9 +18,9 @@ public class EditProfileInteractor {
     try{
       Profile profile = editProfileWithRequest(request);
       updateProfileInGateway(profile);
-      return new SuccessfullyEditedResponse();
+      return new SuccessResponse();
     } catch (Exception e){
-      return new FailedSearchResponse();
+      return new ErrorResponse("No profile with that username exists");
     }
   }
 

@@ -3,9 +3,7 @@ package fsc.interactor;
 import fsc.gateway.ProfileGateway;
 import fsc.request.CreateProfileRequest;
 import fsc.entity.Profile;
-import fsc.response.FailedAddedProfileResponse;
-import fsc.response.SuccessfullyAddedProfileResponse;
-import fsc.response.Response;
+import fsc.response.*;
 
 public class CreateProfileInteractor {
 
@@ -21,9 +19,9 @@ public class CreateProfileInteractor {
     try{ gateway.getProfile(request.username);}
     catch (Exception e) {
       gateway.addProfile(makeProfileFromRequest(request));
-      return new SuccessfullyAddedProfileResponse();
+      return new SuccessResponse();
       }
-    return new FailedAddedProfileResponse();
+    return new ErrorResponse("Profile with that username already exists");
   }
 
   private Profile makeProfileFromRequest(CreateProfileRequest request) {

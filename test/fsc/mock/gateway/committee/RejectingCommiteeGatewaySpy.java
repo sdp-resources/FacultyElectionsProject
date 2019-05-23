@@ -1,25 +1,22 @@
 package fsc.mock.gateway.committee;
 
 import fsc.entity.Committee;
-import fsc.gateway.CommitteeGateway;
 
-import java.util.List;
-
-public class RejectingCommiteeGatewaySpy extends RejectingCommitteeGatewayStub {
-  public List<String> committeeNamesRequested;
-  public List<Committee> committeesAdded;
+public class RejectingCommiteeGatewaySpy extends CommitteeGatewayDummy {
+  public String committeeNameRequested = null;
+  public Committee committeeAdded = null;
 
   @Override
-  public Committee getCommitteeFromCommitteeName(String name) throws CommitteeGateway.NoCommitteeWithThatNameException
+  public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException
   {
-    committeeNamesRequested.add(name);
-    return super.getCommitteeFromCommitteeName(name);
+    committeeNameRequested = name;
+    throw new UnknownCommitteeException();
   }
 
   @Override
   public void addCommittee(Committee committee)
   {
-    committeesAdded.add(committee);
+    committeeAdded = committee;
     super.addCommittee(committee);
   }
 }
