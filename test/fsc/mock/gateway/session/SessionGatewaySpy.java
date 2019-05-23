@@ -1,9 +1,10 @@
 package fsc.mock.gateway.session;
 
+import fsc.entity.AuthorizedSession;
 import fsc.entity.Session;
 
 public class SessionGatewaySpy extends SessionGatewayDummy {
-  public Session addedSession = null;
+  public AuthorizedSession addedSession = null;
   public boolean saveCalled = false;
 
   private Session storedSession;
@@ -16,7 +17,7 @@ public class SessionGatewaySpy extends SessionGatewayDummy {
   }
 
   @Override
-  public void addSession(Session session)
+  public void addSession(AuthorizedSession session)
   {
     addedSession = session;
   }

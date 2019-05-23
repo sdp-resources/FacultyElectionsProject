@@ -1,12 +1,12 @@
 package fsc.interactor;
 
+import fsc.entity.Session;
 import fsc.gateway.SessionGateway;
 import fsc.mock.gateway.session.SessionGatewayDummy;
 import fsc.mock.gateway.session.SessionGatewaySpy;
 import fsc.request.LoginRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.LoginResponse;
-import fsc.response.Response;
 import fsc.service.Authorizer;
 import fsc.service.authorizer.AcceptingAuthorizerStub;
 import fsc.service.authorizer.RejectingAuthorizerStub;

@@ -1,7 +1,6 @@
 package fsc.service.authorizer;
 
-import fsc.entity.Authorization;
-import fsc.entity.AuthorizedAuthorization;
+import fsc.entity.*;
 
 import java.util.Calendar;
 
@@ -16,8 +15,8 @@ public class AcceptingAuthorizerStub extends AuthorizerDummy {
   }
 
   @Override
-  public Authorization authorize(String username, String password)
+  public Session authorize(String username, String password)
   {
-    return new AuthorizedAuthorization(role, username, token, Calendar.getInstance());
+    return new AuthorizedSession(role, username, token, Calendar.getInstance());
   }
 }

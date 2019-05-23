@@ -1,7 +1,10 @@
 package fsc.service;
 
-import fsc.entity.Authorization;
+import fsc.entity.Session;
 
-public interface Authorizer {
-  Authorization authorize(String username, String password);
+public interface Authorizer{
+  Session authorize(String username, String password);
+  enum Role { ROLE_USER, ROLE_ADMIN }
+
+
 }

@@ -1,8 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.Authorization;
-import fsc.entity.AuthorizedAuthorization;
-import fsc.entity.Session;
+import fsc.entity.*;
 import fsc.gateway.SessionGateway;
 import fsc.request.LoginRequest;
 import fsc.response.ErrorResponse;
@@ -20,17 +18,18 @@ public class LoginInteractor {
   }
 
   public Response execute(LoginRequest request) {
-    Authorization authorization = authorizer.authorize(request.username, request.password);
+    Session authorization = authorizer.authorize(request.username, request.password);
     if (!authorization.isAuthorized())
     {
       return new ErrorResponse("Invalid username or password");
     }
-    AuthorizedAuthorization authorizedAuthorization = (AuthorizedAuthorization) authorization;
-    sessionGateway.addSession(new Session(authorizedAuthorization.role,
-                                          authorizedAuthorization.username,
-                                          authorizedAuthorization.token,
-                                          authorizedAuthorization.expirationTime));
+    Session authorizedSession = (AuthorizedSession) authorization;
+    sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorizedSession).getRole(),
+                                                    ((AuthorizedSession) authorizedSession).getUsername(),
+                                                    ((AuthorizedSession) authorizedSession).getToken(),
+                                                    ((AuthorizedSession) authorizedSession).getExpirationTime()));
     sessionGateway.save();
-    return new LoginResponse(authorizedAuthorization.role, authorizedAuthorization.token);
+    return new LoginResponse(((AuthorizedSession) authorizedSession).getRole(),
+                             ((AuthorizedSession) authorizedSession).getToken());
   }
 }

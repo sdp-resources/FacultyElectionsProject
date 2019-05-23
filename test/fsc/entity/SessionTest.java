@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -10,7 +9,7 @@ import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertFalse;
 
 public class SessionTest {
-  Session session;
+  AuthorizedSession session;
 
   @Test
   public void javaDatesWeird()
@@ -29,7 +28,7 @@ public class SessionTest {
     Calendar expirationTime = Calendar.getInstance();
     expirationTime.add(Calendar.MINUTE, 10);
 
-    session = new Session(role, username, token, expirationTime);
+    session = new AuthorizedSession(role, username, token, expirationTime);
 
     assertEquals(token, session.getToken());
     assertEquals(username, session.getUsername());
