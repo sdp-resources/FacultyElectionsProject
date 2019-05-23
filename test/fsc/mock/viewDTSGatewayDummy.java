@@ -3,11 +3,10 @@ package fsc.mock;
 import fsc.entity.*;
 import fsc.gateway.Gateway;
 
-import javax.management.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class viewDTSGateWayDummy implements Gateway {
+public class viewDTSGatewayDummy implements Gateway {
   public Profile profile = new Profile("skiadas", "skiadas21","science","tenured");
   public AlwaysTrueQueryStub query = new AlwaysTrueQueryStub();
   public Seat seat = new Seat("bigSeat", query);
@@ -16,24 +15,16 @@ public class viewDTSGateWayDummy implements Gateway {
   public Election election = new Election(seat, committee, query, ballot);
   public Candidate candidate = new Candidate(profile);
 
-
-
   public Ballot getBallot(String id) throws InvalidBallotIDException {
     ballot.add(profile);
     return ballot;
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException { }
 
-  }
+  public void addCommittee(Committee committee) {}
 
-  public void addCommittee(Committee committee) {
-
-  }
-
-  public void addContractType(String contract) throws Exception {
-
-  }
+  public void addContractType(String contract) throws Exception { }
 
   public List<String> getAvailableContractTypes() {
     return null;
@@ -43,9 +34,7 @@ public class viewDTSGateWayDummy implements Gateway {
     return null;
   }
 
-  public void addDivision(String division) {
-
-  }
+  public void addDivision(String division) {}
 
   public Boolean hasDivision(String divisionName) {
     return null;
@@ -55,13 +44,9 @@ public class viewDTSGateWayDummy implements Gateway {
     return null;
   }
 
-  public void addElection(Election election) {
+  public void addElection(Election election) {}
 
-  }
-
-  public void recordVote(VoteRecord voteRecord) {
-
-  }
+  public void recordVote(VoteRecord voteRecord) {}
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     return profile;
@@ -73,10 +58,7 @@ public class viewDTSGateWayDummy implements Gateway {
     return profiles;
   }
 
-  public void addProfile(Profile profile) {
+  public void addProfile(Profile profile) {}
 
-  }
-
-  public void save() {
-  }
+  public void save() {}
 }

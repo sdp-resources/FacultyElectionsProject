@@ -23,12 +23,16 @@ public class viewDTSInteractor {
       Profile profile = gateway.getProfile(request.username);
       Ballot ballot = gateway.getBallot(request.electionID);
       ballot.contains(profile);
+      int candidateListSize = ballot.sizeCandidates();
+      for (int candidateIndex = 0; candidateIndex < candidateListSize; candidateIndex++){
+        if (ballot.getCandidate(candidateIndex).getProfile() == profile) {
+          candidate = ballot.getCandidate(candidateIndex);
+        }
+      }
+      return new viewDTSResponse(candidate);
     }
-    catch(Exception e){
-      throw new ErrorResponse("No Profile Exist");
+    catch (Exception e) {
+      throw new ErrorResponse("Invalid request");
     }
-
-    Candidate candidate = new Candidate(profile);
-    return new viewDTSResponse(candidate);
   }
 }
