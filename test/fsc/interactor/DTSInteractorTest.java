@@ -9,6 +9,7 @@ import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DTSInteractorTest {
@@ -25,6 +26,7 @@ public class DTSInteractorTest {
     Response response = interactor.execute(request);
 
     assertTrue(response instanceof SuccessResponse);
+    //assertEquals(Candidate.Status.Declined, gateway.candidate.getStatus());
   }
 
   @Test
