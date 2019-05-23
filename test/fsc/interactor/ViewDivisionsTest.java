@@ -29,7 +29,7 @@ public class ViewDivisionsTest {
 
   @Test
   public void sendRequestToGetValidResponseBack(){
-    request = new ViewDivisionRequest("SCI");
+    request = new ViewDivisionRequest();
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);
@@ -39,7 +39,7 @@ public class ViewDivisionsTest {
 
   @Test
   public void gatewayDivisionListEqualsOurDivisionList(){
-    request = new ViewDivisionRequest("SCI");
+    request = new ViewDivisionRequest();
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);

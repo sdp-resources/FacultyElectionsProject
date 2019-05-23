@@ -17,7 +17,6 @@ public class ViewDivisionInteractor {
   }
 
   public Response execute(ViewDivisionRequest request){
-    String divisionName = request.divisionName;
     List<String> listOfDivisions = gateway.getAvailableDivisions();
     return new ViewDivisionResponse(listOfDivisions);
   }
