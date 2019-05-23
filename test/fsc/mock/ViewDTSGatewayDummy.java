@@ -6,7 +6,7 @@ import fsc.gateway.Gateway;
 import java.util.ArrayList;
 import java.util.List;
 
-public class viewDTSGatewayDummy implements Gateway {
+public class ViewDTSGatewayDummy implements Gateway {
   public Profile profile = new Profile("skiadas", "skiadas21","science","tenured");
   public AlwaysTrueQueryStub query = new AlwaysTrueQueryStub();
   public Seat seat = new Seat("bigSeat", query);
@@ -20,11 +20,11 @@ public class viewDTSGatewayDummy implements Gateway {
     return ballot;
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException { }
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {}
 
   public void addCommittee(Committee committee) {}
 
-  public void addContractType(String contract) throws Exception { }
+  public void addContractType(String contract) throws Exception {}
 
   public List<String> getAvailableContractTypes() {
     return null;
@@ -49,7 +49,10 @@ public class viewDTSGatewayDummy implements Gateway {
   public void recordVote(VoteRecord voteRecord) {}
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
-    return profile;
+    if (profile.username == username){
+      return profile;
+    }
+    throw new InvalidProfileUsernameException();
   }
 
   public List<Profile> getAllProfiles() {
