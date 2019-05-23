@@ -3,7 +3,7 @@ package fsc.response;
 import java.util.List;
 import java.util.Objects;
 
-public class ContractsViewerResponse implements Response{
+public class ViewContractsResponse implements Response{
   public List<String> contracts;
 
   public boolean equals(Object o) {

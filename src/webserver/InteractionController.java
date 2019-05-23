@@ -50,7 +50,7 @@ public class InteractionController {
   }
 
   public List<String> getAllContractTypes() {
-    ContractsViewerResponse response = viewContractsInteractor.execute(new ContractsViewerRequest());
+    ViewContractsResponse response = viewContractsInteractor.execute(new ContractsViewerRequest());
     return response.contracts;
   }
 
