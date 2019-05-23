@@ -14,20 +14,13 @@ import static org.junit.Assert.*;
 
 public class InMemoryGatewayFromFileTest {
 
-  private File file;
   private InMemoryGateway gateway;
+  private String pathname;
 
   @Before
   public void setUp() throws Exception {
-    file = new File("assets/data/sample.json");
-    gateway = InMemoryGateway.fromJSONFile(file);
-  }
-
-  @Test
-  public void canReadFile() {
-    System.out.println(file.getAbsolutePath());
-    assertTrue(file.exists());
-    assertTrue(file.canRead());
+    pathname = "assets/data/sample.json";
+    gateway = InMemoryGateway.fromJSONFile(pathname);
   }
 
   @Test

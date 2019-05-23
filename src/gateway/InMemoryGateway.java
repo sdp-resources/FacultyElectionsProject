@@ -14,8 +14,13 @@ public class InMemoryGateway implements Gateway {
   private List<String> contractTypes = new ArrayList<>();
   private List<String> divisions = new ArrayList<>();
 
-  public static InMemoryGateway fromJSONFile(File file) throws FileNotFoundException {
-    return fromReader(new JSONElectionDataReader(file));
+  public static InMemoryGateway fromJSONFile(String path) {
+    try {
+      return fromReader(new JSONElectionDataReader(new File(path)));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      throw new RuntimeException("file not found: " + path);
+    }
   }
 
   private static InMemoryGateway fromReader(ElectionDataReader dataReader) {
