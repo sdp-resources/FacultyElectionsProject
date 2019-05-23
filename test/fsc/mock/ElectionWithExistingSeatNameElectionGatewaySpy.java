@@ -28,6 +28,10 @@ public class ElectionWithExistingSeatNameElectionGatewaySpy implements ElectionG
 
   }
 
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    return null;
+  }
+
   public Committee getCommitteeFromCommitteeName(String committeeName)
         throws InvalidCommitteeNameException {
     return null;

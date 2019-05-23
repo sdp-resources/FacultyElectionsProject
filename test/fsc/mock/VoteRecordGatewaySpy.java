@@ -27,4 +27,8 @@ public class VoteRecordGatewaySpy implements ElectionGateway {
     boolTestVar = true;
     this.voteRecord = voteRecord;
   }
+
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    return null;
+  }
 }

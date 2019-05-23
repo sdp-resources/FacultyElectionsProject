@@ -48,6 +48,10 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    return null;
+  }
+
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     if (profile.username == username){
       return profile;

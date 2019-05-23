@@ -39,6 +39,11 @@ public class Election {
     return ballot;
   }
 
+  public void setBallot(Ballot ballot){
+    this.ballot = ballot;
+  }
+
+
   public void setDefaultQuery(Query defaultQuery) {
     this.defaultQuery = defaultQuery;
   }

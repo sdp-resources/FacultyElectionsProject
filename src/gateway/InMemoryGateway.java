@@ -77,6 +77,10 @@ public class InMemoryGateway implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    return null;
+  }
+
   public void save() {}
 
 }

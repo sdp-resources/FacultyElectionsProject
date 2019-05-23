@@ -11,6 +11,7 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
 
   public ArrayList<Seat> seats = new ArrayList<Seat>();
   public ArrayList<Committee> committees = new ArrayList<Committee>();
+  public ArrayList<Election> elections = new ArrayList<Election>();
   public String submittedCommitteeName;
   public CreateElectionRequest request;
   public Election addedElection;
@@ -45,6 +46,15 @@ public class ElectingWithEverythingCorrectGatewaySpy implements ElectionGateway{
 
   public void recordVote(VoteRecord voteRecord) {
 
+  }
+
+  public Election getElectionFromElectionID(String electionID) throws Exception {
+    for (int i = 0; i <= elections.size(); i++) {
+      if (Integer.toString(elections.get(i).getID()) == electionID){
+        return elections.get(i);
+      }
+    }
+    throw new Exception();
   }
 
   public Seat addSeat(Seat seat) {
