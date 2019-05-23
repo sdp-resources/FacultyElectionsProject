@@ -26,7 +26,10 @@ public class DTSInteractor {
       if (request.status == Candidate.Status.Accepted){
         candidate.setAccepted();
       }
-      candidate.setDeclinded();
+      else{
+        candidate.setDeclinded();
+      }
+      gateway.save();
       return new SuccessResponse();
     }
     catch (Exception e) {
