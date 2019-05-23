@@ -4,6 +4,7 @@ import fsc.entity.Candidate;
 import fsc.mock.ViewDTSGatewayDummy;
 import fsc.request.ViewDTSRequest;
 import fsc.response.*;
+import fsc.viewable.ViewableProfile;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,6 +23,7 @@ public class ViewDTSInteractorTest {
 
     assertEquals(gateway.profile.username, username);
     assertEquals(gateway.candidate.getStatus(), Candidate.Status.NoAnswer);
+    assertTrue(((ViewDTSResponse)response).profile instanceof ViewableProfile);
     assertTrue(response instanceof ViewDTSResponse);
   }
 
