@@ -26,7 +26,7 @@ public class LoginInteractor {
     {
       return new ErrorResponse("Invalid username or password");
     }
-    Session authorizedSession = (AuthorizedSession) authorization;
+    Session authorizedSession = authorization;
     sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorizedSession).getRole(),
                                                     ((AuthorizedSession) authorizedSession).getUsername(),
                                                     ((AuthorizedSession) authorizedSession).getToken(),
