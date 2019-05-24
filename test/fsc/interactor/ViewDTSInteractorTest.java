@@ -4,7 +4,6 @@ import fsc.entity.Candidate;
 import fsc.mock.ViewDTSGatewayDummy;
 import fsc.request.ViewDTSRequest;
 import fsc.response.*;
-import fsc.viewable.ViewableProfile;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

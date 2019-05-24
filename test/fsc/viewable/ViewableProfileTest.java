@@ -3,7 +3,6 @@ package fsc.viewable;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 public class ViewableProfileTest {

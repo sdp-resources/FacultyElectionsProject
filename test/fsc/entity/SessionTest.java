@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static junit.framework.TestCase.*;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 
 public class SessionTest {
