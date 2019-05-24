@@ -19,9 +19,9 @@ public class Committee {
   }
 
   public Seat getSeat(String seatName) throws UnknownSeatNameException {
-    for (int i = 0; i < seats.size(); i++) {
-      if (seats.get(i).getName().equals(seatName)) {
-        return seats.get(i);
+    for (Seat seat : seats) {
+      if (seat.getName().equals(seatName)) {
+        return seat;
       }
     }
     throw new UnknownSeatNameException();
