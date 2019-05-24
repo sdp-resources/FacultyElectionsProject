@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class ViewDTSInteractorTest {
 
   @Test
-  public void canGetDTSFormForUser() {
+  public void canGetDTSFormForUser() throws ErrorResponse {
     String username = "skiadas21";
     String electionID = "1";
     ViewDTSRequest request = new ViewDTSRequest(username, electionID);
@@ -25,7 +25,7 @@ public class ViewDTSInteractorTest {
   }
 
   @Test
-  public void cannotGetDTSFormForUser() {
+  public void cannotGetDTSFormForUser() throws ErrorResponse {
     String username = "wilson";
     String electionID = "1";
     ViewDTSRequest request = new ViewDTSRequest(username, electionID);

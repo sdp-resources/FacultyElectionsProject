@@ -17,7 +17,7 @@ public class DTSInteractorTest {
   private final Candidate.Status status = Candidate.Status.Declined;
 
   @Test
-  public void correctExecuteTest() {
+  public void correctExecuteTest() throws ErrorResponse {
     DTSRequest request = new DTSRequest(electionID, profileUserName, status);
     ViewDTSGatewayDummy gateway = new ViewDTSGatewayDummy();
     DTSInteractor interactor = new DTSInteractor(gateway);
@@ -27,7 +27,7 @@ public class DTSInteractorTest {
   }
 
   @Test
-  public void badExecuteTest() {
+  public void badExecuteTest() throws ErrorResponse {
     DTSRequest request = new DTSRequest(electionID, "wilson", status);
     ViewDTSGatewayDummy gateway = new ViewDTSGatewayDummy();
     DTSInteractor interactor = new DTSInteractor(gateway);
