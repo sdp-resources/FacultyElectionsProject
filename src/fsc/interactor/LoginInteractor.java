@@ -26,13 +26,12 @@ public class LoginInteractor {
     {
       return new ErrorResponse("Invalid username or password");
     }
-    Session authorizedSession = authorization;
-    sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorizedSession).getRole(),
-                                                    ((AuthorizedSession) authorizedSession).getUsername(),
-                                                    ((AuthorizedSession) authorizedSession).getToken(),
-                                                    ((AuthorizedSession) authorizedSession).getExpirationTime()));
+    sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorization).getRole(),
+                                                    ((AuthorizedSession) authorization).getUsername(),
+                                                    ((AuthorizedSession) authorization).getToken(),
+                                                    ((AuthorizedSession) authorization).getExpirationTime()));
     sessionGateway.save();
-    return new LoginResponse(((AuthorizedSession) authorizedSession).getRole(),
-                             ((AuthorizedSession) authorizedSession).getToken());
+    return new LoginResponse(((AuthorizedSession) authorization).getRole(),
+                             ((AuthorizedSession) authorization).getToken());
   }
 }
