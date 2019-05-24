@@ -9,7 +9,7 @@ public class MissingDivisionGatewaySpy implements DivisionGateway {
   ArrayList<Division> divisionList ;
   public String submittedDivisionName;
 
-  public void MissingDivisionGatewaySpy() {
+  public MissingDivisionGatewaySpy() {
     this.divisionList = null;
   }
 
