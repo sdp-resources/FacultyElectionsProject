@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class EditProfileTests {
 
-  Profile profile;
+  private Profile profile;
 
   @Before
   public void setup() {

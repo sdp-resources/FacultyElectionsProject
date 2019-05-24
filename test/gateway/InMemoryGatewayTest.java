@@ -17,8 +17,8 @@ public class InMemoryGatewayTest {
   private static final String DIVISION = "division";
   private static final String CONTRACT = "contract";
   private static final String OTHER_USERNAME = "otherUsername";
-  public static final String A_CONTRACT_TYPE = "aContractType";
-  public static final String NATURAL_SCIENCES_DIVISION = "NatSci";
+  private static final String A_CONTRACT_TYPE = "aContractType";
+  private static final String NATURAL_SCIENCES_DIVISION = "NatSci";
   private Profile profile;
   private InMemoryGateway gateway;
 

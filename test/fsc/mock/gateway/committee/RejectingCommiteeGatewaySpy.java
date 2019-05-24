@@ -4,7 +4,7 @@ import fsc.entity.Committee;
 
 public class RejectingCommiteeGatewaySpy extends CommitteeGatewayDummy {
   public String committeeNameRequested = null;
-  public Committee committeeAdded = null;
+  private Committee committeeAdded = null;
 
   @Override
   public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException

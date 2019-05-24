@@ -18,11 +18,12 @@ public class EditProfileInteractorTest {
 
   EditProfileRequest request;
   Map<String,Object> changes;
-  final Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Before
   public void setup(){
     changes = new HashMap<>();
+
   }
 
   @Test
@@ -92,7 +93,7 @@ public class EditProfileInteractorTest {
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertEquals(request.username, fakegateway.providedUsername);
+    assertEquals(request.username, ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.providedUsername);
   }
 
   @Test
@@ -102,6 +103,6 @@ public class EditProfileInteractorTest {
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertTrue(fakegateway.profileHasBeenEdited);
+    assertTrue(ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.profileHasBeenEdited);
   }
 }

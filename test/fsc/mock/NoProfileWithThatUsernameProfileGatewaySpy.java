@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGateway {
-  public final ArrayList<Profile> profileList;
+  public ArrayList<Profile> profileList;
   public String submittedUsername;
 
   public NoProfileWithThatUsernameProfileGatewaySpy(){

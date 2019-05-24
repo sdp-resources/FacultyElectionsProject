@@ -6,7 +6,7 @@ import fsc.mock.AlwaysTrueQueryStub;
 
 public class AcceptingCommitteeGatewaySpy extends CommitteeGatewayDummy {
   public String committeeNameRequested = null;
-  public Committee committeeAdded = null;
+  private Committee committeeAdded = null;
   public Committee returnedCommittee = null;
 
   public Committee getCommitteeFromCommitteeName(String name) {
@@ -21,7 +21,7 @@ public class AcceptingCommitteeGatewaySpy extends CommitteeGatewayDummy {
   }
 
   private class CommitteeStub extends Committee {
-    public CommitteeStub(String name, String description) {
+    CommitteeStub(String name, String description) {
       super(name, description);
     }
 

@@ -5,7 +5,7 @@ import fsc.gateway.ElectionGateway;
 import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 
-public class ElectionCreatorTest {
+class ElectionCreatorTest {
 
   private Election election;
   private ElectionGateway mockGateway;

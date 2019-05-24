@@ -52,7 +52,7 @@ public class BallotCreatorTest {
     final Profile profile3 = new Profile("name3", "username3", "dept", "contract");
     final private ArrayList<Profile> allProfiles = new ArrayList<>();
 
-    public MockGateway() {
+    MockGateway() {
       allProfiles.add(profile1);
       allProfiles.add(profile2);
       allProfiles.add(profile3);

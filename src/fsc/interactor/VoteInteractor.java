@@ -9,7 +9,7 @@ import fsc.request.VoteRecordRequest;
 public class VoteInteractor {
 
   private final ProfileGateway profileGateway;
-  final ElectionGateway voteGateway;
+  ElectionGateway voteGateway;
 
   public VoteInteractor(ElectionGateway voteRecordGateway, ProfileGateway profileGateway) {
     this.voteGateway = voteRecordGateway;

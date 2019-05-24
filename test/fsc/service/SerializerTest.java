@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class SerializerTest {
-  Serializer serializer;
+  private Serializer serializer;
 
   @Before
   public void Setup()

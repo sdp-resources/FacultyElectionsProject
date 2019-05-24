@@ -1,7 +1,7 @@
 package fsc.entity;
 
 public class Candidate {
-  final Profile profile;
+  Profile profile;
   public enum Status {NoAnswer, Declined, Accepted}
   Status status;
 

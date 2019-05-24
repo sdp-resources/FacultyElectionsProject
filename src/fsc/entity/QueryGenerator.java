@@ -4,8 +4,8 @@ import fsc.entity.query.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class QueryGenerator {
-  public Query generate(JSONObject root) {
+class QueryGenerator {
+  Query generate(JSONObject root) {
     String firstKey = JSONObject.getNames(root)[0];
 
     switch (firstKey)

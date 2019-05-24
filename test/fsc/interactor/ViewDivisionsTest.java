@@ -18,12 +18,13 @@ public class ViewDivisionsTest {
   ViewDivisionRequest request;
   ViewDivisionInteractor interactor;
   Response response;
-  final ArrayList<String> testList = new ArrayList<>();
+  ArrayList<String> testList = new ArrayList<>();
 
   @Before
   public void setup(){
     testList.add("SCI");
     testList.add("ART");
+
   }
 
   @Test

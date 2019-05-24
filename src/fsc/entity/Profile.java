@@ -1,11 +1,11 @@
 package fsc.entity;
 
 public class Profile {
-  String name;
+  private String name;
   public String username;
-  String division;
-  String contract;
-  Boolean active;
+  private String division;
+  private String contract;
+  private Boolean active;
 
   public Profile(String name, String username, String division, String contract) {
     this.name = name;

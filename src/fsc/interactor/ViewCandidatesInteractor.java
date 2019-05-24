@@ -10,10 +10,10 @@ import fsc.viewable.ViewableProfile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewCandidatesInteractor {
+class ViewCandidatesInteractor {
   private final BallotGateway gateway;
 
-  public ViewCandidatesInteractor(BallotGateway gateway) {
+  ViewCandidatesInteractor(BallotGateway gateway) {
     this.gateway = gateway;
   }
 

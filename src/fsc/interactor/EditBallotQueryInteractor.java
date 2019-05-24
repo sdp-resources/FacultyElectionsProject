@@ -13,7 +13,7 @@ public class EditBallotQueryInteractor{
   private final ElectionGateway electionGateway;
   private final ProfileGateway profileGateway;
 
-  public EditBallotQueryInteractor(
+  EditBallotQueryInteractor(
         ElectionGateway electionGateway, ProfileGateway profileGateway
   ){
     this.electionGateway = electionGateway;

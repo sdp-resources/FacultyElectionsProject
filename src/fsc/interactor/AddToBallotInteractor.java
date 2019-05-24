@@ -8,8 +8,8 @@ import fsc.request.AddToBallotRequest;
 import fsc.response.*;
 
 public class AddToBallotInteractor {
-  private final BallotGateway ballotGateway;
-  private final ProfileGateway profileGateway;
+  private BallotGateway ballotGateway;
+  private ProfileGateway profileGateway;
 
   public AddToBallotInteractor(BallotGateway ballotGateway, ProfileGateway profileGateway)
   {

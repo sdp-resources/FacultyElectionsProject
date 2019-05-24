@@ -10,7 +10,7 @@ import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertNotSame;
 
 public class SessionTest {
-  AuthorizedSession session;
+  private AuthorizedSession session;
 
   @Test
   public void javaDatesWeird() throws InterruptedException {

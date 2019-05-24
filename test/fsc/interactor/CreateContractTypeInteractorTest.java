@@ -10,10 +10,10 @@ import static org.junit.Assert.assertTrue;
 
 public class CreateContractTypeInteractorTest {
 
-  public static final String addedContract = "tenured";
-  CreateContractTypeRequest request;
-  CreateContractTypeInteractor interactor;
-  Response response;
+  private static final String addedContract = "tenured";
+  private CreateContractTypeRequest request;
+  private CreateContractTypeInteractor interactor;
+  private Response response;
 
   @Test
   public void succesfullyAddedContract() {

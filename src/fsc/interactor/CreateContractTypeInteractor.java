@@ -5,7 +5,7 @@ import fsc.gateway.ContractTypeGateway;
 import fsc.request.CreateContractTypeRequest;
 import fsc.response.*;
 
-public class CreateContractTypeInteractor {
+class CreateContractTypeInteractor {
 
   private ContractTypeGateway gateway;
 

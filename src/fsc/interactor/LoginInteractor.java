@@ -14,7 +14,7 @@ public class LoginInteractor {
   private final Authorizer authorizer;
   private final Authenticator authenticator;
 
-  public LoginInteractor(SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator) {
+  LoginInteractor(SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator) {
     this.sessionGateway = sessionGateway;
     this.authorizer = authorizer;
     this.authenticator = authenticator;

@@ -13,11 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class ViewProfileInteractorTest {
 
-  final Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Before
   public void setup()
@@ -55,7 +54,7 @@ public class ViewProfileInteractorTest {
     ErrorResponse response = (ErrorResponse) viewInteractor.execute(request);
 
     assertEquals(request.username, gatewaySpy.usernameReceived);
-    assertNull(converterSpy.profileReceived);
+    assertEquals(null, converterSpy.profileReceived);
     assertEquals(ErrorResponse.NO_PROFILE_FOUND, response.message);
   }
 

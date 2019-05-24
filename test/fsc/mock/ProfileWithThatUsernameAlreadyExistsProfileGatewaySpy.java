@@ -2,15 +2,18 @@ package fsc.mock;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
+
 import java.util.ArrayList;
 
 public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGateway {
-  public ArrayList<Profile> profileList;
-  public String providedUsername;
-  public Profile dummyProfile = new Profile("a", "b", "c", "d");
+  public static ArrayList<Profile> profileList;
+  public static String providedUsername;
+  public static Profile dummyProfile = new Profile("a", "b", "c", "d");
   public Profile profileSent;
   Profile providedProfile;
-  public Boolean profileHasBeenEdited = false;
+  static public Boolean profileHasBeenEdited = false;
+
+
 
   public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(Profile profile) {
     this.providedProfile = profile;

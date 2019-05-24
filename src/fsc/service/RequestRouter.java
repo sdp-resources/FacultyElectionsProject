@@ -8,7 +8,7 @@ import fsc.response.Response;
 public class RequestRouter {
   private final Interactor[] interactors;
 
-  public RequestRouter(Interactor... interactors)
+  RequestRouter(Interactor... interactors)
   {
     this.interactors = interactors;
   }

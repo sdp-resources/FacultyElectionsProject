@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class CreateElectionInteractorTest {
 
-  CreateElectionRequest request;
+  private CreateElectionRequest request;
   private CreateElectionInteractor interactor;
   private Response response;
   private final ProfileGateway profileGateway = new ProfileGatewayStub();

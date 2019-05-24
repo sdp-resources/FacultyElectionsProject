@@ -20,13 +20,13 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class VoteInteractorTest {
-  String username;
-  Date date;
-  String vote;
-  int electionID;
+  private String username;
+  private Date date;
+  private String vote;
+  private int electionID;
   private VoteRecordRequest request;
   private ElectionGateway electionGateway;
-  Profile providedProfile;
+  private Profile providedProfile;
 
   @Before
   public void setup() {

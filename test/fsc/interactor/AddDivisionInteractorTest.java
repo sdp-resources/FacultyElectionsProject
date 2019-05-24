@@ -11,8 +11,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AddDivisionInteractorTest {
-  public AddDivisionRequest request;
-  public AddDivisionInteractor interactor;
+  private AddDivisionRequest request;
+  private AddDivisionInteractor interactor;
 
   @Before
   public void setup() {

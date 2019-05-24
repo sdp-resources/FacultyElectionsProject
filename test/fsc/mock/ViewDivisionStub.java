@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 public class ViewDivisionStub implements DivisionGateway {
 
-  final ArrayList<String> divisionList = new ArrayList<>();
+  ArrayList<String> divisionList = new ArrayList<>();
+
+
 
   public ArrayList<String> getAvailableDivisions() {
     return divisionList;
@@ -14,9 +16,12 @@ public class ViewDivisionStub implements DivisionGateway {
 
   public void addDivision(String division) {
     divisionList.add(division);
+
   }
 
-  public void save() {}
+  public void save() {
+
+  }
 
   public Boolean hasDivision(String divisionName) {
     return null;

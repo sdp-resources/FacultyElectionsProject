@@ -11,7 +11,7 @@ import java.util.HashMap;
 import static spark.Spark.*;
 
 // By default serving at http://localhost:4567
-public class Server {
+class Server {
 
   private static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
   private static final InMemoryGateway gateway = InMemoryGateway.fromJSONFile("assets/data/sample.json");

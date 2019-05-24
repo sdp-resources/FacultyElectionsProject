@@ -62,9 +62,9 @@ public class InteractionControllerTest {
   private class InMemoryGatewaySpy extends InMemoryGateway {}
 
   private class CreateProfileInteractorSpy extends CreateProfileInteractor {
-    public CreateProfileRequest submittedRequest = null;
+    CreateProfileRequest submittedRequest = null;
 
-    public CreateProfileInteractorSpy(Gateway gateway) {
+    CreateProfileInteractorSpy(Gateway gateway) {
       super(gateway);
     }
 
@@ -82,7 +82,7 @@ public class InteractionControllerTest {
       return super.execute(submittedRequest);
     }
 
-    public ViewContractsInteractorSpy(ContractTypeGateway gateway) {
+    ViewContractsInteractorSpy(ContractTypeGateway gateway) {
       super(gateway);
     }
   }

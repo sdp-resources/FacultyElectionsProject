@@ -6,7 +6,7 @@ import fsc.request.CreateCommitteeRequest;
 import fsc.response.*;
 
 public class CreateCommitteeInteractor {
-  public final CommitteeGateway gateway;
+  public CommitteeGateway gateway;
 
   public CreateCommitteeInteractor(CommitteeGateway gateway){
     this.gateway = gateway;

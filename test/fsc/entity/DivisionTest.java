@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DivisionTest {
 
-  Division testDivision;
+  private Division testDivision;
 
   @Before
   public void setup() {

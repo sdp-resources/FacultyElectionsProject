@@ -11,7 +11,7 @@ import fsc.response.*;
 
 public class DTSInteractor {
 
-  public final Gateway gateway;
+  public Gateway gateway;
   public Profile profile;
   public Ballot ballot;
   public Candidate candidate;
@@ -20,7 +20,7 @@ public class DTSInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(DTSRequest request) {
+  public Response execute(DTSRequest request) throws ErrorResponse {
     try {
       getProperCandidate(request);
       if (request.status == Candidate.Status.Accepted){

@@ -7,24 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewDTSGatewayDummy implements Gateway {
-  public final Profile profile = new Profile("skiadas", "skiadas21","science","tenured");
-  public final AlwaysTrueQueryStub query = new AlwaysTrueQueryStub();
-  public final Seat seat = new Seat("bigSeat", query);
-  public final Committee committee = new Committee("coolCommittee","This committee is really cool.");
-  public final Ballot ballot = new Ballot();
-  public final Election election = new Election(seat, committee, query, ballot);
-  public final Candidate candidate = new Candidate(profile);
+  public Profile profile = new Profile("skiadas", "skiadas21","science","tenured");
+  public AlwaysTrueQueryStub query = new AlwaysTrueQueryStub();
+  public Seat seat = new Seat("bigSeat", query);
+  public Committee committee = new Committee("coolCommittee","This committee is really cool.");
+  public Ballot ballot = new Ballot();
+  public Election election = new Election(seat, committee, query, ballot);
+  public Candidate candidate = new Candidate(profile);
 
-  public Ballot getBallot(String id) {
+  public Ballot getBallot(String id) throws InvalidBallotIDException {
     ballot.add(profile);
     return ballot;
   }
 
-  public void addBallot(Ballot ballot) {}
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {}
 
   public void addCommittee(Committee committee) {}
 
-  public void addContractType(String contract) {}
+  public void addContractType(String contract) throws Exception {}
 
   public List<String> getAvailableContractTypes() {
     return null;
@@ -48,7 +48,7 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public Election getElectionFromElectionID(String electionID) {
+  public Election getElectionFromElectionID(String electionID) throws Exception {
     return null;
   }
 

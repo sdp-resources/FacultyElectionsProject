@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class VoteTest {
-  Ballot ballot;
+  private Ballot ballot;
 
   @Before
   public void setup() {

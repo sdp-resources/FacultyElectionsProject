@@ -11,7 +11,7 @@ import fsc.response.*;
 
 public class ViewDTSInteractor {
 
-  public final Gateway gateway;
+  public Gateway gateway;
   public Profile profile;
   public Ballot ballot;
   public Candidate candidate;
@@ -20,7 +20,7 @@ public class ViewDTSInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(ViewDTSRequest request) {
+  public Response execute(ViewDTSRequest request) throws ErrorResponse {
     try {
       getProperCandidate(request);
       return new ViewDTSResponse(candidate);

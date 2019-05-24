@@ -1,17 +1,17 @@
 package fsc.entity;
 
 public class Division {
-  public String divisionName;
+  private String divisionName;
 
   public Division(String newDivisionName) {
     this.divisionName = newDivisionName;
   }
 
-  public String getDivisionName() {
+  String getDivisionName() {
     return divisionName;
   }
 
-  public void setDivisionName(String newDivisionName) {
+  void setDivisionName(String newDivisionName) {
     divisionName = newDivisionName;
   }
 

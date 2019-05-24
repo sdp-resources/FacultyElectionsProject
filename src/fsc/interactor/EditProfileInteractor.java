@@ -10,7 +10,7 @@ import java.util.Map;
 public class EditProfileInteractor {
   private final ProfileGateway gateway;
 
-  public EditProfileInteractor(ProfileGateway gateway) {
+  EditProfileInteractor(ProfileGateway gateway) {
     this.gateway = gateway;
   }
 

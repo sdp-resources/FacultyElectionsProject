@@ -9,7 +9,7 @@ public class Ballot extends AbstractList<Profile> {
   private final AbstractList<Profile> profiles = new ArrayList<>();
   private final List<Candidate> candidates = new ArrayList<>();
 
-  public String ballotID;
+  private String ballotID;
 
   public String getBallotID(String ballotID) {
     return ballotID;

@@ -16,7 +16,7 @@ public class CreateProfileInteractorTest {
   CreateProfileRequest request;
   CreateProfileInteractor interactor;
   Response response;
-  final Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Before
   public void setup() {

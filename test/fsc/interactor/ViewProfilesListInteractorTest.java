@@ -13,13 +13,14 @@ import org.junit.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class ViewProfilesListInteractorTest {
 
-  final Profile profile1 = new Profile("Ben Givens", "givensb", "ART", "Tenured");
-  final Profile profile2 = new Profile("Jacob Stricker", "strickerj", "SCIENCE", "Tenured");
-  final Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
+  Profile profile1 = new Profile("Ben Givens", "givensb", "ART", "Tenured");
+  Profile profile2 = new Profile("Jacob Stricker", "strickerj", "SCIENCE", "Tenured");
+  Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
 
   @Before
   public void setup()
@@ -48,7 +49,7 @@ public class ViewProfilesListInteractorTest {
 
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
     assertEquals(expectedProfiles, response.viewableProfiles);
-    assertNotNull(converterSpy.profileReceived);
+    assertTrue(converterSpy.profileReceived != null);
   }
 
   @After

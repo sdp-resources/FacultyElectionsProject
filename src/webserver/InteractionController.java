@@ -20,7 +20,7 @@ public class InteractionController {
   private final InMemoryGateway gateway;
   private final CreateElectionInteractor createElectionInteractor;
 
-  public InteractionController(InMemoryGateway gateway) {
+  InteractionController(InMemoryGateway gateway) {
     viewProfilesListInteractor = new ViewProfilesListInteractor(gateway);
     createProfileInteractor = new CreateProfileInteractor(gateway);
     viewContractsInteractor = new ViewContractsInteractor(gateway);

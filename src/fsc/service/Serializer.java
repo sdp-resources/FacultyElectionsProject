@@ -5,9 +5,9 @@ import fsc.entity.Profile;
 import fsc.entity.Seat;
 import org.json.JSONObject;
 
-public class Serializer {
+class Serializer {
 
-  public String profileToString(Profile profile)
+  String profileToString(Profile profile)
   {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("name", profile.getName());
@@ -17,7 +17,7 @@ public class Serializer {
     return jsonObject.toString();
   }
 
-  public Profile stringToProfile(String string)
+  Profile stringToProfile(String string)
   {
     JSONObject jsonObject = new JSONObject(string);
     String name = jsonObject.getString("name");
@@ -27,14 +27,14 @@ public class Serializer {
     return new Profile(name, username, division, contract);
   }
 
-  public String committeeToString(Committee committee) {
+  String committeeToString(Committee committee) {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("name", committee.getName());
     jsonObject.put("description", committee.getDescription());
     return jsonObject.toString();
   }
 
-  public Committee stringToCommittee(String string) {
+  Committee stringToCommittee(String string) {
     JSONObject jsonObject = new JSONObject(string);
     String name = jsonObject.getString("name");
     String description = jsonObject.getString("description");

@@ -6,7 +6,7 @@ import fsc.gateway.DivisionGateway;
 import java.util.ArrayList;
 
 public class MissingDivisionGatewaySpy implements DivisionGateway {
-  final ArrayList<Division> divisionList ;
+  ArrayList<Division> divisionList ;
   public String submittedDivisionName;
 
   public MissingDivisionGatewaySpy() {
@@ -17,9 +17,12 @@ public class MissingDivisionGatewaySpy implements DivisionGateway {
     return null;
   }
 
-  public void addDivision(String division) {}
+  public void addDivision(String division) {
+  }
 
-  public void save() {}
+  public void save() {
+
+  }
 
   public Boolean hasDivision(String divisionName) {
     submittedDivisionName = divisionName;
