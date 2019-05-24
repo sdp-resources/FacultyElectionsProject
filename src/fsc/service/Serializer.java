@@ -2,7 +2,6 @@ package fsc.service;
 
 import fsc.entity.Committee;
 import fsc.entity.Profile;
-import fsc.entity.Seat;
 import org.json.JSONObject;
 
 class Serializer {
@@ -20,11 +19,15 @@ class Serializer {
   Profile stringToProfile(String string)
   {
     JSONObject jsonObject = new JSONObject(string);
-    String name = jsonObject.getString("name");
-    String username = jsonObject.getString("username");
-    String division = jsonObject.getString("division");
-    String contract = jsonObject.getString("contract");
+    String name = toString(jsonObject, "name");
+    String username = Serializer.this.toString(jsonObject, "username");
+    String division = toString(jsonObject, "division");
+    String contract = toString(jsonObject, "contract");
     return new Profile(name, username, division, contract);
+  }
+
+  private String toString(JSONObject jsonObject, String username) {
+    return jsonObject.getString(username);
   }
 
   String committeeToString(Committee committee) {
@@ -36,8 +39,8 @@ class Serializer {
 
   Committee stringToCommittee(String string) {
     JSONObject jsonObject = new JSONObject(string);
-    String name = jsonObject.getString("name");
-    String description = jsonObject.getString("description");
+    String name = toString(jsonObject, "name");
+    String description = toString(jsonObject, "description");
     return new Committee(name, description);
   }
 

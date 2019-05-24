@@ -4,7 +4,6 @@ import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CommitteeGatewaySpy implements CommitteeGateway {
 
