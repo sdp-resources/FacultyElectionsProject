@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,9 @@ public class VoteInteractorTest {
   @Before
   public void setup() {
     username = "wilsonT";
-    date = new Date(2019,11,22);
+    GregorianCalendar calendar = new GregorianCalendar();
+    calendar.set(2019,11,22);
+    date = calendar.getTime();
     vote = "Haris Skiadas";
     electionID = 1;
     request = new VoteRecordRequest(username, date, vote, electionID);
