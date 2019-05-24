@@ -25,9 +25,6 @@ public class ProfileGatewayStub implements ProfileGateway {
   public void addProfile(Profile profile) { }
 
   public void save() {}
-  public void save() {
-
-  }
 
   public boolean isValidDivision(String division) {
     return false;
