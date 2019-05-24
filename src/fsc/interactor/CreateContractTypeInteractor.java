@@ -7,7 +7,7 @@ import fsc.response.*;
 
 public class CreateContractTypeInteractor {
 
-  private static ContractTypeGateway gateway;
+  private ContractTypeGateway gateway;
 
   public CreateContractTypeInteractor(ContractTypeGateway gateway){this.gateway = gateway;}
 

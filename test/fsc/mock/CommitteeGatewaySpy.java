@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CommitteeGatewaySpy implements CommitteeGateway {
 
-  private final List<Committee> committees = new ArrayList<>();
-  public static String submittedCommitteeName;
+  private List<Committee> committees = new ArrayList<>();
+  public String submittedCommitteeName;
 
   public CommitteeGatewaySpy(){}
 

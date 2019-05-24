@@ -24,7 +24,7 @@ public class AddDivisionInteractorTest {
     MissingDivisionGatewaySpy testGateway =
           new MissingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
-    Response response = AddDivisionInteractor.execute(request);
+    Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
     assertTrue(response instanceof SuccessfullyAddedDivision);
   }

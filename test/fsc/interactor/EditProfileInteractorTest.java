@@ -93,7 +93,7 @@ public class EditProfileInteractorTest {
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertEquals(request.username, ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.providedUsername);
+    assertEquals(request.username, fakegateway.providedUsername);
   }
 
   @Test
@@ -103,6 +103,6 @@ public class EditProfileInteractorTest {
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertTrue(ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.profileHasBeenEdited);
+    assertTrue(fakegateway.profileHasBeenEdited);
   }
 }

@@ -5,12 +5,12 @@ import fsc.gateway.ProfileGateway;
 import java.util.ArrayList;
 
 public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGateway {
-  public static ArrayList<Profile> profileList;
-  public static String providedUsername;
-  public static final Profile dummyProfile = new Profile("a", "b", "c", "d");
+  public ArrayList<Profile> profileList;
+  public String providedUsername;
+  public Profile dummyProfile = new Profile("a", "b", "c", "d");
   public Profile profileSent;
-  final Profile providedProfile;
-  static public Boolean profileHasBeenEdited = false;
+  Profile providedProfile;
+  public Boolean profileHasBeenEdited = false;
 
   public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(Profile profile) {
     this.providedProfile = profile;
@@ -27,7 +27,9 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
     return profileSent;
   }
 
-  public void addProfile(Profile profile) {}
+  public void addProfile(Profile profile) {
+
+  }
 
   public void save() {
     profileHasBeenEdited = true;

@@ -7,7 +7,7 @@ import fsc.response.*;
 
 public class CreateProfileInteractor {
 
-  private static ProfileGateway gateway;
+  private ProfileGateway gateway;
 
 
   public CreateProfileInteractor(ProfileGateway gateway) {
