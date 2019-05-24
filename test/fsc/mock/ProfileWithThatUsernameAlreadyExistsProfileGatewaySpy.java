@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements ProfileGateway {
   public static ArrayList<Profile> profileList;
   public static String providedUsername;
-  public static Profile dummyProfile = new Profile("a", "b", "c", "d");
+  public static final Profile dummyProfile = new Profile("a", "b", "c", "d");
   public Profile profileSent;
-  Profile providedProfile;
+  final Profile providedProfile;
   static public Boolean profileHasBeenEdited = false;
 
   public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(Profile profile) {

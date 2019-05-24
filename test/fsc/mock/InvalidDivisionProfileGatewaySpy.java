@@ -6,7 +6,7 @@ import fsc.gateway.ProfileGateway;
 import java.util.ArrayList;
 
 public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
-  public ArrayList<Profile> profileList;
+  public final ArrayList<Profile> profileList;
   public String submittedUsername;
   public String submittedDivision;
 

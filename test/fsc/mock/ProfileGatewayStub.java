@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProfileGatewayStub implements ProfileGateway {
   public Profile profile;
-  private List<Profile> profiles;
+  private final List<Profile> profiles;
 
   public ProfileGatewayStub(Profile... profiles) {
     this.profiles = Arrays.asList(profiles);

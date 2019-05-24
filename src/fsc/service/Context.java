@@ -9,5 +9,5 @@ public class Context {
 
   }
 
-  public static Context instance = new Context();
+  public static final Context instance = new Context();
 }

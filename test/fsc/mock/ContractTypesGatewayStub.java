@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ContractTypesGatewayStub implements ContractTypeGateway {
 
-  public ArrayList<String> contracts = new ArrayList<>();
+  public final ArrayList<String> contracts = new ArrayList<>();
 
   public ContractTypesGatewayStub() {
     contracts.add("tenure_track");

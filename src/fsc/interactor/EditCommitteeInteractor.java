@@ -8,7 +8,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 
 public class EditCommitteeInteractor {
-  private CommitteeGateway committeeGateway;
+  private final CommitteeGateway committeeGateway;
 
   public EditCommitteeInteractor(CommitteeGateway committeeGateway) {
     this.committeeGateway = committeeGateway;

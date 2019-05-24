@@ -8,7 +8,7 @@ import fsc.response.*;
 import java.util.Map;
 
 public class EditProfileInteractor {
-  private ProfileGateway gateway;
+  private final ProfileGateway gateway;
 
   public EditProfileInteractor(ProfileGateway gateway) {
     this.gateway = gateway;

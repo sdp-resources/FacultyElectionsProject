@@ -6,8 +6,8 @@ public class Election {
 
   private Ballot ballot;
   // should have status:preparing, declined, voting, closed-can be enums //
-  private Committee committee;
-  private Seat seat;
+  private final Committee committee;
+  private final Seat seat;
   private int ID;
 
 

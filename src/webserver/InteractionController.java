@@ -15,10 +15,10 @@ import java.util.function.Function;
 public class InteractionController {
   private ViewProfilesListInteractor viewProfilesListInteractor;
   private CreateProfileInteractor createProfileInteractor;
-  private ViewContractsInteractor viewContractsInteractor;
-  private ViewDivisionInteractor viewDivisionsInteractor;
-  private InMemoryGateway gateway;
-  private CreateElectionInteractor createElectionInteractor;
+  private final ViewContractsInteractor viewContractsInteractor;
+  private final ViewDivisionInteractor viewDivisionsInteractor;
+  private final InMemoryGateway gateway;
+  private final CreateElectionInteractor createElectionInteractor;
 
   public InteractionController(InMemoryGateway gateway) {
     viewProfilesListInteractor = new ViewProfilesListInteractor(gateway);

@@ -6,7 +6,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 
 public class RequestRouter {
-  private Interactor[] interactors;
+  private final Interactor[] interactors;
 
   public RequestRouter(Interactor... interactors)
   {

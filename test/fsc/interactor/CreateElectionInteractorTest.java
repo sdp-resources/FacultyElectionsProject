@@ -19,7 +19,7 @@ public class CreateElectionInteractorTest {
   CreateElectionRequest request;
   private CreateElectionInteractor interactor;
   private Response response;
-  private ProfileGateway profileGateway = new ProfileGatewayStub();
+  private final ProfileGateway profileGateway = new ProfileGatewayStub();
 
   @Before
   public void setup() {

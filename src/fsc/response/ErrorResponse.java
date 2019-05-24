@@ -9,7 +9,7 @@ public class ErrorResponse extends Throwable implements Response {
   public static final String INVALID_COMMITTEE_NAME = "Invalid Committee Name";
   public static final String UNKNOWN_SEAT_NAME = "Unknown Seat Name";
   public static final String UNKNOWN_ELECTION_ID = "Unknown Election ID";
-  public String message;
+  public final String message;
 
   public ErrorResponse(String s) {
     message = s;

@@ -10,8 +10,8 @@ import fsc.response.ErrorResponse;
 import fsc.response.SuccessfullyEditedResponse;
 
 public class EditBallotQueryInteractor{
-  private ElectionGateway electionGateway;
-  private ProfileGateway profileGateway;
+  private final ElectionGateway electionGateway;
+  private final ProfileGateway profileGateway;
 
   public EditBallotQueryInteractor(
         ElectionGateway electionGateway, ProfileGateway profileGateway

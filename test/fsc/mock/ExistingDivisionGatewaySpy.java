@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExistingDivisionGatewaySpy implements DivisionGateway {
-  ArrayList<Division> divisionList;
+  final ArrayList<Division> divisionList;
   public String submittedDivisionName;
 
   public ExistingDivisionGatewaySpy() {

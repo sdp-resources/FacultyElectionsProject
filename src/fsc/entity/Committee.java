@@ -6,7 +6,7 @@ public class Committee {
   private String name;
   private String description;
 
-  private ArrayList<Seat> seats = new ArrayList<>();
+  private final ArrayList<Seat> seats = new ArrayList<>();
 
   public Committee(String name, String description)
   {

@@ -11,11 +11,11 @@ import java.util.List;
 
 public class InMemoryGateway implements Gateway {
 
-  private List<Profile> profiles = new ArrayList<>();
-  private List<String> contractTypes = new ArrayList<>();
-  private List<String> divisions = new ArrayList<>();
-  private List<Committee> committees = new ArrayList<>();
-  private List<Election> elections = new ArrayList<>();
+  private final List<Profile> profiles = new ArrayList<>();
+  private final List<String> contractTypes = new ArrayList<>();
+  private final List<String> divisions = new ArrayList<>();
+  private final List<Committee> committees = new ArrayList<>();
+  private final List<Election> elections = new ArrayList<>();
 
   public static InMemoryGateway fromJSONFile(String path) {
     try {

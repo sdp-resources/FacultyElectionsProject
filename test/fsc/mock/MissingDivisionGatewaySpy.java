@@ -6,7 +6,7 @@ import fsc.gateway.DivisionGateway;
 import java.util.ArrayList;
 
 public class MissingDivisionGatewaySpy implements DivisionGateway {
-  ArrayList<Division> divisionList ;
+  final ArrayList<Division> divisionList ;
   public String submittedDivisionName;
 
   public MissingDivisionGatewaySpy() {

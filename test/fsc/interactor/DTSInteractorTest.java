@@ -12,9 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 public class DTSInteractorTest {
 
-  private String electionID = "12345";
-  private String profileUserName = "skiadas21";
-  private Candidate.Status status = Candidate.Status.Declined;
+  private final String electionID = "12345";
+  private final String profileUserName = "skiadas21";
+  private final Candidate.Status status = Candidate.Status.Declined;
 
   @Test
   public void correctExecuteTest() throws ErrorResponse {

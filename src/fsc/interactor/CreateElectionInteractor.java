@@ -8,9 +8,9 @@ import fsc.request.CreateElectionRequest;
 import fsc.response.*;
 
 public class CreateElectionInteractor {
-  public ElectionGateway electionGateway;
-  private CommitteeGateway committeeGateway;
-  private ProfileGateway profileGateway;
+  public final ElectionGateway electionGateway;
+  private final CommitteeGateway committeeGateway;
+  private final ProfileGateway profileGateway;
 
   public CreateElectionInteractor(ElectionGateway electionGateway,
                                   CommitteeGateway committeeGateway,

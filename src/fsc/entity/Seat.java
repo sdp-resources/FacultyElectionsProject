@@ -5,7 +5,7 @@ import fsc.entity.query.Query;
 public class Seat {
   private Profile profile;
   private Query defaultQuery;
-  private String name;
+  private final String name;
 
   public Seat(String name, Query defaultQuery){
 

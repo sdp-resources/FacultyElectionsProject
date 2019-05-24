@@ -13,9 +13,9 @@ import static spark.Spark.*;
 // By default serving at http://localhost:4567
 public class Server {
 
-  private static HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
-  private static InMemoryGateway gateway = InMemoryGateway.fromJSONFile("assets/data/sample.json");
-  private static InteractionController controller = new InteractionController(gateway);
+  private static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
+  private static final InMemoryGateway gateway = InMemoryGateway.fromJSONFile("assets/data/sample.json");
+  private static final InteractionController controller = new InteractionController(gateway);
 
   public static void main(String[] args) {
     staticFiles.location("/public");
