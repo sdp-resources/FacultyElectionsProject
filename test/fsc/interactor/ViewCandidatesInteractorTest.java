@@ -19,7 +19,7 @@ import static junit.framework.TestCase.assertTrue;
 public class ViewCandidatesInteractorTest {
   private Ballot ballot;
   private String electionId;
-  private List<ViewableProfile> testList = new ArrayList<>();
+  private final List<ViewableProfile> testList = new ArrayList<>();
   private ViewableProfile profile1;
   private ViewableProfile profile2;
   private ViewableProfile profile3;

@@ -17,9 +17,9 @@ import static junit.framework.TestCase.*;
 
 public class ViewProfilesListInteractorTest {
 
-  Profile profile1 = new Profile("Ben Givens", "givensb", "ART", "Tenured");
-  Profile profile2 = new Profile("Jacob Stricker", "strickerj", "SCIENCE", "Tenured");
-  Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
+  final Profile profile1 = new Profile("Ben Givens", "givensb", "ART", "Tenured");
+  final Profile profile2 = new Profile("Jacob Stricker", "strickerj", "SCIENCE", "Tenured");
+  final Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
 
   @Before
   public void setup()

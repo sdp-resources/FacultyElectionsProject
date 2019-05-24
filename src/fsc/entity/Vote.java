@@ -6,7 +6,7 @@ import java.util.List;
 public class Vote {
 
   private final Ballot ballot;
-  List<Profile> listOfVotes = new ArrayList<>();
+  final List<Profile> listOfVotes = new ArrayList<>();
 
   public Vote(Ballot ballot){
     this.ballot = ballot;

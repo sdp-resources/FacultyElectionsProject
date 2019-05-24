@@ -5,8 +5,8 @@ import fsc.viewable.ViewableProfile;
 
 public class ViewDTSResponse implements Response {
 
-  public ViewableProfile profile;
-  public String Status;
+  public final ViewableProfile profile;
+  public final String Status;
 
   public ViewDTSResponse(Candidate candidate){
     this.profile = new ViewableProfile(candidate.getProfile().getName(),

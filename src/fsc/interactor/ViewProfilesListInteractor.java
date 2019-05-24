@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ViewProfilesListInteractor {
-  private ProfileGateway profileGateway;
+  private final ProfileGateway profileGateway;
 
   public ViewProfilesListInteractor(ProfileGateway profileGateway) {
     this.profileGateway = profileGateway;

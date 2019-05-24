@@ -18,7 +18,7 @@ public class ViewDivisionsTest {
   ViewDivisionRequest request;
   ViewDivisionInteractor interactor;
   Response response;
-  ArrayList<String> testList = new ArrayList<>();
+  final ArrayList<String> testList = new ArrayList<>();
 
   @Before
   public void setup(){

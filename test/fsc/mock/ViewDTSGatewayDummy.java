@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewDTSGatewayDummy implements Gateway {
-  public Profile profile = new Profile("skiadas", "skiadas21","science","tenured");
-  public AlwaysTrueQueryStub query = new AlwaysTrueQueryStub();
-  public Seat seat = new Seat("bigSeat", query);
-  public Committee committee = new Committee("coolCommittee","This committee is really cool.");
-  public Ballot ballot = new Ballot();
-  public Election election = new Election(seat, committee, query, ballot);
-  public Candidate candidate = new Candidate(profile);
+  public final Profile profile = new Profile("skiadas", "skiadas21","science","tenured");
+  public final AlwaysTrueQueryStub query = new AlwaysTrueQueryStub();
+  public final Seat seat = new Seat("bigSeat", query);
+  public final Committee committee = new Committee("coolCommittee","This committee is really cool.");
+  public final Ballot ballot = new Ballot();
+  public final Election election = new Election(seat, committee, query, ballot);
+  public final Candidate candidate = new Candidate(profile);
 
   public Ballot getBallot(String id) {
     ballot.add(profile);

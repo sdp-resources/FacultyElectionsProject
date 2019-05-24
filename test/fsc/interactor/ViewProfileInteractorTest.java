@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNull;
 
 public class ViewProfileInteractorTest {
 
-  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  final Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Before
   public void setup()

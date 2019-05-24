@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ViewContractsResponse implements Response{
-  public List<String> contracts;
+  public final List<String> contracts;
 
   public boolean equals(Object o) {
     if (this == o) return true;

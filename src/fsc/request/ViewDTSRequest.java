@@ -1,8 +1,8 @@
 package fsc.request;
 
 public class ViewDTSRequest extends Request {
-  public String username;
-  public String electionID;
+  public final String username;
+  public final String electionID;
 
   public ViewDTSRequest(String username, String electionID){
     this.username = username;

@@ -8,7 +8,7 @@ public class VoteRecord {
   private final Profile profile;
   private final String vote;
   private final int electionID;
-  private Date date;
+  private final Date date;
 
   public VoteRecord(Profile profile, String vote, int electionID) {
     this(profile, Calendar.getInstance().getTime(), vote, electionID);
