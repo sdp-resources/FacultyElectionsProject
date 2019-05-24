@@ -28,7 +28,7 @@ public class EditProfileInteractor {
     Profile profile = gateway.getProfile(request.username);
     Map changesMap = request.changes;
     for (Object key : changesMap.keySet()) {
-      profile = updateProfileField(profile, changesMap, key);
+      updateProfileField(profile, changesMap, key);
     }
     return profile;
   }
@@ -36,7 +36,7 @@ public class EditProfileInteractor {
   private Profile updateProfileField(Profile profile, Map changesMap, Object key) {
     String changeKey = key.toString();
     String changeField = changesMap.get(key).toString();
-    profile = updateProfileWithChanges(changeKey,changeField,profile);
+    updateProfileWithChanges(changeKey, changeField, profile);
     return profile;
   }
 

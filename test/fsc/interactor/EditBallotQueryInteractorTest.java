@@ -20,7 +20,7 @@ public class EditBallotQueryInteractorTest {
   request = new EditBallotQueryRequest("556", new AlwaysTrueQueryStub());
   ElectionGateway fakeGateway = new ElectionGatewaySpy();
   ProfileGateway profileGateway = null;
-  EditBallotQueryInteractor interactor = new EditBallotQueryInteractor(fakeGateway, profileGateway);
+  EditBallotQueryInteractor interactor = new EditBallotQueryInteractor(fakeGateway, null);
   Response response = (Response) interactor.execute(request);
   assertFalse(response instanceof SuccessfullyEditedResponse);
   }
