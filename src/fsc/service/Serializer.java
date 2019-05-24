@@ -45,7 +45,4 @@ public class Serializer {
     return new Committee(name, description);
   }
 
-  public String seatToString(Seat seat) {
-    return null;
-  }
 }

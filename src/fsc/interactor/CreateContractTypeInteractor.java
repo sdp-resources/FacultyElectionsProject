@@ -22,8 +22,4 @@ public class CreateContractTypeInteractor {
     }
     return new SuccessResponse();
 }
-
-  private String makeContractTypeFromRequest(CreateContractTypeRequest request) {
-    return request.contract_type;
-  }
   }

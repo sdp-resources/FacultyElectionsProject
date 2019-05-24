@@ -5,9 +5,8 @@ import fsc.entity.query.Query;
 public class Election {
 
   private Ballot ballot;
-  // should have status:preparing, declined, voting, closed-can be enums //
-  private final Committee committee;
-  private final Seat seat;
+  private Committee committee;
+  private Seat seat;
   private int ID;
 
 
