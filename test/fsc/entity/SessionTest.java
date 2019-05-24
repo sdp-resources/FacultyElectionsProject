@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 
 import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 
 public class SessionTest {
   AuthorizedSession session;

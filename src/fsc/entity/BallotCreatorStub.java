@@ -1,7 +1,6 @@
 package fsc.entity;
 
 import fsc.entity.Ballot;
-import fsc.entity.Profile;
 import fsc.entity.query.Query;
 
 

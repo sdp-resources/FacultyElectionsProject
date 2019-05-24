@@ -16,9 +16,6 @@ import static fsc.response.ErrorResponse.NO_PROFILE_WITH_THAT_USERNAME;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class AddToBallotInteractorTest {
 
   private String ballotID = "98705439870539870";

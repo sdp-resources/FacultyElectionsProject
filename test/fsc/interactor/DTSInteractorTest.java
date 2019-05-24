@@ -1,7 +1,6 @@
 package fsc.interactor;
 
 import fsc.entity.Candidate;
-import fsc.mock.DTSGateWayDummy;
 import fsc.mock.ViewDTSGatewayDummy;
 import fsc.request.DTSRequest;
 import fsc.response.ErrorResponse;
@@ -9,7 +8,6 @@ import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DTSInteractorTest {

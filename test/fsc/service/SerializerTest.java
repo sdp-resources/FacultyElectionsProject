@@ -2,9 +2,6 @@ package fsc.service;
 
 import fsc.entity.Committee;
 import fsc.entity.Profile;
-import fsc.entity.Seat;
-import fsc.entity.query.Query;
-import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 import org.junit.Test;
 

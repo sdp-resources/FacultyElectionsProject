@@ -5,7 +5,6 @@ import fsc.gateway.ProfileGateway;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItem;

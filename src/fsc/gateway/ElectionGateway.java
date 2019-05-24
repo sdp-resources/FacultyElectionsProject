@@ -1,7 +1,5 @@
 package fsc.gateway;
 
-import fsc.entity.VoteRecord;
-
 import fsc.entity.*;
 
 public interface ElectionGateway {

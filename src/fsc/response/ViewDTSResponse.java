@@ -1,7 +1,6 @@
 package fsc.response;
 
 import fsc.entity.Candidate;
-import fsc.entity.Profile;
 import fsc.viewable.ViewableProfile;
 
 public class ViewDTSResponse implements Response {
