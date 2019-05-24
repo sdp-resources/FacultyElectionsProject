@@ -1,0 +1,29 @@
+{{> header.hbs}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>Elections</h2>
+      <ul>
+        {{#each values}}
+          <li class="election" data-name="{{name}}">
+            <h4>For committee: {{committee.name}}</h4>
+            <h3>Seat: {{seat.name}}</h3>
+            Ballot:
+            <ul>
+              {{#with ballot}}
+                {{#each candidates}}
+                  <li class="candidate" data-name="{{profile.name}}">
+                    {{profile.name}} ({{profile.username}})
+                  </li>
+                {{/each}}
+
+              {{/with}}
+            </ul>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{> footer.hbs}}

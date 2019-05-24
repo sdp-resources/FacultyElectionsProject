@@ -3,16 +3,21 @@ package fsc.interactor;
 import fsc.entity.*;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
+import fsc.gateway.ProfileGateway;
 import fsc.request.CreateElectionRequest;
 import fsc.response.*;
 
 public class CreateElectionInteractor {
   public ElectionGateway electionGateway;
   private CommitteeGateway committeeGateway;
+  private ProfileGateway profileGateway;
 
-  public CreateElectionInteractor(ElectionGateway electionGateway, CommitteeGateway committeeGateway) {
+  public CreateElectionInteractor(ElectionGateway electionGateway,
+                                  CommitteeGateway committeeGateway,
+                                  ProfileGateway profileGateway) {
     this.electionGateway = electionGateway;
     this.committeeGateway = committeeGateway;
+    this.profileGateway = profileGateway;
   }
 
   public Response execute(CreateElectionRequest request) {
@@ -31,7 +36,7 @@ public class CreateElectionInteractor {
   }
 
   private Ballot makeBallotFromSeat(Seat seat) {
-    BallotCreatorStub ballotCreator = new BallotCreatorStub();
+    BallotCreator ballotCreator = new BallotCreator(profileGateway);
     return ballotCreator.getBallot(seat.getDefaultQuery());
   }
 

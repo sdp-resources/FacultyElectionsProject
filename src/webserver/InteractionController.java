@@ -1,5 +1,7 @@
 package webserver;
 
+import fsc.entity.Committee;
+import fsc.entity.Election;
 import fsc.interactor.*;
 import fsc.request.*;
 import fsc.response.*;
@@ -15,12 +17,16 @@ public class InteractionController {
   private CreateProfileInteractor createProfileInteractor;
   private ViewContractsInteractor viewContractsInteractor;
   private ViewDivisionInteractor viewDivisionsInteractor;
+  private InMemoryGateway gateway;
+  private CreateElectionInteractor createElectionInteractor;
 
   public InteractionController(InMemoryGateway gateway) {
     viewProfilesListInteractor = new ViewProfilesListInteractor(gateway);
     createProfileInteractor = new CreateProfileInteractor(gateway);
     viewContractsInteractor = new ViewContractsInteractor(gateway);
     viewDivisionsInteractor = new ViewDivisionInteractor(gateway);
+    createElectionInteractor = new CreateElectionInteractor(gateway, gateway, gateway);
+    this.gateway = gateway;
   }
 
   fsc.response.Response createProfile(Function<String, String> params) {
@@ -57,5 +63,20 @@ public class InteractionController {
   public List<String> getAllDivisions() {
     Response response = viewDivisionsInteractor.execute(new ViewDivisionRequest());
     return ((ViewDivisionResponse) response).divisions;
+  }
+
+  public Collection<Committee> getAllCommittees() {
+    return gateway.getAllCommittees();
+  }
+
+  public Response createElection(Function<String, String> params) {
+    String committeeName = params.apply("committee");
+    String seatName = params.apply("seat");
+    CreateElectionRequest request = new CreateElectionRequest(seatName, committeeName);
+    return createElectionInteractor.execute(request);
+  }
+
+  public Collection<Election> getAllElections() {
+    return gateway.getAllElections();
   }
 }

@@ -6,6 +6,7 @@ import fsc.gateway.Gateway;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class InMemoryGateway implements Gateway {
@@ -13,6 +14,8 @@ public class InMemoryGateway implements Gateway {
   private List<Profile> profiles = new ArrayList<>();
   private List<String> contractTypes = new ArrayList<>();
   private List<String> divisions = new ArrayList<>();
+  private List<Committee> committees = new ArrayList<>();
+  private List<Election> elections = new ArrayList<>();
 
   public static InMemoryGateway fromJSONFile(String path) {
     try {
@@ -28,6 +31,7 @@ public class InMemoryGateway implements Gateway {
     dataReader.getContractTypes().forEach(gateway::addContractType);
     dataReader.getDivisions().forEach(gateway::addDivision);
     dataReader.getProfiles().forEach(gateway::addProfile);
+    dataReader.getCommittees().forEach(gateway::addCommittee);
     return gateway;
   }
 
@@ -72,13 +76,23 @@ public class InMemoryGateway implements Gateway {
 
   public void addBallot(Ballot ballot) throws CannotAddBallotException {}
 
-  public void addElection(Election makeElectionFromRequest) {}
-
-  public Committee getCommitteeFromCommitteeName(String committeeName) {
-    return null;
+  public void addElection(Election election) {
+    elections.add(election);
   }
 
-  public void addCommittee(Committee committee) {}
+  public Committee getCommitteeFromCommitteeName(String committeeName)
+        throws UnknownCommitteeException {
+    for (Committee committee : committees) {
+      if (committee.getName().equals(committeeName)) {
+        return committee;
+      }
+    }
+    throw new UnknownCommitteeException();
+  }
+
+  public void addCommittee(Committee committee) {
+    committees.add(committee);
+  }
 
   public void recordVote(VoteRecord voteRecord) {}
 
@@ -88,4 +102,11 @@ public class InMemoryGateway implements Gateway {
 
   public void save() {}
 
+  public List<Committee> getAllCommittees() {
+    return new ArrayList<>(committees);
+  }
+
+  public Collection<Election> getAllElections() {
+    return new ArrayList<>(elections);
+  }
 }

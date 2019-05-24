@@ -1,6 +1,10 @@
 package gateway;
 
+import fsc.entity.Committee;
 import fsc.entity.Profile;
+import fsc.entity.Seat;
+import fsc.entity.query.AttributeQuery;
+import fsc.entity.query.Query;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -33,6 +37,33 @@ class JSONElectionDataReader implements ElectionDataReader {
     return new Profile(name, username, division, contractType);
   }
 
+  private Committee makeCommittee(Object o) {
+    JSONObject json = (JSONObject) o;
+    String name = json.getString("name");
+    String description = json.getString("description");
+    Committee committee = new Committee(name, description);
+    for (Object s : json.getJSONArray("seats")) {
+      committee.addMember(makeSeat(s));
+    }
+    return committee;
+  }
+
+  private Seat makeSeat(Object o) {
+    JSONObject json = (JSONObject) o;
+    String name = json.getString("name");
+    Query query = makeQuery(json.getJSONObject("query"));
+    return new Seat(name, query);
+  }
+
+  private Query makeQuery(JSONObject o) {
+    if (o.has("contractType")) {
+      return new AttributeQuery("contract", o.getString("contractType"));
+    } else {
+      // TODO: Need more cases and compound cases
+      throw new RuntimeException("Not implemented yet");
+    }
+  }
+
   public Stream<Profile> getProfiles() {
     return StreamSupport.stream(getSpliteratorForKey("profiles"), false).map(this::makeProfile);
   }
@@ -43,6 +74,10 @@ class JSONElectionDataReader implements ElectionDataReader {
 
   public Stream<String> getContractTypes() {
     return StreamSupport.stream(getSpliteratorForKey("contractTypes"), false).map(o -> (String) o);
+  }
+
+  public Stream<Committee> getCommittees() {
+    return StreamSupport.stream(getSpliteratorForKey("committees"), false).map(this::makeCommittee);
   }
 
   private Spliterator<Object> getSpliteratorForKey(String key) {

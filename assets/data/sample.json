@@ -24,5 +24,19 @@
       "division": "Humanities",
       "contract": "tenured"
     }
+  ],
+  "committees": [
+    {
+      "name": "FSC",
+      "description": "Faculty Steering Committee",
+      "seats": [
+        {
+          "name": "TenuredMember",
+          "query": {
+            "contractType": "tenured"
+          }
+        }
+      ]
+    }
   ]
 }

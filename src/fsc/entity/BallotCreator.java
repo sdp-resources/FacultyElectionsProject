@@ -7,6 +7,12 @@ public class BallotCreator {
 
   private ProfileGateway profileGateway;
 
+  public BallotCreator() {}
+
+  public BallotCreator(ProfileGateway profileGateway) {
+    this.profileGateway = profileGateway;
+  }
+
   public Ballot getBallot(Query query) {
     Ballot ballot = new Ballot();
     addValidProfilesToBallot(query, ballot);

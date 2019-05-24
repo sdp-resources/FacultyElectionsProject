@@ -26,14 +26,14 @@
     <div class="col-sm-4">
       <form method="post" action="/profile" class="form-inline">
         <h2>Add user</h2>
-        <div class="form-group">
+        <div class="form-group-">
           <label for="newFullName" class="sr-only">Full Name</label>
-          <input type="text" class="form-control form-control" id="newFullName"
+          <input type="text" class="form-control form-control-sm" id="newFullName"
                  name="fullName" placeholder="full name">
         </div>
         <div class="form-group">
           <label for="newUsername" class="sr-only">Username</label>
-          <div class="input-group">
+          <div class="input-group input-group-sm">
             <input type="text" class="form-control form-control" id="newUsername"
                    name="username" placeholder="username">
             <div class="input-group-append">
@@ -43,7 +43,7 @@
         </div>
         <div class="form-group">
           <label for="newContractType" class="sr-only">Contract Type</label>
-          <select name="contractType" class="form-control form-control" id="newContractType">
+          <select name="contractType" class="form-control form-control-sm" id="newContractType">
             {{#each contractTypes}}
               <option value="{{this}}">{{this}}</option>
             {{/each}}
@@ -51,7 +51,7 @@
         </div>
         <div class="form-group">
           <label for="newDivision" class="sr-only">Division</label>
-          <select name="division" class="form-control form-control" id="newDivision">
+          <select name="division" class="form-control form-control-sm" id="newDivision">
             {{#each divisions}}
               <option value="{{this}}">{{this}}</option>
             {{/each}}
@@ -59,7 +59,7 @@
         </div>
         <div class="form-group">
           <input type="submit" value="Add Staff"
-                 class="btn btn-outline-success float-right login_btn">
+                 class="btn btn-sm btn-outline-success float-right login_btn">
         </div>
       </form>
     </div>

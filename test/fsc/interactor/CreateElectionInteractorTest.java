@@ -1,6 +1,9 @@
 package fsc.interactor;
 
+import fsc.gateway.ElectionGateway;
+import fsc.gateway.ProfileGateway;
 import fsc.mock.ElectionGatewaySpy;
+import fsc.mock.ProfileGatewayStub;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommiteeGatewaySpy;
 import fsc.request.CreateElectionRequest;
@@ -16,6 +19,7 @@ public class CreateElectionInteractorTest {
   CreateElectionRequest request;
   private CreateElectionInteractor interactor;
   private Response response;
+  private ProfileGateway profileGateway = new ProfileGatewayStub();
 
   @Before
   public void setup() {
@@ -28,7 +32,7 @@ public class CreateElectionInteractorTest {
     ElectionGatewaySpy electionGateway =
           new ElectionGatewaySpy();
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
-    interactor = new CreateElectionInteractor(electionGateway, committeeGateway);
+    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);
     assertEquals("Cool committee", committeeGateway.committeeNameRequested);
     assertTrue(response instanceof SuccessfullyCreatedElectionResponse);
@@ -42,7 +46,7 @@ public class CreateElectionInteractorTest {
   public void whenCommitteeNameIsMissingThenReturnsErrorResponse() {
     ElectionGatewaySpy electionGateway = new ElectionGatewaySpy();
     RejectingCommiteeGatewaySpy committeeGateway = new RejectingCommiteeGatewaySpy();
-    interactor = new CreateElectionInteractor(electionGateway, committeeGateway);
+    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);
     assertEquals(ErrorResponse.invalidCommitteeName(), response);
     assertNull(electionGateway.addedElection);

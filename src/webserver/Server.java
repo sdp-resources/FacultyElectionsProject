@@ -24,6 +24,22 @@ public class Server {
     get("/profile", Server::showAllProfilesPage);
     post("/profile", Server::createProfile);
     get("/profile/:username", Server::getProfile);
+    get("/committee", Server::showAllCommitteesPage);
+    post("/election", Server::createElection);
+    get("/election", Server::showElections);
+  }
+
+  private static Object showElections(Request req, Response res) {
+    HashMap<Object, Object> returnedHash = new HashMap<>();
+    returnedHash.put("values", controller.getAllElections());
+    return serveTemplate("/electionList.handlebars", returnedHash);
+  }
+
+  private static Object createElection(Request req, Response res) {
+    fsc.response.Response response = controller.createElection(req::queryParams);
+    System.out.println(response);
+    res.redirect("/election");
+    return null;
   }
 
   private static Object getProfile(Request req, Response res) {
@@ -39,8 +55,13 @@ public class Server {
     return null;
   }
 
+  private static Object showAllCommitteesPage(Request req, Response res) {
+    HashMap<Object, Object> returnedHash = new HashMap<>();
+    returnedHash.put("values", controller.getAllCommittees());
+    return serveTemplate("/committeeList.handlebars", returnedHash);
+  }
+
   private static Object showAllProfilesPage(Request req, Response res) {
-    // TODO: No profiles yet
     HashMap<Object, Object> returnedHash = new HashMap<>();
     returnedHash.put("values", controller.getAllProfiles());
     returnedHash.put("contractTypes", controller.getAllContractTypes());

@@ -1,0 +1,30 @@
+{{> header.hbs}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>Committees</h2>
+      <ul>
+        {{#each values}}
+          <li class="committee" data-name="{{name}}">
+            <h4>{{name}}</h4>
+            <p>{{description}}</p>
+            <ul>
+              {{#each seats}}
+                <li class="seat" data-name="{{name}}">
+                  {{name}} : {{defaultQuery.formattedString}}
+                  <form method="post" action="/election">
+                    <input type="hidden" name="committee" value="FSC">
+                    <input type="hidden" name="seat" value="TenuredMember">
+                    <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
+                  </form>
+                </li>
+              {{/each}}
+            </ul>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{> footer.hbs}}

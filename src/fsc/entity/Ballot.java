@@ -34,6 +34,8 @@ public class Ballot extends AbstractList<Profile> {
     return profiles.add(profile);
   }
 
+  public List<Candidate> getCandidates(){ return candidates; }
+
   public Candidate getCandidate(int i) {
     return candidates.get(i);
   }
