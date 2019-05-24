@@ -8,19 +8,20 @@ import java.util.List;
 
 public class CommitteeGatewaySpy implements CommitteeGateway {
 
-  private List<Committee> committees = new ArrayList<>();
-  public String submittedCommitteeName;
+  public static String submittedCommitteeName;
 
-  public CommitteeGatewaySpy(){}
+  public CommitteeGatewaySpy(){
+
+  }
 
   public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException {
     submittedCommitteeName = name;
     throw new UnknownCommitteeException();
   }
 
-  public void addCommittee(Committee committee) {
-    committees.add(committee);
-  }
+  public void addCommittee(Committee committee) {}
 
-  public void save() {}
+  public void save() {
+
+  }
 }
