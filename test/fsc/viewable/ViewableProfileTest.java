@@ -1,10 +1,10 @@
 package fsc.viewable;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class ViewableProfileTest {
   @Test
@@ -34,8 +34,8 @@ public class ViewableProfileTest {
     ViewableProfile a = new ViewableProfile(name, username, division, contract);
     ViewableProfile b = new ViewableProfile(name, username, division, contract);
 
-    assertTrue(a.equals(b));
-    assertTrue(a.hashCode() == b.hashCode());
+    TestCase.assertEquals(a, b);
+    TestCase.assertEquals(a.hashCode(), b.hashCode());
   }
 
   @Test
@@ -50,7 +50,7 @@ public class ViewableProfileTest {
     ViewableProfile a = new ViewableProfile(name, username, divisionA, contract);
     ViewableProfile b = new ViewableProfile(name, username, divisionB, contract);
 
-    assertFalse(a.equals(b));
-    assertFalse(a.hashCode() == b.hashCode());
+    assertNotEquals(a, b);
+    assertNotEquals(a.hashCode(), b.hashCode());
   }
 }

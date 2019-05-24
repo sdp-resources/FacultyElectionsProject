@@ -10,6 +10,7 @@ import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -36,8 +37,8 @@ public class CreateElectionInteractorTest {
     assertEquals("Cool committee", committeeGateway.committeeNameRequested);
     assertTrue(response instanceof SuccessfullyCreatedElectionResponse);
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
-    assertTrue(electionGateway.addedElection.getCommittee().getName().equals(request.committeeName));
-    assertTrue(electionGateway.addedElection.getID() == 1);
+    assertEquals(electionGateway.addedElection.getCommittee().getName(), request.committeeName);
+    assertEquals(1, electionGateway.addedElection.getID());
     assertTrue(electionGateway.hasSaved);
   }
 

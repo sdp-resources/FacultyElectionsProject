@@ -7,8 +7,7 @@ import fsc.response.*;
 import fsc.viewable.ViewableProfile;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ViewDTSInteractorTest {
 
@@ -23,7 +22,7 @@ public class ViewDTSInteractorTest {
 
     assertEquals(gateway.profile.username, username);
     assertEquals(gateway.candidate.getStatus(), Candidate.Status.NoAnswer);
-    assertTrue(((ViewDTSResponse) response).profile != null);
+    assertNotNull(((ViewDTSResponse) response).profile);
   }
 
   @Test

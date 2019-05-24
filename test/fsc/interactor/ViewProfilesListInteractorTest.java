@@ -13,8 +13,7 @@ import org.junit.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 public class ViewProfilesListInteractorTest {
 
@@ -49,7 +48,7 @@ public class ViewProfilesListInteractorTest {
 
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
     assertEquals(expectedProfiles, response.viewableProfiles);
-    assertTrue(converterSpy.profileReceived != null);
+    assertNotNull(converterSpy.profileReceived);
   }
 
   @After

@@ -8,14 +8,15 @@ import java.util.GregorianCalendar;
 
 import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 
 public class SessionTest {
   AuthorizedSession session;
 
   @Test
   public void javaDatesWeird() throws InterruptedException {
-    assertFalse(Calendar.getInstance() == Calendar.getInstance());
-    assertFalse(new GregorianCalendar() == new GregorianCalendar());
+    assertNotSame(Calendar.getInstance(), Calendar.getInstance());
+    assertNotSame(new GregorianCalendar(), new GregorianCalendar());
 
     Calendar calendar = Calendar.getInstance();
     Date initalTime = calendar.getTime();
