@@ -3,7 +3,9 @@ package fsc.entity;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class BallotTest {
 
@@ -16,13 +18,13 @@ public class BallotTest {
 
   @Test
   public void isCreatedBallotEmpty (){
-    assertEquals(true, ballot.isEmpty());
+    assertTrue(ballot.isEmpty());
   }
 
   @Test
   public void addingCandidateResultInNonEmptyBallot() throws Ballot.NoProfileInBallotException {
     Profile testCandidate = createAndAddOneCandidate();
-    assertEquals(false, ballot.isEmpty());
+    assertFalse(ballot.isEmpty());
   }
 
   @Test
@@ -64,7 +66,7 @@ public class BallotTest {
     Profile testCandidate = new Profile("name", "username", "division", "contract");
     ballot.add(testCandidate);
     ballot.remove(testCandidate);
-    assertEquals(true, ballot.isEmpty());
+    assertTrue(ballot.isEmpty());
   }
 
   @Test
