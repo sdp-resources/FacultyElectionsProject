@@ -18,8 +18,8 @@ import static org.junit.Assert.assertEquals;
 
 public class AddToBallotInteractorTest {
 
-  private String ballotID = "98705439870539870";
-  private String profileUsername = "hayfieldj";
+  private final String ballotID = "98705439870539870";
+  private final String profileUsername = "hayfieldj";
   private AddToBallotRequest request;
 
   @Before

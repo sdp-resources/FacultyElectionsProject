@@ -47,10 +47,10 @@ public class BallotCreatorTest {
   }
 
   private class MockGateway implements ProfileGateway {
-    Profile profile1 = new Profile("name1", "username1", "dept", "contract");
-    Profile profile2 = new Profile("name2", "username2", "dept", "contract");
-    Profile profile3 = new Profile("name3", "username3", "dept", "contract");
-    private ArrayList<Profile> allProfiles = new ArrayList<>();
+    final Profile profile1 = new Profile("name1", "username1", "dept", "contract");
+    final Profile profile2 = new Profile("name2", "username2", "dept", "contract");
+    final Profile profile3 = new Profile("name3", "username3", "dept", "contract");
+    final private ArrayList<Profile> allProfiles = new ArrayList<>();
 
     public MockGateway() {
       allProfiles.add(profile1);

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Ballot extends AbstractList<Profile> {
 
-  private AbstractList<Profile> profiles = new ArrayList<>();
-  private List<Candidate> candidates = new ArrayList<>();
+  private final AbstractList<Profile> profiles = new ArrayList<>();
+  private final List<Candidate> candidates = new ArrayList<>();
 
   public String ballotID;
 

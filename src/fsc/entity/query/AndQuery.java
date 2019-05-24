@@ -3,7 +3,7 @@ package fsc.entity.query;
 import fsc.entity.Profile;
 
 public class AndQuery implements Query {
-  private Query[] queries;
+  private final Query[] queries;
 
   public AndQuery(Query[] queries) {
     this.queries = queries;

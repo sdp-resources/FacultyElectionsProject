@@ -5,8 +5,8 @@ import fsc.entity.*;
 import java.util.Calendar;
 
 public class AcceptingAuthorizerStub extends AuthorizerDummy {
-  private String role;
-  private String token;
+  private final String role;
+  private final String token;
 
   public AcceptingAuthorizerStub(String role, String token)
   {

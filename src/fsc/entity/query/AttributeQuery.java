@@ -3,8 +3,8 @@ package fsc.entity.query;
 import fsc.entity.Profile;
 
 public class AttributeQuery implements Query {
-  private String key;
-  private String value;
+  private final String key;
+  private final String value;
 
   public AttributeQuery(String key, String value)
   {

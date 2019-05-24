@@ -6,7 +6,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 
 public class AuthorizeInteractor implements Interactor {
-  private SessionGateway sessionGateway;
+  private final SessionGateway sessionGateway;
 
   public AuthorizeInteractor(SessionGateway sessionGateway) {
     this.sessionGateway = sessionGateway;

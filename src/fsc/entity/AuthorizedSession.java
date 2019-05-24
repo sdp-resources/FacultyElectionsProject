@@ -3,10 +3,10 @@ package fsc.entity;
 import java.util.Calendar;
 
 public class AuthorizedSession implements Session {
-  private String role;
-  private String username;
-  private String token;
-  private Calendar expirationTime;
+  private final String role;
+  private final String username;
+  private final String token;
+  private final Calendar expirationTime;
 
   public AuthorizedSession(String role, String username, String token, Calendar expirationTime) {
     this.role = role;
