@@ -26,7 +26,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void noProfileExistsException() throws Exception {
+  public void noProfileExistsException() {
     changes.put("Contract","Tenured");
     request = new EditProfileRequest("dummyUsername", changes);
     NoProfileWithThatUsernameProfileGatewaySpy fakeGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
@@ -36,7 +36,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void canTakeProfile() throws Exception {
+  public void canTakeProfile() {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway =
@@ -47,7 +47,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void canEditSingleField() throws Exception {
+  public void canEditSingleField() {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway =
@@ -59,7 +59,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void canHandleMultipleChanges() throws Exception {
+  public void canHandleMultipleChanges() {
     changes.put("Name", "Bill Mill");
     changes.put("Division", "Science");
     changes.put("Contract", "Sabbatical");
@@ -74,7 +74,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void canHandleBooleanChanges() throws Exception {
+  public void canHandleBooleanChanges() {
     changes.put("Inactive", true);
     request = new EditProfileRequest("rossB12", changes);
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
@@ -85,7 +85,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void spyRemembersUsername() throws Exception {
+  public void spyRemembersUsername() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
     Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
@@ -96,7 +96,7 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void spyCanTellProfileHasBeenEdited() throws Exception {
+  public void spyCanTellProfileHasBeenEdited() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);

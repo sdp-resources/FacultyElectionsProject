@@ -22,7 +22,7 @@ public class EditCommitteeInteractorTest {
     CommitteeGateway gateway = new RejectingCommitteeGatewayStub();
     EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
     String name = "Steering";
-    HashMap<String, Object> changes = new HashMap<String, Object>();
+    HashMap<String, Object> changes = new HashMap<>();
     changes.put("name", "steering wheel");
     EditCommitteeRequest request = new EditCommitteeRequest(name, changes);
 

@@ -22,25 +22,25 @@ public class BallotTest {
   }
 
   @Test
-  public void addingCandidateResultInNonEmptyBallot() throws Ballot.NoProfileInBallotException {
+  public void addingCandidateResultInNonEmptyBallot() {
     Profile testCandidate = createAndAddOneCandidate();
     assertFalse(ballot.isEmpty());
   }
 
   @Test
-  public void addingOneCandidateIncreasesSizeByOne() throws Ballot.NoProfileInBallotException {
+  public void addingOneCandidateIncreasesSizeByOne() {
     Profile testCandidate = createAndAddOneCandidate();
     assertEquals(1, ballot.size());
   }
 
   @Test
-  public void canGetCandidateFromBallotByIndexing() throws Ballot.NoProfileInBallotException {
+  public void canGetCandidateFromBallotByIndexing() {
     Profile testCandidate = createAndAddOneCandidate();
     assertEquals(testCandidate, ballot.get(0));
   }
 
   @Test
-  public void addingMultipleCandidateIncreasesSize() throws Ballot.NoProfileInBallotException {
+  public void addingMultipleCandidateIncreasesSize() {
     createAndAddManyCandidates();
     assertEquals(3, ballot.size());
   }

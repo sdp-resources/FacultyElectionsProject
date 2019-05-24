@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.*;
+import fsc.gateway.BallotGateway;
 import fsc.mock.*;
 import fsc.request.ViewCandidatesRequest;
 import fsc.response.ErrorResponse;
@@ -57,7 +58,7 @@ public class ViewCandidatesInteractorTest {
   }
 
   @Test
-  public void gatewayCanGetABallot() throws Exception {
+  public void gatewayCanGetABallot() throws BallotGateway.InvalidBallotIDException {
     BallotGatewaySpy gateway = new BallotGatewaySpy();
     ballot = gateway.getBallot(electionId);
 
