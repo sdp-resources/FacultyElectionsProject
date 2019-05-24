@@ -53,7 +53,7 @@ public class ViewDTSGatewayDummy implements Gateway {
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
-    if (profile.username == username){
+    if (profile.username.equals(username)){
       return profile;
     }
     throw new InvalidProfileUsernameException();
