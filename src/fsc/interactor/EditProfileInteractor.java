@@ -74,10 +74,7 @@ public class EditProfileInteractor {
 
   private boolean ifUsernameExists(String username) throws Exception {
 
-    if (gateway.getProfile(username) != null){
-      return true;
-    }
-    return false;
+    return gateway.getProfile(username) != null;
   }
 
 
