@@ -33,14 +33,13 @@ public class EditProfileInteractor {
     return profile;
   }
 
-  private Profile updateProfileField(Profile profile, Map changesMap, Object key) {
+  private void updateProfileField(Profile profile, Map changesMap, Object key) {
     String changeKey = key.toString();
     String changeField = changesMap.get(key).toString();
     updateProfileWithChanges(changeKey, changeField, profile);
-    return profile;
   }
 
-  private Profile updateProfileWithChanges(String changeKey, String changeField, Profile profile) {
+  private void updateProfileWithChanges(String changeKey, String changeField, Profile profile) {
     switch(changeKey){
       case "Contract":
         profile.setContract(changeField);
@@ -65,7 +64,6 @@ public class EditProfileInteractor {
         }
         break;
     }
-    return profile;
   }
 
   private boolean isTrue(String changeField) {
