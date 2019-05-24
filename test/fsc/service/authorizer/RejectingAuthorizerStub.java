@@ -2,7 +2,6 @@ package fsc.service.authorizer;
 
 import fsc.entity.Session;
 import fsc.entity.UnAuthorizedSession;
-import fsc.service.Authenticator;
 
 public class RejectingAuthorizerStub extends AuthorizerDummy {
   @Override
@@ -11,7 +10,4 @@ public class RejectingAuthorizerStub extends AuthorizerDummy {
     return new UnAuthorizedSession();
   }
 
-  public Authenticator authenticate(String username, String password) {
-    return null;
-  }
 }

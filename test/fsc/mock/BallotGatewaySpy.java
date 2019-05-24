@@ -18,17 +18,13 @@ public class BallotGatewaySpy implements BallotGateway {
     this.ballot.add(new Profile("John Collins", "collins", "Natural Science",
                                             "Tenured"));
   }
-  public Ballot getBallot(String id) {
+  public Ballot getBallot(String id) throws InvalidBallotIDException {
     canGetBallot = true;
     return ballot;
   }
 
-  public void addBallot(Ballot ballot) {
+  public void addBallot(Ballot ballot) throws CannotAddBallotException {}
 
-  }
-
-  public void save() {
-
-  }
+  public void save() {}
 
 }

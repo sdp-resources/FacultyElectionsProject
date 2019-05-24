@@ -14,10 +14,6 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
     this.profileList = null;
   }
 
-  public ArrayList<Profile> getProfiles() {
-    return null;
-  }
-
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     submittedUsername = username;
     throw new InvalidProfileUsernameException();

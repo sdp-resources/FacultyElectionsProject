@@ -17,9 +17,7 @@ public class ElectionGatewaySpy implements ElectionGateway{
     hasSaved = false;
   }
 
-  public void recordVote(VoteRecord voteRecord) {
-
-  }
+  public void recordVote(VoteRecord voteRecord) {}
 
   public Election getElectionFromElectionID(String electionID) {
     return null;

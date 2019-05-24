@@ -8,20 +8,15 @@ public class ViewDivisionStub implements DivisionGateway {
 
   ArrayList<String> divisionList = new ArrayList<>();
 
-
-
   public ArrayList<String> getAvailableDivisions() {
     return divisionList;
   }
 
   public void addDivision(String division) {
     divisionList.add(division);
-
   }
 
-  public void save() {
-
-  }
+  public void save() {}
 
   public Boolean hasDivision(String divisionName) {
     return null;

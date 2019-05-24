@@ -15,8 +15,5 @@ public class GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy implements Ballo
     SavedBallot = ballot;
   }
 
-  public void save()
-  {
-
-  }
+  public void save() {}
 }

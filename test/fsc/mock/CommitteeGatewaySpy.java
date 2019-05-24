@@ -11,9 +11,7 @@ public class CommitteeGatewaySpy implements CommitteeGateway {
   private List<Committee> committees = new ArrayList<>();
   public static String submittedCommitteeName;
 
-  public CommitteeGatewaySpy(){
-
-  }
+  public CommitteeGatewaySpy(){}
 
   public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException {
     submittedCommitteeName = name;
@@ -24,7 +22,5 @@ public class CommitteeGatewaySpy implements CommitteeGateway {
     committees.add(committee);
   }
 
-  public void save() {
-
-  }
+  public void save() {}
 }

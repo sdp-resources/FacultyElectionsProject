@@ -1,6 +1,6 @@
 package fsc.interactor;
 
-import fsc.mock.CreatContractTypeGateWaySpy;
+import fsc.mock.CreateContractTypeGateWaySpy;
 import fsc.request.CreateContractTypeRequest;
 import fsc.response.*;
 import org.junit.Test;
@@ -18,17 +18,17 @@ public class CreateContractTypeInteractorTest {
   @Test
   public void succesfullyAddedContract() {
     request =  new CreateContractTypeRequest(addedContract);
-    CreatContractTypeGateWaySpy gateway = new CreatContractTypeGateWaySpy();
+    CreateContractTypeGateWaySpy gateway = new CreateContractTypeGateWaySpy();
     interactor = new CreateContractTypeInteractor(gateway);
     response = interactor.execute(request);
-    assertTrue(gateway.curentContractTypes.contains(addedContract));
+    assertTrue(gateway.currentContractTypes.contains(addedContract));
     assert(response instanceof SuccessResponse);
   }
 
   @Test
   public void contractAlreadyExist() {
     request =  new CreateContractTypeRequest("sabbatical");
-    CreatContractTypeGateWaySpy gateway = new CreatContractTypeGateWaySpy();
+    CreateContractTypeGateWaySpy gateway = new CreateContractTypeGateWaySpy();
     interactor = new CreateContractTypeInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("Contract already exists", ((ErrorResponse) response).message);

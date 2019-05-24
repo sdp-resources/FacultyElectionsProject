@@ -11,10 +11,7 @@ public class CommitteeAlreadyExistsCommitteeGatewaySpy implements CommitteeGatew
     return null;
   }
 
-  public void addCommittee(Committee committee) {
-  }
+  public void addCommittee(Committee committee) {}
 
-  public void save() {
-
-  }
+  public void save() {}
 }

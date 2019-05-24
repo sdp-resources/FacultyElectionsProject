@@ -9,13 +9,9 @@ public class VoteRecordGatewaySpy implements ElectionGateway {
   public Boolean boolTestVar = false;
   public VoteRecord voteRecord;
 
-  public void save() {
+  public void save() {}
 
-  }
-
-  public void addElection(Election election) {
-
-  }
+  public void addElection(Election election) {}
 
   public void recordVote(VoteRecord voteRecord) {
     boolTestVar = true;
