@@ -14,7 +14,7 @@ public class EditProfileInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(EditProfileRequest request) throws Exception {
+  public Response execute(EditProfileRequest request) {
     try{
       Profile profile = editProfileWithRequest(request);
       updateProfileInGateway(profile);

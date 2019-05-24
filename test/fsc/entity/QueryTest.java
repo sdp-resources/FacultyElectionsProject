@@ -14,7 +14,7 @@ public class QueryTest {
   private Profile profile;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     profile = new Profile("Todd", "SmithT", "Art", "contract");
   }
 

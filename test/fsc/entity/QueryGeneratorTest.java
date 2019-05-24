@@ -19,7 +19,7 @@ public class QueryGeneratorTest {
   private Profile samProfile;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     queryGenerator = new QueryGenerator();
     joeProfile = new Profile("Joe", "joe@hanover.edu", "Art", "tenured");
     janeProfile = new Profile("Jane", "jane@hanover.edu", "Librarian", "non-tenured");

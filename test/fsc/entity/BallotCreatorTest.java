@@ -17,7 +17,7 @@ public class BallotCreatorTest {
   private ProfileGateway mockGateway;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     ballotCreator = new BallotCreator();
     mockGateway = makeGateway();
     ballotCreator.setProfileGateway(mockGateway);

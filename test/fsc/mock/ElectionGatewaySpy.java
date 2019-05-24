@@ -21,7 +21,7 @@ public class ElectionGatewaySpy implements ElectionGateway{
 
   }
 
-  public Election getElectionFromElectionID(String electionID) throws Exception {
+  public Election getElectionFromElectionID(String electionID) {
     return null;
   }
 

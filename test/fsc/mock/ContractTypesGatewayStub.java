@@ -16,7 +16,7 @@ public class ContractTypesGatewayStub implements ContractTypeGateway {
     contracts.add("one-year");
   }
 
-  public void addContractType(String contract) throws Exception {
+  public void addContractType(String contract) {
 
   }
 

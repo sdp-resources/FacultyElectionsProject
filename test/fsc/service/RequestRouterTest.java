@@ -19,7 +19,7 @@ public class RequestRouterTest {
   private RequestRouter requestRouter;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     requestRouter = new RequestRouter(new AddDivisionInteractor(new MissingDivisionGatewaySpy()),
                                       new ViewProfileInteractor(new ProfileGatewayStub(
                                             new Profile("James Gordon", "jamesg", "ART", "TENURED"))));

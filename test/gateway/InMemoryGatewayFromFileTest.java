@@ -17,7 +17,7 @@ public class InMemoryGatewayFromFileTest {
   private String pathname;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     pathname = "assets/data/sample.json";
     gateway = InMemoryGateway.fromJSONFile(pathname);
   }

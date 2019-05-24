@@ -8,7 +8,7 @@ public class NoBallotExistsBallotGatewayStub implements BallotGateway {
     throw new InvalidBallotIDException();
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {
+  public void addBallot(Ballot ballot) {
 
   }
 

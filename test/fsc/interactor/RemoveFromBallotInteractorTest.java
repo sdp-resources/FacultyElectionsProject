@@ -22,7 +22,7 @@ public class RemoveFromBallotInteractorTest {
   private RemoveFromBallotRequest request;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     request = new RemoveFromBallotRequest(ballotID, profileUsername);
   }
 

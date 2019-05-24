@@ -20,7 +20,7 @@ public class DTSInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(DTSRequest request) throws ErrorResponse {
+  public Response execute(DTSRequest request) {
     try {
       getProperCandidate(request);
       if (request.status == Candidate.Status.Accepted){

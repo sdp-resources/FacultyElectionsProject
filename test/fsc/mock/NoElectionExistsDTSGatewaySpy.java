@@ -12,11 +12,11 @@ public class NoElectionExistsDTSGatewaySpy implements Gateway {
   public String submittedUserName;
   public Candidate.Status submittedStatus;
 
-  public Ballot getBallot(String id) throws InvalidBallotIDException {
+  public Ballot getBallot(String id) {
     return null;
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {
+  public void addBallot(Ballot ballot) {
 
   }
 
@@ -24,7 +24,7 @@ public class NoElectionExistsDTSGatewaySpy implements Gateway {
 
   }
 
-  public void addContractType(String contract) throws Exception {
+  public void addContractType(String contract) {
 
   }
 
@@ -56,11 +56,11 @@ public class NoElectionExistsDTSGatewaySpy implements Gateway {
 
   }
 
-  public Election getElectionFromElectionID(String electionID) throws Exception {
+  public Election getElectionFromElectionID(String electionID) {
     return null;
   }
 
-  public Profile getProfile(String username) throws InvalidProfileUsernameException {
+  public Profile getProfile(String username) {
     return null;
   }
 

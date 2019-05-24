@@ -16,7 +16,7 @@ public class EditBallotQueryInteractorTest {
   private EditBallotQueryRequest request;
 
   @Test
-  public void isElectionID() throws Exception{
+  public void isElectionID() {
   request = new EditBallotQueryRequest("556", new AlwaysTrueQueryStub());
   ElectionGateway fakeGateway = new ElectionGatewaySpy();
   ProfileGateway profileGateway = null;

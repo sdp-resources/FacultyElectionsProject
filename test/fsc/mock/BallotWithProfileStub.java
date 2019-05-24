@@ -13,11 +13,11 @@ public class BallotWithProfileStub implements BallotGateway {
     ballot.add(profile);
   }
 
-  public Ballot getBallot(String id) throws InvalidBallotIDException {
+  public Ballot getBallot(String id) {
     return ballot;
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {
+  public void addBallot(Ballot ballot) {
 
 
   }

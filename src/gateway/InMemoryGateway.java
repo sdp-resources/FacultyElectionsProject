@@ -70,11 +70,11 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(divisions);
   }
 
-  public Ballot getBallot(String id) throws InvalidBallotIDException {
+  public Ballot getBallot(String id) {
     return null;
   }
 
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {}
+  public void addBallot(Ballot ballot) {}
 
   public void addElection(Election election) {
     elections.add(election);
@@ -96,7 +96,7 @@ public class InMemoryGateway implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public Election getElectionFromElectionID(String electionID) throws Exception {
+  public Election getElectionFromElectionID(String electionID) {
     return null;
   }
 

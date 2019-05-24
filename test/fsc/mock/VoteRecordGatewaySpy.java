@@ -22,7 +22,7 @@ public class VoteRecordGatewaySpy implements ElectionGateway {
     this.voteRecord = voteRecord;
   }
 
-  public Election getElectionFromElectionID(String electionID) throws Exception {
+  public Election getElectionFromElectionID(String electionID) {
     return null;
   }
 }

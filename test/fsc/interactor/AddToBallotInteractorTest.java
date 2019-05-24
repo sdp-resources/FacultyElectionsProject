@@ -23,7 +23,7 @@ public class AddToBallotInteractorTest {
   private AddToBallotRequest request;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     request = new AddToBallotRequest(ballotID, profileUsername);
   }
 

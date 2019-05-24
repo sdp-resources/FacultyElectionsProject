@@ -14,7 +14,7 @@ public class VoteRecorderTest {
   private String vote;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     Ballot ballot = new Ballot();
     vote = "";
   }

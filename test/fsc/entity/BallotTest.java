@@ -12,7 +12,7 @@ public class BallotTest {
   private Ballot ballot;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     ballot = new Ballot();
   }
 
@@ -91,14 +91,14 @@ public class BallotTest {
     assertEquals(0, ballot.sizeCandidates());
   }
 
-  private Profile createAndAddOneCandidate() throws Ballot.NoProfileInBallotException {
+  private Profile createAndAddOneCandidate() {
     Profile testCandidate = new Profile("name", "username", "division",
                                                         "contract");
     ballot.add(testCandidate);
     return testCandidate;
   }
 
-  private void createAndAddManyCandidates() throws Ballot.NoProfileInBallotException {
+  private void createAndAddManyCandidates() {
     Profile testCandidate1 = new Profile("name1", "username1","department1",
                                              "contract1");
     Profile testCandidate2 = new Profile("name2", "username2","department2",
