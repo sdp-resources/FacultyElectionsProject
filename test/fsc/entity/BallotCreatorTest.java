@@ -71,9 +71,6 @@ public class BallotCreatorTest {
     public void save() {
     }
 
-    public boolean isValidDivision(String division) {
-      return false;
-    }
 
   }
 }

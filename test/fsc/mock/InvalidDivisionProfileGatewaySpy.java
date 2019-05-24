@@ -30,10 +30,13 @@ public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
 
   }
 
-  public boolean isValidDivision(String division) {
-    submittedDivision = division;
-    return false;
+  public void saveProfile(Profile profile) {
+
   }
+
+  public void clearProfileList() {}
+
+
 
   public Profile getProfile(String userName) {
     return null;

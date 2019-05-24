@@ -24,12 +24,16 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   public void save() {
   }
 
+  public void saveProfile(Profile profile) {
+
+  }
+
   public List<Profile> getAllProfiles() {
     return null;
   }
 
-  public boolean isValidDivision(String division) {
-    return true;
+  public void clearProfileList() {
+
   }
 
 }

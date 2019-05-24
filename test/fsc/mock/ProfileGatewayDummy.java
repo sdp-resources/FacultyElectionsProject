@@ -19,8 +19,8 @@ public class ProfileGatewayDummy implements ProfileGateway {
   public void save() {
   }
 
-  public boolean isValidDivision(String division) {
-    return false;
+  public void saveProfile(Profile profile) {
+
   }
 
 }

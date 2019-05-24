@@ -6,10 +6,6 @@ import fsc.entity.Seat;
 import org.json.JSONObject;
 
 public class Serializer {
-  public String SeatToString(Seat seat)
-  {
-    return "";
-  }
 
   public String profileToString(Profile profile)
   {
