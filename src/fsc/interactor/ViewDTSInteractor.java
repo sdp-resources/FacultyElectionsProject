@@ -20,7 +20,7 @@ public class ViewDTSInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(ViewDTSRequest request) throws ErrorResponse {
+  public Response execute(ViewDTSRequest request) {
     try {
       getProperCandidate(request);
       return new ViewDTSResponse(candidate);
