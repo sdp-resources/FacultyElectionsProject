@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ViewDivisionStub implements DivisionGateway {
 
-  ArrayList<String> divisionList = new ArrayList<String>();
+  ArrayList<String> divisionList = new ArrayList<>();
 
 
 

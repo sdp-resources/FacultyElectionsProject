@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreatContractTypeGateWaySpy implements ContractTypeGateway {
-  public List<String> curentContractTypes = new ArrayList<String>();
+  public List<String> curentContractTypes = new ArrayList<>();
 
   public CreatContractTypeGateWaySpy(){
     curentContractTypes.add("sabbatical");

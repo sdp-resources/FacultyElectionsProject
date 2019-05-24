@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ViewDivisions {
 
-  ArrayList<String> divisionList = new ArrayList<String>();
+  ArrayList<String> divisionList = new ArrayList<>();
 
   public ArrayList<String> getDivisionList(){
     return divisionList;

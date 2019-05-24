@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ProfileToHashMapConverter {
   public Map<String, String> createHashMap(Profile profile) {
-    Map<String, String> profileView = new HashMap<String, String>();
+    Map<String, String> profileView = new HashMap<>();
     profileView.put("Username", profile.getUsername());
     profileView.put("Name", profile.getName());
     profileView.put("Department", profile.getDivision());

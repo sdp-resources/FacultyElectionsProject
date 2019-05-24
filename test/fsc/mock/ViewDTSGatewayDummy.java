@@ -60,7 +60,7 @@ public class ViewDTSGatewayDummy implements Gateway {
   }
 
   public List<Profile> getAllProfiles() {
-    List<Profile> profiles = new ArrayList<Profile>();
+    List<Profile> profiles = new ArrayList<>();
     profiles.add(profile);
     return profiles;
   }
