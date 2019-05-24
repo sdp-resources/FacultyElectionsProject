@@ -71,10 +71,6 @@ public class BallotCreatorTest {
     public void save() {
     }
 
-    public void saveProfile(Profile profile) {
-
-    }
-
     public boolean isValidDivision(String division) {
       return false;
     }

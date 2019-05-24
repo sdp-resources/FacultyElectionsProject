@@ -17,7 +17,4 @@ public class AlwaysFailsSaveBallotGatewayStub implements BallotGateway {
 
   }
 
-  public void remove(Profile profile) throws Ballot.NoProfileInBallotException {
-
-  }
 }
