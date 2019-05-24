@@ -22,13 +22,4 @@ public class AuthorizeInteractorTest {
     assertEquals("Session invalid", response.message);
     assertTrue(canHandleRequest);
   }
-
-  /*@Test
-  public void validCredentialsRefusesToHandleRequest()
-  {
-    Calendar calendar = Calendar.getInstance();
-    calendar.add();
-    Session validSession = new Session("Admin", "jamesg", "sldfsl", )
-    SessionGateway sessionGateway = new SessionGatewaySpy()
-  }*/
 }

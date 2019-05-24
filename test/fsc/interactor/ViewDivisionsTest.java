@@ -24,7 +24,6 @@ public class ViewDivisionsTest {
   public void setup(){
     testList.add("SCI");
     testList.add("ART");
-
   }
 
   @Test

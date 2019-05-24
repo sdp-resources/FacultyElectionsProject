@@ -24,7 +24,6 @@ public class DTSInteractorTest {
     Response response = interactor.execute(request);
 
     assertTrue(response instanceof SuccessResponse);
-    //assertEquals(Candidate.Status.Declined, gateway.candidate.getStatus());
   }
 
   @Test

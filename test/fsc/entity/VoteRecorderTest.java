@@ -50,6 +50,4 @@ public class VoteRecorderTest {
     assertEquals(1, voteRecord.getElectionID());
   }
 
-
-
 }

@@ -23,7 +23,6 @@ public class EditProfileInteractorTest {
   @Before
   public void setup(){
     changes = new HashMap<>();
-
   }
 
   @Test
