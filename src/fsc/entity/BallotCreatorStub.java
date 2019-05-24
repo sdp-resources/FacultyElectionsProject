@@ -1,8 +1,6 @@
 package fsc.entity;
 
-import fsc.entity.Ballot;
 import fsc.entity.query.Query;
-
 
 public class BallotCreatorStub {
 
