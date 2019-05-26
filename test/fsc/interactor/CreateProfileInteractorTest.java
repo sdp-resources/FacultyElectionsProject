@@ -37,6 +37,6 @@ public class CreateProfileInteractorTest {
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
-    assertEquals("Profile with that username already exists", ((ErrorResponse)response).message);
+    assertEquals(ErrorResponse.resourceExists(), response);
   }
 }

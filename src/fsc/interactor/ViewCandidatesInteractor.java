@@ -19,7 +19,7 @@ class ViewCandidatesInteractor {
 
   public Response execute(ViewCandidatesRequest request) throws Exception {
     if (gateway.getBallot(request.electionID) == null) {
-      return new ErrorResponse("Invalid Election ID");
+      return ErrorResponse.unknownElectionID();
     }
     return viewCandidates(request);
   }

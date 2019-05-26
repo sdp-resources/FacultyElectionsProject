@@ -31,6 +31,6 @@ public class CreateContractTypeInteractorTest {
     CreateContractTypeGateWaySpy gateway = new CreateContractTypeGateWaySpy();
     interactor = new CreateContractTypeInteractor(gateway);
     response = interactor.execute(request);
-    assertEquals("Contract already exists", ((ErrorResponse) response).message);
+    assertEquals(ErrorResponse.resourceExists(), response);
   }
 }

@@ -21,7 +21,7 @@ public class CreateProfileInteractor {
       gateway.addProfile(makeProfileFromRequest(request));
       return new SuccessResponse();
       }
-    return new ErrorResponse("Profile with that username already exists");
+    return ErrorResponse.resourceExists();
   }
 
   private Profile makeProfileFromRequest(CreateProfileRequest request) {

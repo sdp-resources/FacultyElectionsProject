@@ -36,6 +36,6 @@ public class AddDivisionInteractorTest {
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
-    assertEquals("Division already exists", ((ErrorResponse) response).message);
+    assertEquals(ErrorResponse.resourceExists(), response);
   }
 }

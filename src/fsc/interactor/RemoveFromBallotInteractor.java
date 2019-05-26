@@ -32,11 +32,12 @@ public class RemoveFromBallotInteractor {
       ballotGateway.save();
       return new SuccessfullyRemovedProfileFromBallotResponse();
     } catch (BallotGateway.InvalidBallotIDException e) {
-      return new ErrorResponse("No ballot with that ID");
+      return ErrorResponse.unknownBallotID();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return new ErrorResponse("No profile with that username");
+      return ErrorResponse.unknownProfileName();
     } catch (Ballot.NoProfileInBallotException e) {
-      return new ErrorResponse("Ballot does not contain profile");
+      return ErrorResponse.invalidCandidate();
     }
   }
+
 }

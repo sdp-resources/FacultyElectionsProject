@@ -20,7 +20,7 @@ public class EditProfileInteractor {
       updateProfileInGateway(profile);
       return new SuccessResponse();
     } catch (Exception e){
-      return new ErrorResponse("No profile with that username exists");
+      return ErrorResponse.unknownProfileName();
     }
   }
 

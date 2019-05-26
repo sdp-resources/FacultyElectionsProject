@@ -32,11 +32,11 @@ public class RemoveFromBallotInteractorTest {
     NoBallotExistsBallotGatewayStub noBallotBallotGateway = new NoBallotExistsBallotGatewayStub();
     ProfileGateway dummyProfileGateway = new ProfileGatewayDummy();
 
-    RemoveFromBallotInteractor inter = new RemoveFromBallotInteractor(noBallotBallotGateway,
+    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(noBallotBallotGateway,
                                                             dummyProfileGateway);
-    Response response = inter.execute(request);
+    Response response = interactor.execute(request);
 
-    assertEquals("No ballot with that ID", ((ErrorResponse)response).message);
+    assertEquals(ErrorResponse.unknownBallotID(), response);
   }
 
   @Test
@@ -49,7 +49,7 @@ public class RemoveFromBallotInteractorTest {
                                                              noProfileProfileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals("No profile with that username", ((ErrorResponse)response).message);
+    assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
   @Test

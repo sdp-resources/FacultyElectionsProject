@@ -28,7 +28,7 @@ public class EditCommitteeInteractorTest {
 
     ErrorResponse response = (ErrorResponse) interactor.execute(request);
 
-    assertEquals("No committee with that name", response.message);
+    assertEquals(ErrorResponse.unknownCommitteeName(), response);
   }
 
   @Test

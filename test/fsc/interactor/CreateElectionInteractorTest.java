@@ -48,7 +48,7 @@ public class CreateElectionInteractorTest {
     RejectingCommiteeGatewaySpy committeeGateway = new RejectingCommiteeGatewaySpy();
     interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);
-    assertEquals(ErrorResponse.invalidCommitteeName(), response);
+    assertEquals(ErrorResponse.unknownCommitteeName(), response);
     assertNull(electionGateway.addedElection);
     assertNotNull(committeeGateway.committeeNameRequested);
   }

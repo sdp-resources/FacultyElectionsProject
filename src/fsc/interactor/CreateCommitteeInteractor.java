@@ -19,7 +19,7 @@ public class CreateCommitteeInteractor {
       gateway.save();
       return new SuccessResponse();
     }
-    return new ErrorResponse("Failed to create committee");
+    return ErrorResponse.resourceExists();
   }
 
   private Committee makeCommitteeFromRequest(CreateCommitteeRequest request) {

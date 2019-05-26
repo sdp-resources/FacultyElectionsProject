@@ -8,8 +8,7 @@ import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.mock.VoteRecordGatewaySpy;
 import fsc.request.VoteRecordRequest;
-import fsc.response.ProfileDoesNotExistResponse;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,18 +31,19 @@ public class VoteInteractorTest {
   public void setup() {
     username = "wilsonT";
     GregorianCalendar calendar = new GregorianCalendar();
-    calendar.set(2019,11,22);
+    calendar.set(2019, 11, 22);
     date = calendar.getTime();
     vote = "Haris Skiadas";
     electionID = 1;
     request = new VoteRecordRequest(username, date, vote, electionID);
     electionGateway = new VoteRecordGatewaySpy();
-    providedProfile = new Profile("Bob Ross", "rossB12","Arts and Letters", "Tenured");
+    providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
   }
 
   @Test
   public void canExecuteGoodID() throws Exception {
-    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
+    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+          providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
 
     assertTrue(interactor.execute(request) instanceof SuccessResponse);
@@ -53,13 +53,14 @@ public class VoteInteractorTest {
   public void canExecuteBadID() throws Exception {
     ProfileGateway profileGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
-
-    assertTrue(interactor.execute(request) instanceof ProfileDoesNotExistResponse);
+    Response response = interactor.execute(request);
+    assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
   @Test
   public void voteRecordSpyFunctionality() throws Exception {
-    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
+    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+          providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
     interactor.execute(request);
 
@@ -68,7 +69,8 @@ public class VoteInteractorTest {
 
   @Test
   public void canRecordAVote() throws Exception {
-    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
+    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+          providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
     interactor.execute(request);
     Profile profile = profileGateway.getProfile(username);

@@ -23,7 +23,7 @@ public class EditCommitteeInteractor {
     }
     catch (CommitteeGateway.UnknownCommitteeException e)
     {
-      return new ErrorResponse("No committee with that name");
+      return ErrorResponse.unknownCommitteeName();
     }
 
     for(String field : request.changes.keySet())

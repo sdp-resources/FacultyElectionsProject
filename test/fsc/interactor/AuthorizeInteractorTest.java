@@ -19,7 +19,7 @@ public class AuthorizeInteractorTest {
     boolean canHandleRequest = authorizeInteractor.canHandle(request);
     ErrorResponse response = (ErrorResponse) authorizeInteractor.execute(request);
 
-    assertEquals("Session invalid", response.message);
+    assertEquals(ErrorResponse.notAuthorized(), response);
     assertTrue(canHandleRequest);
   }
 }

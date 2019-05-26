@@ -31,7 +31,7 @@ public class LoginInteractorTest {
 
     ErrorResponse response = (ErrorResponse) loginInteractor.execute(request);
 
-    assertEquals("Invalid username or password", response.message);
+    assertEquals(ErrorResponse.notAuthorized(), response);
   }
 
   @Test

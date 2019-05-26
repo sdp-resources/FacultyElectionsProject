@@ -17,6 +17,7 @@ public class AuthorizeInteractor implements Interactor {
   }
 
   public Response execute(Request request) {
-    return new ErrorResponse("Session invalid");
+    return ErrorResponse.notAuthorized();
   }
+
 }

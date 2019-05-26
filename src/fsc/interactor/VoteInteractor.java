@@ -19,7 +19,7 @@ public class VoteInteractor {
   public Response execute(VoteRecordRequest request) throws Exception {
     try {profileGateway.getProfile(request.username);}
     catch (Exception e) {
-      return new ProfileDoesNotExistResponse();
+      return ErrorResponse.unknownProfileName();
     }
     voteGateway.recordVote(createVoteObject(request));
       return new SuccessResponse();

@@ -27,10 +27,11 @@ public class AddToBallotInteractor {
       ballot.add(profile);
       ballotGateway.save();
     } catch (BallotGateway.InvalidBallotIDException e) {
-      return new ErrorResponse(ErrorResponse.NO_BALLOT_WITH_THAT_ID);
+      return ErrorResponse.unknownBallotID();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return new ErrorResponse(ErrorResponse.NO_PROFILE_WITH_THAT_USERNAME);
+      return ErrorResponse.unknownProfileName();
     }
     return new SuccessfullyAddedProfileToBallotResponse();
   }
+
 }

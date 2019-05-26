@@ -15,7 +15,7 @@ public class AddDivisionInteractor implements Interactor {
 
   public static Response execute(AddDivisionRequest request) {
     if (gateway.hasDivision(request.name)){
-      return new ErrorResponse("Division already exists");
+      return ErrorResponse.resourceExists();
     }
     gateway.addDivision(request.name);
     gateway.save();

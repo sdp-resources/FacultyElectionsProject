@@ -4,6 +4,7 @@ import fsc.entity.Profile;
 import fsc.mock.*;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
+import fsc.response.Response;
 import fsc.response.ViewProfileResponse;
 
 import fsc.service.Context;
@@ -51,11 +52,11 @@ public class ViewProfileInteractorTest {
 
     ViewProfileRequest request = new ViewProfileRequest("BoogieA14");
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
-    ErrorResponse response = (ErrorResponse) viewInteractor.execute(request);
+    Response response = viewInteractor.execute(request);
 
     assertEquals(request.username, gatewaySpy.usernameReceived);
     assertEquals(null, converterSpy.profileReceived);
-    assertEquals(ErrorResponse.NO_PROFILE_FOUND, response.message);
+    assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
   @After

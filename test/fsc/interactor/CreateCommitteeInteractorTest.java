@@ -35,6 +35,6 @@ public class CreateCommitteeInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals("cccc", gateway.submittedCommitteeName);
-    assertEquals("Failed to create committee", ((ErrorResponse)response).message);
+    assertEquals(ErrorResponse.resourceExists(), response);
   }
 }

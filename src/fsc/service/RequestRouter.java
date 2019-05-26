@@ -22,6 +22,7 @@ public class RequestRouter {
       }
     }
 
-    return new ErrorResponse("No interactor can handle that request");
+    return ErrorResponse.cannotHandle();
   }
+
 }

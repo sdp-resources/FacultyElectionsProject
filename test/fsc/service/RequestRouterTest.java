@@ -31,7 +31,7 @@ public class RequestRouterTest {
     requestRouter = new RequestRouter();
     AddDivisionRequest addDivisionRequest = new AddDivisionRequest("SQUAD");
     ErrorResponse response = (ErrorResponse) requestRouter.execute(addDivisionRequest);
-    assertEquals("No interactor can handle that request", response.message);
+    assertEquals(ErrorResponse.cannotHandle(), response);
   }
 
   @Test

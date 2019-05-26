@@ -29,7 +29,7 @@ public class CreateElectionInteractor {
       electionGateway.save();
       return new SuccessfullyCreatedElectionResponse();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return ErrorResponse.invalidCommitteeName();
+      return ErrorResponse.unknownCommitteeName();
     } catch (Committee.UnknownSeatNameException e) {
       return ErrorResponse.unknownSeatName();
     }

@@ -33,7 +33,7 @@ public class EditProfileInteractorTest {
     NoProfileWithThatUsernameProfileGatewaySpy fakeGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
     EditProfileInteractor interactor = new EditProfileInteractor(fakeGateway);
     Response response = interactor.execute(request);
-    assertEquals("No profile with that username exists", ((ErrorResponse)response).message);
+    assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
   @Test

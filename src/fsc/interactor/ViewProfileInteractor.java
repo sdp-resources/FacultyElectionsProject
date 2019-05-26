@@ -30,7 +30,7 @@ public class ViewProfileInteractor implements Interactor {
     }
     catch (ProfileGateway.InvalidProfileUsernameException e)
     {
-      return new ErrorResponse(ErrorResponse.NO_PROFILE_FOUND);
+      return ErrorResponse.unknownProfileName();
     }
 
     return new ViewProfileResponse(Context.instance.profileToViewableProfileConverter.convert(profile));

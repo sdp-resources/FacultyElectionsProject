@@ -31,9 +31,10 @@ public class DTSInteractor {
       }
       gateway.save();
       return new SuccessResponse();
-    }
-    catch (Exception e) {
-      return new ErrorResponse("Invalid request");
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
+      return ErrorResponse.unknownProfileName();
+    } catch (BallotGateway.InvalidBallotIDException e) {
+      return ErrorResponse.unknownBallotID();
     }
   }
 
