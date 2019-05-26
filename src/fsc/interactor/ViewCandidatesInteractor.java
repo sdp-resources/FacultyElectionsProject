@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ViewCandidatesInteractor {
-  private final BallotGateway gateway;
+  private BallotGateway gateway;
 
   ViewCandidatesInteractor(BallotGateway gateway) {
     this.gateway = gateway;

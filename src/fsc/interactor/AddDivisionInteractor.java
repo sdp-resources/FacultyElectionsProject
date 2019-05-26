@@ -7,13 +7,13 @@ import fsc.response.*;
 
 public class AddDivisionInteractor implements Interactor {
 
-  public static DivisionGateway gateway;
+  private DivisionGateway gateway;
 
   public AddDivisionInteractor(DivisionGateway gateway) {
     this.gateway = gateway;
   }
 
-  public static Response execute(AddDivisionRequest request) {
+  public Response execute(AddDivisionRequest request) {
     if (gateway.hasDivision(request.name)){
       return ErrorResponse.resourceExists();
     }

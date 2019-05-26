@@ -11,7 +11,7 @@ import fsc.service.Context;
 
 public class ViewProfileInteractor implements Interactor {
   public String userName;
-  public ProfileGateway gateway;
+  private ProfileGateway gateway;
 
 
   public ViewProfileInteractor(ProfileGateway gateway){

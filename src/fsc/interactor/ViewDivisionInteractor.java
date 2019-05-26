@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ViewDivisionInteractor {
 
-  private final DivisionGateway gateway;
+  private DivisionGateway gateway;
 
   public ViewDivisionInteractor(DivisionGateway gateway){
     this.gateway = gateway;

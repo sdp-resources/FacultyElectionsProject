@@ -11,7 +11,7 @@ import fsc.response.*;
 
 public class ViewDTSInteractor {
 
-  public Gateway gateway;
+  private Gateway gateway;
   public Profile profile;
   public Ballot ballot;
   public Candidate candidate;

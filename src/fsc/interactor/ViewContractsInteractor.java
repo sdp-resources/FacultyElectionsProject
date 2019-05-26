@@ -7,7 +7,7 @@ import fsc.response.ViewContractsResponse;
 import java.util.List;
 
 public class ViewContractsInteractor {
-  private final ContractTypeGateway gateway;
+  private ContractTypeGateway gateway;
 
   public ViewContractsInteractor(ContractTypeGateway gateway){
     this.gateway = gateway;

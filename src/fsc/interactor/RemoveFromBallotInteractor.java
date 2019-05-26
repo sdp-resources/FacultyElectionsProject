@@ -10,8 +10,8 @@ import fsc.response.Response;
 import fsc.response.SuccessfullyRemovedProfileFromBallotResponse;
 
 public class RemoveFromBallotInteractor {
-  private final BallotGateway ballotGateway;
-  private final ProfileGateway profileGateway;
+  private BallotGateway ballotGateway;
+  private ProfileGateway profileGateway;
 
   public RemoveFromBallotInteractor(
         BallotGateway ballotGateway, ProfileGateway profileGateway) {

@@ -11,9 +11,9 @@ import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 
 public class LoginInteractor {
-  private final SessionGateway sessionGateway;
-  private final Authorizer authorizer;
-  private final Authenticator authenticator;
+  private SessionGateway sessionGateway;
+  private Authorizer authorizer;
+  private Authenticator authenticator;
 
   LoginInteractor(SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator) {
     this.sessionGateway = sessionGateway;
