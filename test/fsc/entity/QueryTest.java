@@ -1,8 +1,6 @@
 package fsc.entity;
 
 import fsc.entity.query.*;
-import fsc.mock.AlwaysFalseQueryStub;
-import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,20 +18,20 @@ public class QueryTest {
 
   @Test
   public void ProfileIsAlwaysFalse() {
-    query = new AlwaysFalseQueryStub();
+    query = new FalseQuery();
     assertFalse(query.isProfileValid(profile));
   }
 
   @Test
   public void ProfileIsAlwaysTrue() {
-    query = new AlwaysTrueQueryStub();
+    query = new TrueQuery();
     assertTrue(query.isProfileValid(profile));
   }
 
   @Test
   public void AndWithThreeTrues() {
     query = new AndQuery(new Query[]{
-          new AlwaysTrueQueryStub(), new AlwaysTrueQueryStub(), new AlwaysTrueQueryStub()
+          new TrueQuery(), new TrueQuery(), new TrueQuery()
     });
 
     assertTrue(query.isProfileValid(profile));
@@ -42,7 +40,7 @@ public class QueryTest {
   @Test
   public void AndWithTwoTrueOneFalse() {
     query = new AndQuery(new Query[]{
-          new AlwaysTrueQueryStub(), new AlwaysTrueQueryStub(), new AlwaysFalseQueryStub()
+          new TrueQuery(), new TrueQuery(), new FalseQuery()
     });
 
     assertFalse(query.isProfileValid(profile));
@@ -51,7 +49,7 @@ public class QueryTest {
   @Test
   public void OrWithThreeFalse() {
     query = new OrQuery(new Query[]{
-          new AlwaysFalseQueryStub(), new AlwaysFalseQueryStub(), new AlwaysFalseQueryStub()
+          new FalseQuery(), new FalseQuery(), new FalseQuery()
     });
 
     assertFalse(query.isProfileValid(profile));
@@ -60,7 +58,7 @@ public class QueryTest {
   @Test
   public void OrWithOneTrueTwoFalse() {
     query = new OrQuery(new Query[]{
-          new AlwaysTrueQueryStub(), new AlwaysFalseQueryStub(), new AlwaysFalseQueryStub()
+          new TrueQuery(), new FalseQuery(), new FalseQuery()
     });
 
     assertTrue(query.isProfileValid(profile));
@@ -76,7 +74,7 @@ public class QueryTest {
   @Test
   public void AndWithThreeItemsFormatsString() {
     query = new AndQuery(new Query[]{
-          new AlwaysTrueQueryStub(), new AlwaysFalseQueryStub(),
+          new TrueQuery(), new FalseQuery(),
           new AttributeQuery("contract", "tenured")
     });
 
@@ -86,7 +84,7 @@ public class QueryTest {
   @Test
   public void OrWithThreeItemsFormatsString() {
     query = new OrQuery(new Query[]{
-          new AlwaysTrueQueryStub(), new AlwaysFalseQueryStub(),
+          new TrueQuery(), new FalseQuery(),
           new AttributeQuery("contract", "tenured")
     });
 
@@ -96,8 +94,8 @@ public class QueryTest {
   @Test
   public void AndWithOrInsideFormatsString() {
     query = new AndQuery(new Query[]{
-          new AlwaysTrueQueryStub(),
-          new OrQuery(new Query[]{new AlwaysTrueQueryStub(), new AlwaysFalseQueryStub()})
+          new TrueQuery(),
+          new OrQuery(new Query[]{new TrueQuery(), new FalseQuery()})
     });
 
     assertEquals("(true AND (true OR false))", query.getFormattedString());

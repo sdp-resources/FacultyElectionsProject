@@ -1,8 +1,8 @@
 package fsc.entity;
 
+import fsc.entity.query.FalseQuery;
+import fsc.entity.query.TrueQuery;
 import fsc.gateway.ProfileGateway;
-import fsc.mock.AlwaysFalseQueryStub;
-import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,13 +26,13 @@ public class BallotCreatorTest {
 
   @Test
   public void whenGivenAlwaysFalseQuery_GetEmptyBallot() {
-    Ballot ballot = ballotCreator.getBallot(new AlwaysFalseQueryStub());
+    Ballot ballot = ballotCreator.getBallot(new FalseQuery());
     assertTrue(ballot.isEmpty());
   }
 
   @Test
   public void whenGivenAlwaysTrueQuery_AddAllProfilesToBallot() {
-    Ballot ballot = ballotCreator.getBallot(new AlwaysTrueQueryStub());
+    Ballot ballot = ballotCreator.getBallot(new TrueQuery());
     assertSameLists(ballot, mockGateway.getAllProfiles());
   }
 

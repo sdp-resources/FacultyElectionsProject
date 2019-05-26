@@ -2,7 +2,7 @@ package fsc.mock.gateway.committee;
 
 import fsc.entity.Committee;
 import fsc.entity.Seat;
-import fsc.mock.AlwaysTrueQueryStub;
+import fsc.entity.query.TrueQuery;
 
 public class AcceptingCommitteeGatewaySpy extends CommitteeGatewayDummy {
   public String committeeNameRequested = null;
@@ -26,7 +26,7 @@ public class AcceptingCommitteeGatewaySpy extends CommitteeGatewayDummy {
     }
 
     public Seat getSeat(String seatName) {
-      return new Seat(seatName, new AlwaysTrueQueryStub());
+      return new Seat(seatName, new TrueQuery());
     }
   }
 }

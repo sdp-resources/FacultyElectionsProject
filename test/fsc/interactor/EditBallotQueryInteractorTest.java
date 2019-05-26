@@ -1,8 +1,8 @@
 package fsc.interactor;
 
+import fsc.entity.query.TrueQuery;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
-import fsc.mock.AlwaysTrueQueryStub;
 import fsc.mock.ElectionGatewaySpy;
 import fsc.request.EditBallotQueryRequest;
 import fsc.response.Response;
@@ -19,7 +19,7 @@ public class EditBallotQueryInteractorTest {
   @Ignore
   @Test
   public void isElectionID() {
-    request = new EditBallotQueryRequest("556", new AlwaysTrueQueryStub());
+    request = new EditBallotQueryRequest("556", new TrueQuery());
     ElectionGateway fakeGateway = new ElectionGatewaySpy();
     ProfileGateway profileGateway = null;
     EditBallotQueryInteractor interactor = new EditBallotQueryInteractor(fakeGateway, null);

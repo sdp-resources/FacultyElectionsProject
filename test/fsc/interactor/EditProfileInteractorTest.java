@@ -1,7 +1,9 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.gateway.profile.*;
+import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
+import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
+import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.EditProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
