@@ -1,20 +1,17 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.AllProfilesGatewaySpy;
-import fsc.mock.ViewableEntityConverterSpy;
+import fsc.mock.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
+import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -24,51 +21,29 @@ public class ViewProfilesListInteractorTest {
   Profile profile1 = new Profile("Ben Givens", "givensb", "ART", "Tenured");
   Profile profile2 = new Profile("Jacob Stricker", "strickerj", "SCIENCE", "Tenured");
   Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
+  private ViewProfilesListRequest request;
+  private ProfileGatewayStub profileGatewaySpy;
 
   @Before
   public void setup() {
-    saveConverter();
+    request = new ViewProfilesListRequest();
+    profileGatewaySpy = new ProfileGatewayStub(profile1, profile2, profile3);
   }
 
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
-    ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
-    Context.instance.viewableEntityConverter = converterSpy;
-
-    AllProfilesGatewaySpy profileGatewaySpy = new AllProfilesGatewaySpy(profile1, profile2,
-                                                                        profile3);
-
     ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
-
-    ViewProfilesListRequest request = new ViewProfilesListRequest();
-
-    ViewResponse<Collection<ViewableProfile>> response = (ViewResponse<Collection<ViewableProfile>>) interactor
-                                                                                                           .execute(
-                                                                                                                 request);
-
-    List<ViewableProfile> expectedProfiles = new ArrayList<>();
-    for (Profile profile : profileGatewaySpy.getAllProfiles()) {
-      expectedProfiles.add(Context.instance.viewableEntityConverter.convert(profile));
-    }
+    Response generalResponse = interactor.execute(request);
+    ViewResponse<List<ViewableProfile>> response = (ViewResponse<List<ViewableProfile>>) generalResponse;
+    List<ViewableProfile> expectedViewableProfiles = getViewableProfiles(
+          profileGatewaySpy.getAllProfiles());
 
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
-    assertEquals(expectedProfiles, response.values);
-    assertTrue(converterSpy.profileReceived != null);
+    assertEquals(expectedViewableProfiles, response.values);
   }
 
-  @After
-  public void Teardown() {
-    restoreConverter();
+  private List<ViewableProfile> getViewableProfiles(List<Profile> profiles) {
+    ViewableEntityConverter viewableEntityConverter = new ViewableEntityConverter();
+    return profiles.stream().map(viewableEntityConverter::convert).collect(Collectors.toList());
   }
-
-  private ViewableEntityConverter savedConverter;
-
-  private void saveConverter() {
-    savedConverter = Context.instance.viewableEntityConverter;
-  }
-
-  private void restoreConverter() {
-    Context.instance.viewableEntityConverter = savedConverter;
-  }
-
 }

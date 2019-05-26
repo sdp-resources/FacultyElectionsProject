@@ -9,7 +9,7 @@ import fsc.service.Context;
 import fsc.viewable.ViewableProfile;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class ViewProfilesListInteractor {
   private ProfileGateway profileGateway;
@@ -19,7 +19,7 @@ public class ViewProfilesListInteractor {
   }
 
   public Response execute(ViewProfilesListRequest request) {
-    Collection<ViewableProfile> viewableProfiles = new ArrayList<>();
+    List<ViewableProfile> viewableProfiles = new ArrayList<>();
     for (Profile profile : profileGateway.getAllProfiles()) {
       viewableProfiles.add(Context.instance.viewableEntityConverter.convert(profile));
     }

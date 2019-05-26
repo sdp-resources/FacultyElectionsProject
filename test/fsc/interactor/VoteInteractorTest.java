@@ -5,7 +5,7 @@ import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
-import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
+import fsc.mock.ExistingProfileGatewaySpy;
 import fsc.mock.VoteRecordGatewaySpy;
 import fsc.request.VoteRecordRequest;
 import fsc.response.ErrorResponse;
@@ -44,7 +44,7 @@ public class VoteInteractorTest {
 
   @Test
   public void canExecuteGoodID() throws Exception {
-    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ProfileGateway profileGateway = new ExistingProfileGatewaySpy(
           providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
 
@@ -61,7 +61,7 @@ public class VoteInteractorTest {
 
   @Test
   public void voteRecordSpyFunctionality() throws Exception {
-    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ProfileGateway profileGateway = new ExistingProfileGatewaySpy(
           providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
     interactor.execute(request);
@@ -71,7 +71,7 @@ public class VoteInteractorTest {
 
   @Test
   public void canRecordAVote() throws Exception {
-    ProfileGateway profileGateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ProfileGateway profileGateway = new ExistingProfileGatewaySpy(
           providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
     interactor.execute(request);

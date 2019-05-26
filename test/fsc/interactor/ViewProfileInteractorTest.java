@@ -2,17 +2,13 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.mock.InvalidProfileGatewaySpy;
-import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
-import fsc.mock.ViewableEntityConverterSpy;
+import fsc.mock.ExistingProfileGatewaySpy;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -21,35 +17,22 @@ public class ViewProfileInteractorTest {
 
   Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
-  @Before
-  public void setup() {
-    saveConverter();
-  }
-
   @Test
   public void validUsernameReturnsCorrectViewableProfile() {
-    ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
-    Context.instance.viewableEntityConverter = converterSpy;
-    Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(
           providedProfile);
 
-    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
-    ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
-    ViewResponse<ViewableProfile> response = (ViewResponse) viewInteractor.execute(request);
+    ViewProfileRequest request = new ViewProfileRequest(providedProfile.getUsername());
+    ViewProfileInteractor interactor = new ViewProfileInteractor(gatewaySpy);
+    ViewResponse<ViewableProfile> response = (ViewResponse<ViewableProfile>) interactor.execute(request);
 
-    assertEquals(request.username,
-                 ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.providedUsername);
-    assertEquals(gatewaySpy.profileSent, converterSpy.profileReceived);
+    assertEquals(request.username, gatewaySpy.providedUsername);
     assertEquals(response.values,
-                 Context.instance.viewableEntityConverter.convert(converterSpy.profileReceived));
+                 new ViewableEntityConverter().convert(providedProfile));
   }
 
   @Test
-  public void invalidUsernameDoesNotContinueReturnsErrorResponse() {
-    ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
-    Context.instance.viewableEntityConverter = converterSpy;
-
+  public void whenViewingMissingProfile_returnErrorResponse() {
     InvalidProfileGatewaySpy gatewaySpy = new InvalidProfileGatewaySpy();
 
     ViewProfileRequest request = new ViewProfileRequest("BoogieA14");
@@ -57,22 +40,6 @@ public class ViewProfileInteractorTest {
     Response response = viewInteractor.execute(request);
 
     assertEquals(request.username, gatewaySpy.usernameReceived);
-    assertEquals(null, converterSpy.profileReceived);
     assertEquals(ErrorResponse.unknownProfileName(), response);
-  }
-
-  @After
-  public void Teardown() {
-    restoreConverter();
-  }
-
-  private ViewableEntityConverter savedConverter;
-
-  private void saveConverter() {
-    savedConverter = Context.instance.viewableEntityConverter;
-  }
-
-  private void restoreConverter() {
-    Context.instance.viewableEntityConverter = savedConverter;
   }
 }

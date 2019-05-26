@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
-import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
+import fsc.mock.ExistingProfileGatewaySpy;
 import fsc.request.EditProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -42,7 +42,7 @@ public class EditProfileInteractorTest {
   public void canTakeProfile() {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
           providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     Response response = interactor.execute(request);
@@ -53,7 +53,7 @@ public class EditProfileInteractorTest {
   public void canEditSingleField() {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
           providedProfile);
     Profile profile = fakegateway.getProfile("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
@@ -67,7 +67,7 @@ public class EditProfileInteractorTest {
     changes.put("Division", "Science");
     changes.put("Contract", "Sabbatical");
     request = new EditProfileRequest("rossB12", changes);
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
           providedProfile);
     Profile profile = fakegateway.getProfile("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
@@ -81,7 +81,7 @@ public class EditProfileInteractorTest {
   public void canHandleBooleanChanges() {
     changes.put("Inactive", true);
     request = new EditProfileRequest("rossB12", changes);
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
           providedProfile);
     Profile profile = fakegateway.getProfile("rossB12");
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
@@ -94,22 +94,21 @@ public class EditProfileInteractorTest {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
     Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
           providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertEquals(request.username,
-                 ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.providedUsername);
+    assertEquals(request.username, fakegateway.providedUsername);
   }
 
   @Test
   public void spyCanTellProfileHasBeenEdited() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy fakegateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
           providedProfile);
     EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
     interactor.execute(request);
-    assertTrue(ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.profileHasBeenEdited);
+    assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
   }
 }
