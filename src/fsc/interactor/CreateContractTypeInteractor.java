@@ -12,14 +12,12 @@ class CreateContractTypeInteractor {
 
   public CreateContractTypeInteractor(ContractTypeGateway gateway) {this.gateway = gateway;}
 
-  public Response execute(
-        CreateContractTypeRequest request
-  ) {
+  public Response execute(CreateContractTypeRequest request) {
     try {
-      gateway.addContractType(request.contract_type);
-    } catch (Exception e) {
+      gateway.addContractType(request.contractType);
+      return new SuccessResponse();
+    } catch (ContractTypeGateway.ExistingContractTypeException e) {
       return ErrorResponse.resourceExists();
     }
-    return new SuccessResponse();
   }
 }
