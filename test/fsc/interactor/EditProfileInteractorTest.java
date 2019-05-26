@@ -3,6 +3,7 @@ package fsc.interactor;
 import fsc.entity.Profile;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ExistingProfileGatewaySpy;
+import fsc.mock.ProfileGatewayStub;
 import fsc.request.EditProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -20,12 +21,14 @@ public class EditProfileInteractorTest {
 
   EditProfileRequest request;
   Map<String, Object> changes;
-  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile providedProfile;
+  private ProfileGatewayStub profileGateway;
 
   @Before
   public void setup() {
     changes = new HashMap<>();
-
+    providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+    profileGateway = new ProfileGatewayStub(providedProfile);
   }
 
   @Test
@@ -42,9 +45,7 @@ public class EditProfileInteractorTest {
   public void canTakeProfile() {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
-          providedProfile);
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     Response response = interactor.execute(request);
     assertTrue(response instanceof SuccessResponse);
   }
@@ -53,12 +54,9 @@ public class EditProfileInteractorTest {
   public void canEditSingleField() {
     changes.put("Contract", "Untenured");
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
-          providedProfile);
-    Profile profile = fakegateway.getProfile("rossB12");
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
-    assertNotEquals("Tenured", profile.getContract());
+    assertNotEquals("Tenured", providedProfile.getContract());
   }
 
   @Test
@@ -67,47 +65,38 @@ public class EditProfileInteractorTest {
     changes.put("Division", "Science");
     changes.put("Contract", "Sabbatical");
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
-          providedProfile);
-    Profile profile = fakegateway.getProfile("rossB12");
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
-    assertEquals("Bill Mill", profile.getName());
-    assertEquals("Sabbatical", profile.getContract());
-    assertEquals("Science", profile.getDivision());
+    assertEquals("Bill Mill", providedProfile.getName());
+    assertEquals("Sabbatical", providedProfile.getContract());
+    assertEquals("Science", providedProfile.getDivision());
   }
 
   @Test
   public void canHandleBooleanChanges() {
     changes.put("Inactive", true);
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
-          providedProfile);
-    Profile profile = fakegateway.getProfile("rossB12");
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
-    assertFalse(profile.isActive());
+    assertFalse(providedProfile.isActive());
   }
 
   @Test
   public void spyRemembersUsername() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
-    Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
-    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
-          providedProfile);
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);;
+    EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
-    assertEquals(request.username, fakegateway.providedUsername);
+    assertEquals(request.username, profileGateway.providedUsername);
   }
 
   @Test
   public void spyCanTellProfileHasBeenEdited() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy fakegateway = new ExistingProfileGatewaySpy(
-          providedProfile);
-    EditProfileInteractor interactor = new EditProfileInteractor(fakegateway);
+    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);;
+    EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
     assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
   }
