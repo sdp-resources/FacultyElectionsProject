@@ -1,11 +1,11 @@
-package fsc.entity;
+package fsc.service;
 
 import fsc.entity.query.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class QueryGenerator {
-  Query generate(JSONObject root) {
+public class QueryGenerator {
+  public Query generate(JSONObject root) {
     String firstKey = JSONObject.getNames(root)[0];
 
     switch (firstKey)

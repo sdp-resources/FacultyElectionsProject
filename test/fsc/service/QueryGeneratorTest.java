@@ -1,8 +1,9 @@
-package fsc.entity;
+package fsc.service;
 
+import fsc.entity.Profile;
 import fsc.entity.query.Query;
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 

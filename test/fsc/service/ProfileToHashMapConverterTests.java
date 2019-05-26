@@ -1,13 +1,12 @@
-package fsc.interactor;
+package fsc.service;
 
 import fsc.entity.Profile;
-import fsc.entity.ProfileToHashMapConverter;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ProfileToHashMapConverterTests {
   private Map<String, String> map;

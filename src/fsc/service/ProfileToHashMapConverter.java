@@ -1,4 +1,6 @@
-package fsc.entity;
+package fsc.service;
+
+import fsc.entity.Profile;
 
 import java.util.*;
 
