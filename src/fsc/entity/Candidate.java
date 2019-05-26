@@ -20,7 +20,7 @@ public class Candidate {
     return status;
   }
 
-  public void setDeclinded() {
+  public void setDeclined() {
     status = Status.Declined;
   }
 
