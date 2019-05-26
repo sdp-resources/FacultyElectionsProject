@@ -1,28 +1,26 @@
 package fsc.interactor;
 
-import fsc.mock.ViewDivisionStub;
+import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
 import fsc.request.ViewDivisionRequest;
-import fsc.response.Response;
 import fsc.response.ViewResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ViewDivisionsTest {
 
   ViewDivisionRequest request;
   ViewDivisionInteractor interactor;
   ViewResponse<List<String>> response;
-  private ViewDivisionStub divisionGateway;
+  private ExistingDivisionGatewaySpy divisionGateway;
 
   @Before
   public void setup() {
     request = new ViewDivisionRequest();
-    divisionGateway = new ViewDivisionStub("SCI", "ART");
+    divisionGateway = new ExistingDivisionGatewaySpy("SCI", "ART");
   }
 
   @Test

@@ -1,27 +1,23 @@
-package fsc.mock;
+package fsc.mock.gateway.division;
 
-import fsc.entity.Division;
 import fsc.gateway.DivisionGateway;
 
 import java.util.ArrayList;
 
 public class MissingDivisionGatewaySpy implements DivisionGateway {
-  ArrayList<Division> divisionList;
   public String submittedDivisionName;
-
-  public MissingDivisionGatewaySpy() {
-    this.divisionList = null;
-  }
+  public boolean saveCalled = false;
 
   public ArrayList<String> getAvailableDivisions() {
     return null;
   }
 
-  public void addDivision(String division) {
-  }
+  public void addDivision(String division) { }
 
   public void save() {
-
+    if (submittedDivisionName != null) {
+      saveCalled = true;
+    }
   }
 
   public Boolean hasDivision(String divisionName) {

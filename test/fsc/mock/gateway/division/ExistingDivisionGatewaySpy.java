@@ -1,14 +1,15 @@
-package fsc.mock;
+package fsc.mock.gateway.division;
 
 import fsc.gateway.DivisionGateway;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ViewDivisionStub implements DivisionGateway {
+public class ExistingDivisionGatewaySpy implements DivisionGateway {
   public List<String> divisions;
+  public String submittedDivisionName;
 
-  public ViewDivisionStub(String... divisions) {
+  public ExistingDivisionGatewaySpy(String... divisions) {
     this.divisions = Arrays.asList(divisions);
   }
 
@@ -25,6 +26,7 @@ public class ViewDivisionStub implements DivisionGateway {
   }
 
   public Boolean hasDivision(String divisionName) {
-    return null;
+    submittedDivisionName = divisionName;
+    return true;
   }
 }
