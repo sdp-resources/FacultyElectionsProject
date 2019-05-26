@@ -5,7 +5,7 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
-import fsc.response.ViewProfileResponse;
+import fsc.response.ViewResponse;
 import fsc.response.Response;
 import fsc.service.Context;
 
@@ -33,7 +33,7 @@ public class ViewProfileInteractor implements Interactor {
       return ErrorResponse.unknownProfileName();
     }
 
-    return new ViewProfileResponse(Context.instance.profileToViewableProfileConverter.convert(profile));
+    return new ViewResponse(Context.instance.viewableEntityConverter.convert(profile));
   }
 
   public boolean canHandle(Request request) {

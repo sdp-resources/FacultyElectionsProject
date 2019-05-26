@@ -4,9 +4,7 @@ import fsc.entity.*;
 import fsc.gateway.BallotGateway;
 import fsc.mock.*;
 import fsc.request.ViewCandidatesRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.ViewCandidatesResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 import fsc.viewable.ViewableProfile;
@@ -54,7 +52,7 @@ public class ViewCandidatesInteractorTest {
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assert(response instanceof ViewCandidatesResponse);
+    assert(response instanceof ViewResponse);
   }
 
   @Test
@@ -72,9 +70,9 @@ public class ViewCandidatesInteractorTest {
     BallotGatewaySpy gateway = new BallotGatewaySpy();
     ballot = gateway.getBallot(electionId);
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
-    ViewCandidatesResponse response = (ViewCandidatesResponse) interactor.execute(request);
+    ViewResponse<List<ViewableProfile>> response = (ViewResponse<List<ViewableProfile>>) interactor.execute(request);
 
-    assertEquals(testList, response.viewableProfiles);
+    assertEquals(testList, response.values);
   }
 
   private void addProfilesToTestList() {

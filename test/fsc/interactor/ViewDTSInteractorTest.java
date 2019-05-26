@@ -21,7 +21,7 @@ public class ViewDTSInteractorTest {
 
     assertEquals(gateway.profile.username, username);
     assertEquals(gateway.candidate.getStatus(), Candidate.Status.NoAnswer);
-    assertNotNull(((ViewDTSResponse) response).profile);
+    assertNotNull(((ViewResponse) response).values);
   }
 
   @Test

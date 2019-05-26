@@ -2,15 +2,16 @@ package fsc.interactor;
 
 import fsc.mock.AllProfilesGatewaySpy;
 import fsc.entity.Profile;
-import fsc.mock.ProfileToViewableProfileConverterSpy;
+import fsc.mock.ViewableEntityConverterSpy;
 import fsc.request.ViewProfilesListRequest;
-import fsc.response.ViewProfilesListResponse;
+import fsc.response.ViewResponse;
 import fsc.service.Context;
-import fsc.service.ProfileToViewableProfileConverter;
+import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
 import org.junit.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -30,8 +31,8 @@ public class ViewProfilesListInteractorTest {
 
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
-    ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
-    Context.instance.profileToViewableProfileConverter = converterSpy;
+    ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
+    Context.instance.viewableEntityConverter = converterSpy;
 
     AllProfilesGatewaySpy profileGatewaySpy = new AllProfilesGatewaySpy(profile1, profile2, profile3);
 
@@ -39,16 +40,16 @@ public class ViewProfilesListInteractorTest {
 
     ViewProfilesListRequest request = new ViewProfilesListRequest();
 
-    ViewProfilesListResponse response = (ViewProfilesListResponse) interactor.execute(request);
+    ViewResponse<Collection<ViewableProfile>> response = (ViewResponse<Collection<ViewableProfile>>) interactor.execute(request);
 
     List<ViewableProfile> expectedProfiles = new ArrayList<>();
     for(Profile profile : profileGatewaySpy.getAllProfiles())
     {
-      expectedProfiles.add(Context.instance.profileToViewableProfileConverter.convert(profile));
+      expectedProfiles.add(Context.instance.viewableEntityConverter.convert(profile));
     }
 
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
-    assertEquals(expectedProfiles, response.viewableProfiles);
+    assertEquals(expectedProfiles, response.values);
     assertTrue(converterSpy.profileReceived != null);
   }
 
@@ -58,15 +59,15 @@ public class ViewProfilesListInteractorTest {
     restoreConverter();
   }
 
-  private ProfileToViewableProfileConverter savedConverter;
+  private ViewableEntityConverter savedConverter;
   private void saveConverter()
   {
-    savedConverter = Context.instance.profileToViewableProfileConverter;
+    savedConverter = Context.instance.viewableEntityConverter;
   }
 
   private void restoreConverter()
   {
-    Context.instance.profileToViewableProfileConverter = savedConverter;
+    Context.instance.viewableEntityConverter = savedConverter;
   }
 
 }

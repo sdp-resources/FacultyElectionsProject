@@ -5,10 +5,11 @@ import fsc.mock.*;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
-import fsc.response.ViewProfileResponse;
+import fsc.response.ViewResponse;
 
 import fsc.service.Context;
-import fsc.service.ProfileToViewableProfileConverter;
+import fsc.service.ViewableEntityConverter;
+import fsc.viewable.ViewableProfile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,26 +28,26 @@ public class ViewProfileInteractorTest {
 
   @Test
   public void validUsernameReturnsCorrectViewableProfile() {
-    ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
-    Context.instance.profileToViewableProfileConverter = converterSpy;
+    ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
+    Context.instance.viewableEntityConverter = converterSpy;
     Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
     ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
 
     ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
-    ViewProfileResponse response = (ViewProfileResponse) viewInteractor.execute(request);
+    ViewResponse<ViewableProfile> response = (ViewResponse) viewInteractor.execute(request);
 
     assertEquals(request.username, gatewaySpy.providedUsername);
     assertEquals(gatewaySpy.profileSent, converterSpy.profileReceived);
-    assertEquals(response.viewableProfile,
-                 Context.instance.profileToViewableProfileConverter.convert(converterSpy.profileReceived));
+    assertEquals(response.values,
+                 Context.instance.viewableEntityConverter.convert(converterSpy.profileReceived));
   }
 
   @Test
   public void invalidUsernameDoesNotContinueReturnsErrorResponse()
   {
-    ProfileToViewableProfileConverterSpy converterSpy = new ProfileToViewableProfileConverterSpy();
-    Context.instance.profileToViewableProfileConverter = converterSpy;
+    ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
+    Context.instance.viewableEntityConverter = converterSpy;
 
     InvalidProfileGatewaySpy gatewaySpy = new InvalidProfileGatewaySpy();
 
@@ -65,14 +66,14 @@ public class ViewProfileInteractorTest {
     restoreConverter();
   }
 
-  private ProfileToViewableProfileConverter savedConverter;
+  private ViewableEntityConverter savedConverter;
   private void saveConverter()
   {
-    savedConverter = Context.instance.profileToViewableProfileConverter;
+    savedConverter = Context.instance.viewableEntityConverter;
   }
 
   private void restoreConverter()
   {
-    Context.instance.profileToViewableProfileConverter = savedConverter;
+    Context.instance.viewableEntityConverter = savedConverter;
   }
 }

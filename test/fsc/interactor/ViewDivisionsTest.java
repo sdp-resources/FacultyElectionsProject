@@ -3,14 +3,14 @@ package fsc.interactor;
 import fsc.mock.ViewDivisionStub;
 import fsc.request.ViewDivisionRequest;
 import fsc.response.Response;
-import fsc.response.ViewDivisionResponse;
-import static org.junit.Assert.assertEquals;
-
+import fsc.response.ViewResponse;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ViewDivisionsTest {
@@ -33,7 +33,7 @@ public class ViewDivisionsTest {
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
     response = interactor.execute(request);
-    assertTrue(response instanceof ViewDivisionResponse);
+    assertTrue(response instanceof ViewResponse);
 
   }
 
@@ -46,7 +46,7 @@ public class ViewDivisionsTest {
     gateway.addDivision("SCI");
     gateway.addDivision("ART");
     assertEquals(testList, gateway.getAvailableDivisions());
-    assertEquals(testList, ((ViewDivisionResponse)response).divisions);
+    assertEquals(testList, ((ViewResponse<List<String>>)response).values);
   }
 
 }

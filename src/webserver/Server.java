@@ -65,7 +65,7 @@ class Server {
     HashMap<Object, Object> returnedHash = new HashMap<>();
     returnedHash.put("values", controller.getAllProfiles());
     returnedHash.put("contractTypes", controller.getAllContractTypes());
-    returnedHash.put("divisions", controller.getAllDivisions());
+    returnedHash.put("values", controller.getAllDivisions());
     return serveTemplate("/profilesList.handlebars", returnedHash);
   }
 

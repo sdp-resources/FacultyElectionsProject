@@ -1,8 +1,8 @@
 package fsc.service;
 
 public class Context {
-  public ProfileToViewableProfileConverter profileToViewableProfileConverter =
-        new ProfileToViewableProfileConverter();
+  public ViewableEntityConverter viewableEntityConverter =
+        new ViewableEntityConverter();
 
   private Context()
   {

@@ -8,6 +8,7 @@ import fsc.mock.ProfileGatewayStub;
 import fsc.request.AddDivisionRequest;
 import fsc.request.ViewProfileRequest;
 import fsc.response.*;
+import fsc.viewable.ViewableProfile;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +46,8 @@ public class RequestRouterTest {
   public void canExecuteViewProfileInteractor() {
     String username = "jamesg";
     ViewProfileRequest viewProfileRequest = new ViewProfileRequest(username);
-    ViewProfileResponse response = (ViewProfileResponse) requestRouter.execute(viewProfileRequest);
-    assertEquals(username, response.viewableProfile.username);
+    ViewResponse<ViewableProfile> response =
+          (ViewResponse<ViewableProfile>) requestRouter.execute(viewProfileRequest);
+    assertEquals(username, response.values.username);
   }
 }

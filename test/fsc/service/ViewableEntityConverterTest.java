@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ProfileToViewableProfileConverterTest {
+public class ViewableEntityConverterTest {
   @Test
   public void viewableProfileMatchesInformationInProfile()
   {
@@ -15,7 +15,7 @@ public class ProfileToViewableProfileConverterTest {
     String division = "Art";
     String contract = "Tenured";
 
-    ProfileToViewableProfileConverter converter = new ProfileToViewableProfileConverter();
+    ViewableEntityConverter converter = new ViewableEntityConverter();
     Profile profile = new Profile(name, username, division, contract);
     ViewableProfile convertedViewableProfile = converter.convert(profile);
     ViewableProfile manualViewableProfile = new ViewableProfile(name, username, division, contract);

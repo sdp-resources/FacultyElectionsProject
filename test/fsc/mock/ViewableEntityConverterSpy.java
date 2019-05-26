@@ -1,11 +1,11 @@
 package fsc.mock;
 
 import fsc.entity.Profile;
-import fsc.service.ProfileToViewableProfileConverter;
+import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
 
-public class ProfileToViewableProfileConverterSpy
-      extends ProfileToViewableProfileConverter {
+public class ViewableEntityConverterSpy
+      extends ViewableEntityConverter {
   public Profile profileReceived;
 
   @Override

@@ -7,7 +7,7 @@ import fsc.interactor.ViewContractsInteractor;
 import fsc.request.ContractsViewerRequest;
 import fsc.request.CreateProfileRequest;
 import fsc.response.Response;
-import fsc.response.ViewContractsResponse;
+import fsc.response.ViewResponse;
 import gateway.InMemoryGateway;
 import org.junit.Before;
 import org.junit.Test;
@@ -77,7 +77,7 @@ public class InteractionControllerTest {
   private class ViewContractsInteractorSpy extends ViewContractsInteractor {
     private ContractsViewerRequest submittedRequest;
 
-    public ViewContractsResponse execute(ContractsViewerRequest request) {
+    public ViewResponse execute(ContractsViewerRequest request) {
       submittedRequest = request;
       return super.execute(submittedRequest);
     }

@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.gateway.ContractTypeGateway;
 import fsc.request.ContractsViewerRequest;
-import fsc.response.ViewContractsResponse;
+import fsc.response.ViewResponse;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ public class ViewContractsInteractor {
     this.gateway = gateway;
   }
 
-  public ViewContractsResponse execute(ContractsViewerRequest request) {
+  public ViewResponse<List<String>> execute(ContractsViewerRequest request) {
     List<String> contracts = gateway.getAvailableContractTypes();
-    return new ViewContractsResponse(contracts);
+    return new ViewResponse<>(contracts);
   }
 }

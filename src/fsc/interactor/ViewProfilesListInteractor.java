@@ -21,9 +21,9 @@ public class ViewProfilesListInteractor {
     Collection<ViewableProfile> viewableProfiles = new ArrayList<>();
     for(Profile profile : profileGateway.getAllProfiles())
     {
-      viewableProfiles.add(Context.instance.profileToViewableProfileConverter.convert(profile));
+      viewableProfiles.add(Context.instance.viewableEntityConverter.convert(profile));
     }
 
-    return new ViewProfilesListResponse(viewableProfiles);
+    return new ViewResponse<>(viewableProfiles);
   }
 }
