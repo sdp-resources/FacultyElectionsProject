@@ -4,6 +4,8 @@ import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
+import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
+import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.AddToBallotRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -26,12 +28,8 @@ public class AddToBallotInteractorTest {
 
   @Test
   public void addingToNoBallot() {
-
-    NoBallotExistsBallotGatewayStub noBallotBallotGateway = new NoBallotExistsBallotGatewayStub();
-    ProfileGateway dummyProfileGateway = new ProfileGatewayDummy();
-
-    AddToBallotInteractor inter = new AddToBallotInteractor(noBallotBallotGateway,
-                                                            dummyProfileGateway);
+    AddToBallotInteractor inter = new AddToBallotInteractor(new NoBallotExistsBallotGatewayStub(),
+                                                            new ProfileGatewayStub());
     Response response = inter.execute(request);
 
     assertEquals(ErrorResponse.unknownBallotID(), response);
@@ -39,11 +37,8 @@ public class AddToBallotInteractorTest {
 
   @Test
   public void addingNotRealProfile() {
-    BallotGateway dummyBallotGateway = new BallotGatewayDummy();
-    ProfileGateway noProfileProfileGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
-
-    AddToBallotInteractor interactor = new AddToBallotInteractor(dummyBallotGateway,
-                                                                 noProfileProfileGateway);
+    AddToBallotInteractor interactor = new AddToBallotInteractor(new BallotGatewayDummy(),
+                                                                 new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);

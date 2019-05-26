@@ -4,7 +4,9 @@ import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
-import fsc.mock.*;
+import fsc.mock.VoteRecordGatewaySpy;
+import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
+import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.VoteRecordRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -50,8 +52,8 @@ public class VoteInteractorTest {
 
   @Test
   public void canExecuteBadID() throws Exception {
-    ProfileGateway profileGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
-    VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
+    VoteInteractor interactor = new VoteInteractor(electionGateway,
+                                                   new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }

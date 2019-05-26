@@ -1,4 +1,4 @@
-package fsc.mock;
+package fsc.mock.gateway.profile;
 
 import fsc.entity.Profile;
 

@@ -1,8 +1,8 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
-import fsc.mock.ExistingProfileGatewaySpy;
+import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
+import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -27,7 +27,7 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testCorrectExecute() {
-    NoProfileWithThatUsernameProfileGatewaySpy gateway = new NoProfileWithThatUsernameProfileGatewaySpy();
+    InvalidProfileGatewaySpy gateway = new InvalidProfileGatewaySpy();
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);

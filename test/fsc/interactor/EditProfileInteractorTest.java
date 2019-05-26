@@ -1,9 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
-import fsc.mock.ExistingProfileGatewaySpy;
-import fsc.mock.ProfileGatewayStub;
+import fsc.mock.gateway.profile.*;
 import fsc.request.EditProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -35,8 +33,7 @@ public class EditProfileInteractorTest {
   public void noProfileExistsException() {
     changes.put("Contract", "Tenured");
     request = new EditProfileRequest("dummyUsername", changes);
-    NoProfileWithThatUsernameProfileGatewaySpy fakeGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
-    EditProfileInteractor interactor = new EditProfileInteractor(fakeGateway);
+    EditProfileInteractor interactor = new EditProfileInteractor(new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }
@@ -85,7 +82,8 @@ public class EditProfileInteractorTest {
   public void spyRemembersUsername() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);;
+    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
+    ;
     EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
     assertEquals(request.username, profileGateway.providedUsername);
@@ -95,7 +93,8 @@ public class EditProfileInteractorTest {
   public void spyCanTellProfileHasBeenEdited() {
     changes.put("Inactive", "True");
     request = new EditProfileRequest("rossB12", changes);
-    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);;
+    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
+    ;
     EditProfileInteractor interactor = new EditProfileInteractor(profileGateway);
     interactor.execute(request);
     assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);

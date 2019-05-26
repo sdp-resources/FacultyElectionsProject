@@ -4,6 +4,7 @@ import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
+import fsc.mock.gateway.profile.*;
 import fsc.request.RemoveFromBallotRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -29,7 +30,7 @@ public class RemoveFromBallotInteractorTest {
   public void ballotDoesNotExist() {
 
     NoBallotExistsBallotGatewayStub noBallotBallotGateway = new NoBallotExistsBallotGatewayStub();
-    ProfileGateway dummyProfileGateway = new ProfileGatewayDummy();
+    ProfileGateway dummyProfileGateway = new ProfileGatewayStub();
 
     RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(noBallotBallotGateway,
                                                                            dummyProfileGateway);
@@ -42,10 +43,9 @@ public class RemoveFromBallotInteractorTest {
   public void profileDoesNotExist() {
 
     BallotGateway dummyBallotGateway = new BallotGatewayDummy();
-    ProfileGateway noProfileProfileGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
 
     RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(dummyBallotGateway,
-                                                                           noProfileProfileGateway);
+                                                                           new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);

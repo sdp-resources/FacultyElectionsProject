@@ -1,4 +1,4 @@
-package fsc.mock;
+package fsc.mock.gateway.profile;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ProfileGatewayStub implements ProfileGateway {
-  public Profile profile;
   private final List<Profile> profiles;
   public boolean getAllProfilesWasCalled = false;
 

@@ -4,7 +4,7 @@ import fsc.entity.Profile;
 import fsc.interactor.AddDivisionInteractor;
 import fsc.interactor.ViewProfileInteractor;
 import fsc.mock.MissingDivisionGatewaySpy;
-import fsc.mock.ProfileGatewayStub;
+import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.AddDivisionRequest;
 import fsc.request.ViewProfileRequest;
 import fsc.response.*;

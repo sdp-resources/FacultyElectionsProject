@@ -1,8 +1,8 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.InvalidProfileGatewaySpy;
-import fsc.mock.ExistingProfileGatewaySpy;
+import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
+import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -39,7 +39,7 @@ public class ViewProfileInteractorTest {
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     Response response = viewInteractor.execute(request);
 
-    assertEquals(request.username, gatewaySpy.usernameReceived);
+    assertEquals(request.username, gatewaySpy.submittedUsername);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 }
