@@ -49,7 +49,7 @@ public class Profile {
     username = newUsername;
   }
 
-  public void setInactive() { active = false;  }
+  public void setInactive() { active = false; }
 
   public void setActive() { active = true; }
 }

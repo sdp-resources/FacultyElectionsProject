@@ -11,8 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AuthorizeInteractorTest {
   @Test
-  public void sessionGatewayWithNoTokensCanHandleAndGivesErrorResponse()
-  {
+  public void sessionGatewayWithNoTokensCanHandleAndGivesErrorResponse() {
     SessionGateway sessionGateway = new RejectingSessionGatewayStub();
     Interactor authorizeInteractor = new AuthorizeInteractor(sessionGateway);
     ViewProfilesListRequest request = new ViewProfilesListRequest();

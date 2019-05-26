@@ -3,12 +3,12 @@ package fsc.viewable;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ViewableProfileTest {
   @Test
-  public void constructorPopulatesFields()
-  {
+  public void constructorPopulatesFields() {
     String name = "Joe Basic";
     String username = "basicj";
     String division = "Art";
@@ -23,8 +23,7 @@ public class ViewableProfileTest {
   }
 
   @Test
-  public void sameFieldsAreEqual()
-  {
+  public void sameFieldsAreEqual() {
     String name = "Joe Basic";
     String username = "basicj";
     String division = "Art";
@@ -38,8 +37,7 @@ public class ViewableProfileTest {
   }
 
   @Test
-  public void differntFieldsAreNotEqual()
-  {
+  public void differntFieldsAreNotEqual() {
     String name = "Joe Basic";
     String username = "basicj";
     String divisionA = "Art";

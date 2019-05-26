@@ -9,7 +9,7 @@ import java.util.List;
 public class ViewContractsInteractor {
   private ContractTypeGateway gateway;
 
-  public ViewContractsInteractor(ContractTypeGateway gateway){
+  public ViewContractsInteractor(ContractTypeGateway gateway) {
     this.gateway = gateway;
   }
 

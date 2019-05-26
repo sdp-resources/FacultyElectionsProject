@@ -10,13 +10,13 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class EditBallotQueryInteractor{
+public class EditBallotQueryInteractor {
   private ElectionGateway electionGateway;
   private ProfileGateway profileGateway;
 
   EditBallotQueryInteractor(
         ElectionGateway electionGateway, ProfileGateway profileGateway
-  ){
+  ) {
     this.electionGateway = electionGateway;
     this.profileGateway = profileGateway;
   }

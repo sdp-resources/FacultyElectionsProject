@@ -5,16 +5,19 @@ import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.CreateElectionRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 
 public class CreateElectionInteractor {
   private ElectionGateway electionGateway;
   private CommitteeGateway committeeGateway;
   private ProfileGateway profileGateway;
 
-  public CreateElectionInteractor(ElectionGateway electionGateway,
-                                  CommitteeGateway committeeGateway,
-                                  ProfileGateway profileGateway) {
+  public CreateElectionInteractor(
+        ElectionGateway electionGateway, CommitteeGateway committeeGateway,
+        ProfileGateway profileGateway
+  ) {
     this.electionGateway = electionGateway;
     this.committeeGateway = committeeGateway;
     this.profileGateway = profileGateway;

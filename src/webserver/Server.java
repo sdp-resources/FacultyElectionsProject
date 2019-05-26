@@ -14,7 +14,8 @@ import static spark.Spark.*;
 class Server {
 
   private static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
-  private static final InMemoryGateway gateway = InMemoryGateway.fromJSONFile("assets/data/sample.json");
+  private static final InMemoryGateway gateway = InMemoryGateway
+                                                       .fromJSONFile("assets/data/sample.json");
   private static final InteractionController controller = new InteractionController(gateway);
 
   public static void main(String[] args) {

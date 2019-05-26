@@ -10,10 +10,9 @@ public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
   public String submittedUsername;
   public String submittedDivision;
 
-  public InvalidDivisionProfileGatewaySpy(){
+  public InvalidDivisionProfileGatewaySpy() {
     this.profileList = null;
   }
-
 
   public ArrayList<Profile> getAllProfiles() {
     return null;
@@ -35,8 +34,6 @@ public class InvalidDivisionProfileGatewaySpy implements ProfileGateway {
   }
 
   public void clearProfileList() {}
-
-
 
   public Profile getProfile(String userName) {
     return null;

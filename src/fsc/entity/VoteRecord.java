@@ -14,7 +14,7 @@ public class VoteRecord {
     this(profile, Calendar.getInstance().getTime(), vote, electionID);
   }
 
-  public VoteRecord(Profile profile, Date date, String vote, int electionID){
+  public VoteRecord(Profile profile, Date date, String vote, int electionID) {
     this.profile = profile;
     this.vote = vote;
     this.date = date;

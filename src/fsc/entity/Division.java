@@ -15,5 +15,4 @@ public class Division {
     divisionName = newDivisionName;
   }
 
-
 }

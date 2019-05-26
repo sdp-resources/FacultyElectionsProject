@@ -4,9 +4,9 @@ import fsc.gateway.CommitteeGateway;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewayStub;
 import fsc.request.EditCommitteeRequest;
-import fsc.response.SuccessResponse;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
+import fsc.response.SuccessResponse;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class EditCommitteeInteractorTest {
 
   @Test
-  public void changeOnNonexistantCommitteeGivesErrorResponse(){
+  public void changeOnNonexistantCommitteeGivesErrorResponse() {
     CommitteeGateway gateway = new RejectingCommitteeGatewayStub();
     EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
     String name = "Steering";
@@ -32,8 +32,7 @@ public class EditCommitteeInteractorTest {
   }
 
   @Test
-  public void changeOnProfileMakesChangeToGateway()
-  {
+  public void changeOnProfileMakesChangeToGateway() {
     String originalName = "steering";
     String newName = "steering wheel";
 
@@ -51,7 +50,7 @@ public class EditCommitteeInteractorTest {
   }
 
   @Test
-  public void canMakeMultipleChanges(){
+  public void canMakeMultipleChanges() {
     String originalName = "steering";
     String newName = "steering wheel";
     String newDescription = "This turns the car real well.";

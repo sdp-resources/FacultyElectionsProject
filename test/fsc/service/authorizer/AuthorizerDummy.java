@@ -6,8 +6,7 @@ import fsc.service.Authorizer;
 
 public class AuthorizerDummy implements Authorizer {
 
-  public Session authorize(String username, String password)
-  {
+  public Session authorize(String username, String password) {
     return null;
   }
 

@@ -9,39 +9,36 @@ public class Election {
   private Seat seat;
   private int ID;
 
-
   private Query defaultQuery;
 
-  public Election(Seat seat, Committee committee, Query query, Ballot ballot)
-  {
+  public Election(Seat seat, Committee committee, Query query, Ballot ballot) {
     this.seat = seat;
     this.committee = committee;
     this.defaultQuery = query;
     this.ballot = ballot;
   }
 
-  public int getID(){
+  public int getID() {
     return ID;
   }
 
   public void setID(int ID) {this.ID = ID;}
 
-  public Seat getSeat(){
+  public Seat getSeat() {
     return seat;
   }
 
-  public Committee getCommittee(){
+  public Committee getCommittee() {
     return committee;
   }
 
-  public Ballot getBallot(){
+  public Ballot getBallot() {
     return ballot;
   }
 
-  public void setBallot(Ballot ballot){
+  public void setBallot(Ballot ballot) {
     this.ballot = ballot;
   }
-
 
   public void setDefaultQuery(Query defaultQuery) {
     this.defaultQuery = defaultQuery;

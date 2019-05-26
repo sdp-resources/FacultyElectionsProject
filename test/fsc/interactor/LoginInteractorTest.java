@@ -5,7 +5,8 @@ import fsc.mock.AcceptingAuthenticatorDummy;
 import fsc.mock.gateway.session.SessionGatewayDummy;
 import fsc.mock.gateway.session.SessionGatewaySpy;
 import fsc.request.LoginRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.LoginResponse;
 import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 import fsc.service.authorizer.AcceptingAuthorizerStub;
@@ -22,12 +23,13 @@ public class LoginInteractorTest {
   public void authorizationRejectedGivesErrorResponse() {
     String username = "admin";
     String password = "1234";
-    LoginRequest request =  new LoginRequest(username,password);
+    LoginRequest request = new LoginRequest(username, password);
 
     Authenticator authenticator = new AcceptingAuthenticatorDummy();
     Authorizer authorizer = new RejectingAuthorizerStub();
     SessionGateway sessionGateway = new SessionGatewayDummy();
-    LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer, authenticator);
+    LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
+                                                          authenticator);
 
     ErrorResponse response = (ErrorResponse) loginInteractor.execute(request);
 
@@ -38,7 +40,7 @@ public class LoginInteractorTest {
   public void authorizationAcceptedGivesTokenAndRoles() {
     String username = "admin";
     String password = "1234";
-    LoginRequest request =  new LoginRequest(username,password);
+    LoginRequest request = new LoginRequest(username, password);
 
     String expectedRole = "Admin";
     String expectedToken = "jlksdfgj";
@@ -46,7 +48,8 @@ public class LoginInteractorTest {
     Authenticator authenticator = new AcceptingAuthenticatorDummy();
     Authorizer authorizer = new AcceptingAuthorizerStub(expectedRole, expectedToken);
     SessionGatewaySpy sessionGateway = new SessionGatewaySpy();
-    LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer, authenticator);
+    LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
+                                                          authenticator);
 
     LoginResponse response = (LoginResponse) loginInteractor.execute(request);
 
@@ -62,12 +65,13 @@ public class LoginInteractorTest {
   public void authenticatorAccepted() {
     String username = "admin";
     String password = "1234";
-    LoginRequest request =  new LoginRequest(username,password);
+    LoginRequest request = new LoginRequest(username, password);
 
     Authenticator authenticator = new AcceptingAuthenticatorDummy();
     Authorizer authorizer = new AuthorizerDummy();
     SessionGateway sessionGateway = new SessionGatewayDummy();
-    LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer, authenticator);
+    LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
+                                                          authenticator);
 
     LoginResponse response = (LoginResponse) loginInteractor.execute(request);
   }

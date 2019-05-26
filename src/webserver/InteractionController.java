@@ -4,7 +4,8 @@ import fsc.entity.Committee;
 import fsc.entity.Election;
 import fsc.interactor.*;
 import fsc.request.*;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ViewResponse;
 import fsc.viewable.ViewableProfile;
 import gateway.InMemoryGateway;
 
@@ -62,7 +63,8 @@ public class InteractionController {
   }
 
   public List<String> getAllDivisions() {
-    ViewResponse<List<String>> response = viewDivisionsInteractor.execute(new ViewDivisionRequest());
+    ViewResponse<List<String>> response = viewDivisionsInteractor
+                                                .execute(new ViewDivisionRequest());
     return response.values;
   }
 

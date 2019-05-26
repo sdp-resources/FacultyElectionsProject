@@ -1,6 +1,5 @@
 package fsc.gateway;
 
-
 import java.util.List;
 
 public interface DivisionGateway {

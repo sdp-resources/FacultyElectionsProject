@@ -21,14 +21,14 @@ public class ViewDivisionsTest {
   ArrayList<String> testList = new ArrayList<>();
 
   @Before
-  public void setup(){
+  public void setup() {
     testList.add("SCI");
     testList.add("ART");
 
   }
 
   @Test
-  public void sendRequestToGetValidResponseBack(){
+  public void sendRequestToGetValidResponseBack() {
     request = new ViewDivisionRequest();
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
@@ -38,7 +38,7 @@ public class ViewDivisionsTest {
   }
 
   @Test
-  public void gatewayDivisionListEqualsOurDivisionList(){
+  public void gatewayDivisionListEqualsOurDivisionList() {
     request = new ViewDivisionRequest();
     ViewDivisionStub gateway = new ViewDivisionStub();
     interactor = new ViewDivisionInteractor(gateway);
@@ -46,7 +46,7 @@ public class ViewDivisionsTest {
     gateway.addDivision("SCI");
     gateway.addDivision("ART");
     assertEquals(testList, gateway.getAvailableDivisions());
-    assertEquals(testList, ((ViewResponse<List<String>>)response).values);
+    assertEquals(testList, ((ViewResponse<List<String>>) response).values);
   }
 
 }

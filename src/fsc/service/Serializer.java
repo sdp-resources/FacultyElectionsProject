@@ -6,8 +6,7 @@ import org.json.JSONObject;
 
 class Serializer {
 
-  String profileToString(Profile profile)
-  {
+  String profileToString(Profile profile) {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("name", profile.getName());
     jsonObject.put("username", profile.getUsername());
@@ -16,8 +15,7 @@ class Serializer {
     return jsonObject.toString();
   }
 
-  Profile stringToProfile(String string)
-  {
+  Profile stringToProfile(String string) {
     JSONObject jsonObject = new JSONObject(string);
     String name = toString(jsonObject, "name");
     String username = Serializer.this.toString(jsonObject, "username");

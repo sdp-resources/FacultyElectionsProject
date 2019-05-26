@@ -10,19 +10,16 @@ public class AndQuery implements Query {
   }
 
   public boolean isProfileValid(Profile profile) {
-    for(Query query : queries)
-    {
+    for (Query query : queries) {
       if (!query.isProfileValid(profile)) return false;
     }
 
     return true;
   }
 
-  public String getFormattedString()
-  {
+  public String getFormattedString() {
     String output = "(";
-    for(int i = 0; i < queries.length; i++)
-    {
+    for (int i = 0; i < queries.length; i++) {
       output += queries[i].getFormattedString();
       if (i < queries.length - 1) output += " AND ";
     }

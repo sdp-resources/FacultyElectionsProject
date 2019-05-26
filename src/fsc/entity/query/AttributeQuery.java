@@ -6,8 +6,7 @@ public class AttributeQuery implements Query {
   private final String key;
   private final String value;
 
-  public AttributeQuery(String key, String value)
-  {
+  public AttributeQuery(String key, String value) {
     this.key = key;
     this.value = value;
   }

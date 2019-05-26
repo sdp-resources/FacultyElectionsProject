@@ -5,14 +5,15 @@ import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.AddToBallotRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 
 public class AddToBallotInteractor {
   private BallotGateway ballotGateway;
   private ProfileGateway profileGateway;
 
-  public AddToBallotInteractor(BallotGateway ballotGateway, ProfileGateway profileGateway)
-  {
+  public AddToBallotInteractor(BallotGateway ballotGateway, ProfileGateway profileGateway) {
     this.ballotGateway = ballotGateway;
     this.profileGateway = profileGateway;
   }

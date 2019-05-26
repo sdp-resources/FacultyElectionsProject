@@ -11,14 +11,12 @@ public class SerializerTest {
   private Serializer serializer;
 
   @Before
-  public void Setup()
-  {
+  public void Setup() {
     serializer = new Serializer();
   }
 
   @Test
-  public void profileToString()
-  {
+  public void profileToString() {
     String name = "Joe Average";
     String username = "averagej";
     String division = "ART";
@@ -26,27 +24,19 @@ public class SerializerTest {
 
     Profile profile = new Profile(name, username, division, contract);
 
-
-    String expectedOutput = "{\"division\":\"" + division +"\"," +
-                                  "\"contract\":\"" + contract + "\"," +
-                                  "\"name\":\"" + name + "\"," +
-                                  "\"username\":\"" + username + "\"}";
+    String expectedOutput = "{\"division\":\"" + division + "\"," + "\"contract\":\"" + contract + "\"," + "\"name\":\"" + name + "\"," + "\"username\":\"" + username + "\"}";
 
     assertEquals(expectedOutput, serializer.profileToString(profile));
   }
 
   @Test
-  public void formattedStringGivesExpectedProfile()
-  {
+  public void formattedStringGivesExpectedProfile() {
     String name = "Joe Average";
     String username = "averagej";
     String division = "ART";
     String contract = "Tenured";
 
-    String string = "{\"name\":\"" + name +"\"," +
-                          "\"username\":\"" + username + "\"," +
-                          "\"division\":\"" + division+ "\"," +
-                          "\"contract\":\"" + contract + "\"}";
+    String string = "{\"name\":\"" + name + "\"," + "\"username\":\"" + username + "\"," + "\"division\":\"" + division + "\"," + "\"contract\":\"" + contract + "\"}";
 
     Profile profile = serializer.stringToProfile(string);
 
@@ -57,8 +47,7 @@ public class SerializerTest {
   }
 
   @Test
-  public void profileSurvivesRoundTrip()
-  {
+  public void profileSurvivesRoundTrip() {
     String name = "Joe Average";
     String username = "averagej";
     String division = "ART";
@@ -66,8 +55,8 @@ public class SerializerTest {
 
     Profile originalProfile = new Profile(name, username, division, contract);
 
-    Profile generatedProfile =
-          serializer.stringToProfile(serializer.profileToString(originalProfile));
+    Profile generatedProfile = serializer
+                                     .stringToProfile(serializer.profileToString(originalProfile));
 
     assertEquals(originalProfile.getName(), generatedProfile.getName());
     assertEquals(originalProfile.getUsername(), generatedProfile.getUsername());
@@ -76,27 +65,23 @@ public class SerializerTest {
   }
 
   @Test
-  public void committeeToString()
-  {
+  public void committeeToString() {
     String name = "Steering";
     String description = "Drives the car";
 
     Committee committee = new Committee(name, description);
     String serializedCommittee = serializer.committeeToString(committee);
-    String expectedString = "{\"name\":\"" + name +"\"," +
-                                  "\"description\":\"" + description + "\"}";
+    String expectedString = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"}";
 
     assertEquals(expectedString, serializedCommittee);
   }
 
   @Test
-  public void stringToCommittee()
-  {
+  public void stringToCommittee() {
     String name = "Steering";
     String description = "Drives the car";
 
-    String string = "{\"name\":\"" + name +"\"," +
-                          "\"description\":\"" + description + "\"}";
+    String string = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"}";
 
     Committee committee = serializer.stringToCommittee(string);
 
@@ -105,15 +90,14 @@ public class SerializerTest {
   }
 
   @Test
-  public void committeeSurvivesRoundTrip()
-  {
+  public void committeeSurvivesRoundTrip() {
     String name = "Steering";
     String description = "Drives the car";
 
     Committee originalCommittee = new Committee(name, description);
 
-    Committee generatedCommittee =
-          serializer.stringToCommittee(serializer.committeeToString(originalCommittee));
+    Committee generatedCommittee = serializer.stringToCommittee(
+          serializer.committeeToString(originalCommittee));
 
     assertEquals(originalCommittee.getName(), generatedCommittee.getName());
     assertEquals(originalCommittee.getDescription(), generatedCommittee.getDescription());

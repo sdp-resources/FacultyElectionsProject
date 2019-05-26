@@ -8,8 +8,7 @@ public class QueryGenerator {
   public Query generate(JSONObject root) {
     String firstKey = JSONObject.getNames(root)[0];
 
-    switch (firstKey)
-    {
+    switch (firstKey) {
       case "and":
         return new AndQuery(getQueriesFromJSONArray((JSONArray) root.get("and")));
       case "or":
@@ -22,8 +21,7 @@ public class QueryGenerator {
   private Query[] getQueriesFromJSONArray(JSONArray array) {
     Query[] queries = new Query[array.length()];
 
-    for(int i = 0; i < array.length(); i++)
-    {
+    for (int i = 0; i < array.length(); i++) {
       queries[i] = generate((JSONObject) array.get(i));
     }
 

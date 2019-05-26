@@ -5,11 +5,12 @@ import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
 import fsc.request.AddToBallotRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class AddToBallotInteractorTest {
@@ -33,24 +34,23 @@ public class AddToBallotInteractorTest {
                                                             dummyProfileGateway);
     Response response = inter.execute(request);
 
-    assertEquals( ErrorResponse.unknownBallotID(), response);
+    assertEquals(ErrorResponse.unknownBallotID(), response);
   }
 
   @Test
-  public void addingNotRealProfile()
-  {
+  public void addingNotRealProfile() {
     BallotGateway dummyBallotGateway = new BallotGatewayDummy();
     ProfileGateway noProfileProfileGateway = new NoProfileWithThatUsernameProfileGatewaySpy();
 
-    AddToBallotInteractor interactor = new AddToBallotInteractor(dummyBallotGateway, noProfileProfileGateway);
+    AddToBallotInteractor interactor = new AddToBallotInteractor(dummyBallotGateway,
+                                                                 noProfileProfileGateway);
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
   @Test
-  public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse()
-  {
+  public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse() {
     BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();
     ProfileGateway profileGateway = new ProfileGatewayStub(
           new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
@@ -62,8 +62,7 @@ public class AddToBallotInteractorTest {
   }
 
   @Test
-  public void gatewayGetsBallotWithChanges()
-  {
+  public void gatewayGetsBallotWithChanges() {
     GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy ballotGateway = new GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy();
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(
           new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));

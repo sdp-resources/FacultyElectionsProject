@@ -35,7 +35,7 @@ public class InMemoryGatewayTest {
     assertEquals(profile, returnedProfile);
   }
 
-  @Test(expected=InvalidProfileUsernameException.class)
+  @Test(expected = InvalidProfileUsernameException.class)
   public void missingProfile_cannotBeFound() throws InvalidProfileUsernameException {
     gateway.addProfile(profile);
     gateway.getProfile(OTHER_USERNAME);

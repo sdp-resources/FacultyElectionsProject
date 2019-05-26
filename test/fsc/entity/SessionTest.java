@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
 public class SessionTest {
@@ -25,8 +25,7 @@ public class SessionTest {
   }
 
   @Test
-  public void canCreateSession()
-  {
+  public void canCreateSession() {
     String role = "Administrator";
     String username = "admin";
     String token = "random-string";

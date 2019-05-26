@@ -3,7 +3,9 @@ package fsc.interactor;
 import fsc.mock.CommitteeAlreadyExistsCommitteeGatewaySpy;
 import fsc.mock.CommitteeGatewaySpy;
 import fsc.request.CreateCommitteeRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,12 +21,12 @@ public class CreateCommitteeInteractorTest {
   }
 
   @Test
-  public void ExecuteCreatesCorrectResponseType(){
+  public void ExecuteCreatesCorrectResponseType() {
     CommitteeGatewaySpy gateway = new CommitteeGatewaySpy();
     CreateCommitteeInteractor interactor = new CreateCommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assertEquals("cccc", gateway.submittedCommitteeName);
+    assertEquals("cccc", CommitteeGatewaySpy.submittedCommitteeName);
     assertTrue(response instanceof SuccessResponse);
   }
 

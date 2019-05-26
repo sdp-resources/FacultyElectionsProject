@@ -13,11 +13,9 @@ public class ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy implements Pr
   Profile providedProfile;
   static public Boolean profileHasBeenEdited = false;
 
-
-
   public ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(Profile profile) {
     this.providedProfile = profile;
-    this.profileList = null;
+    profileList = null;
   }
 
   public ArrayList<Profile> getAllProfiles() {

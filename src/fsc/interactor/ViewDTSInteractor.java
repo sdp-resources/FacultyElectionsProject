@@ -7,9 +7,10 @@ import fsc.gateway.BallotGateway;
 import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.ViewDTSRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.ViewResponse;
 import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableCandidate;
 
 public class ViewDTSInteractor {
 

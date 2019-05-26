@@ -4,7 +4,9 @@ import fsc.entity.Profile;
 import fsc.mock.NoProfileWithThatUsernameProfileGatewaySpy;
 import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +36,8 @@ public class CreateProfileInteractorTest {
 
   @Test
   public void testWrongUsernameExecute() {
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
+    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gateway = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+          providedProfile);
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals(ErrorResponse.resourceExists(), response);

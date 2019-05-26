@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class InMemoryGatewayFromFileTest {
 
@@ -30,7 +30,8 @@ public class InMemoryGatewayFromFileTest {
 
   @Test
   public void canReadDivisions() {
-    List<String> divisions = List.of("Arts and Letters", "Humanities", "Natural Sciences", "Social Sciences");
+    List<String> divisions = List.of("Arts and Letters", "Humanities", "Natural Sciences",
+                                     "Social Sciences");
     for (String type : divisions) {
       assertThat(gateway.getAvailableDivisions(), hasItem(type));
     }

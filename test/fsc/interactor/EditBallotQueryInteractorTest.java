@@ -19,12 +19,12 @@ public class EditBallotQueryInteractorTest {
   @Ignore
   @Test
   public void isElectionID() {
-  request = new EditBallotQueryRequest("556", new AlwaysTrueQueryStub());
-  ElectionGateway fakeGateway = new ElectionGatewaySpy();
-  ProfileGateway profileGateway = null;
-  EditBallotQueryInteractor interactor = new EditBallotQueryInteractor(fakeGateway, null);
-  Response response = interactor.execute(request);
-  assertEquals(new SuccessResponse(), response);
+    request = new EditBallotQueryRequest("556", new AlwaysTrueQueryStub());
+    ElectionGateway fakeGateway = new ElectionGatewaySpy();
+    ProfileGateway profileGateway = null;
+    EditBallotQueryInteractor interactor = new EditBallotQueryInteractor(fakeGateway, null);
+    Response response = interactor.execute(request);
+    assertEquals(new SuccessResponse(), response);
   }
 }
 

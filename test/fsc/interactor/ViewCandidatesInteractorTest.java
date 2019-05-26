@@ -1,13 +1,16 @@
 package fsc.interactor;
 
-import fsc.entity.*;
+import fsc.entity.Ballot;
 import fsc.gateway.BallotGateway;
-import fsc.mock.*;
+import fsc.mock.BallotGatewaySpy;
+import fsc.mock.EmptyBallotGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.ViewResponse;
+import fsc.viewable.ViewableProfile;
 import org.junit.Before;
 import org.junit.Test;
-import fsc.viewable.ViewableProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +44,7 @@ public class ViewCandidatesInteractorTest {
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assert(response instanceof ErrorResponse);
+    assert (response instanceof ErrorResponse);
   }
 
   @Test
@@ -52,7 +55,7 @@ public class ViewCandidatesInteractorTest {
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assert(response instanceof ViewResponse);
+    assert (response instanceof ViewResponse);
   }
 
   @Test
@@ -70,7 +73,9 @@ public class ViewCandidatesInteractorTest {
     BallotGatewaySpy gateway = new BallotGatewaySpy();
     ballot = gateway.getBallot(electionId);
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
-    ViewResponse<List<ViewableProfile>> response = (ViewResponse<List<ViewableProfile>>) interactor.execute(request);
+    ViewResponse<List<ViewableProfile>> response = (ViewResponse<List<ViewableProfile>>) interactor
+                                                                                               .execute(
+                                                                                                     request);
 
     assertEquals(testList, response.values);
   }

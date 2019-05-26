@@ -7,5 +7,6 @@ public interface BallotGateway {
   void addBallot(Ballot ballot) throws CannotAddBallotException;
   void save();
   class InvalidBallotIDException extends Exception {}
+
   class CannotAddBallotException extends Exception {}
 }

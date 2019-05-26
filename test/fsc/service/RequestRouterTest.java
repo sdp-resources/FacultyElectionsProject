@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
 public class RequestRouterTest {
 
@@ -46,8 +45,8 @@ public class RequestRouterTest {
   public void canExecuteViewProfileInteractor() {
     String username = "jamesg";
     ViewProfileRequest viewProfileRequest = new ViewProfileRequest(username);
-    ViewResponse<ViewableProfile> response =
-          (ViewResponse<ViewableProfile>) requestRouter.execute(viewProfileRequest);
+    ViewResponse<ViewableProfile> response = (ViewResponse<ViewableProfile>) requestRouter.execute(
+          viewProfileRequest);
     assertEquals(username, response.values.username);
   }
 }

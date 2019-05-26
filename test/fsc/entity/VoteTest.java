@@ -17,12 +17,12 @@ public class VoteTest {
   }
 
   @Test
-  public void emptyBallotVoteTest(){
+  public void emptyBallotVoteTest() {
     Vote vote = new Vote(ballot);
   }
 
   @Test
-  public void voteForOnePerson(){
+  public void voteForOnePerson() {
     Profile candidate = new Profile("Sam", "sam55", "Art", "tenured");
     ballot.add(candidate);
     Vote vote = new Vote(ballot);
@@ -36,8 +36,7 @@ public class VoteTest {
   public void voteForMoreThanOnePerson() {
     Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
     Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM",
-                                                     "Untenured");
+    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
 
     ballot.add(candidate1);
     ballot.add(candidate2);
@@ -56,8 +55,7 @@ public class VoteTest {
   public void removeOnePerson() {
     Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
     Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM",
-                                                     "Untenured");
+    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
 
     ballot.add(candidate1);
     ballot.add(candidate2);
@@ -77,11 +75,10 @@ public class VoteTest {
   }
 
   @Test
-  public void removeMultiplePeople(){
+  public void removeMultiplePeople() {
     Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
     Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM",
-                                                     "Untenured");
+    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
 
     ballot.add(candidate1);
     ballot.add(candidate2);

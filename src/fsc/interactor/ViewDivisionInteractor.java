@@ -10,11 +10,11 @@ public class ViewDivisionInteractor {
 
   private DivisionGateway gateway;
 
-  public ViewDivisionInteractor(DivisionGateway gateway){
+  public ViewDivisionInteractor(DivisionGateway gateway) {
     this.gateway = gateway;
   }
 
-  public ViewResponse<List<String>> execute(ViewDivisionRequest request){
+  public ViewResponse<List<String>> execute(ViewDivisionRequest request) {
     List<String> listOfDivisions = gateway.getAvailableDivisions();
     return new ViewResponse<>(listOfDivisions);
   }

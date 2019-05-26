@@ -14,7 +14,6 @@ public class DivisionTest {
     testDivision = new Division("SCI");
   }
 
-
   @Test
   public void getDivisionNameTest() {
     assertEquals("SCI", testDivision.getDivisionName());

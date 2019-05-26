@@ -22,7 +22,7 @@ public class BallotCreator {
   private void addValidProfilesToBallot(Query query, Ballot ballot) {
     for (Profile profile : profileGateway.getAllProfiles()) {
       if (query.isProfileValid(profile)) {
-        ballot.add( profile);
+        ballot.add(profile);
       }
     }
   }

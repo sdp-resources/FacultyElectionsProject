@@ -1,11 +1,9 @@
 package fsc.service;
 
 public class Context {
-  public ViewableEntityConverter viewableEntityConverter =
-        new ViewableEntityConverter();
+  public ViewableEntityConverter viewableEntityConverter = new ViewableEntityConverter();
 
-  private Context()
-  {
+  private Context() {
 
   }
 

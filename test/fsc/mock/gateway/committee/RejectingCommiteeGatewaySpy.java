@@ -7,15 +7,13 @@ public class RejectingCommiteeGatewaySpy extends CommitteeGatewayDummy {
   private Committee committeeAdded = null;
 
   @Override
-  public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException
-  {
+  public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException {
     committeeNameRequested = name;
     throw new UnknownCommitteeException();
   }
 
   @Override
-  public void addCommittee(Committee committee)
-  {
+  public void addCommittee(Committee committee) {
     committeeAdded = committee;
     super.addCommittee(committee);
   }

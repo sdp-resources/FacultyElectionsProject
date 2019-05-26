@@ -9,7 +9,8 @@ public class VoteRecordRequest extends Request {
   public final int electionID;
 
   public VoteRecordRequest(
-        String username, Date date, String vote, int electionID) {
+        String username, Date date, String vote, int electionID
+  ) {
     this.username = username;
     this.date = date;
     this.vote = vote;

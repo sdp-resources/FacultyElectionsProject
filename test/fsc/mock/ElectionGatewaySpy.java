@@ -1,9 +1,10 @@
 package fsc.mock;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 
-public class ElectionGatewaySpy implements ElectionGateway{
+public class ElectionGatewaySpy implements ElectionGateway {
   public Election addedElection;
   public boolean hasSaved = false;
 

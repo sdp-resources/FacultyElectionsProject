@@ -17,7 +17,7 @@ public class BallotTest {
   }
 
   @Test
-  public void isCreatedBallotEmpty (){
+  public void isCreatedBallotEmpty() {
     assertTrue(ballot.isEmpty());
   }
 
@@ -46,13 +46,10 @@ public class BallotTest {
   }
 
   @Test
-  public void checkingMultipleCandidateOfBallot(){
-    Profile testCandidate1 = new Profile("name1", "username1", "department1",
-                                                   "contract1");
-    Profile testCandidate2 = new Profile("name2", "username2","department2",
-                                                         "contract2");
-    Profile testCandidate3 = new Profile("name3", "username3","department3",
-                                                         "contract3");
+  public void checkingMultipleCandidateOfBallot() {
+    Profile testCandidate1 = new Profile("name1", "username1", "department1", "contract1");
+    Profile testCandidate2 = new Profile("name2", "username2", "department2", "contract2");
+    Profile testCandidate3 = new Profile("name3", "username3", "department3", "contract3");
     ballot.add(testCandidate1);
     ballot.add(testCandidate2);
     ballot.add(testCandidate3);
@@ -62,7 +59,7 @@ public class BallotTest {
   }
 
   @Test
-  public void removeOneCandidateMakesBallotEmpty() throws Ballot.NoProfileInBallotException{
+  public void removeOneCandidateMakesBallotEmpty() throws Ballot.NoProfileInBallotException {
     Profile testCandidate = new Profile("name", "username", "division", "contract");
     ballot.add(testCandidate);
     ballot.remove(testCandidate);
@@ -70,20 +67,17 @@ public class BallotTest {
   }
 
   @Test
-  public void candidateIsRemovedFromBallot() throws Ballot.NoProfileInBallotException{
-    Profile testCandidate1 = new Profile("name1", "username1", "department1",
-                                                         "contract1");
-    Profile testCandidate2 = new Profile("name2", "username2","department2",
-                                                         "contract2");
+  public void candidateIsRemovedFromBallot() throws Ballot.NoProfileInBallotException {
+    Profile testCandidate1 = new Profile("name1", "username1", "department1", "contract1");
+    Profile testCandidate2 = new Profile("name2", "username2", "department2", "contract2");
     ballot.add(testCandidate1);
     ballot.add(testCandidate2);
     ballot.remove(testCandidate1);
     assertEquals(testCandidate2, ballot.get(0));
   }
 
-
   @Test
-  public void removeOneCandidateDecreasesSizeByOne() throws Ballot.NoProfileInBallotException{
+  public void removeOneCandidateDecreasesSizeByOne() throws Ballot.NoProfileInBallotException {
     Profile testCandidate = new Profile("name", "username", "division", "contract");
     ballot.add(testCandidate);
     ballot.remove(testCandidate);
@@ -92,23 +86,18 @@ public class BallotTest {
   }
 
   private Profile createAndAddOneCandidate() {
-    Profile testCandidate = new Profile("name", "username", "division",
-                                                        "contract");
+    Profile testCandidate = new Profile("name", "username", "division", "contract");
     ballot.add(testCandidate);
     return testCandidate;
   }
 
   private void createAndAddManyCandidates() {
-    Profile testCandidate1 = new Profile("name1", "username1","department1",
-                                             "contract1");
-    Profile testCandidate2 = new Profile("name2", "username2","department2",
-                                                         "contract2");
-    Profile testCandidate3 =new Profile("name3", "username3","department3",
-                                                         "contract3");
+    Profile testCandidate1 = new Profile("name1", "username1", "department1", "contract1");
+    Profile testCandidate2 = new Profile("name2", "username2", "department2", "contract2");
+    Profile testCandidate3 = new Profile("name3", "username3", "department3", "contract3");
     ballot.add(testCandidate1);
     ballot.add(testCandidate2);
     ballot.add(testCandidate3);
   }
-
 
 }

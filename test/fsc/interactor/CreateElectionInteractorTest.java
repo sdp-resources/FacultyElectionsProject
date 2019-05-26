@@ -6,13 +6,16 @@ import fsc.mock.ProfileGatewayStub;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommiteeGatewaySpy;
 import fsc.request.CreateElectionRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class CreateElectionInteractorTest {
 
@@ -29,8 +32,7 @@ public class CreateElectionInteractorTest {
   @Test
   public void testCorrectExecute() {
 
-    ElectionGatewaySpy electionGateway =
-          new ElectionGatewaySpy();
+    ElectionGatewaySpy electionGateway = new ElectionGatewaySpy();
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
     interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);

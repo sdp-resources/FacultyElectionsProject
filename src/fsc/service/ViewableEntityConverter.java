@@ -8,8 +8,8 @@ import fsc.viewable.ViewableProfile;
 public class ViewableEntityConverter {
 
   public ViewableProfile convert(Profile profile) {
-    return new ViewableProfile(profile.getName(), profile.getUsername(),
-                               profile.getDivision(), profile.getContract());
+    return new ViewableProfile(profile.getName(), profile.getUsername(), profile.getDivision(),
+                               profile.getContract());
   }
 
   public ViewableCandidate convert(Candidate candidate) {

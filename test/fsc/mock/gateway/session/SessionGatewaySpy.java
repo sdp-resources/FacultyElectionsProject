@@ -11,26 +11,22 @@ public class SessionGatewaySpy extends SessionGatewayDummy {
 
   public SessionGatewaySpy() {}
 
-  public SessionGatewaySpy(Session storedSession)
-  {
+  public SessionGatewaySpy(Session storedSession) {
     this.storedSession = storedSession;
   }
 
   @Override
-  public void addSession(AuthorizedSession session)
-  {
+  public void addSession(AuthorizedSession session) {
     addedSession = session;
   }
 
   @Override
-  public Session getSession(String token)
-  {
+  public Session getSession(String token) {
     return storedSession;
   }
 
   @Override
-  public void save()
-  {
+  public void save() {
     saveCalled = true;
   }
 }

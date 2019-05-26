@@ -3,7 +3,9 @@ package fsc.interactor;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.request.EditProfileRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 
 import java.util.Map;
 
@@ -15,11 +17,11 @@ public class EditProfileInteractor {
   }
 
   public Response execute(EditProfileRequest request) {
-    try{
+    try {
       Profile profile = editProfileWithRequest(request);
       updateProfileInGateway(profile);
       return new SuccessResponse();
-    } catch (Exception e){
+    } catch (Exception e) {
       return ErrorResponse.unknownProfileName();
     }
   }
@@ -40,7 +42,7 @@ public class EditProfileInteractor {
   }
 
   private void updateProfileWithChanges(String changeKey, String changeField, Profile profile) {
-    switch(changeKey){
+    switch (changeKey) {
       case "Contract":
         profile.setContract(changeField);
         break;
@@ -54,12 +56,12 @@ public class EditProfileInteractor {
         profile.setUsername(changeField);
         break;
       case "Active":
-        if(isTrue(changeField)){
+        if (isTrue(changeField)) {
           profile.setActive();
         }
         break;
       case "Inactive":
-        if(isTrue(changeField)){
+        if (isTrue(changeField)) {
           profile.setInactive();
         }
         break;
@@ -74,7 +76,6 @@ public class EditProfileInteractor {
 
     return gateway.getProfile(username) != null;
   }
-
 
   private void updateProfileInGateway(Profile profile) {
     gateway.save();

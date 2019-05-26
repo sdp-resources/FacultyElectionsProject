@@ -15,7 +15,9 @@ public class LoginInteractor {
   private Authorizer authorizer;
   private Authenticator authenticator;
 
-  LoginInteractor(SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator) {
+  LoginInteractor(
+        SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator
+  ) {
     this.sessionGateway = sessionGateway;
     this.authorizer = authorizer;
     this.authenticator = authenticator;
@@ -23,14 +25,15 @@ public class LoginInteractor {
 
   public Response execute(LoginRequest request) {
     Session authorization = authorizer.authorize(request.username, request.password);
-    if (!authorization.isAuthorized())
-    {
+    if (!authorization.isAuthorized()) {
       return ErrorResponse.notAuthorized();
     }
     sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorization).getRole(),
-                                                    ((AuthorizedSession) authorization).getUsername(),
+                                                    ((AuthorizedSession) authorization)
+                                                          .getUsername(),
                                                     ((AuthorizedSession) authorization).getToken(),
-                                                    ((AuthorizedSession) authorization).getExpirationTime()));
+                                                    ((AuthorizedSession) authorization)
+                                                          .getExpirationTime()));
     sessionGateway.save();
     return new LoginResponse(((AuthorizedSession) authorization).getRole(),
                              ((AuthorizedSession) authorization).getToken());

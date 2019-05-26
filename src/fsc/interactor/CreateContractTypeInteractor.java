@@ -1,25 +1,25 @@
 package fsc.interactor;
 
 import fsc.gateway.ContractTypeGateway;
-
 import fsc.request.CreateContractTypeRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 
 class CreateContractTypeInteractor {
 
   private ContractTypeGateway gateway;
 
-  public CreateContractTypeInteractor(ContractTypeGateway gateway){this.gateway = gateway;}
+  public CreateContractTypeInteractor(ContractTypeGateway gateway) {this.gateway = gateway;}
 
   public Response execute(
-        CreateContractTypeRequest request) {
-    try
-    {
+        CreateContractTypeRequest request
+  ) {
+    try {
       gateway.addContractType(request.contract_type);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       return ErrorResponse.resourceExists();
     }
     return new SuccessResponse();
-}
   }
+}

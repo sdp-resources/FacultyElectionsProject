@@ -1,12 +1,13 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.mock.*;
+import fsc.mock.InvalidProfileGatewaySpy;
+import fsc.mock.ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy;
+import fsc.mock.ViewableEntityConverterSpy;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
@@ -21,8 +22,7 @@ public class ViewProfileInteractorTest {
   Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Before
-  public void setup()
-  {
+  public void setup() {
     saveConverter();
   }
 
@@ -31,21 +31,22 @@ public class ViewProfileInteractorTest {
     ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
     Context.instance.viewableEntityConverter = converterSpy;
     Profile profile = new Profile("Boogie", "BoogieA14", "division", "contract");
-    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(providedProfile);
+    ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy gatewaySpy = new ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy(
+          providedProfile);
 
     ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
     ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
     ViewResponse<ViewableProfile> response = (ViewResponse) viewInteractor.execute(request);
 
-    assertEquals(request.username, gatewaySpy.providedUsername);
+    assertEquals(request.username,
+                 ProfileWithThatUsernameAlreadyExistsProfileGatewaySpy.providedUsername);
     assertEquals(gatewaySpy.profileSent, converterSpy.profileReceived);
     assertEquals(response.values,
                  Context.instance.viewableEntityConverter.convert(converterSpy.profileReceived));
   }
 
   @Test
-  public void invalidUsernameDoesNotContinueReturnsErrorResponse()
-  {
+  public void invalidUsernameDoesNotContinueReturnsErrorResponse() {
     ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
     Context.instance.viewableEntityConverter = converterSpy;
 
@@ -61,19 +62,17 @@ public class ViewProfileInteractorTest {
   }
 
   @After
-  public void Teardown()
-  {
+  public void Teardown() {
     restoreConverter();
   }
 
   private ViewableEntityConverter savedConverter;
-  private void saveConverter()
-  {
+
+  private void saveConverter() {
     savedConverter = Context.instance.viewableEntityConverter;
   }
 
-  private void restoreConverter()
-  {
+  private void restoreConverter() {
     Context.instance.viewableEntityConverter = savedConverter;
   }
 }

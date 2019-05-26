@@ -3,12 +3,13 @@ package fsc.interactor;
 import fsc.mock.ExistingDivisionGatewaySpy;
 import fsc.mock.MissingDivisionGatewaySpy;
 import fsc.request.AddDivisionRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class AddDivisionInteractorTest {
   private AddDivisionRequest request;
@@ -21,8 +22,7 @@ public class AddDivisionInteractorTest {
 
   @Test
   public void testCorrectExecute() {
-    MissingDivisionGatewaySpy testGateway =
-          new MissingDivisionGatewaySpy();
+    MissingDivisionGatewaySpy testGateway = new MissingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
@@ -31,8 +31,7 @@ public class AddDivisionInteractorTest {
 
   @Test
   public void testAlreadyExistsExecute() {
-    ExistingDivisionGatewaySpy testGateway =
-          new ExistingDivisionGatewaySpy();
+    ExistingDivisionGatewaySpy testGateway = new ExistingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);

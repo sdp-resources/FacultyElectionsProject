@@ -1,14 +1,16 @@
 package fsc.interactor;
 
-import fsc.mock.AllProfilesGatewaySpy;
 import fsc.entity.Profile;
+import fsc.mock.AllProfilesGatewaySpy;
 import fsc.mock.ViewableEntityConverterSpy;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.ViewResponse;
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,8 +26,7 @@ public class ViewProfilesListInteractorTest {
   Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
 
   @Before
-  public void setup()
-  {
+  public void setup() {
     saveConverter();
   }
 
@@ -34,17 +35,19 @@ public class ViewProfilesListInteractorTest {
     ViewableEntityConverterSpy converterSpy = new ViewableEntityConverterSpy();
     Context.instance.viewableEntityConverter = converterSpy;
 
-    AllProfilesGatewaySpy profileGatewaySpy = new AllProfilesGatewaySpy(profile1, profile2, profile3);
+    AllProfilesGatewaySpy profileGatewaySpy = new AllProfilesGatewaySpy(profile1, profile2,
+                                                                        profile3);
 
     ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
 
     ViewProfilesListRequest request = new ViewProfilesListRequest();
 
-    ViewResponse<Collection<ViewableProfile>> response = (ViewResponse<Collection<ViewableProfile>>) interactor.execute(request);
+    ViewResponse<Collection<ViewableProfile>> response = (ViewResponse<Collection<ViewableProfile>>) interactor
+                                                                                                           .execute(
+                                                                                                                 request);
 
     List<ViewableProfile> expectedProfiles = new ArrayList<>();
-    for(Profile profile : profileGatewaySpy.getAllProfiles())
-    {
+    for (Profile profile : profileGatewaySpy.getAllProfiles()) {
       expectedProfiles.add(Context.instance.viewableEntityConverter.convert(profile));
     }
 
@@ -54,19 +57,17 @@ public class ViewProfilesListInteractorTest {
   }
 
   @After
-  public void Teardown()
-  {
+  public void Teardown() {
     restoreConverter();
   }
 
   private ViewableEntityConverter savedConverter;
-  private void saveConverter()
-  {
+
+  private void saveConverter() {
     savedConverter = Context.instance.viewableEntityConverter;
   }
 
-  private void restoreConverter()
-  {
+  private void restoreConverter() {
     Context.instance.viewableEntityConverter = savedConverter;
   }
 

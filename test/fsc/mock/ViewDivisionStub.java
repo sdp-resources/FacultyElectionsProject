@@ -8,8 +8,6 @@ public class ViewDivisionStub implements DivisionGateway {
 
   ArrayList<String> divisionList = new ArrayList<>();
 
-
-
   public ArrayList<String> getAvailableDivisions() {
     return divisionList;
   }

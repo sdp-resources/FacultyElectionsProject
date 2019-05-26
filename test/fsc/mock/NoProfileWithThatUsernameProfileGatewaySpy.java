@@ -10,7 +10,7 @@ public class NoProfileWithThatUsernameProfileGatewaySpy implements ProfileGatewa
   public ArrayList<Profile> profileList;
   public String submittedUsername;
 
-  public NoProfileWithThatUsernameProfileGatewaySpy(){
+  public NoProfileWithThatUsernameProfileGatewaySpy() {
     this.profileList = null;
   }
 

@@ -4,7 +4,9 @@ import fsc.entity.Ballot;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.request.ViewCandidatesRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.ViewResponse;
 import fsc.viewable.ViewableProfile;
 
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ class ViewCandidatesInteractor {
     return viewCandidates(request);
   }
 
-  private Response viewCandidates(ViewCandidatesRequest request) throws BallotGateway.InvalidBallotIDException {
+  private Response viewCandidates(ViewCandidatesRequest request)
+        throws BallotGateway.InvalidBallotIDException {
     Ballot ballot = gateway.getBallot(request.electionID);
     List<ViewableProfile> viewableCandidates = convertBallotToListOfViewableProfiles(ballot);
     return new ViewResponse(viewableCandidates);

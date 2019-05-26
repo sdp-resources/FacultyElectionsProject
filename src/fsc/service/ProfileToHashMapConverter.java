@@ -2,7 +2,8 @@ package fsc.service;
 
 import fsc.entity.Profile;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileToHashMapConverter {
   public Map<String, String> createHashMap(Profile profile) {

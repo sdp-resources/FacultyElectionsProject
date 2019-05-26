@@ -4,8 +4,7 @@ import fsc.entity.Profile;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
 
-public class ViewableEntityConverterSpy
-      extends ViewableEntityConverter {
+public class ViewableEntityConverterSpy extends ViewableEntityConverter {
   public Profile profileReceived;
 
   @Override

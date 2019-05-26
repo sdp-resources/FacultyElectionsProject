@@ -8,7 +8,7 @@ public class Vote {
   private final Ballot ballot;
   List<Profile> listOfVotes = new ArrayList<>();
 
-  public Vote(Ballot ballot){
+  public Vote(Ballot ballot) {
     this.ballot = ballot;
   }
 
@@ -23,7 +23,7 @@ public class Vote {
   }
 
   public void addMultipleVote(List<Profile> listOfCandidates) {
-    for (Profile profile: listOfCandidates){
+    for (Profile profile : listOfCandidates) {
       this.addSingleVote(profile);
     }
   }
@@ -33,7 +33,7 @@ public class Vote {
   }
 
   public void removeMultipleVotes(List<Profile> listOfRemovals) {
-    for (Profile profile: listOfRemovals){
+    for (Profile profile : listOfRemovals) {
       this.removeProfileFromVote(profile);
     }
   }

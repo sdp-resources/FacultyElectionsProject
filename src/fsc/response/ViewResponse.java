@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public class ViewResponse<T> implements Response {
   public final T values;
-  public ViewResponse(T values){
+
+  public ViewResponse(T values) {
     this.values = values;
   }
 

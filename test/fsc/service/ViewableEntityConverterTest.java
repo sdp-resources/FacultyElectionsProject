@@ -8,8 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ViewableEntityConverterTest {
   @Test
-  public void viewableProfileMatchesInformationInProfile()
-  {
+  public void viewableProfileMatchesInformationInProfile() {
     String name = "Joe Basic";
     String username = "basicj";
     String division = "Art";

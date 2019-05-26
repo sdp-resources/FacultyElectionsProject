@@ -2,27 +2,29 @@ package fsc.entity;
 
 public class Candidate {
   Profile profile;
+
   public enum Status {NoAnswer, Declined, Accepted}
+
   Status status;
 
-  public Candidate(Profile profile){
+  public Candidate(Profile profile) {
     this.profile = profile;
     status = Status.NoAnswer;
   }
 
-  public Profile getProfile(){
+  public Profile getProfile() {
     return profile;
   }
 
-  public Status getStatus(){
+  public Status getStatus() {
     return status;
   }
 
-  public void setDeclinded(){
+  public void setDeclinded() {
     status = Status.Declined;
   }
 
-  public void setAccepted(){
+  public void setAccepted() {
     status = Status.Accepted;
   }
 }

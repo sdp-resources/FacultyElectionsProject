@@ -1,7 +1,7 @@
 package fsc.entity;
 
-import fsc.mock.AlwaysTrueQueryStub;
 import fsc.entity.query.Query;
+import fsc.mock.AlwaysTrueQueryStub;
 import org.junit.Before;
 import org.junit.Test;
 

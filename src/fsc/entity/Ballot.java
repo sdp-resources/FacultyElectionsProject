@@ -1,7 +1,7 @@
 package fsc.entity;
 
-import java.util.ArrayList;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ballot extends AbstractList<Profile> {
@@ -23,7 +23,7 @@ public class Ballot extends AbstractList<Profile> {
     return profiles.size();
   }
 
-  public int sizeCandidates(){return candidates.size();}
+  public int sizeCandidates() {return candidates.size();}
 
   public boolean isEmpty() {
     return candidates.isEmpty();

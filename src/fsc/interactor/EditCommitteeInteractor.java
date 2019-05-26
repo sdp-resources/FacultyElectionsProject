@@ -3,9 +3,9 @@ package fsc.interactor;
 import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 import fsc.request.EditCommitteeRequest;
-import fsc.response.SuccessResponse;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
+import fsc.response.SuccessResponse;
 
 public class EditCommitteeInteractor {
   private CommitteeGateway committeeGateway;
@@ -17,17 +17,13 @@ public class EditCommitteeInteractor {
   public Response execute(EditCommitteeRequest request) {
     Committee committee;
 
-    try
-    {
+    try {
       committee = committeeGateway.getCommitteeFromCommitteeName(request.name);
-    }
-    catch (CommitteeGateway.UnknownCommitteeException e)
-    {
+    } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ErrorResponse.unknownCommitteeName();
     }
 
-    for(String field : request.changes.keySet())
-    {
+    for (String field : request.changes.keySet()) {
       updateProfile(committee, field, request.changes.get(field));
     }
 
@@ -35,10 +31,8 @@ public class EditCommitteeInteractor {
     return new SuccessResponse();
   }
 
-  public void updateProfile(Committee committee, String field, Object value)
-  {
-    switch (field)
-    {
+  public void updateProfile(Committee committee, String field, Object value) {
+    switch (field) {
       case "name":
         committee.setName((String) value);
         break;

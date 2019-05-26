@@ -11,7 +11,7 @@ public class AddToBallotRequest extends Request {
 
   public String getBallotID() {return ballotID;}
 
-  public String getProfileUsername(){
+  public String getProfileUsername() {
     return profileUsername;
   }
 }

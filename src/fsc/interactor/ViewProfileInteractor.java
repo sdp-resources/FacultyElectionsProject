@@ -5,16 +5,15 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
-import fsc.response.ViewResponse;
 import fsc.response.Response;
+import fsc.response.ViewResponse;
 import fsc.service.Context;
 
 public class ViewProfileInteractor implements Interactor {
   public String userName;
   private ProfileGateway gateway;
 
-
-  public ViewProfileInteractor(ProfileGateway gateway){
+  public ViewProfileInteractor(ProfileGateway gateway) {
     this.gateway = gateway;
   }
 
@@ -27,9 +26,7 @@ public class ViewProfileInteractor implements Interactor {
     Profile profile;
     try {
       profile = gateway.getProfile(userName);
-    }
-    catch (ProfileGateway.InvalidProfileUsernameException e)
-    {
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     }
 

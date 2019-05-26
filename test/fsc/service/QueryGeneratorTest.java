@@ -10,7 +10,6 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-
 public class QueryGeneratorTest {
 
   private QueryGenerator queryGenerator;
@@ -29,8 +28,7 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void profileWithNameJoeIsValidWithQueryAskingForJoe()
-  {
+  public void profileWithNameJoeIsValidWithQueryAskingForJoe() {
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("name", "Joe");
@@ -41,8 +39,7 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void profileNameWithNameJaneIsNOTValidWithQueryAskingForJoe()
-  {
+  public void profileNameWithNameJaneIsNOTValidWithQueryAskingForJoe() {
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("name", "Joe");
@@ -53,15 +50,14 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void queryRequiresArtAndTenuredExpectOnlyJoe()
-  {
+  public void queryRequiresArtAndTenuredExpectOnlyJoe() {
     JSONObject and = new JSONObject();
     JSONObject department = new JSONObject();
     department.put("division", "Art");
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
-    and.put("and", new JSONArray( new JSONObject[] { department, contract }));
+    and.put("and", new JSONArray(new JSONObject[]{department, contract}));
 
     Query query = queryGenerator.generate(and);
 
@@ -72,15 +68,14 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void queryRequiresArtOrTenuredExpectJoeSallyAndSam()
-  {
+  public void queryRequiresArtOrTenuredExpectJoeSallyAndSam() {
     JSONObject or = new JSONObject();
     JSONObject department = new JSONObject();
     department.put("division", "Art");
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
-    or.put("or", new JSONArray( new JSONObject[] { department, contract }));
+    or.put("or", new JSONArray(new JSONObject[]{department, contract}));
 
     Query query = queryGenerator.generate(or);
 
@@ -91,8 +86,7 @@ public class QueryGeneratorTest {
   }
 
   @Test
-  public void queryRequiresTenured_And_ArtOrLibrarian()
-  {
+  public void queryRequiresTenured_And_ArtOrLibrarian() {
     JSONObject contract = new JSONObject();
     contract.put("contract", "tenured");
 
@@ -102,10 +96,10 @@ public class QueryGeneratorTest {
     librarian.put("division", "Librarian");
 
     JSONObject or = new JSONObject();
-    or.put("or", new JSONArray( new JSONObject[] { art, librarian } ));
+    or.put("or", new JSONArray(new JSONObject[]{art, librarian}));
 
     JSONObject and = new JSONObject();
-    and.put("and", new JSONArray( new JSONObject[] { contract, or }));
+    and.put("and", new JSONArray(new JSONObject[]{contract, or}));
 
     Query query = queryGenerator.generate(and);
 
