@@ -2,19 +2,22 @@ package fsc.mock;
 
 import fsc.gateway.DivisionGateway;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ViewDivisionStub implements DivisionGateway {
+  public List<String> divisions;
 
-  ArrayList<String> divisionList = new ArrayList<>();
+  public ViewDivisionStub(String... divisions) {
+    this.divisions = Arrays.asList(divisions);
+  }
 
-  public ArrayList<String> getAvailableDivisions() {
-    return divisionList;
+  public List<String> getAvailableDivisions() {
+    return divisions;
   }
 
   public void addDivision(String division) {
-    divisionList.add(division);
-
+    divisions.add(division);
   }
 
   public void save() {

@@ -10,43 +10,26 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ViewDivisionsTest {
 
   ViewDivisionRequest request;
   ViewDivisionInteractor interactor;
-  Response response;
-  ArrayList<String> testList = new ArrayList<>();
+  ViewResponse<List<String>> response;
+  private ViewDivisionStub divisionGateway;
 
   @Before
   public void setup() {
-    testList.add("SCI");
-    testList.add("ART");
-
-  }
-
-  @Test
-  public void sendRequestToGetValidResponseBack() {
     request = new ViewDivisionRequest();
-    ViewDivisionStub gateway = new ViewDivisionStub();
-    interactor = new ViewDivisionInteractor(gateway);
-    response = interactor.execute(request);
-    assertTrue(response instanceof ViewResponse);
-
+    divisionGateway = new ViewDivisionStub("SCI", "ART");
   }
 
   @Test
   public void gatewayDivisionListEqualsOurDivisionList() {
-    request = new ViewDivisionRequest();
-    ViewDivisionStub gateway = new ViewDivisionStub();
-    interactor = new ViewDivisionInteractor(gateway);
+    interactor = new ViewDivisionInteractor(divisionGateway);
     response = interactor.execute(request);
-    gateway.addDivision("SCI");
-    gateway.addDivision("ART");
-    assertEquals(testList, gateway.getAvailableDivisions());
-    assertEquals(testList, ((ViewResponse<List<String>>) response).values);
+    assertEquals(divisionGateway.divisions, response.values);
   }
 
 }
