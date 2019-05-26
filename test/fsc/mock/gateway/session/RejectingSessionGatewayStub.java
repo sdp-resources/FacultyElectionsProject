@@ -1,6 +1,6 @@
 package fsc.mock.gateway.session;
 
-import fsc.entity.Session;
+import fsc.entity.session.Session;
 import fsc.gateway.SessionGateway;
 
 public class RejectingSessionGatewayStub extends SessionGatewayDummy {

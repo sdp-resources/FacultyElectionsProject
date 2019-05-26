@@ -1,4 +1,4 @@
-package fsc.entity;
+package fsc.entity.session;
 
 import java.util.Calendar;
 

@@ -1,6 +1,6 @@
 package fsc.service.authorizer;
 
-import fsc.entity.Session;
+import fsc.entity.session.Session;
 import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 

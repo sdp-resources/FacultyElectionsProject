@@ -1,6 +1,6 @@
 package fsc.service;
 
-import fsc.entity.Session;
+import fsc.entity.session.Session;
 
 public interface Authorizer{
   Session authorize(String username, String password);

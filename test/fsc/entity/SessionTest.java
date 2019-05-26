@@ -1,5 +1,6 @@
 package fsc.entity;
 
+import fsc.entity.session.AuthorizedSession;
 import org.junit.Test;
 
 import java.util.Calendar;

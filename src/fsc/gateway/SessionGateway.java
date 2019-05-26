@@ -1,7 +1,7 @@
 package fsc.gateway;
 
-import fsc.entity.AuthorizedSession;
-import fsc.entity.Session;
+import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.Session;
 
 public interface SessionGateway {
   void addSession(AuthorizedSession session);

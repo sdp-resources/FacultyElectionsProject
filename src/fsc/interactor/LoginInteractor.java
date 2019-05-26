@@ -1,6 +1,7 @@
 package fsc.interactor;
 
-import fsc.entity.*;
+import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.Session;
 import fsc.gateway.SessionGateway;
 import fsc.request.LoginRequest;
 import fsc.response.ErrorResponse;

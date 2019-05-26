@@ -1,6 +1,7 @@
 package fsc.service.authorizer;
 
-import fsc.entity.*;
+import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.Session;
 
 import java.util.Calendar;
 

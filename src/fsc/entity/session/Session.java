@@ -1,4 +1,4 @@
-package fsc.entity;
+package fsc.entity.session;
 
 public interface Session {
   boolean isAuthorized();

@@ -1,7 +1,7 @@
 package fsc.mock.gateway.session;
 
-import fsc.entity.AuthorizedSession;
-import fsc.entity.Session;
+import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.Session;
 import fsc.gateway.SessionGateway;
 
 public class SessionGatewayDummy implements SessionGateway {
