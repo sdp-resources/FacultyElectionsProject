@@ -7,7 +7,8 @@ import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.EditBallotQueryRequest;
 import fsc.response.ErrorResponse;
-import fsc.response.SuccessfullyEditedResponse;
+import fsc.response.Response;
+import fsc.response.SuccessResponse;
 
 public class EditBallotQueryInteractor{
   private ElectionGateway electionGateway;
@@ -20,7 +21,7 @@ public class EditBallotQueryInteractor{
     this.profileGateway = profileGateway;
   }
 
-  public Object execute(EditBallotQueryRequest request) {
+  public Response execute(EditBallotQueryRequest request) {
     try {
       Election election = electionGateway.getElectionFromElectionID(request.electionID);
       BallotCreator ballotCreator = new BallotCreator(profileGateway);
@@ -28,7 +29,7 @@ public class EditBallotQueryInteractor{
       Ballot ballot = ballotCreator.getBallot(election.getDefaultQuery());
       election.setBallot(ballot);
       electionGateway.save();
-      return new SuccessfullyEditedResponse();
+      return new SuccessResponse();
     } catch (Exception e) {
       return ErrorResponse.unknownElectionID();
     }

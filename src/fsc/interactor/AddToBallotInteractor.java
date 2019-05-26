@@ -31,7 +31,7 @@ public class AddToBallotInteractor {
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     }
-    return new SuccessfullyAddedProfileToBallotResponse();
+    return new SuccessResponse();
   }
 
 }

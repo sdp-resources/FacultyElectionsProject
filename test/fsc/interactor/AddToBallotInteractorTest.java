@@ -5,9 +5,7 @@ import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
 import fsc.request.AddToBallotRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessfullyAddedProfileToBallotResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,7 +58,7 @@ public class AddToBallotInteractorTest {
     AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
     Response response = interactor.execute(request);
 
-    assertTrue(response instanceof SuccessfullyAddedProfileToBallotResponse);
+    assertEquals(new SuccessResponse(), response);
   }
 
   @Test

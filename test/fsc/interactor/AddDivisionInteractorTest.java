@@ -26,7 +26,7 @@ public class AddDivisionInteractorTest {
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals("ENG", testGateway.submittedDivisionName);
-    assertTrue(response instanceof SuccessfullyAddedDivision);
+    assertEquals(new SuccessResponse(), response);
   }
 
   @Test

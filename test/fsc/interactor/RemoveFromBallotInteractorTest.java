@@ -5,9 +5,7 @@ import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.*;
 import fsc.request.RemoveFromBallotRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessfullyRemovedProfileFromBallotResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -76,6 +74,6 @@ public class RemoveFromBallotInteractorTest {
     Response response = interactor.execute(request);
 
     assertFalse(ballotGateway.ballot.contains(profile));
-    assertTrue(response instanceof SuccessfullyRemovedProfileFromBallotResponse);
+    assertEquals(new SuccessResponse(), response);
   }
 }

@@ -19,7 +19,7 @@ public class AddDivisionInteractor implements Interactor {
     }
     gateway.addDivision(request.name);
     gateway.save();
-    return new SuccessfullyAddedDivision();
+    return new SuccessResponse();
   }
 
   public boolean canHandle(Request request) {

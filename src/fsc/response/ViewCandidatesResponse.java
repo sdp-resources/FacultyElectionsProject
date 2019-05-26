@@ -4,10 +4,10 @@ import fsc.viewable.ViewableProfile;
 
 import java.util.List;
 
-public class SuccessfullyViewedCandidatesResponse implements Response{
+public class ViewCandidatesResponse implements Response{
   public final List<ViewableProfile> viewableProfiles;
 
-  public SuccessfullyViewedCandidatesResponse(List<ViewableProfile> viewableProfiles) {
+  public ViewCandidatesResponse(List<ViewableProfile> viewableProfiles) {
     this.viewableProfiles = viewableProfiles;
   }
 }

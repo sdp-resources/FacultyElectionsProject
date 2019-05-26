@@ -27,7 +27,7 @@ class ViewCandidatesInteractor {
   private Response viewCandidates(ViewCandidatesRequest request) throws BallotGateway.InvalidBallotIDException {
     Ballot ballot = gateway.getBallot(request.electionID);
     List<ViewableProfile> viewableCandidates = convertBallotToListOfViewableProfiles(ballot);
-    return new SuccessfullyViewedCandidatesResponse(viewableCandidates);
+    return new ViewCandidatesResponse(viewableCandidates);
   }
 
   private List<ViewableProfile> convertBallotToListOfViewableProfiles(Ballot ballot) {

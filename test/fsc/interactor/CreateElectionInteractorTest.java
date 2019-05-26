@@ -35,7 +35,7 @@ public class CreateElectionInteractorTest {
     interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);
     assertEquals("Cool committee", committeeGateway.committeeNameRequested);
-    assertTrue(response instanceof SuccessfullyCreatedElectionResponse);
+    assertEquals(new SuccessResponse(), response);
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
     assertEquals(electionGateway.addedElection.getCommittee().getName(), request.committeeName);
     assertEquals(1, electionGateway.addedElection.getID());

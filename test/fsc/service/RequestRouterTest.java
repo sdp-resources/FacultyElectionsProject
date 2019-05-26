@@ -22,12 +22,12 @@ public class RequestRouterTest {
   public void setUp() {
     requestRouter = new RequestRouter(new AddDivisionInteractor(new MissingDivisionGatewaySpy()),
                                       new ViewProfileInteractor(new ProfileGatewayStub(
-                                            new Profile("James Gordon", "jamesg", "ART", "TENURED"))));
+                                            new Profile("James Gordon", "jamesg", "ART",
+                                                        "TENURED"))));
   }
 
   @Test
-  public void emptyRouterGivesErrorResponse()
-  {
+  public void emptyRouterGivesErrorResponse() {
     requestRouter = new RequestRouter();
     AddDivisionRequest addDivisionRequest = new AddDivisionRequest("SQUAD");
     ErrorResponse response = (ErrorResponse) requestRouter.execute(addDivisionRequest);
@@ -35,16 +35,14 @@ public class RequestRouterTest {
   }
 
   @Test
-  public void canExecuteAddDivisionRequest()
-  {
+  public void canExecuteAddDivisionRequest() {
     AddDivisionRequest addDivisionRequest = new AddDivisionRequest("SQUAD");
     Response response = requestRouter.execute(addDivisionRequest);
-    assertTrue(response instanceof SuccessfullyAddedDivision);
+    assertEquals(new SuccessResponse(), response);
   }
 
   @Test
-  public void canExecuteViewProfileInteractor()
-  {
+  public void canExecuteViewProfileInteractor() {
     String username = "jamesg";
     ViewProfileRequest viewProfileRequest = new ViewProfileRequest(username);
     ViewProfileResponse response = (ViewProfileResponse) requestRouter.execute(viewProfileRequest);

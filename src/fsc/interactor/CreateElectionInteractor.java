@@ -27,7 +27,7 @@ public class CreateElectionInteractor {
       Ballot ballot = makeBallotFromSeat(seat);
       electionGateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));
       electionGateway.save();
-      return new SuccessfullyCreatedElectionResponse();
+      return new SuccessResponse();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ErrorResponse.unknownCommitteeName();
     } catch (Committee.UnknownSeatNameException e) {

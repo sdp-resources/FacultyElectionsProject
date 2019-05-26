@@ -5,9 +5,7 @@ import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.RemoveFromBallotRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessfullyRemovedProfileFromBallotResponse;
+import fsc.response.*;
 
 public class RemoveFromBallotInteractor {
   private BallotGateway ballotGateway;
@@ -30,7 +28,7 @@ public class RemoveFromBallotInteractor {
 
       ballot.remove(candidate);
       ballotGateway.save();
-      return new SuccessfullyRemovedProfileFromBallotResponse();
+      return new SuccessResponse();
     } catch (BallotGateway.InvalidBallotIDException e) {
       return ErrorResponse.unknownBallotID();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
