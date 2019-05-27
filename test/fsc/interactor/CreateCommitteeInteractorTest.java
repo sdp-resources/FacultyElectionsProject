@@ -10,14 +10,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class CreateCommitteeInteractorTest {
+  public static final String COMMITTEE_NAME = "cccc";
   private CreateCommitteeRequest request;
 
   @Before
   public void setup() {
-    request = new CreateCommitteeRequest("cccc", "xxxx");
+    request = new CreateCommitteeRequest(COMMITTEE_NAME, "xxxx");
   }
 
   @Test
@@ -26,8 +26,8 @@ public class CreateCommitteeInteractorTest {
     CreateCommitteeInteractor interactor = new CreateCommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assertEquals("cccc", CommitteeGatewaySpy.submittedCommitteeName);
-    assertTrue(response instanceof SuccessResponse);
+    assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
+    assertEquals(new SuccessResponse(), response);
   }
 
   @Test
@@ -36,7 +36,7 @@ public class CreateCommitteeInteractorTest {
     CreateCommitteeInteractor interactor = new CreateCommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assertEquals("cccc", gateway.submittedCommitteeName);
+    assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertEquals(ErrorResponse.resourceExists(), response);
   }
 }

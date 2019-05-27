@@ -5,7 +5,7 @@ import fsc.gateway.CommitteeGateway;
 
 public class CommitteeGatewaySpy implements CommitteeGateway {
 
-  public static String submittedCommitteeName;
+  public String submittedCommitteeName;
 
   public CommitteeGatewaySpy() {
 
