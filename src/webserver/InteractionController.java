@@ -5,7 +5,6 @@ import fsc.entity.Election;
 import fsc.interactor.*;
 import fsc.request.*;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
 import fsc.viewable.ViewableProfile;
 import gateway.InMemoryGateway;
 
