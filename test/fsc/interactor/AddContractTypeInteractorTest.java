@@ -1,7 +1,7 @@
 package fsc.interactor;
 
 import fsc.mock.gateway.contractType.ContractTypesGatewayStub;
-import fsc.request.CreateContractTypeRequest;
+import fsc.request.AddContractTypeRequest;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import org.junit.Before;
@@ -10,12 +10,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class CreateContractTypeInteractorTest {
+public class AddContractTypeInteractorTest {
 
   private static final String EXISTING_CONTRACT = "tenured";
   private static final String ADDED_CONTRACT = "sabbatical";
-  private CreateContractTypeRequest request;
-  private CreateContractTypeInteractor interactor;
+  private AddContractTypeRequest request;
+  private AddContractTypeInteractor interactor;
   private Response response;
   private ContractTypesGatewayStub contractTypeGateWay;
 
@@ -26,8 +26,8 @@ public class CreateContractTypeInteractorTest {
 
   @Test
   public void succesfullyAddedContract() {
-    request = new CreateContractTypeRequest(ADDED_CONTRACT);
-    interactor = new CreateContractTypeInteractor(contractTypeGateWay);
+    request = new AddContractTypeRequest(ADDED_CONTRACT);
+    interactor = new AddContractTypeInteractor(contractTypeGateWay);
     response = interactor.execute(request);
     assertEquals(new SuccessResponse(), response);
     assertTrue(contractTypeGateWay.contractTypes.contains(ADDED_CONTRACT));
