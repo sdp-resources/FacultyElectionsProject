@@ -1,7 +1,5 @@
 package fsc.viewable;
 
-import fsc.entity.Profile;
-
 import java.util.Objects;
 
 public class ViewableProfile {
@@ -24,11 +22,6 @@ public class ViewableProfile {
   public String getDivision() { return division; }
 
   public String getContract() { return contract; }
-
-  public static ViewableProfile from(Profile profile) {
-    return new ViewableProfile(profile.getName(), profile.getUsername(), profile.getDivision(),
-                               profile.getContract());
-  }
 
   public boolean equals(Object o) {
     if (this == o) return true;

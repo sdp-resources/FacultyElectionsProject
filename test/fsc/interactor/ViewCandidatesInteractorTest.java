@@ -9,19 +9,14 @@ import fsc.request.ViewCandidatesRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableProfile;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class ViewCandidatesInteractorTest {
   public static final String MOCK_ID = "mockID";
   private Ballot ballot;
-  private List<ViewableProfile> viewableProfiles;
   private Election election;
 
   private static Ballot sampleBallot() {
@@ -37,7 +32,6 @@ public class ViewCandidatesInteractorTest {
   public void setup() {
     ballot = sampleBallot();
     ballot.setBallotID(MOCK_ID);
-    viewableProfiles = new ViewableEntityConverter().convert(ballot);
     election = new Election(null, null, null, ballot);
   }
 
@@ -59,7 +53,7 @@ public class ViewCandidatesInteractorTest {
     Response initialResponse = interactor.execute(request);
 
     assertEquals(MOCK_ID, electionGateway.providedElectionId);
-    assertEquals(viewableProfiles, ((ViewResponse<List<ViewableProfile>>) initialResponse).values);
+    assertEquals(ViewResponse.ofProfileList(ballot), initialResponse);
   }
 
 }

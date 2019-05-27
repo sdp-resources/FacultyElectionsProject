@@ -7,7 +7,6 @@ import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.Context;
 
 public class ViewProfileInteractor implements Interactor {
   public String userName;
@@ -26,11 +25,11 @@ public class ViewProfileInteractor implements Interactor {
     Profile profile;
     try {
       profile = gateway.getProfile(userName);
+      return ViewResponse.ofProfile(profile);
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     }
 
-    return new ViewResponse(Context.instance.viewableEntityConverter.convert(profile));
   }
 
   public boolean canHandle(Request request) {

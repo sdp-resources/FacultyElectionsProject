@@ -1,15 +1,9 @@
 package fsc.interactor;
 
-import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.Context;
-import fsc.viewable.ViewableProfile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ViewProfilesListInteractor {
   private ProfileGateway profileGateway;
@@ -19,11 +13,7 @@ public class ViewProfilesListInteractor {
   }
 
   public Response execute(ViewProfilesListRequest request) {
-    List<ViewableProfile> viewableProfiles = new ArrayList<>();
-    for (Profile profile : profileGateway.getAllProfiles()) {
-      viewableProfiles.add(Context.instance.viewableEntityConverter.convert(profile));
-    }
-
-    return new ViewResponse<>(viewableProfiles);
+    return ViewResponse.ofProfileList(profileGateway.getAllProfiles());
   }
+
 }

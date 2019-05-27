@@ -7,28 +7,24 @@ import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableProfile;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class ViewProfileInteractorTest {
 
-  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile profile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
 
   @Test
   public void validUsernameReturnsCorrectViewableProfile() {
-    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(
-          providedProfile);
+    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
 
-    ViewProfileRequest request = new ViewProfileRequest(providedProfile.getUsername());
+    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
     ViewProfileInteractor interactor = new ViewProfileInteractor(gatewaySpy);
-    ViewResponse<ViewableProfile> response = (ViewResponse<ViewableProfile>) interactor.execute(request);
+    Response response = interactor.execute(request);
 
     assertEquals(request.username, gatewaySpy.providedUsername);
-    assertEquals(response.values,
-                 new ViewableEntityConverter().convert(providedProfile));
+    assertEquals(ViewResponse.ofProfile(profile), response);
   }
 
   @Test

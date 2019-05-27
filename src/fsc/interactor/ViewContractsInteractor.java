@@ -14,7 +14,7 @@ public class ViewContractsInteractor {
   }
 
   public ViewResponse<List<String>> execute(ContractsViewerRequest request) {
-    List<String> contracts = gateway.getAvailableContractTypes();
-    return new ViewResponse<>(contracts);
+    return ViewResponse.ofStrings(gateway.getAvailableContractTypes());
   }
+
 }

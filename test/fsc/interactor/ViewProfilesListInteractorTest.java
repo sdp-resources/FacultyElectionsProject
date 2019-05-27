@@ -5,13 +5,8 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableProfile;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -33,17 +28,10 @@ public class ViewProfilesListInteractorTest {
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
     ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
-    Response generalResponse = interactor.execute(request);
-    ViewResponse<List<ViewableProfile>> response = (ViewResponse<List<ViewableProfile>>) generalResponse;
-    List<ViewableProfile> expectedViewableProfiles = getViewableProfiles(
-          profileGatewaySpy.getAllProfiles());
-
+    Response response = interactor.execute(request);
+    Response expectedResponse = ViewResponse.ofProfileList(profileGatewaySpy.getAllProfiles());
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
-    assertEquals(expectedViewableProfiles, response.values);
+    assertEquals(expectedResponse, response);
   }
 
-  private List<ViewableProfile> getViewableProfiles(List<Profile> profiles) {
-    ViewableEntityConverter viewableEntityConverter = new ViewableEntityConverter();
-    return profiles.stream().map(viewableEntityConverter::convert).collect(Collectors.toList());
-  }
 }

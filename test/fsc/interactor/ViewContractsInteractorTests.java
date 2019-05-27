@@ -18,8 +18,6 @@ public class ViewContractsInteractorTests {
     ViewContractsInteractor interactor = new ViewContractsInteractor(gateway);
     ViewResponse<List<String>> response = interactor.execute(request);
 
-    ViewResponse<List<String>> responseList = new ViewResponse<>(gateway.contractTypes);
-
-    assertEquals(response, responseList);
+    assertEquals(ViewResponse.ofStrings(gateway.contractTypes), response);
   }
 }

@@ -7,8 +7,6 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.ViewDTSRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
-import fsc.service.ViewableEntityConverter;
 
 public class ViewDTSInteractor {
 
@@ -24,7 +22,8 @@ public class ViewDTSInteractor {
   public Response execute(ViewDTSRequest request) {
     try {
       getProperCandidate(request);
-      return new ViewResponse<>(new ViewableEntityConverter().convert(candidate));
+      return null;
+//      return new ViewResponse<>(new ViewableEntityConverter().convert(candidate));
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     } catch (ElectionGateway.InvalidElectionIDException e) {
