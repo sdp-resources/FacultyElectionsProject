@@ -41,9 +41,7 @@ public class InteractionController {
   }
 
   Collection<ViewableProfile> getAllProfiles() {
-    ViewProfilesListRequest request = new ViewProfilesListRequest();
-    fsc.response.Response response = viewProfilesListInteractor.execute(request);
-    return ((ViewResponse<Collection<ViewableProfile>>) response).values;
+    return viewProfilesListInteractor.execute(new ViewProfilesListRequest()).values;
   }
 
   public void setViewProfilesListInteractor(
@@ -57,15 +55,11 @@ public class InteractionController {
   }
 
   public List<String> getAllContractTypes() {
-    ViewResponse<List<String>> response = viewContractsInteractor
-                                                .execute(new ContractsViewerRequest());
-    return response.values;
+    return viewContractsInteractor.execute(new ContractsViewerRequest()).values;
   }
 
   public List<String> getAllDivisions() {
-    ViewResponse<List<String>> response = viewDivisionsInteractor
-                                                .execute(new ViewDivisionRequest());
-    return response.values;
+    return viewDivisionsInteractor.execute(new ViewDivisionRequest()).values;
   }
 
   public Collection<Committee> getAllCommittees() {

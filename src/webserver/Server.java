@@ -58,15 +58,15 @@ class Server {
 
   private static Object showAllCommitteesPage(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<>();
-    returnedHash.put("values", controller.getAllCommittees());
+    returnedHash.put("committees", controller.getAllCommittees());
     return serveTemplate("/committeeList.handlebars", returnedHash);
   }
 
   private static Object showAllProfilesPage(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<>();
-    returnedHash.put("values", controller.getAllProfiles());
+    returnedHash.put("profiles", controller.getAllProfiles());
     returnedHash.put("contractTypes", controller.getAllContractTypes());
-    returnedHash.put("values", controller.getAllDivisions());
+    returnedHash.put("divisions", controller.getAllDivisions());
     return serveTemplate("/profilesList.handlebars", returnedHash);
   }
 
