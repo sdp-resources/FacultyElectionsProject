@@ -23,7 +23,7 @@ public class ViewDTSInteractor {
     try {
       getProperCandidate(request);
       return null;
-//      return new ViewResponse<>(new ViewableEntityConverter().convert(candidate));
+      //      return new ViewResponse<>(new ViewableEntityConverter().convert(candidate));
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     } catch (ElectionGateway.InvalidElectionIDException e) {

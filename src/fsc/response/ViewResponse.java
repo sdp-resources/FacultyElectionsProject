@@ -16,6 +16,7 @@ public class ViewResponse<T> implements Response {
   private ViewResponse(T values) {
     this.values = values;
   }
+
   public static ViewResponse<List<ViewableProfile>> ofProfileList(List<Profile> profiles) {
     return new ViewResponse<>(entityConverter.convert(profiles));
   }
