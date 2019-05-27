@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles.CanViewProfiles</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>7</exceptions>
+    </counts>
+    <date>2019-05-27T15:20:40-04:00</date>
+    <runTimeInMillis>103</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.Profiles.ScenarioLibrary"&gt;.FacultyVoting.Profiles.ScenarioLibrary&lt;/a&gt; &lt;a href="FacultyVoting.Profiles.ScenarioLibrary?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profile _ _ _  _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.Profiles.SetUp"&gt;.FacultyVoting.Profiles.SetUp&lt;/a&gt; &lt;a href="FacultyVoting.Profiles.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;import&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;fixtures.fixtures&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;library&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Fsc fixture&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Test Context&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td colspan="4"&gt;given user profiles&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;fullname&lt;/td&gt;
+		&lt;td&gt;username&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="error"&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td class="error"&gt;skiadas&lt;/td&gt;
+		&lt;td class="error"&gt;Natural Sciences&lt;/td&gt;
+		&lt;td class="error"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile; &lt;span class="error"&gt;The instance scriptTableActor.addProfile. does not exist&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td&gt;skiadas&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+		&lt;td&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="error"&gt;Theresa Wilson&lt;/td&gt;
+		&lt;td class="error"&gt;wilsont&lt;/td&gt;
+		&lt;td class="error"&gt;Natural Sciences&lt;/td&gt;
+		&lt;td class="error"&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile; &lt;span class="error"&gt;The instance scriptTableActor.addProfile. does not exist&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Theresa Wilson&lt;/td&gt;
+		&lt;td&gt;wilsont&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+		&lt;td&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="error"&gt;Kate Johnson&lt;/td&gt;
+		&lt;td class="error"&gt;johnson&lt;/td&gt;
+		&lt;td class="error"&gt;Humanities&lt;/td&gt;
+		&lt;td class="error"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile; &lt;span class="error"&gt;The instance scriptTableActor.addProfile. does not exist&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Kate Johnson&lt;/td&gt;
+		&lt;td&gt;johnson&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+		&lt;td&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;profile for user _ matches _ _ _&lt;/td&gt;
+		&lt;td&gt;username,fullname,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;start&lt;/td&gt;
+		&lt;td&gt;getProfile&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;check&lt;/td&gt;
+		&lt;td&gt;fullname equals&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;check&lt;/td&gt;
+		&lt;td&gt;division equals&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;check&lt;/td&gt;
+		&lt;td&gt;contract type equals&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td colspan="4"&gt;profile for user matches&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;username&lt;/td&gt;
+		&lt;td&gt;fullname&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="error"&gt;skiadas&lt;/td&gt;
+		&lt;td class="error"&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td class="error"&gt;Natural Sciences&lt;/td&gt;
+		&lt;td class="error"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;profile for user _ matches _ _ _&lt;/td&gt;
+		&lt;td&gt;username,fullname,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;start&lt;/td&gt;
+		&lt;td&gt;getProfile &lt;span class="error"&gt;Could not invoke constructor for getProfile[1]&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;skiadas&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;check&lt;/td&gt;
+		&lt;td&gt;fullname equals&lt;/td&gt;
+		&lt;td&gt;Haris Skiadas &lt;span class="error"&gt;The instance scriptTableActor.fullnameEquals. does not exist&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;check&lt;/td&gt;
+		&lt;td&gt;division equals&lt;/td&gt;
+		&lt;td&gt;Natural Sciences &lt;span class="error"&gt;The instance scriptTableActor.divisionEquals. does not exist&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;check&lt;/td&gt;
+		&lt;td&gt;contract type equals&lt;/td&gt;
+		&lt;td&gt;tenured &lt;span class="error"&gt;The instance scriptTableActor.contractTypeEquals. does not exist&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>CanViewProfiles</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='import_2_0', instruction='import', path='fixtures.fixtures'}</instruction>
+        <slimResult>pass(fixtures.fixtures)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>import_2_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ImportExpectation</type>
+          <evaluationMessage>fixtures.fixtures</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='library_3_0', instruction='make', instanceName='library1', className='FscFixture', args=[]}</instruction>
+        <slimResult>pass(Fsc fixture)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>library_3_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Fsc fixture</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_4_0', instruction='make', instanceName='decisionTable_4', className='TestContext', args=[]}</instruction>
+        <slimResult>pass(Test Context)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_4_0</instructionId>
+          <col>0</col>
+          <row>0</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Test Context</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_5_0/scriptTable_1_0', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Haris Skiadas, skiadas, Natural Sciences, tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_5_0/scriptTable_1_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addProfile. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_5_1/scriptTable_1_0', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Theresa Wilson, wilsont, Natural Sciences, tenure-track]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_5_1/scriptTable_1_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addProfile. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_5_2/scriptTable_1_0', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Kate Johnson, johnson, Humanities, tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_5_2/scriptTable_1_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addProfile. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_7_0/scriptTable_6_0', instruction='make', instanceName='scriptTableActor', className='getProfile', args=[skiadas]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_7_0/scriptTable_6_0</instructionId>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Could not invoke constructor for getProfile[1]</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_7_0/scriptTable_6_1', instruction='call', instanceName='scriptTableActor', methodName='fullnameEquals', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_7_0/scriptTable_6_1</instructionId>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.fullnameEquals. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_7_0/scriptTable_6_2', instruction='call', instanceName='scriptTableActor', methodName='divisionEquals', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_7_0/scriptTable_6_2</instructionId>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.divisionEquals. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_7_0/scriptTable_6_3', instruction='call', instanceName='scriptTableActor', methodName='contractTypeEquals', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_7_0/scriptTable_6_3</instructionId>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.contractTypeEquals. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fitnesse.slim.SlimService 1</command>
+    <exitCode>0</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>555</totalRunTimeInMillis>
+</testResults>
+

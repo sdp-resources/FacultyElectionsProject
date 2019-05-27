@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles.CanViewProfiles</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>4</exceptions>
+    </counts>
+    <date>2019-05-27T12:17:21-04:00</date>
+    <runTimeInMillis>119</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a
+        href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        &lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.Profiles.SetUp"&gt;.FacultyVoting.Profiles.SetUp&lt;/a&gt;
+        &lt;a href="FacultyVoting.Profiles.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction="
+        class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+        &lt;div&gt;&lt;div class="contents"&gt;
+        &lt;b&gt;Contents:&lt;/b&gt;
+        &lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+        &lt;/div&gt;
+        &lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;import&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor0"&gt;
+        &lt;td&gt;&lt;span class="pass"&gt;fixtures.fixtures&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr&gt;
+        &lt;td colspan="4"&gt;&lt;span class="pass"&gt;With Profiles&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;full name&lt;/td&gt;
+        &lt;td&gt;username&lt;/td&gt;
+        &lt;td&gt;division&lt;/td&gt;
+        &lt;td&gt;contract type&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Haris Skiadas &lt;span class="error"&gt;Method setFullName[1] not found in
+        fixtures.FscFixture.&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;skiadas &lt;span class="error"&gt;Method setUsername[1] not found in fixtures.FscFixture.&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Natural Sciences &lt;span class="error"&gt;Method setDivision[1] not found in
+        fixtures.FscFixture.&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;tenured &lt;span class="error"&gt;Method setContractType[1] not found in fixtures.FscFixture.&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    </content>
+    <relativePageName>CanViewProfiles</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='import_0_0', instruction='import', path='fixtures.fixtures'}</instruction>
+        <slimResult>pass(fixtures.fixtures)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>import_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ImportExpectation</type>
+          <evaluationMessage>fixtures.fixtures</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_1_0', instruction='make', instanceName='decisionTable_1', className='WithProfiles', args=[]}</instruction>
+        <slimResult>pass(With Profiles)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_1_0</instructionId>
+          <col>0</col>
+          <row>0</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>With Profiles</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_1_4', instruction='call', instanceName='decisionTable_1', methodName='setFullName', args=[Haris Skiadas]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_1_4</instructionId>
+          <type>VoidReturnExpectation</type>
+          <evaluationMessage>Method setFullName[1] not found in fixtures.FscFixture.</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_1_5', instruction='call', instanceName='decisionTable_1', methodName='setUsername', args=[skiadas]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_1_5</instructionId>
+          <type>VoidReturnExpectation</type>
+          <evaluationMessage>Method setUsername[1] not found in fixtures.FscFixture.</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_1_6', instruction='call', instanceName='decisionTable_1', methodName='setDivision', args=[Natural Sciences]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_1_6</instructionId>
+          <type>VoidReturnExpectation</type>
+          <evaluationMessage>Method setDivision[1] not found in fixtures.FscFixture.</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_1_7', instruction='call', instanceName='decisionTable_1', methodName='setContractType', args=[tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_1_7</instructionId>
+          <type>VoidReturnExpectation</type>
+          <evaluationMessage>Method setContractType[1] not found in fixtures.FscFixture.</evaluationMessage>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fitnesse.slim.SlimService 1</command>
+    <exitCode>0</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>542</totalRunTimeInMillis>
+</testResults>
+

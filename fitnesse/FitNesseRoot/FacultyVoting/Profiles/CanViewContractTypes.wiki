@@ -1,0 +1,10 @@
+---
+Test
+---
+-|script|
+|given standard contract types|
+
+|Then we have contract type|
+|contractType|
+|tenured|
+|tenure-track|

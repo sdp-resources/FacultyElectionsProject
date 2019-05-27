@@ -28,5 +28,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="org.json:json:20180813" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/fitnesse/fitnesse-standalone.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

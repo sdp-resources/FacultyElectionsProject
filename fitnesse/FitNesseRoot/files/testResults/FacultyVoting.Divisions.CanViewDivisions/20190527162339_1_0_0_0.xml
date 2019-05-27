@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Divisions.CanViewDivisions</rootPath>
+  <result>
+    <counts>
+      <right>6</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <date>2019-05-27T16:23:40-04:00</date>
+    <runTimeInMillis>125</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.ScenarioLibrary"&gt;.FacultyVoting.ScenarioLibrary&lt;/a&gt; &lt;a href="FacultyVoting.ScenarioLibrary?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profile _ _ _  _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Then the profile for username _ has name _ division _ and contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;username,fullname,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor3"&gt;
+		&lt;td&gt;check profile for;&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given division&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td colspan="2"&gt;@division&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given standard divisions&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Arts and Letters&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Social Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.SetUp"&gt;.FacultyVoting.SetUp&lt;/a&gt; &lt;a href="FacultyVoting.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;import&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;fixtures.fixtures&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;library&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Fsc fixture&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Test Context&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="hidden" class="slimRowTitle"&gt;
+		&lt;td&gt;script&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;given standard divisions&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given standard divisions&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Arts and Letters&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Social Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Then we have division _&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;ensure&lt;/td&gt;
+		&lt;td&gt;has division&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Then we have division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Then we have division _&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;has division&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Then we have division _&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;has division&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>CanViewDivisions</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='import_5_0', instruction='import', path='fixtures.fixtures'}</instruction>
+        <slimResult>pass(fixtures.fixtures)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>import_5_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ImportExpectation</type>
+          <evaluationMessage>fixtures.fixtures</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='library_6_0', instruction='make', instanceName='library1', className='FscFixture', args=[]}</instruction>
+        <slimResult>pass(Fsc fixture)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>library_6_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Fsc fixture</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_7_0', instruction='make', instanceName='decisionTable_7', className='TestContext', args=[]}</instruction>
+        <slimResult>pass(Test Context)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_7_0</instructionId>
+          <col>0</col>
+          <row>0</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Test Context</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_8_0/scriptTable_4_0', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Humanities]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_8_0/scriptTable_4_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_8_0/scriptTable_4_1', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Arts and Letters]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_8_0/scriptTable_4_1</instructionId>
+          <col>0</col>
+          <row>2</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_8_0/scriptTable_4_2', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Natural Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_8_0/scriptTable_4_2</instructionId>
+          <col>0</col>
+          <row>3</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_8_0/scriptTable_4_3', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Social Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_8_0/scriptTable_4_3</instructionId>
+          <col>0</col>
+          <row>4</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_10_0/scriptTable_9_0', instruction='call', instanceName='scriptTableActor', methodName='hasDivision', args=[Natural Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_10_0/scriptTable_9_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_10_1/scriptTable_9_0', instruction='call', instanceName='scriptTableActor', methodName='hasDivision', args=[Humanities]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_10_1/scriptTable_9_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fitnesse.slim.SlimService 1</command>
+    <exitCode>0</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>1</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>505</totalRunTimeInMillis>
+</testResults>
+

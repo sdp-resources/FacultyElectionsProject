@@ -1,0 +1,740 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles.CanViewProfiles</rootPath>
+  <result>
+    <counts>
+      <right>21</right>
+      <wrong>3</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <date>2019-05-27T19:00:39-04:00</date>
+    <runTimeInMillis>40</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.ScenarioLibrary"&gt;.FacultyVoting.ScenarioLibrary&lt;/a&gt; &lt;a href="FacultyVoting.ScenarioLibrary?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;ensure&lt;/td&gt;
+		&lt;td&gt;valid division&lt;/td&gt;
+		&lt;td colspan="3"&gt;@division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;ensure&lt;/td&gt;
+		&lt;td&gt;valid contract type&lt;/td&gt;
+		&lt;td colspan="3"&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td colspan="3"&gt;Given user with name @fullname username @username division @division and contract type @contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Then the profile for username _ has name _ division _ and contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;username,fullname,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor3"&gt;
+		&lt;td&gt;check profile for;&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given division&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td colspan="2"&gt;@division&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given standard divisions&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Arts and Letters&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;add division&lt;/td&gt;
+		&lt;td&gt;Social Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given contract type&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor3"&gt;
+		&lt;td&gt;add contract type&lt;/td&gt;
+		&lt;td colspan="2"&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given standard contract types&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;Given contract type&lt;/td&gt;
+		&lt;td&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;Given contract type&lt;/td&gt;
+		&lt;td&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.SetUp"&gt;.FacultyVoting.SetUp&lt;/a&gt; &lt;a href="FacultyVoting.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;import&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;fixtures&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;library&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Fsc fixture&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Test Context&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="hidden" class="slimRowTitle"&gt;
+		&lt;td&gt;script&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;given standard divisions&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given standard divisions&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Arts and Letters&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add division&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Social Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;given standard contract types&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given standard contract types&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;Given contract type&lt;/td&gt;
+		&lt;td class="pass"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="2"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given contract type&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor3"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add contract type&lt;/span&gt;&lt;/td&gt;
+		&lt;td colspan="2"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="pass"&gt;Given contract type&lt;/td&gt;
+		&lt;td class="pass"&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="2"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given contract type&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor3"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add contract type&lt;/span&gt;&lt;/td&gt;
+		&lt;td colspan="2"&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td colspan="4"&gt;given user profiles&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;fullname&lt;/td&gt;
+		&lt;td&gt;username&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="fail"&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td class="fail"&gt;skiadas&lt;/td&gt;
+		&lt;td class="fail"&gt;Natural Sciences&lt;/td&gt;
+		&lt;td class="fail"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td colspan="3" class="fail"&gt;Given user with name Haris Skiadas username skiadas division Natural Sciences and contract type tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="3"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;valid division&lt;/td&gt;
+		&lt;td colspan="3"&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="fail"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;valid contract type&lt;/td&gt;
+		&lt;td colspan="3"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add profile;&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td&gt;skiadas&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+		&lt;td&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="fail"&gt;Theresa Wilson&lt;/td&gt;
+		&lt;td class="fail"&gt;wilsont&lt;/td&gt;
+		&lt;td class="fail"&gt;Natural Sciences&lt;/td&gt;
+		&lt;td class="fail"&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td colspan="3" class="fail"&gt;Given user with name Theresa Wilson username wilsont division Natural Sciences and contract type tenure-track&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="3"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;valid division&lt;/td&gt;
+		&lt;td colspan="3"&gt;Natural Sciences&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="fail"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;valid contract type&lt;/td&gt;
+		&lt;td colspan="3"&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add profile;&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Theresa Wilson&lt;/td&gt;
+		&lt;td&gt;wilsont&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+		&lt;td&gt;tenure-track&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="fail"&gt;Kate Johnson&lt;/td&gt;
+		&lt;td class="fail"&gt;johnson&lt;/td&gt;
+		&lt;td class="fail"&gt;Humanities&lt;/td&gt;
+		&lt;td class="fail"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+		&lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td colspan="3" class="fail"&gt;Given user with name Kate Johnson username johnson division Humanities and contract type tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="3"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;valid division&lt;/td&gt;
+		&lt;td colspan="3"&gt;Humanities&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor8"&gt;
+		&lt;td&gt;&lt;span class="fail"&gt;ensure&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;valid contract type&lt;/td&gt;
+		&lt;td colspan="3"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;add profile;&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Kate Johnson&lt;/td&gt;
+		&lt;td&gt;johnson&lt;/td&gt;
+		&lt;td&gt;Humanities&lt;/td&gt;
+		&lt;td&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td colspan="4"&gt;&lt;span class="pass"&gt;Can find profiles&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;username&lt;/td&gt;
+		&lt;td&gt;fullname?&lt;/td&gt;
+		&lt;td&gt;division?&lt;/td&gt;
+		&lt;td&gt;contract type?&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;skiadas&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Haris Skiadas&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Natural Sciences&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;tenured&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;wilsont&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Theresa Wilson&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Natural Sciences&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;tenure-track&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;johnson&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Kate Johnson&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Humanities&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;tenured&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;</content>
+    <relativePageName>CanViewProfiles</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='import_7_0', instruction='import', path='fixtures'}</instruction>
+        <slimResult>pass(fixtures)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>import_7_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ImportExpectation</type>
+          <evaluationMessage>fixtures</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='library_8_0', instruction='make', instanceName='library1', className='FscFixture', args=[]}</instruction>
+        <slimResult>pass(Fsc fixture)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>library_8_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Fsc fixture</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_9_0', instruction='make', instanceName='decisionTable_9', className='TestContext', args=[]}</instruction>
+        <slimResult>pass(Test Context)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_9_0</instructionId>
+          <col>0</col>
+          <row>0</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Test Context</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_0', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Humanities]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_1', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Arts and Letters]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_1</instructionId>
+          <col>0</col>
+          <row>2</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_2', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Natural Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_2</instructionId>
+          <col>0</col>
+          <row>3</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_3', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Social Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_3</instructionId>
+          <col>0</col>
+          <row>4</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_1/scriptTable_6_0/scriptTable_5_0', instruction='call', instanceName='scriptTableActor', methodName='addContractType', args=[tenured]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_10_1/scriptTable_6_0/scriptTable_5_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_1/scriptTable_6_1/scriptTable_5_0', instruction='call', instanceName='scriptTableActor', methodName='addContractType', args=[tenure-track]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>scriptTable_10_1/scriptTable_6_1/scriptTable_5_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_0/scriptTable_1_0/scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='validDivision', args=[Natural Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_11_0/scriptTable_1_0/scriptTable_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_0/scriptTable_1_0/scriptTable_0_1', instruction='call', instanceName='scriptTableActor', methodName='validContractType', args=[tenured]}</instruction>
+        <slimResult>fail()</slimResult>
+        <expectation>
+          <status>fail</status>
+          <instructionId>decisionTable_11_0/scriptTable_1_0/scriptTable_0_1</instructionId>
+          <col>0</col>
+          <row>2</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_0/scriptTable_1_0/scriptTable_0_2', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Haris Skiadas, skiadas, Natural Sciences, tenured]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_11_0/scriptTable_1_0/scriptTable_0_2</instructionId>
+          <col>0</col>
+          <row>3</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_1/scriptTable_1_0/scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='validDivision', args=[Natural Sciences]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_11_1/scriptTable_1_0/scriptTable_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_1/scriptTable_1_0/scriptTable_0_1', instruction='call', instanceName='scriptTableActor', methodName='validContractType', args=[tenure-track]}</instruction>
+        <slimResult>fail()</slimResult>
+        <expectation>
+          <status>fail</status>
+          <instructionId>decisionTable_11_1/scriptTable_1_0/scriptTable_0_1</instructionId>
+          <col>0</col>
+          <row>2</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_1/scriptTable_1_0/scriptTable_0_2', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Theresa Wilson, wilsont, Natural Sciences, tenure-track]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_11_1/scriptTable_1_0/scriptTable_0_2</instructionId>
+          <col>0</col>
+          <row>3</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_2/scriptTable_1_0/scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='validDivision', args=[Humanities]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_11_2/scriptTable_1_0/scriptTable_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_2/scriptTable_1_0/scriptTable_0_1', instruction='call', instanceName='scriptTableActor', methodName='validContractType', args=[tenured]}</instruction>
+        <slimResult>fail()</slimResult>
+        <expectation>
+          <status>fail</status>
+          <instructionId>decisionTable_11_2/scriptTable_1_0/scriptTable_0_1</instructionId>
+          <col>0</col>
+          <row>2</row>
+          <type>EnsureActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_2/scriptTable_1_0/scriptTable_0_2', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Kate Johnson, johnson, Humanities, tenured]}</instruction>
+        <slimResult>pass()</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_11_2/scriptTable_1_0/scriptTable_0_2</instructionId>
+          <col>0</col>
+          <row>3</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_0', instruction='make', instanceName='decisionTable_12', className='CanFindProfiles', args=[]}</instruction>
+        <slimResult>pass(Can find profiles)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_0</instructionId>
+          <col>0</col>
+          <row>0</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Can find profiles</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_4', instruction='call', instanceName='decisionTable_12', methodName='setUsername', args=[skiadas]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <instructionId>decisionTable_12_4</instructionId>
+          <col>0</col>
+          <row>2</row>
+          <type>VoidReturnExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_6', instruction='call', instanceName='decisionTable_12', methodName='fullname', args=[]}</instruction>
+        <slimResult>pass(Haris Skiadas)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_6</instructionId>
+          <col>1</col>
+          <row>2</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>Haris Skiadas</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_7', instruction='call', instanceName='decisionTable_12', methodName='division', args=[]}</instruction>
+        <slimResult>pass(Natural Sciences)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_7</instructionId>
+          <col>2</col>
+          <row>2</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>Natural Sciences</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_8', instruction='call', instanceName='decisionTable_12', methodName='contractType', args=[]}</instruction>
+        <slimResult>pass(tenured)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_8</instructionId>
+          <col>3</col>
+          <row>2</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>tenured</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_10', instruction='call', instanceName='decisionTable_12', methodName='setUsername', args=[wilsont]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <instructionId>decisionTable_12_10</instructionId>
+          <col>0</col>
+          <row>3</row>
+          <type>VoidReturnExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_12', instruction='call', instanceName='decisionTable_12', methodName='fullname', args=[]}</instruction>
+        <slimResult>pass(Theresa Wilson)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_12</instructionId>
+          <col>1</col>
+          <row>3</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>Theresa Wilson</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_13', instruction='call', instanceName='decisionTable_12', methodName='division', args=[]}</instruction>
+        <slimResult>pass(Natural Sciences)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_13</instructionId>
+          <col>2</col>
+          <row>3</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>Natural Sciences</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_14', instruction='call', instanceName='decisionTable_12', methodName='contractType', args=[]}</instruction>
+        <slimResult>pass(tenure-track)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_14</instructionId>
+          <col>3</col>
+          <row>3</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>tenure-track</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_16', instruction='call', instanceName='decisionTable_12', methodName='setUsername', args=[johnson]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <instructionId>decisionTable_12_16</instructionId>
+          <col>0</col>
+          <row>4</row>
+          <type>VoidReturnExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_18', instruction='call', instanceName='decisionTable_12', methodName='fullname', args=[]}</instruction>
+        <slimResult>pass(Kate Johnson)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_18</instructionId>
+          <col>1</col>
+          <row>4</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>Kate Johnson</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_19', instruction='call', instanceName='decisionTable_12', methodName='division', args=[]}</instruction>
+        <slimResult>pass(Humanities)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_19</instructionId>
+          <col>2</col>
+          <row>4</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>Humanities</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_20', instruction='call', instanceName='decisionTable_12', methodName='contractType', args=[]}</instruction>
+        <slimResult>pass(tenured)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_20</instructionId>
+          <col>3</col>
+          <row>4</row>
+          <type>ReturnedValueExpectation</type>
+          <evaluationMessage>tenured</evaluationMessage>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <finalCounts>
+    <right>0</right>
+    <wrong>1</wrong>
+    <ignores>0</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>40</totalRunTimeInMillis>
+</testResults>
+

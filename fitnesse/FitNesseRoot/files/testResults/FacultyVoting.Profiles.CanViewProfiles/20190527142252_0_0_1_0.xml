@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles.CanViewProfiles</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <date>2019-05-27T14:22:53-04:00</date>
+    <runTimeInMillis>96</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.Profiles.SetUp"&gt;.FacultyVoting.Profiles.SetUp&lt;/a&gt; &lt;a href="FacultyVoting.Profiles.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;div class="contents"&gt;
+	&lt;b&gt;Contents:&lt;/b&gt;
+	&lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;import&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;fixtures.fixtures&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;library&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor0"&gt;
+		&lt;td&gt;&lt;span class="pass"&gt;Test Context&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;given user _ _ from division _ with contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;@fullname&lt;/td&gt;
+		&lt;td&gt;@username&lt;/td&gt;
+		&lt;td&gt;@division&lt;/td&gt;
+		&lt;td&gt;@contractType&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td colspan="4"&gt;given user from division with contract type&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;fullname&lt;/td&gt;
+		&lt;td&gt;username&lt;/td&gt;
+		&lt;td&gt;division&lt;/td&gt;
+		&lt;td&gt;contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="scenario closed"&gt;
+		&lt;td class="ignore"&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td class="ignore"&gt;skiadas&lt;/td&gt;
+		&lt;td class="ignore"&gt;Natural Sciences&lt;/td&gt;
+		&lt;td class="ignore"&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td&gt;scenario&lt;/td&gt;
+		&lt;td&gt;given user _ _ from division _ with contract type _&lt;/td&gt;
+		&lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor1"&gt;
+		&lt;td&gt;add profile;&lt;/td&gt;
+		&lt;td&gt;Haris Skiadas&lt;/td&gt;
+		&lt;td&gt;skiadas&lt;/td&gt;
+		&lt;td&gt;Natural Sciences&lt;/td&gt;
+		&lt;td&gt;tenured&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>CanViewProfiles</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='import_0_0', instruction='import', path='fixtures.fixtures'}</instruction>
+        <slimResult>pass(fixtures.fixtures)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>import_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ImportExpectation</type>
+          <evaluationMessage>fixtures.fixtures</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='library_1_0', instruction='make', instanceName='library1', className='TestContext', args=[]}</instruction>
+        <slimResult>pass(Test Context)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>library_1_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Test Context</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_3_0/scriptTable_2_0', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Haris Skiadas, skiadas, Natural Sciences, tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <instructionId>decisionTable_3_0/scriptTable_2_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ScriptActionExpectation</type>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fitnesse.slim.SlimService 1</command>
+    <exitCode>0</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>1</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>471</totalRunTimeInMillis>
+</testResults>
+

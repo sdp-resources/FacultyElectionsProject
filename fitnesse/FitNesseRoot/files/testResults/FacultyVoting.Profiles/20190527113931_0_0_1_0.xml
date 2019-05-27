@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<suiteResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles</rootPath>
+  <pageHistoryReference>
+    <name>FacultyVoting.Profiles.CanViewProfiles</name>
+    <date>2019-05-27T11:39:31-04:00</date>
+    <pageHistoryLink>FacultyVoting.Profiles.CanViewProfiles?pageHistory&amp;resultDate=20190527113931</pageHistoryLink>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <runTimeInMillis>105</runTimeInMillis>
+  </pageHistoryReference>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fitnesse.slim.SlimService 1</command>
+    <exitCode>0</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>1</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>493</totalRunTimeInMillis>
+</suiteResults>
+

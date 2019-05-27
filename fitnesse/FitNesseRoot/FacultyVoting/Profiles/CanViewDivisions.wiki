@@ -1,0 +1,12 @@
+---
+Test
+---
+-|script|
+|given standard divisions|
+
+|Then we have division|
+|division|
+|Natural Sciences|
+|Humanities|
+|Arts and Letters|
+|Social Sciences|

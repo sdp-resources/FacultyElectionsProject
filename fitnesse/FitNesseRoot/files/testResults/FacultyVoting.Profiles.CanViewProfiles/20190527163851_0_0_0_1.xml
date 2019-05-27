@@ -1,0 +1,1170 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles.CanViewProfiles</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>29</exceptions>
+    </counts>
+    <date>2019-05-27T16:38:51-04:00</date>
+    <runTimeInMillis>193</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a
+        href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        &lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.ScenarioLibrary"&gt;.FacultyVoting.ScenarioLibrary&lt;/a&gt;
+        &lt;a href="FacultyVoting.ScenarioLibrary?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction="
+        class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+        &lt;div&gt;&lt;div class="contents"&gt;
+        &lt;b&gt;Contents:&lt;/b&gt;
+        &lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+        &lt;/div&gt;
+        &lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+        &lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure&lt;/td&gt;
+        &lt;td&gt;valid division&lt;/td&gt;
+        &lt;td colspan="3"&gt;@division&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure&lt;/td&gt;
+        &lt;td&gt;valid contract type&lt;/td&gt;
+        &lt;td colspan="3"&gt;@contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor1"&gt;
+        &lt;td&gt;add profile;&lt;/td&gt;
+        &lt;td&gt;@fullname&lt;/td&gt;
+        &lt;td&gt;@username&lt;/td&gt;
+        &lt;td&gt;@division&lt;/td&gt;
+        &lt;td&gt;@contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+        &lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor0"&gt;
+        &lt;td colspan="3"&gt;Given user with name @fullname username @username division @division and contract type
+        @contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Then the profile for username _ has name _ division _ and contract type _&lt;/td&gt;
+        &lt;td colspan="3"&gt;username,fullname,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor3"&gt;
+        &lt;td&gt;check profile for;&lt;/td&gt;
+        &lt;td&gt;@username&lt;/td&gt;
+        &lt;td&gt;@fullname&lt;/td&gt;
+        &lt;td&gt;@division&lt;/td&gt;
+        &lt;td&gt;@contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given division&lt;/td&gt;
+        &lt;td&gt;division&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division&lt;/td&gt;
+        &lt;td colspan="2"&gt;@division&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given standard divisions&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division&lt;/td&gt;
+        &lt;td&gt;Humanities&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division&lt;/td&gt;
+        &lt;td&gt;Arts and Letters&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division&lt;/td&gt;
+        &lt;td&gt;Natural Sciences&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division&lt;/td&gt;
+        &lt;td&gt;Social Sciences&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given contract type&lt;/td&gt;
+        &lt;td&gt;contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor3"&gt;
+        &lt;td&gt;add contract type&lt;/td&gt;
+        &lt;td colspan="2"&gt;@contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given standard contract types&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor1"&gt;
+        &lt;td&gt;Given contract type&lt;/td&gt;
+        &lt;td&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor1"&gt;
+        &lt;td&gt;Given contract type&lt;/td&gt;
+        &lt;td&gt;tenure-track&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a
+        href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        &lt;p class="title"&gt;Included page: &lt;a href="FacultyVoting.SetUp"&gt;.FacultyVoting.SetUp&lt;/a&gt; &lt;a
+        href="FacultyVoting.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+        &lt;div&gt;&lt;div class="contents"&gt;
+        &lt;b&gt;Contents:&lt;/b&gt;
+        &lt;ul class="toc1"/&gt;&lt;ul class="toc1"/&gt;
+        &lt;/div&gt;
+        &lt;br/&gt;&lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;import&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor0"&gt;
+        &lt;td&gt;&lt;span class="pass"&gt;fixtures.fixtures&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;library&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor0"&gt;
+        &lt;td&gt;Fsc fixture &lt;span class="error"&gt;Could not invoke constructor for FscFixture[0]&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Test Context &lt;span class="error"&gt;Could not invoke constructor for TestContext[0]&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr class="hidden" class="slimRowTitle"&gt;
+        &lt;td&gt;script&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;given standard divisions&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given standard divisions&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division &lt;span class="error"&gt;The instance scriptTableActor.addDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Humanities&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division &lt;span class="error"&gt;The instance scriptTableActor.addDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Arts and Letters&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division &lt;span class="error"&gt;The instance scriptTableActor.addDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Natural Sciences&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;add division &lt;span class="error"&gt;The instance scriptTableActor.addDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Social Sciences&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;given standard contract types&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="1"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given standard contract types&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;Given contract type&lt;/td&gt;
+        &lt;td class="error"&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="2"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given contract type&lt;/td&gt;
+        &lt;td&gt;contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor3"&gt;
+        &lt;td&gt;add contract type &lt;span class="error"&gt;The instance scriptTableActor.addContractType. does not
+        exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td colspan="2"&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;Given contract type&lt;/td&gt;
+        &lt;td class="error"&gt;tenure-track&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="2"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given contract type&lt;/td&gt;
+        &lt;td&gt;contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor3"&gt;
+        &lt;td&gt;add contract type &lt;span class="error"&gt;The instance scriptTableActor.addContractType. does not
+        exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td colspan="2"&gt;tenure-track&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr&gt;
+        &lt;td colspan="4"&gt;given user profiles&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;fullname&lt;/td&gt;
+        &lt;td&gt;username&lt;/td&gt;
+        &lt;td&gt;division&lt;/td&gt;
+        &lt;td&gt;contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;Haris Skiadas&lt;/td&gt;
+        &lt;td class="error"&gt;skiadas&lt;/td&gt;
+        &lt;td class="error"&gt;Natural Sciences&lt;/td&gt;
+        &lt;td class="error"&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+        &lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td colspan="3" class="error"&gt;Given user with name Haris Skiadas username skiadas division Natural
+        Sciences and contract type tenured&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="3"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+        &lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure &lt;span class="error"&gt;The instance scriptTableActor.validDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;valid division&lt;/td&gt;
+        &lt;td colspan="3"&gt;Natural Sciences&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure &lt;span class="error"&gt;The instance scriptTableActor.validContractType. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;valid contract type&lt;/td&gt;
+        &lt;td colspan="3"&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor1"&gt;
+        &lt;td&gt;add profile; &lt;span class="error"&gt;The instance scriptTableActor.addProfile. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Haris Skiadas&lt;/td&gt;
+        &lt;td&gt;skiadas&lt;/td&gt;
+        &lt;td&gt;Natural Sciences&lt;/td&gt;
+        &lt;td&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;Theresa Wilson&lt;/td&gt;
+        &lt;td class="error"&gt;wilsont&lt;/td&gt;
+        &lt;td class="error"&gt;Natural Sciences&lt;/td&gt;
+        &lt;td class="error"&gt;tenure-track&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+        &lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td colspan="3" class="error"&gt;Given user with name Theresa Wilson username wilsont division Natural
+        Sciences and contract type tenure-track&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="3"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+        &lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure &lt;span class="error"&gt;The instance scriptTableActor.validDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;valid division&lt;/td&gt;
+        &lt;td colspan="3"&gt;Natural Sciences&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure &lt;span class="error"&gt;The instance scriptTableActor.validContractType. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;valid contract type&lt;/td&gt;
+        &lt;td colspan="3"&gt;tenure-track&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor1"&gt;
+        &lt;td&gt;add profile; &lt;span class="error"&gt;The instance scriptTableActor.addProfile. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Theresa Wilson&lt;/td&gt;
+        &lt;td&gt;wilsont&lt;/td&gt;
+        &lt;td&gt;Natural Sciences&lt;/td&gt;
+        &lt;td&gt;tenure-track&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td class="error"&gt;Kate Johnson&lt;/td&gt;
+        &lt;td class="error"&gt;johnson&lt;/td&gt;
+        &lt;td class="error"&gt;Humanities&lt;/td&gt;
+        &lt;td class="error"&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="4"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user profiles _ _ _ _&lt;/td&gt;
+        &lt;td&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="scenario closed"&gt;
+        &lt;td colspan="3" class="error"&gt;Given user with name Kate Johnson username johnson division Humanities and
+        contract type tenured&lt;/td&gt;
+        &lt;/tr&gt;&lt;tr class="scenario-detail closed-detail"&gt;&lt;td colspan="3"&gt;&lt;table&gt;
+        &lt;tr class="slimRowTitle"&gt;
+        &lt;td&gt;scenario&lt;/td&gt;
+        &lt;td&gt;Given user with name _ username _ division _ and contract type _&lt;/td&gt;
+        &lt;td colspan="3"&gt;fullname,username,division,contractType&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure &lt;span class="error"&gt;The instance scriptTableActor.validDivision. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;valid division&lt;/td&gt;
+        &lt;td colspan="3"&gt;Humanities&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor8"&gt;
+        &lt;td&gt;ensure &lt;span class="error"&gt;The instance scriptTableActor.validContractType. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;valid contract type&lt;/td&gt;
+        &lt;td colspan="3"&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class="slimRowColor1"&gt;
+        &lt;td&gt;add profile; &lt;span class="error"&gt;The instance scriptTableActor.addProfile. does not exist&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Kate Johnson&lt;/td&gt;
+        &lt;td&gt;johnson&lt;/td&gt;
+        &lt;td&gt;Humanities&lt;/td&gt;
+        &lt;td&gt;tenured&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;&lt;table&gt;
+        &lt;tr&gt;
+        &lt;td colspan="4"&gt;&lt;span class="pass"&gt;Can find profiles&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;username&lt;/td&gt;
+        &lt;td&gt;fullname?&lt;/td&gt;
+        &lt;td&gt;division?&lt;/td&gt;
+        &lt;td&gt;contract type?&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;skiadas&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NoClassDefFoundError:
+        fixtures.fixtures/TestContext
+        at fixtures.CanFindProfiles.setUsername(CanFindProfiles.java:10)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]
+        Caused by: java.lang.ClassNotFoundException: fixtures.TestContext
+        at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) [n/a]
+        at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) [n/a]
+        at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) [rt.jar]
+        at fixtures.CanFindProfiles.setUsername(CanFindProfiles.java:10)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;Haris Skiadas&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.fullname(CanFindProfiles.java:14)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;Natural Sciences&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.division(CanFindProfiles.java:18)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;tenured&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.contractType(CanFindProfiles.java:22)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;wilsont&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NoClassDefFoundError:
+        fixtures.fixtures/TestContext
+        at fixtures.CanFindProfiles.setUsername(CanFindProfiles.java:10)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;Theresa Wilson&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.fullname(CanFindProfiles.java:14)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;Natural Sciences&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.division(CanFindProfiles.java:18)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;tenure-track&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.contractType(CanFindProfiles.java:22)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;johnson&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NoClassDefFoundError:
+        fixtures.fixtures/TestContext
+        at fixtures.CanFindProfiles.setUsername(CanFindProfiles.java:10)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;Kate Johnson&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.fullname(CanFindProfiles.java:14)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;Humanities&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.division(CanFindProfiles.java:18)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;table&gt;&lt;tr class="exception closed"&gt;&lt;td&gt; &lt;span class="error"&gt;tenured&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr
+        class="exception-detail closed-detail"&gt;&lt;td&gt;__EXCEPTION__:java.lang.NullPointerException
+        at fixtures.CanFindProfiles.contractType(CanFindProfiles.java:22)
+        [file:/Users/haris/Documents/Programming/FacultyElectionsProject/out/production/]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [n/a]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) [n/a]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        [n/a]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:564) [rt.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.methodInvoke(SimpleInteraction.java:256)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.callMethod(SimpleInteraction.java:241)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.invokeMethod(SimpleInteraction.java:223)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.fixtureInteraction.SimpleInteraction.findAndInvoke(SimpleInteraction.java:185)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.MethodExecutor.findAndInvoke(MethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.FixtureMethodExecutor.execute(FixtureMethodExecutor.java:18) [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.getMethodExecutionResult(StatementExecutor.java:139)
+        [fitnesse-standalone.jar]
+        at fitnesse.slim.StatementExecutor.call(StatementExecutor.java:112) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.CallInstruction.executeInternal(CallInstruction.java:35) [fitnesse-standalone.jar]
+        at fitnesse.slim.instructions.Instruction.execute(Instruction.java:29) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatement(ListExecutor.java:49) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor$Executive.executeStatements(ListExecutor.java:43) [fitnesse-standalone.jar]
+        at fitnesse.slim.ListExecutor.execute(ListExecutor.java:85) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.executeInstructions(SlimServer.java:82) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.processOneSetOfInstructions(SlimServer.java:75) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.tryProcessInstructions(SlimServer.java:62) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimServer.serve(SlimServer.java:47) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.handle(SlimService.java:169) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.acceptOne(SlimService.java:177) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.accept(SlimService.java:139) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.startWithFactory(SlimService.java:92) [fitnesse-standalone.jar]
+        at fitnesse.slim.SlimService.main(SlimService.java:57) [fitnesse-standalone.jar]&lt;/td&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br/&gt;</content>
+    <relativePageName>CanViewProfiles</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='import_7_0', instruction='import', path='fixtures.fixtures'}</instruction>
+        <slimResult>pass(fixtures.fixtures)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>import_7_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ImportExpectation</type>
+          <evaluationMessage>fixtures.fixtures</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='library_8_0', instruction='make', instanceName='library1', className='FscFixture', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>library_8_0</instructionId>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Could not invoke constructor for FscFixture[0]</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_9_0', instruction='make', instanceName='decisionTable_9', className='TestContext', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_9_0</instructionId>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Could not invoke constructor for TestContext[0]</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_0', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Humanities]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_1', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Arts and Letters]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_1</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_2', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Natural Sciences]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_2</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_0/scriptTable_4_3', instruction='call', instanceName='scriptTableActor', methodName='addDivision', args=[Social Sciences]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_10_0/scriptTable_4_3</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_1/scriptTable_6_0/scriptTable_5_0', instruction='call', instanceName='scriptTableActor', methodName='addContractType', args=[tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_10_1/scriptTable_6_0/scriptTable_5_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addContractType. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='scriptTable_10_1/scriptTable_6_1/scriptTable_5_0', instruction='call', instanceName='scriptTableActor', methodName='addContractType', args=[tenure-track]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_10_1/scriptTable_6_1/scriptTable_5_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addContractType. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_0/scriptTable_1_0/scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='validDivision', args=[Natural Sciences]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_0/scriptTable_1_0/scriptTable_0_0</instructionId>
+          <type>EnsureActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.validDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_0/scriptTable_1_0/scriptTable_0_1', instruction='call', instanceName='scriptTableActor', methodName='validContractType', args=[tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_0/scriptTable_1_0/scriptTable_0_1</instructionId>
+          <type>EnsureActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.validContractType. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_0/scriptTable_1_0/scriptTable_0_2', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Haris Skiadas, skiadas, Natural Sciences, tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_0/scriptTable_1_0/scriptTable_0_2</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addProfile. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_1/scriptTable_1_0/scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='validDivision', args=[Natural Sciences]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_1/scriptTable_1_0/scriptTable_0_0</instructionId>
+          <type>EnsureActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.validDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_1/scriptTable_1_0/scriptTable_0_1', instruction='call', instanceName='scriptTableActor', methodName='validContractType', args=[tenure-track]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_1/scriptTable_1_0/scriptTable_0_1</instructionId>
+          <type>EnsureActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.validContractType. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_1/scriptTable_1_0/scriptTable_0_2', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Theresa Wilson, wilsont, Natural Sciences, tenure-track]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_1/scriptTable_1_0/scriptTable_0_2</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addProfile. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_2/scriptTable_1_0/scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='validDivision', args=[Humanities]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_2/scriptTable_1_0/scriptTable_0_0</instructionId>
+          <type>EnsureActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.validDivision. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_2/scriptTable_1_0/scriptTable_0_1', instruction='call', instanceName='scriptTableActor', methodName='validContractType', args=[tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_2/scriptTable_1_0/scriptTable_0_1</instructionId>
+          <type>EnsureActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.validContractType. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_11_2/scriptTable_1_0/scriptTable_0_2', instruction='call', instanceName='scriptTableActor', methodName='addProfile', args=[Kate Johnson, johnson, Humanities, tenured]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_11_2/scriptTable_1_0/scriptTable_0_2</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>The instance scriptTableActor.addProfile. does not exist</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_0', instruction='make', instanceName='decisionTable_12', className='CanFindProfiles', args=[]}</instruction>
+        <slimResult>pass(Can find profiles)</slimResult>
+        <expectation>
+          <status>pass</status>
+          <instructionId>decisionTable_12_0</instructionId>
+          <col>0</col>
+          <row>0</row>
+          <type>ConstructionExpectation</type>
+          <evaluationMessage>Can find profiles</evaluationMessage>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_4', instruction='call', instanceName='decisionTable_12', methodName='setUsername', args=[skiadas]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_4</instructionId>
+          <type>VoidReturnExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_6', instruction='call', instanceName='decisionTable_12', methodName='fullname', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_6</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_7', instruction='call', instanceName='decisionTable_12', methodName='division', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_7</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_8', instruction='call', instanceName='decisionTable_12', methodName='contractType', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_8</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_10', instruction='call', instanceName='decisionTable_12', methodName='setUsername', args=[wilsont]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_10</instructionId>
+          <type>VoidReturnExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_12', instruction='call', instanceName='decisionTable_12', methodName='fullname', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_12</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_13', instruction='call', instanceName='decisionTable_12', methodName='division', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_13</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_14', instruction='call', instanceName='decisionTable_12', methodName='contractType', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_14</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_16', instruction='call', instanceName='decisionTable_12', methodName='setUsername', args=[johnson]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_16</instructionId>
+          <type>VoidReturnExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_18', instruction='call', instanceName='decisionTable_12', methodName='fullname', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_18</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_19', instruction='call', instanceName='decisionTable_12', methodName='division', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_19</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+      <instructionResult>
+        <instruction>{id='decisionTable_12_20', instruction='call', instanceName='decisionTable_12', methodName='contractType', args=[]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>decisionTable_12_20</instructionId>
+          <type>ReturnedValueExpectation</type>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fitnesse.slim.SlimService 1</command>
+    <exitCode>0</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>666</totalRunTimeInMillis>
+</testResults>
+

@@ -1,0 +1,40 @@
+!contents -R2 -g -p -f -h
+
+!3 Profiles
+
+|scenario|Given user with name _ username _ division _ and contract type _ |fullname,username,division,contractType|
+|ensure|valid division|@division|
+|ensure|valid contract type|@contractType|
+|add profile;|@fullname|@username|@division|@contractType|
+
+|scenario|Given user profiles _ _ _ _|fullname,username,division,contractType|
+|Given user with name @fullname username @username division @division and contract type @contractType|
+
+|scenario|Then the profile for username _ has name _ division _ and contract type _|username,fullname,division,contractType|
+|check profile for;|@username|@fullname|@division|@contractType|
+
+!3 Divisions
+
+|scenario|Given division|division|
+|add division|@division|
+
+|scenario|Given standard divisions|
+|add division|Humanities|
+|add division|Arts and Letters|
+|add division|Natural Sciences|
+|add division|Social Sciences|
+
+|scenario|Then we have division _ |division|
+|ensure|valid division|@division|
+
+!3 Contract Types
+
+|scenario|Given contract type|contractType|
+|add contract type|@contractType|
+
+|scenario|Given standard contract types|
+|Given contract type|tenured|
+|Given contract type|tenure-track|
+
+|scenario|Then we have contract type _ |contractType|
+|ensure|valid contract type|@contractType|

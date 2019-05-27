@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190508</FitNesseVersion>
+  <rootPath>FacultyVoting.Profiles.CanViewProfiles</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>1</exceptions>
+    </counts>
+    <date>2019-05-27T11:31:21-04:00</date>
+    <runTimeInMillis>2</runTimeInMillis>
+    <content>&lt;br/&gt;&lt;table&gt;
+        &lt;tr&gt;
+        &lt;td class="error"&gt;fixtures.fixtures.Profiles&lt;hr&gt;&lt;pre&gt;&lt;div class="fit_stacktrace"&gt;java.lang.NullPointerException
+        at fit.ColumnFixture.doRows(ColumnFixture.java:12)
+        at fit.Fixture.doTable(Fixture.java:156)
+        at fit.Fixture.interpretTables(Fixture.java:101)
+        at fit.Fixture.doTables(Fixture.java:81)
+        at fit.FitServer.process(FitServer.java:81)
+        at fit.FitServer.run(FitServer.java:56)
+        at fit.FitServer.main(FitServer.java:41)
+        &lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    </content>
+    <relativePageName>CanViewProfiles</relativePageName>
+  </result>
+  <executionLog>
+    <testSystem>fit:fit.FitServer</testSystem>
+    <command>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java -cp /Users/haris/Documents/Programming/FacultyElectionsProject/fitnesse/fitnesse-standalone.jar:../out/production fit.FitServer MacBook-Pro-6.local 57391 3863</command>
+    <exitCode>1</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>485</totalRunTimeInMillis>
+</testResults>
+
