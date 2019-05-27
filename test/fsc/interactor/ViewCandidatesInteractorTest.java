@@ -31,7 +31,6 @@ public class ViewCandidatesInteractorTest {
   @Before
   public void setup() {
     ballot = sampleBallot();
-    ballot.setBallotID(MOCK_ID);
     election = new Election(null, null, null, ballot);
   }
 

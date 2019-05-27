@@ -9,16 +9,6 @@ public class Ballot extends AbstractList<Profile> {
   private final AbstractList<Profile> profiles = new ArrayList<>();
   private final List<Candidate> candidates = new ArrayList<>();
 
-  private String ballotID;
-
-  public String getBallotID(String ballotID) {
-    return ballotID;
-  }
-
-  public void setBallotID(String ballotID) {
-    this.ballotID = ballotID;
-  }
-
   public int size() {
     return profiles.size();
   }

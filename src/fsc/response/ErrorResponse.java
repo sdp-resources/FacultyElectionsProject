@@ -3,7 +3,6 @@ package fsc.response;
 import java.util.Objects;
 
 public class ErrorResponse extends Throwable implements Response {
-  public static final String NO_BALLOT_WITH_THAT_ID = "No ballot with that ID";
   public static final String NO_PROFILE_WITH_THAT_USERNAME = "Unknown username";
   public static final String UNKNOWN_COMMITTEE_NAME = "Unknown Committee Name";
   public static final String UNKNOWN_SEAT_NAME = "Unknown Seat Name";
@@ -32,10 +31,6 @@ public class ErrorResponse extends Throwable implements Response {
 
   public static ErrorResponse unknownProfileName() {
     return new ErrorResponse(NO_PROFILE_WITH_THAT_USERNAME);
-  }
-
-  public static ErrorResponse unknownBallotID() {
-    return new ErrorResponse(NO_BALLOT_WITH_THAT_ID);
   }
 
   public static ErrorResponse resourceExists() {
