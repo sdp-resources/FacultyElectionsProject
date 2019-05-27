@@ -3,7 +3,7 @@ package fsc.interactor;
 import fsc.entity.Profile;
 import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
-import fsc.mock.gateway.ballot.*;
+import fsc.mock.gateway.election.*;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.AddToBallotRequest;

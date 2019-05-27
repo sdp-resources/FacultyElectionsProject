@@ -2,8 +2,8 @@ package fsc.interactor;
 
 import fsc.entity.Ballot;
 import fsc.entity.Profile;
-import fsc.mock.gateway.ballot.ExistingBallotGatewaySpy;
-import fsc.mock.gateway.ballot.EmptyBallotGatewaySpy;
+import fsc.mock.gateway.election.ExistingBallotGatewaySpy;
+import fsc.mock.gateway.election.EmptyBallotGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;

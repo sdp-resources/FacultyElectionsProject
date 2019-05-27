@@ -1,10 +1,10 @@
-package fsc.mock.gateway.ballot;
+package fsc.mock.gateway.election;
 
 import fsc.entity.Ballot;
 import fsc.gateway.BallotGateway;
 
-public class NoBallotExistsBallotGatewayStub implements BallotGateway {
-  public Ballot getBallot(String ballotID) throws InvalidBallotIDException {
+public class EmptyBallotGatewaySpy implements BallotGateway {
+  public Ballot getBallot(String id) throws InvalidBallotIDException {
     throw new InvalidBallotIDException();
   }
 
