@@ -1,7 +1,7 @@
 package fsc.interactor;
 
 import fsc.gateway.ProfileGateway;
-import fsc.mock.ElectionGatewaySpy;
+import fsc.mock.gateway.election.ElectionGatewaySpy;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommiteeGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;

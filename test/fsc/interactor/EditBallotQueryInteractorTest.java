@@ -3,7 +3,7 @@ package fsc.interactor;
 import fsc.entity.query.TrueQuery;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
-import fsc.mock.ElectionGatewaySpy;
+import fsc.mock.gateway.election.ElectionGatewaySpy;
 import fsc.request.EditBallotQueryRequest;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;

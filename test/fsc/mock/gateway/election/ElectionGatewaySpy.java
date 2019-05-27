@@ -1,4 +1,4 @@
-package fsc.mock;
+package fsc.mock.gateway.election;
 
 import fsc.entity.Election;
 import fsc.entity.VoteRecord;
