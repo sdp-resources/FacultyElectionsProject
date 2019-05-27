@@ -19,18 +19,14 @@ class ViewCandidatesInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(ViewCandidatesRequest request) throws Exception {
-    if (gateway.getBallot(request.electionID) == null) {
+  public Response execute(ViewCandidatesRequest request) {
+    try {
+      Ballot ballot = gateway.getBallot(request.electionID);
+      List<ViewableProfile> viewableCandidates = convertBallotToListOfViewableProfiles(ballot);
+      return new ViewResponse(viewableCandidates);
+    } catch (BallotGateway.InvalidBallotIDException e) {
       return ErrorResponse.unknownElectionID();
     }
-    return viewCandidates(request);
-  }
-
-  private Response viewCandidates(ViewCandidatesRequest request)
-        throws BallotGateway.InvalidBallotIDException {
-    Ballot ballot = gateway.getBallot(request.electionID);
-    List<ViewableProfile> viewableCandidates = convertBallotToListOfViewableProfiles(ballot);
-    return new ViewResponse(viewableCandidates);
   }
 
   private List<ViewableProfile> convertBallotToListOfViewableProfiles(Ballot ballot) {

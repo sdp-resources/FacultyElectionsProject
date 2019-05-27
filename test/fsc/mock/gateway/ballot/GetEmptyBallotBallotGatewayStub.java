@@ -1,11 +1,11 @@
-package fsc.mock;
+package fsc.mock.gateway.ballot;
 
 import fsc.entity.Ballot;
 import fsc.gateway.BallotGateway;
 
-public class BallotGatewayDummy implements BallotGateway {
+public class GetEmptyBallotBallotGatewayStub implements BallotGateway {
   public Ballot getBallot(String id) {
-    return null;
+    return new Ballot();
   }
 
   public void addBallot(Ballot ballot) {

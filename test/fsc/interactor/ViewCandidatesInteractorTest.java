@@ -1,89 +1,65 @@
 package fsc.interactor;
 
 import fsc.entity.Ballot;
-import fsc.gateway.BallotGateway;
-import fsc.mock.BallotGatewaySpy;
-import fsc.mock.EmptyBallotGatewaySpy;
+import fsc.entity.Profile;
+import fsc.mock.gateway.ballot.ExistingBallotGatewaySpy;
+import fsc.mock.gateway.ballot.EmptyBallotGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
+import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableProfile;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 public class ViewCandidatesInteractorTest {
+  public static final String MOCK_ID = "mockID";
   private Ballot ballot;
-  private String electionId;
-  private final List<ViewableProfile> testList = new ArrayList<>();
-  private ViewableProfile profile1;
-  private ViewableProfile profile2;
-  private ViewableProfile profile3;
-  private ViewableProfile profile4;
+  private List<ViewableProfile> viewableProfiles;
+
+  private static Ballot sampleBallot() {
+    Ballot aBallot = new Ballot();
+    aBallot.add(new Profile("Haris Skiadas", "skiadas", "Natural Science", "Tenured"));
+    aBallot.add(new Profile("Theresa Wilson", "wilson", "Natural Science", "tenure-track"));
+    aBallot.add(new Profile("Barb Wahl", "wahl", "Natural Science", "Tenured"));
+    aBallot.add(new Profile("John Collins", "collins", "Natural Science", "Tenured"));
+    return aBallot;
+  }
 
   @Before
   public void setup() {
-    ballot = new Ballot();
-    electionId = "mockID";
-    profile1 = new ViewableProfile("Haris Skiadas", "skiadas", "Natural Science", "Tenured");
-    profile2 = new ViewableProfile("Theresa Wilson", "wilson", "Natural Science", "tenure-track");
-    profile3 = new ViewableProfile("Barb Wahl", "wahl", "Natural Science", "Tenured");
-    profile4 = new ViewableProfile("John Collins", "collins", "Natural Science", "Tenured");
+    ballot = sampleBallot();
+    ballot.setBallotID(MOCK_ID);
+    ViewableEntityConverter converter = new ViewableEntityConverter();
+    viewableProfiles = ballot.stream().map(converter::convert).collect(Collectors.toList());
   }
 
   @Test
   public void canRecognizeEmptyBallot() throws Exception {
-    ViewCandidatesRequest request = new ViewCandidatesRequest(electionId);
+    ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
     EmptyBallotGatewaySpy gateway = new EmptyBallotGatewaySpy();
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assert (response instanceof ErrorResponse);
-  }
-
-  @Test
-  public void canRecognizeNonEmptyBallot() throws Exception {
-    ViewCandidatesRequest request = new ViewCandidatesRequest(electionId);
-    BallotGatewaySpy gateway = new BallotGatewaySpy();
-    ballot = gateway.getBallot(electionId);
-    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
-    Response response = interactor.execute(request);
-
-    assert (response instanceof ViewResponse);
-  }
-
-  @Test
-  public void gatewayCanGetABallot() throws BallotGateway.InvalidBallotIDException {
-    BallotGatewaySpy gateway = new BallotGatewaySpy();
-    ballot = gateway.getBallot(electionId);
-
-    assertTrue(gateway.canGetBallot);
+    assertEquals(ErrorResponse.unknownElectionID(), response);
   }
 
   @Test
   public void canViewABallot() throws Exception {
-    addProfilesToTestList();
-    ViewCandidatesRequest request = new ViewCandidatesRequest(electionId);
-    BallotGatewaySpy gateway = new BallotGatewaySpy();
-    ballot = gateway.getBallot(electionId);
+    ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
+    ExistingBallotGatewaySpy gateway = new ExistingBallotGatewaySpy(ballot);
     ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
-    ViewResponse<List<ViewableProfile>> response = (ViewResponse<List<ViewableProfile>>) interactor
-                                                                                               .execute(
-                                                                                                     request);
+    Response initialResponse = interactor.execute(request);
 
-    assertEquals(testList, response.values);
+    assertEquals(MOCK_ID, gateway.requestedBallotId);
+    assertEquals(viewableProfiles, ((ViewResponse<List<ViewableProfile>>) initialResponse).values);
   }
 
-  private void addProfilesToTestList() {
-    testList.add(profile1);
-    testList.add(profile2);
-    testList.add(profile3);
-    testList.add(profile4);
-  }
 }

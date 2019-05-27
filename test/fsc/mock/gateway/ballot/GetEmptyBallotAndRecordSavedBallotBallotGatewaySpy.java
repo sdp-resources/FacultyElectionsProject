@@ -1,4 +1,4 @@
-package fsc.mock;
+package fsc.mock.gateway.ballot;
 
 import fsc.entity.Ballot;
 import fsc.gateway.BallotGateway;
