@@ -8,7 +8,7 @@ public abstract class Interactor {
   public abstract boolean canHandle(Request request);
   public abstract Response execute(Request request);
 
-  private Interactor next = null;
+  public Interactor next = null;
 
   public Response handle(Request request) {
     return canHandle(request) ? execute(request) : passOn(request);
@@ -18,8 +18,8 @@ public abstract class Interactor {
     return next == null ? ErrorResponse.cannotHandle() : next.handle(request);
   }
 
-  public Interactor prependTo(Interactor other) {
-    next = other;
+  public Interactor append(Interactor other) {
+    next = next == null ? other : next.append(other);
     return this;
   }
 }

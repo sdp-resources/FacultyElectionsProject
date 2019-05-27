@@ -15,11 +15,7 @@ class CreateContractTypeInteractor {
   }
 
   public Response execute(CreateContractTypeRequest request) {
-    try {
-      gateway.addContractType(request.contractType);
-      return new SuccessResponse();
-    } catch (ContractTypeGateway.ExistingContractTypeException e) {
-      return ErrorResponse.resourceExists();
-    }
+    gateway.addContractType(request.contractType);
+    return new SuccessResponse();
   }
 }

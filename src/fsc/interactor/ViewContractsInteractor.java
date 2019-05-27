@@ -1,20 +1,29 @@
 package fsc.interactor;
 
 import fsc.gateway.ContractTypeGateway;
-import fsc.request.ContractsViewerRequest;
+import fsc.request.Request;
+import fsc.request.ViewContractsRequest;
+import fsc.response.Response;
 import fsc.response.ViewResponse;
 
 import java.util.List;
 
-public class ViewContractsInteractor {
+public class ViewContractsInteractor extends Interactor {
   private ContractTypeGateway gateway;
 
   public ViewContractsInteractor(ContractTypeGateway gateway) {
     this.gateway = gateway;
   }
 
-  public ViewResponse<List<String>> execute(ContractsViewerRequest request) {
+  public ViewResponse<List<String>> execute(ViewContractsRequest request) {
     return ViewResponse.ofStrings(gateway.getAvailableContractTypes());
   }
 
+  public boolean canHandle(Request request) {
+    return request instanceof ViewContractsRequest;
+  }
+
+  public Response execute(Request request) {
+    return execute((ViewContractsRequest) request);
+  }
 }

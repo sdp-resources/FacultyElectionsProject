@@ -18,7 +18,7 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void addCommittee(Committee committee) {}
 
-  public void addContractType(String contract) throws ExistingContractTypeException {}
+  public void addContractType(String contract) {}
 
   public List<String> getAvailableContractTypes() {
     return null;

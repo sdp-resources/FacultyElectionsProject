@@ -13,10 +13,7 @@ public class ContractTypesGatewayStub implements ContractTypeGateway {
     this.contractTypes = new ArrayList<>(Arrays.asList(contractTypes));
   }
 
-  public void addContractType(String contractType) throws ExistingContractTypeException {
-    if (contractTypes.contains(contractType)) {
-      throw new ExistingContractTypeException();
-    }
+  public void addContractType(String contractType) {
     contractTypes.add(contractType);
   }
 

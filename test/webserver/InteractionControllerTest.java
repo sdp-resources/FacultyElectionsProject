@@ -4,7 +4,7 @@ import fsc.gateway.ContractTypeGateway;
 import fsc.gateway.Gateway;
 import fsc.interactor.CreateProfileInteractor;
 import fsc.interactor.ViewContractsInteractor;
-import fsc.request.ContractsViewerRequest;
+import fsc.request.ViewContractsRequest;
 import fsc.request.CreateProfileRequest;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
@@ -75,9 +75,9 @@ public class InteractionControllerTest {
   }
 
   private class ViewContractsInteractorSpy extends ViewContractsInteractor {
-    private ContractsViewerRequest submittedRequest;
+    private ViewContractsRequest submittedRequest;
 
-    public ViewResponse execute(ContractsViewerRequest request) {
+    public ViewResponse execute(ViewContractsRequest request) {
       submittedRequest = request;
       return super.execute(submittedRequest);
     }

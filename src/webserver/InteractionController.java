@@ -55,7 +55,7 @@ public class InteractionController {
   }
 
   public List<String> getAllContractTypes() {
-    return viewContractsInteractor.execute(new ContractsViewerRequest()).values;
+    return viewContractsInteractor.execute(new ViewContractsRequest()).values;
   }
 
   public List<String> getAllDivisions() {

@@ -4,10 +4,8 @@ import java.util.List;
 
 public interface ContractTypeGateway {
 
-  void addContractType(String contract) throws ExistingContractTypeException;
+  void addContractType(String contract);
   List<String> getAvailableContractTypes();
-
-  class ExistingContractTypeException extends Exception {}
 }
 
 

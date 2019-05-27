@@ -1,7 +1,7 @@
 package fsc.interactor;
 
 import fsc.mock.gateway.contractType.ContractTypesGatewayStub;
-import fsc.request.ContractsViewerRequest;
+import fsc.request.ViewContractsRequest;
 import fsc.response.ViewResponse;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class ViewContractsInteractorTests {
 
   @Test
   public void existingContractTypesAreReturned() {
-    ContractsViewerRequest request = new ContractsViewerRequest();
+    ViewContractsRequest request = new ViewContractsRequest();
     ContractTypesGatewayStub gateway = new ContractTypesGatewayStub("tenure_track", "tenured");
     ViewContractsInteractor interactor = new ViewContractsInteractor(gateway);
     ViewResponse<List<String>> response = interactor.execute(request);
