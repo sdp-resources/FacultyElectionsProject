@@ -39,13 +39,11 @@ public class TestContext {
   }
 
   public static boolean addDivision(String division) {
-    Response response = interactor.handle(new AddDivisionRequest(division));
-    return response.equals(new SuccessResponse());
+    return isSuccessful(new AddDivisionRequest(division));
   }
 
   public static boolean addContractType(String contractType) {
-    Response response = interactor.handle(new AddContractTypeRequest(contractType));
-    return response.equals(new SuccessResponse());
+    return isSuccessful(new AddContractTypeRequest(contractType));
   }
 
   public static boolean hasDivision(String division) {
@@ -54,6 +52,11 @@ public class TestContext {
 
   public static boolean hasContractType(String contractType) {
     return getStringListResult(new ViewContractsRequest()).contains(contractType);
+  }
+
+  private static boolean isSuccessful(Request request) {
+    Response response = interactor.handle(request);
+    return response.equals(new SuccessResponse());
   }
 
   private static List<String> getStringListResult(Request request) {
