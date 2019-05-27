@@ -50,6 +50,13 @@ public class InMemoryGateway implements Gateway {
     profiles.add(profile);
   }
 
+  public boolean hasProfile(String username) {
+    for (Profile currProfile : profiles) {
+      if (username.equals(currProfile.username)) return true;
+    }
+    return false;
+  }
+
   public void addContractType(String contractType) {
     contractTypes.add(contractType);
   }

@@ -7,6 +7,8 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
+import java.util.Map;
+
 public class EditCommitteeInteractor {
   private CommitteeGateway committeeGateway;
 
@@ -15,20 +17,21 @@ public class EditCommitteeInteractor {
   }
 
   public Response execute(EditCommitteeRequest request) {
-    Committee committee;
-
     try {
-      committee = committeeGateway.getCommittee(request.name);
+      Committee committee = committeeGateway.getCommittee(request.name);
+      performUpdates(committee, request.changes);
+      committeeGateway.save();
+      return new SuccessResponse();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ErrorResponse.unknownCommitteeName();
     }
 
-    for (String field : request.changes.keySet()) {
-      updateProfile(committee, field, request.changes.get(field));
-    }
+  }
 
-    committeeGateway.save();
-    return new SuccessResponse();
+  private void performUpdates(Committee committee, Map<String, Object> changes) {
+    for (String field : changes.keySet()) {
+      updateProfile(committee, field, changes.get(field));
+    }
   }
 
   public void updateProfile(Committee committee, String field, Object value) {

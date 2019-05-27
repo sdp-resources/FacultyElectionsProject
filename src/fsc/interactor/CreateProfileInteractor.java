@@ -15,14 +15,13 @@ public class CreateProfileInteractor {
     this.gateway = gateway;
   }
 
-  public Response execute(
-        CreateProfileRequest request
-  ) {
-    try { gateway.getProfile(request.username);} catch (Exception e) {
-      gateway.addProfile(makeProfileFromRequest(request));
-      return new SuccessResponse();
+  public Response execute(CreateProfileRequest request) {
+    if (gateway.hasProfile(request.username)) {
+      return ErrorResponse.resourceExists();
     }
-    return ErrorResponse.resourceExists();
+    gateway.addProfile(makeProfileFromRequest(request));
+    gateway.save();
+    return new SuccessResponse();
   }
 
   private Profile makeProfileFromRequest(CreateProfileRequest request) {

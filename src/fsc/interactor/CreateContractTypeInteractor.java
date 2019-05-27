@@ -10,7 +10,9 @@ class CreateContractTypeInteractor {
 
   private ContractTypeGateway gateway;
 
-  public CreateContractTypeInteractor(ContractTypeGateway gateway) {this.gateway = gateway;}
+  public CreateContractTypeInteractor(ContractTypeGateway gateway) {
+    this.gateway = gateway;
+  }
 
   public Response execute(CreateContractTypeRequest request) {
     try {

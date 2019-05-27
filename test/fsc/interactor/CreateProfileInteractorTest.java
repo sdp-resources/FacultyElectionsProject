@@ -31,7 +31,8 @@ public class CreateProfileInteractorTest {
     interactor = new CreateProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);
-    assertTrue(response instanceof SuccessResponse);
+    assertEquals(new SuccessResponse(), response);
+    assertTrue(gateway.hasSaved);
   }
 
   @Test

@@ -20,6 +20,10 @@ public class ProfileGatewayStub implements ProfileGateway {
 
   public void addProfile(Profile profile) { }
 
+  public boolean hasProfile(String username) {
+    return false;
+  }
+
   public void save() {}
 
   public Profile getAProfile() {

@@ -69,6 +69,10 @@ public class BallotCreatorTest {
 
     public void addProfile(Profile profile) { }
 
+    public boolean hasProfile(String username) {
+      return false;
+    }
+
     public void save() {
     }
 

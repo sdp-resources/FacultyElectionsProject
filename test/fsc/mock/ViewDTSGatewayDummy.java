@@ -61,6 +61,10 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void addProfile(Profile profile) {}
 
+  public boolean hasProfile(String username) {
+    return false;
+  }
+
   public void save() {
 
   }

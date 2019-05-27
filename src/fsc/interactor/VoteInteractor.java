@@ -18,12 +18,14 @@ public class VoteInteractor {
     this.profileGateway = profileGateway;
   }
 
-  public Response execute(VoteRecordRequest request) throws Exception {
-    try {profileGateway.getProfile(request.username);} catch (Exception e) {
+  public Response execute(VoteRecordRequest request) {
+    try {
+      profileGateway.getProfile(request.username);
+      voteGateway.recordVote(createVoteObject(request));
+      return new SuccessResponse();
+    } catch (Exception e) {
       return ErrorResponse.unknownProfileName();
     }
-    voteGateway.recordVote(createVoteObject(request));
-    return new SuccessResponse();
   }
 
   private VoteRecord createVoteObject(VoteRecordRequest request)

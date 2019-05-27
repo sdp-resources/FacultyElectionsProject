@@ -25,6 +25,12 @@ public class ExistingProfileGatewaySpy extends ProfileGatewayStub {
 
   }
 
+  public boolean hasProfile(String username) {
+    providedUsername = username;
+    return true;
+  }
+
+
   public void save() {
     profileHasBeenEdited = true;
   }

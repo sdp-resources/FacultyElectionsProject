@@ -1,17 +1,11 @@
 package fsc.request;
 
 public class RemoveFromBallotRequest extends Request {
-  private final String profileUsername;
-  private final String ballotID;
+  public final String username;
+  public final String ballotID;
 
-  public RemoveFromBallotRequest(String ballotID, String profileUsername) {
+  public RemoveFromBallotRequest(String ballotID, String username) {
     this.ballotID = ballotID;
-    this.profileUsername = profileUsername;
-  }
-
-  public String getBallotID() {return ballotID;}
-
-  public String getProfileUsername() {
-    return profileUsername;
+    this.username = username;
   }
 }

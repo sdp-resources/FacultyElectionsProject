@@ -18,15 +18,13 @@ public class RemoveFromBallotInteractor {
         ProfileGateway profileGateway, ElectionGateway electionGateway
   ) {
     this.profileGateway = profileGateway;
-
     this.electionGateway = electionGateway;
   }
 
   public Response execute(RemoveFromBallotRequest request) {
-
     try {
-      Election election = electionGateway.getElection(request.getBallotID());
-      Profile profile = profileGateway.getProfile(request.getProfileUsername());
+      Election election = electionGateway.getElection(request.ballotID);
+      Profile profile = profileGateway.getProfile(request.username);
       election.getBallot().remove(profile);
       electionGateway.save();
       return new SuccessResponse();

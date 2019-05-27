@@ -22,9 +22,8 @@ public class ViewProfileInteractor implements Interactor {
   }
 
   private Response tryCreateProfileResponse() {
-    Profile profile;
     try {
-      profile = gateway.getProfile(userName);
+      Profile profile = gateway.getProfile(userName);
       return ViewResponse.ofProfile(profile);
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
