@@ -63,4 +63,8 @@ public class ErrorResponse extends Throwable implements Response {
   public int hashCode() {
     return Objects.hash(message);
   }
+
+  public String toString() {
+    return "ErrorResponse: \'" + message + '\'';
+  }
 }
