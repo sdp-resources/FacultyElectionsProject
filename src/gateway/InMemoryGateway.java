@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class InMemoryGateway implements Gateway {
 
@@ -80,7 +81,7 @@ public class InMemoryGateway implements Gateway {
     elections.add(election);
   }
 
-  public Committee getCommitteeFromCommitteeName(String committeeName)
+  public Committee getCommittee(String committeeName)
         throws UnknownCommitteeException {
     for (Committee committee : committees) {
       if (committee.getName().equals(committeeName)) {
@@ -92,6 +93,15 @@ public class InMemoryGateway implements Gateway {
 
   public void addCommittee(Committee committee) {
     committees.add(committee);
+  }
+
+  public boolean hasCommittee(String name) {
+    for (Committee committee : committees) {
+      if (committee.getName().equals(name)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public void recordVote(VoteRecord voteRecord) {}

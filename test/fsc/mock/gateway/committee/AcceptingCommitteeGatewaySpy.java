@@ -9,7 +9,7 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
   public String submittedCommitteeName = null;
   public Committee returnedCommittee = null;
 
-  public Committee getCommitteeFromCommitteeName(String name) {
+  public Committee getCommittee(String name) {
     submittedCommitteeName = name;
     returnedCommittee = new CommitteeStub(name, "Description");
     return returnedCommittee;
@@ -20,6 +20,11 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
   }
 
   public void save() { }
+
+  public boolean hasCommittee(String name) {
+    submittedCommitteeName = name;
+    return true;
+  }
 
   private class CommitteeStub extends Committee {
     CommitteeStub(String name, String description) {

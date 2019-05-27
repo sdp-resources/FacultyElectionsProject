@@ -1,6 +1,7 @@
 package fsc.entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Committee {
   private String name;
@@ -48,6 +49,19 @@ public class Committee {
 
   public void addMember(Seat seat) {
     seats.add(seat);
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Committee committee = (Committee) o;
+    return Objects.equals(name, committee.name) && Objects.equals(description,
+                                                                  committee.description) && seats.equals(
+          committee.seats);
+  }
+
+  public int hashCode() {
+    return Objects.hash(name, description, seats);
   }
 
   public class UnknownSeatNameException extends Exception {}

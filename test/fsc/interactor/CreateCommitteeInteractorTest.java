@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Committee;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.CreateCommitteeRequest;
@@ -15,10 +16,12 @@ public class CreateCommitteeInteractorTest {
   public static final String COMMITTEE_NAME = "cccc";
   public static final String COMMITTEE_DESCRIPTION = "xxxx";
   private CreateCommitteeRequest request;
+  private Committee expectedCommittee;
 
   @Before
   public void setup() {
     request = new CreateCommitteeRequest(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
+    expectedCommittee = new Committee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
   }
 
   @Test
@@ -29,8 +32,7 @@ public class CreateCommitteeInteractorTest {
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertNotNull(gateway.committeeAdded);
-    assertEquals(COMMITTEE_NAME, gateway.committeeAdded.getName());
-    assertEquals(COMMITTEE_DESCRIPTION, gateway.committeeAdded.getDescription());
+    assertEquals(expectedCommittee, gateway.committeeAdded);
     assertTrue(gateway.hasSaved);
     assertEquals(new SuccessResponse(), response);
   }

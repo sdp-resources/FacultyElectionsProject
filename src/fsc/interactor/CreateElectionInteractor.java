@@ -25,7 +25,7 @@ public class CreateElectionInteractor {
 
   public Response execute(CreateElectionRequest request) {
     try {
-      Committee committee = committeeGateway.getCommitteeFromCommitteeName(request.committeeName);
+      Committee committee = committeeGateway.getCommittee(request.committeeName);
       Seat seat = committee.getSeat(request.seatName);
       Ballot ballot = makeBallotFromSeat(seat);
       electionGateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));

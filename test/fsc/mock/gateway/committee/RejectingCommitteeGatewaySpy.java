@@ -9,7 +9,7 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
   public boolean hasSaved = false;
 
   @Override
-  public Committee getCommitteeFromCommitteeName(String name) throws UnknownCommitteeException {
+  public Committee getCommittee(String name) throws UnknownCommitteeException {
     submittedCommitteeName = name;
     throw new UnknownCommitteeException();
   }
@@ -21,6 +21,11 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
 
   public void save() {
     if (committeeAdded != null) { hasSaved = true; }
+  }
+
+  public boolean hasCommittee(String name) {
+    submittedCommitteeName = name;
+    return false;
   }
 
 }

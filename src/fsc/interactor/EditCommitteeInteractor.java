@@ -18,7 +18,7 @@ public class EditCommitteeInteractor {
     Committee committee;
 
     try {
-      committee = committeeGateway.getCommitteeFromCommitteeName(request.name);
+      committee = committeeGateway.getCommittee(request.name);
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ErrorResponse.unknownCommitteeName();
     }

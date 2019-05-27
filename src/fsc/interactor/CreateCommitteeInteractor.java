@@ -15,12 +15,12 @@ public class CreateCommitteeInteractor {
   }
 
   public Response execute(CreateCommitteeRequest request) {
-    try { gateway.getCommitteeFromCommitteeName(request.name);} catch (Exception e) {
-      gateway.addCommittee(makeCommitteeFromRequest(request));
-      gateway.save();
-      return new SuccessResponse();
+    if (gateway.hasCommittee(request.name)) {
+      return ErrorResponse.resourceExists();
     }
-    return ErrorResponse.resourceExists();
+    gateway.addCommittee(makeCommitteeFromRequest(request));
+    gateway.save();
+    return new SuccessResponse();
   }
 
   private Committee makeCommitteeFromRequest(CreateCommitteeRequest request) {

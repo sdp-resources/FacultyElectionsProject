@@ -34,7 +34,7 @@ public class ViewDTSGatewayDummy implements Gateway {
     return null;
   }
 
-  public Committee getCommitteeFromCommitteeName(String committeeName) {
+  public Committee getCommittee(String committeeName) {
     return null;
   }
 
@@ -63,5 +63,9 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void save() {
 
+  }
+
+  public boolean hasCommittee(String name) {
+    return false;
   }
 }
