@@ -8,7 +8,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
 
-public class ViewProfileInteractor implements Interactor {
+public class ViewProfileInteractor extends Interactor {
   public String userName;
   private ProfileGateway gateway;
 

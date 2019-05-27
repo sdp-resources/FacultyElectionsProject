@@ -7,7 +7,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class AddDivisionInteractor implements Interactor {
+public class AddDivisionInteractor extends Interactor {
 
   private DivisionGateway gateway;
 

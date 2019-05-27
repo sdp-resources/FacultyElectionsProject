@@ -2,6 +2,7 @@ package fsc.interactor;
 
 import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
 import fsc.request.ViewDivisionRequest;
+import fsc.response.Response;
 import fsc.response.ViewResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class ViewDivisionsTest {
 
   ViewDivisionRequest request;
   ViewDivisionInteractor interactor;
-  ViewResponse<List<String>> response;
+  Response response;
   private ExistingDivisionGatewaySpy divisionGateway;
 
   @Before
@@ -27,7 +28,7 @@ public class ViewDivisionsTest {
   public void gatewayDivisionListEqualsOurDivisionList() {
     interactor = new ViewDivisionInteractor(divisionGateway);
     response = interactor.execute(request);
-    assertEquals(divisionGateway.divisions, response.values);
+    assertEquals(ViewResponse.ofStrings(divisionGateway.divisions), response);
   }
 
 }
