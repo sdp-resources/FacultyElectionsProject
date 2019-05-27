@@ -18,7 +18,7 @@ public class VoteRecordGatewaySpy implements ElectionGateway {
     this.voteRecord = voteRecord;
   }
 
-  public Election getElectionFromElectionID(String electionID) {
+  public Election getElection(String electionID) {
     return null;
   }
 }

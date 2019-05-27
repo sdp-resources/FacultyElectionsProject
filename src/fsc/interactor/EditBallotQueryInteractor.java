@@ -23,7 +23,7 @@ public class EditBallotQueryInteractor {
 
   public Response execute(EditBallotQueryRequest request) {
     try {
-      Election election = electionGateway.getElectionFromElectionID(request.electionID);
+      Election election = electionGateway.getElection(request.electionID);
       BallotCreator ballotCreator = new BallotCreator(profileGateway);
       election.setDefaultQuery(request.query);
       Ballot ballot = ballotCreator.getBallot(election.getDefaultQuery());

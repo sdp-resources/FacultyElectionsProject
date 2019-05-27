@@ -1,9 +1,10 @@
 package fsc.interactor;
 
 import fsc.entity.Ballot;
+import fsc.entity.Election;
 import fsc.entity.Profile;
-import fsc.mock.gateway.election.ExistingBallotGatewaySpy;
-import fsc.mock.gateway.election.EmptyBallotGatewaySpy;
+import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
+import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -14,15 +15,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
 public class ViewCandidatesInteractorTest {
   public static final String MOCK_ID = "mockID";
   private Ballot ballot;
   private List<ViewableProfile> viewableProfiles;
+  private Election election;
 
   private static Ballot sampleBallot() {
     Ballot aBallot = new Ballot();
@@ -37,28 +37,28 @@ public class ViewCandidatesInteractorTest {
   public void setup() {
     ballot = sampleBallot();
     ballot.setBallotID(MOCK_ID);
-    ViewableEntityConverter converter = new ViewableEntityConverter();
-    viewableProfiles = ballot.stream().map(converter::convert).collect(Collectors.toList());
+    viewableProfiles = new ViewableEntityConverter().convert(ballot);
+    election = new Election(null, null, null, ballot);
   }
 
   @Test
-  public void canRecognizeEmptyBallot() throws Exception {
+  public void canRecognizeEmptyBallot() {
     ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
-    EmptyBallotGatewaySpy gateway = new EmptyBallotGatewaySpy();
-    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
+    RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
+    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(electionGateway);
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownElectionID(), response);
   }
 
   @Test
-  public void canViewABallot() throws Exception {
+  public void canViewABallot() {
     ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
-    ExistingBallotGatewaySpy gateway = new ExistingBallotGatewaySpy(ballot);
-    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(gateway);
+    ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
+    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(electionGateway);
     Response initialResponse = interactor.execute(request);
 
-    assertEquals(MOCK_ID, gateway.requestedBallotId);
+    assertEquals(MOCK_ID, electionGateway.providedElectionId);
     assertEquals(viewableProfiles, ((ViewResponse<List<ViewableProfile>>) initialResponse).values);
   }
 

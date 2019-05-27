@@ -1,9 +1,10 @@
 package fsc.interactor;
 
+import fsc.entity.Ballot;
+import fsc.entity.Election;
 import fsc.entity.Profile;
-import fsc.gateway.BallotGateway;
-import fsc.gateway.ProfileGateway;
-import fsc.mock.gateway.election.*;
+import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
+import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.AddToBallotRequest;
@@ -13,32 +14,42 @@ import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.junit.Assert.*;
 
 public class AddToBallotInteractorTest {
 
-  private final String ballotID = "98705439870539870";
+  private final String ELECTION_ID = "98705439870539870";
   private final String profileUsername = "hayfieldj";
   private AddToBallotRequest request;
+  private Election election;
+  private ProvidedElectionGatewaySpy electionGateway;
+  private AddToBallotInteractor interactor;
+  private Profile profile;
+  private ProfileGatewayStub profileGateway;
 
   @Before
   public void setUp() {
-    request = new AddToBallotRequest(ballotID, profileUsername);
+    request = new AddToBallotRequest(ELECTION_ID, profileUsername);
+    election = new Election(null, null, null, new Ballot());
+    election.setID(ELECTION_ID);
+    electionGateway = new ProvidedElectionGatewaySpy(election);
+    profile = new Profile("Adam Jones", "jonesa", "SCI", "Tenured");
+    profileGateway = new ProfileGatewayStub(profile);
   }
 
   @Test
   public void addingToNoBallot() {
-    AddToBallotInteractor inter = new AddToBallotInteractor(new NoBallotExistsBallotGatewayStub(),
-                                                            new ProfileGatewayStub());
-    Response response = inter.execute(request);
+    interactor = new AddToBallotInteractor(new ProfileGatewayStub(),
+                                           new RejectingElectionGatewaySpy());
+    Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownBallotID(), response);
+    assertEquals(ErrorResponse.unknownElectionID(), response);
   }
 
   @Test
   public void addingNotRealProfile() {
-    AddToBallotInteractor interactor = new AddToBallotInteractor(new BallotGatewayDummy(),
-                                                                 new InvalidProfileGatewaySpy());
+    interactor = new AddToBallotInteractor(new InvalidProfileGatewaySpy(), electionGateway);
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);
@@ -46,25 +57,12 @@ public class AddToBallotInteractorTest {
 
   @Test
   public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse() {
-    BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub(
-          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
-
-    AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
+    interactor = new AddToBallotInteractor(profileGateway, electionGateway);
     Response response = interactor.execute(request);
 
     assertEquals(new SuccessResponse(), response);
-  }
+    assertThat(election.getBallot(), hasItem(profile));
+    assertTrue(electionGateway.hasSaved);
 
-  @Test
-  public void gatewayGetsBallotWithChanges() {
-    GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy ballotGateway = new GetEmptyBallotAndRecordSavedBallotBallotGatewaySpy();
-    ProfileGatewayStub profileGateway = new ProfileGatewayStub(
-          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
-
-    AddToBallotInteractor interactor = new AddToBallotInteractor(ballotGateway, profileGateway);
-    Response response = interactor.execute(request);
-
-    assertEquals(profileGateway.getAProfile(), ballotGateway.SavedBallot.get(0));
   }
 }

@@ -1,9 +1,7 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
-import fsc.entity.Candidate;
-import fsc.entity.Profile;
-import fsc.gateway.BallotGateway;
+import fsc.entity.*;
+import fsc.gateway.ElectionGateway;
 import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.DTSRequest;
@@ -34,16 +32,17 @@ public class DTSInteractor {
       return new SuccessResponse();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
-    } catch (BallotGateway.InvalidBallotIDException e) {
-      return ErrorResponse.unknownBallotID();
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ErrorResponse.unknownElectionID();
     }
   }
 
   private void getProperCandidate(DTSRequest request)
         throws ProfileGateway.InvalidProfileUsernameException,
-               BallotGateway.InvalidBallotIDException {
+               ElectionGateway.InvalidElectionIDException {
     Profile profile = gateway.getProfile(request.userName);
-    Ballot ballot = gateway.getBallot(request.electionID);
+    Election election = gateway.getElection(request.electionID);
+    Ballot ballot = election.getBallot();
     int candidateListSize = ballot.sizeCandidates();
     for (int candidateIndex = 0; candidateIndex < candidateListSize; candidateIndex++) {
       if (ballot.getCandidate(candidateIndex).getProfile() == profile) {

@@ -4,7 +4,7 @@ import fsc.entity.Election;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 
-public class ElectionGatewaySpy implements ElectionGateway {
+public class AddedElectionGatewaySpy implements ElectionGateway {
   public Election addedElection;
   public boolean hasSaved = false;
 
@@ -14,13 +14,12 @@ public class ElectionGatewaySpy implements ElectionGateway {
 
   public void addElection(Election election) {
     this.addedElection = election;
-    addedElection.setID(1);
     hasSaved = false;
   }
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public Election getElectionFromElectionID(String electionID) {
+  public Election getElection(String electionID) {
     return null;
   }
 

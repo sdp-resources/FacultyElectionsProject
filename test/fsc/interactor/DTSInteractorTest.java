@@ -6,6 +6,7 @@ import fsc.request.DTSRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -16,6 +17,7 @@ public class DTSInteractorTest {
   private final String profileUserName = "skiadas21";
   private final Candidate.Status status = Candidate.Status.Declined;
 
+  @Ignore
   @Test
   public void correctExecuteTest() throws ErrorResponse {
     DTSRequest request = new DTSRequest(electionID, profileUserName, status);

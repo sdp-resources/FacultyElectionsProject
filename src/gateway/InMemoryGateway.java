@@ -96,7 +96,7 @@ public class InMemoryGateway implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public Election getElectionFromElectionID(String electionID) {
+  public Election getElection(String electionID) {
     return null;
   }
 

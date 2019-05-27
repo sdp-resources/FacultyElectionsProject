@@ -1,9 +1,11 @@
 package fsc.interactor;
 
+import fsc.entity.Ballot;
+import fsc.entity.Election;
 import fsc.entity.Profile;
-import fsc.gateway.BallotGateway;
 import fsc.gateway.ProfileGateway;
-import fsc.mock.gateway.election.*;
+import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
+import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.RemoveFromBallotRequest;
@@ -15,38 +17,39 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RemoveFromBallotInteractorTest {
 
   private final String ballotID = "98705439870539870";
   private final String profileUsername = "hayfieldj";
   private RemoveFromBallotRequest request;
+  private Election election;
+  private Profile profile;
+  private ProvidedElectionGatewaySpy electionGateway;
+  private RemoveFromBallotInteractor interactor;
 
   @Before
   public void setUp() {
     request = new RemoveFromBallotRequest(ballotID, profileUsername);
+    election = new Election(null, null, null, new Ballot());
+    profile = new Profile("Adam Jones", "jonesa", "SCI", "Tenured");
+    electionGateway = new ProvidedElectionGatewaySpy(election);
   }
 
   @Test
   public void ballotDoesNotExist() {
-
-    NoBallotExistsBallotGatewayStub noBallotBallotGateway = new NoBallotExistsBallotGatewayStub();
     ProfileGateway dummyProfileGateway = new ProfileGatewayStub();
-
-    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(noBallotBallotGateway,
-                                                                           dummyProfileGateway);
+    interactor = new RemoveFromBallotInteractor(dummyProfileGateway,
+                                                new RejectingElectionGatewaySpy());
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownBallotID(), response);
+    assertEquals(ErrorResponse.unknownElectionID(), response);
   }
 
   @Test
   public void profileDoesNotExist() {
-
-    BallotGateway dummyBallotGateway = new BallotGatewayDummy();
-
-    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(dummyBallotGateway,
-                                                                           new InvalidProfileGatewaySpy());
+    interactor = new RemoveFromBallotInteractor(new InvalidProfileGatewaySpy(), electionGateway);
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);
@@ -54,27 +57,22 @@ public class RemoveFromBallotInteractorTest {
 
   @Test
   public void removeFromEmptyBallot() {
-    BallotGateway ballotGateway = new GetEmptyBallotBallotGatewayStub();
-    ProfileGateway profileGateway = new ProfileGatewayStub(
-          new Profile("Adam Jones", "jonesa", "SCI", "Tenured"));
-
-    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(ballotGateway,
-                                                                           profileGateway);
+    ProfileGateway profileGateway = new ProfileGatewayStub(profile);
+    interactor = new RemoveFromBallotInteractor(profileGateway, electionGateway);
     Response response = interactor.execute(request);
 
-    assertEquals("Ballot does not contain profile", ((ErrorResponse) response).message);
+    assertEquals(ErrorResponse.invalidCandidate(), response);
   }
 
   @Test
   public void profileRemovedFromBallotGivesSuccesfullyRemovedResponse() {
-    Profile profile = new Profile("Banana", "Apple", "Art", "Tenured");
-    BallotWithProfileStub ballotGateway = new BallotWithProfileStub(profile);
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
-    RemoveFromBallotInteractor interactor = new RemoveFromBallotInteractor(ballotGateway,
-                                                                           profileGateway);
+    interactor = new RemoveFromBallotInteractor(profileGateway, electionGateway);
+    election.getBallot().add(profile);
     Response response = interactor.execute(request);
 
-    assertFalse(ballotGateway.ballot.contains(profile));
+    assertFalse(election.getBallot().contains(profile));
     assertEquals(new SuccessResponse(), response);
+    assertTrue(electionGateway.hasSaved);
   }
 }

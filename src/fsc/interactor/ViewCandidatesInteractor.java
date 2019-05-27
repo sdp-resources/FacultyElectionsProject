@@ -1,8 +1,8 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
+import fsc.entity.Election;
 import fsc.entity.Profile;
-import fsc.gateway.BallotGateway;
+import fsc.gateway.ElectionGateway;
 import fsc.request.ViewCandidatesRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -13,25 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ViewCandidatesInteractor {
-  private BallotGateway gateway;
+  private ElectionGateway electionGateway;
 
-  ViewCandidatesInteractor(BallotGateway gateway) {
-    this.gateway = gateway;
+  ViewCandidatesInteractor(ElectionGateway electionGateway) {
+    this.electionGateway = electionGateway;
   }
 
   public Response execute(ViewCandidatesRequest request) {
     try {
-      Ballot ballot = gateway.getBallot(request.electionID);
-      List<ViewableProfile> viewableCandidates = convertBallotToListOfViewableProfiles(ballot);
+      Election election = electionGateway.getElection(request.electionID);
+      List<ViewableProfile> viewableCandidates = getViewableCandidates(election);
       return new ViewResponse(viewableCandidates);
-    } catch (BallotGateway.InvalidBallotIDException e) {
+    } catch (ElectionGateway.InvalidElectionIDException e) {
       return ErrorResponse.unknownElectionID();
     }
   }
 
-  private List<ViewableProfile> convertBallotToListOfViewableProfiles(Ballot ballot) {
+  private List<ViewableProfile> getViewableCandidates(Election election) {
     List<ViewableProfile> viewableCandidates = new ArrayList<>();
-    for (Profile profile : ballot) {
+    for (Profile profile : election.getBallot()) {
       viewableCandidates.add(ViewableProfile.from(profile));
     }
     return viewableCandidates;

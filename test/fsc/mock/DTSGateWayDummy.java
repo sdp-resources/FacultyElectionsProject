@@ -28,7 +28,7 @@ public class DTSGateWayDummy implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public Election getElectionFromElectionID(String electionID) {
+  public Election getElection(String electionID) {
     return null;
   }
 

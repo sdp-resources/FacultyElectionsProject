@@ -6,12 +6,14 @@ import fsc.request.ViewDTSRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ViewDTSInteractorTest {
 
+  @Ignore
   @Test
   public void canGetDTSFormForUser() throws ErrorResponse {
     String username = "skiadas21";

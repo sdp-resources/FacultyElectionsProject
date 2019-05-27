@@ -56,7 +56,7 @@ public class NoElectionExistsDTSGatewaySpy implements Gateway {
 
   }
 
-  public Election getElectionFromElectionID(String electionID) {
+  public Election getElection(String electionID) {
     return null;
   }
 

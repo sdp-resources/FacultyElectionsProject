@@ -7,5 +7,8 @@ public interface ElectionGateway {
   void save();
   void addElection(Election election);
   void recordVote(VoteRecord voteRecord);
-  Election getElectionFromElectionID(String electionID) throws Exception;
+  Election getElection(String electionID) throws InvalidElectionIDException;
+  public static class InvalidElectionIDException extends Exception {
+    public InvalidElectionIDException() {}
+  }
 }

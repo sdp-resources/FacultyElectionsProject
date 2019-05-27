@@ -16,13 +16,6 @@ public class ViewDTSGatewayDummy implements Gateway {
   public Election election = new Election(seat, committee, query, ballot);
   public Candidate candidate = new Candidate(profile);
 
-  public Ballot getBallot(String id) throws InvalidBallotIDException {
-    ballot.add(profile);
-    return ballot;
-  }
-
-  public void addBallot(Ballot ballot) throws CannotAddBallotException {}
-
   public void addCommittee(Committee committee) {}
 
   public void addContractType(String contract) throws ExistingContractTypeException {}
@@ -49,7 +42,7 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public Election getElectionFromElectionID(String electionID) throws Exception {
+  public Election getElection(String electionID) {
     return null;
   }
 

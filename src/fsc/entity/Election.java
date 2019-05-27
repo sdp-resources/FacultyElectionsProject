@@ -7,7 +7,7 @@ public class Election {
   private Ballot ballot;
   private Committee committee;
   private Seat seat;
-  private int ID;
+  private String ID;
 
   private Query defaultQuery;
 
@@ -18,11 +18,11 @@ public class Election {
     this.ballot = ballot;
   }
 
-  public int getID() {
+  public String getID() {
     return ID;
   }
 
-  public void setID(int ID) {this.ID = ID;}
+  public void setID(String ID) {this.ID = ID;}
 
   public Seat getSeat() {
     return seat;
