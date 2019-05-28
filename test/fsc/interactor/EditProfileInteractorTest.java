@@ -7,36 +7,29 @@ import fsc.request.EditProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static fsc.request.EditProfileRequest.*;
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 public class EditProfileInteractorTest {
-
-  EditProfileRequest request;
-  Map<String, Object> changes;
-  Profile providedProfile;
+  private EditProfileRequest request;
+  private Profile providedProfile;
   private ExistingProfileGatewaySpy profileGateway;
   private EditProfileInteractor interactor;
 
   @Before
   public void setup() {
-    changes = new HashMap<>();
     providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
     profileGateway = new ExistingProfileGatewaySpy(providedProfile);
-    request = new EditProfileRequest("rossB12", changes);
+    request = new EditProfileRequest("rossB12");
     interactor = new EditProfileInteractor(profileGateway);
   }
 
   @Test
   public void noProfileExistsException() {
-    changes.put(CHANGE_CONTRACT_TYPE, "Tenured");
+    request.changeContractType("Tenured");
     interactor = new EditProfileInteractor(new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
@@ -44,23 +37,23 @@ public class EditProfileInteractorTest {
 
   @Test
   public void canTakeProfile() {
-    changes.put(CHANGE_CONTRACT_TYPE, "Untenured");
+    request.changeContractType("Untenured");
     Response response = interactor.execute(request);
     assertEquals(new SuccessResponse(), response);
   }
 
   @Test
   public void canEditSingleField() {
-    changes.put(CHANGE_CONTRACT_TYPE, "Untenured");
+    request.changeContractType("Untenured");
     interactor.execute(request);
     assertNotEquals("Tenured", providedProfile.getContract());
   }
 
   @Test
   public void canHandleMultipleChanges() {
-    changes.put(CHANGE_NAME, "Bill Mill");
-    changes.put(CHANGE_DIVISION, "Science");
-    changes.put(CHANGE_CONTRACT_TYPE, "Sabbatical");
+    request.changeFullname("Bill Mill");
+    request.changeDivision("Science");
+    request.changeContractType("Sabbatical");
     interactor.execute(request);
     assertEquals("Bill Mill", providedProfile.getName());
     assertEquals("Sabbatical", providedProfile.getContract());
@@ -69,17 +62,17 @@ public class EditProfileInteractorTest {
 
   @Test
   public void canHandleBooleanChanges() {
-    changes.put(CHANGE_ACTIVE, false);
+    request.changeActiveStatus(false);
     interactor.execute(request);
     assertFalse(providedProfile.isActive());
   }
 
   @Test
   public void spyRemembersUsername() {
-    changes.put(CHANGE_ACTIVE, "False");
+    request.changeActiveStatus("False");
     interactor.execute(request);
     assertFalse(providedProfile.isActive());
-    assertEquals(request.username, profileGateway.providedUsername);
-    assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
+    Assert.assertEquals(request.username, profileGateway.providedUsername);
+    Assert.assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
   }
 }

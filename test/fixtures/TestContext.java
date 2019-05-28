@@ -1,8 +1,6 @@
 package fixtures;
 
-import fsc.entity.Profile;
 import fsc.gateway.Gateway;
-import fsc.gateway.ProfileGateway;
 import fsc.interactor.*;
 import fsc.request.*;
 import fsc.response.Response;
@@ -12,7 +10,6 @@ import fsc.viewable.ViewableProfile;
 import gateway.InMemoryGateway;
 
 import java.util.List;
-import java.util.Map;
 
 public class TestContext {
   private static Gateway gateway;
@@ -32,8 +29,8 @@ public class TestContext {
                                               .append(new EditProfileInteractor(gateway));
   }
 
-  public static boolean editProfile(String username, Map<String, Object> changes) {
-    return isSuccessful(new EditProfileRequest(username, changes));
+  public static boolean editProfile(EditProfileRequest request) {
+    return isSuccessful(request);
   }
 
   public static boolean addProfile(
