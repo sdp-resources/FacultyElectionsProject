@@ -2,7 +2,7 @@ package fsc.mock.gateway.profile;
 
 import fsc.entity.Profile;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ExistingProfileGatewaySpy extends ProfileGatewayStub {
   public String providedUsername;
@@ -12,8 +12,8 @@ public class ExistingProfileGatewaySpy extends ProfileGatewayStub {
     super(profiles);
   }
 
-  public ArrayList<Profile> getAllProfiles() {
-    return null;
+  public List<Profile> getAllProfiles() {
+    return super.getAllProfiles();
   }
 
   public Profile getProfile(String username) {
