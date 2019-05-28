@@ -43,7 +43,7 @@ public class VoteInteractorTest {
   }
 
   @Test
-  public void canExecuteGoodID() throws Exception {
+  public void canExecuteGoodID() {
     ProfileGateway profileGateway = new ProfileGatewayStub(providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
 
@@ -58,7 +58,7 @@ public class VoteInteractorTest {
   }
 
   @Test
-  public void voteRecordSpyFunctionality() throws Exception {
+  public void voteRecordSpyFunctionality() {
     ProfileGateway profileGateway = new ProfileGatewayStub(providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
     interactor.execute(request);
@@ -67,14 +67,13 @@ public class VoteInteractorTest {
   }
 
   @Test
-  public void canRecordAVote() throws Exception {
+  public void canRecordAVote() {
     ProfileGateway profileGateway = new ProfileGatewayStub(providedProfile);
     VoteInteractor interactor = new VoteInteractor(electionGateway, profileGateway);
     interactor.execute(request);
-    Profile profile = profileGateway.getProfile(username);
     VoteRecord testRecord = ((VoteRecordGatewaySpy) electionGateway).voteRecord;
 
-    assertEquals(testRecord.getProfile(), profile);
+    assertEquals(testRecord.getProfile(), providedProfile);
     assertEquals(testRecord.getDate(), date);
     assertEquals(testRecord.getVote(), vote);
     assertEquals(testRecord.getElectionID(), electionID);

@@ -23,7 +23,7 @@ public class VoteInteractor {
       profileGateway.getProfile(request.username);
       voteGateway.recordVote(createVoteObject(request));
       return new SuccessResponse();
-    } catch (Exception e) {
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     }
   }
