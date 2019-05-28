@@ -30,10 +30,9 @@ public class EditBallotQueryInteractor {
       election.setBallot(ballot);
       electionGateway.save();
       return new SuccessResponse();
-    } catch (Exception e) {
+    } catch (ElectionGateway.InvalidElectionIDException e) {
       return ErrorResponse.unknownElectionID();
     }
-
   }
 
 }

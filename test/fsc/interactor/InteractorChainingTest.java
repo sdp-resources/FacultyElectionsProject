@@ -4,7 +4,8 @@ import fsc.request.Request;
 import fsc.response.Response;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class InteractorChainingTest {
   @Test
@@ -21,6 +22,7 @@ public class InteractorChainingTest {
 
   private class InteractorStub extends Interactor {
     private String name;
+
     public InteractorStub(String name) {
       this.name = name;
     }

@@ -51,9 +51,8 @@ public class VoteInteractorTest {
   }
 
   @Test
-  public void canExecuteBadID() throws Exception {
-    VoteInteractor interactor = new VoteInteractor(electionGateway,
-                                                   new InvalidProfileGatewaySpy());
+  public void canExecuteBadID() {
+    VoteInteractor interactor = new VoteInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }

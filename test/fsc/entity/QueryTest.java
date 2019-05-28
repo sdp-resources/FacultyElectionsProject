@@ -74,8 +74,7 @@ public class QueryTest {
   @Test
   public void AndWithThreeItemsFormatsString() {
     query = new AndQuery(new Query[]{
-          new TrueQuery(), new FalseQuery(),
-          new AttributeQuery("contract", "tenured")
+          new TrueQuery(), new FalseQuery(), new AttributeQuery("contract", "tenured")
     });
 
     assertEquals("(true AND false AND contract = tenured)", query.getFormattedString());
@@ -84,8 +83,7 @@ public class QueryTest {
   @Test
   public void OrWithThreeItemsFormatsString() {
     query = new OrQuery(new Query[]{
-          new TrueQuery(), new FalseQuery(),
-          new AttributeQuery("contract", "tenured")
+          new TrueQuery(), new FalseQuery(), new AttributeQuery("contract", "tenured")
     });
 
     assertEquals("(true OR false OR contract = tenured)", query.getFormattedString());
@@ -94,8 +92,7 @@ public class QueryTest {
   @Test
   public void AndWithOrInsideFormatsString() {
     query = new AndQuery(new Query[]{
-          new TrueQuery(),
-          new OrQuery(new Query[]{new TrueQuery(), new FalseQuery()})
+          new TrueQuery(), new OrQuery(new Query[]{new TrueQuery(), new FalseQuery()})
     });
 
     assertEquals("(true AND (true OR false))", query.getFormattedString());

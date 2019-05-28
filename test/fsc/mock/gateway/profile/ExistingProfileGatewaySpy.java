@@ -30,7 +30,6 @@ public class ExistingProfileGatewaySpy extends ProfileGatewayStub {
     return true;
   }
 
-
   public void save() {
     profileHasBeenEdited = true;
   }

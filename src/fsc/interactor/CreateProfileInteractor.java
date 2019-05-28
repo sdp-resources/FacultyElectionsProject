@@ -34,6 +34,6 @@ public class CreateProfileInteractor extends Interactor {
   }
 
   public Response execute(Request request) {
-    return execute ((CreateProfileRequest) request);
+    return execute((CreateProfileRequest) request);
   }
 }
