@@ -1,12 +1,11 @@
 package fixtures;
 
-import fsc.gateway.ProfileGateway;
 import fsc.viewable.ViewableProfile;
 
-public class CanFindProfiles {
+public class ThenCanFindProfiles {
   private ViewableProfile profile;
 
-  public void setUsername(String username) throws ProfileGateway.InvalidProfileUsernameException {
+  public void setUsername(String username) {
     profile = TestContext.getProfile(username);
   }
 

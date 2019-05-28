@@ -12,6 +12,7 @@ import fsc.viewable.ViewableProfile;
 import gateway.InMemoryGateway;
 
 import java.util.List;
+import java.util.Map;
 
 public class TestContext {
   private static Gateway gateway;
@@ -27,7 +28,12 @@ public class TestContext {
                                               .append(new ViewContractsInteractor(gateway))
                                               .append(new AddContractTypeInteractor(gateway))
                                               .append(new CreateProfileInteractor(gateway))
-                                              .append(new ViewProfileInteractor(gateway));
+                                              .append(new ViewProfileInteractor(gateway))
+                                              .append(new EditProfileInteractor(gateway));
+  }
+
+  public static boolean editProfile(String username, Map<String, Object> changes) {
+    return isSuccessful(new EditProfileRequest(username, changes));
   }
 
   public static boolean addProfile(
