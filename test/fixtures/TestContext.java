@@ -8,6 +8,7 @@ import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import fsc.response.ViewResponse;
+import fsc.viewable.ViewableProfile;
 import gateway.InMemoryGateway;
 
 import java.util.List;
@@ -24,18 +25,19 @@ public class TestContext {
   private Interactor loadInteractors(Gateway gateway) {
     return new ViewDivisionInteractor(gateway).append(new AddDivisionInteractor(gateway))
                                               .append(new ViewContractsInteractor(gateway))
-                                              .append(new AddContractTypeInteractor(gateway));
+                                              .append(new AddContractTypeInteractor(gateway))
+                                              .append(new CreateProfileInteractor(gateway))
+                                              .append(new ViewProfileInteractor(gateway));
   }
 
-  public static void addProfile(
+  public static boolean addProfile(
         String fullname, String username, String contractType, String division
   ) {
-    gateway.addProfile(new Profile(fullname, username, division, contractType));
+    return isSuccessful(new CreateProfileRequest(fullname, username, division, contractType));
   }
 
-  public static Profile getProfile(String username)
-        throws ProfileGateway.InvalidProfileUsernameException {
-    return gateway.getProfile(username);
+  public static ViewableProfile getProfile(String username) {
+    return getViewableProfileResult(new ViewProfileRequest(username));
   }
 
   public static boolean addDivision(String division) {
@@ -62,5 +64,10 @@ public class TestContext {
   private static List<String> getStringListResult(Request request) {
     Response response = interactor.handle(request);
     return ((ViewResponse<List<String>>) response).values;
+  }
+
+  private static ViewableProfile getViewableProfileResult(Request request) {
+    Response response = interactor.handle(request);
+    return ((ViewResponse<ViewableProfile>) response).values;
   }
 }

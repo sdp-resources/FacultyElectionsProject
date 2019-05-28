@@ -13,6 +13,9 @@
 |scenario|Then the profile for username _ has name _ division _ and contract type _|username,fullname,division,contractType|
 |check profile for;|@username|@fullname|@division|@contractType|
 
+|scenario|Then we cannot add profile for _ with name _ division _ and contract type _|username,fullname,division,contract|
+|reject|add profile;|@fullname|@username|@division|@contractType|
+
 !3 Divisions
 
 |scenario|Given division|division|

@@ -4,8 +4,7 @@ public class FscFixture {
   public boolean addProfile(
         String fullname, String username, String contractType, String division
   ) {
-    TestContext.addProfile(fullname, username, division, contractType);
-    return true;
+    return TestContext.addProfile(fullname, username, division, contractType);
   }
 
   public boolean addDivision(String division) {
