@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.ViewProfileRequest;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ViewProfileInteractorTest {
 
-  Profile profile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile profile = EntityStub.getProfile(0);
 
   @Test
   public void validUsernameReturnsCorrectViewableProfile() {

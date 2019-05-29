@@ -4,6 +4,7 @@ import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
+import fsc.mock.EntityStub;
 import fsc.mock.VoteRecordGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
@@ -39,7 +40,7 @@ public class VoteInteractorTest {
     electionID = 1;
     request = new VoteRecordRequest(username, date, vote, electionID);
     electionGateway = new VoteRecordGatewaySpy();
-    providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+    providedProfile = EntityStub.getProfile(0);
   }
 
   @Test

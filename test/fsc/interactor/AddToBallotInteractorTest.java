@@ -1,8 +1,8 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
 import fsc.entity.Election;
 import fsc.entity.Profile;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
@@ -31,10 +31,10 @@ public class AddToBallotInteractorTest {
   @Before
   public void setUp() {
     request = new AddToBallotRequest(ELECTION_ID, profileUsername);
-    election = new Election(null, null, null, new Ballot());
+    election = EntityStub.simpleBallotElection();
     election.setID(ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
-    profile = new Profile("Adam Jones", "jonesa", "SCI", "Tenured");
+    profile = EntityStub.getProfile(0);
     profileGateway = new ProfileGatewayStub(profile);
   }
 

@@ -3,10 +3,11 @@ package fsc.entity;
 import fsc.entity.query.FalseQuery;
 import fsc.entity.query.TrueQuery;
 import fsc.gateway.ProfileGateway;
+import fsc.mock.EntityStub;
+import fsc.mock.gateway.profile.ProfileGatewayStub;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +21,8 @@ public class BallotCreatorTest {
   @Before
   public void setUp() {
     ballotCreator = new BallotCreator();
-    mockGateway = makeGateway();
+    mockGateway = new ProfileGatewayStub(EntityStub.getProfile(0), EntityStub.getProfile(1),
+                                         EntityStub.getProfile(2));
     ballotCreator.setProfileGateway(mockGateway);
   }
 
@@ -43,38 +45,4 @@ public class BallotCreatorTest {
     assertEquals(list2.size(), list1.size());
   }
 
-  private ProfileGateway makeGateway() {
-    return new MockGateway();
-  }
-
-  private class MockGateway implements ProfileGateway {
-    final Profile profile1 = new Profile("name1", "username1", "dept", "contract");
-    final Profile profile2 = new Profile("name2", "username2", "dept", "contract");
-    final Profile profile3 = new Profile("name3", "username3", "dept", "contract");
-    final private ArrayList<Profile> allProfiles = new ArrayList<>();
-
-    MockGateway() {
-      allProfiles.add(profile1);
-      allProfiles.add(profile2);
-      allProfiles.add(profile3);
-    }
-
-    public Profile getProfile(String username) {
-      return null;
-    }
-
-    public List<Profile> getAllProfiles() {
-      return allProfiles;
-    }
-
-    public void addProfile(Profile profile) { }
-
-    public boolean hasProfile(String username) {
-      return false;
-    }
-
-    public void save() {
-    }
-
-  }
 }

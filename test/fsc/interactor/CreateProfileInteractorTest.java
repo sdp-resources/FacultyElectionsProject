@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;
@@ -18,7 +19,7 @@ public class CreateProfileInteractorTest {
   CreateProfileRequest request;
   CreateProfileInteractor interactor;
   Response response;
-  Profile providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  Profile providedProfile = EntityStub.getProfile(0);
 
   @Before
   public void setup() {

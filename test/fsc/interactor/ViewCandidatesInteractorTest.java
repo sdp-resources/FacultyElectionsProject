@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Ballot;
 import fsc.entity.Election;
-import fsc.entity.Profile;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
@@ -21,17 +21,17 @@ public class ViewCandidatesInteractorTest {
 
   private static Ballot sampleBallot() {
     Ballot aBallot = new Ballot();
-    aBallot.add(new Profile("Haris Skiadas", "skiadas", "Natural Science", "Tenured"));
-    aBallot.add(new Profile("Theresa Wilson", "wilson", "Natural Science", "tenure-track"));
-    aBallot.add(new Profile("Barb Wahl", "wahl", "Natural Science", "Tenured"));
-    aBallot.add(new Profile("John Collins", "collins", "Natural Science", "Tenured"));
+    aBallot.add(EntityStub.getProfile(3));
+    aBallot.add(EntityStub.getProfile(2));
+    aBallot.add(EntityStub.getProfile(1));
+    aBallot.add(EntityStub.getProfile(0));
     return aBallot;
   }
 
   @Before
   public void setup() {
     ballot = sampleBallot();
-    election = new Election(null, null, null, ballot);
+    election = EntityStub.simpleBallotElection(ballot);
   }
 
   @Test

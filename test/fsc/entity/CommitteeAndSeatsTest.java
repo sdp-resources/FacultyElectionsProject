@@ -2,6 +2,7 @@ package fsc.entity;
 
 import fsc.entity.query.Query;
 import fsc.entity.query.TrueQuery;
+import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,7 +55,7 @@ public class CommitteeAndSeatsTest {
 
   @Test
   public void setProfileOnSeat() {
-    Profile profile = new Profile("Skiadas", "skiadas", "Natural Science", "tenured");
+    Profile profile = EntityStub.getProfile(0);
     seat.setProfile(profile);
 
     assertThat(seat.getProfile(), is(profile));

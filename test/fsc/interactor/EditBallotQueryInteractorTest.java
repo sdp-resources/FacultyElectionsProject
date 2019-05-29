@@ -4,6 +4,7 @@ import fsc.entity.Ballot;
 import fsc.entity.Election;
 import fsc.entity.Profile;
 import fsc.entity.query.TrueQuery;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
@@ -25,10 +26,10 @@ public class EditBallotQueryInteractorTest {
   private EditBallotQueryInteractor interactor;
 
   @Before
-  public void setUp() throws Exception {
-    providedProfile = new Profile("Bob Ross", "rossB12", "Arts and Letters", "Tenured");
+  public void setUp() {
+    providedProfile = EntityStub.getProfile(0);
     request = new EditBallotQueryRequest("556", new TrueQuery());
-    election = new Election(null, null, null, new Ballot());
+    election = EntityStub.simpleBallotElection();
   }
 
   @Test

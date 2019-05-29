@@ -1,6 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.Profile;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
@@ -13,16 +13,14 @@ import static junit.framework.TestCase.assertTrue;
 
 public class ViewProfilesListInteractorTest {
 
-  Profile profile1 = new Profile("Ben Givens", "givensb", "ART", "Tenured");
-  Profile profile2 = new Profile("Jacob Stricker", "strickerj", "SCIENCE", "Tenured");
-  Profile profile3 = new Profile("Blaise Lin", "linb", "SOCIAL", "Non-tenured");
   private ViewProfilesListRequest request;
   private ProfileGatewayStub profileGatewaySpy;
 
   @Before
   public void setup() {
     request = new ViewProfilesListRequest();
-    profileGatewaySpy = new ProfileGatewayStub(profile1, profile2, profile3);
+    profileGatewaySpy = new ProfileGatewayStub(EntityStub.getProfile(0), EntityStub.getProfile(1),
+                                               EntityStub.getProfile(2));
   }
 
   @Test

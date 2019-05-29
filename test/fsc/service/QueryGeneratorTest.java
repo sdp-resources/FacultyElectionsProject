@@ -17,21 +17,21 @@ public class QueryGeneratorTest {
   private Profile janeProfile;
   private Profile sallyProfile;
   private Profile samProfile;
+  private JSONObject jsonObject;
 
   @Before
   public void setUp() {
     queryGenerator = new QueryGenerator();
     joeProfile = new Profile("Joe", "joe@hanover.edu", "Art", "tenured");
-    janeProfile = new Profile("Jane", "jane@hanover.edu", "Librarian", "non-tenured");
-    sallyProfile = new Profile("Sally", "sally@hanover.edu", "Librarian", "tenured");
-    samProfile = new Profile("Sam", "sam@hanover.edu", "Art", "non-tenured");
+    janeProfile = new Profile("Jane", "jane", "Librarian", "non-tenured");
+    sallyProfile = new Profile("Sally", "sally", "Librarian", "tenured");
+    samProfile = new Profile("Sam", "sam", "Art", "non-tenured");
+    jsonObject = new JSONObject();
   }
 
   @Test
   public void profileWithNameJoeIsValidWithQueryAskingForJoe() {
-
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("name", "Joe");
+    jsonObject.put("name", joeProfile.getName());
 
     Query query = queryGenerator.generate(jsonObject);
 
@@ -40,9 +40,7 @@ public class QueryGeneratorTest {
 
   @Test
   public void profileNameWithNameJaneIsNOTValidWithQueryAskingForJoe() {
-
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("name", "Joe");
+    jsonObject.put("name", joeProfile.getName());
 
     Query query = queryGenerator.generate(jsonObject);
 
