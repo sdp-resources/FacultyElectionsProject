@@ -26,7 +26,12 @@ public class TestContext {
                                               .append(new AddContractTypeInteractor(gateway))
                                               .append(new CreateProfileInteractor(gateway))
                                               .append(new ViewProfileInteractor(gateway))
-                                              .append(new EditProfileInteractor(gateway));
+                                              .append(new EditProfileInteractor(gateway))
+                                              .append(new ViewProfilesListInteractor(gateway));
+  }
+
+  public static List<ViewableProfile> getAllProfiles() {
+    return getViewableProfileListResult(new ViewProfilesListRequest());
   }
 
   public static boolean editProfile(EditProfileRequest request) {
@@ -72,5 +77,10 @@ public class TestContext {
   private static ViewableProfile getViewableProfileResult(Request request) {
     Response response = interactor.handle(request);
     return ((ViewResponse<ViewableProfile>) response).values;
+  }
+
+  private static List<ViewableProfile> getViewableProfileListResult(Request request) {
+    Response response = interactor.handle(request);
+    return ((ViewResponse<List<ViewableProfile>>) response).values;
   }
 }
