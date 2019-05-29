@@ -1,11 +1,9 @@
 package fsc.mock.gateway.division;
 
-import fsc.gateway.DivisionGateway;
-
 import java.util.Arrays;
 import java.util.List;
 
-public class ExistingDivisionGatewaySpy implements DivisionGateway {
+public class ExistingDivisionGatewaySpy extends MissingDivisionGatewaySpy {
   public List<String> divisions;
   public String submittedDivisionName;
 
@@ -18,14 +16,16 @@ public class ExistingDivisionGatewaySpy implements DivisionGateway {
   }
 
   public void addDivision(String division) {
+    super.addDivision(division);
     divisions.add(division);
   }
 
   public void save() {
-
+    super.save();
   }
 
   public Boolean hasDivision(String divisionName) {
+    super.hasDivision(divisionName);
     submittedDivisionName = divisionName;
     return true;
   }

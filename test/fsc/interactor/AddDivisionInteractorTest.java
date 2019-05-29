@@ -9,11 +9,12 @@ import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class AddDivisionInteractorTest {
-  public static final String A_DIVISION = "ENG";
+  private static final String A_DIVISION = "ENG";
   private AddDivisionRequest request;
   private AddDivisionInteractor interactor;
 
@@ -27,9 +28,9 @@ public class AddDivisionInteractorTest {
     MissingDivisionGatewaySpy testGateway = new MissingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
-    assertEquals(A_DIVISION, testGateway.submittedDivisionName);
     assertEquals(new SuccessResponse(), response);
-    assertTrue(testGateway.saveCalled);
+    assertEquals(List.of("has division: " + A_DIVISION, "add division: " + A_DIVISION, "save"),
+                 testGateway.events);
   }
 
   @Test
@@ -37,7 +38,7 @@ public class AddDivisionInteractorTest {
     ExistingDivisionGatewaySpy testGateway = new ExistingDivisionGatewaySpy();
     interactor = new AddDivisionInteractor(testGateway);
     Response response = interactor.execute(request);
-    assertEquals(A_DIVISION, testGateway.submittedDivisionName);
     assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(List.of("has division: " + A_DIVISION), testGateway.events);
   }
 }

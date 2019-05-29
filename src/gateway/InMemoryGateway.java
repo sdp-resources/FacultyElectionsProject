@@ -65,6 +65,10 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(contractTypes);
   }
 
+  public boolean hasContractType(String contract) {
+    return contractTypes.contains(contract);
+  }
+
   public void addDivision(String division) {
     divisions.add(division);
   }

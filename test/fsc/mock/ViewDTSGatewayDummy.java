@@ -69,6 +69,10 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   }
 
+  public boolean hasContractType(String contract) {
+    return false;
+  }
+
   public boolean hasCommittee(String name) {
     return false;
   }
