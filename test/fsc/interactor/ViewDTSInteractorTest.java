@@ -1,43 +1,62 @@
 package fsc.interactor;
 
-import fsc.entity.Candidate;
+import fsc.entity.*;
+import fsc.mock.EntityStub;
 import fsc.mock.ViewDTSGatewayDummy;
+import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
+import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewDTSRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ViewDTSInteractorTest {
 
-  @Ignore
-  @Test
-  public void canGetDTSFormForUser() throws ErrorResponse {
-    String username = "skiadas21";
-    String electionID = "1";
-    ViewDTSRequest request = new ViewDTSRequest(username, electionID);
-    ViewDTSGatewayDummy gateway = new ViewDTSGatewayDummy();
-    ViewDTSInteractor interactor = new ViewDTSInteractor(gateway);
-    Response response = interactor.execute(request);
+  private String electionID = "1";
+  private ViewDTSRequest request;
+  private Election election;
+  private Profile profile;
+  private ViewDTSInteractor interactor;
+  private ProvidedElectionGatewaySpy gateway;
 
-    assertEquals(gateway.profile.username, username);
-    assertEquals(gateway.candidate.getStatus(), Candidate.Status.NoAnswer);
-    assertNotNull(((ViewResponse) response).values);
+  @Before
+  public void setUp() {
+    election = EntityStub.simpleBallotElection();
+    profile = EntityStub.getProfile(0);
+    request = new ViewDTSRequest(profile.getUsername(), electionID);
   }
 
   @Test
-  public void cannotGetDTSFormForUser() throws ErrorResponse {
-    String username = "wilson";
-    String electionID = "1";
-    ViewDTSRequest request = new ViewDTSRequest(username, electionID);
-    ViewDTSGatewayDummy gateway = new ViewDTSGatewayDummy();
-    ViewDTSInteractor interactor = new ViewDTSInteractor(gateway);
+  public void whenUserIsCandidate_canGetTheirPreference() throws Ballot.NoProfileInBallotException {
+    election.getBallot().add(profile);
+    Candidate candidate = election.getCandidateByUsername(profile.getUsername());
+    candidate.setStatus(Candidate.Status.Accepted);
+    gateway = new ProvidedElectionGatewaySpy(election);
+    interactor = new ViewDTSInteractor(gateway);
     Response response = interactor.execute(request);
-
-    assertTrue(response instanceof ErrorResponse);
+    assertEquals(electionID, gateway.providedElectionId);
+    assertEquals(ViewResponse.ofCandidate(candidate), response);
   }
 
+  @Test
+  public void whenUserIsNotCandidate_errorReturned() {
+    gateway = new ProvidedElectionGatewaySpy(election);
+    interactor = new ViewDTSInteractor(gateway);
+    Response response = interactor.execute(request);
+    assertEquals(electionID, gateway.providedElectionId);
+    assertEquals(ErrorResponse.invalidCandidate(), response);
+  }
+
+  @Test
+  public void whenElectionDoesNotExist_thenError() {
+    RejectingElectionGatewaySpy rejectingGateway = new RejectingElectionGatewaySpy();
+    interactor = new ViewDTSInteractor(rejectingGateway);
+    Response response = interactor.execute(request);
+
+    assertEquals(ErrorResponse.unknownElectionID(), response);
+  }
 }

@@ -23,7 +23,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   }
 
-  public Election getElection(String electionID) throws InvalidElectionIDException {
+  public Election getElection(String electionID) {
     providedElectionId = electionID;
     return storedElection;
   }

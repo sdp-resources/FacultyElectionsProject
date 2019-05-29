@@ -1,47 +1,68 @@
 package fsc.interactor;
 
-import fsc.entity.Candidate;
-import fsc.entity.Election;
+import fsc.entity.*;
 import fsc.mock.EntityStub;
 import fsc.mock.ViewDTSGatewayDummy;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
+import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.DTSRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static fsc.entity.Candidate.*;
+import static org.junit.Assert.*;
 
 public class SubmitDTSInteractorTest {
 
-  private final String electionID = "12345";
-  private final String profileUserName = "skiadas21";
-  private final Candidate.Status status = Candidate.Status.Declined;
-  private Election election = EntityStub.simpleBallotElection();
+  private String electionID = "12345";
+  private Status status = Status.Declined;
+  private Election election;
 
   private ProvidedElectionGatewaySpy electionGatewaySpy;
+  private DTSRequest request;
+  private SubmitDTSInteractor interactor;
+  private Profile profile;
 
-  @Ignore
-  @Test
-  public void whenCandidateIsInElection_thenRecordTheirStatus() {
-    DTSRequest request = new DTSRequest(electionID, profileUserName, status);
+  @Before
+  public void setUp() {
+    election = EntityStub.simpleBallotElection();
+    profile = EntityStub.getProfile(0);
+    request = new DTSRequest(electionID, profile.getUsername(), status);
     electionGatewaySpy = new ProvidedElectionGatewaySpy(election);
-    DTSInteractor interactor = new DTSInteractor(electionGatewaySpy);
+    interactor = new SubmitDTSInteractor(electionGatewaySpy);
+  }
+
+  @Test
+  public void whenCandidateIsInElection_thenRecordTheirStatus()
+        throws Ballot.NoProfileInBallotException {
+    election.getBallot().add(profile);
     Response response = interactor.execute(request);
 
-    assertTrue(response instanceof SuccessResponse);
+    assertEquals(new SuccessResponse(), response);
+    assertEquals(electionID, electionGatewaySpy.providedElectionId);
+    assertEquals(status, election.getCandidateByUsername(profile.getUsername()).getStatus());
+    assertTrue(electionGatewaySpy.hasSaved);
   }
 
   @Test
   public void whenCandidateIsNotInElection_thenError() {
-    DTSRequest request = new DTSRequest(electionID, "wilson", status);
-    ViewDTSGatewayDummy gateway = new ViewDTSGatewayDummy();
-    DTSInteractor interactor = new DTSInteractor(gateway);
     Response response = interactor.execute(request);
 
-    assertTrue(response instanceof ErrorResponse);
+    assertEquals(ErrorResponse.invalidCandidate(), response);
+    assertFalse(electionGatewaySpy.hasSaved);
+  }
+
+  @Test
+  public void whenElectionDoesNotExist_thenError() {
+    RejectingElectionGatewaySpy rejectingGateway = new RejectingElectionGatewaySpy();
+    interactor = new SubmitDTSInteractor(rejectingGateway);
+    Response response = interactor.execute(request);
+
+    assertEquals(ErrorResponse.unknownElectionID(), response);
   }
 }
 

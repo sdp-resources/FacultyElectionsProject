@@ -1,8 +1,10 @@
 package fsc.response;
 
+import fsc.entity.Candidate;
 import fsc.entity.Profile;
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
+import fsc.viewable.ViewableCandidate;
 import fsc.viewable.ViewableProfile;
 
 import java.util.List;
@@ -27,6 +29,10 @@ public class ViewResponse<T> implements Response {
 
   public static ViewResponse<List<String>> ofStrings(List<String> strings) {
     return new ViewResponse<>(strings);
+  }
+
+  public static ViewResponse<ViewableCandidate> ofCandidate(Candidate candidate) {
+    return new ViewResponse<>(entityConverter.convert(candidate));
   }
 
   public boolean equals(Object o) {

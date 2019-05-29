@@ -37,5 +37,5 @@ public class Ballot extends AbstractList<Profile> {
     candidates.removeIf(i -> (i.getProfile() == profile));
   }
 
-  public class NoProfileInBallotException extends Exception {}
+  public static class NoProfileInBallotException extends Exception {}
 }

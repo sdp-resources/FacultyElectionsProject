@@ -47,5 +47,15 @@ public class Election {
   public Query getDefaultQuery() {
     return defaultQuery;
   }
+
+  public Candidate getCandidateByUsername(String username)
+        throws Ballot.NoProfileInBallotException {
+    for (int i = 0; i < ballot.size(); i++) {
+      if (ballot.getCandidate(i).getProfile().getUsername().equals(username)) {
+        return ballot.getCandidate(i);
+      }
+    }
+    throw new Ballot.NoProfileInBallotException();
+  }
 }
 

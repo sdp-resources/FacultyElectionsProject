@@ -1,11 +1,10 @@
 package fsc.entity;
 
 public class Candidate {
-  Profile profile;
+  public enum Status {NoAnswer, Declined, Accepted;}
 
-  public enum Status {NoAnswer, Declined, Accepted}
-
-  Status status;
+  private Profile profile;
+  private Status status;
 
   public Candidate(Profile profile) {
     this.profile = profile;
@@ -20,11 +19,8 @@ public class Candidate {
     return status;
   }
 
-  public void setDeclined() {
-    status = Status.Declined;
+  public void setStatus(Status status) {
+    this.status = status;
   }
 
-  public void setAccepted() {
-    status = Status.Accepted;
-  }
 }
