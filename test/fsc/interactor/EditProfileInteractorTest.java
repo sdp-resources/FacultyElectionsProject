@@ -31,7 +31,7 @@ public class EditProfileInteractorTest {
   public void noProfileExistsException() {
     request.changeContractType("Tenured");
     interactor = new EditProfileInteractor(new InvalidProfileGatewaySpy());
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
