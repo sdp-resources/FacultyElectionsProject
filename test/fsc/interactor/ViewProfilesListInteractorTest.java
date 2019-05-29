@@ -26,7 +26,7 @@ public class ViewProfilesListInteractorTest {
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
     ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     Response expectedResponse = ViewResponse.ofProfileList(profileGatewaySpy.getAllProfiles());
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
     assertEquals(expectedResponse, response);
