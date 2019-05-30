@@ -5,12 +5,16 @@ import fsc.entity.Profile;
 import java.util.Objects;
 
 public class AttributeQuery extends Query {
-  private final String key;
-  private final String value;
+  public final String key;
+  public final String value;
 
   public AttributeQuery(String key, String value) {
     this.key = key;
     this.value = value;
+  }
+
+  public Object accept(QueryVisitor visitor) {
+    return visitor.visit(this);
   }
 
   public boolean isProfileValid(Profile profile) {

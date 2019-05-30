@@ -7,13 +7,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class QueryGeneratorTest {
+public class QueryJsonConverterTest {
 
-  private QueryGenerator queryGenerator;
+  private QueryJsonConverter queryJsonConverter;
 
   @Before
   public void setUp() {
-    queryGenerator = new QueryGenerator();
+    queryJsonConverter = new QueryJsonConverter();
   }
 
   @Test
@@ -50,6 +50,7 @@ public class QueryGeneratorTest {
   }
 
   private void jsonProducesQuery(String json, Query expectedQuery) {
-    assertEquals(expectedQuery, queryGenerator.generate(new JSONObject(json)));
+    assertEquals(expectedQuery, queryJsonConverter.fromJSON(new JSONObject(json)));
+    assertEquals(new JSONObject(json).toString(), queryJsonConverter.toJSON(expectedQuery).toString());
   }
 }

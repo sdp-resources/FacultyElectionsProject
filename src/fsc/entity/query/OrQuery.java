@@ -5,10 +5,14 @@ import fsc.entity.Profile;
 import java.util.Arrays;
 
 public class OrQuery extends Query {
-  private final Query[] queries;
+  public final Query[] queries;
 
   public OrQuery(Query[] queries) {
     this.queries = queries;
+  }
+
+  public Object accept(Query.QueryVisitor visitor) {
+    return visitor.visit(this);
   }
 
   public boolean isProfileValid(Profile profile) {
