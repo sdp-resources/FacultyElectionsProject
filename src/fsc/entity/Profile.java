@@ -5,14 +5,26 @@ public class Profile {
   public String username;
   private String division;
   private String contract;
-  private Boolean active;
+  private Status status;
+
+  public enum Status {
+    ACTIVE {
+      public Boolean isActive() { return true; }
+      public String toString() { return "active"; }
+    }, INACTIVE {
+      public Boolean isActive() { return false; }
+      public String toString() { return "inactive"; }
+    };
+
+    public Boolean isActive() { return null; }
+  }
 
   public Profile(String name, String username, String division, String contract) {
     this.name = name;
     this.division = division;
     this.username = username;
     this.contract = contract;
-    this.active = true;
+    this.status = Status.ACTIVE;
   }
 
   public String getName() {
@@ -31,7 +43,9 @@ public class Profile {
     return username;
   }
 
-  public Boolean isActive() {return active;}
+  public Status getStatus() { return status; }
+
+  public Boolean isActive() { return status.isActive(); }
 
   public void setContract(String contractType) {
     contract = contractType;
@@ -49,7 +63,15 @@ public class Profile {
     username = newUsername;
   }
 
-  public void setInactive() { active = false; }
+  public void setStatus(Status status) {
+    this.status = status;
+  }
 
-  public void setActive() { active = true; }
+  public void setInactive() {
+    setStatus(Status.INACTIVE);
+  }
+
+  public void setActive() {
+    setStatus(Status.ACTIVE);
+  }
 }

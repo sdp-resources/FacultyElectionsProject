@@ -7,31 +7,35 @@ import static org.junit.Assert.*;
 
 public class EditProfileTests {
 
+  public static final String PROFILE_NAME = "Adam Jones";
+  public static final String PROFILE_USERNAME = "jonesa";
+  public static final String DIVISION = "SCI";
+  public static final String CONTRACT = "Tenured";
   private Profile profile;
 
   @Before
   public void setup() {
-    profile = new Profile("Adam Jones", "jonesa", "SCI", "Tenured");
+    profile = new Profile(PROFILE_NAME, PROFILE_USERNAME, DIVISION, CONTRACT);
   }
 
   @Test
   public void readProfileName() {
-    assertEquals("Adam Jones", profile.getName());
+    assertEquals(PROFILE_NAME, profile.getName());
   }
 
   @Test
   public void readProfileUsername() {
-    assertEquals("jonesa", profile.getUsername());
+    assertEquals(PROFILE_USERNAME, profile.getUsername());
   }
 
   @Test
   public void readDivision() {
-    assertEquals("SCI", profile.getDivision());
+    assertEquals(DIVISION, profile.getDivision());
   }
 
   @Test
   public void readAndSetContractType() {
-    String contractStatus = "Tenured";
+    String contractStatus = CONTRACT;
     profile.setContract(contractStatus);
     assertEquals(contractStatus, profile.getContract());
   }
