@@ -3,8 +3,8 @@ package fsc.entity.query;
 import fsc.entity.Profile;
 
 public abstract class Query {
-  public static Query always() { return new TrueQuery(); }
-  public static Query never() { return new FalseQuery(); }
+  public static Query always() { return Query.all(); }
+  public static Query never() { return Query.any(); }
   public static Query any(Query... queries) { return new OrQuery(queries); }
   public static Query all(Query... queries) { return new AndQuery(queries); }
   public static Query has(String key, String value) { return new AttributeQuery(key, value); }

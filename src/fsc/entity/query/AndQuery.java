@@ -20,6 +20,7 @@ public class AndQuery extends Query {
   }
 
   public String getFormattedString() {
+    if (queries.length == 0) { return "all"; }
     String output = "(";
     for (int i = 0; i < queries.length; i++) {
       output += queries[i].getFormattedString();

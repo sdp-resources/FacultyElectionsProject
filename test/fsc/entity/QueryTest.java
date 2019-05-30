@@ -55,26 +55,26 @@ public class QueryTest {
   @Test
   public void SingleAttributeQueryFormatString() {
     Query query = Query.has("contract", "tenured");
-    assertEquals("contract = tenured", query.getFormattedString());
+    assertEquals("contract equals tenured", query.getFormattedString());
   }
 
   @Test
   public void AndWithThreeItemsFormatsString() {
     query = Query.all(Query.always(), Query.never(), Query.has("contract", "tenured"));
-    assertEquals("(true AND false AND contract = tenured)", query.getFormattedString());
+    assertEquals("(all AND none AND contract equals tenured)", query.getFormattedString());
   }
 
   @Test
   public void OrWithThreeItemsFormatsString() {
     query = Query.any(Query.always(), Query.never(), Query.has("contract", "tenured"));
 
-    assertEquals("(true OR false OR contract = tenured)", query.getFormattedString());
+    assertEquals("(all OR none OR contract equals tenured)", query.getFormattedString());
   }
 
   @Test
   public void AndWithOrInsideFormatsString() {
     query = Query.all(Query.always(), Query.any(Query.always(), Query.never()));
 
-    assertEquals("(true AND (true OR false))", query.getFormattedString());
+    assertEquals("(all AND (all OR none))", query.getFormattedString());
   }
 }
