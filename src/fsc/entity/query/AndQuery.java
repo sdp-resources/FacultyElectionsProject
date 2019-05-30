@@ -2,6 +2,8 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
+import java.util.Arrays;
+
 public class AndQuery extends Query {
   private final Query[] queries;
 
@@ -25,5 +27,16 @@ public class AndQuery extends Query {
     }
     output += ")";
     return output;
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AndQuery andQuery = (AndQuery) o;
+    return Arrays.equals(queries, andQuery.queries);
+  }
+
+  public int hashCode() {
+    return Arrays.hashCode(queries);
   }
 }

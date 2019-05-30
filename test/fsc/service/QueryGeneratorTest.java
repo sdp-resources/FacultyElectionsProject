@@ -1,109 +1,55 @@
 package fsc.service;
 
-import fsc.entity.Profile;
 import fsc.entity.query.Query;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 public class QueryGeneratorTest {
 
   private QueryGenerator queryGenerator;
-  private Profile joeProfile;
-  private Profile janeProfile;
-  private Profile sallyProfile;
-  private Profile samProfile;
-  private JSONObject jsonObject;
 
   @Before
   public void setUp() {
     queryGenerator = new QueryGenerator();
-    joeProfile = new Profile("Joe", "joe@hanover.edu", "Art", "tenured");
-    janeProfile = new Profile("Jane", "jane", "Librarian", "non-tenured");
-    sallyProfile = new Profile("Sally", "sally", "Librarian", "tenured");
-    samProfile = new Profile("Sam", "sam", "Art", "non-tenured");
-    jsonObject = new JSONObject();
   }
 
   @Test
-  public void profileWithNameJoeIsValidWithQueryAskingForJoe() {
-    jsonObject.put("name", joeProfile.getName());
-
-    Query query = queryGenerator.generate(jsonObject);
-
-    assertTrue(query.isProfileValid(joeProfile));
+  public void queryAskingForNameOnlyPicksUpCorrectName() {
+    jsonProducesQuery(
+          "{ name: \"Joe\" }",
+          Query.has("name", "Joe"));
+    jsonProducesQuery(
+          "{ and: [" +
+                "{ division: \"Art\" }," +
+                "{ contract: \"tenured\" }" +
+                "]}",
+          Query.all(Query.has("division", "Art"),
+                    Query.has("contract", "tenured")));
+    jsonProducesQuery(
+          "{ or: [" +
+                "{ division: \"Art\" }," +
+                "{ contract: \"tenured\" }" +
+                "]}",
+          Query.any(Query.has("division", "Art"),
+                    Query.has("contract", "tenured")));
+    jsonProducesQuery(
+          "{ and: [" +
+                "{ contract: \"tenured\" }," +
+                "{ or: [" +
+                "   { division: \"Art\" }," +
+                "   { division: \"Librarian\" }" +
+                "]}" +
+                "]}",
+          Query.all(
+                Query.has("contract", "tenured"),
+                Query.any(Query.has("division", "Art"),
+                          Query.has("division", "Librarian"))));
   }
 
-  @Test
-  public void profileNameWithNameJaneIsNOTValidWithQueryAskingForJoe() {
-    jsonObject.put("name", joeProfile.getName());
-
-    Query query = queryGenerator.generate(jsonObject);
-
-    assertFalse(query.isProfileValid(janeProfile));
-  }
-
-  @Test
-  public void queryRequiresArtAndTenuredExpectOnlyJoe() {
-    JSONObject and = new JSONObject();
-    JSONObject department = new JSONObject();
-    department.put("division", "Art");
-    JSONObject contract = new JSONObject();
-    contract.put("contract", "tenured");
-
-    and.put("and", new JSONArray(new JSONObject[]{department, contract}));
-
-    Query query = queryGenerator.generate(and);
-
-    assertTrue(query.isProfileValid(joeProfile));
-    assertFalse(query.isProfileValid(janeProfile));
-    assertFalse(query.isProfileValid(sallyProfile));
-    assertFalse(query.isProfileValid(samProfile));
-  }
-
-  @Test
-  public void queryRequiresArtOrTenuredExpectJoeSallyAndSam() {
-    JSONObject or = new JSONObject();
-    JSONObject department = new JSONObject();
-    department.put("division", "Art");
-    JSONObject contract = new JSONObject();
-    contract.put("contract", "tenured");
-
-    or.put("or", new JSONArray(new JSONObject[]{department, contract}));
-
-    Query query = queryGenerator.generate(or);
-
-    assertTrue(query.isProfileValid(joeProfile));
-    assertFalse(query.isProfileValid(janeProfile));
-    assertTrue(query.isProfileValid(sallyProfile));
-    assertTrue(query.isProfileValid(samProfile));
-  }
-
-  @Test
-  public void queryRequiresTenured_And_ArtOrLibrarian() {
-    JSONObject contract = new JSONObject();
-    contract.put("contract", "tenured");
-
-    JSONObject art = new JSONObject();
-    art.put("division", "Art");
-    JSONObject librarian = new JSONObject();
-    librarian.put("division", "Librarian");
-
-    JSONObject or = new JSONObject();
-    or.put("or", new JSONArray(new JSONObject[]{art, librarian}));
-
-    JSONObject and = new JSONObject();
-    and.put("and", new JSONArray(new JSONObject[]{contract, or}));
-
-    Query query = queryGenerator.generate(and);
-
-    assertTrue(query.isProfileValid(joeProfile));
-    assertFalse(query.isProfileValid(janeProfile));
-    assertTrue(query.isProfileValid(sallyProfile));
-    assertFalse(query.isProfileValid(samProfile));
+  private void jsonProducesQuery(String json, Query expectedQuery) {
+    assertEquals(expectedQuery, queryGenerator.generate(new JSONObject(json)));
   }
 }

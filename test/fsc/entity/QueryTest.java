@@ -1,6 +1,6 @@
 package fsc.entity;
 
-import fsc.entity.query.*;
+import fsc.entity.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 

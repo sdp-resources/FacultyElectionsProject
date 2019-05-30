@@ -2,6 +2,8 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
+import java.util.Objects;
+
 public class AttributeQuery extends Query {
   private final String key;
   private final String value;
@@ -20,4 +22,19 @@ public class AttributeQuery extends Query {
   }
 
   public String getFormattedString() { return key + " = " + value; }
+
+  public String toString() {
+    return "AttributeQuery{" + "key='" + key + '\'' + ", value='" + value + '\'' + '}';
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AttributeQuery that = (AttributeQuery) o;
+    return Objects.equals(key, that.key) && Objects.equals(value, that.value);
+  }
+
+  public int hashCode() {
+    return Objects.hash(key, value);
+  }
 }
