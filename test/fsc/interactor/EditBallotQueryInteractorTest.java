@@ -2,7 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.Election;
 import fsc.entity.Profile;
-import fsc.entity.query.TrueQuery;
+import fsc.entity.query.Query;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -27,7 +27,7 @@ public class EditBallotQueryInteractorTest {
   @Before
   public void setUp() {
     providedProfile = EntityStub.getProfile(0);
-    request = new EditBallotQueryRequest("556", new TrueQuery());
+    request = new EditBallotQueryRequest("556", Query.always());
     election = EntityStub.simpleBallotElection();
   }
 

@@ -2,7 +2,6 @@ package fsc.mock;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
-import fsc.entity.query.TrueQuery;
 import fsc.gateway.Gateway;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class ViewDTSGatewayDummy implements Gateway {
   public Profile profile = new Profile("skiadas", "skiadas21", "science", "tenured");
-  public TrueQuery query = new TrueQuery();
+  public Query query = Query.always();
   public Seat seat = new Seat("bigSeat", query);
   public Committee committee = new Committee("coolCommittee", "This committee is really cool.");
   public Ballot ballot = new Ballot();

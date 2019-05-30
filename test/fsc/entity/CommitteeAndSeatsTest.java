@@ -1,7 +1,6 @@
 package fsc.entity;
 
 import fsc.entity.query.Query;
-import fsc.entity.query.TrueQuery;
 import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +20,7 @@ public class CommitteeAndSeatsTest {
   public void setup() {
     committee = new Committee("cccc", "xxxx");
     seats = new ArrayList<>();
-    TrueQuery queryStub = new TrueQuery();
-    seat = new Seat("a", queryStub);
+    seat = new Seat("a", Query.always());
   }
 
   @Test
@@ -63,7 +61,7 @@ public class CommitteeAndSeatsTest {
 
   @Test
   public void setDefaultQueryOnSeat() {
-    Query query = new TrueQuery();
+    Query query = Query.always();
     seat.setDefaultQuery(query);
 
     assertThat(seat.getDefaultQuery(), is(query));

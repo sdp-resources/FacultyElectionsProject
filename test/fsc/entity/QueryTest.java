@@ -18,82 +18,62 @@ public class QueryTest {
 
   @Test
   public void ProfileIsAlwaysFalse() {
-    query = new FalseQuery();
+    query = Query.never();
     assertFalse(query.isProfileValid(profile));
   }
 
   @Test
   public void ProfileIsAlwaysTrue() {
-    query = new TrueQuery();
+    query = Query.always();
     assertTrue(query.isProfileValid(profile));
   }
 
   @Test
   public void AndWithThreeTrues() {
-    query = new AndQuery(new Query[]{
-          new TrueQuery(), new TrueQuery(), new TrueQuery()
-    });
-
+    query = Query.all(Query.always(), Query.always(), Query.always());
     assertTrue(query.isProfileValid(profile));
   }
 
   @Test
   public void AndWithTwoTrueOneFalse() {
-    query = new AndQuery(new Query[]{
-          new TrueQuery(), new TrueQuery(), new FalseQuery()
-    });
-
+    query = Query.all(Query.always(), Query.always(), Query.never());
     assertFalse(query.isProfileValid(profile));
   }
 
   @Test
   public void OrWithThreeFalse() {
-    query = new OrQuery(new Query[]{
-          new FalseQuery(), new FalseQuery(), new FalseQuery()
-    });
-
+    query = Query.any(Query.never(), Query.never(), Query.never());
     assertFalse(query.isProfileValid(profile));
   }
 
   @Test
   public void OrWithOneTrueTwoFalse() {
-    query = new OrQuery(new Query[]{
-          new TrueQuery(), new FalseQuery(), new FalseQuery()
-    });
-
+    query = Query.any(Query.always(), Query.never(), Query.never());
     assertTrue(query.isProfileValid(profile));
   }
 
   @Test
   public void SingleAttributeQueryFormatString() {
-    Query query = new AttributeQuery("contract", "tenured");
-
+    Query query = Query.has("contract", "tenured");
     assertEquals("contract = tenured", query.getFormattedString());
   }
 
   @Test
   public void AndWithThreeItemsFormatsString() {
-    query = new AndQuery(new Query[]{
-          new TrueQuery(), new FalseQuery(), new AttributeQuery("contract", "tenured")
-    });
-
+    query = Query.all(Query.always(), Query.never(), Query.has("contract", "tenured"));
     assertEquals("(true AND false AND contract = tenured)", query.getFormattedString());
   }
 
   @Test
   public void OrWithThreeItemsFormatsString() {
-    query = new OrQuery(new Query[]{
-          new TrueQuery(), new FalseQuery(), new AttributeQuery("contract", "tenured")
-    });
+    query = Query.any(Query.always(), Query.never(), Query.has("contract", "tenured"));
 
     assertEquals("(true OR false OR contract = tenured)", query.getFormattedString());
   }
 
   @Test
   public void AndWithOrInsideFormatsString() {
-    query = new AndQuery(new Query[]{
-          new TrueQuery(), new OrQuery(new Query[]{new TrueQuery(), new FalseQuery()})
-    });
+    query = Query.all(Query.always(), Query.any(Query.always(), Query.never()));
 
     assertEquals("(true AND (true OR false))", query.getFormattedString());
   }

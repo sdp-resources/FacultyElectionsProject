@@ -1,6 +1,6 @@
 package fsc.service;
 
-import fsc.entity.query.*;
+import fsc.entity.query.Query;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,11 +10,11 @@ public class QueryGenerator {
 
     switch (firstKey) {
       case "and":
-        return new AndQuery(getQueriesFromJSONArray((JSONArray) root.get("and")));
+        return Query.all(getQueriesFromJSONArray((JSONArray) root.get("and")));
       case "or":
-        return new OrQuery(getQueriesFromJSONArray((JSONArray) root.get("or")));
+        return Query.any(getQueriesFromJSONArray((JSONArray) root.get("or")));
       default:
-        return new AttributeQuery(firstKey, root.getString(firstKey));
+        return Query.has(firstKey, root.getString(firstKey));
     }
   }
 
