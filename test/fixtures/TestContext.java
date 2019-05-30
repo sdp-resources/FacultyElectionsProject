@@ -20,6 +20,10 @@ public class TestContext {
     interactor = loadInteractors(gateway);
   }
 
+  public static List<ViewableProfile> getActiveProfiles() {
+    return getViewableProfileListResult(new ViewProfilesListRequest("active"));
+  }
+
   private Interactor loadInteractors(Gateway gateway) {
     return new ViewDivisionInteractor(gateway).append(new AddDivisionInteractor(gateway))
                                               .append(new ViewContractsInteractor(gateway))

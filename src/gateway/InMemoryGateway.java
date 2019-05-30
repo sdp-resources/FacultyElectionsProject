@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InMemoryGateway implements Gateway {
 
@@ -37,6 +38,10 @@ public class InMemoryGateway implements Gateway {
 
   public ArrayList<Profile> getAllProfiles() {
     return new ArrayList<>(profiles);
+  }
+
+  public List<Profile> getActiveProfiles() {
+    return profiles.stream().filter(Profile::isActive).collect(Collectors.toList());
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {

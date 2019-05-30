@@ -46,6 +46,10 @@ public class ViewResponse<T> implements Response {
     return Objects.hash(values);
   }
 
+  public String toString() {
+    return "ViewResponse{" + "values=" + values + '}';
+  }
+
   public static ViewableEntityConverter getEntityConverter() {
     return entityConverter;
   }

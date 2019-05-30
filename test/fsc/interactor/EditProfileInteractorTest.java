@@ -62,15 +62,20 @@ public class EditProfileInteractorTest {
   }
 
   @Test
-  public void canHandleBooleanChanges() {
-    request.changeActiveStatus(false);
+  public void canTestStatus() {
+    request.changeActiveStatus("inactive");
     interactor.execute(request);
-    assertFalse(providedProfile.isActive());
+    request.changeActiveStatus("active");
+    interactor.execute(request);
+    assertTrue(providedProfile.isActive());
+    Assert.assertEquals(request.username, profileGateway.providedUsername);
+    Assert.assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
+
   }
 
   @Test
   public void spyRemembersUsername() {
-    request.changeActiveStatus("False");
+    request.changeActiveStatus("inactive");
     interactor.execute(request);
     assertFalse(providedProfile.isActive());
     Assert.assertEquals(request.username, profileGateway.providedUsername);

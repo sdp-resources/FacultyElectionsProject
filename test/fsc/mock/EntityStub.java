@@ -24,7 +24,7 @@ public class EntityStub {
   }
 
   public static Profile getProfile(int i) {
-    return profiles.get(i);
+    return new Profile("name" + i, "username" + i, "division", "contract");
   }
 
 }

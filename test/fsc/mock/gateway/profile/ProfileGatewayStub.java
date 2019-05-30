@@ -5,6 +5,7 @@ import fsc.gateway.ProfileGateway;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProfileGatewayStub implements ProfileGateway {
   private final List<Profile> profiles;
@@ -33,5 +34,9 @@ public class ProfileGatewayStub implements ProfileGateway {
   public List<Profile> getAllProfiles() {
     getAllProfilesWasCalled = true;
     return profiles;
+  }
+
+  public List<Profile> getActiveProfiles() {
+    return profiles.stream().filter(Profile::isActive).collect(Collectors.toList());
   }
 }

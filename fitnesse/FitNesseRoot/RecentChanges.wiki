@@ -1,3 +1,4 @@
+|FacultyVoting.Profiles.CanSetProfileAsInactive||12:52:25 Thu, May 30, 2019|
 |FacultyVoting.Profiles.CanViewProfiles||12:12:54 Wed, May 29, 2019|
 |FacultyVoting.Profiles.CanEditProfiles||12:12:43 Tue, May 28, 2019|
 |FacultyVoting.ScenarioLibrary||11:44:29 Tue, May 28, 2019|

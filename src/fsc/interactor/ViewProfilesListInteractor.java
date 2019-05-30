@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
@@ -17,7 +18,17 @@ public class ViewProfilesListInteractor extends Interactor {
   }
 
   public ViewResponse<List<ViewableProfile>> execute(ViewProfilesListRequest request) {
-    return ViewResponse.ofProfileList(profileGateway.getAllProfiles());
+    List<Profile> profiles = getProfiles(request.which);
+
+    return ViewResponse.ofProfileList(profiles);
+  }
+
+  private List<Profile> getProfiles(String which) {
+    if (which.equals("active")) {
+      return profileGateway.getActiveProfiles();
+    } else {
+      return profileGateway.getAllProfiles();
+    }
   }
 
   public boolean canHandle(Request request) {

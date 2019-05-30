@@ -34,4 +34,8 @@ public class ViewableProfile {
   public int hashCode() {
     return Objects.hash(name, username, division, contract);
   }
+
+  public String toString() {
+    return "ViewableProfile{" + username + '}';
+  }
 }

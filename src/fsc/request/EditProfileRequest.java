@@ -82,7 +82,9 @@ public class EditProfileRequest extends Request {
     private static class ProfileActiveStatusChange extends ProfileChange {
       private boolean active;
 
-      ProfileActiveStatusChange(Object active) { this.active = Boolean.valueOf(active.toString()); }
+      ProfileActiveStatusChange(Object active) {
+        this.active = active.toString().equals("active");
+      }
 
       public void updateProfile(Profile profile) {
         if (active) { profile.setActive(); } else { profile.setInactive(); }

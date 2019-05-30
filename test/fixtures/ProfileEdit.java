@@ -21,6 +21,10 @@ public class ProfileEdit {
     request.changeContractType(contractType);
   }
 
+  public void setStatus(String status) {
+    request.changeActiveStatus(status);
+  }
+
   public boolean sendRequest() {
     return TestContext.editProfile(request);
   }
