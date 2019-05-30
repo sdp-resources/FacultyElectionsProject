@@ -17,7 +17,7 @@ Test
 |wilsont|Theresa Wilson|Natural Sciences|tenure-track|
 |johnson|Kate Johnson|Humanities|tenured|
 
-|Query:view all profiles|
+|Query:view profiles|all|
 |username|fullname|division|contract type|
 |skiadas|Haris Skiadas|Natural Sciences|tenured|
 |wilsont|Theresa Wilson|Natural Sciences|tenure-track|

@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
 import fsc.entity.Election;
 import fsc.entity.Profile;
 import fsc.entity.query.TrueQuery;

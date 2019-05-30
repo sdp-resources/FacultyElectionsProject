@@ -2,7 +2,6 @@ package fsc.interactor;
 
 import fsc.entity.*;
 import fsc.mock.EntityStub;
-import fsc.mock.ViewDTSGatewayDummy;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewDTSRequest;
@@ -12,7 +11,7 @@ import fsc.response.ViewResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ViewDTSInteractorTest {
 

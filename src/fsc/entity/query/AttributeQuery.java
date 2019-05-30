@@ -2,7 +2,7 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
-public class AttributeQuery implements Query {
+public class AttributeQuery extends Query {
   private final String key;
   private final String value;
 
@@ -15,6 +15,7 @@ public class AttributeQuery implements Query {
     if (key.equals("name")) return profile.getName().equals(value);
     if (key.equals("division")) return profile.getDivision().equals(value);
     if (key.equals("contract")) return profile.getContract().equals(value);
+    if (key.equals("status")) return profile.getStatus().toString().equals(value);
     return false;
   }
 

@@ -2,7 +2,7 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
-public class TrueQuery implements Query {
+public class TrueQuery extends Query {
 
   public boolean isProfileValid(Profile profile) {
     return true;

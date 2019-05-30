@@ -1,6 +1,7 @@
 package fsc.mock;
 
 import fsc.entity.*;
+import fsc.entity.query.Query;
 import fsc.entity.query.TrueQuery;
 import fsc.gateway.Gateway;
 
@@ -57,6 +58,10 @@ public class ViewDTSGatewayDummy implements Gateway {
     List<Profile> profiles = new ArrayList<>();
     profiles.add(profile);
     return profiles;
+  }
+
+  public List<Profile> getProfilesMatching(Query query) {
+    return null;
   }
 
   public void addProfile(Profile profile) {}

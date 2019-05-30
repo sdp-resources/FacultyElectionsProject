@@ -2,7 +2,7 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
-public class OrQuery implements Query {
+public class OrQuery extends Query {
   private final Query[] queries;
 
   public OrQuery(Query[] queries) {

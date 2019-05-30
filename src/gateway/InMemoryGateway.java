@@ -1,6 +1,7 @@
 package gateway;
 
 import fsc.entity.*;
+import fsc.entity.query.Query;
 import fsc.gateway.Gateway;
 
 import java.io.File;
@@ -40,8 +41,8 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(profiles);
   }
 
-  public List<Profile> getActiveProfiles() {
-    return profiles.stream().filter(Profile::isActive).collect(Collectors.toList());
+  public List<Profile> getProfilesMatching(Query query) {
+    return profiles.stream().filter(query::isProfileValid).collect(Collectors.toList());
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {

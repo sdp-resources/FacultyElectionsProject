@@ -1,6 +1,7 @@
 package fsc.mock.gateway.profile;
 
 import fsc.entity.Profile;
+import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
 
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public class ProfileGatewayStub implements ProfileGateway {
     return profiles;
   }
 
-  public List<Profile> getActiveProfiles() {
-    return profiles.stream().filter(Profile::isActive).collect(Collectors.toList());
+  public List<Profile> getProfilesMatching(Query query) {
+    return profiles.stream().filter(query::isProfileValid).collect(Collectors.toList());
   }
 }

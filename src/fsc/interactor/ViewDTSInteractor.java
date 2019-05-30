@@ -3,7 +3,9 @@ package fsc.interactor;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.request.ViewDTSRequest;
-import fsc.response.*;
+import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.ViewResponse;
 
 public class ViewDTSInteractor {
 

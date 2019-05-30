@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
+import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
@@ -25,7 +26,7 @@ public class ViewProfilesListInteractor extends Interactor {
 
   private List<Profile> getProfiles(String which) {
     if (which.equals("active")) {
-      return profileGateway.getActiveProfiles();
+      return profileGateway.getProfilesMatching(Query.isActive());
     } else {
       return profileGateway.getAllProfiles();
     }

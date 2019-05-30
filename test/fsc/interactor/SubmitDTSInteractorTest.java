@@ -1,8 +1,9 @@
 package fsc.interactor;
 
-import fsc.entity.*;
+import fsc.entity.Ballot;
+import fsc.entity.Election;
+import fsc.entity.Profile;
 import fsc.mock.EntityStub;
-import fsc.mock.ViewDTSGatewayDummy;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.DTSRequest;
@@ -10,10 +11,9 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static fsc.entity.Candidate.*;
+import static fsc.entity.Candidate.Status;
 import static org.junit.Assert.*;
 
 public class SubmitDTSInteractorTest {
