@@ -4,7 +4,8 @@ import fsc.entity.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class QueryTest {
 
@@ -50,31 +51,5 @@ public class QueryTest {
   public void OrWithOneTrueTwoFalse() {
     query = Query.any(Query.always(), Query.never(), Query.never());
     assertTrue(query.isProfileValid(profile));
-  }
-
-  @Test
-  public void SingleAttributeQueryFormatString() {
-    Query query = Query.has("contract", "tenured");
-    assertEquals("contract equals tenured", query.getFormattedString());
-  }
-
-  @Test
-  public void AndWithThreeItemsFormatsString() {
-    query = Query.all(Query.always(), Query.never(), Query.has("contract", "tenured"));
-    assertEquals("(all AND none AND contract equals tenured)", query.getFormattedString());
-  }
-
-  @Test
-  public void OrWithThreeItemsFormatsString() {
-    query = Query.any(Query.always(), Query.never(), Query.has("contract", "tenured"));
-
-    assertEquals("(all OR none OR contract equals tenured)", query.getFormattedString());
-  }
-
-  @Test
-  public void AndWithOrInsideFormatsString() {
-    query = Query.all(Query.always(), Query.any(Query.always(), Query.never()));
-
-    assertEquals("(all AND (all OR none))", query.getFormattedString());
   }
 }

@@ -23,17 +23,6 @@ public class AndQuery extends Query {
     return true;
   }
 
-  public String getFormattedString() {
-    if (queries.length == 0) { return "all"; }
-    String output = "(";
-    for (int i = 0; i < queries.length; i++) {
-      output += queries[i].getFormattedString();
-      if (i < queries.length - 1) output += " AND ";
-    }
-    output += ")";
-    return output;
-  }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

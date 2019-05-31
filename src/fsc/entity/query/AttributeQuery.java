@@ -25,8 +25,6 @@ public class AttributeQuery extends Query {
     return false;
   }
 
-  public String getFormattedString() { return key + " equals " + value; }
-
   public String toString() {
     return "AttributeQuery{" + "key='" + key + '\'' + ", value='" + value + '\'' + '}';
   }
