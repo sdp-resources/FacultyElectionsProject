@@ -1,32 +1,34 @@
 package fixtures;
 
-import fsc.request.EditProfileRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileEdit {
-  private EditProfileRequest request;
+  private String username;
+  private Map<String, String> changes = new HashMap<>();
 
   public ProfileEdit(String username) {
-    request = new EditProfileRequest(username);
+    this.username = username;
   }
 
   public void setFullName(String name) {
-    request.changeFullname(name);
+    changes.put("name", name);
   }
 
   public void setDivision(String division) {
-    request.changeDivision(division);
+    changes.put("division", division);
   }
 
   public void setContractType(String contractType) {
-    request.changeContractType(contractType);
+    changes.put("contractType", contractType);
   }
 
   public void setStatus(String status) {
-    request.changeActiveStatus(status);
+    changes.put("status", status);
   }
 
   public boolean sendRequest() {
-    return TestContext.editProfile(request);
+    return TestContext.app.editProfile(username, changes);
   }
 }
 

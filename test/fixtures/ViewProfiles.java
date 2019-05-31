@@ -13,9 +13,9 @@ public class ViewProfiles {
   }
 
   public List<List<List<String>>> query() {
-    return TestContext.getProfilesForQuery(which).stream()
-                      .map(ViewProfiles::handleProfile)
-                      .collect(Collectors.toList());
+    return TestContext.app.getProfilesForQuery(which).stream()
+                     .map(ViewProfiles::handleProfile)
+                     .collect(Collectors.toList());
   }
 
   private static List<List<String>> handleProfile(ViewableProfile profile) {

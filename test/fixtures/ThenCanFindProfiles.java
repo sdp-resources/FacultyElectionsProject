@@ -6,7 +6,7 @@ public class ThenCanFindProfiles {
   private ViewableProfile profile;
 
   public void setUsername(String username) {
-    profile = TestContext.getProfile(username);
+    profile = TestContext.app.getProfile(username);
   }
 
   public String fullname() {

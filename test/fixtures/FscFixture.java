@@ -4,23 +4,22 @@ public class FscFixture {
   public boolean addProfile(
         String fullname, String username, String contractType, String division
   ) {
-    return TestContext.addProfile(fullname, username, division, contractType);
+    return TestContext.app.addProfile(fullname, username, division, contractType);
   }
 
   public boolean addDivision(String division) {
-    return TestContext.addDivision(division);
+    return TestContext.app.addDivision(division);
   }
 
   public boolean addContractType(String contractType) {
-    TestContext.addContractType(contractType);
-    return true;
+    return TestContext.app.addContractType(contractType);
   }
 
   public boolean validDivision(String division) {
-    return TestContext.hasDivision(division);
+    return TestContext.app.hasDivision(division);
   }
 
   public boolean validContractType(String contractType) {
-    return TestContext.hasContractType(contractType);
+    return TestContext.app.hasContractType(contractType);
   }
 }

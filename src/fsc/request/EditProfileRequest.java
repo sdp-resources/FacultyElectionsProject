@@ -2,16 +2,38 @@ package fsc.request;
 
 import fsc.entity.Profile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EditProfileRequest extends Request {
   public final String username;
   private List<ProfileChange> changes;
 
-  public EditProfileRequest(String username) {
+  public EditProfileRequest(String username, Map<String, String> changes) {
     this.username = username;
     this.changes = new ArrayList<>();
+    processChanges(changes);
+  }
+
+  private void processChanges(Map<String, String> changes) {
+    changes.forEach(this::processChange);
+  }
+
+  private void processChange(String key, String value) {
+    switch (key) {
+      case "name": changeFullname(value);
+        break;
+      case "division": changeDivision(value);
+        break;
+      case "contractType": changeContractType(value);
+        break;
+      case "status": changeActiveStatus(value);
+        break;
+      default: throw new RuntimeException("Unknown change key: " + key);
+    }
+  }
+
+  public EditProfileRequest(String username) {
+    this(username, new HashMap<>());
   }
 
   public void applyChangesTo(Profile profile) {
