@@ -1,0 +1,32 @@
+---
+Test
+---
+-|script|
+|given standard divisions|
+|given standard contract types|
+
+|Given user profiles|
+|fullname|username|division|contractType|
+|Haris Skiadas|skiadas|Natural Sciences|tenured|
+|Theresa Wilson|wilsont|Natural Sciences|tenure-track|
+|Kate Johnson|johnson|Humanities|tenured|
+
+
+|Query:view profiles|division equals Natural Sciences|
+|username|fullname|division|contract type|
+|wilsont|Theresa Wilson|Natural Sciences|tenure-track|
+|skiadas|Haris Skiadas|Natural Sciences|tenured|
+
+|Query:view profiles|contract equals tenured|
+|username|fullname|division|contract type|
+|johnson|Kate Johnson|Humanities|tenured|
+|skiadas|Haris Skiadas|Natural Sciences|tenured|
+
+|Query:view profiles|(contract equals tenured AND division equals Natural Sciences)|
+|username|fullname|division|contract type|
+|skiadas|Haris Skiadas|Natural Sciences|tenured|
+
+|Query:view profiles|(contract equals tenure-track OR division equals Humanities)|
+|username|fullname|division|contract type|
+|wilsont|Theresa Wilson|Natural Sciences|tenure-track|
+|johnson|Kate Johnson|Humanities|tenured|
