@@ -20,8 +20,8 @@ public class TestContext {
     interactor = loadInteractors(gateway);
   }
 
-  public static List<ViewableProfile> getActiveProfiles() {
-    return getViewableProfileListResult(new ViewProfilesListRequest("active"));
+  public static List<ViewableProfile> getProfilesForQuery(String query) {
+    return getViewableProfileListResult(new ViewProfilesListRequest(query));
   }
 
   private Interactor loadInteractors(Gateway gateway) {
@@ -32,10 +32,6 @@ public class TestContext {
                                               .append(new ViewProfileInteractor(gateway))
                                               .append(new EditProfileInteractor(gateway))
                                               .append(new ViewProfilesListInteractor(gateway));
-  }
-
-  public static List<ViewableProfile> getAllProfiles() {
-    return getViewableProfileListResult(new ViewProfilesListRequest());
   }
 
   public static boolean editProfile(EditProfileRequest request) {

@@ -44,7 +44,7 @@ public class ViewProfilesListInteractorTest {
   public void whenSetToViewActiveProfiles_ignoreInactiveProfiles() {
     ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
     profile2.setInactive();
-    request = new ViewProfilesListRequest("active");
+    request = new ViewProfilesListRequest("status equals active");
     Response response = interactor.handle(request);
     Response expectedResponse = ViewResponse.ofProfileList(List.of(profile1, profile3));
     assertEquals(expectedResponse, response);

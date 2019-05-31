@@ -7,6 +7,7 @@ import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
+import fsc.service.QueryStringConverter;
 import fsc.viewable.ViewableProfile;
 
 import java.util.List;
@@ -25,11 +26,7 @@ public class ViewProfilesListInteractor extends Interactor {
   }
 
   private List<Profile> getProfiles(String which) {
-    if (which.equals("active")) {
-      return profileGateway.getProfilesMatching(Query.isActive());
-    } else {
-      return profileGateway.getAllProfiles();
-    }
+    return profileGateway.getProfilesMatching(new QueryStringConverter().fromString(which));
   }
 
   public boolean canHandle(Request request) {
