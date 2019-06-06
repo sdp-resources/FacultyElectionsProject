@@ -11,14 +11,6 @@ class VotingRound {
     this.votes = cloneVotes(votes);
   }
 
-  public VotingRoundResult getResult() {
-    return result;
-  }
-
-  public List<CandidateTally> getSortedCandidateTallies() {
-    return rankedTallies;
-  }
-
   public void determineResults() {
     rankedTallies = new VoteTallier().tallyVotes(votes);
     result = determineResultForRound();
@@ -37,10 +29,6 @@ class VotingRound {
     return VotingRoundResult.win(firstCandidate().getName());
   }
 
-  private CandidateTally firstCandidate() {
-    return rankedTallies.get(0);
-  }
-
   private VotingRoundResult resultFromTiedForLast(String[] candidates) {
     return candidates.length == 1 ? lastCandidateEliminated() : VotingRoundResult.tied(candidates);
   }
@@ -49,14 +37,26 @@ class VotingRound {
     return VotingRoundResult.eliminate(lastCandidate().getName());
   }
 
-  private CandidateTally lastCandidate() {
-    return rankedTallies.get(rankedTallies.size() - 1);
+  private CandidateTally firstCandidate() {
+    return rankedTallies.get(0);
   }
 
   private String[] tiedForLast() {
     return rankedTallies.stream().filter(lastCandidate()::equals)
                         .map(CandidateTally::getName)
                         .toArray(String[]::new);
+  }
+
+  private CandidateTally lastCandidate() {
+    return rankedTallies.get(rankedTallies.size() - 1);
+  }
+
+  public VotingRoundResult getResult() {
+    return result;
+  }
+
+  public List<CandidateTally> getSortedCandidateTallies() {
+    return rankedTallies;
   }
 
   private List<List<String>> cloneVotes(List<List<String>> votes) {
