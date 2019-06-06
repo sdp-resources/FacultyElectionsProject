@@ -57,5 +57,13 @@ public class Election {
     }
     throw new Ballot.NoProfileInBallotException();
   }
+
+  public boolean hasCandidate(String username) {
+    for (int i = 0; i < ballot.size(); i++) {
+      if (ballot.getCandidate(i).getProfile().getUsername().equals(username)) {
+        return true;
+      }
+    }return false;
+  }
 }
 

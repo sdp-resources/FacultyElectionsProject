@@ -1,5 +1,7 @@
 package fsc.entity;
 
+import java.util.Objects;
+
 public class Profile {
   private String name;
   public String username;
@@ -73,5 +75,16 @@ public class Profile {
 
   public void setActive() {
     setStatus(Status.ACTIVE);
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Profile profile = (Profile) o;
+    return username.equals(profile.username);
+  }
+
+  public int hashCode() {
+    return Objects.hash(username);
   }
 }

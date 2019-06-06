@@ -2,39 +2,40 @@ package fsc.entity;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class VoteRecord {
 
-  private final Profile profile;
-  private final String vote;
-  private final int electionID;
+  private final Profile voter;
+  private final List<Profile> votes;
+  private final Election election;
   private final Date date;
 
-  public VoteRecord(Profile profile, String vote, int electionID) {
-    this(profile, Calendar.getInstance().getTime(), vote, electionID);
+  public VoteRecord(Profile voter, List<Profile> votes, Election election) {
+    this(voter, Calendar.getInstance().getTime(), votes, election);
   }
 
-  public VoteRecord(Profile profile, Date date, String vote, int electionID) {
-    this.profile = profile;
-    this.vote = vote;
+  public VoteRecord(Profile voter, Date date, List<Profile> votes, Election election) {
+    this.voter = voter;
+    this.votes = votes;
     this.date = date;
-    this.electionID = electionID;
+    this.election = election;
   }
 
-  public Profile getProfile() {
-    return profile;
+  public Profile getVoter() {
+    return voter;
   }
 
-  public String getVote() {
-    return vote;
+  public List<Profile> getVotes() {
+    return votes;
   }
 
   public Date getDate() {
     return date;
   }
 
-  public int getElectionID() {
-    return electionID;
+  public Election getElection() {
+    return election;
   }
 
 }

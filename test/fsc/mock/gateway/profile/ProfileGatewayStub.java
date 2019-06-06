@@ -17,6 +17,10 @@ public class ProfileGatewayStub implements ProfileGateway {
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
+    for (Profile profile : profiles) {
+      if (profile.getUsername().equals(username)) { return profile; }
+    }
+
     return profiles.get(0);
   }
 

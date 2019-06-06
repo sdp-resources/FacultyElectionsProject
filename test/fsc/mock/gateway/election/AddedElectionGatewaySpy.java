@@ -19,6 +19,10 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
+  public boolean hasVoteRecord(String username, String electionID) {
+    return false;
+  }
+
   public Election getElection(String electionID) {
     return null;
   }

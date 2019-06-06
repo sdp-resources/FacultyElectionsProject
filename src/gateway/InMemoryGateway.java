@@ -121,6 +121,10 @@ public class InMemoryGateway implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
+  public boolean hasVoteRecord(String username, String electionID) {
+    return false; // TODO
+  }
+
   public Election getElection(String electionID) {
     return null;
   }

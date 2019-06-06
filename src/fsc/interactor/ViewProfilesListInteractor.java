@@ -1,7 +1,6 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
-import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;

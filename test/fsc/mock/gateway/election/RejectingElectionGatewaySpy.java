@@ -13,6 +13,10 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
+  public boolean hasVoteRecord(String username, String electionID) {
+    return false;
+  }
+
   public Election getElection(String electionID) throws InvalidElectionIDException {
     requestedElectionId = electionID;
     throw new InvalidElectionIDException();

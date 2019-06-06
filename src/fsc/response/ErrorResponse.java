@@ -11,6 +11,7 @@ public class ErrorResponse extends Throwable implements Response {
   public static final String NOT_AUTHORIZED = "Not Authorized";
   public static final String INVALID_CANDIDATE = "Ballot does not contain profile";
   public static final String NO_HANDLERS = "No available handler for that request";
+  public static final String VOTER_ALREADY_VOTED = "Voter has already voted on this election.";
   public String message;
 
   public ErrorResponse(String s) {
@@ -47,6 +48,10 @@ public class ErrorResponse extends Throwable implements Response {
 
   public static ErrorResponse cannotHandle() {
     return new ErrorResponse(NO_HANDLERS);
+  }
+
+  public static ErrorResponse alreadyVoted() {
+    return new ErrorResponse(VOTER_ALREADY_VOTED);
   }
 
   public boolean equals(Object o) {
