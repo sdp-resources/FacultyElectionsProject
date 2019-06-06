@@ -5,27 +5,19 @@ import java.util.List;
 
 public class Vote {
 
-  private final Ballot ballot;
-  List<Profile> listOfVotes = new ArrayList<>();
+  public final Election election;
+  private final List<Profile> listOfVotes = new ArrayList<>();
 
-  public Vote(Ballot ballot) {
-    this.ballot = ballot;
-  }
-
-  public void addSingleVote(Profile profile) {
-    if (ballot.contains(profile)) {
-      listOfVotes.add(profile);
-    }
+  public Vote(Election election) {
+    this.election = election;
   }
 
   public List<Profile> getRankedList() {
     return listOfVotes;
   }
 
-  public void addMultipleVote(List<Profile> listOfCandidates) {
-    for (Profile profile : listOfCandidates) {
-      this.addSingleVote(profile);
-    }
+  public void addVotes(List<Profile> listOfCandidates) {
+    listOfVotes.addAll(listOfCandidates);
   }
 
   public void removeProfileFromVote(Profile profile) {

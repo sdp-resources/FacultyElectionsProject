@@ -1,101 +1,55 @@
 package fsc.entity;
 
+import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class VoteTest {
   private Ballot ballot;
+  private Election election;
+  private Profile candidate1;
+  private Profile candidate2;
+  private Profile candidate3;
+  private Vote vote;
 
   @Before
   public void setup() {
-    ballot = new Ballot();
-  }
-
-  @Test
-  public void emptyBallotVoteTest() {
-    Vote vote = new Vote(ballot);
+    election = EntityStub.simpleBallotElection();
+    ballot = election.getBallot();
+    candidate1 = EntityStub.getProfile(0);
+    candidate2 = EntityStub.getProfile(1);
+    candidate3 = EntityStub.getProfile(2);
+    ballot.addAll(List.of(candidate1, candidate2, candidate3));
+    vote = new Vote(election);
   }
 
   @Test
   public void voteForOnePerson() {
-    Profile candidate = new Profile("Sam", "sam55", "Art", "tenured");
-    ballot.add(candidate);
-    Vote vote = new Vote(ballot);
-    vote.addSingleVote(candidate);
-    List<Profile> expectedList = new ArrayList<>();
-    expectedList.add(candidate);
-    assertEquals(expectedList, vote.getRankedList());
+    vote.addVotes(List.of(candidate1));
+    assertEquals(List.of(candidate1), vote.getRankedList());
   }
 
   @Test
   public void voteForMoreThanOnePerson() {
-    Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
-    Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
-
-    ballot.add(candidate1);
-    ballot.add(candidate2);
-    ballot.add(candidate3);
-
-    Vote vote = new Vote(ballot);
-    ArrayList<Profile> voteList = new ArrayList<>();
-    voteList.add(candidate3);
-    voteList.add(candidate2);
-
-    vote.addMultipleVote(voteList);
-    assertEquals(voteList, vote.getRankedList());
+    vote.addVotes(List.of(candidate3, candidate2));
+    assertEquals(List.of(candidate3, candidate2), vote.getRankedList());
   }
 
   @Test
   public void removeOnePerson() {
-    Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
-    Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
-
-    ballot.add(candidate1);
-    ballot.add(candidate2);
-    ballot.add(candidate3);
-
-    Vote vote = new Vote(ballot);
-    ArrayList<Profile> voteList = new ArrayList<>();
-    voteList.add(candidate3);
-    voteList.add(candidate2);
-
-    vote.addMultipleVote(voteList);
+    vote.addVotes(List.of(candidate3, candidate2));
     vote.removeProfileFromVote(candidate2);
-
-    List<Profile> expectedList = new ArrayList<>();
-    expectedList.add(candidate3);
-    assertEquals(expectedList, vote.getRankedList());
+    assertEquals(List.of(candidate3), vote.getRankedList());
   }
 
   @Test
   public void removeMultiplePeople() {
-    Profile candidate1 = new Profile("Sam", "sam55", "Art", "tenured");
-    Profile candidate2 = new Profile("Bill Maywood", "maywoodb", "SCI", "Tenured");
-    Profile candidate3 = new Profile("Emma Joppins", "joppinse", "HUM", "Untenured");
-
-    ballot.add(candidate1);
-    ballot.add(candidate2);
-    ballot.add(candidate3);
-
-    Vote vote = new Vote(ballot);
-    ArrayList<Profile> voteList = new ArrayList<>();
-    voteList.add(candidate3);
-    voteList.add(candidate2);
-    voteList.add(candidate1);
-
-    vote.addMultipleVote(voteList);
-    voteList.remove(candidate1);
-    vote.removeMultipleVotes(voteList);
-
-    List<Profile> expectedList = new ArrayList<>();
-    expectedList.add(candidate1);
-    assertEquals(expectedList, vote.getRankedList());
+    vote.addVotes(List.of(candidate3, candidate2, candidate1));
+    vote.removeMultipleVotes(List.of(candidate3, candidate2));
+    assertEquals(List.of(candidate1), vote.getRankedList());
   }
 }
