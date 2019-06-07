@@ -1,17 +1,19 @@
 package fsc.voting;
 
+import fsc.entity.Profile;
+
 import java.util.*;
 
 public class CandidateTally implements Comparable<CandidateTally> {
   public static final Comparator<CandidateTally> alphaComparator =
-        Comparator.comparing(o -> o.name);
+        Comparator.comparing(o -> o.profile.getUsername());
   public static final Comparator<CandidateTally> rankComparator = new ReverseRankComparator();
 
-  private final String name;
+  private final Profile profile;
   private final List<Integer> rankCounts;
 
-  public CandidateTally(String name, Integer... rankCounts) {
-    this.name = name;
+  public CandidateTally(Profile profile, Integer... rankCounts) {
+    this.profile = profile;
     this.rankCounts = new ArrayList<>(Arrays.asList(rankCounts));
   }
 
@@ -22,9 +24,7 @@ public class CandidateTally implements Comparable<CandidateTally> {
     rankCounts.set(rank, rankCounts.get(rank) + 1);
   }
 
-  public String getName() {
-    return name;
-  }
+  public String getName() { return profile.getUsername(); }
 
   public int compareTo(CandidateTally o) {
     int i = 0;
@@ -64,6 +64,8 @@ public class CandidateTally implements Comparable<CandidateTally> {
   public boolean hasTopRanksAtLeast(int votes) {
     return rankCounts.get(0) >= votes;
   }
+
+  public Profile getProfile() { return profile; }
 
   private static class ReverseRankComparator implements Comparator<CandidateTally> {
     public int compare(CandidateTally o1, CandidateTally o2) {

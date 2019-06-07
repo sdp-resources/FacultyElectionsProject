@@ -1,27 +1,41 @@
 package fsc.entity;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vote {
+public class Vote extends AbstractList<Profile> {
 
-  public final Election election;
-  private final List<Profile> listOfVotes = new ArrayList<>();
+  private final List<Profile> preferenceList = new ArrayList<>();
 
-  public Vote(Election election) {
-    this.election = election;
+  public Vote(List<Profile> profiles) {
+    preferenceList.addAll(profiles);
+  }
+
+  public Vote() { }
+
+  public int size() {
+    return preferenceList.size();
+  }
+
+  public Profile get(int index) {
+    return preferenceList.get(index);
+  }
+
+  public static Vote of(Profile... profiles) {
+    return new Vote(List.of(profiles));
   }
 
   public List<Profile> getRankedList() {
-    return listOfVotes;
+    return preferenceList;
   }
 
   public void addVotes(List<Profile> listOfCandidates) {
-    listOfVotes.addAll(listOfCandidates);
+    preferenceList.addAll(listOfCandidates);
   }
 
   public void removeProfileFromVote(Profile profile) {
-    listOfVotes.remove(profile);
+    preferenceList.remove(profile);
   }
 
   public void removeMultipleVotes(List<Profile> listOfRemovals) {
@@ -29,4 +43,9 @@ public class Vote {
       this.removeProfileFromVote(profile);
     }
   }
+
+  public Vote clone() {
+    return new Vote(this);
+  }
+
 }

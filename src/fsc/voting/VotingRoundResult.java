@@ -1,24 +1,26 @@
 package fsc.voting;
 
+import fsc.entity.Profile;
+
 import java.util.*;
 
 interface VotingRoundResult {
-  static VotingRoundResult win(String candidate) {
-    return new WinVotingRoundResult(candidate);
+  static VotingRoundResult win(Profile cA) {
+    return new WinVotingRoundResult(cA);
   }
-  static VotingRoundResult eliminate(String candidate) {
+  static VotingRoundResult eliminate(Profile candidate) {
     return new EliminationVotingRoundResult(candidate);
   }
-  static VotingRoundResult tied(String... candidates) {
+  static VotingRoundResult tied(Profile... candidates) {
     return new DrawVotingResult(candidates);
   }
 
   class EliminationVotingRoundResult implements VotingRoundResult {
-  public final String candidate;
+    public final Profile candidate;
 
-  public EliminationVotingRoundResult(String candidate) {
-    this.candidate = candidate;
-  }
+    public EliminationVotingRoundResult(Profile candidate) {
+      this.candidate = candidate;
+    }
 
     public boolean equals(Object o) {
       if (this == o) return true;
@@ -37,9 +39,9 @@ interface VotingRoundResult {
   }
 
   class WinVotingRoundResult implements VotingRoundResult {
-    public final String candidate;
+    public final Profile candidate;
 
-    public WinVotingRoundResult(String candidate) {this.candidate = candidate;}
+    public WinVotingRoundResult(Profile candidate) { this.candidate = candidate; }
 
     public boolean equals(Object o) {
       if (this == o) return true;
@@ -58,9 +60,9 @@ interface VotingRoundResult {
   }
 
   class DrawVotingResult implements VotingRoundResult {
-    public final Set<String> candidates;
+    public final Set<Profile> candidates;
 
-    public DrawVotingResult(String[] candidates) {
+    public DrawVotingResult(Profile[] candidates) {
       this.candidates = new HashSet<>(Arrays.asList(candidates));
     }
 

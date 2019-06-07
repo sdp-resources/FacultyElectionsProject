@@ -1,11 +1,13 @@
 package fsc.voting;
 
+import fsc.entity.Vote;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class ElectionRecord {
   private List<VotingRound> rounds = new ArrayList<>();
-  private List<List<String>> votes = new ArrayList<>();
+  private List<Vote> votes = new ArrayList<>();
 
   public void runElection() {
     computeNextRound();
@@ -23,8 +25,8 @@ class ElectionRecord {
     rounds.add(round);
   }
 
-  public void add(List<String> vote) {
-    votes.add(new ArrayList<>(vote));
+  public void add(Vote vote) {
+    votes.add(vote);
   }
 
   public int numberOfRounds() {

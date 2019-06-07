@@ -8,13 +8,6 @@ import java.util.List;
 
 public class EntityStub {
 
-  private static List<Profile> profiles = List.of(
-        new Profile("John Collins", "collins", "Natural Sciences", "tenured"),
-        new Profile("Barb Wahl", "wahl", "Natural Sciences", "tenured"),
-        new Profile("Theresa Wilson", "wilsont", "Natural Sciences", "tenure-track"),
-        new Profile("Haris Skiadas", "skiadas", "Natural Sciences", "tenured")
-  );
-
   public static Election simpleBallotElection() {
     return new Election(null, null, null, new Ballot());
   }
@@ -27,4 +20,7 @@ public class EntityStub {
     return new Profile("name" + i, "username" + i, "division", "contract");
   }
 
+  public static Profile getProfile(String username) {
+    return new Profile(username, username, "division", "contract");
+  }
 }

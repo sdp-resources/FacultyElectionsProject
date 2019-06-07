@@ -1,31 +1,33 @@
 package fsc.voting;
 
+import fsc.entity.Profile;
+import fsc.entity.Vote;
+
 import java.util.*;
 
 class VoteTallier {
-  private Map<String, CandidateTally> tallies = new HashMap<>();
+  private Map<Profile, CandidateTally> tallies = new HashMap<>();
 
-  List<CandidateTally> tallyVotes(List<List<String>> votes) {
+  List<CandidateTally> tallyVotes(List<Vote> votes) {
     votes.forEach(this::countVote);
     return computeTallies(tallies);
   }
 
-  private void countVote(List<String> vote) {
+  private void countVote(Vote vote) {
     for (int i = 0; i < vote.size(); i++) {
-      String candidate = vote.get(i);
-      getTally(candidate).addVote(i);
+      getTally(vote.get(i)).addVote(i);
     }
   }
 
-  private CandidateTally getTally(String candidate) {
+  private CandidateTally getTally(Profile candidate) {
     if (!tallies.containsKey(candidate)) {
       tallies.put(candidate, new CandidateTally(candidate));
     }
     return tallies.get(candidate);
   }
 
-  private List<CandidateTally> computeTallies(Map<String, CandidateTally> tallies) {
-    List<CandidateTally> tallyList = new ArrayList<>(tallies.values());
+  private List<CandidateTally> computeTallies(Map<Profile, CandidateTally> profileTallies) {
+    List<CandidateTally> tallyList = new ArrayList<>(profileTallies.values());
     tallyList.sort(CandidateTally.rankComparator);
     return tallyList;
   }
