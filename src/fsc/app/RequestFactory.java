@@ -22,8 +22,7 @@ public class RequestFactory {
   }
 
   public Request editProfile(String username, Map<String, String> changes) {
-    Request request = new EditProfileRequest(username, changes);
-    return request;
+    return new EditProfileRequest(username, changes);
   }
 
   Request addDivision(String division) {
