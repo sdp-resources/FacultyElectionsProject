@@ -12,9 +12,11 @@ public class Profile {
   public enum Status {
     ACTIVE {
       public Boolean isActive() { return true; }
+
       public String toString() { return "active"; }
     }, INACTIVE {
       public Boolean isActive() { return false; }
+
       public String toString() { return "inactive"; }
     };
 

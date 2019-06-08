@@ -63,7 +63,8 @@ public class Election {
       if (ballot.getCandidate(i).getProfile().getUsername().equals(username)) {
         return true;
       }
-    }return false;
+    }
+    return false;
   }
 }
 

@@ -6,7 +6,8 @@ import org.junit.Test;
 
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class QueryStringConverterTest {
   private static QueryStringConverter queryStringConverter = new QueryStringConverter();
@@ -23,11 +24,14 @@ public class QueryStringConverterTest {
                                    Query.all(Query.has("contract", "tenured"),
                                              Query.has("division", "Arts and Letters")));
     assertStringCorrespondsToQuery("(all AND none AND contract equals tenured)",
-                                   Query.all(Query.always(), Query.never(), Query.has("contract", "tenured")));
+                                   Query.all(Query.always(), Query.never(),
+                                             Query.has("contract", "tenured")));
     assertStringCorrespondsToQuery("(all OR none OR contract equals tenured)",
-                                   Query.any(Query.always(), Query.never(), Query.has("contract", "tenured")));
+                                   Query.any(Query.always(), Query.never(),
+                                             Query.has("contract", "tenured")));
     assertStringCorrespondsToQuery("(all AND (all OR none))",
-                                   Query.all(Query.always(), Query.any(Query.always(), Query.never())));
+                                   Query.all(Query.always(),
+                                             Query.any(Query.always(), Query.never())));
     assertStringCorrespondsToQuery("((all OR none) AND (all OR none))",
                                    Query.all(Query.any(Query.always(), Query.never()),
                                              Query.any(Query.always(), Query.never())));
@@ -35,7 +39,7 @@ public class QueryStringConverterTest {
 
   @Ignore
   @Test
-  public void invalidStringsCannotBeParsed(){}
+  public void invalidStringsCannotBeParsed() {}
 
   private void assertStringCorrespondsToQuery(String string, Query query) {
     assertEquals(string, queryStringConverter.toString(query));

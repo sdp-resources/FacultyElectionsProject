@@ -4,8 +4,6 @@ import fsc.entity.Ballot;
 import fsc.entity.Election;
 import fsc.entity.Profile;
 
-import java.util.List;
-
 public class EntityStub {
 
   public static Election simpleBallotElection() {

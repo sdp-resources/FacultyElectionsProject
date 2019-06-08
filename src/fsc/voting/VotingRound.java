@@ -8,15 +8,11 @@ import java.util.List;
 class VotingRound {
   private final List<Vote> votes;
   private List<CandidateTally> rankedTallies;
-  private VotingRoundResult result = null;
+  private VotingRoundResult result;
 
   public VotingRound(List<Vote> votes) {
     this.votes = Vote.createVoteSnapshot(votes);
-    determineResults();
-  }
-
-  public void determineResults() {
-    rankedTallies = new VoteTallier().tallyVotes(votes);
+    rankedTallies = new VoteTallier().tallyVotes(this.votes);
     result = determineResultForRound();
   }
 
@@ -30,7 +26,7 @@ class VotingRound {
   }
 
   private VotingRoundResult topCandidateWins() {
-    return VotingRoundResult.win(firstCandidate().getProfile());
+    return VotingRoundResult.win(firstCandidate().profile);
   }
 
   private VotingRoundResult resultFromTiedForLast(Profile[] candidates) {
@@ -38,7 +34,7 @@ class VotingRound {
   }
 
   private VotingRoundResult lastCandidateEliminated() {
-    return VotingRoundResult.eliminate(lastCandidate().getProfile());
+    return VotingRoundResult.eliminate(lastCandidate().profile);
   }
 
   private CandidateTally firstCandidate() {
@@ -47,7 +43,7 @@ class VotingRound {
 
   private Profile[] tiedForLast() {
     return rankedTallies.stream().filter(lastCandidate()::equals)
-                        .map(CandidateTally::getProfile)
+                        .map(candidateTally -> candidateTally.profile)
                         .toArray(Profile[]::new);
   }
 

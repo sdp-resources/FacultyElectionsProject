@@ -9,7 +9,7 @@ public class CandidateTally implements Comparable<CandidateTally> {
         Comparator.comparing(o -> o.profile.getUsername());
   public static final Comparator<CandidateTally> rankComparator = new ReverseRankComparator();
 
-  private final Profile profile;
+  public final Profile profile;
   private final List<Integer> rankCounts;
 
   public CandidateTally(Profile profile, Integer... rankCounts) {
@@ -24,18 +24,22 @@ public class CandidateTally implements Comparable<CandidateTally> {
     rankCounts.set(rank, rankCounts.get(rank) + 1);
   }
 
-  public String getName() { return profile.getUsername(); }
+  public String getUsername() { return profile.getUsername(); }
+
+  public boolean isMorePreferredThan(CandidateTally other) {
+    return compareTo(other) < 0;
+  }
+
+  public boolean isEqualRankTo(CandidateTally other) {
+    return compareTo(other) == 0;
+  }
+
+  public boolean hasTopRanksAtLeast(int votes) {
+    return rankCounts.get(0) >= votes;
+  }
 
   public int compareTo(CandidateTally o) {
-    int i = 0;
-    while (true) {
-      if (i >= rankCounts.size() || i >= o.rankCounts.size()) {
-        return o.rankCounts.size() - rankCounts.size();
-      }
-      int countDifference = o.rankCounts.get(i) - rankCounts.get(i);
-      if (countDifference != 0) { return countDifference; }
-      i++;
-    }
+    return rankComparator.compare(this, o);
   }
 
   public boolean equals(Object o) {
@@ -53,23 +57,35 @@ public class CandidateTally implements Comparable<CandidateTally> {
     return "CandidateTally{" + rankCounts + '}';
   }
 
-  public boolean isMorePreferredThan(CandidateTally other) {
-    return compareTo(other) < 0;
-  }
-
-  public boolean isEqualRankTo(CandidateTally other) {
-    return compareTo(other) == 0;
-  }
-
-  public boolean hasTopRanksAtLeast(int votes) {
-    return rankCounts.get(0) >= votes;
-  }
-
-  public Profile getProfile() { return profile; }
-
   private static class ReverseRankComparator implements Comparator<CandidateTally> {
     public int compare(CandidateTally o1, CandidateTally o2) {
-      return o1.compareTo(o2);
+      return compareFromRank(o1, o2, 0);
+    }
+
+    private int compareFromRank(CandidateTally o1, CandidateTally o2, int rank) {
+      return oneTallyWasExhausted(o1, o2, rank)
+             ? tallySizeDifference(o1, o2)
+             : differenceAtCurrentRankOrMoveOn(o1, o2, rank,
+                                               differenceAtRank(o1, o2, rank));
+    }
+
+    private int differenceAtCurrentRankOrMoveOn(
+          CandidateTally o1, CandidateTally o2, int rank, int difference
+    ) {
+      return difference != 0 ? difference
+                             : compareFromRank(o1, o2, rank + 1);
+    }
+
+    private boolean oneTallyWasExhausted(CandidateTally o1, CandidateTally o2, int rank) {
+      return rank >= o1.rankCounts.size() || rank >= o2.rankCounts.size();
+    }
+
+    private int differenceAtRank(CandidateTally o1, CandidateTally o2, int rank) {
+      return o2.rankCounts.get(rank) - o1.rankCounts.get(rank);
+    }
+
+    private int tallySizeDifference(CandidateTally o1, CandidateTally o2) {
+      return o2.rankCounts.size() - o1.rankCounts.size();
     }
   }
 

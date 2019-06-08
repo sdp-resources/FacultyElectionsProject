@@ -26,19 +26,15 @@ class ElectionRecord extends AbstractList<VotingRound> {
 
   private void eliminateACandidate() {
     Profile candidate = getLastResult().getCandidate();
-    for (Vote vote : votes) {
-      vote.remove(candidate);
-    }
+    votes.forEach(vote -> vote.remove(candidate));
   }
 
   private boolean lastRoundHadWinner() {
     return getLastResult() instanceof WinVotingRoundResult;
-
   }
 
   private VotingRoundResult getLastResult() {
-    VotingRound votingRound = lastRound();
-    return votingRound.getResult();
+    return lastRound().getResult();
   }
 
   private VotingRound lastRound() {
@@ -62,6 +58,6 @@ class ElectionRecord extends AbstractList<VotingRound> {
   }
 
   public int size() {
-    return 0;
+    return rounds.size();
   }
 }
