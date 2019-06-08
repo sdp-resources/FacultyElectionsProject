@@ -24,32 +24,31 @@ public class VoteTest {
     candidate2 = EntityStub.getProfile(1);
     candidate3 = EntityStub.getProfile(2);
     ballot.addAll(List.of(candidate1, candidate2, candidate3));
-    vote = new Vote();
   }
 
   @Test
   public void voteForOnePerson() {
-    vote.addVotes(List.of(candidate1));
-    assertEquals(List.of(candidate1), vote.getRankedList());
+    vote = Vote.of(candidate1);
+    assertEquals(List.of(candidate1), vote.order);
   }
 
   @Test
   public void voteForMoreThanOnePerson() {
-    vote.addVotes(List.of(candidate3, candidate2));
-    assertEquals(List.of(candidate3, candidate2), vote.getRankedList());
+    vote = Vote.of(candidate3, candidate2);
+    assertEquals(List.of(candidate3, candidate2), vote.order);
   }
 
   @Test
   public void removeOnePerson() {
-    vote.addVotes(List.of(candidate3, candidate2));
-    vote.removeProfileFromVote(candidate2);
-    assertEquals(List.of(candidate3), vote.getRankedList());
+    vote = Vote.of(candidate3, candidate2);
+    vote.remove(candidate2);
+    assertEquals(List.of(candidate3), vote.order);
   }
 
   @Test
   public void removeMultiplePeople() {
-    vote.addVotes(List.of(candidate3, candidate2, candidate1));
-    vote.removeMultipleVotes(List.of(candidate3, candidate2));
-    assertEquals(List.of(candidate1), vote.getRankedList());
+    vote = Vote.of(candidate3, candidate2, candidate1);
+    vote.removeAll(List.of(candidate3, candidate2));
+    assertEquals(List.of(candidate1), vote.order);
   }
 }

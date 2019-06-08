@@ -3,30 +3,55 @@ package fsc.voting;
 import fsc.entity.Profile;
 import fsc.entity.Vote;
 import fsc.mock.EntityStub;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class VotingTest {
-  ElectionRecord record = new ElectionRecord();
+  private ElectionRecord record;
+
   private Profile cA = EntityStub.getProfile("A");
   private Profile cB = EntityStub.getProfile("B");
   private Profile cC = EntityStub.getProfile("C");
 
-  @Ignore
   @Test
   public void candidateWithMajorityWinsRightAway() {
-    List<Vote> votes = List.of(Vote.of(cA, cB, cC),
-                               Vote.of(cA, cC, cB),
-                               Vote.of(cB, cA, cC));
-    for (Vote vote : votes) {
-      record.add(vote);
-    }
+    assertVotes_produceResults(List.of(Vote.of(cA, cB, cC),
+                                       Vote.of(cA, cC, cB),
+                                       Vote.of(cB, cA, cC)),
+                               List.of(VotingRoundResult.win(cA)));
+    assertVotes_produceResults(List.of(Vote.of(cA),
+                                       Vote.of(),
+                                       Vote.of()),
+                               List.of(VotingRoundResult.win(cA)));
+  }
+
+  @Test
+  public void candidateWithFewestFirstPlacesIsEliminatedFirst() {
+    assertVotes_produceResults(
+          List.of(Vote.of(cA, cB, cC),
+                  Vote.of(cC, cA, cB),
+                  Vote.of(cB, cA, cC),
+                  Vote.of(cA, cB, cC),
+                  Vote.of(cB, cA, cC)),
+          List.of(VotingRoundResult.eliminate(cC),
+                  VotingRoundResult.win(cA)));
+
+  }
+
+  private void assertVotes_produceResults(List<Vote> votes, List<VotingRoundResult> results) {
+    record = new ElectionRecord(votes);
     record.runElection();
-    assertEquals(1, record.numberOfRounds());
-    assertEquals(VotingRoundResult.win(cA), record.getRound(1).getResult());
+    assertEquals(results.size(), record.numberOfRounds());
+    Iterator<VotingRoundResult> expected = results.iterator();
+    for (VotingRound round : record) {
+      assertTrue(expected.hasNext());
+      assertEquals(expected.next(), round.getResult());
+
+    }
   }
 }

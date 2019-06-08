@@ -94,7 +94,6 @@ public class CandidateTallyTest {
         VotingRoundResult expectedResult
   ) {
     VotingRound round = new VotingRound(votes);
-    round.determineResults();
     assertEquals(expectedTallies, round.getSortedCandidateTallies());
     assertEquals(expectedResult, round.getResult());
   }

@@ -3,45 +3,43 @@ package fsc.entity;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Vote extends AbstractList<Profile> {
 
-  private final List<Profile> preferenceList = new ArrayList<>();
-
-  public Vote(List<Profile> profiles) {
-    preferenceList.addAll(profiles);
-  }
+  public final List<Profile> order = new ArrayList<>();
 
   public Vote() { }
 
-  public int size() {
-    return preferenceList.size();
+  public Vote(List<Profile> profiles) {
+    order.addAll(profiles);
   }
 
-  public Profile get(int index) {
-    return preferenceList.get(index);
-  }
+  private static boolean isNonEmpty(Vote v) { return !v.isEmpty(); }
 
   public static Vote of(Profile... profiles) {
     return new Vote(List.of(profiles));
   }
 
-  public List<Profile> getRankedList() {
-    return preferenceList;
+  public int size() {
+    return order.size();
   }
 
-  public void addVotes(List<Profile> listOfCandidates) {
-    preferenceList.addAll(listOfCandidates);
+  public Profile get(int index) {
+    return order.get(index);
   }
 
-  public void removeProfileFromVote(Profile profile) {
-    preferenceList.remove(profile);
+  public boolean remove(Profile profile) {
+    return order.remove(profile);
   }
 
-  public void removeMultipleVotes(List<Profile> listOfRemovals) {
-    for (Profile profile : listOfRemovals) {
-      this.removeProfileFromVote(profile);
-    }
+  public Profile remove(int index) {
+    return order.remove(index);
+  }
+
+  public static List<Vote> createVoteSnapshot(List<Vote> votes) {
+    return votes.stream().filter(Vote::isNonEmpty)
+                .map(Vote::clone).collect(Collectors.toList());
   }
 
   public Vote clone() {

@@ -4,7 +4,6 @@ import fsc.entity.Profile;
 import fsc.entity.Vote;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 class VotingRound {
   private final List<Vote> votes;
@@ -12,7 +11,8 @@ class VotingRound {
   private VotingRoundResult result = null;
 
   public VotingRound(List<Vote> votes) {
-    this.votes = createVoteSnapshot(votes);
+    this.votes = Vote.createVoteSnapshot(votes);
+    determineResults();
   }
 
   public void determineResults() {
@@ -61,10 +61,6 @@ class VotingRound {
 
   public List<CandidateTally> getSortedCandidateTallies() {
     return rankedTallies;
-  }
-
-  private List<Vote> createVoteSnapshot(List<Vote> votes) {
-    return votes.stream().map(Vote::clone).collect(Collectors.toList());
   }
 
 }

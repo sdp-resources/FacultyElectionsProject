@@ -14,6 +14,7 @@ interface VotingRoundResult {
   static VotingRoundResult tied(Profile... candidates) {
     return new DrawVotingResult(candidates);
   }
+  Profile getCandidate();
 
   class EliminationVotingRoundResult implements VotingRoundResult {
     public final Profile candidate;
@@ -36,6 +37,10 @@ interface VotingRoundResult {
     public String toString() {
       return "Eliminated{" + candidate + '}';
     }
+
+    public Profile getCandidate() {
+      return candidate;
+    }
   }
 
   class WinVotingRoundResult implements VotingRoundResult {
@@ -56,6 +61,10 @@ interface VotingRoundResult {
 
     public String toString() {
       return "Winner{" + candidate + '}';
+    }
+
+    public Profile getCandidate() {
+      return candidate;
     }
   }
 
@@ -79,6 +88,12 @@ interface VotingRoundResult {
 
     public String toString() {
       return "Draw{" + candidates + '}';
+    }
+
+    public Profile getCandidate() {
+      Iterator<Profile> iterator = candidates.iterator();
+      if (iterator.hasNext()) { return iterator.next(); }
+      throw new RuntimeException("Should not have NO candidates tied to last");
     }
   }
 }
