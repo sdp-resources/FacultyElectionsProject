@@ -43,6 +43,19 @@ public class VotingTest {
 
   }
 
+  @Test
+  public void whenTiedForLastOneOfTheCandidatesIsRemoved() {
+    assertVotes_produceResults(
+          List.of(Vote.of(cA, cB, cC),
+                  Vote.of(cC, cB, cA),
+                  Vote.of(cB, cC, cA),
+                  Vote.of(cA, cC, cB)),
+          List.of(VotingRoundResult.tied(cB, cC),
+                  VotingRoundResult.tied(cA, cC),
+                  VotingRoundResult.win(cC)));
+
+  }
+
   private void assertVotes_produceResults(List<Vote> votes, List<VotingRoundResult> results) {
     record = new ElectionRecord(votes);
     record.runElection();
