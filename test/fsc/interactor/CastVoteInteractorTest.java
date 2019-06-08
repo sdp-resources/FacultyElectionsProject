@@ -66,7 +66,7 @@ public class CastVoteInteractorTest {
   @Test
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
     interactor = new CastVoteInteractor(electionGateway, profileGateway);
-    election.getBallot().add(voter);
+    election.getBallot().addCandidate(voter);
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.invalidCandidate(), response);
   }
@@ -74,7 +74,7 @@ public class CastVoteInteractorTest {
   @Test
   public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
     interactor = new CastVoteInteractor(electionGateway, profileGateway);
-    election.getBallot().add(candidate);
+    election.getBallot().addCandidate(candidate);
     interactor.execute(request);
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.alreadyVoted(), response);
@@ -83,7 +83,7 @@ public class CastVoteInteractorTest {
   @Test
   public void whenGivenCorrectInformation_saveRecord() {
     interactor = new CastVoteInteractor(electionGateway, profileGateway);
-    election.getBallot().add(candidate);
+    election.getBallot().addCandidate(candidate);
     Response response = interactor.execute(request);
     assertEquals(new SuccessResponse(), response);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;

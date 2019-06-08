@@ -24,7 +24,7 @@ public class AddToBallotInteractor {
     try {
       Election election = electionGateway.getElection(request.getBallotID());
       Profile profile = profileGateway.getProfile(request.getProfileUsername());
-      election.getBallot().add(profile);
+      election.getBallot().addCandidate(profile);
       electionGateway.save();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();

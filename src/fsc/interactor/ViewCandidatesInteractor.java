@@ -17,7 +17,7 @@ class ViewCandidatesInteractor {
   public Response execute(ViewCandidatesRequest request) {
     try {
       Election election = electionGateway.getElection(request.electionID);
-      return ViewResponse.ofProfileList(election.getBallot());
+      return ViewResponse.ofProfileList(election.getCandidateProfiles());
     } catch (ElectionGateway.InvalidElectionIDException e) {
       return ErrorResponse.unknownElectionID();
     }

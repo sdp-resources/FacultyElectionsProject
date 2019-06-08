@@ -2,6 +2,8 @@ package fsc.entity;
 
 import fsc.entity.query.Query;
 
+import java.util.List;
+
 public class Election {
 
   private Ballot ballot;
@@ -50,21 +52,15 @@ public class Election {
 
   public Candidate getCandidateByUsername(String username)
         throws Ballot.NoProfileInBallotException {
-    for (int i = 0; i < ballot.size(); i++) {
-      if (ballot.getCandidate(i).getProfile().getUsername().equals(username)) {
-        return ballot.getCandidate(i);
-      }
-    }
-    throw new Ballot.NoProfileInBallotException();
+    return ballot.getCandidateByUsername(username);
   }
 
-  public boolean hasCandidate(String username) {
-    for (int i = 0; i < ballot.size(); i++) {
-      if (ballot.getCandidate(i).getProfile().getUsername().equals(username)) {
-        return true;
-      }
-    }
-    return false;
+  public boolean hasCandidate(Profile profile) {
+    return ballot.hasCandidate(profile);
+  }
+
+  public List<Profile> getCandidateProfiles() {
+    return ballot.getCandidateProfiles();
   }
 }
 

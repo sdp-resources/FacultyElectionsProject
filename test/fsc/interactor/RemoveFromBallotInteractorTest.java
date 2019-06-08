@@ -68,10 +68,10 @@ public class RemoveFromBallotInteractorTest {
   public void profileRemovedFromBallotGivesSuccesfullyRemovedResponse() {
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
     interactor = new RemoveFromBallotInteractor(profileGateway, electionGateway);
-    election.getBallot().add(profile);
+    election.getBallot().addCandidate(profile);
     Response response = interactor.execute(request);
 
-    assertFalse(election.getBallot().contains(profile));
+    assertFalse(election.hasCandidate(profile));
     assertEquals(new SuccessResponse(), response);
     assertTrue(electionGateway.hasSaved);
   }

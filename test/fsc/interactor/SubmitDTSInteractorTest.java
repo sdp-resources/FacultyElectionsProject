@@ -39,7 +39,7 @@ public class SubmitDTSInteractorTest {
   @Test
   public void whenCandidateIsInElection_thenRecordTheirStatus()
         throws Ballot.NoProfileInBallotException {
-    election.getBallot().add(profile);
+    election.getBallot().addCandidate(profile);
     Response response = interactor.execute(request);
 
     assertEquals(new SuccessResponse(), response);

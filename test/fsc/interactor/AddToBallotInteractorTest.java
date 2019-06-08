@@ -61,7 +61,7 @@ public class AddToBallotInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals(new SuccessResponse(), response);
-    assertThat(election.getBallot(), hasItem(profile));
+    assertThat(election.getCandidateProfiles(), hasItem(profile));
     assertTrue(electionGateway.hasSaved);
 
   }

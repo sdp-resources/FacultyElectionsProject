@@ -30,61 +30,60 @@ public class BallotTest {
 
   @Test
   public void addingCandidateResultInNonEmptyBallot() {
-    ballot.add(testCandidate1);
+    ballot.addCandidate(testCandidate1);
     assertFalse(ballot.isEmpty());
   }
 
   @Test
   public void addingOneCandidateIncreasesSizeByOne() {
-    ballot.add(testCandidate1);
+    ballot.addCandidate(testCandidate1);
     assertEquals(1, ballot.size());
   }
 
   @Test
   public void canGetCandidateFromBallotByIndexing() {
-    ballot.add(testCandidate1);
-    assertEquals(testCandidate1, ballot.get(0));
+    ballot.addCandidate(testCandidate1);
+    assertTrue(ballot.get(0).matchesProfile(testCandidate1));
   }
 
   @Test
   public void addingMultipleCandidateIncreasesSize() {
-    ballot.add(testCandidate1);
-    ballot.add(testCandidate2);
-    ballot.add(testCandidate3);
+    ballot.addCandidate(testCandidate1);
+    ballot.addCandidate(testCandidate2);
+    ballot.addCandidate(testCandidate3);
     assertEquals(3, ballot.size());
   }
 
   @Test
   public void checkingMultipleCandidateOfBallot() {
-    ballot.add(testCandidate1);
-    ballot.add(testCandidate2);
-    ballot.add(testCandidate3);
-    assertEquals(testCandidate1, ballot.get(0));
-    assertEquals(testCandidate2, ballot.get(1));
-    assertEquals(testCandidate3, ballot.get(2));
+    ballot.addCandidate(testCandidate1);
+    ballot.addCandidate(testCandidate2);
+    ballot.addCandidate(testCandidate3);
+    assertTrue(ballot.get(0).matchesProfile(testCandidate1));
+    assertTrue(ballot.get(1).matchesProfile(testCandidate2));
+    assertTrue(ballot.get(2).matchesProfile(testCandidate3));
   }
 
   @Test
   public void removeOneCandidateMakesBallotEmpty() throws Ballot.NoProfileInBallotException {
-    ballot.add(testCandidate1);
+    ballot.addCandidate(testCandidate1);
     ballot.remove(testCandidate1);
     assertTrue(ballot.isEmpty());
   }
 
   @Test
   public void candidateIsRemovedFromBallot() throws Ballot.NoProfileInBallotException {
-    ballot.add(testCandidate1);
-    ballot.add(testCandidate2);
+    ballot.addCandidate(testCandidate1);
+    ballot.addCandidate(testCandidate2);
     ballot.remove(testCandidate1);
-    assertEquals(testCandidate2, ballot.get(0));
+    assertTrue(ballot.get(0).matchesProfile(testCandidate2));
   }
 
   @Test
   public void removeOneCandidateDecreasesSizeByOne() throws Ballot.NoProfileInBallotException {
-    ballot.add(testCandidate1);
+    ballot.addCandidate(testCandidate1);
     ballot.remove(testCandidate1);
     assertEquals(0, ballot.size());
-    assertEquals(0, ballot.sizeCandidates());
   }
 
 }

@@ -21,10 +21,10 @@ public class ViewCandidatesInteractorTest {
 
   private static Ballot sampleBallot() {
     Ballot aBallot = new Ballot();
-    aBallot.add(EntityStub.getProfile(3));
-    aBallot.add(EntityStub.getProfile(2));
-    aBallot.add(EntityStub.getProfile(1));
-    aBallot.add(EntityStub.getProfile(0));
+    aBallot.addCandidate(EntityStub.getProfile(3));
+    aBallot.addCandidate(EntityStub.getProfile(2));
+    aBallot.addCandidate(EntityStub.getProfile(1));
+    aBallot.addCandidate(EntityStub.getProfile(0));
     return aBallot;
   }
 
@@ -52,7 +52,7 @@ public class ViewCandidatesInteractorTest {
     Response initialResponse = interactor.execute(request);
 
     assertEquals(MOCK_ID, electionGateway.providedElectionId);
-    assertEquals(ViewResponse.ofProfileList(ballot), initialResponse);
+    assertEquals(ViewResponse.ofProfileList(ballot.getCandidateProfiles()), initialResponse);
   }
 
 }

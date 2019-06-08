@@ -34,7 +34,7 @@ public class CastVoteInteractor {
       Profile voter = profileGateway.getProfile(request.username);
       List<Profile> votes = profileGateway.getProfiles(request.vote);
       for (Profile vote : votes) {
-        if (!election.hasCandidate(vote.getUsername())) {
+        if (!election.hasCandidate(vote)) {
           return ErrorResponse.invalidCandidate();
         }
       }

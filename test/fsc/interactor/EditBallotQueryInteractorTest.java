@@ -45,7 +45,7 @@ public class EditBallotQueryInteractorTest {
     interactor = new EditBallotQueryInteractor(electionGateway, profileGateway);
     Response response = interactor.execute(request);
     assertEquals(new SuccessResponse(), response);
-    assertThat(election.getBallot(), hasItem(providedProfile));
+    assertThat(election.getCandidateProfiles(), hasItem(providedProfile));
     assertEquals(request.query, election.getDefaultQuery());
     assertEquals(request.electionID, electionGateway.providedElectionId);
     assertTrue(profileGateway.getAllProfilesWasCalled);

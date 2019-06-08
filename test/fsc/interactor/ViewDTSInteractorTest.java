@@ -31,7 +31,7 @@ public class ViewDTSInteractorTest {
 
   @Test
   public void whenUserIsCandidate_canGetTheirPreference() throws Ballot.NoProfileInBallotException {
-    election.getBallot().add(profile);
+    election.getBallot().addCandidate(profile);
     Candidate candidate = election.getCandidateByUsername(profile.getUsername());
     candidate.setStatus(Candidate.Status.Accepted);
     gateway = new ProvidedElectionGatewaySpy(election);

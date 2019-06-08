@@ -26,18 +26,18 @@
 !3 Build a JSON configuration string
 
 !4 Hint: use this table to construct your Json expression.
- 
+
 !|script                           |Method Extractor                                                        |
 |#                                 |Scope Pattern                               |Target Name |Parameter List|
-|add;                              |Cell\s+(\w+):(\d+)\s*                       |getRowColumn|$2,$1         |
+|add candidate;                    |CellSWDS               |getRowColumn|21                        |
 |# used a named group in the pattern                                                                        |
-|add;                              |Named\s+Cell\s+(?<column>\w+):(?<row>\d+)\s*|getRowColumn|$row,$column  |
+|add candidate;                    |NamedSCellSColumnWRowDS|getRowColumn                           |RowColumn  |
 |# used a fixed value as parameter                                                                          |
-|add;                              |Header\s+Column\s+(\w+)\s*                  |getRowColumn|0,$1          |
+|add candidate;                    |HeaderSColumnSWS       |getRowColumn|01                        |
 |# Default (match all pattern) catches every column name                                                    |
-|add;                              |.+                                          |set         |$0            |
+|add candidate;                    |                       |set         |0                         |
 |# The first matching rule is used. The below will never be used as it comes after the default rule         |
-|add;                              |Last.*                                      |Unreachable |              |
+|add candidate;                    |Last                   |Unreachable                            |
 |show collapsed                    |to Json                                                                 |
 |$TestMethodExtractorConfiguration=|get fixture                                                             |
 
