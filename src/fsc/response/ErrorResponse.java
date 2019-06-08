@@ -12,6 +12,7 @@ public class ErrorResponse extends Throwable implements Response {
   public static final String INVALID_CANDIDATE = "Ballot does not contain profile";
   public static final String NO_HANDLERS = "No available handler for that request";
   public static final String VOTER_ALREADY_VOTED = "Voter has already voted on this election.";
+  public static final String MULTIPLE_RANKS_FOR_CANDIDATE = "Multiple rankings for the same candidate";
   public String message;
 
   public ErrorResponse(String s) {
@@ -52,6 +53,10 @@ public class ErrorResponse extends Throwable implements Response {
 
   public static ErrorResponse alreadyVoted() {
     return new ErrorResponse(VOTER_ALREADY_VOTED);
+  }
+
+  public static ErrorResponse multipleRanksForCandidate() {
+    return new ErrorResponse(MULTIPLE_RANKS_FOR_CANDIDATE);
   }
 
   public boolean equals(Object o) {

@@ -10,9 +10,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class CastVoteInteractor {
 
@@ -33,11 +31,15 @@ public class CastVoteInteractor {
       Election election = electionGateway.getElection(request.electionID);
       Profile voter = profileGateway.getProfile(request.username);
       List<Profile> votes = profileGateway.getProfiles(request.vote);
-      for (Profile vote : votes) {
-        if (!election.hasCandidate(vote)) {
-          return ErrorResponse.invalidCandidate();
-        }
+
+      if (thereAreMultipleProfileOccurences(votes)) {
+        return ErrorResponse.multipleRanksForCandidate();
       }
+
+      if (someProfilesAreNotCandidates(election, votes)) {
+        return ErrorResponse.invalidCandidate();
+      }
+
       Date now = Calendar.getInstance().getTime();
       VoteRecord voteRecord = new VoteRecord(voter, now, votes, election);
       electionGateway.recordVote(voteRecord);
@@ -48,6 +50,18 @@ public class CastVoteInteractor {
     } catch (ElectionGateway.InvalidElectionIDException e) {
       return ErrorResponse.unknownElectionID();
     }
+  }
+
+  private boolean someProfilesAreNotCandidates(Election election, List<Profile> votes) {
+    for (Profile vote : votes) {
+      if (!election.hasCandidate(vote)) return true;
+    }
+    return false;
+  }
+
+  private static boolean thereAreMultipleProfileOccurences(List<Profile> profiles) {
+    HashSet profilesSet = new HashSet<>(profiles);
+    return profilesSet.size() != profiles.size();
   }
 
 }

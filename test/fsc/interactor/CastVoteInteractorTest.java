@@ -72,6 +72,17 @@ public class CastVoteInteractorTest {
   }
 
   @Test
+  public void whenGivenMultipleVotesForCandidate_returnErrorResponse() {
+    interactor = new CastVoteInteractor(electionGateway, profileGateway);
+    election.getBallot().addCandidate(candidate);
+    election.getBallot().addCandidate(voter);
+    vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
+    request = new VoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
+    Response response = interactor.execute(request);
+    assertEquals(ErrorResponse.multipleRanksForCandidate(), response);
+  }
+
+  @Test
   public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
     interactor = new CastVoteInteractor(electionGateway, profileGateway);
     election.getBallot().addCandidate(candidate);

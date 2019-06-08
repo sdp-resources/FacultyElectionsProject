@@ -11,15 +11,13 @@ public class Vote extends AbstractList<Profile> {
 
   public Vote() { }
 
-  public Vote(List<Profile> profiles) {
+  private Vote(List<Profile> profiles) {
     order.addAll(profiles);
   }
 
   private static boolean isNonEmpty(Vote v) { return !v.isEmpty(); }
 
-  public static Vote of(Profile... profiles) {
-    return new Vote(List.of(profiles));
-  }
+  public static Vote of(Profile... profiles) { return new Vote(List.of(profiles)); }
 
   public int size() {
     return order.size();
