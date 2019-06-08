@@ -40,4 +40,8 @@ public class RequestFactory {
   Request viewContractTypeList() {
     return new ViewContractsRequest();
   }
+
+  public Request createCommittee(String name, String description) {
+    return new CreateCommitteeRequest(name, description);
+  }
 }

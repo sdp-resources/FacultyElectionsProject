@@ -22,4 +22,8 @@ public class FscFixture {
   public boolean validContractType(String contractType) {
     return TestContext.app.hasContractType(contractType);
   }
+
+  public boolean createCommittee(String name, String description) {
+    return TestContext.app.addCommittee(name, description);
+  }
 }

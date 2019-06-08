@@ -38,3 +38,10 @@
 
 |scenario|Then we have contract type _ |contractType|
 |ensure|valid contract type|@contractType|
+
+!3 Committees
+
+|scenario|Given committee with name _ and description _ |name,description|
+|ensure|create committee;|@name|@description|
+
+

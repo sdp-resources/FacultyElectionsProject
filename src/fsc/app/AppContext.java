@@ -6,8 +6,10 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import fsc.response.ViewResponse;
+import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +31,8 @@ public class AppContext {
                  .append(new CreateProfileInteractor(gateway))
                  .append(new ViewProfileInteractor(gateway))
                  .append(new EditProfileInteractor(gateway))
-                 .append(new ViewProfilesListInteractor(gateway));
+                 .append(new ViewProfilesListInteractor(gateway))
+                 .append(new CreateCommitteeInteractor(gateway));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {
@@ -49,6 +52,10 @@ public class AppContext {
 
   public ViewableProfile getProfile(String username) {
     return getViewableProfileResult(requestFactory.viewProfile(username));
+  }
+
+  public boolean addCommittee(String name, String description) {
+    return isSuccessful(requestFactory.createCommittee(name, description));
   }
 
   public boolean addDivision(String division) {
@@ -93,5 +100,9 @@ public class AppContext {
   private List<ViewableProfile> getViewableProfileListResult(Request request) {
     Response response = getResponse(request);
     return ((ViewResponse<List<ViewableProfile>>) response).values;
+  }
+
+  public List<ViewableCommittee> getAllCommittees() {
+    return null;
   }
 }
