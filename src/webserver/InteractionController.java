@@ -1,5 +1,6 @@
 package webserver;
 
+import fsc.entity.BallotCreator;
 import fsc.entity.Committee;
 import fsc.entity.Election;
 import fsc.interactor.*;
@@ -26,7 +27,8 @@ public class InteractionController {
     createProfileInteractor = new CreateProfileInteractor(gateway);
     viewContractsInteractor = new ViewContractsInteractor(gateway);
     viewDivisionsInteractor = new ViewDivisionInteractor(gateway);
-    createElectionInteractor = new CreateElectionInteractor(gateway, gateway, gateway);
+    createElectionInteractor = new CreateElectionInteractor(gateway, gateway,
+                                                            new BallotCreator(gateway));
     this.gateway = gateway;
   }
 

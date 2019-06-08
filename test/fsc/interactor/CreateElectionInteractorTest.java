@@ -1,6 +1,6 @@
 package fsc.interactor;
 
-import fsc.gateway.ProfileGateway;
+import fsc.entity.BallotCreator;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.mock.gateway.election.AddedElectionGatewaySpy;
@@ -22,7 +22,8 @@ public class CreateElectionInteractorTest {
   private CreateElectionRequest request;
   private CreateElectionInteractor interactor;
   private Response response;
-  private final ProfileGateway profileGateway = new ProfileGatewayStub();
+  private BallotCreator ballotCreator = new BallotCreator(new ProfileGatewayStub());
+  private AddedElectionGatewaySpy electionGateway;
 
   @Before
   public void setup() {
@@ -31,10 +32,9 @@ public class CreateElectionInteractorTest {
 
   @Test
   public void testCorrectExecute() {
-
-    AddedElectionGatewaySpy electionGateway = new AddedElectionGatewaySpy();
+    electionGateway = new AddedElectionGatewaySpy();
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
-    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
+    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, ballotCreator);
     response = interactor.execute(request);
     assertEquals("Cool committee", committeeGateway.submittedCommitteeName);
     assertEquals(new SuccessResponse(), response);
@@ -45,9 +45,9 @@ public class CreateElectionInteractorTest {
 
   @Test
   public void whenCommitteeNameIsMissingThenReturnsErrorResponse() {
-    AddedElectionGatewaySpy electionGateway = new AddedElectionGatewaySpy();
+    electionGateway = new AddedElectionGatewaySpy();
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
-    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, profileGateway);
+    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, ballotCreator);
     response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownCommitteeName(), response);
     assertNull(electionGateway.addedElection);
