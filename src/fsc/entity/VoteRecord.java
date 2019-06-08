@@ -1,7 +1,6 @@
 package fsc.entity;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class VoteRecord {
@@ -9,13 +8,13 @@ public class VoteRecord {
   private final Profile voter;
   private final List<Profile> votes;
   private final Election election;
-  private final Date date;
+  private final LocalDateTime date;
 
   public VoteRecord(Profile voter, List<Profile> votes, Election election) {
-    this(voter, Calendar.getInstance().getTime(), votes, election);
+    this(voter, LocalDateTime.now(), votes, election);
   }
 
-  public VoteRecord(Profile voter, Date date, List<Profile> votes, Election election) {
+  public VoteRecord(Profile voter, LocalDateTime date, List<Profile> votes, Election election) {
     this.voter = voter;
     this.votes = votes;
     this.date = date;
@@ -30,7 +29,7 @@ public class VoteRecord {
     return votes;
   }
 
-  public Date getDate() {
+  public LocalDateTime getDate() {
     return date;
   }
 

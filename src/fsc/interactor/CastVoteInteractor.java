@@ -10,7 +10,8 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
 
 public class CastVoteInteractor {
 
@@ -40,8 +41,7 @@ public class CastVoteInteractor {
         return ErrorResponse.invalidCandidate();
       }
 
-      Date now = Calendar.getInstance().getTime();
-      VoteRecord voteRecord = new VoteRecord(voter, now, votes, election);
+      VoteRecord voteRecord = new VoteRecord(voter, votes, election);
       electionGateway.recordVote(voteRecord);
       electionGateway.save();
       return new SuccessResponse();

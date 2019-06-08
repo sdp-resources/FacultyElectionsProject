@@ -1,14 +1,16 @@
 package fsc.entity.session;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class AuthorizedSession implements Session {
   private final String role;
   private final String username;
   private final String token;
-  private final Calendar expirationTime;
+  private final LocalDateTime expirationTime;
 
-  public AuthorizedSession(String role, String username, String token, Calendar expirationTime) {
+  public AuthorizedSession(
+        String role, String username, String token, LocalDateTime expirationTime
+  ) {
     this.role = role;
     this.username = username;
     this.token = token;
@@ -27,7 +29,7 @@ public class AuthorizedSession implements Session {
     return role;
   }
 
-  public Calendar getExpirationTime() { return expirationTime;}
+  public LocalDateTime getExpirationTime() { return expirationTime; }
 
   public boolean isAuthorized() {
     return true;

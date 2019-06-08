@@ -3,26 +3,13 @@ package fsc.entity;
 import fsc.entity.session.AuthorizedSession;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertNotSame;
 
 public class SessionTest {
   private AuthorizedSession session;
-
-  @Test
-  public void javaDatesWeird() throws InterruptedException {
-    assertNotSame(Calendar.getInstance(), Calendar.getInstance());
-    assertNotSame(new GregorianCalendar(), new GregorianCalendar());
-
-    Calendar calendar = Calendar.getInstance();
-    Date initalTime = calendar.getTime();
-    Thread.sleep(100);
-    assertEquals(initalTime, calendar.getTime());
-  }
 
   @Test
   public void canCreateSession() {
@@ -30,8 +17,7 @@ public class SessionTest {
     String username = "admin";
     String token = "random-string";
 
-    Calendar expirationTime = Calendar.getInstance();
-    expirationTime.add(Calendar.MINUTE, 10);
+    LocalDateTime expirationTime = LocalDateTime.now().plus(10, MINUTES);
 
     session = new AuthorizedSession(role, username, token, expirationTime);
 

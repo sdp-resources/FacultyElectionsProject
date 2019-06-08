@@ -3,7 +3,7 @@ package fsc.service.authorizer;
 import fsc.entity.session.AuthorizedSession;
 import fsc.entity.session.Session;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class AcceptingAuthorizerStub extends AuthorizerDummy {
   private final String role;
@@ -16,6 +16,6 @@ public class AcceptingAuthorizerStub extends AuthorizerDummy {
 
   @Override
   public Session authorize(String username, String password) {
-    return new AuthorizedSession(role, username, token, Calendar.getInstance());
+    return new AuthorizedSession(role, username, token, LocalDateTime.now());
   }
 }

@@ -4,10 +4,10 @@ import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.MILLIS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -30,14 +30,12 @@ public class VoteRecordTest {
   public void voteRecordCreatedProperly() {
     assertEquals(voter, voteRecord.getVoter());
     assertEquals(votes, voteRecord.getVotes());
-    Date now = Calendar.getInstance().getTime();
-    assertCloseDates(now, voteRecord.getDate());
+    assertCloseDates(LocalDateTime.now(), voteRecord.getDate());
     assertEquals(election, voteRecord.getElection());
   }
 
-  public static void assertCloseDates(Date date1, Date date2) {
-    long diffInMillies = Math.abs(date1.getTime() - date2.getTime());
-    assertTrue(diffInMillies < 2000);
+  public static void assertCloseDates(LocalDateTime date1, LocalDateTime date2) {
+    assertTrue(date1.until(date2, MILLIS) < 2000);
   }
 
 }

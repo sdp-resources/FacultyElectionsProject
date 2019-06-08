@@ -16,8 +16,7 @@ import fsc.response.SuccessResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static fsc.entity.VoteRecordTest.assertCloseDates;
@@ -27,7 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 public class CastVoteInteractorTest {
   public static final String ELECTION_ID = "1";
-  private Date date;
   private List<String> vote;
   private VoteRecordRequest request;
   private ProvidedElectionGatewaySpy electionGateway;
@@ -100,7 +98,7 @@ public class CastVoteInteractorTest {
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
     assertNotNull(submittedVoteRecord);
     assertEquals(voter, submittedVoteRecord.getVoter());
-    assertCloseDates(Calendar.getInstance().getTime(), submittedVoteRecord.getDate());
+    assertCloseDates(LocalDateTime.now(), submittedVoteRecord.getDate());
     assertEquals(List.of(candidate), submittedVoteRecord.getVotes());
     assertEquals(election, submittedVoteRecord.getElection());
     assertTrue(electionGateway.hasSaved);
