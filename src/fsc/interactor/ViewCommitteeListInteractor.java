@@ -6,7 +6,7 @@ import fsc.request.ViewCommitteeListRequest;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
 
-public class ViewCommitteeListInteractor extends Interactor {
+public class ViewCommitteeListInteractor extends Interactor<ViewCommitteeListRequest> {
   private CommitteeGateway committeeGateway;
 
   public ViewCommitteeListInteractor(CommitteeGateway committeeGateway) {
@@ -19,9 +19,5 @@ public class ViewCommitteeListInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof ViewCommitteeListRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((ViewCommitteeListRequest) request);
   }
 }

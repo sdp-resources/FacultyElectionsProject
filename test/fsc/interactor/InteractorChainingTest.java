@@ -44,7 +44,7 @@ public class InteractorChainingTest {
     assertEquals(ErrorResponse.cannotHandle(), response);
   }
 
-  private class RejectingInteractorSpy extends Interactor {
+  private class RejectingInteractorSpy extends Interactor<Request> {
     private String name;
     public boolean executeCalled = false;
     public boolean canHandleCalled = false;

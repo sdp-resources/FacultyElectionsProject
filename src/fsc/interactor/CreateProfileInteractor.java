@@ -8,7 +8,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class CreateProfileInteractor extends Interactor {
+public class CreateProfileInteractor extends Interactor<CreateProfileRequest> {
 
   private ProfileGateway gateway;
 
@@ -31,9 +31,5 @@ public class CreateProfileInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof CreateProfileRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((CreateProfileRequest) request);
   }
 }

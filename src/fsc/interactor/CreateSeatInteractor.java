@@ -11,7 +11,7 @@ import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import fsc.service.QueryStringConverter;
 
-public class CreateSeatInteractor extends Interactor {
+public class CreateSeatInteractor extends Interactor<CreateSeatRequest> {
   private CommitteeGateway gateway;
 
   public CreateSeatInteractor(CommitteeGateway gateway) {
@@ -37,9 +37,5 @@ public class CreateSeatInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof CreateSeatRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((CreateSeatRequest) request);
   }
 }

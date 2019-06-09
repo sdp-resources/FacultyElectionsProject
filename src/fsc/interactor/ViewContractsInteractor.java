@@ -8,7 +8,7 @@ import fsc.response.ViewResponse;
 
 import java.util.List;
 
-public class ViewContractsInteractor extends Interactor {
+public class ViewContractsInteractor extends Interactor<ViewContractsRequest> {
   private ContractTypeGateway gateway;
 
   public ViewContractsInteractor(ContractTypeGateway gateway) {
@@ -21,9 +21,5 @@ public class ViewContractsInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof ViewContractsRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((ViewContractsRequest) request);
   }
 }

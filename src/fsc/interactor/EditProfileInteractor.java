@@ -8,7 +8,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class EditProfileInteractor extends Interactor {
+public class EditProfileInteractor extends Interactor<EditProfileRequest> {
   private ProfileGateway gateway;
 
   public EditProfileInteractor(ProfileGateway gateway) {
@@ -29,9 +29,4 @@ public class EditProfileInteractor extends Interactor {
   public boolean canHandle(Request request) {
     return request instanceof EditProfileRequest;
   }
-
-  public Response execute(Request request) {
-    return execute((EditProfileRequest) request);
-  }
-
 }

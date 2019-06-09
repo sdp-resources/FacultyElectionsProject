@@ -8,7 +8,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
 
-public class ViewProfileInteractor extends Interactor {
+public class ViewProfileInteractor extends Interactor<ViewProfileRequest> {
   public String userName;
   private ProfileGateway gateway;
 
@@ -33,9 +33,5 @@ public class ViewProfileInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof ViewProfileRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((ViewProfileRequest) request);
   }
 }

@@ -4,14 +4,13 @@ import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
-import fsc.response.Response;
 import fsc.response.ViewResponse;
 import fsc.service.QueryStringConverter;
 import fsc.viewable.ViewableProfile;
 
 import java.util.List;
 
-public class ViewProfilesListInteractor extends Interactor {
+public class ViewProfilesListInteractor extends Interactor<ViewProfilesListRequest> {
   private ProfileGateway profileGateway;
 
   public ViewProfilesListInteractor(ProfileGateway profileGateway) {
@@ -30,9 +29,5 @@ public class ViewProfilesListInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof ViewProfilesListRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((ViewProfilesListRequest) request);
   }
 }

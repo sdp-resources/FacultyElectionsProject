@@ -6,7 +6,7 @@ import fsc.request.ViewDivisionRequest;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
 
-public class ViewDivisionInteractor extends Interactor {
+public class ViewDivisionInteractor extends Interactor<ViewDivisionRequest> {
 
   private DivisionGateway gateway;
 
@@ -14,13 +14,12 @@ public class ViewDivisionInteractor extends Interactor {
     this.gateway = gateway;
   }
 
-  public Response execute(Request request) {
+  public Response execute(ViewDivisionRequest request) {
     return ViewResponse.ofStrings(gateway.getAvailableDivisions());
   }
 
   public boolean canHandle(Request request) {
     return request instanceof ViewDivisionRequest;
   }
-
 }
 

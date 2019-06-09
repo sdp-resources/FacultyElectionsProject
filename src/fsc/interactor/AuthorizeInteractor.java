@@ -5,7 +5,7 @@ import fsc.request.Request;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 
-public class AuthorizeInteractor extends Interactor {
+public class AuthorizeInteractor {
   private SessionGateway sessionGateway;
 
   public AuthorizeInteractor(SessionGateway sessionGateway) {

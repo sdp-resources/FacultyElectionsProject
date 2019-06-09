@@ -7,7 +7,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class AddDivisionInteractor extends Interactor {
+public class AddDivisionInteractor extends Interactor<AddDivisionRequest> {
 
   private DivisionGateway gateway;
 
@@ -26,9 +26,5 @@ public class AddDivisionInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof AddDivisionRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((AddDivisionRequest) request);
   }
 }

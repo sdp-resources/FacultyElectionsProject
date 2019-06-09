@@ -7,7 +7,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class AddContractTypeInteractor extends Interactor {
+public class AddContractTypeInteractor extends Interactor<AddContractTypeRequest> {
 
   private ContractTypeGateway gateway;
 
@@ -26,9 +26,5 @@ public class AddContractTypeInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof AddContractTypeRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((AddContractTypeRequest) request);
   }
 }

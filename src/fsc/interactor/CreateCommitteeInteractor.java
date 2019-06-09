@@ -8,7 +8,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 
-public class CreateCommitteeInteractor extends Interactor {
+public class CreateCommitteeInteractor extends Interactor<CreateCommitteeRequest> {
   private CommitteeGateway gateway;
 
   public CreateCommitteeInteractor(CommitteeGateway gateway) {
@@ -30,9 +30,5 @@ public class CreateCommitteeInteractor extends Interactor {
 
   public boolean canHandle(Request request) {
     return request instanceof CreateCommitteeRequest;
-  }
-
-  public Response execute(Request request) {
-    return execute((CreateCommitteeRequest) request);
   }
 }
