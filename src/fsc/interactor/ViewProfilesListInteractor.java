@@ -19,7 +19,7 @@ public class ViewProfilesListInteractor extends Interactor {
   }
 
   public ViewResponse<List<ViewableProfile>> execute(ViewProfilesListRequest request) {
-    List<Profile> profiles = getProfiles(request.which);
+    List<Profile> profiles = getProfiles(request.query);
 
     return ViewResponse.ofProfileList(profiles);
   }

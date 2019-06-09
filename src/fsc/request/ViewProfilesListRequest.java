@@ -1,10 +1,10 @@
 package fsc.request;
 
 public class ViewProfilesListRequest extends Request {
-  public String which;
+  public final String query;
 
-  public ViewProfilesListRequest(String which) {
-    this.which = which;
+  public ViewProfilesListRequest(String query) {
+    this.query = query;
   }
 
   public ViewProfilesListRequest() {
