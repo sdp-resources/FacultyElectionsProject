@@ -9,7 +9,7 @@ import fsc.request.Request;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
-import fsc.service.QueryStringConverter;
+import fsc.service.query.QueryStringConverter;
 
 public class CreateSeatInteractor extends Interactor<CreateSeatRequest> {
   private CommitteeGateway gateway;

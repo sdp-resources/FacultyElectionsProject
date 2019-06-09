@@ -1,6 +1,7 @@
 package fsc.service;
 
 import fsc.entity.query.Query;
+import fsc.service.query.QueryStringConverter;
 import org.junit.Ignore;
 import org.junit.Test;
 

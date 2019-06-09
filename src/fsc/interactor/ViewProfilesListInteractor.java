@@ -5,7 +5,7 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.ViewResponse;
-import fsc.service.QueryStringConverter;
+import fsc.service.query.QueryStringConverter;
 import fsc.viewable.ViewableProfile;
 
 import java.util.List;

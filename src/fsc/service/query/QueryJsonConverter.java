@@ -1,4 +1,4 @@
-package fsc.service;
+package fsc.service.query;
 
 import fsc.entity.query.*;
 import org.json.JSONArray;

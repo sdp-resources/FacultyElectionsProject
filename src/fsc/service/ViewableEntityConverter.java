@@ -1,6 +1,7 @@
 package fsc.service;
 
 import fsc.entity.*;
+import fsc.service.query.QueryStringConverter;
 import fsc.viewable.*;
 
 import java.util.List;

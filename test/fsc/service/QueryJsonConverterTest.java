@@ -1,6 +1,7 @@
 package fsc.service;
 
 import fsc.entity.query.Query;
+import fsc.service.query.QueryJsonConverter;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;

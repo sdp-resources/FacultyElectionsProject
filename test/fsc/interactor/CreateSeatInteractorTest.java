@@ -9,7 +9,7 @@ import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
-import fsc.service.QueryStringConverter;
+import fsc.service.query.QueryStringConverter;
 import org.junit.Before;
 import org.junit.Test;
 
