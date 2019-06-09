@@ -34,6 +34,10 @@ public class ViewDTSGatewayDummy implements Gateway {
     return null;
   }
 
+  public List<Committee> getCommittees() {
+    return null;
+  }
+
   public Committee getCommittee(String committeeName) {
     return null;
   }

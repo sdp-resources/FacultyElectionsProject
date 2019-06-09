@@ -43,7 +43,7 @@ class JSONElectionDataReader implements ElectionDataReader {
     String description = json.getString("description");
     Committee committee = new Committee(name, description);
     for (Object s : json.getJSONArray("seats")) {
-      committee.addMember(makeSeat(s));
+      committee.addSeat(makeSeat(s));
     }
     return committee;
   }

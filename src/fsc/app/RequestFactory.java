@@ -41,7 +41,15 @@ public class RequestFactory {
     return new ViewContractsRequest();
   }
 
+  public Request viewCommitteeList() {
+    return new ViewCommitteeListRequest();
+  }
+
   public Request createCommittee(String name, String description) {
     return new CreateCommitteeRequest(name, description);
+  }
+
+  public Request addSeat(String committeeName, String seatName, String query) {
+    return new CreateSeatRequest(committeeName, seatName, query);
   }
 }

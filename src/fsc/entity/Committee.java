@@ -27,6 +27,16 @@ public class Committee {
     throw new UnknownSeatNameException();
   }
 
+  public boolean hasSeat(String seatName) {
+    for (Seat seat : seats) {
+      if (seat.getName().equals(seatName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   public void setName(String name) {
     this.name = name;
   }
@@ -47,7 +57,7 @@ public class Committee {
     return seats.size();
   }
 
-  public void addMember(Seat seat) {
+  public void addSeat(Seat seat) {
     seats.add(seat);
   }
 

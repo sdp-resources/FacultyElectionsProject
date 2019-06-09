@@ -97,6 +97,10 @@ public class InMemoryGateway implements Gateway {
     elections.add(election);
   }
 
+  public List<Committee> getCommittees() {
+    return committees;
+  }
+
   public Committee getCommittee(String committeeName) throws UnknownCommitteeException {
     for (Committee committee : committees) {
       if (committee.getName().equals(committeeName)) {

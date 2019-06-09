@@ -26,4 +26,8 @@ public class FscFixture {
   public boolean createCommittee(String name, String description) {
     return TestContext.app.addCommittee(name, description);
   }
+
+  public boolean createSeat(String committeeName, String seatName, String query) {
+    return TestContext.app.addSeat(committeeName, seatName, query);
+  }
 }

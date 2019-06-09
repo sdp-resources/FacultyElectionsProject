@@ -46,7 +46,7 @@ public class CommitteeAndSeatsTest {
 
   @Test
   public void committeeHasOneSeat() {
-    committee.addMember(seat);
+    committee.addSeat(seat);
 
     assertThat(committee.getCommitteeSize(), is(1));
   }

@@ -9,7 +9,6 @@ import fsc.response.ViewResponse;
 import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,11 +31,17 @@ public class AppContext {
                  .append(new ViewProfileInteractor(gateway))
                  .append(new EditProfileInteractor(gateway))
                  .append(new ViewProfilesListInteractor(gateway))
-                 .append(new CreateCommitteeInteractor(gateway));
+                 .append(new CreateCommitteeInteractor(gateway))
+                 .append(new ViewCommitteeListInteractor(gateway))
+                 .append(new CreateSeatInteractor(gateway));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {
     return getViewableProfileListResult(requestFactory.viewProfilesList(query));
+  }
+
+  public List<ViewableCommittee> getAllCommittees() {
+    return getViewableCommitteeListResult(requestFactory.viewCommitteeList());
   }
 
   public boolean editProfile(String username, Map<String, String> changes) {
@@ -56,6 +61,10 @@ public class AppContext {
 
   public boolean addCommittee(String name, String description) {
     return isSuccessful(requestFactory.createCommittee(name, description));
+  }
+
+  public boolean addSeat(String committeeName, String seatName, String query) {
+    return isSuccessful(requestFactory.addSeat(committeeName, seatName, query));
   }
 
   public boolean addDivision(String division) {
@@ -102,7 +111,8 @@ public class AppContext {
     return ((ViewResponse<List<ViewableProfile>>) response).values;
   }
 
-  public List<ViewableCommittee> getAllCommittees() {
-    return null;
+  private List<ViewableCommittee> getViewableCommitteeListResult(Request request) {
+    Response response = getResponse(request);
+    return ((ViewResponse<List<ViewableCommittee>>) response).values;
   }
 }

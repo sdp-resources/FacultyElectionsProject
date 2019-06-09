@@ -1,10 +1,12 @@
 package fsc.response;
 
 import fsc.entity.Candidate;
+import fsc.entity.Committee;
 import fsc.entity.Profile;
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableCandidate;
+import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
 
 import java.util.List;
@@ -33,6 +35,10 @@ public class ViewResponse<T> implements Response {
 
   public static ViewResponse<ViewableCandidate> ofCandidate(Candidate candidate) {
     return new ViewResponse<>(entityConverter.convert(candidate));
+  }
+
+  public static ViewResponse<List<ViewableCommittee>> ofCommitteeList(List<Committee> committees) {
+    return new ViewResponse<>(entityConverter.convertCommittees(committees));
   }
 
   public boolean equals(Object o) {

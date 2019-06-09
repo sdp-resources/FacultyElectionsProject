@@ -5,33 +5,35 @@ import fsc.gateway.CommitteeGateway;
 
 import java.util.List;
 
-public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
+public class ProvidedCommitteeGatewaySpy implements CommitteeGateway {
   public String submittedCommitteeName = null;
-  public Committee committeeAdded = null;
-  public boolean hasSaved = false;
+  public Committee storedCommittee;
+  public boolean saveWasCalled = false;
+
+  public ProvidedCommitteeGatewaySpy(Committee committee) {
+    storedCommittee = committee;
+  }
 
   public List<Committee> getCommittees() {
     return null;
   }
 
-  @Override
-  public Committee getCommittee(String name) throws UnknownCommitteeException {
+  public Committee getCommittee(String name) {
     submittedCommitteeName = name;
-    throw new UnknownCommitteeException();
+    return storedCommittee;
   }
 
   @Override
   public void addCommittee(Committee committee) {
-    committeeAdded = committee;
   }
 
   public void save() {
-    if (committeeAdded != null) { hasSaved = true; }
+    if (submittedCommitteeName != null) { saveWasCalled = true; }
   }
 
   public boolean hasCommittee(String name) {
     submittedCommitteeName = name;
-    return false;
+    return name.equals(storedCommittee.getName());
   }
 
 }

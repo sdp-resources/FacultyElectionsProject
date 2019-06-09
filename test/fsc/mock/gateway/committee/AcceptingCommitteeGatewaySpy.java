@@ -5,9 +5,15 @@ import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 
+import java.util.List;
+
 public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
   public String submittedCommitteeName = null;
   public Committee returnedCommittee = null;
+
+  public List<Committee> getCommittees() {
+    return null;
+  }
 
   public Committee getCommittee(String name) {
     submittedCommitteeName = name;
