@@ -31,3 +31,4 @@ hs_err_pid*
 
 \.idea/uiDesigner\.xml
 fitnesse/FitNesseRoot/files/testResults
+fitnesse/FitNesseRoot/*
