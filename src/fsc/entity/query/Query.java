@@ -28,6 +28,15 @@ public abstract class Query {
     return new NotQuery(query);
   }
 
+
+  public static Query named(String name) {
+    return named(name, null);
+  }
+
+  public static Query named(String aName, Query query) {
+    return new NamedQuery(aName, query);
+  }
+
   public abstract Object accept(QueryVisitor visitor);
   public abstract boolean isProfileValid(Profile profile);
 
@@ -41,6 +50,7 @@ public abstract class Query {
     T visit(AndQuery query);
     T visit(AttributeQuery query);
     T visit(NotQuery query);
+    T visit(NamedQuery query);
   }
 
 }

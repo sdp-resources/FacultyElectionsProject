@@ -33,6 +33,9 @@ public class QueryStringConverterTest {
     assertStringCorrespondsToQuery("((all or none) and (all or none))",
                                    Query.all(Query.any(Query.always(), Query.never()),
                                              Query.any(Query.always(), Query.never())));
+    assertStringCorrespondsToQuery("(isActive and division equals \"Humanities\")",
+                                   Query.all(Query.named("isActive"),
+                                             Query.has("division", "Humanities")));
   }
 
   @Ignore

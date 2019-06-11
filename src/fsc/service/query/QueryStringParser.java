@@ -49,8 +49,7 @@ public class QueryStringParser {
         throw new RuntimeException("Expected string or name");
       }
     } else {
-      // TODO: Need to introduce named queries
-      return null;
+      return Query.named(nextToken.value, null);
     }
   }
 

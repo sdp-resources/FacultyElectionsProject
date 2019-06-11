@@ -16,7 +16,14 @@ public class QueryJsonConverter implements Query.QueryVisitor<JSONObject> {
       case "or":
         return Query.any(getQueriesFromJSONArray((JSONArray) root.get("or")));
       default:
-        return Query.has(firstKey, root.getString(firstKey));
+        Object value = root.get(firstKey);
+        if (value instanceof String) {
+          return Query.has(firstKey, (String) value);
+        }
+        if ((value instanceof Boolean) && (Boolean) value) {
+          return Query.named(firstKey, null);
+        }
+        throw new RuntimeException("Cannot process value: " + value);
     }
   }
 
@@ -54,5 +61,9 @@ public class QueryJsonConverter implements Query.QueryVisitor<JSONObject> {
 
   public JSONObject visit(NotQuery query) {
     throw new RuntimeException("Need to handle this case");
+  }
+
+  public JSONObject visit(NamedQuery query) {
+    return new JSONObject().put(query.name, true);
   }
 }

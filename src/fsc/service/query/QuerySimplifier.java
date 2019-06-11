@@ -25,6 +25,8 @@ public class QuerySimplifier implements Query.QueryVisitor<Query> {
     return query;
   }
 
+  public Query visit(NamedQuery query) { return query; }
+
   private Stream<Query> flattenOr(Query q) {
     return (q instanceof OrQuery ? ((OrQuery) q).queries : List.of(q)).stream();
   }

@@ -47,6 +47,9 @@ public class QueryJsonConverterTest {
                 Query.has("contract", "tenured"),
                 Query.any(Query.has("division", "Art"),
                           Query.has("division", "Librarian"))));
+    jsonProducesQuery(
+          "{ isActive: true }",
+          Query.named("isActive", null));
   }
 
   private void jsonProducesQuery(String json, Query expectedQuery) {

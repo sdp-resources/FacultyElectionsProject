@@ -32,6 +32,10 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
     throw new RuntimeException("Need to handle this case");
   }
 
+  public String visit(NamedQuery query) {
+    return query.name;
+  }
+
   public Query fromString(String s) {
     return new QueryStringParser(s).parse();
   }

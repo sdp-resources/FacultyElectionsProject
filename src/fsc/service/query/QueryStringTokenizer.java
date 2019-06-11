@@ -70,14 +70,13 @@ class QueryStringTokenizer {
 
   private ParseToken readWord(String word) {
     String lword = word.toLowerCase();
-    if (lword.equals(ALL)) { return ParseToken.all; } else if (lword.equals(NONE)) {
-      return ParseToken.none;
-    } else if (lword.equals(EQUALS) || lword.equals(IS)) {
-      return ParseToken.equals;
-    } else if (lword.equals(AND)) { return ParseToken.and; } else if (lword.equals(OR)) {
-      return ParseToken.or;
-    } else { return ParseToken.name(word); }
-    // TODO
+    if (lword.equals(ALL)) { return ParseToken.all; }
+    if (lword.equals(NONE)) { return ParseToken.none; }
+    if (lword.equals(EQUALS) || lword.equals(IS)) { return ParseToken.equals; }
+    if (lword.equals(AND)) { return ParseToken.and; }
+    if (lword.equals(OR)) { return ParseToken.or; }
+    return ParseToken.name(word);
+    // TODO case of NOT?
 
   }
 

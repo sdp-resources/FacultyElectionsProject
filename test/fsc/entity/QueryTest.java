@@ -52,4 +52,10 @@ public class QueryTest {
     query = Query.any(Query.always(), Query.never(), Query.never());
     assertTrue(query.isProfileValid(profile));
   }
+
+  @Test
+  public void namedQuery() {
+    query = Query.named("aName", Query.has("division", profile.getDivision()));
+    assertTrue(query.isProfileValid(profile));
+  }
 }
