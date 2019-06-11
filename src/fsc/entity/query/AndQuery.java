@@ -2,13 +2,13 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class AndQuery extends Query {
-  public final Query[] queries;
+  public List<Query> queries;
 
-  public AndQuery(Query[] queries) {
-    this.queries = queries;
+  public AndQuery(List<Query> queries) {
+    this.queries = new ArrayList<>(queries);
   }
 
   public Object accept(QueryVisitor visitor) {
@@ -27,10 +27,14 @@ public class AndQuery extends Query {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     AndQuery andQuery = (AndQuery) o;
-    return Arrays.equals(queries, andQuery.queries);
+    return queries.equals(andQuery.queries);
   }
 
   public int hashCode() {
-    return Arrays.hashCode(queries);
+    return Objects.hash(queries);
+  }
+
+  public String toString() {
+    return "AndQuery{" + queries + '}';
   }
 }

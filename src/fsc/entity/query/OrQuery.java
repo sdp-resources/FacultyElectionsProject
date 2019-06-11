@@ -2,12 +2,13 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class OrQuery extends Query {
-  public final Query[] queries;
+  public List<Query> queries;
 
-  public OrQuery(Query[] queries) {
+  public OrQuery(List<Query> queries) {
     this.queries = queries;
   }
 
@@ -27,10 +28,14 @@ public class OrQuery extends Query {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     OrQuery orQuery = (OrQuery) o;
-    return Arrays.equals(queries, orQuery.queries);
+    return queries.equals(orQuery.queries);
   }
 
   public int hashCode() {
-    return Arrays.hashCode(queries);
+    return Objects.hash(queries);
+  }
+
+  public String toString() {
+    return "OrQuery{" + queries + '}';
   }
 }

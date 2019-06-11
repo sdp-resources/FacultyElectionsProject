@@ -1,7 +1,6 @@
-package fsc.service;
+package fsc.service.query;
 
 import fsc.entity.query.Query;
-import fsc.service.query.QueryJsonConverter;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +52,6 @@ public class QueryJsonConverterTest {
   private void jsonProducesQuery(String json, Query expectedQuery) {
     assertEquals(expectedQuery, queryJsonConverter.fromJSON(new JSONObject(json)));
     assertEquals(new JSONObject(json).toString(),
-                 queryJsonConverter.toJSON(expectedQuery).toString());
+                        queryJsonConverter.toJSON(expectedQuery).toString());
   }
 }

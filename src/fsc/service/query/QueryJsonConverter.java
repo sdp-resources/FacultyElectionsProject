@@ -4,7 +4,9 @@ import fsc.entity.query.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class QueryJsonConverter implements Query.QueryVisitor {
+import java.util.List;
+
+public class QueryJsonConverter implements Query.QueryVisitor<JSONObject> {
   public Query fromJSON(JSONObject root) {
     String firstKey = JSONObject.getNames(root)[0];
 
@@ -19,7 +21,7 @@ public class QueryJsonConverter implements Query.QueryVisitor {
   }
 
   public JSONObject toJSON(Query query) {
-    return (JSONObject) visit(query);
+    return visit(query);
   }
 
   private Query[] getQueriesFromJSONArray(JSONArray array) {
@@ -32,21 +34,25 @@ public class QueryJsonConverter implements Query.QueryVisitor {
     return queries;
   }
 
-  public Object visit(OrQuery query) {
+  public JSONObject visit(OrQuery query) {
     return new JSONObject().put("or", visit(query.queries));
   }
 
-  public Object visit(AndQuery query) {
+  public JSONObject visit(AndQuery query) {
     return new JSONObject().put("and", visit(query.queries));
   }
 
-  private JSONArray visit(Query[] queries) {
+  private JSONArray visit(List<Query> queries) {
     JSONArray jsonQueries = new JSONArray();
     for (Query q : queries) { jsonQueries.put(visit(q)); }
     return jsonQueries;
   }
 
-  public Object visit(AttributeQuery query) {
+  public JSONObject visit(AttributeQuery query) {
     return new JSONObject().put(query.key, query.value);
+  }
+
+  public JSONObject visit(NotQuery query) {
+    throw new RuntimeException("Need to handle this case");
   }
 }
