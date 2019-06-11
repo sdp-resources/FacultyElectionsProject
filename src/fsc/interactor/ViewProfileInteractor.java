@@ -2,7 +2,6 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
-import fsc.request.Request;
 import fsc.request.ViewProfileRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -29,9 +28,5 @@ public class ViewProfileInteractor extends Interactor<ViewProfileRequest> {
       return ErrorResponse.unknownProfileName();
     }
 
-  }
-
-  public boolean canHandle(Request request) {
-    return request instanceof ViewProfileRequest;
   }
 }

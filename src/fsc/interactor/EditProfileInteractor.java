@@ -3,7 +3,6 @@ package fsc.interactor;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.request.EditProfileRequest;
-import fsc.request.Request;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
@@ -24,9 +23,5 @@ public class EditProfileInteractor extends Interactor<EditProfileRequest> {
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ErrorResponse.unknownProfileName();
     }
-  }
-
-  public boolean canHandle(Request request) {
-    return request instanceof EditProfileRequest;
   }
 }

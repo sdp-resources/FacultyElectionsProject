@@ -2,7 +2,6 @@ package fsc.interactor;
 
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
-import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.ViewResponse;
 import fsc.service.query.QueryStringConverter;
@@ -25,9 +24,5 @@ public class ViewProfilesListInteractor extends Interactor<ViewProfilesListReque
 
   private List<Profile> getProfiles(String which) {
     return profileGateway.getProfilesMatching(new QueryStringConverter().fromString(which));
-  }
-
-  public boolean canHandle(Request request) {
-    return request instanceof ViewProfilesListRequest;
   }
 }

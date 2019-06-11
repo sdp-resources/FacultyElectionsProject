@@ -5,7 +5,6 @@ import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.request.CreateSeatRequest;
-import fsc.request.Request;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
@@ -33,9 +32,5 @@ public class CreateSeatInteractor extends Interactor<CreateSeatRequest> {
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ErrorResponse.unknownCommitteeName();
     }
-  }
-
-  public boolean canHandle(Request request) {
-    return request instanceof CreateSeatRequest;
   }
 }
