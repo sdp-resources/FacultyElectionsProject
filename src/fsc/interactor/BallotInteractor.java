@@ -1,10 +1,10 @@
 package fsc.interactor;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
-import fsc.entity.VoteRecord;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
+import fsc.request.AddToBallotRequest;
+import fsc.request.RemoveFromBallotRequest;
 import fsc.request.VoteRecordRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
@@ -13,14 +13,45 @@ import fsc.response.SuccessResponse;
 import java.util.HashSet;
 import java.util.List;
 
-public class CastVoteInteractor {
-
+public class BallotInteractor {
   private ProfileGateway profileGateway;
   private ElectionGateway electionGateway;
 
-  public CastVoteInteractor(ElectionGateway electionGateway, ProfileGateway profileGateway) {
-    this.electionGateway = electionGateway;
+  public BallotInteractor(
+        ElectionGateway electionGateway, ProfileGateway profileGateway
+  ) {
     this.profileGateway = profileGateway;
+    this.electionGateway = electionGateway;
+  }
+
+  public Response execute(AddToBallotRequest request) {
+    try {
+      Election election = electionGateway.getElection(request.getBallotID());
+      Profile profile = profileGateway.getProfile(request.getProfileUsername());
+      election.getBallot().addCandidate(profile);
+      electionGateway.save();
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
+      return ErrorResponse.unknownProfileName();
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ErrorResponse.unknownElectionID();
+    }
+    return new SuccessResponse();
+  }
+
+  public Response execute(RemoveFromBallotRequest request) {
+    try {
+      Election election = electionGateway.getElection(request.ballotID);
+      Profile profile = profileGateway.getProfile(request.username);
+      election.getBallot().remove(profile);
+      electionGateway.save();
+      return new SuccessResponse();
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
+      return ErrorResponse.unknownProfileName();
+    } catch (Ballot.NoProfileInBallotException e) {
+      return ErrorResponse.invalidCandidate();
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ErrorResponse.unknownElectionID();
+    }
   }
 
   public Response execute(VoteRecordRequest request) {
@@ -65,6 +96,3 @@ public class CastVoteInteractor {
   }
 
 }
-
-
-

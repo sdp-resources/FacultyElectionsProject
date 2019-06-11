@@ -2,15 +2,16 @@ package fsc.interactor;
 
 import fsc.gateway.ContractTypeGateway;
 import fsc.request.AddContractTypeRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.request.ViewContractsRequest;
+import fsc.response.*;
 
-public class AddContractTypeInteractor extends Interactor<AddContractTypeRequest> {
+import java.util.List;
+
+public class ContractTypeInteractor extends Interactor {
 
   private ContractTypeGateway gateway;
 
-  public AddContractTypeInteractor(ContractTypeGateway gateway) {
+  public ContractTypeInteractor(ContractTypeGateway gateway) {
     this.gateway = gateway;
   }
 
@@ -22,4 +23,9 @@ public class AddContractTypeInteractor extends Interactor<AddContractTypeRequest
     gateway.save();
     return new SuccessResponse();
   }
+
+  public ViewResponse<List<String>> execute(ViewContractsRequest request) {
+    return ViewResponse.ofStrings(gateway.getAvailableContractTypes());
+  }
+
 }

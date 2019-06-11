@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.gateway.CommitteeGateway;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.EditCommitteeRequest;
@@ -17,10 +16,11 @@ import static org.junit.Assert.assertEquals;
 
 public class EditCommitteeInteractorTest {
 
+  private CommitteeInteractor interactor;
+
   @Test
   public void changeOnNonexistantCommitteeGivesErrorResponse() {
-    CommitteeGateway gateway = new RejectingCommitteeGatewaySpy();
-    EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
+    interactor = new CommitteeInteractor(new RejectingCommitteeGatewaySpy());
     String name = "Steering";
     HashMap<String, Object> changes = new HashMap<>();
     changes.put("name", "steering wheel");
@@ -41,7 +41,7 @@ public class EditCommitteeInteractorTest {
     EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
 
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
-    EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway);
 
     Response response = interactor.execute(request);
 
@@ -61,7 +61,7 @@ public class EditCommitteeInteractorTest {
     EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
 
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
-    EditCommitteeInteractor interactor = new EditCommitteeInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway);
 
     Response response = interactor.execute(request);
 

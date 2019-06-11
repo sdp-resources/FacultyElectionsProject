@@ -1,11 +1,11 @@
 package fsc.interactor;
 
 import fsc.entity.Committee;
-import fsc.mock.gateway.committee.ProvidedCommitteeGatewaySpy;
-import fsc.request.CreateSeatRequest;
 import fsc.entity.Seat;
 import fsc.entity.query.Query;
+import fsc.mock.gateway.committee.ProvidedCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
+import fsc.request.CreateSeatRequest;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
@@ -13,7 +13,8 @@ import fsc.service.query.QueryStringConverter;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CreateSeatInteractorTest {
   public static final String COMMITTEE_NAME = "a committee";
@@ -21,7 +22,7 @@ public class CreateSeatInteractorTest {
   private static final String QUERY_STRING = "status equals active";
   private CreateSeatRequest request;
   private Seat expectedSeat;
-  private CreateSeatInteractor interactor;
+  private CommitteeInteractor interactor;
 
   @Before
   public void setup() {
@@ -33,7 +34,7 @@ public class CreateSeatInteractorTest {
   @Test
   public void WhenCommitteeNameDoesNotExist_thenReturnError() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
-    interactor = new CreateSeatInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -45,7 +46,7 @@ public class CreateSeatInteractorTest {
     Committee committee = new Committee(COMMITTEE_NAME, "");
     committee.addSeat(expectedSeat);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CreateSeatInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -56,7 +57,7 @@ public class CreateSeatInteractorTest {
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
     Committee committee = new Committee(COMMITTEE_NAME, "");
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CreateSeatInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);

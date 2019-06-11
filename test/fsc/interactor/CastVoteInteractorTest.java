@@ -33,7 +33,7 @@ public class CastVoteInteractorTest {
   private ProfileGateway profileGateway;
   private Election election;
   private Profile candidate;
-  private CastVoteInteractor interactor;
+  private BallotInteractor interactor;
 
   @Before
   public void setup() {
@@ -45,25 +45,25 @@ public class CastVoteInteractorTest {
     request = new VoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(candidate, voter);
+    interactor = new BallotInteractor(electionGateway, profileGateway);
   }
 
   @Test
   public void whenGivenAnInvalidProfile_returnErrorResponse() {
-    interactor = new CastVoteInteractor(electionGateway, new InvalidProfileGatewaySpy());
+    interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }
 
   @Test
   public void whenGivenAnInvalidElectionId_returnErrorResponse() {
-    interactor = new CastVoteInteractor(new RejectingElectionGatewaySpy(), profileGateway);
+    interactor = new BallotInteractor(new RejectingElectionGatewaySpy(), profileGateway);
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownElectionID(), response);
   }
 
   @Test
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
-    interactor = new CastVoteInteractor(electionGateway, profileGateway);
     election.getBallot().addCandidate(voter);
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.invalidCandidate(), response);
@@ -71,7 +71,6 @@ public class CastVoteInteractorTest {
 
   @Test
   public void whenGivenMultipleVotesForCandidate_returnErrorResponse() {
-    interactor = new CastVoteInteractor(electionGateway, profileGateway);
     election.getBallot().addCandidate(candidate);
     election.getBallot().addCandidate(voter);
     vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
@@ -82,7 +81,6 @@ public class CastVoteInteractorTest {
 
   @Test
   public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
-    interactor = new CastVoteInteractor(electionGateway, profileGateway);
     election.getBallot().addCandidate(candidate);
     interactor.execute(request);
     Response response = interactor.execute(request);
@@ -91,7 +89,6 @@ public class CastVoteInteractorTest {
 
   @Test
   public void whenGivenCorrectInformation_saveRecord() {
-    interactor = new CastVoteInteractor(electionGateway, profileGateway);
     election.getBallot().addCandidate(candidate);
     Response response = interactor.execute(request);
     assertEquals(new SuccessResponse(), response);

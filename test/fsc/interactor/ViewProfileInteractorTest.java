@@ -21,7 +21,7 @@ public class ViewProfileInteractorTest {
     ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
 
     ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
-    ViewProfileInteractor interactor = new ViewProfileInteractor(gatewaySpy);
+    ProfileInteractor interactor = new ProfileInteractor(gatewaySpy);
     Response response = interactor.execute(request);
 
     assertEquals(request.username, gatewaySpy.providedUsername);
@@ -33,7 +33,7 @@ public class ViewProfileInteractorTest {
     InvalidProfileGatewaySpy gatewaySpy = new InvalidProfileGatewaySpy();
 
     ViewProfileRequest request = new ViewProfileRequest("BoogieA14");
-    ViewProfileInteractor viewInteractor = new ViewProfileInteractor(gatewaySpy);
+    ProfileInteractor viewInteractor = new ProfileInteractor(gatewaySpy);
     Response response = viewInteractor.execute(request);
 
     assertEquals(request.username, gatewaySpy.submittedUsername);

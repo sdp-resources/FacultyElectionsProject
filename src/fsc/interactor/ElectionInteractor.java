@@ -4,16 +4,20 @@ import fsc.entity.*;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
 import fsc.request.CreateElectionRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.request.EditBallotQueryRequest;
+import fsc.request.ViewCandidatesRequest;
+import fsc.response.*;
 
-public class CreateElectionInteractor {
+public class ElectionInteractor {
   private ElectionGateway electionGateway;
   private CommitteeGateway committeeGateway;
   private BallotCreator ballotCreator;
 
-  public CreateElectionInteractor(
+  public ElectionInteractor(ElectionGateway electionGateway, BallotCreator ballotCreator) {
+    this(electionGateway, null, ballotCreator);
+  }
+
+  public ElectionInteractor(
         ElectionGateway electionGateway, CommitteeGateway committeeGateway,
         BallotCreator ballotCreator
   ) {
@@ -37,4 +41,25 @@ public class CreateElectionInteractor {
     }
   }
 
+  public Response execute(EditBallotQueryRequest request) {
+    try {
+      Election election = electionGateway.getElection(request.electionID);
+      election.setDefaultQuery(request.query);
+      Ballot ballot = ballotCreator.getBallot(election.getDefaultQuery());
+      election.setBallot(ballot);
+      electionGateway.save();
+      return new SuccessResponse();
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ErrorResponse.unknownElectionID();
+    }
+  }
+
+  public Response execute(ViewCandidatesRequest request) {
+    try {
+      Election election = electionGateway.getElection(request.electionID);
+      return ViewResponse.ofProfileList(election.getCandidateProfiles());
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ErrorResponse.unknownElectionID();
+    }
+  }
 }

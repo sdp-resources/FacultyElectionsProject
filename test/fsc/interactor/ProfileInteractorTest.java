@@ -14,10 +14,10 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class CreateProfileInteractorTest {
+public class ProfileInteractorTest {
 
   CreateProfileRequest request;
-  CreateProfileInteractor interactor;
+  ProfileInteractor interactor;
   Response response;
   Profile providedProfile = EntityStub.getProfile(0);
 
@@ -29,7 +29,7 @@ public class CreateProfileInteractorTest {
   @Test
   public void testCorrectExecute() {
     InvalidProfileGatewaySpy gateway = new InvalidProfileGatewaySpy();
-    interactor = new CreateProfileInteractor(gateway);
+    interactor = new ProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);
     assertEquals(new SuccessResponse(), response);
@@ -39,7 +39,7 @@ public class CreateProfileInteractorTest {
   @Test
   public void testWrongUsernameExecute() {
     ExistingProfileGatewaySpy gateway = new ExistingProfileGatewaySpy(providedProfile);
-    interactor = new CreateProfileInteractor(gateway);
+    interactor = new ProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals(ErrorResponse.resourceExists(), response);
   }

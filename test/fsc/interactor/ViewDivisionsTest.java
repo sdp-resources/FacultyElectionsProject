@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class ViewDivisionsTest {
 
   ViewDivisionRequest request;
-  ViewDivisionInteractor interactor;
+  DivisionInteractor interactor;
   Response response;
   private ExistingDivisionGatewaySpy divisionGateway;
 
@@ -24,7 +24,7 @@ public class ViewDivisionsTest {
 
   @Test
   public void gatewayDivisionListEqualsOurDivisionList() {
-    interactor = new ViewDivisionInteractor(divisionGateway);
+    interactor = new DivisionInteractor(divisionGateway);
     response = interactor.execute(request);
     assertEquals(ViewResponse.ofStrings(divisionGateway.divisions), response);
   }

@@ -2,7 +2,6 @@ package fsc.interactor;
 
 import fsc.gateway.SessionGateway;
 import fsc.mock.gateway.session.RejectingSessionGatewayStub;
-import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.ErrorResponse;
 import org.junit.Test;

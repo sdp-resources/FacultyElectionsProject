@@ -18,20 +18,20 @@ public class EditProfileInteractorTest {
   private EditProfileRequest request;
   private Profile providedProfile;
   private ExistingProfileGatewaySpy profileGateway;
-  private EditProfileInteractor interactor;
+  private ProfileInteractor interactor;
 
   @Before
   public void setup() {
     providedProfile = EntityStub.getProfile(0);
     profileGateway = new ExistingProfileGatewaySpy(providedProfile);
     request = new EditProfileRequest("rossB12");
-    interactor = new EditProfileInteractor(profileGateway);
+    interactor = new ProfileInteractor(profileGateway);
   }
 
   @Test
   public void noProfileExistsException() {
     request.changeContractType("Tenured");
-    interactor = new EditProfileInteractor(new InvalidProfileGatewaySpy());
+    interactor = new ProfileInteractor(new InvalidProfileGatewaySpy());
     Response response = interactor.handle(request);
     assertEquals(ErrorResponse.unknownProfileName(), response);
   }

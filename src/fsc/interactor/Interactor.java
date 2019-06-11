@@ -4,14 +4,19 @@ import fsc.request.Request;
 import fsc.response.ErrorResponse;
 import fsc.response.Response;
 
-public abstract class Interactor<T extends Request> {
-  public abstract Response execute(T request);
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-  public Interactor<? extends Request> next = null;
+public abstract class Interactor {
+  public Response execute(Request request) {
+    return ErrorResponse.cannotHandle();
+  }
+
+  public Interactor next = null;
 
   public boolean canHandle(Request request) {
     try {
-      this.getClass().getDeclaredMethod("execute", request.getClass());
+      getExecuteForRequest(request);
       return true;
     } catch (NoSuchMethodException e) {
       return false;
@@ -19,14 +24,31 @@ public abstract class Interactor<T extends Request> {
   }
 
   public Response handle(Request request) {
-    return canHandle(request) ? execute((T) request) : passOn(request);
+    return canHandle(request) ? callAppropriateExecute(request)
+                              : passOn(request);
+  }
+
+  private Response callAppropriateExecute(Request request) {
+    try {
+      return (Response) getExecuteForRequest(request).invoke(this, request);
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException("Should really not be happening");
+    } catch (InvocationTargetException e) {
+      throw new RuntimeException("Should not be happening");
+    } catch (NoSuchMethodException e) {
+      throw new RuntimeException("Should not be happening");
+    }
   }
 
   public Response passOn(Request request) {
     return next == null ? ErrorResponse.cannotHandle() : next.handle(request);
   }
 
-  public Interactor<? extends Request> append(Interactor<? extends Request> other) {
+  private Method getExecuteForRequest(Request request) throws NoSuchMethodException {
+    return this.getClass().getDeclaredMethod("execute", request.getClass());
+  }
+
+  public Interactor append(Interactor other) {
     next = next == null ? other : next.append(other);
     return this;
   }

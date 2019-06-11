@@ -15,20 +15,18 @@ import java.util.List;
 import java.util.function.Function;
 
 public class InteractionController {
-  private ViewProfilesListInteractor viewProfilesListInteractor;
-  private CreateProfileInteractor createProfileInteractor;
-  private final ViewContractsInteractor viewContractsInteractor;
-  private final ViewDivisionInteractor viewDivisionsInteractor;
+  private ProfileInteractor profileInteractor;
+  private final ContractTypeInteractor contractTypeInteractor;
+  private final DivisionInteractor divisionInteractor;
   private final InMemoryGateway gateway;
-  private final CreateElectionInteractor createElectionInteractor;
+  private final ElectionInteractor electionInteractor;
 
   InteractionController(InMemoryGateway gateway) {
-    viewProfilesListInteractor = new ViewProfilesListInteractor(gateway);
-    createProfileInteractor = new CreateProfileInteractor(gateway);
-    viewContractsInteractor = new ViewContractsInteractor(gateway);
-    viewDivisionsInteractor = new ViewDivisionInteractor(gateway);
-    createElectionInteractor = new CreateElectionInteractor(gateway, gateway,
-                                                            new BallotCreator(gateway));
+    profileInteractor = new ProfileInteractor(gateway);
+    contractTypeInteractor = new ContractTypeInteractor(gateway);
+    divisionInteractor = new DivisionInteractor(gateway);
+    electionInteractor = new ElectionInteractor(gateway, gateway,
+                                                new BallotCreator(gateway));
     this.gateway = gateway;
   }
 
@@ -39,29 +37,23 @@ public class InteractionController {
     String contractType = params.apply("contractType");
     CreateProfileRequest request = new CreateProfileRequest(fullName, username, division,
                                                             contractType);
-    return createProfileInteractor.execute(request);
+    return profileInteractor.execute(request);
   }
 
   Collection<ViewableProfile> getAllProfiles() {
-    return viewProfilesListInteractor.execute(new ViewProfilesListRequest()).values;
+    return profileInteractor.execute(new ViewProfilesListRequest()).values;
   }
 
-  public void setViewProfilesListInteractor(
-        ViewProfilesListInteractor viewProfilesListInteractor
-  ) {
-    this.viewProfilesListInteractor = viewProfilesListInteractor;
-  }
-
-  public void setCreateProfileInteractor(CreateProfileInteractor createProfileInteractor) {
-    this.createProfileInteractor = createProfileInteractor;
+  public void setProfileInteractor(ProfileInteractor profileInteractor) {
+    this.profileInteractor = profileInteractor;
   }
 
   public List<String> getAllContractTypes() {
-    return viewContractsInteractor.execute(new ViewContractsRequest()).values;
+    return contractTypeInteractor.execute(new ViewContractsRequest()).values;
   }
 
   public List<String> getAllDivisions() {
-    Response response = viewDivisionsInteractor.execute(new ViewDivisionRequest());
+    Response response = divisionInteractor.execute(new ViewDivisionRequest());
     return ((ViewResponse<List<String>>) response).values;
   }
 
@@ -73,7 +65,7 @@ public class InteractionController {
     String committeeName = params.apply("committee");
     String seatName = params.apply("seat");
     CreateElectionRequest request = new CreateElectionRequest(seatName, committeeName);
-    return createElectionInteractor.execute(request);
+    return electionInteractor.execute(request);
   }
 
   public Collection<Election> getAllElections() {

@@ -21,6 +21,7 @@ public class ViewProfilesListInteractorTest {
   private Profile profile1;
   private Profile profile2;
   private Profile profile3;
+  private ProfileInteractor interactor;
 
   @Before
   public void setup() {
@@ -29,11 +30,11 @@ public class ViewProfilesListInteractorTest {
     profile2 = EntityStub.getProfile(1);
     profile3 = EntityStub.getProfile(2);
     profileGatewaySpy = new ProfileGatewayStub(profile1, profile2, profile3);
+    interactor = new ProfileInteractor(profileGatewaySpy);
   }
 
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
-    ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
     Response response = interactor.handle(request);
     Response expectedResponse = ViewResponse.ofProfileList(profileGatewaySpy.getAllProfiles());
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
@@ -42,7 +43,6 @@ public class ViewProfilesListInteractorTest {
 
   @Test
   public void whenSetToViewActiveProfiles_ignoreInactiveProfiles() {
-    ViewProfilesListInteractor interactor = new ViewProfilesListInteractor(profileGatewaySpy);
     profile2.setInactive();
     request = new ViewProfilesListRequest("status equals active");
     Response response = interactor.handle(request);

@@ -23,17 +23,10 @@ public class AppContext {
   }
 
   public Interactor loadInteractors(Gateway gateway) {
-    return new ViewDivisionInteractor(gateway)
-                 .append(new AddDivisionInteractor(gateway))
-                 .append(new ViewContractsInteractor(gateway))
-                 .append(new AddContractTypeInteractor(gateway))
-                 .append(new CreateProfileInteractor(gateway))
-                 .append(new ViewProfileInteractor(gateway))
-                 .append(new EditProfileInteractor(gateway))
-                 .append(new ViewProfilesListInteractor(gateway))
-                 .append(new CreateCommitteeInteractor(gateway))
-                 .append(new ViewCommitteeListInteractor(gateway))
-                 .append(new CreateSeatInteractor(gateway));
+    return new DivisionInteractor(gateway)
+                 .append(new ContractTypeInteractor(gateway))
+                 .append(new ProfileInteractor(gateway))
+                 .append(new CommitteeInteractor(gateway));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {

@@ -13,12 +13,12 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AddContractTypeInteractorTest {
+public class ContractTypeInteractorTest {
 
   private static final String EXISTING_CONTRACT = "tenured";
   private static final String ADDED_CONTRACT = "sabbatical";
   private AddContractTypeRequest request;
-  private AddContractTypeInteractor interactor;
+  private ContractTypeInteractor interactor;
   private Response response;
   private ContractTypesGatewayStub contractTypeGateWay;
 
@@ -30,7 +30,7 @@ public class AddContractTypeInteractorTest {
   @Test
   public void succesfullyAddedContract() {
     request = new AddContractTypeRequest(ADDED_CONTRACT);
-    interactor = new AddContractTypeInteractor(contractTypeGateWay);
+    interactor = new ContractTypeInteractor(contractTypeGateWay);
     response = interactor.handle(request);
     assertEquals(new SuccessResponse(), response);
     assertTrue(contractTypeGateWay.contractTypes.contains(ADDED_CONTRACT));
@@ -42,7 +42,7 @@ public class AddContractTypeInteractorTest {
   @Test
   public void correctlyErrorsOnAddingExistingContract() {
     request = new AddContractTypeRequest(EXISTING_CONTRACT);
-    interactor = new AddContractTypeInteractor(contractTypeGateWay);
+    interactor = new ContractTypeInteractor(contractTypeGateWay);
     response = interactor.execute(request);
     assertEquals(ErrorResponse.resourceExists(), response);
     assertEquals(List.of("has contract type: " + EXISTING_CONTRACT), contractTypeGateWay.events);

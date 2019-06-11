@@ -18,6 +18,7 @@ public class ViewCandidatesInteractorTest {
   public static final String MOCK_ID = "mockID";
   private Ballot ballot;
   private Election election;
+  private ElectionInteractor interactor;
 
   private static Ballot sampleBallot() {
     Ballot aBallot = new Ballot();
@@ -38,7 +39,7 @@ public class ViewCandidatesInteractorTest {
   public void canRecognizeEmptyBallot() {
     ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
     RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
-    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(electionGateway);
+    interactor = new ElectionInteractor(electionGateway, null);
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownElectionID(), response);
@@ -48,7 +49,7 @@ public class ViewCandidatesInteractorTest {
   public void canViewABallot() {
     ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
-    ViewCandidatesInteractor interactor = new ViewCandidatesInteractor(electionGateway);
+    interactor = new ElectionInteractor(electionGateway, null);
     Response initialResponse = interactor.execute(request);
 
     assertEquals(MOCK_ID, electionGateway.providedElectionId);

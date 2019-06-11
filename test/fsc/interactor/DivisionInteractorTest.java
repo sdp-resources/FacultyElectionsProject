@@ -13,10 +13,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AddDivisionInteractorTest {
+public class DivisionInteractorTest {
   private static final String A_DIVISION = "ENG";
   private AddDivisionRequest request;
-  private AddDivisionInteractor interactor;
+  private DivisionInteractor interactor;
 
   @Before
   public void setup() {
@@ -26,7 +26,7 @@ public class AddDivisionInteractorTest {
   @Test
   public void testCorrectExecute() {
     MissingDivisionGatewaySpy testGateway = new MissingDivisionGatewaySpy();
-    interactor = new AddDivisionInteractor(testGateway);
+    interactor = new DivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals(new SuccessResponse(), response);
     assertEquals(List.of("has division: " + A_DIVISION, "add division: " + A_DIVISION, "save"),
@@ -36,7 +36,7 @@ public class AddDivisionInteractorTest {
   @Test
   public void testAlreadyExistsExecute() {
     ExistingDivisionGatewaySpy testGateway = new ExistingDivisionGatewaySpy();
-    interactor = new AddDivisionInteractor(testGateway);
+    interactor = new DivisionInteractor(testGateway);
     Response response = interactor.execute(request);
     assertEquals(ErrorResponse.resourceExists(), response);
     assertEquals(List.of("has division: " + A_DIVISION), testGateway.events);

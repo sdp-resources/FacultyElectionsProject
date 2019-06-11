@@ -27,7 +27,7 @@ public class RemoveFromBallotInteractorTest {
   private Election election;
   private Profile profile;
   private ProvidedElectionGatewaySpy electionGateway;
-  private RemoveFromBallotInteractor interactor;
+  private BallotInteractor interactor;
 
   @Before
   public void setUp() {
@@ -40,8 +40,9 @@ public class RemoveFromBallotInteractorTest {
   @Test
   public void ballotDoesNotExist() {
     ProfileGateway dummyProfileGateway = new ProfileGatewayStub();
-    interactor = new RemoveFromBallotInteractor(dummyProfileGateway,
-                                                new RejectingElectionGatewaySpy());
+    interactor = new BallotInteractor(new RejectingElectionGatewaySpy(),
+                                      dummyProfileGateway
+    );
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownElectionID(), response);
@@ -49,7 +50,7 @@ public class RemoveFromBallotInteractorTest {
 
   @Test
   public void profileDoesNotExist() {
-    interactor = new RemoveFromBallotInteractor(new InvalidProfileGatewaySpy(), electionGateway);
+    interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);
@@ -58,7 +59,7 @@ public class RemoveFromBallotInteractorTest {
   @Test
   public void removeFromEmptyBallot() {
     ProfileGateway profileGateway = new ProfileGatewayStub(profile);
-    interactor = new RemoveFromBallotInteractor(profileGateway, electionGateway);
+    interactor = new BallotInteractor(electionGateway, profileGateway);
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.invalidCandidate(), response);
@@ -67,7 +68,7 @@ public class RemoveFromBallotInteractorTest {
   @Test
   public void profileRemovedFromBallotGivesSuccesfullyRemovedResponse() {
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
-    interactor = new RemoveFromBallotInteractor(profileGateway, electionGateway);
+    interactor = new BallotInteractor(electionGateway, profileGateway);
     election.getBallot().addCandidate(profile);
     Response response = interactor.execute(request);
 

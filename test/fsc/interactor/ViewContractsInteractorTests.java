@@ -15,7 +15,7 @@ public class ViewContractsInteractorTests {
   public void existingContractTypesAreReturned() {
     ViewContractsRequest request = new ViewContractsRequest();
     ContractTypesGatewayStub gateway = new ContractTypesGatewayStub("tenure_track", "tenured");
-    ViewContractsInteractor interactor = new ViewContractsInteractor(gateway);
+    ContractTypeInteractor interactor = new ContractTypeInteractor(gateway);
     ViewResponse<List<String>> response = interactor.execute(request);
 
     assertEquals(ViewResponse.ofStrings(gateway.contractTypes), response);

@@ -2,15 +2,14 @@ package fsc.interactor;
 
 import fsc.gateway.DivisionGateway;
 import fsc.request.AddDivisionRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.request.ViewDivisionRequest;
+import fsc.response.*;
 
-public class AddDivisionInteractor extends Interactor<AddDivisionRequest> {
+public class DivisionInteractor extends Interactor {
 
   private DivisionGateway gateway;
 
-  public AddDivisionInteractor(DivisionGateway gateway) {
+  public DivisionInteractor(DivisionGateway gateway) {
     this.gateway = gateway;
   }
 
@@ -21,5 +20,9 @@ public class AddDivisionInteractor extends Interactor<AddDivisionRequest> {
     gateway.addDivision(request.name);
     gateway.save();
     return new SuccessResponse();
+  }
+
+  public Response execute(ViewDivisionRequest request) {
+    return ViewResponse.ofStrings(gateway.getAvailableDivisions());
   }
 }

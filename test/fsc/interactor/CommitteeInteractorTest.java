@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CreateCommitteeInteractorTest {
+public class CommitteeInteractorTest {
   public static final String COMMITTEE_NAME = "cccc";
   public static final String COMMITTEE_DESCRIPTION = "xxxx";
   private CreateCommitteeRequest request;
@@ -27,7 +27,7 @@ public class CreateCommitteeInteractorTest {
   @Test
   public void ExecuteCreatesCorrectResponseType() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
-    CreateCommitteeInteractor interactor = new CreateCommitteeInteractor(gateway);
+    CommitteeInteractor interactor = new CommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -40,7 +40,7 @@ public class CreateCommitteeInteractorTest {
   @Test
   public void ExecuteCreatesAFailedResponse() {
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
-    CreateCommitteeInteractor interactor = new CreateCommitteeInteractor(gateway);
+    CommitteeInteractor interactor = new CommitteeInteractor(gateway);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);

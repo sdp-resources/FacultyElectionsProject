@@ -1,19 +1,14 @@
 package webserver;
 
-import fsc.gateway.ContractTypeGateway;
 import fsc.gateway.Gateway;
-import fsc.interactor.CreateProfileInteractor;
-import fsc.interactor.ViewContractsInteractor;
+import fsc.interactor.ProfileInteractor;
 import fsc.request.CreateProfileRequest;
-import fsc.request.ViewContractsRequest;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
 import gateway.InMemoryGateway;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -31,8 +26,8 @@ public class InteractionControllerTest {
 
   @Test
   public void createProfileControllerSubmitsCorrectProfile() {
-    CreateProfileInteractorSpy interactor = new CreateProfileInteractorSpy(gateway);
-    controller.setCreateProfileInteractor(interactor);
+    ProfileInteractorSpy interactor = new ProfileInteractorSpy(gateway);
+    controller.setProfileInteractor(interactor);
     Map<String, String> map = simpleMap("fullName", "Skiadas", "username", "skiadas", "division",
                                         "Natural Sciences", "contractType", "tenured");
 
@@ -42,12 +37,6 @@ public class InteractionControllerTest {
     assertEquals(submittedRequest.name, map.get("fullName"));
     assertEquals(submittedRequest.division, map.get("division"));
     assertEquals(submittedRequest.contract, map.get("contractType"));
-  }
-
-  @Test
-  public void canGetContractTypes() {
-    ViewContractsInteractor interactor = new ViewContractsInteractorSpy(gateway);
-    List<String> contractTypes = controller.getAllContractTypes();
   }
 
   private Map<String, String> simpleMap(String... strings) {
@@ -61,10 +50,10 @@ public class InteractionControllerTest {
 
   private class InMemoryGatewaySpy extends InMemoryGateway {}
 
-  private class CreateProfileInteractorSpy extends CreateProfileInteractor {
+  private class ProfileInteractorSpy extends ProfileInteractor {
     CreateProfileRequest submittedRequest = null;
 
-    CreateProfileInteractorSpy(Gateway gateway) {
+    ProfileInteractorSpy(Gateway gateway) {
       super(gateway);
     }
 
@@ -74,16 +63,4 @@ public class InteractionControllerTest {
     }
   }
 
-  private class ViewContractsInteractorSpy extends ViewContractsInteractor {
-    private ViewContractsRequest submittedRequest;
-
-    public ViewResponse execute(ViewContractsRequest request) {
-      submittedRequest = request;
-      return super.execute(submittedRequest);
-    }
-
-    ViewContractsInteractorSpy(ContractTypeGateway gateway) {
-      super(gateway);
-    }
-  }
 }

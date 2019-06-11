@@ -24,7 +24,7 @@ public class AddToBallotInteractorTest {
   private AddToBallotRequest request;
   private Election election;
   private ProvidedElectionGatewaySpy electionGateway;
-  private AddToBallotInteractor interactor;
+  private BallotInteractor interactor;
   private Profile profile;
   private ProfileGatewayStub profileGateway;
 
@@ -40,8 +40,8 @@ public class AddToBallotInteractorTest {
 
   @Test
   public void addingToNoBallot() {
-    interactor = new AddToBallotInteractor(new ProfileGatewayStub(),
-                                           new RejectingElectionGatewaySpy());
+    interactor = new BallotInteractor(new RejectingElectionGatewaySpy(), new ProfileGatewayStub()
+    );
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownElectionID(), response);
@@ -49,7 +49,7 @@ public class AddToBallotInteractorTest {
 
   @Test
   public void addingNotRealProfile() {
-    interactor = new AddToBallotInteractor(new InvalidProfileGatewaySpy(), electionGateway);
+    interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
 
     assertEquals(ErrorResponse.unknownProfileName(), response);
@@ -57,7 +57,7 @@ public class AddToBallotInteractorTest {
 
   @Test
   public void addRealProfileToRealBallotGivesSuccessfullyAddedToBallotResponse() {
-    interactor = new AddToBallotInteractor(profileGateway, electionGateway);
+    interactor = new BallotInteractor(electionGateway, profileGateway);
     Response response = interactor.execute(request);
 
     assertEquals(new SuccessResponse(), response);

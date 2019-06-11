@@ -17,10 +17,10 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class CreateElectionInteractorTest {
+public class ElectionInteractorTest {
 
   private CreateElectionRequest request;
-  private CreateElectionInteractor interactor;
+  private ElectionInteractor interactor;
   private Response response;
   private BallotCreator ballotCreator = new BallotCreator(new ProfileGatewayStub());
   private AddedElectionGatewaySpy electionGateway;
@@ -34,7 +34,7 @@ public class CreateElectionInteractorTest {
   public void testCorrectExecute() {
     electionGateway = new AddedElectionGatewaySpy();
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
-    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, ballotCreator);
+    interactor = new ElectionInteractor(electionGateway, committeeGateway, ballotCreator);
     response = interactor.execute(request);
     assertEquals("Cool committee", committeeGateway.submittedCommitteeName);
     assertEquals(new SuccessResponse(), response);
@@ -47,7 +47,7 @@ public class CreateElectionInteractorTest {
   public void whenCommitteeNameIsMissingThenReturnsErrorResponse() {
     electionGateway = new AddedElectionGatewaySpy();
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
-    interactor = new CreateElectionInteractor(electionGateway, committeeGateway, ballotCreator);
+    interactor = new ElectionInteractor(electionGateway, committeeGateway, ballotCreator);
     response = interactor.execute(request);
     assertEquals(ErrorResponse.unknownCommitteeName(), response);
     assertNull(electionGateway.addedElection);

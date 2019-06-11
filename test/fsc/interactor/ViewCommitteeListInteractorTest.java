@@ -30,14 +30,16 @@ public class ViewCommitteeListInteractorTest {
       public Committee getCommittee(String name) { return null; }
 
       public void addCommittee(Committee committee) { }
+
       public void save() { }
+
       public boolean hasCommittee(String name) { return false; }
     };
   }
 
   @Test
   public void responseHasAllProvidedProfiles() {
-    ViewCommitteeListInteractor interactor = new ViewCommitteeListInteractor(committeeGateway);
+    CommitteeInteractor interactor = new CommitteeInteractor(committeeGateway);
     Response response = interactor.handle(request);
     Response expectedResponse = ViewResponse.ofCommitteeList(committeeGateway.getCommittees());
     assertEquals(expectedResponse, response);
