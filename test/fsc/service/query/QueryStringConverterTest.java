@@ -17,20 +17,20 @@ public class QueryStringConverterTest {
                                    Query.has("contract", "tenured"));
     assertStringCorrespondsToQuery("division equals \"Arts and Letters\"",
                                    Query.has("division", "Arts and Letters"));
-    assertStringCorrespondsToQuery("(contract equals \"tenured\" AND division equals " +
+    assertStringCorrespondsToQuery("(contract equals \"tenured\" and division equals " +
                                          "\"Arts and Letters\")",
                                    Query.all(Query.has("contract", "tenured"),
                                              Query.has("division", "Arts and Letters")));
-    assertStringCorrespondsToQuery("(all AND none AND contract equals \"tenured\")",
+    assertStringCorrespondsToQuery("(all and none and contract equals \"tenured\")",
                                    Query.all(Query.always(), Query.never(),
                                              Query.has("contract", "tenured")));
-    assertStringCorrespondsToQuery("(all OR none OR contract equals \"tenured\")",
+    assertStringCorrespondsToQuery("(all or none or contract equals \"tenured\")",
                                    Query.any(Query.always(), Query.never(),
                                              Query.has("contract", "tenured")));
-    assertStringCorrespondsToQuery("(all AND (all OR none))",
+    assertStringCorrespondsToQuery("(all and (all or none))",
                                    Query.all(Query.always(),
                                              Query.any(Query.always(), Query.never())));
-    assertStringCorrespondsToQuery("((all OR none) AND (all OR none))",
+    assertStringCorrespondsToQuery("((all or none) and (all or none))",
                                    Query.all(Query.any(Query.always(), Query.never()),
                                              Query.any(Query.always(), Query.never())));
   }

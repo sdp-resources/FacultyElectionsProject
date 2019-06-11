@@ -12,21 +12,21 @@ Test
 |Kate Johnson|johnson|Humanities|tenured|
 
 
-|Query:view profiles|division equals Natural Sciences|
+|Query:view profiles|division equals "Natural Sciences"|
 |username|fullname|division|contract type|
 |wilsont|Theresa Wilson|Natural Sciences|tenure-track|
 |skiadas|Haris Skiadas|Natural Sciences|tenured|
 
-|Query:view profiles|contract equals tenured|
+|Query:view profiles|contract equals "tenured"|
 |username|fullname|division|contract type|
 |johnson|Kate Johnson|Humanities|tenured|
 |skiadas|Haris Skiadas|Natural Sciences|tenured|
 
-|Query:view profiles|(contract equals tenured AND division equals Natural Sciences)|
+|Query:view profiles|(contract equals "tenured" and division equals "Natural Sciences")|
 |username|fullname|division|contract type|
 |skiadas|Haris Skiadas|Natural Sciences|tenured|
 
-|Query:view profiles|(contract equals tenure-track OR division equals Humanities)|
+|Query:view profiles|(contract equals "tenure-track" or division equals "Humanities")|
 |username|fullname|division|contract type|
 |wilsont|Theresa Wilson|Natural Sciences|tenure-track|
 |johnson|Kate Johnson|Humanities|tenured|

@@ -10,14 +10,14 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
   public String visit(AndQuery query) {
     if (query.queries.size() == 0) { return "all"; }
     return query.queries.stream().map(this::visit)
-                        .collect(joinCollector(" AND "));
+                        .collect(joinCollector(" and "));
   }
 
   public String visit(OrQuery query) {
     int length = query.queries.size();
     if (length == 0) { return "none"; }
     return query.queries.stream().map(this::visit)
-                        .collect(joinCollector(" OR "));
+                        .collect(joinCollector(" or "));
   }
 
   private Collector<CharSequence, ?, String> joinCollector(String delimiter) {
@@ -36,8 +36,6 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
     return new QueryStringParser(s).parse();
   }
 
-  public String toString(Query query) {
-    return visit(query);
-  }
+  public String toString(Query query) { return visit(query); }
 
 }

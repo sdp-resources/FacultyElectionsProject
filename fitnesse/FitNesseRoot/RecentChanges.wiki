@@ -1,4 +1,5 @@
-|FacultyVoting.Committees.CanCreateCommitteeAndSeats||12:34:59 Sun, Jun 09, 2019|
+|FacultyVoting.Profiles.CanFilterProfileList||11:23:57 Tue, Jun 11, 2019|
+|FacultyVoting.Committees.CanCreateCommitteeAndSeats||11:16:35 Tue, Jun 11, 2019|
 |FacultyVoting.ScenarioLibrary||11:15:58 Sun, Jun 09, 2019|
 |FacultyVoting.Committees.CanCreateCommittee||20:41:07 Sat, Jun 08, 2019|
 |FacultyVoting.Committees||19:19:48 Sat, Jun 08, 2019|
@@ -6,7 +7,6 @@
 |FacultyVoting.Queries||18:56:19 Sat, Jun 08, 2019|
 |FacultyVoting.Voting.CanCastAVote||18:55:28 Sat, Jun 08, 2019|
 |FacultyVoting.Voting||18:40:26 Sat, Jun 08, 2019|
-|FacultyVoting.Profiles.CanFilterProfileList||11:18:39 Fri, May 31, 2019|
 |FacultyVoting.Profiles.CanSetProfileAsInactive||01:58:22 Fri, May 31, 2019|
 |FacultyVoting.Profiles.CanViewProfiles||13:47:18 Thu, May 30, 2019|
 |FacultyVoting.Profiles.CanEditProfiles||12:12:43 Tue, May 28, 2019|
