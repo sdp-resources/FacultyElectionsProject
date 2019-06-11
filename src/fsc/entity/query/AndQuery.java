@@ -2,7 +2,9 @@ package fsc.entity.query;
 
 import fsc.entity.Profile;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class AndQuery extends Query {
   public List<Query> queries;

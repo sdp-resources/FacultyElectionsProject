@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static java.io.StreamTokenizer.*;
+import static java.io.StreamTokenizer.TT_EOF;
+import static java.io.StreamTokenizer.TT_WORD;
 
 class QueryStringTokenizer {
   private static final String ALL = "all";
