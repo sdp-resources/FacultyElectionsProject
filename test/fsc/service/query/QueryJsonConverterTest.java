@@ -52,6 +52,6 @@ public class QueryJsonConverterTest {
   private void jsonProducesQuery(String json, Query expectedQuery) {
     assertEquals(expectedQuery, queryJsonConverter.fromJSON(new JSONObject(json)));
     assertEquals(new JSONObject(json).toString(),
-                        queryJsonConverter.toJSON(expectedQuery).toString());
+                 queryJsonConverter.toJSON(expectedQuery).toString());
   }
 }
