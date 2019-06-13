@@ -10,6 +10,7 @@ import fsc.response.ErrorResponse;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import fsc.service.query.QueryStringConverter;
+import fsc.service.query.QueryStringParser;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class CreateSeatInteractorTest {
   private CommitteeInteractor interactor;
 
   @Before
-  public void setup() {
+  public void setup() throws QueryStringParser.QueryParseException {
     request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, QUERY_STRING);
     Query query = new QueryStringConverter().fromString(QUERY_STRING);
     expectedSeat = new Seat(SEAT_NAME, query);

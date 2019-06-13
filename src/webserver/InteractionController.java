@@ -41,7 +41,8 @@ public class InteractionController {
   }
 
   Collection<ViewableProfile> getAllProfiles() {
-    return profileInteractor.execute(new ViewProfilesListRequest()).values;
+    Response response = profileInteractor.execute(new ViewProfilesListRequest());
+    return ((ViewResponse<List<ViewableProfile>>) response).values;
   }
 
   public void setProfileInteractor(ProfileInteractor profileInteractor) {

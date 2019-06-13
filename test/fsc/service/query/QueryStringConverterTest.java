@@ -10,7 +10,7 @@ public class QueryStringConverterTest {
   private static QueryStringConverter queryStringConverter = new QueryStringConverter();
 
   @Test
-  public void stringsCorrespondToQueries() {
+  public void stringsCorrespondToQueries() throws QueryStringParser.QueryParseException {
     assertStringCorrespondsToQuery("all", Query.always());
     assertStringCorrespondsToQuery("none", Query.never());
     assertStringCorrespondsToQuery("contract equals \"tenured\"",
@@ -42,13 +42,14 @@ public class QueryStringConverterTest {
   @Test
   public void invalidStringsCannotBeParsed() {}
 
-  private void assertStringCorrespondsToQuery(String string, Query query) {
+  private void assertStringCorrespondsToQuery(String string, Query query)
+        throws QueryStringParser.QueryParseException {
     assertEquals(string, queryStringConverter.toString(query));
     assertEquals(query.simplify(), queryStringConverter.fromString(string).simplify());
   }
 
   @Test
-  public void newParserStringsCorrespondToQueries() {
+  public void newParserStringsCorrespondToQueries() throws QueryStringParser.QueryParseException {
     assertStringParserCorrespondsToQuery("all", Query.always());
     assertStringParserCorrespondsToQuery("none", Query.never());
     assertStringParserCorrespondsToQuery("contract equals tenured",
@@ -73,8 +74,9 @@ public class QueryStringConverterTest {
                                                    Query.any(Query.always(), Query.never())));
   }
 
-  private void assertStringParserCorrespondsToQuery(String string, Query query) {
-    assertEquals(query.simplify(), new QueryStringParser(string).parse().simplify());
+  private void assertStringParserCorrespondsToQuery(String string, Query query)
+        throws QueryStringParser.QueryParseException {
+    assertEquals(query.simplify(),queryStringConverter.fromString(string).simplify());
   }
 
 }

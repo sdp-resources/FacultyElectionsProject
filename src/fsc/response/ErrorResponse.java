@@ -59,6 +59,10 @@ public class ErrorResponse extends Throwable implements Response {
     return new ErrorResponse(MULTIPLE_RANKS_FOR_CANDIDATE);
   }
 
+  public static ErrorResponse invalidQuery(String errorMessage) {
+    return new ErrorResponse(errorMessage);
+  }
+
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

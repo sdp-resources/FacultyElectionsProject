@@ -99,6 +99,10 @@ class QueryStringTokenizer {
     return tokens;
   }
 
+  public int getLocation() {
+    return 0;
+  }
+
   public static class ParseToken {
     public static ParseToken not = new ParseToken(TokenType.Not);
     public static ParseToken end = new ParseToken(TokenType.End);

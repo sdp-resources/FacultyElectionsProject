@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class NamedQuery extends Query {
   public String name;
-  private Query query;
+  public Query query;
 
   public NamedQuery(String name, Query query) {
     this.name = name;

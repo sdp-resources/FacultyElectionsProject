@@ -7,6 +7,7 @@ import fsc.gateway.CommitteeGateway;
 import fsc.request.*;
 import fsc.response.*;
 import fsc.service.query.QueryStringConverter;
+import fsc.service.query.QueryStringParser;
 
 import java.util.Map;
 
@@ -55,6 +56,8 @@ public class CommitteeInteractor extends Interactor {
       return new SuccessResponse();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ErrorResponse.unknownCommitteeName();
+    } catch (QueryStringParser.QueryParseException e) {
+      return ErrorResponse.invalidQuery(e.getMessage());
     }
   }
 

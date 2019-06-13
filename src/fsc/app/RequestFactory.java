@@ -7,6 +7,10 @@ import java.util.Map;
 public class RequestFactory {
   public RequestFactory() { }
 
+  public static Request createNamedQuery(String name, String queryString) {
+    return new CreateNamedQueryRequest(name, queryString);
+  }
+
   Request viewProfilesList(String query) {
     return new ViewProfilesListRequest(query);
   }

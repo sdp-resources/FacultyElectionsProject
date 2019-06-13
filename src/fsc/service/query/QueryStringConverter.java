@@ -36,10 +36,18 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
     return query.name;
   }
 
-  public Query fromString(String s) {
+  public Query fromString(String s) throws QueryStringParser.QueryParseException {
     return new QueryStringParser(s).parse();
   }
 
   public String toString(Query query) { return visit(query); }
 
+  public QueryValidationResult validateQueryString(String queryString) {
+    try {
+      Query query = fromString(queryString);
+      return new QueryValidationResult.ValidQueryResult(query, toString(query));
+    } catch (QueryStringParser.QueryParseException e) {
+      return new QueryValidationResult.InvalidQueryResult(e.getMessage());
+    }
+  }
 }

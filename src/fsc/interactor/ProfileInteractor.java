@@ -5,7 +5,7 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.*;
 import fsc.response.*;
 import fsc.service.query.QueryStringConverter;
-import fsc.viewable.ViewableProfile;
+import fsc.service.query.QueryStringParser;
 
 import java.util.List;
 
@@ -46,11 +46,15 @@ public class ProfileInteractor extends Interactor {
     }
   }
 
-  public ViewResponse<List<ViewableProfile>> execute(ViewProfilesListRequest request) {
-    List<Profile> profiles = gateway.getProfilesMatching(
-          new QueryStringConverter().fromString(request.query));
-
-    return ViewResponse.ofProfileList(profiles);
+  public Response execute(ViewProfilesListRequest request) {
+    try {
+      List<Profile> profiles = gateway.getProfilesMatching(
+            new QueryStringConverter().fromString(request.query));
+      return ViewResponse.ofProfileList(profiles);
+    } catch (QueryStringParser.QueryParseException e) {
+      // TODO: Check for this
+      return ErrorResponse.invalidQuery(e.getMessage());
+    }
   }
 
   private Profile makeProfileFromRequest(CreateProfileRequest request) {
