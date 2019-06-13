@@ -6,9 +6,10 @@ import fsc.entity.query.QueryValidationResult.InvalidQueryResult;
 import fsc.entity.query.QueryValidationResult.ValidQueryResult;
 import fsc.gateway.QueryGateway;
 import fsc.request.CreateNamedQueryRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.request.ViewNamedQueryListRequest;
+import fsc.response.*;
+
+import java.util.Map;
 
 public class QueryInteractor extends Interactor {
   private QueryGateway gateway;
@@ -30,5 +31,10 @@ public class QueryInteractor extends Interactor {
     gateway.addQuery(request.name, validatedQuery);
     gateway.save();
     return new SuccessResponse();
+  }
+
+  public Response execute(ViewNamedQueryListRequest request) {
+    Map<String, Query> queries = gateway.getAllQueries();
+    return ViewResponse.ofNamedQueries(queries);
   }
 }

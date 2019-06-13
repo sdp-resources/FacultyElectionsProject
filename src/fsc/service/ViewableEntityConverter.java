@@ -1,13 +1,18 @@
 package fsc.service;
 
 import fsc.entity.*;
+import fsc.entity.query.Query;
 import fsc.service.query.QueryStringConverter;
 import fsc.viewable.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ViewableEntityConverter {
+
+  private QueryStringConverter queryStringConverter = new QueryStringConverter();
 
   public ViewableProfile convert(Profile profile) {
     return new ViewableProfile(profile.getName(), profile.getUsername(), profile.getDivision(),
@@ -39,5 +44,15 @@ public class ViewableEntityConverter {
 
   public List<ViewableCommittee> convertCommittees(List<Committee> committees) {
     return committees.stream().map(this::convert).collect(Collectors.toList());
+  }
+
+  public Map<String, String> convertQueries(Map<String, Query> queries) {
+    HashMap<String, String> returnedQueries = new HashMap<>();
+    queries.forEach((k, q) -> returnedQueries.put(k, convertQuery(q)));
+    return returnedQueries;
+  }
+
+  private String convertQuery(Query query) {
+    return queryStringConverter.toString(query);
   }
 }

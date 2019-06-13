@@ -3,6 +3,7 @@ package fsc.response;
 import fsc.entity.Candidate;
 import fsc.entity.Committee;
 import fsc.entity.Profile;
+import fsc.entity.query.Query;
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableCandidate;
@@ -10,6 +11,7 @@ import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ViewResponse<T> implements Response {
@@ -31,6 +33,10 @@ public class ViewResponse<T> implements Response {
 
   public static ViewResponse<List<String>> ofStrings(List<String> strings) {
     return new ViewResponse<>(strings);
+  }
+
+  public static ViewResponse<Map<String, String>> ofNamedQueries(Map<String, Query> queries) {
+    return new ViewResponse<>(entityConverter.convertQueries(queries));
   }
 
   public static ViewResponse<ViewableCandidate> ofCandidate(Candidate candidate) {

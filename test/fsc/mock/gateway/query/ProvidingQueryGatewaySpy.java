@@ -43,4 +43,8 @@ public class ProvidingQueryGatewaySpy implements QueryGateway {
   public void save() {
     if (addedQueryName != null) { hasSaved = true; }
   }
+
+  public Map<String, Query> getAllQueries() {
+    return namedQueries;
+  }
 }
