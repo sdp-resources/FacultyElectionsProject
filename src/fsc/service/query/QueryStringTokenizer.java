@@ -19,7 +19,6 @@ class QueryStringTokenizer {
 
   private StreamTokenizer tokenizer;
   ParseToken nextToken = null;
-  private ParseToken lookaheadToken = null;
   private int location = 0;
 
   public QueryStringTokenizer(String s) {
@@ -28,8 +27,8 @@ class QueryStringTokenizer {
   }
 
   ParseToken lookahead() {
-    if (lookaheadToken != null) { return lookaheadToken; }
-    lookaheadToken = produceNextToken();
+    ParseToken lookaheadToken = produceNextToken();
+    tokenizer.pushBack();
     return lookaheadToken;
   }
 
@@ -43,11 +42,6 @@ class QueryStringTokenizer {
   }
 
   private ParseToken produceNextToken() {
-    if (lookaheadToken != null) {
-      ParseToken token = this.lookaheadToken;
-      lookaheadToken = null;
-      return token;
-    }
     switch (readNextToken()) {
       case TT_EOF: return ParseToken.end;
       case TT_WORD: return readWord(tokenizer.sval);
