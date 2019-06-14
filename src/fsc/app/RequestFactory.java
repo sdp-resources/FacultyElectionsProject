@@ -7,7 +7,7 @@ import java.util.Map;
 public class RequestFactory {
   public RequestFactory() { }
 
-  public static Request createNamedQuery(String name, String queryString) {
+  public Request createNamedQuery(String name, String queryString) {
     return new CreateNamedQueryRequest(name, queryString);
   }
 
@@ -55,5 +55,9 @@ public class RequestFactory {
 
   public Request addSeat(String committeeName, String seatName, String query) {
     return new CreateSeatRequest(committeeName, seatName, query);
+  }
+
+  public Request viewQueryList() {
+    return new ViewNamedQueryListRequest();
   }
 }

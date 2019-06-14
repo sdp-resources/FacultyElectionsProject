@@ -2,10 +2,12 @@ package fsc.mock;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
+import fsc.entity.query.QueryValidationResult;
 import fsc.gateway.Gateway;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ViewDTSGatewayDummy implements Gateway {
   public Profile profile = new Profile("skiadas", "skiadas21", "science", "tenured");
@@ -77,8 +79,24 @@ public class ViewDTSGatewayDummy implements Gateway {
     return false;
   }
 
+  public void addQuery(String name, Query query) {
+
+  }
+
+  public boolean hasQuery(String name) {
+    return false;
+  }
+
+  public QueryValidationResult validateQueryString(String queryString) {
+    return null;
+  }
+
   public void save() {
 
+  }
+
+  public Map<String, Query> getAllQueries() {
+    return null;
   }
 
   public boolean hasContractType(String contract) {

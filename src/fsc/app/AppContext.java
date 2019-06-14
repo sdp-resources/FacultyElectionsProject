@@ -26,7 +26,8 @@ public class AppContext {
     return new DivisionInteractor(gateway)
                  .append(new ContractTypeInteractor(gateway))
                  .append(new ProfileInteractor(gateway))
-                 .append(new CommitteeInteractor(gateway));
+                 .append(new CommitteeInteractor(gateway))
+                 .append(new QueryInteractor(gateway));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {
@@ -64,6 +65,14 @@ public class AppContext {
     return isSuccessful(requestFactory.addDivision(division));
   }
 
+  public boolean addNamedQuery(String name, String queryString) {
+    return isSuccessful(requestFactory.createNamedQuery(name, queryString));
+  }
+
+  public Map<String, String> getAllQueries() {
+    return getMapResult(requestFactory.viewQueryList());
+  }
+
   public boolean addContractType(String contractType) {
     return isSuccessful(requestFactory.addContractType(contractType));
   }
@@ -87,6 +96,11 @@ public class AppContext {
 
   private boolean isResponseSuccessful(Response response) {
     return response.equals(new SuccessResponse());
+  }
+
+  private Map<String, String> getMapResult(Request request) {
+    Response response = getResponse(request);
+    return ((ViewResponse<Map<String, String>>) response).values;
   }
 
   private List<String> getStringListResult(Request request) {

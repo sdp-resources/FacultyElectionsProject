@@ -39,6 +39,11 @@
 |scenario|Then we have contract type _ |contractType|
 |ensure|valid contract type|@contractType|
 
+!3 Queries
+
+|scenario|Given queries _ _|name,string|
+|add named query;|@name|@string|
+
 !3 Committees
 
 |scenario|Given committee with name _ and description _ |name,description|
@@ -46,3 +51,4 @@
 
 |scenario|Given seats _ _ _|committeeName,seatName,seatQuery|
 |ensure|create seat;|@committeeName|@seatName|@seatQuery|
+

@@ -29,7 +29,7 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
   }
 
   public String visit(NotQuery query) {
-    throw new RuntimeException("Need to handle this case");
+    return "(not " + visit(query.query) + ")";
   }
 
   public String visit(NamedQuery query) {

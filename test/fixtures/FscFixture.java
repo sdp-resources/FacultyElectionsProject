@@ -27,6 +27,10 @@ public class FscFixture {
     return TestContext.app.addCommittee(name, description);
   }
 
+  public boolean addNamedQuery(String name, String queryString) {
+    return TestContext.app.addNamedQuery(name, queryString);
+  }
+
   public boolean createSeat(String committeeName, String seatName, String query) {
     return TestContext.app.addSeat(committeeName, seatName, query);
   }

@@ -15,10 +15,12 @@ class QueryStringTokenizer {
   private static final String IS = "is";
   private static final String AND = "and";
   private static final String OR = "or";
+  private static final String NOT = "not";
 
   private StreamTokenizer tokenizer;
   ParseToken nextToken = null;
   private ParseToken lookaheadToken = null;
+  private int location = 0;
 
   public QueryStringTokenizer(String s) {
     Reader reader = new BufferedReader(new StringReader(s));
@@ -75,16 +77,27 @@ class QueryStringTokenizer {
     if (lword.equals(EQUALS) || lword.equals(IS)) { return ParseToken.equals; }
     if (lword.equals(AND)) { return ParseToken.and; }
     if (lword.equals(OR)) { return ParseToken.or; }
+    if (lword.equals(NOT)) { return ParseToken.not; }
     return ParseToken.name(word);
-    // TODO case of NOT?
-
   }
 
   private int readNextToken() {
     try {
-      return tokenizer.nextToken();
+      int token = tokenizer.nextToken();
+      advanceLocation(token);
+      return token;
     } catch (IOException e) {
       throw new RuntimeException("This should not be happening");
+    }
+  }
+
+  private void advanceLocation(int token) {
+    switch (token) {
+      case TT_WORD: location += tokenizer.sval.length(); return;
+      case '"': location += tokenizer.sval.length() + 2; return;
+      case '(':
+      case ')': location += 1; return;
+      case TT_EOF: ; return;
     }
   }
 
@@ -100,7 +113,7 @@ class QueryStringTokenizer {
   }
 
   public int getLocation() {
-    return 0;
+    return location;
   }
 
   public static class ParseToken {

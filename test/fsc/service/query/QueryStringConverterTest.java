@@ -36,16 +36,8 @@ public class QueryStringConverterTest {
     assertStringCorrespondsToQuery("(isActive and division equals \"Humanities\")",
                                    Query.all(Query.named("isActive"),
                                              Query.has("division", "Humanities")));
-  }
-
-  @Ignore
-  @Test
-  public void invalidStringsCannotBeParsed() {}
-
-  private void assertStringCorrespondsToQuery(String string, Query query)
-        throws QueryStringParser.QueryParseException {
-    assertEquals(string, queryStringConverter.toString(query));
-    assertEquals(query.simplify(), queryStringConverter.fromString(string).simplify());
+    assertStringCorrespondsToQuery("(not status equals \"active\")",
+                                   Query.not(Query.has("status", "active")));
   }
 
   @Test
@@ -72,6 +64,16 @@ public class QueryStringConverterTest {
     assertStringParserCorrespondsToQuery("((all OR none) AND (all OR none))",
                                          Query.all(Query.any(Query.always(), Query.never()),
                                                    Query.any(Query.always(), Query.never())));
+  }
+
+  @Ignore
+  @Test
+  public void invalidStringsCannotBeParsed() {}
+
+  private void assertStringCorrespondsToQuery(String string, Query query)
+        throws QueryStringParser.QueryParseException {
+    assertEquals(string, queryStringConverter.toString(query));
+    assertEquals(query.simplify(), queryStringConverter.fromString(string).simplify());
   }
 
   private void assertStringParserCorrespondsToQuery(String string, Query query)

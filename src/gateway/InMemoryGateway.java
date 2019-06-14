@@ -2,13 +2,14 @@ package gateway;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
+import fsc.entity.query.QueryValidationResult;
 import fsc.gateway.Gateway;
+import fsc.service.query.QueryStringConverter;
+import fsc.service.query.QueryStringParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InMemoryGateway implements Gateway {
@@ -18,6 +19,8 @@ public class InMemoryGateway implements Gateway {
   private final List<String> divisions = new ArrayList<>();
   private final List<Committee> committees = new ArrayList<>();
   private final List<Election> elections = new ArrayList<>();
+  private final Map<String, Query> queries = new HashMap<>();
+  private QueryStringConverter queryStringConverter = new QueryStringConverter();
 
   public static InMemoryGateway fromJSONFile(String path) {
     try {
@@ -133,7 +136,29 @@ public class InMemoryGateway implements Gateway {
     return null;
   }
 
+  public void addQuery(String name, Query query) {
+    queries.put(name, query);
+  }
+
+  public boolean hasQuery(String name) {
+    return queries.containsKey(name);
+  }
+
+  public QueryValidationResult validateQueryString(String queryString) {
+    try {
+      Query query = queryStringConverter.fromString(queryString);
+      String string = queryStringConverter.toString(query);
+      return new QueryValidationResult.ValidQueryResult(query, string);
+    } catch (QueryStringParser.QueryParseException e) {
+      return new QueryValidationResult.InvalidQueryResult(e.getMessage());
+    }
+  }
+
   public void save() {}
+
+  public Map<String, Query> getAllQueries() {
+    return queries;
+  }
 
   public List<Committee> getAllCommittees() {
     return new ArrayList<>(committees);
