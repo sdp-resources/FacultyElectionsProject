@@ -44,6 +44,12 @@
 |scenario|Given queries _ _|name,string|
 |add named query;|@name|@string|
 
+|scenario|Creating the queries results in error _ _|name,string|
+|check|add named query;|@name|@string|false|
+
+|scenario|string _ when validated results in _|string,result|
+|check|validateString|@string|@result|
+
 !3 Committees
 
 |scenario|Given committee with name _ and description _ |name,description|

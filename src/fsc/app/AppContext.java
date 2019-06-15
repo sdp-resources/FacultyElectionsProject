@@ -1,11 +1,13 @@
 package fsc.app;
 
+import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import fsc.response.ViewResponse;
+import fsc.service.query.QueryStringParser;
 import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
 
@@ -16,10 +18,13 @@ public class AppContext {
   private RequestFactory requestFactory = new RequestFactory();
   public Gateway gateway;
   public Interactor interactor;
+  private GatewayBackedQueryValidator queryValidator;
 
   public AppContext(Gateway gateway) {
     this.gateway = gateway;
     this.interactor = loadInteractors(gateway);
+    this.queryValidator = new GatewayBackedQueryValidator(AppContext.this.gateway);
+    QueryStringParser.setNameValidator(queryValidator);
   }
 
   public Interactor loadInteractors(Gateway gateway) {
@@ -122,4 +127,5 @@ public class AppContext {
     Response response = getResponse(request);
     return ((ViewResponse<List<ViewableCommittee>>) response).values;
   }
+
 }

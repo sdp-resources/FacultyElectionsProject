@@ -34,4 +34,10 @@ public class FscFixture {
   public boolean createSeat(String committeeName, String seatName, String query) {
     return TestContext.app.addSeat(committeeName, seatName, query);
   }
+
+  public String validateString(String queryString) {
+    // TODO
+    return "";
+    //return TestContext.app.validateString(queryString);
+  }
 }
