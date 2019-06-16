@@ -102,8 +102,7 @@ public class AppContext {
   }
 
   private boolean isSuccessful(Request request) {
-    Response response = getResponse(request);
-    return response.equals(ResponseFactory.success());
+    return getResponse(request).isSuccessful();
   }
 
   private Response getResponse(Request request) {

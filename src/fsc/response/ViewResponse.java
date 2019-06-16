@@ -25,4 +25,7 @@ public class ViewResponse<T> implements Response {
     return "ViewResponse{" + "values=" + values + '}';
   }
 
+  public boolean isSuccessful() {
+    return true;
+  }
 }

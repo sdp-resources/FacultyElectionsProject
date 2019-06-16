@@ -8,4 +8,9 @@ public class LoginResponse implements Response {
     this.role = role;
     this.token = token;
   }
+
+  public boolean isSuccessful() {
+    // TODO
+    return false;
+  }
 }

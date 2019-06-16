@@ -32,4 +32,8 @@ public class ErrorResponse implements Response {
   public String toString() {
     return "ErrorResponse: \'" + message + '\'';
   }
+
+  public boolean isSuccessful() {
+    return false;
+  }
 }
