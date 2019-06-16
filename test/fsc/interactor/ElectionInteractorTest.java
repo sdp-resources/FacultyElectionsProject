@@ -8,7 +8,6 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.CreateElectionRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.response.ViewResponse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +41,7 @@ public class ElectionInteractorTest {
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
     assertEquals(electionGateway.addedElection.getCommittee().getName(), request.committeeName);
     assertTrue(electionGateway.hasSaved);
-    assertEquals(ELECTION_ID, ((ViewResponse<String>) response).values);
+    assertEquals(ELECTION_ID, response.getValues());
   }
 
   @Test

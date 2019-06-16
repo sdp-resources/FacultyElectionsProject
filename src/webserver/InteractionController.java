@@ -40,7 +40,7 @@ public class InteractionController {
 
   Collection<ViewableProfile> getAllProfiles() {
     Response response = profileInteractor.execute(new ViewProfilesListRequest());
-    return ((ViewResponse<List<ViewableProfile>>) response).values;
+    return ((ViewResponse<List<ViewableProfile>>) response).getValues();
   }
 
   public void setProfileInteractor(ProfileInteractor profileInteractor) {
@@ -49,12 +49,12 @@ public class InteractionController {
 
   public List<String> getAllContractTypes() {
     Response response = contractTypeInteractor.execute(new ViewContractsRequest());
-    return ((ViewResponse<List<String>>) response).values;
+    return ((ViewResponse<List<String>>) response).getValues();
   }
 
   public List<String> getAllDivisions() {
     Response response = divisionInteractor.execute(new ViewDivisionRequest());
-    return ((ViewResponse<List<String>>) response).values;
+    return ((ViewResponse<List<String>>) response).getValues();
   }
 
   public Collection<Committee> getAllCommittees() {

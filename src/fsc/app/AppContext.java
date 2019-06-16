@@ -4,7 +4,6 @@ import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
 import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
 import fsc.viewable.ViewableCommittee;
@@ -110,7 +109,6 @@ public class AppContext {
   }
 
   private <T> T getValues(Request request) {
-    Response response = getResponse(request);
-    return ((ViewResponse<T>) response).values;
+    return getResponse(request).getValues();
   }
 }
