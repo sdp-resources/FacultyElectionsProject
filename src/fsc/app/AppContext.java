@@ -1,15 +1,16 @@
 package fsc.app;
 
-import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
 import fsc.response.Response;
 import fsc.response.SuccessResponse;
 import fsc.response.ViewResponse;
+import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
 import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
+import fsc.viewable.ViewableValidationResult;
 
 import java.util.List;
 import java.util.Map;
@@ -36,11 +37,11 @@ public class AppContext {
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {
-    return getViewableProfileListResult(requestFactory.viewProfilesList(query));
+    return getValues(requestFactory.viewProfilesList(query));
   }
 
   public List<ViewableCommittee> getAllCommittees() {
-    return getViewableCommitteeListResult(requestFactory.viewCommitteeList());
+    return getValues(requestFactory.viewCommitteeList());
   }
 
   public boolean editProfile(String username, Map<String, String> changes) {
@@ -55,7 +56,7 @@ public class AppContext {
   }
 
   public ViewableProfile getProfile(String username) {
-    return getViewableProfileResult(requestFactory.viewProfile(username));
+    return getValues(requestFactory.viewProfile(username));
   }
 
   public boolean addCommittee(String name, String description) {
@@ -75,7 +76,11 @@ public class AppContext {
   }
 
   public Map<String, String> getAllQueries() {
-    return getMapResult(requestFactory.viewQueryList());
+    return getValues(requestFactory.viewQueryList());
+  }
+
+  public ViewableValidationResult validateString(String string) {
+    return getValues(requestFactory.validateQuery(string));
   }
 
   public boolean addContractType(String contractType) {
@@ -83,11 +88,13 @@ public class AppContext {
   }
 
   public boolean hasDivision(String division) {
-    return getStringListResult(requestFactory.viewDivisionList()).contains(division);
+    List<String> result = getValues(requestFactory.viewDivisionList());
+    return result.contains(division);
   }
 
   public boolean hasContractType(String contractType) {
-    return getStringListResult(requestFactory.viewContractTypeList()).contains(contractType);
+    List<String> result = getValues(requestFactory.viewContractTypeList());
+    return result.contains(contractType);
   }
 
   private boolean isSuccessful(Request request) {
@@ -103,29 +110,9 @@ public class AppContext {
     return response.equals(new SuccessResponse());
   }
 
-  private Map<String, String> getMapResult(Request request) {
+  private <T> T getValues(Request request) {
     Response response = getResponse(request);
-    return ((ViewResponse<Map<String, String>>) response).values;
-  }
-
-  private List<String> getStringListResult(Request request) {
-    Response response = getResponse(request);
-    return ((ViewResponse<List<String>>) response).values;
-  }
-
-  private ViewableProfile getViewableProfileResult(Request request) {
-    Response response = getResponse(request);
-    return ((ViewResponse<ViewableProfile>) response).values;
-  }
-
-  private List<ViewableProfile> getViewableProfileListResult(Request request) {
-    Response response = getResponse(request);
-    return ((ViewResponse<List<ViewableProfile>>) response).values;
-  }
-
-  private List<ViewableCommittee> getViewableCommitteeListResult(Request request) {
-    Response response = getResponse(request);
-    return ((ViewResponse<List<ViewableCommittee>>) response).values;
+    return ((ViewResponse<T>) response).values;
   }
 
 }

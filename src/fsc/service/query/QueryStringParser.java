@@ -81,7 +81,7 @@ public class QueryStringParser {
   private void throwUnlessIsAllowedValueForKey(String key, String value)
         throws QueryParseException {
     if (!nameValidator.isValidValueForKey(key, value)) {
-      throw generateException("Invalid value " + value + " for key + " + key);
+      throw generateException("Invalid value \"" + value + "\" for key \"" + key + "\"");
     }
   }
 

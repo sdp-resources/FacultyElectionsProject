@@ -60,4 +60,8 @@ public class RequestFactory {
   public Request viewQueryList() {
     return new ViewNamedQueryListRequest();
   }
+
+  public Request validateQuery(String string) {
+    return new QueryValidationRequest(string);
+  }
 }

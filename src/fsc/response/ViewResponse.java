@@ -4,11 +4,10 @@ import fsc.entity.Candidate;
 import fsc.entity.Committee;
 import fsc.entity.Profile;
 import fsc.entity.query.Query;
+import fsc.entity.query.QueryValidationResult;
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableCandidate;
-import fsc.viewable.ViewableCommittee;
-import fsc.viewable.ViewableProfile;
+import fsc.viewable.*;
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +44,10 @@ public class ViewResponse<T> implements Response {
 
   public static ViewResponse<List<ViewableCommittee>> ofCommitteeList(List<Committee> committees) {
     return new ViewResponse<>(entityConverter.convertCommittees(committees));
+  }
+
+  public static Response ofQueryResult(QueryValidationResult result) {
+    return new ViewResponse<>(new ViewableValidationResult(result));
   }
 
   public boolean equals(Object o) {

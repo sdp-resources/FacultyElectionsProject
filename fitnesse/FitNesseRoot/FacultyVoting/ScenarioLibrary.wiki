@@ -47,8 +47,10 @@
 |scenario|Creating the queries results in error _ _|name,string|
 |check|add named query;|@name|@string|false|
 
-|scenario|string _ when validated results in _|string,result|
-|check|validateString|@string|@result|
+|scenario|string _ when validated _ _|string,isValid,errorOrResult|
+|set string|@string|
+|check|is valid|@isValid|
+|check|error or result|@errorOrResult|
 
 !3 Committees
 
