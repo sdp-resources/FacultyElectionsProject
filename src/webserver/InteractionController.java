@@ -1,6 +1,5 @@
 package webserver;
 
-import fsc.entity.BallotCreator;
 import fsc.entity.Committee;
 import fsc.entity.Election;
 import fsc.interactor.*;
@@ -25,8 +24,7 @@ public class InteractionController {
     profileInteractor = new ProfileInteractor(gateway);
     contractTypeInteractor = new ContractTypeInteractor(gateway);
     divisionInteractor = new DivisionInteractor(gateway);
-    electionInteractor = new ElectionInteractor(gateway, gateway,
-                                                new BallotCreator(gateway));
+    electionInteractor = new ElectionInteractor(gateway, gateway, gateway);
     this.gateway = gateway;
   }
 

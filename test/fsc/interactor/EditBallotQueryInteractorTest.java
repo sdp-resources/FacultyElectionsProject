@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.entity.BallotCreator;
 import fsc.entity.Election;
 import fsc.entity.Profile;
 import fsc.entity.query.Query;
@@ -9,7 +8,8 @@ import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.request.EditBallotQueryRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class EditBallotQueryInteractorTest {
 
   @Test
   public void whenGivenInvalidElectionId_returnErrorResponse() {
-    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null);
+    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, null);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
@@ -41,7 +41,7 @@ public class EditBallotQueryInteractorTest {
   public void whenGivenValidElectionId_replaceBallotWithNewBallotFromQuery() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
-    interactor = new ElectionInteractor(electionGateway, new BallotCreator(profileGateway));
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(providedProfile));

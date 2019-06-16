@@ -1,10 +1,10 @@
 package fsc.app;
 
-import fsc.entity.BallotCreator;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ViewResponse;
 import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
 import fsc.viewable.ViewableCommittee;
@@ -33,7 +33,7 @@ public class AppContext {
                  .append(new ProfileInteractor(gateway))
                  .append(new CommitteeInteractor(gateway))
                  .append(new QueryInteractor(gateway))
-                 .append(new ElectionInteractor(gateway, gateway, new BallotCreator(gateway)));
+                 .append(new ElectionInteractor(gateway, gateway, gateway));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {

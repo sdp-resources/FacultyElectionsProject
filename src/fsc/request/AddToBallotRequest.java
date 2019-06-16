@@ -4,8 +4,8 @@ public class AddToBallotRequest extends Request {
   private final String profileUsername;
   private final String ballotID;
 
-  public AddToBallotRequest(String ballotID, String profileUsername) {
-    this.ballotID = ballotID;
+  public AddToBallotRequest(String electionID, String profileUsername) {
+    this.ballotID = electionID;
     this.profileUsername = profileUsername;
   }
 

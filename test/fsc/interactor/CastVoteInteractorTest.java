@@ -31,7 +31,7 @@ public class CastVoteInteractorTest {
   private ProfileGateway profileGateway;
   private Election election;
   private Profile candidate;
-  private BallotInteractor interactor;
+  private ElectionInteractor interactor;
 
   @Before
   public void setup() {
@@ -43,19 +43,19 @@ public class CastVoteInteractorTest {
     request = new VoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(candidate, voter);
-    interactor = new BallotInteractor(electionGateway, profileGateway);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
   }
 
   @Test
   public void whenGivenAnInvalidProfile_returnErrorResponse() {
-    interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
+    interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
   public void whenGivenAnInvalidElectionId_returnErrorResponse() {
-    interactor = new BallotInteractor(new RejectingElectionGatewaySpy(), profileGateway);
+    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
