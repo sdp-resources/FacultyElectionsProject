@@ -7,6 +7,11 @@ import fsc.gateway.ElectionGateway;
 public class AddedElectionGatewaySpy implements ElectionGateway {
   public Election addedElection;
   public boolean hasSaved = false;
+  private String electionId;
+
+  public AddedElectionGatewaySpy(String electionId) {
+    this.electionId = electionId;
+  }
 
   public void save() {
     hasSaved = true;
@@ -14,6 +19,7 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
 
   public void addElection(Election election) {
     this.addedElection = election;
+    election.setID(electionId);
     hasSaved = false;
   }
 

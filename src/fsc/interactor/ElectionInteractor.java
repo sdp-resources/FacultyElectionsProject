@@ -36,9 +36,10 @@ public class ElectionInteractor extends Interactor {
       Committee committee = committeeGateway.getCommittee(request.committeeName);
       Seat seat = committee.getSeat(request.seatName);
       Ballot ballot = ballotCreator.getBallot(seat.getDefaultQuery());
-      electionGateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));
+      Election election = new Election(seat, committee, seat.getDefaultQuery(), ballot);
+      electionGateway.addElection(election);
       electionGateway.save();
-      return ResponseFactory.success();
+      return ResponseFactory.ofString(election.getID());
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return ResponseFactory.unknownCommitteeName();
     } catch (Committee.UnknownSeatNameException e) {

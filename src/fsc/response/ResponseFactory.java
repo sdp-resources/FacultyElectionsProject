@@ -51,6 +51,10 @@ public class ResponseFactory {
     return new ViewResponse<>(new ViewableValidationResult(result));
   }
 
+  public static Response ofString(String string) {
+    return new ViewResponse<>(string);
+  }
+
   public static Response success() {
     return new ViewResponse<>(null);
   }

@@ -8,6 +8,7 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.CreateElectionRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.response.ViewResponse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertNull;
 
 public class ElectionInteractorTest {
 
+  public static final String ELECTION_ID = "an id";
   private CreateElectionRequest request;
   private ElectionInteractor interactor;
   private Response response;
@@ -31,20 +33,21 @@ public class ElectionInteractorTest {
 
   @Test
   public void testCorrectExecute() {
-    electionGateway = new AddedElectionGatewaySpy();
+    electionGateway = new AddedElectionGatewaySpy(ELECTION_ID);
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);
     assertEquals("Cool committee", committeeGateway.submittedCommitteeName);
-    assertEquals(ResponseFactory.success(), response);
+    assertTrue(response.isSuccessful());
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
     assertEquals(electionGateway.addedElection.getCommittee().getName(), request.committeeName);
     assertTrue(electionGateway.hasSaved);
+    assertEquals(ELECTION_ID, ((ViewResponse<String>) response).values);
   }
 
   @Test
   public void whenCommitteeNameIsMissingThenReturnsErrorResponse() {
-    electionGateway = new AddedElectionGatewaySpy();
+    electionGateway = new AddedElectionGatewaySpy("an id");
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway);
     response = interactor.execute(request);
