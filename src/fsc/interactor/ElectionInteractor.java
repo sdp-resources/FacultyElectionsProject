@@ -8,7 +8,7 @@ import fsc.request.EditBallotQueryRequest;
 import fsc.request.ViewCandidatesRequest;
 import fsc.response.*;
 
-public class ElectionInteractor {
+public class ElectionInteractor extends Interactor {
   private ElectionGateway electionGateway;
   private CommitteeGateway committeeGateway;
   private BallotCreator ballotCreator;

@@ -60,3 +60,10 @@
 |scenario|Given seats _ _ _|committeeName,seatName,seatQuery|
 |ensure|create seat;|@committeeName|@seatName|@seatQuery|
 
+!3 Elections
+
+|scenario|Given election for _ seat _ _|committee,seat|
+|@electionId=|create election;|@committee|@seat|
+
+
+

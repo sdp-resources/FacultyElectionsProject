@@ -1,5 +1,6 @@
 package fsc.app;
 
+import fsc.entity.BallotCreator;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
@@ -33,7 +34,8 @@ public class AppContext {
                  .append(new ContractTypeInteractor(gateway))
                  .append(new ProfileInteractor(gateway))
                  .append(new CommitteeInteractor(gateway))
-                 .append(new QueryInteractor(gateway));
+                 .append(new QueryInteractor(gateway))
+                 .append(new ElectionInteractor(gateway, gateway, new BallotCreator(gateway)));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {
@@ -65,6 +67,10 @@ public class AppContext {
 
   public boolean addSeat(String committeeName, String seatName, String query) {
     return isSuccessful(requestFactory.addSeat(committeeName, seatName, query));
+  }
+
+  public String createElection(String committeeName, String seatName) {
+    return getValues(requestFactory.createElection(committeeName, seatName));
   }
 
   public boolean addDivision(String division) {
@@ -99,20 +105,15 @@ public class AppContext {
 
   private boolean isSuccessful(Request request) {
     Response response = getResponse(request);
-    return isResponseSuccessful(response);
+    return response.equals(new SuccessResponse());
   }
 
   private Response getResponse(Request request) {
     return interactor.handle(request);
   }
 
-  private boolean isResponseSuccessful(Response response) {
-    return response.equals(new SuccessResponse());
-  }
-
   private <T> T getValues(Request request) {
     Response response = getResponse(request);
     return ((ViewResponse<T>) response).values;
   }
-
 }

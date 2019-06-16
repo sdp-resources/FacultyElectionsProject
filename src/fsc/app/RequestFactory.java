@@ -64,4 +64,8 @@ public class RequestFactory {
   public Request validateQuery(String string) {
     return new QueryValidationRequest(string);
   }
+
+  public Request createElection(String committeeName, String seatName) {
+    return new CreateElectionRequest(seatName, committeeName);
+  }
 }
