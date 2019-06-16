@@ -20,15 +20,15 @@ public class CommitteeInteractor extends Interactor {
 
   public Response execute(CreateCommitteeRequest request) {
     if (gateway.hasCommittee(request.name)) {
-      return ErrorResponse.resourceExists();
+      return ResponseFactory.resourceExists();
     }
     gateway.addCommittee(makeCommitteeFromRequest(request));
     gateway.save();
-    return new SuccessResponse();
+    return ResponseFactory.success();
   }
 
   public Response execute(ViewCommitteeListRequest request) {
-    return ViewResponse.ofCommitteeList(gateway.getCommittees());
+    return ResponseFactory.ofCommitteeList(gateway.getCommittees());
   }
 
   public Response execute(EditCommitteeRequest request) {
@@ -36,9 +36,9 @@ public class CommitteeInteractor extends Interactor {
       Committee committee = gateway.getCommittee(request.name);
       performUpdates(committee, request.changes);
       gateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return ErrorResponse.unknownCommitteeName();
+      return ResponseFactory.unknownCommitteeName();
     }
   }
 
@@ -48,16 +48,16 @@ public class CommitteeInteractor extends Interactor {
       Query query = new QueryStringConverter().fromString(request.queryString);
       Seat seat = new Seat(request.seatName, query);
       if (committee.hasSeat(request.seatName)) {
-        return ErrorResponse.resourceExists();
+        return ResponseFactory.resourceExists();
       }
 
       committee.addSeat(seat);
       gateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return ErrorResponse.unknownCommitteeName();
+      return ResponseFactory.unknownCommitteeName();
     } catch (QueryStringParser.QueryParseException e) {
-      return ErrorResponse.invalidQuery(e.getMessage());
+      return ResponseFactory.invalidQuery(e.getMessage());
     }
   }
 

@@ -10,9 +10,7 @@ import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.VoteRecordRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,21 +50,21 @@ public class CastVoteInteractorTest {
   public void whenGivenAnInvalidProfile_returnErrorResponse() {
     interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.unknownProfileName(), response);
+    assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
   public void whenGivenAnInvalidElectionId_returnErrorResponse() {
     interactor = new BallotInteractor(new RejectingElectionGatewaySpy(), profileGateway);
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.unknownElectionID(), response);
+    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
     election.getBallot().addCandidate(voter);
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.invalidCandidate(), response);
+    assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 
   @Test
@@ -76,7 +74,7 @@ public class CastVoteInteractorTest {
     vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
     request = new VoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.multipleRanksForCandidate(), response);
+    assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
   }
 
   @Test
@@ -84,14 +82,14 @@ public class CastVoteInteractorTest {
     election.getBallot().addCandidate(candidate);
     interactor.execute(request);
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.alreadyVoted(), response);
+    assertEquals(ResponseFactory.alreadyVoted(), response);
   }
 
   @Test
   public void whenGivenCorrectInformation_saveRecord() {
     election.getBallot().addCandidate(candidate);
     Response response = interactor.execute(request);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
     assertNotNull(submittedVoteRecord);
     assertEquals(voter, submittedVoteRecord.getVoter());

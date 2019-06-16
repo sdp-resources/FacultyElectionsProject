@@ -6,9 +6,7 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.ViewResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +40,7 @@ public class ViewCandidatesInteractorTest {
     interactor = new ElectionInteractor(electionGateway, null);
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownElectionID(), response);
+    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
@@ -53,7 +51,7 @@ public class ViewCandidatesInteractorTest {
     Response initialResponse = interactor.execute(request);
 
     assertEquals(MOCK_ID, electionGateway.providedElectionId);
-    assertEquals(ViewResponse.ofProfileList(ballot.getCandidateProfiles()), initialResponse);
+    assertEquals(ResponseFactory.ofProfileList(ballot.getCandidateProfiles()), initialResponse);
   }
 
 }

@@ -2,7 +2,7 @@ package fsc.response;
 
 import java.util.Objects;
 
-public class ErrorResponse extends Throwable implements Response {
+public class ErrorResponse implements Response {
   public static final String NO_PROFILE_WITH_THAT_USERNAME = "Unknown username";
   public static final String UNKNOWN_COMMITTEE_NAME = "Unknown Committee Name";
   public static final String UNKNOWN_SEAT_NAME = "Unknown Seat Name";
@@ -17,50 +17,6 @@ public class ErrorResponse extends Throwable implements Response {
 
   public ErrorResponse(String s) {
     message = s;
-  }
-
-  public static ErrorResponse unknownCommitteeName() {
-    return new ErrorResponse(UNKNOWN_COMMITTEE_NAME);
-  }
-
-  public static ErrorResponse unknownSeatName() {
-    return new ErrorResponse(UNKNOWN_SEAT_NAME);
-  }
-
-  public static ErrorResponse unknownElectionID() {
-    return new ErrorResponse(UNKNOWN_ELECTION_ID);
-  }
-
-  public static ErrorResponse unknownProfileName() {
-    return new ErrorResponse(NO_PROFILE_WITH_THAT_USERNAME);
-  }
-
-  public static ErrorResponse resourceExists() {
-    return new ErrorResponse(RESOURCE_EXISTS);
-  }
-
-  public static ErrorResponse notAuthorized() {
-    return new ErrorResponse(NOT_AUTHORIZED);
-  }
-
-  public static ErrorResponse invalidCandidate() {
-    return new ErrorResponse(INVALID_CANDIDATE);
-  }
-
-  public static ErrorResponse cannotHandle() {
-    return new ErrorResponse(NO_HANDLERS);
-  }
-
-  public static ErrorResponse alreadyVoted() {
-    return new ErrorResponse(VOTER_ALREADY_VOTED);
-  }
-
-  public static ErrorResponse multipleRanksForCandidate() {
-    return new ErrorResponse(MULTIPLE_RANKS_FOR_CANDIDATE);
-  }
-
-  public static ErrorResponse invalidQuery(String errorMessage) {
-    return new ErrorResponse(errorMessage);
   }
 
   public boolean equals(Object o) {

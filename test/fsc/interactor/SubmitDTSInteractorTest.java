@@ -7,9 +7,7 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.DTSRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +40,7 @@ public class SubmitDTSInteractorTest {
     election.getBallot().addCandidate(profile);
     Response response = interactor.execute(request);
 
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertEquals(electionID, electionGatewaySpy.providedElectionId);
     assertEquals(status, election.getCandidateByUsername(profile.getUsername()).getStatus());
     assertTrue(electionGatewaySpy.hasSaved);
@@ -52,7 +50,7 @@ public class SubmitDTSInteractorTest {
   public void whenCandidateIsNotInElection_thenError() {
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.invalidCandidate(), response);
+    assertEquals(ResponseFactory.invalidCandidate(), response);
     assertFalse(electionGatewaySpy.hasSaved);
   }
 
@@ -62,7 +60,7 @@ public class SubmitDTSInteractorTest {
     interactor = new SubmitDTSInteractor(rejectingGateway);
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownElectionID(), response);
+    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 }
 

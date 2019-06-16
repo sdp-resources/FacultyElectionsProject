@@ -3,9 +3,7 @@ package fsc.interactor;
 import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
 import fsc.mock.gateway.division.MissingDivisionGatewaySpy;
 import fsc.request.AddDivisionRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +26,7 @@ public class DivisionInteractorTest {
     MissingDivisionGatewaySpy testGateway = new MissingDivisionGatewaySpy();
     interactor = new DivisionInteractor(testGateway);
     Response response = interactor.execute(request);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertEquals(List.of("has division: " + A_DIVISION, "add division: " + A_DIVISION, "save"),
                  testGateway.events);
   }
@@ -38,7 +36,7 @@ public class DivisionInteractorTest {
     ExistingDivisionGatewaySpy testGateway = new ExistingDivisionGatewaySpy();
     interactor = new DivisionInteractor(testGateway);
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(ResponseFactory.resourceExists(), response);
     assertEquals(List.of("has division: " + A_DIVISION), testGateway.events);
   }
 }

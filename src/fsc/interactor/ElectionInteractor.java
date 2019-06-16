@@ -33,11 +33,11 @@ public class ElectionInteractor extends Interactor {
       Ballot ballot = ballotCreator.getBallot(seat.getDefaultQuery());
       electionGateway.addElection(new Election(seat, committee, seat.getDefaultQuery(), ballot));
       electionGateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return ErrorResponse.unknownCommitteeName();
+      return ResponseFactory.unknownCommitteeName();
     } catch (Committee.UnknownSeatNameException e) {
-      return ErrorResponse.unknownSeatName();
+      return ResponseFactory.unknownSeatName();
     }
   }
 
@@ -48,18 +48,18 @@ public class ElectionInteractor extends Interactor {
       Ballot ballot = ballotCreator.getBallot(election.getDefaultQuery());
       election.setBallot(ballot);
       electionGateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ErrorResponse.unknownElectionID();
+      return ResponseFactory.unknownElectionID();
     }
   }
 
   public Response execute(ViewCandidatesRequest request) {
     try {
       Election election = electionGateway.getElection(request.electionID);
-      return ViewResponse.ofProfileList(election.getCandidateProfiles());
+      return ResponseFactory.ofProfileList(election.getCandidateProfiles());
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ErrorResponse.unknownElectionID();
+      return ResponseFactory.unknownElectionID();
     }
   }
 }

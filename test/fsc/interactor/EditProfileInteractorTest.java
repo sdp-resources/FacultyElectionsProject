@@ -5,9 +5,7 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.EditProfileRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,14 +31,14 @@ public class EditProfileInteractorTest {
     request.changeContractType("Tenured");
     interactor = new ProfileInteractor(new InvalidProfileGatewaySpy());
     Response response = interactor.handle(request);
-    assertEquals(ErrorResponse.unknownProfileName(), response);
+    assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
   public void canTakeProfile() {
     request.changeContractType("Untenured");
     Response response = interactor.execute(request);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
   }
 
   @Test

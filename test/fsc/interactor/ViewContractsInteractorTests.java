@@ -2,10 +2,9 @@ package fsc.interactor;
 
 import fsc.mock.gateway.contractType.ContractTypesGatewayStub;
 import fsc.request.ViewContractsRequest;
-import fsc.response.ViewResponse;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,8 +15,8 @@ public class ViewContractsInteractorTests {
     ViewContractsRequest request = new ViewContractsRequest();
     ContractTypesGatewayStub gateway = new ContractTypesGatewayStub("tenure_track", "tenured");
     ContractTypeInteractor interactor = new ContractTypeInteractor(gateway);
-    ViewResponse<List<String>> response = interactor.execute(request);
+    Response response = interactor.execute(request);
 
-    assertEquals(ViewResponse.ofStrings(gateway.contractTypes), response);
+    assertEquals(ResponseFactory.ofStrings(gateway.contractTypes), response);
   }
 }

@@ -5,7 +5,7 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class ViewProfilesListInteractorTest {
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
     Response response = interactor.handle(request);
-    Response expectedResponse = ViewResponse.ofProfileList(profileGatewaySpy.getAllProfiles());
+    Response expectedResponse = ResponseFactory.ofProfileList(profileGatewaySpy.getAllProfiles());
     assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
     assertEquals(expectedResponse, response);
   }
@@ -46,7 +46,7 @@ public class ViewProfilesListInteractorTest {
     profile2.setInactive();
     request = new ViewProfilesListRequest("status equals active");
     Response response = interactor.handle(request);
-    Response expectedResponse = ViewResponse.ofProfileList(List.of(profile1, profile3));
+    Response expectedResponse = ResponseFactory.ofProfileList(List.of(profile1, profile3));
     assertEquals(expectedResponse, response);
   }
 }

@@ -6,9 +6,7 @@ import fsc.gateway.ProfileGateway;
 import fsc.request.AddToBallotRequest;
 import fsc.request.RemoveFromBallotRequest;
 import fsc.request.VoteRecordRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,11 +29,11 @@ public class BallotInteractor {
       election.getBallot().addCandidate(profile);
       electionGateway.save();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ErrorResponse.unknownProfileName();
+      return ResponseFactory.unknownProfileName();
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ErrorResponse.unknownElectionID();
+      return ResponseFactory.unknownElectionID();
     }
-    return new SuccessResponse();
+    return ResponseFactory.success();
   }
 
   public Response execute(RemoveFromBallotRequest request) {
@@ -44,20 +42,20 @@ public class BallotInteractor {
       Profile profile = profileGateway.getProfile(request.username);
       election.getBallot().remove(profile);
       electionGateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ErrorResponse.unknownProfileName();
+      return ResponseFactory.unknownProfileName();
     } catch (Ballot.NoProfileInBallotException e) {
-      return ErrorResponse.invalidCandidate();
+      return ResponseFactory.invalidCandidate();
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ErrorResponse.unknownElectionID();
+      return ResponseFactory.unknownElectionID();
     }
   }
 
   public Response execute(VoteRecordRequest request) {
     try {
       if (electionGateway.hasVoteRecord(request.username, request.electionID)) {
-        return ErrorResponse.alreadyVoted();
+        return ResponseFactory.alreadyVoted();
       }
       profileGateway.getProfile(request.username);
       Election election = electionGateway.getElection(request.electionID);
@@ -65,21 +63,21 @@ public class BallotInteractor {
       List<Profile> votes = profileGateway.getProfiles(request.vote);
 
       if (thereAreMultipleProfileOccurences(votes)) {
-        return ErrorResponse.multipleRanksForCandidate();
+        return ResponseFactory.multipleRanksForCandidate();
       }
 
       if (someProfilesAreNotCandidates(election, votes)) {
-        return ErrorResponse.invalidCandidate();
+        return ResponseFactory.invalidCandidate();
       }
 
       VoteRecord voteRecord = new VoteRecord(voter, votes, election);
       electionGateway.recordVote(voteRecord);
       electionGateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ErrorResponse.unknownProfileName();
+      return ResponseFactory.unknownProfileName();
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ErrorResponse.unknownElectionID();
+      return ResponseFactory.unknownElectionID();
     }
   }
 

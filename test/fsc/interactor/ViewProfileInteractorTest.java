@@ -5,9 +5,7 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.ViewProfileRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.ViewResponse;
+import fsc.response.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +23,7 @@ public class ViewProfileInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals(request.username, gatewaySpy.providedUsername);
-    assertEquals(ViewResponse.ofProfile(profile), response);
+    assertEquals(ResponseFactory.ofProfile(profile), response);
   }
 
   @Test
@@ -37,6 +35,6 @@ public class ViewProfileInteractorTest {
     Response response = viewInteractor.execute(request);
 
     assertEquals(request.username, gatewaySpy.submittedUsername);
-    assertEquals(ErrorResponse.unknownProfileName(), response);
+    assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 }

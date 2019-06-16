@@ -15,14 +15,14 @@ public class DivisionInteractor extends Interactor {
 
   public Response execute(AddDivisionRequest request) {
     if (gateway.hasDivision(request.name)) {
-      return ErrorResponse.resourceExists();
+      return ResponseFactory.resourceExists();
     }
     gateway.addDivision(request.name);
     gateway.save();
-    return new SuccessResponse();
+    return ResponseFactory.success();
   }
 
   public Response execute(ViewDivisionRequest request) {
-    return ViewResponse.ofStrings(gateway.getAvailableDivisions());
+    return ResponseFactory.ofStrings(gateway.getAvailableDivisions());
   }
 }

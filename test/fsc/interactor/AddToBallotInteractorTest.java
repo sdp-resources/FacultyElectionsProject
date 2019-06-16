@@ -8,9 +8,7 @@ import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.AddToBallotRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +42,7 @@ public class AddToBallotInteractorTest {
     );
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownElectionID(), response);
+    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
@@ -52,7 +50,7 @@ public class AddToBallotInteractorTest {
     interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownProfileName(), response);
+    assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
@@ -60,7 +58,7 @@ public class AddToBallotInteractorTest {
     interactor = new BallotInteractor(electionGateway, profileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(profile));
     assertTrue(electionGateway.hasSaved);
 

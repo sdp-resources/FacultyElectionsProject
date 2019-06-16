@@ -3,9 +3,7 @@ package fsc.interactor;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.request.DTSRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 
 public class SubmitDTSInteractor {
 
@@ -24,11 +22,11 @@ public class SubmitDTSInteractor {
       candidate = election.getCandidateByUsername(request.userName);
       candidate.setStatus(request.status);
       electionGateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ErrorResponse.unknownElectionID();
+      return ResponseFactory.unknownElectionID();
     } catch (Ballot.NoProfileInBallotException e) {
-      return ErrorResponse.invalidCandidate();
+      return ResponseFactory.invalidCandidate();
     }
   }
 

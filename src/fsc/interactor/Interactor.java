@@ -1,15 +1,15 @@
 package fsc.interactor;
 
 import fsc.request.Request;
-import fsc.response.ErrorResponse;
 import fsc.response.Response;
+import fsc.response.ResponseFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public abstract class Interactor {
   public Response execute(Request request) {
-    return ErrorResponse.cannotHandle();
+    return ResponseFactory.cannotHandle();
   }
 
   public Interactor next = null;
@@ -41,7 +41,7 @@ public abstract class Interactor {
   }
 
   public Response passOn(Request request) {
-    return next == null ? ErrorResponse.cannotHandle() : next.handle(request);
+    return next == null ? ResponseFactory.cannotHandle() : next.handle(request);
   }
 
   private Method getExecuteForRequest(Request request) throws NoSuchMethodException {

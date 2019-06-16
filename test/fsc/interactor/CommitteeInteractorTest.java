@@ -4,9 +4,7 @@ import fsc.entity.Committee;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.CreateCommitteeRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +32,7 @@ public class CommitteeInteractorTest {
     assertNotNull(gateway.committeeAdded);
     assertEquals(expectedCommittee, gateway.committeeAdded);
     assertTrue(gateway.hasSaved);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
   }
 
   @Test
@@ -44,6 +42,6 @@ public class CommitteeInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
-    assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(ResponseFactory.resourceExists(), response);
   }
 }

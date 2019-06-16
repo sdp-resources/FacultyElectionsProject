@@ -2,9 +2,7 @@ package fsc.interactor;
 
 import fsc.mock.gateway.contractType.ContractTypesGatewayStub;
 import fsc.request.AddContractTypeRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +30,7 @@ public class ContractTypeInteractorTest {
     request = new AddContractTypeRequest(ADDED_CONTRACT);
     interactor = new ContractTypeInteractor(contractTypeGateWay);
     response = interactor.handle(request);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertTrue(contractTypeGateWay.contractTypes.contains(ADDED_CONTRACT));
     assertEquals(
           List.of("has contract type: " + ADDED_CONTRACT, "add contract type: " + ADDED_CONTRACT,
@@ -44,7 +42,7 @@ public class ContractTypeInteractorTest {
     request = new AddContractTypeRequest(EXISTING_CONTRACT);
     interactor = new ContractTypeInteractor(contractTypeGateWay);
     response = interactor.execute(request);
-    assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(ResponseFactory.resourceExists(), response);
     assertEquals(List.of("has contract type: " + EXISTING_CONTRACT), contractTypeGateWay.events);
   }
 }

@@ -2,8 +2,8 @@ package fsc.interactor;
 
 import fsc.gateway.SessionGateway;
 import fsc.request.Request;
-import fsc.response.ErrorResponse;
 import fsc.response.Response;
+import fsc.response.ResponseFactory;
 
 public class AuthorizeInteractor {
   private SessionGateway sessionGateway;
@@ -17,7 +17,7 @@ public class AuthorizeInteractor {
   }
 
   public Response execute(Request request) {
-    return ErrorResponse.notAuthorized();
+    return ResponseFactory.notAuthorized();
   }
 
 }

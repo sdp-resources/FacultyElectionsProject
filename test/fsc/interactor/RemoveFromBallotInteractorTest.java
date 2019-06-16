@@ -9,9 +9,7 @@ import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.RemoveFromBallotRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +43,7 @@ public class RemoveFromBallotInteractorTest {
     );
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownElectionID(), response);
+    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
@@ -53,7 +51,7 @@ public class RemoveFromBallotInteractorTest {
     interactor = new BallotInteractor(electionGateway, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownProfileName(), response);
+    assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
@@ -62,7 +60,7 @@ public class RemoveFromBallotInteractorTest {
     interactor = new BallotInteractor(electionGateway, profileGateway);
     Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.invalidCandidate(), response);
+    assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 
   @Test
@@ -73,7 +71,7 @@ public class RemoveFromBallotInteractorTest {
     Response response = interactor.execute(request);
 
     assertFalse(election.hasCandidate(profile));
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertTrue(electionGateway.hasSaved);
   }
 }

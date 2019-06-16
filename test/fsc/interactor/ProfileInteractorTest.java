@@ -5,9 +5,7 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +30,7 @@ public class ProfileInteractorTest {
     interactor = new ProfileInteractor(gateway);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertTrue(gateway.hasSaved);
   }
 
@@ -41,6 +39,6 @@ public class ProfileInteractorTest {
     ExistingProfileGatewaySpy gateway = new ExistingProfileGatewaySpy(providedProfile);
     interactor = new ProfileInteractor(gateway);
     response = interactor.execute(request);
-    assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(ResponseFactory.resourceExists(), response);
   }
 }

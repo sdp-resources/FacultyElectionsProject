@@ -5,7 +5,7 @@ import fsc.entity.query.Query;
 import fsc.mock.gateway.query.ProvidingQueryGatewaySpy;
 import fsc.request.ViewNamedQueryListRequest;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
+import fsc.response.ResponseFactory;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 import org.junit.Before;
@@ -38,6 +38,6 @@ public class ViewNamedQueryInteractorTest {
   @Test
   public void returnListOfStoredRequests() {
     Response response = interactor.handle(request);
-    assertEquals(ViewResponse.ofNamedQueries(Map.of(QUERY_NAME, actualQuery)), response);
+    assertEquals(ResponseFactory.ofNamedQueries(Map.of(QUERY_NAME, actualQuery)), response);
   }
 }

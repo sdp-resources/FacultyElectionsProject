@@ -3,7 +3,7 @@ package fsc.interactor;
 import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
 import fsc.request.ViewDivisionRequest;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class ViewDivisionsTest {
   public void gatewayDivisionListEqualsOurDivisionList() {
     interactor = new DivisionInteractor(divisionGateway);
     response = interactor.execute(request);
-    assertEquals(ViewResponse.ofStrings(divisionGateway.divisions), response);
+    assertEquals(ResponseFactory.ofStrings(divisionGateway.divisions), response);
   }
 
 }

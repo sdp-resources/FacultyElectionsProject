@@ -4,7 +4,7 @@ import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 import fsc.request.ViewCommitteeListRequest;
 import fsc.response.Response;
-import fsc.response.ViewResponse;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,7 +41,7 @@ public class ViewCommitteeListInteractorTest {
   public void responseHasAllProvidedProfiles() {
     CommitteeInteractor interactor = new CommitteeInteractor(committeeGateway);
     Response response = interactor.handle(request);
-    Response expectedResponse = ViewResponse.ofCommitteeList(committeeGateway.getCommittees());
+    Response expectedResponse = ResponseFactory.ofCommitteeList(committeeGateway.getCommittees());
     assertEquals(expectedResponse, response);
   }
 

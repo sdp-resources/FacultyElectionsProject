@@ -6,9 +6,7 @@ import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.mock.gateway.election.AddedElectionGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.CreateElectionRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +35,7 @@ public class ElectionInteractorTest {
     interactor = new ElectionInteractor(electionGateway, committeeGateway, ballotCreator);
     response = interactor.execute(request);
     assertEquals("Cool committee", committeeGateway.submittedCommitteeName);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
     assertEquals(electionGateway.addedElection.getCommittee().getName(), request.committeeName);
     assertTrue(electionGateway.hasSaved);
@@ -49,7 +47,7 @@ public class ElectionInteractorTest {
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, ballotCreator);
     response = interactor.execute(request);
-    assertEquals(ErrorResponse.unknownCommitteeName(), response);
+    assertEquals(ResponseFactory.unknownCommitteeName(), response);
     assertNull(electionGateway.addedElection);
     assertNotNull(committeeGateway.submittedCommitteeName);
   }

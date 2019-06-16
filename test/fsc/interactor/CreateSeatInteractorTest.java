@@ -6,9 +6,7 @@ import fsc.entity.query.Query;
 import fsc.mock.gateway.committee.ProvidedCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.CreateSeatRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 import org.junit.Before;
@@ -39,7 +37,7 @@ public class CreateSeatInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
-    assertEquals(ErrorResponse.unknownCommitteeName(), response);
+    assertEquals(ResponseFactory.unknownCommitteeName(), response);
   }
 
   @Test
@@ -51,7 +49,7 @@ public class CreateSeatInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
-    assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(ResponseFactory.resourceExists(), response);
   }
 
   @Test
@@ -64,6 +62,6 @@ public class CreateSeatInteractorTest {
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertTrue(committee.hasSeat(SEAT_NAME));
     assertTrue(gateway.saveWasCalled);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
   }
 }

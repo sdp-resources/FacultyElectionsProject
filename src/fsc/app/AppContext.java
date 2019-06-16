@@ -4,9 +4,7 @@ import fsc.entity.BallotCreator;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
-import fsc.response.ViewResponse;
+import fsc.response.*;
 import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
 import fsc.viewable.ViewableCommittee;
@@ -105,7 +103,7 @@ public class AppContext {
 
   private boolean isSuccessful(Request request) {
     Response response = getResponse(request);
-    return response.equals(new SuccessResponse());
+    return response.equals(ResponseFactory.success());
   }
 
   private Response getResponse(Request request) {

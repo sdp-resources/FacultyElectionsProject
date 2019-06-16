@@ -4,9 +4,7 @@ import fsc.entity.session.AuthorizedSession;
 import fsc.entity.session.Session;
 import fsc.gateway.SessionGateway;
 import fsc.request.LoginRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.LoginResponse;
-import fsc.response.Response;
+import fsc.response.*;
 import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 
@@ -26,7 +24,7 @@ public class LoginInteractor {
   public Response execute(LoginRequest request) {
     Session authorization = authorizer.authorize(request.username, request.password);
     if (!authorization.isAuthorized()) {
-      return ErrorResponse.notAuthorized();
+      return ResponseFactory.notAuthorized();
     }
     sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorization).getRole(),
                                                     ((AuthorizedSession) authorization)

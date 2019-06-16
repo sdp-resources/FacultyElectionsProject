@@ -21,26 +21,26 @@ public class QueryInteractor extends Interactor {
 
   public Response execute(CreateNamedQueryRequest request) {
     if (gateway.hasQuery(request.name)) {
-      return ErrorResponse.resourceExists();
+      return ResponseFactory.resourceExists();
     }
     QueryValidationResult validationResult = gateway.validateQueryString(request.queryString);
     if (validationResult instanceof InvalidQueryResult) {
       String errorMessage = ((InvalidQueryResult) validationResult).errorMessage;
-      return ErrorResponse.invalidQuery(errorMessage);
+      return ResponseFactory.invalidQuery(errorMessage);
     }
     Query validatedQuery = ((ValidQueryResult) validationResult).query;
     gateway.addQuery(request.name, validatedQuery);
     gateway.save();
-    return new SuccessResponse();
+    return ResponseFactory.success();
   }
 
   public Response execute(ViewNamedQueryListRequest request) {
     Map<String, Query> queries = gateway.getAllQueries();
-    return ViewResponse.ofNamedQueries(queries);
+    return ResponseFactory.ofNamedQueries(queries);
   }
 
   public Response execute(QueryValidationRequest request) {
     QueryValidationResult result = gateway.validateQueryString(request.queryString);
-    return ViewResponse.ofQueryResult(result);
+    return ResponseFactory.ofQueryResult(result);
   }
 }

@@ -5,8 +5,7 @@ import fsc.mock.AcceptingAuthenticatorDummy;
 import fsc.mock.gateway.session.SessionGatewayDummy;
 import fsc.mock.gateway.session.SessionGatewaySpy;
 import fsc.request.LoginRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.LoginResponse;
+import fsc.response.*;
 import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 import fsc.service.authorizer.AcceptingAuthorizerStub;
@@ -31,9 +30,9 @@ public class LoginInteractorTest {
     LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
                                                           authenticator);
 
-    ErrorResponse response = (ErrorResponse) loginInteractor.execute(request);
+    Response response = loginInteractor.execute(request);
 
-    assertEquals(ErrorResponse.notAuthorized(), response);
+    assertEquals(ResponseFactory.notAuthorized(), response);
   }
 
   @Test

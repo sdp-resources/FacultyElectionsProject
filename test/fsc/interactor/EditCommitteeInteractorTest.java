@@ -3,15 +3,13 @@ package fsc.interactor;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.EditCommitteeRequest;
-import fsc.response.ErrorResponse;
 import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.ResponseFactory;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class EditCommitteeInteractorTest {
@@ -26,9 +24,9 @@ public class EditCommitteeInteractorTest {
     changes.put("name", "steering wheel");
     EditCommitteeRequest request = new EditCommitteeRequest(name, changes);
 
-    ErrorResponse response = (ErrorResponse) interactor.execute(request);
+    Response response = interactor.execute(request);
 
-    assertEquals(ErrorResponse.unknownCommitteeName(), response);
+    assertEquals(ResponseFactory.unknownCommitteeName(), response);
   }
 
   @Test
@@ -45,7 +43,7 @@ public class EditCommitteeInteractorTest {
 
     Response response = interactor.execute(request);
 
-    assertTrue(response instanceof SuccessResponse);
+    assertEquals(ResponseFactory.success(), response);
     assertEquals(newName, gateway.returnedCommittee.getName());
   }
 
@@ -65,7 +63,7 @@ public class EditCommitteeInteractorTest {
 
     Response response = interactor.execute(request);
 
-    assertTrue(response instanceof SuccessResponse);
+    assertEquals(ResponseFactory.success(), response);
     assertEquals(newName, gateway.returnedCommittee.getName());
     assertEquals(newDescription, gateway.returnedCommittee.getDescription());
   }

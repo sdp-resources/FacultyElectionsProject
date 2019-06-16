@@ -3,7 +3,8 @@ package fsc.interactor;
 import fsc.gateway.SessionGateway;
 import fsc.mock.gateway.session.RejectingSessionGatewayStub;
 import fsc.request.ViewProfilesListRequest;
-import fsc.response.ErrorResponse;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -16,9 +17,9 @@ public class AuthorizeInteractorTest {
     AuthorizeInteractor authorizeInteractor = new AuthorizeInteractor(sessionGateway);
     ViewProfilesListRequest request = new ViewProfilesListRequest();
     boolean canHandleRequest = authorizeInteractor.canHandle(request);
-    ErrorResponse response = (ErrorResponse) authorizeInteractor.execute(request);
+    Response response = authorizeInteractor.execute(request);
 
-    assertEquals(ErrorResponse.notAuthorized(), response);
+    assertEquals(ResponseFactory.notAuthorized(), response);
     assertTrue(canHandleRequest);
   }
 }

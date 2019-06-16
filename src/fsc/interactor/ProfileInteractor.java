@@ -19,11 +19,11 @@ public class ProfileInteractor extends Interactor {
 
   public Response execute(CreateProfileRequest request) {
     if (gateway.hasProfile(request.username)) {
-      return ErrorResponse.resourceExists();
+      return ResponseFactory.resourceExists();
     }
     gateway.addProfile(makeProfileFromRequest(request));
     gateway.save();
-    return new SuccessResponse();
+    return ResponseFactory.success();
   }
 
   public Response execute(EditProfileRequest request) {
@@ -31,18 +31,18 @@ public class ProfileInteractor extends Interactor {
       Profile profile = gateway.getProfile(request.username);
       request.applyChangesTo(profile);
       gateway.save();
-      return new SuccessResponse();
+      return ResponseFactory.success();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ErrorResponse.unknownProfileName();
+      return ResponseFactory.unknownProfileName();
     }
   }
 
   public Response execute(ViewProfileRequest request) {
     try {
       Profile profile = gateway.getProfile(request.username);
-      return ViewResponse.ofProfile(profile);
+      return ResponseFactory.ofProfile(profile);
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ErrorResponse.unknownProfileName();
+      return ResponseFactory.unknownProfileName();
     }
   }
 
@@ -50,10 +50,10 @@ public class ProfileInteractor extends Interactor {
     try {
       List<Profile> profiles = gateway.getProfilesMatching(
             new QueryStringConverter().fromString(request.query));
-      return ViewResponse.ofProfileList(profiles);
+      return ResponseFactory.ofProfileList(profiles);
     } catch (QueryStringParser.QueryParseException e) {
       // TODO: Check for this
-      return ErrorResponse.invalidQuery(e.getMessage());
+      return ResponseFactory.invalidQuery(e.getMessage());
     }
   }
 

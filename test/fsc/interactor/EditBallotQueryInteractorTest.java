@@ -9,9 +9,7 @@ import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.request.EditBallotQueryRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +34,7 @@ public class EditBallotQueryInteractorTest {
   public void whenGivenInvalidElectionId_returnErrorResponse() {
     interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null);
     Response response = interactor.execute(request);
-    assertEquals(ErrorResponse.unknownElectionID(), response);
+    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
@@ -45,7 +43,7 @@ public class EditBallotQueryInteractorTest {
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
     interactor = new ElectionInteractor(electionGateway, new BallotCreator(profileGateway));
     Response response = interactor.execute(request);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(providedProfile));
     assertEquals(request.query, election.getDefaultQuery());
     assertEquals(request.electionID, electionGateway.providedElectionId);

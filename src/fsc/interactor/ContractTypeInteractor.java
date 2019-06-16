@@ -3,9 +3,8 @@ package fsc.interactor;
 import fsc.gateway.ContractTypeGateway;
 import fsc.request.AddContractTypeRequest;
 import fsc.request.ViewContractsRequest;
-import fsc.response.*;
-
-import java.util.List;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 
 public class ContractTypeInteractor extends Interactor {
 
@@ -17,15 +16,15 @@ public class ContractTypeInteractor extends Interactor {
 
   public Response execute(AddContractTypeRequest request) {
     if (gateway.hasContractType(request.contractType)) {
-      return ErrorResponse.resourceExists();
+      return ResponseFactory.resourceExists();
     }
     gateway.addContractType(request.contractType);
     gateway.save();
-    return new SuccessResponse();
+    return ResponseFactory.success();
   }
 
-  public ViewResponse<List<String>> execute(ViewContractsRequest request) {
-    return ViewResponse.ofStrings(gateway.getAvailableContractTypes());
+  public Response execute(ViewContractsRequest request) {
+    return ResponseFactory.ofStrings(gateway.getAvailableContractTypes());
   }
 
 }

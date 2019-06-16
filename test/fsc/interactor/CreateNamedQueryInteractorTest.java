@@ -4,9 +4,7 @@ import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.mock.gateway.query.ProvidingQueryGatewaySpy;
 import fsc.request.CreateNamedQueryRequest;
-import fsc.response.ErrorResponse;
-import fsc.response.Response;
-import fsc.response.SuccessResponse;
+import fsc.response.*;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 import org.junit.Before;
@@ -38,7 +36,7 @@ public class CreateNamedQueryInteractorTest {
   public void whenQueryNameAlreadyExists_produceError() {
     gateway.addQuery(namedQuery.name, namedQuery.query);
     Response response = interactor.handle(request);
-    assertEquals(ErrorResponse.resourceExists(), response);
+    assertEquals(ResponseFactory.resourceExists(), response);
     assertEquals(QUERY_NAME, gateway.requestedName);
   }
 
@@ -54,7 +52,7 @@ public class CreateNamedQueryInteractorTest {
   @Test
   public void whenQueryStringIsValidAndNameDoesNotExist_createNewNamedQuery() {
     Response response = interactor.handle(request);
-    assertEquals(new SuccessResponse(), response);
+    assertEquals(ResponseFactory.success(), response);
     assertEquals(QUERY_STRING, gateway.requestedValidationForString);
     assertEquals(namedQuery.query, gateway.addedQuery);
     assertEquals(namedQuery.name, gateway.addedQueryName);
