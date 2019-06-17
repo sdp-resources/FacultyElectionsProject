@@ -22,7 +22,7 @@ public class ResponseFactory {
   }
 
   public static Response ofProfileList(List<Profile> profiles) {
-    return new ViewResponse<>(entityConverter.convert(profiles));
+    return new ViewResponse<>(entityConverter.convertProfiles(profiles));
   }
 
   public static Response ofProfile(Profile profile) {

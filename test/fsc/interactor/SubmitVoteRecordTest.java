@@ -1,83 +1,102 @@
 package fsc.interactor;
 
-import fsc.entity.*;
-import fsc.gateway.ElectionGateway;
+import fsc.entity.Election;
+import fsc.entity.Profile;
+import fsc.entity.VoteRecord;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
-import fsc.request.ViewVoteRecordRequest;
-import fsc.response.Response;
-import fsc.response.ResponseFactory;
-import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableVoteRecord;
+import fsc.request.SubmitVoteRecordRequest;
+import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static fsc.entity.VoteRecordTest.assertCloseDates;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class SubmitVoteRecordTest {
-
-  private ViewVoteRecordRequest request;
+  public static final String ELECTION_ID = "1";
+  private List<String> vote;
+  private SubmitVoteRecordRequest request;
+  private ProvidedElectionGatewaySpy electionGateway;
   private Profile voter;
-  private Election election;
-  private Ballot ballot;
-  private ElectionInteractor interactor;
-  private ElectionGateway electionGateway;
   private ProfileGateway profileGateway;
-  private List<Profile> profiles;
+  private Election election;
+  private Profile candidate;
+  private ElectionInteractor interactor;
 
   @Before
-  public void setUp() {
-    profiles = List.of(EntityStub.getProfile(0), EntityStub.getProfile(1),
-                       EntityStub.getProfile(2));
-    voter = profiles.get(0);
-    ballot = new Ballot();
-    ballot.addCandidates(List.of(profiles.get(1), profiles.get(2)));
-    election = EntityStub.simpleBallotElection(ballot);
-    request = new ViewVoteRecordRequest(voter.getUsername(), election.getID());
+  public void setup() {
+    election = EntityStub.simpleBallotElection();
+    election.setID(ELECTION_ID);
+    voter = EntityStub.getProfile(0);
+    candidate = EntityStub.getProfile(1);
+    vote = List.of(candidate.getUsername());
+    request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
-    profileGateway = new ProfileGatewayStub(profiles.toArray(new Profile[]{}));
+    profileGateway = new ProfileGatewayStub(candidate, voter);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
   }
 
   @Test
-  public void whenVoterDoesNotExist_returnError() {
+  public void whenGivenAnInvalidProfile_returnErrorResponse() {
     interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy());
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
-  public void whenElectionDoesNotExist_returnError() {
+  public void whenGivenAnInvalidElectionId_returnErrorResponse() {
     interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
-  public void whenNoVoteHasBeenCast_returnError() {
-    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
+  public void whenGivenVoteForNonCandidate_returnErrorResponse() {
+    election.getBallot().addCandidate(voter);
     Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.noVote(), response);
+    assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 
   @Test
-  public void whenVoteRecordIsPresent_returnViewableRecord() {
-    List<Profile> votes = List.of(profiles.get(2), profiles.get(1));
-    electionGateway.recordVote(new VoteRecord(voter, votes, election));
-    electionGateway.save();
-    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
+  public void whenGivenMultipleVotesForCandidate_returnErrorResponse() {
+    election.getBallot().addCandidate(candidate);
+    election.getBallot().addCandidate(voter);
+    vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
+    request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     Response response = interactor.execute(request);
-    assertTrue(response.isSuccessful());
-    ViewableEntityConverter entityConverter = new ViewableEntityConverter();
-    ViewableVoteRecord resultRecord = response.getValues();
-    assertEquals(entityConverter.convert(votes), resultRecord.votes);
-    assertEquals(entityConverter.convert(voter), resultRecord.voter);
-    assertEquals(election.getID(), resultRecord.electionID);
-    assertNotNull(resultRecord.timestamp);
+    assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
   }
+
+  @Test
+  public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
+    election.getBallot().addCandidate(candidate);
+    interactor.execute(request);
+    Response response = interactor.execute(request);
+    assertEquals(ResponseFactory.alreadyVoted(), response);
+  }
+
+  @Test
+  public void whenGivenCorrectInformation_saveRecord() {
+    election.getBallot().addCandidate(candidate);
+    Response response = interactor.execute(request);
+    assertEquals(ResponseFactory.success(), response);
+    VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
+    assertNotNull(submittedVoteRecord);
+    assertEquals(voter, submittedVoteRecord.getVoter());
+    assertCloseDates(LocalDateTime.now(), submittedVoteRecord.getDate());
+    assertEquals(List.of(candidate), submittedVoteRecord.getVotes());
+    assertEquals(election, submittedVoteRecord.getElection());
+    assertTrue(electionGateway.hasSaved);
+  }
+
 }

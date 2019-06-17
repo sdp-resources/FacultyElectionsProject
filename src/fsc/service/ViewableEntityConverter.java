@@ -36,7 +36,7 @@ public class ViewableEntityConverter {
                             new QueryStringConverter().toString(seat.getDefaultQuery()));
   }
 
-  public List<ViewableProfile> convert(List<Profile> profiles) {
+  public List<ViewableProfile> convertProfiles(List<Profile> profiles) {
     return profiles.stream().map(this::convert).collect(Collectors.toList());
   }
 
@@ -68,6 +68,6 @@ public class ViewableEntityConverter {
           convert(voteRecord.getVoter()),
           convert(voteRecord.getDate()),
           voteRecord.getElection().getID(),
-          convert(voteRecord.getVotes()));
+          convertProfiles(voteRecord.getVotes()));
   }
 }
