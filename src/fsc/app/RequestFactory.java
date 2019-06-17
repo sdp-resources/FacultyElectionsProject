@@ -77,4 +77,12 @@ public class RequestFactory {
   public Request submitVote(String voterName, String electionID, List<String> vote) {
     return new SubmitVoteRecordRequest(voterName, vote, electionID);
   }
+
+  public Request viewVoteRecord(String voter, String electionId) {
+    return new ViewVoteRecordRequest(voter, electionId);
+  }
+
+  public Request viewAllVotes(String electionId) {
+    return new ViewAllVotesRequest(electionId);
+  }
 }

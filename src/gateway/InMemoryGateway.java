@@ -18,6 +18,7 @@ public class InMemoryGateway implements Gateway {
   private final List<String> contractTypes = new ArrayList<>();
   private final List<String> divisions = new ArrayList<>();
   private final List<Committee> committees = new ArrayList<>();
+  private final List<VoteRecord> voteRecords = new ArrayList<>();
   private final List<Election> elections = new ArrayList<>();
   private final Map<String, Query> queries = new HashMap<>();
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
@@ -126,27 +127,37 @@ public class InMemoryGateway implements Gateway {
     return false;
   }
 
-  public void recordVote(VoteRecord voteRecord) {}
-
-  public boolean hasVoteRecord(Profile profile, Election election) {
-    return false; // TODO
+  public void recordVote(VoteRecord voteRecord) {
+    voteRecords.add(voteRecord);
   }
 
-  public VoteRecord getVoteRecord(Profile voter, Election election) {
-    // TODO
-    return null;
+  public boolean hasVoteRecord(Profile voter, Election election) {
+    for (VoteRecord record : voteRecords) {
+      if (record.isRecordFor(voter, election)) return true;
+    }
+
+    return false;
+  }
+
+  public VoteRecord getVoteRecord(Profile voter, Election election) throws NoVoteRecordException {
+    for (VoteRecord record : voteRecords) {
+      if (record.isRecordFor(voter, election)) return record;
+    }
+
+    throw new NoVoteRecordException();
   }
 
   public Election getElection(String electionID) throws InvalidElectionIDException {
     for (Election election : elections) {
       if (election.getID().equals(electionID)) return election;
     }
+
     throw new InvalidElectionIDException();
   }
 
   public List<VoteRecord> getAllVotes(Election election) {
-    // TODO
-    return null;
+    return voteRecords.stream().filter(r -> r.getElection().equals(election))
+          .collect(Collectors.toList());
   }
 
   public void addQuery(String name, Query query) {

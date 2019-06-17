@@ -6,9 +6,7 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
-import fsc.viewable.ViewableCommittee;
-import fsc.viewable.ViewableProfile;
-import fsc.viewable.ViewableValidationResult;
+import fsc.viewable.*;
 
 import java.util.List;
 import java.util.Map;
@@ -118,5 +116,13 @@ public class AppContext {
 
   public boolean submitVote(String voterName, String electionID, List<String> vote) {
     return isSuccessful(requestFactory.submitVote(voterName, electionID, vote));
+  }
+
+  public ViewableVoteRecord getVoteRecord(String electionId, String voter) {
+    return getValues(requestFactory.viewVoteRecord(voter, electionId));
+  }
+
+  public List<ViewableVoteRecord> getAllVotes(String electionId) {
+    return getValues(requestFactory.viewAllVotes(electionId));
   }
 }
