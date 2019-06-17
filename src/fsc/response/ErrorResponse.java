@@ -13,6 +13,7 @@ public class ErrorResponse implements Response {
   public static final String NO_HANDLERS = "No available handler for that request";
   public static final String VOTER_ALREADY_VOTED = "Voter has already voted on this election.";
   public static final String MULTIPLE_RANKS_FOR_CANDIDATE = "Multiple rankings for the same candidate";
+  public static final String NO_VOTE_RECORDED = "No vote has been recorded for that username";
   public String message;
 
   public ErrorResponse(String s) {

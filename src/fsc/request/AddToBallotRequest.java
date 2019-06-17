@@ -2,14 +2,14 @@ package fsc.request;
 
 public class AddToBallotRequest extends Request {
   private final String profileUsername;
-  private final String ballotID;
+  private final String electionId;
 
   public AddToBallotRequest(String electionID, String profileUsername) {
-    this.ballotID = electionID;
+    this.electionId = electionID;
     this.profileUsername = profileUsername;
   }
 
-  public String getBallotID() {return ballotID;}
+  public String getElectionId() {return electionId;}
 
   public String getProfileUsername() {
     return profileUsername;

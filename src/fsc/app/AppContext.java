@@ -111,4 +111,12 @@ public class AppContext {
   private <T> T getValues(Request request) {
     return getResponse(request).getValues();
   }
+
+  public boolean addCandidate(String electionId, String name) {
+    return isSuccessful(requestFactory.addCandidate(electionId, name));
+  }
+
+  public boolean submitVote(String voterName, String electionID, List<String> vote) {
+    return isSuccessful(requestFactory.submitVote(voterName, electionID, vote));
+  }
 }

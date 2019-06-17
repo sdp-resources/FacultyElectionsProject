@@ -5,6 +5,8 @@ import fsc.entity.query.Query;
 import fsc.service.query.QueryStringConverter;
 import fsc.viewable.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 public class ViewableEntityConverter {
 
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
+  private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
   public ViewableProfile convert(Profile profile) {
     return new ViewableProfile(profile.getName(), profile.getUsername(), profile.getDivision(),
@@ -42,6 +45,10 @@ public class ViewableEntityConverter {
 
   }
 
+  private String convert(LocalDateTime date) {
+    return date.format(dateTimeFormatter);
+  }
+
   public List<ViewableCommittee> convertCommittees(List<Committee> committees) {
     return committees.stream().map(this::convert).collect(Collectors.toList());
   }
@@ -54,5 +61,13 @@ public class ViewableEntityConverter {
 
   private String convertQuery(Query query) {
     return queryStringConverter.toString(query);
+  }
+
+  public ViewableVoteRecord convertVoteRecord(VoteRecord voteRecord) {
+    return new ViewableVoteRecord(
+          convert(voteRecord.getVoter()),
+          convert(voteRecord.getDate()),
+          voteRecord.getElection().getID(),
+          convert(voteRecord.getVotes()));
   }
 }

@@ -48,8 +48,12 @@ public class ViewDTSGatewayDummy implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public boolean hasVoteRecord(String username, String electionID) {
+  public boolean hasVoteRecord(Profile voter, Election election) {
     return false;
+  }
+
+  public VoteRecord getVoteRecord(Profile voter, Election election) throws NoVoteRecordException {
+    return null;
   }
 
   public Election getElection(String electionID) {

@@ -9,7 +9,7 @@ import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
-import fsc.request.VoteRecordRequest;
+import fsc.request.SubmitVoteRecordRequest;
 import fsc.response.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
 public class CastVoteInteractorTest {
   public static final String ELECTION_ID = "1";
   private List<String> vote;
-  private VoteRecordRequest request;
+  private SubmitVoteRecordRequest request;
   private ProvidedElectionGatewaySpy electionGateway;
   private Profile voter;
   private ProfileGateway profileGateway;
@@ -40,7 +40,7 @@ public class CastVoteInteractorTest {
     voter = EntityStub.getProfile(0);
     candidate = EntityStub.getProfile(1);
     vote = List.of(candidate.getUsername());
-    request = new VoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
+    request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(candidate, voter);
     interactor = new ElectionInteractor(electionGateway, null, profileGateway);
@@ -72,7 +72,7 @@ public class CastVoteInteractorTest {
     election.getBallot().addCandidate(candidate);
     election.getBallot().addCandidate(voter);
     vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
-    request = new VoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
+    request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
   }

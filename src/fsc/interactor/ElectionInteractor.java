@@ -71,10 +71,10 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(AddToBallotRequest request) {
     try {
-      Election election = getElectionGateway().getElection(request.getBallotID());
-      Profile profile = getProfileGateway().getProfile(request.getProfileUsername());
+      Election election = electionGateway.getElection(request.getElectionId());
+      Profile profile = profileGateway.getProfile(request.getProfileUsername());
       election.getBallot().addCandidate(profile);
-      getElectionGateway().save();
+      electionGateway.save();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ResponseFactory.unknownProfileName();
     } catch (ElectionGateway.InvalidElectionIDException e) {
@@ -85,10 +85,10 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(RemoveFromBallotRequest request) {
     try {
-      Election election = getElectionGateway().getElection(request.ballotID);
-      Profile profile = getProfileGateway().getProfile(request.username);
+      Election election = electionGateway.getElection(request.ballotID);
+      Profile profile = profileGateway.getProfile(request.username);
       election.getBallot().remove(profile);
-      getElectionGateway().save();
+      electionGateway.save();
       return ResponseFactory.success();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ResponseFactory.unknownProfileName();
@@ -99,15 +99,14 @@ public class ElectionInteractor extends Interactor {
     }
   }
 
-  public Response execute(VoteRecordRequest request) {
+  public Response execute(SubmitVoteRecordRequest request) {
     try {
-      if (getElectionGateway().hasVoteRecord(request.username, request.electionID)) {
+      Election election = electionGateway.getElection(request.electionID);
+      Profile voter = profileGateway.getProfile(request.username);
+      if (electionGateway.hasVoteRecord(voter, election)) {
         return ResponseFactory.alreadyVoted();
       }
-      getProfileGateway().getProfile(request.username);
-      Election election = getElectionGateway().getElection(request.electionID);
-      Profile voter = getProfileGateway().getProfile(request.username);
-      List<Profile> votes = getProfileGateway().getProfiles(request.vote);
+      List<Profile> votes = profileGateway.getProfiles(request.vote);
 
       if (thereAreMultipleProfileOccurences(votes)) {
         return ResponseFactory.multipleRanksForCandidate();
@@ -117,9 +116,8 @@ public class ElectionInteractor extends Interactor {
         return ResponseFactory.invalidCandidate();
       }
 
-      VoteRecord voteRecord = new VoteRecord(voter, votes, election);
-      getElectionGateway().recordVote(voteRecord);
-      getElectionGateway().save();
+      electionGateway.recordVote(new VoteRecord(voter, votes, election));
+      electionGateway.save();
       return ResponseFactory.success();
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return ResponseFactory.unknownProfileName();
@@ -128,18 +126,26 @@ public class ElectionInteractor extends Interactor {
     }
   }
 
+  public Response execute(ViewVoteRecordRequest request) {
+    try {
+      Profile voter = profileGateway.getProfile(request.username);
+      Election election = electionGateway.getElection(request.electionID);
+      VoteRecord voteRecord = electionGateway.getVoteRecord(voter, election);
+      return ResponseFactory.ofVoteRecord(voteRecord);
+    } catch (ElectionGateway.NoVoteRecordException e) {
+      return ResponseFactory.noVote();
+    } catch (ProfileGateway.InvalidProfileUsernameException e) {
+      return ResponseFactory.unknownProfileName();
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ResponseFactory.unknownElectionID();
+    }
+  }
+
+
   private boolean someProfilesAreNotCandidates(Election election, List<Profile> votes) {
     for (Profile vote : votes) {
       if (!election.hasCandidate(vote)) return true;
     }
     return false;
-  }
-
-  public ProfileGateway getProfileGateway() {
-    return profileGateway;
-  }
-
-  public ElectionGateway getElectionGateway() {
-    return electionGateway;
   }
 }

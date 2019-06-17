@@ -7,8 +7,16 @@ public class CreateElection {
     electionId = TestContext.app.createElection(committeeName, seatName);
   }
 
+  public boolean electionIdIsNotNull() {
+    return electionId != null;
+  }
+
+  public String getElectionId() {
+    return electionId;
+  }
+
   public boolean addCandidate(String name) {
-    return false;
+    return TestContext.app.addCandidate(electionId, name);
   }
 }
 

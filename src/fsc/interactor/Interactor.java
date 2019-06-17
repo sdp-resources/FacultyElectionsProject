@@ -32,11 +32,14 @@ public abstract class Interactor {
     try {
       return (Response) getExecuteForRequest(request).invoke(this, request);
     } catch (IllegalAccessException e) {
-      throw new RuntimeException("Should really not be happening");
+      throw new RuntimeException("Should really not be happening" + e.getMessage());
     } catch (InvocationTargetException e) {
-      throw new RuntimeException("Should not be happening");
+      if (e.getTargetException() instanceof RuntimeException) {
+        throw (RuntimeException) e.getTargetException();
+      }
+      throw new RuntimeException(e.getTargetException());
     } catch (NoSuchMethodException e) {
-      throw new RuntimeException("Should not be happening");
+      throw new RuntimeException("Should not be happening:" + e.getMessage());
     }
   }
 

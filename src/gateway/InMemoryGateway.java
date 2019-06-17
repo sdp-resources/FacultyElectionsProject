@@ -128,12 +128,20 @@ public class InMemoryGateway implements Gateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public boolean hasVoteRecord(String username, String electionID) {
+  public boolean hasVoteRecord(Profile profile, Election election) {
     return false; // TODO
   }
 
-  public Election getElection(String electionID) {
+  public VoteRecord getVoteRecord(Profile voter, Election election) {
+    // TODO
     return null;
+  }
+
+  public Election getElection(String electionID) throws InvalidElectionIDException {
+    for (Election election : elections) {
+      if (election.getID().equals(electionID)) return election;
+    }
+    throw new InvalidElectionIDException();
   }
 
   public void addQuery(String name, Query query) {
@@ -154,7 +162,17 @@ public class InMemoryGateway implements Gateway {
     }
   }
 
-  public void save() {}
+  public void save() {
+    addIdsToElections();
+  }
+
+  private void addIdsToElections() {
+    int id = 1;
+    for (Election election : elections) {
+      election.setID("election" + id);
+      id++;
+    }
+  }
 
   public Map<String, Query> getAllQueries() {
     return queries;

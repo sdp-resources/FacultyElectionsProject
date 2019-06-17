@@ -1,4 +1,4 @@
-|FacultyVoting.Voting.CanCastAVote||15:20:59 Sun, Jun 16, 2019|
+|FacultyVoting.Voting.CanCastAVote||19:17:04 Sun, Jun 16, 2019|
 |FacultyVoting.ScenarioLibrary||15:13:35 Sun, Jun 16, 2019|
 |FacultyVoting.Queries.CanValidateQueryStrings||20:56:58 Sat, Jun 15, 2019|
 |FacultyVoting.Queries.CanApplyQueriesToProfiles||13:57:44 Sat, Jun 15, 2019|

@@ -2,6 +2,7 @@ package fsc.app;
 
 import fsc.request.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class RequestFactory {
@@ -67,5 +68,13 @@ public class RequestFactory {
 
   public Request createElection(String committeeName, String seatName) {
     return new CreateElectionRequest(seatName, committeeName);
+  }
+
+  public Request addCandidate(String electionId, String name) {
+    return new AddToBallotRequest(electionId, name);
+  }
+
+  public Request submitVote(String voterName, String electionID, List<String> vote) {
+    return new SubmitVoteRecordRequest(voterName, vote, electionID);
   }
 }

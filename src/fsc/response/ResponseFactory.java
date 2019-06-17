@@ -1,8 +1,6 @@
 package fsc.response;
 
-import fsc.entity.Candidate;
-import fsc.entity.Committee;
-import fsc.entity.Profile;
+import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.service.Context;
@@ -51,6 +49,10 @@ public class ResponseFactory {
     return new ViewResponse<>(new ViewableValidationResult(result));
   }
 
+  public static Response ofVoteRecord(VoteRecord voteRecord) {
+    return new ViewResponse<>(entityConverter.convertVoteRecord(voteRecord));
+  }
+
   public static Response ofString(String string) {
     return new ViewResponse<>(string);
   }
@@ -97,6 +99,10 @@ public class ResponseFactory {
 
   public static Response multipleRanksForCandidate() {
     return new ErrorResponse(ErrorResponse.MULTIPLE_RANKS_FOR_CANDIDATE);
+  }
+
+  public static Response noVote() {
+    return new ErrorResponse(ErrorResponse.NO_VOTE_RECORDED);
   }
 
   public static Response invalidQuery(String errorMessage) {

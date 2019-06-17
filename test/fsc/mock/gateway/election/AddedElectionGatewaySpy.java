@@ -1,6 +1,7 @@
 package fsc.mock.gateway.election;
 
 import fsc.entity.Election;
+import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 
@@ -25,12 +26,15 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
 
   public void recordVote(VoteRecord voteRecord) {}
 
-  public boolean hasVoteRecord(String username, String electionID) {
-    return false;
+  public VoteRecord getVoteRecord(Profile voter, Election election) throws NoVoteRecordException {
+    throw new NoVoteRecordException();
   }
 
   public Election getElection(String electionID) {
     return null;
   }
 
+  public boolean hasVoteRecord(Profile voter, Election election) {
+    return false;
+  }
 }

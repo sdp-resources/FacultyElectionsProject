@@ -37,4 +37,7 @@ public class VoteRecord {
     return election;
   }
 
+  public boolean isRecordFor(Profile voter, Election election) {
+    return this.voter.equals(voter) && this.election.equals(election);
+  }
 }
