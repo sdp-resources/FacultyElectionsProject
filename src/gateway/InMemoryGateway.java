@@ -144,6 +144,11 @@ public class InMemoryGateway implements Gateway {
     throw new InvalidElectionIDException();
   }
 
+  public List<VoteRecord> getAllVotes(Election election) {
+    // TODO
+    return null;
+  }
+
   public void addQuery(String name, Query query) {
     queries.put(name, query);
   }

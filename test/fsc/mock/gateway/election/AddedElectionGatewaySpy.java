@@ -5,6 +5,8 @@ import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 
+import java.util.List;
+
 public class AddedElectionGatewaySpy implements ElectionGateway {
   public Election addedElection;
   public boolean hasSaved = false;
@@ -31,6 +33,10 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
   }
 
   public Election getElection(String electionID) {
+    return null;
+  }
+
+  public List<VoteRecord> getAllVotes(Election election) {
     return null;
   }
 

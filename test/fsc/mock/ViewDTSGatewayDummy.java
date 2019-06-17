@@ -60,6 +60,10 @@ public class ViewDTSGatewayDummy implements Gateway {
     return null;
   }
 
+  public List<VoteRecord> getAllVotes(Election election) {
+    return null;
+  }
+
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     if (profile.username.equals(username)) {
       return profile;

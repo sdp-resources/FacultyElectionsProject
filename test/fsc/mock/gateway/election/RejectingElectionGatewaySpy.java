@@ -5,6 +5,8 @@ import fsc.entity.Profile;
 import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 
+import java.util.List;
+
 public class RejectingElectionGatewaySpy implements ElectionGateway {
   public String requestedElectionId;
 
@@ -25,6 +27,10 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
   public Election getElection(String electionID) throws InvalidElectionIDException {
     requestedElectionId = electionID;
     throw new InvalidElectionIDException();
+  }
+
+  public List<VoteRecord> getAllVotes(Election election) {
+    return null;
   }
 
   public boolean hasVoteRecord(Profile voter, Election election) {

@@ -50,7 +50,11 @@ public class ResponseFactory {
   }
 
   public static Response ofVoteRecord(VoteRecord voteRecord) {
-    return new ViewResponse<>(entityConverter.convertVoteRecord(voteRecord));
+    return new ViewResponse<>(entityConverter.convert(voteRecord));
+  }
+
+  public static Response ofVoteRecordList(List<VoteRecord> voteRecordList) {
+    return new ViewResponse<>(entityConverter.convertVoteRecordList(voteRecordList));
   }
 
   public static Response ofString(String string) {

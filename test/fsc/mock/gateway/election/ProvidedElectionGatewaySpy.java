@@ -1,15 +1,17 @@
 package fsc.mock.gateway.election;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
-import fsc.entity.VoteRecord;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProvidedElectionGatewaySpy implements ElectionGateway {
   public boolean hasSaved;
   private Election storedElection;
   public String providedElectionId = null;
   public VoteRecord submittedVoteRecord = null;
+  private List<VoteRecord> voteRecords = new ArrayList<>();
 
   public ProvidedElectionGatewaySpy(Election election) {
     storedElection = election;
@@ -23,6 +25,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   public void recordVote(VoteRecord voteRecord) {
     submittedVoteRecord = voteRecord;
+    voteRecords.add(voteRecord);
   }
 
   public boolean hasVoteRecord(Profile voter, Election election) {
@@ -39,5 +42,9 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
   public Election getElection(String electionID) {
     providedElectionId = electionID;
     return storedElection;
+  }
+
+  public List<VoteRecord> getAllVotes(Election election) {
+    return voteRecords;
   }
 }

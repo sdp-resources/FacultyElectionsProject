@@ -141,6 +141,14 @@ public class ElectionInteractor extends Interactor {
     }
   }
 
+  public Response execute(ViewAllVotesRequest request) {
+    try {
+      Election election = electionGateway.getElection(request.electionID);
+      return ResponseFactory.ofVoteRecordList(electionGateway.getAllVotes(election));
+    } catch (ElectionGateway.InvalidElectionIDException e) {
+      return ResponseFactory.unknownElectionID();
+    }
+  }
 
   private boolean someProfilesAreNotCandidates(Election election, List<Profile> votes) {
     for (Profile vote : votes) {

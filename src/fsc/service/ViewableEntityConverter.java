@@ -49,8 +49,19 @@ public class ViewableEntityConverter {
     return date.format(dateTimeFormatter);
   }
 
+  public ViewableVoteRecord convert(VoteRecord voteRecord) {
+    return new ViewableVoteRecord(
+          convert(voteRecord.getDate()),
+          voteRecord.getElection().getID(),
+          convertProfiles(voteRecord.getVotes()));
+  }
+
   public List<ViewableCommittee> convertCommittees(List<Committee> committees) {
     return committees.stream().map(this::convert).collect(Collectors.toList());
+  }
+
+  public List<ViewableVoteRecord> convertVoteRecordList(List<VoteRecord> voteRecordList) {
+    return voteRecordList.stream().map(this::convert).collect(Collectors.toList());
   }
 
   public Map<String, String> convertQueries(Map<String, Query> queries) {
@@ -61,13 +72,5 @@ public class ViewableEntityConverter {
 
   private String convertQuery(Query query) {
     return queryStringConverter.toString(query);
-  }
-
-  public ViewableVoteRecord convertVoteRecord(VoteRecord voteRecord) {
-    return new ViewableVoteRecord(
-          convert(voteRecord.getVoter()),
-          convert(voteRecord.getDate()),
-          voteRecord.getElection().getID(),
-          convertProfiles(voteRecord.getVotes()));
   }
 }
