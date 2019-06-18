@@ -6,6 +6,8 @@ import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.request.*;
 import fsc.response.*;
+import fsc.response.builder.PartialResponse;
+import fsc.response.builder.UniPartialResponse;
 
 import java.util.HashSet;
 import java.util.List;
@@ -142,11 +144,21 @@ public class ElectionInteractor extends Interactor {
   }
 
   public Response execute(ViewAllVotesRequest request) {
+    return getElection(request.electionID)
+                 .map(this::getAllVotes)
+                 .resolveWith(ResponseFactory::ofVoteRecordList);
+  }
+
+  public List<VoteRecord> getAllVotes(Election election) {
+    return electionGateway.getAllVotes(election);
+  }
+
+  public UniPartialResponse<Election> getElection(String electionID) {
     try {
-      Election election = electionGateway.getElection(request.electionID);
-      return ResponseFactory.ofVoteRecordList(electionGateway.getAllVotes(election));
+      Election election = electionGateway.getElection(electionID);
+      return PartialResponse.supply(election);
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return ResponseFactory.unknownElectionID();
+      return PartialResponse.resolve(ResponseFactory.unknownElectionID());
     }
   }
 
