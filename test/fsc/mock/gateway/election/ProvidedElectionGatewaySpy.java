@@ -28,12 +28,13 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
     voteRecords.add(voteRecord);
   }
 
-  public boolean hasVoteRecord(Profile voter, Election election) {
-    return submittedVoteRecord != null && submittedVoteRecord.isRecordFor(voter, election);
+  public boolean hasVoteRecord(Voter voter) {
+    return submittedVoteRecord != null && submittedVoteRecord.isRecordFor(
+          new Voter(voter.getVoter(), voter.getElection()));
   }
 
-  public VoteRecord getVoteRecord(Profile voter, Election election) throws NoVoteRecordException {
-    if (hasVoteRecord(voter, election)) {
+  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
+    if (hasVoteRecord(new Voter(voter.getVoter(), voter.getElection()))) {
       return submittedVoteRecord;
     }
     throw new NoVoteRecordException();

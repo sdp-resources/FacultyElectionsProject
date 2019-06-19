@@ -1,8 +1,6 @@
 package fsc.mock.gateway.election;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
-import fsc.entity.VoteRecord;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     return false;
   }
 
-  public VoteRecord getVoteRecord(Profile voter, Election election) throws NoVoteRecordException {
+  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
     throw new NoVoteRecordException();
   }
 
@@ -33,7 +31,7 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
-  public boolean hasVoteRecord(Profile voter, Election election) {
-    return hasVoteRecord(voter.getUsername(), election.getID());
+  public boolean hasVoteRecord(Voter voter) {
+    return hasVoteRecord(voter.getVoter().getUsername(), voter.getElection().getID());
   }
 }

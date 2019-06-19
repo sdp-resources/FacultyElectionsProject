@@ -5,24 +5,22 @@ import java.util.List;
 
 public class VoteRecord {
 
-  private final Profile voter;
   private final List<Profile> votes;
-  private final Election election;
   private final LocalDateTime date;
+  private Voter voter;
 
-  public VoteRecord(Profile voter, List<Profile> votes, Election election) {
-    this(voter, LocalDateTime.now(), votes, election);
+  public VoteRecord(Voter voter, List<Profile> votes) {
+    this(voter, LocalDateTime.now(), votes);
   }
 
-  public VoteRecord(Profile voter, LocalDateTime date, List<Profile> votes, Election election) {
+  public VoteRecord(Voter voter, LocalDateTime date, List<Profile> votes) {
     this.voter = voter;
     this.votes = votes;
     this.date = date;
-    this.election = election;
   }
 
   public Profile getVoter() {
-    return voter;
+    return voter.getVoter();
   }
 
   public List<Profile> getVotes() {
@@ -34,10 +32,21 @@ public class VoteRecord {
   }
 
   public Election getElection() {
-    return election;
+    return voter.getElection();
   }
 
-  public boolean isRecordFor(Profile voter, Election election) {
-    return this.voter.equals(voter) && this.election.equals(election);
+  public boolean isRecordFor(Voter aVoter) {
+    return voter.equals(aVoter);
+  }
+
+  public boolean someProfilesAreNotCandidates() {
+    for (Profile vote : getVotes()) {
+      if (!getElection().hasCandidate(vote)) { return true; }
+    }
+    return false;
+  }
+
+  public String toString() {
+    return "VoteRecord{" + voter.getVoter().getUsername() + ", " + votes + '}';
   }
 }

@@ -52,8 +52,8 @@ public class ViewAllVotesTest {
   public void whenVotesArePresent_returnViewableRecord() {
     List<Profile> votes1 = List.of(profiles.get(2), profiles.get(1));
     List<Profile> votes2 = List.of(profiles.get(1));
-    electionGateway.recordVote(new VoteRecord(profiles.get(0), votes1, election));
-    electionGateway.recordVote(new VoteRecord(profiles.get(1), votes2, election));
+    electionGateway.recordVote(new VoteRecord(new Voter(profiles.get(0), election), votes1));
+    electionGateway.recordVote(new VoteRecord(new Voter(profiles.get(1), election), votes2));
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null, profileGateway);
     Response response = interactor.execute(request);

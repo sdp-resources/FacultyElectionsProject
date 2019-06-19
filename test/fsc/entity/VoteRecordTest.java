@@ -23,7 +23,7 @@ public class VoteRecordTest {
     votes = List.of(EntityStub.getProfile(1), EntityStub.getProfile(2));
     voter = EntityStub.getProfile(0);
     election = EntityStub.simpleBallotElection();
-    voteRecord = new VoteRecord(voter, votes, election);
+    voteRecord = new VoteRecord(new Voter(voter, election), votes);
   }
 
   @Test

@@ -39,7 +39,7 @@ public class AddToBallotInteractorTest {
   @Test
   public void addingToNoBallot() {
     interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null,
-                                        new ProfileGatewayStub());
+                                        new ProfileGatewayStub(profile));
     Response response = interactor.execute(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);

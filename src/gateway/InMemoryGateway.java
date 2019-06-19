@@ -131,17 +131,17 @@ public class InMemoryGateway implements Gateway {
     voteRecords.add(voteRecord);
   }
 
-  public boolean hasVoteRecord(Profile voter, Election election) {
+  public boolean hasVoteRecord(Voter voter) {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(voter, election)) return true;
+      if (record.isRecordFor(new Voter(voter.getVoter(), voter.getElection()))) return true;
     }
 
     return false;
   }
 
-  public VoteRecord getVoteRecord(Profile voter, Election election) throws NoVoteRecordException {
+  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(voter, election)) return record;
+      if (record.isRecordFor(new Voter(voter.getVoter(), voter.getElection()))) return record;
     }
 
     throw new NoVoteRecordException();

@@ -37,9 +37,8 @@ public class RemoveFromBallotInteractorTest {
 
   @Test
   public void ballotDoesNotExist() {
-    ProfileGateway dummyProfileGateway = new ProfileGatewayStub();
     interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null,
-                                        dummyProfileGateway);
+                                        new ProfileGatewayStub(profile));
     Response response = interactor.execute(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);

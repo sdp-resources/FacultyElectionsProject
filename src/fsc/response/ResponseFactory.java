@@ -3,10 +3,9 @@ package fsc.response;
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
-import fsc.response.builder.PartialResponse;
 import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
-import fsc.viewable.*;
+import fsc.viewable.ViewableValidationResult;
 
 import java.util.List;
 import java.util.Map;
@@ -114,7 +113,4 @@ public class ResponseFactory {
     return new ErrorResponse(errorMessage);
   }
 
-  public static PartialResponse build() {
-    return new PartialResponse();
-  }
 }

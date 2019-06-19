@@ -67,7 +67,7 @@ public class ViewVoteRecordTest {
   @Test
   public void whenVoteRecordIsPresent_returnViewableRecord() {
     List<Profile> votes = List.of(profiles.get(2), profiles.get(1));
-    electionGateway.recordVote(new VoteRecord(voter, votes, election));
+    electionGateway.recordVote(new VoteRecord(new Voter(voter, election), votes));
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null, profileGateway);
     Response response = interactor.execute(request);
