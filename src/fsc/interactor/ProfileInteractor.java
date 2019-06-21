@@ -1,64 +1,50 @@
 package fsc.interactor;
 
-import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
+import fsc.interactor.fetcher.ProfileFetcher;
 import fsc.request.*;
-import fsc.response.*;
-import fsc.service.query.QueryStringConverter;
-import fsc.service.query.QueryStringParser;
-
-import java.util.List;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
+import fsc.response.builder.ResponseBuilder;
 
 public class ProfileInteractor extends Interactor {
 
-  private ProfileGateway gateway;
+  private ProfileGateway profileGateway;
+  private ProfileFetcher profileFetcher;
 
-  public ProfileInteractor(ProfileGateway gateway) {
-    this.gateway = gateway;
+  public ProfileInteractor(ProfileGateway profileGateway) {
+    this.profileGateway = profileGateway;
+    profileFetcher = new ProfileFetcher(profileGateway);
   }
 
   public Response execute(CreateProfileRequest request) {
-    if (gateway.hasProfile(request.username)) {
-      return ResponseFactory.resourceExists();
-    }
-    gateway.addProfile(makeProfileFromRequest(request));
-    gateway.save();
-    return ResponseFactory.success();
+    return profileFetcher
+                 .makeProfile(request.name, request.username,
+                              request.division, request.contract)
+                 .escapeIf(profileFetcher::profileExists,
+                           ResponseFactory.resourceExists())
+                 .perform(profileFetcher::addProfile)
+                 .perform(profileFetcher::save)
+                 .resolveWith(s -> ResponseFactory.success());
   }
 
   public Response execute(EditProfileRequest request) {
-    try {
-      Profile profile = gateway.getProfile(request.username);
-      request.applyChangesTo(profile);
-      gateway.save();
-      return ResponseFactory.success();
-    } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ResponseFactory.unknownProfileName();
-    }
+    return profileFetcher
+                 .fetchProfile(request.username)
+                 .perform(request::applyChangesTo)
+                 .perform(profileFetcher::save)
+                 .resolveWith((s -> ResponseFactory.success()));
   }
 
   public Response execute(ViewProfileRequest request) {
-    try {
-      Profile profile = gateway.getProfile(request.username);
-      return ResponseFactory.ofProfile(profile);
-    } catch (ProfileGateway.InvalidProfileUsernameException e) {
-      return ResponseFactory.unknownProfileName();
-    }
+    return profileFetcher
+          .fetchProfile(request.username)
+          .resolveWith(ResponseFactory::ofProfile);
   }
 
   public Response execute(ViewProfilesListRequest request) {
-    try {
-      List<Profile> profiles = gateway.getProfilesMatching(
-            new QueryStringConverter().fromString(request.query));
-      return ResponseFactory.ofProfileList(profiles);
-    } catch (QueryStringParser.QueryParseException e) {
-      // TODO: Check for this
-      return ResponseFactory.invalidQuery(e.getMessage());
-    }
+    return profileFetcher.parseQueryFromString(request)
+          .mapThrough(ResponseBuilder.lift(profileFetcher::getProfilesMatchingQuery))
+          .resolveWith(ResponseFactory::ofProfileList);
   }
-
-  private Profile makeProfileFromRequest(CreateProfileRequest request) {
-    return new Profile(request.name, request.username, request.division, request.contract);
-  }
-
 }
