@@ -5,7 +5,7 @@ import fsc.interactor.fetcher.ProfileFetcher;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.response.builder.ResponseBuilder;
+import fsc.utils.builder.Builder;
 
 public class ProfileInteractor extends Interactor {
 
@@ -44,7 +44,7 @@ public class ProfileInteractor extends Interactor {
 
   public Response execute(ViewProfilesListRequest request) {
     return profileFetcher.parseQueryFromString(request)
-          .mapThrough(ResponseBuilder.lift(profileFetcher::getProfilesMatchingQuery))
+          .mapThrough(Builder.lift(profileFetcher::getProfilesMatchingQuery))
           .resolveWith(ResponseFactory::ofProfileList);
   }
 }

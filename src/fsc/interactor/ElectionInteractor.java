@@ -9,7 +9,7 @@ import fsc.interactor.fetcher.ElectionFetcher;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.response.builder.ResponseBuilder;
+import fsc.utils.builder.Builder;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -31,7 +31,7 @@ public class ElectionInteractor extends Interactor {
                           .mapThrough(createElection(request.seatName))
                           .perform(electionFetcher::addElection)
                           .perform(electionFetcher::save)
-                          .mapThrough(ResponseBuilder.lift(Election::getID))
+                          .mapThrough(Builder.lift(Election::getID))
                           .resolveWith(ResponseFactory::ofString);
   }
 
@@ -44,7 +44,7 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(ViewCandidatesRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .mapThrough(ResponseBuilder.lift(Election::getCandidateProfiles))
+                          .mapThrough(Builder.lift(Election::getCandidateProfiles))
                           .resolveWith(ResponseFactory::ofProfileList);
   }
 
@@ -68,7 +68,7 @@ public class ElectionInteractor extends Interactor {
   public Response execute(SubmitVoteRecordRequest request) {
     return electionFetcher.fetchVoterOnlyIfNoRecord(request.username, request.electionID)
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
-                                    ResponseBuilder.lift(VoteRecord::new))
+                                    Builder.lift(VoteRecord::new))
                           .escapeIf(VoteRecord::someProfilesAreNotCandidates,
                                     ResponseFactory.invalidCandidate())
                           .perform(electionFetcher::submitRecord)
@@ -84,11 +84,11 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(ViewAllVotesRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .mapThrough(ResponseBuilder.lift(electionFetcher::getAllVotes))
+                          .mapThrough(Builder.lift(electionFetcher::getAllVotes))
                           .resolveWith(ResponseFactory::ofVoteRecordList);
   }
 
-  private Function<Committee, ResponseBuilder<Election>> createElection(String seatName) {
+  private Function<Committee, Builder<Election, Response>> createElection(String seatName) {
     return committee -> {
       try {
         Seat seat;
@@ -96,9 +96,9 @@ public class ElectionInteractor extends Interactor {
         Query defaultQuery = seat.getDefaultQuery();
         Ballot ballot = ballotCreator.getBallot(defaultQuery);
         Election election = new Election(seat, committee, defaultQuery, ballot);
-        return ResponseBuilder.ofValue(election);
+        return Builder.ofValue(election);
       } catch (Committee.UnknownSeatNameException e) {
-        return ResponseBuilder.ofResponse(ResponseFactory.unknownCommitteeName());
+        return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
       }
     };
   }
