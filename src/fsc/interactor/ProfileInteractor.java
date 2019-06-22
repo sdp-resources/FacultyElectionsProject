@@ -2,6 +2,7 @@ package fsc.interactor;
 
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.fetcher.ProfileFetcher;
+import fsc.interactor.fetcher.QueryFetcher;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
@@ -9,12 +10,12 @@ import fsc.utils.builder.Builder;
 
 public class ProfileInteractor extends Interactor {
 
-  private ProfileGateway profileGateway;
   private ProfileFetcher profileFetcher;
+  private QueryFetcher queryFetcher;
 
   public ProfileInteractor(ProfileGateway profileGateway) {
-    this.profileGateway = profileGateway;
     profileFetcher = new ProfileFetcher(profileGateway);
+    queryFetcher = new QueryFetcher();
   }
 
   public Response execute(CreateProfileRequest request) {
@@ -43,7 +44,7 @@ public class ProfileInteractor extends Interactor {
   }
 
   public Response execute(ViewProfilesListRequest request) {
-    return profileFetcher.parseQueryFromString(request)
+    return queryFetcher.createFromString(request.query)
           .mapThrough(Builder.lift(profileFetcher::getProfilesMatchingQuery))
           .resolveWith(ResponseFactory::ofProfileList);
   }

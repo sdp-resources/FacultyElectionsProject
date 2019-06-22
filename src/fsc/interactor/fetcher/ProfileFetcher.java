@@ -3,12 +3,9 @@ package fsc.interactor.fetcher;
 import fsc.entity.Profile;
 import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
-import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
-import fsc.service.query.QueryStringConverter;
-import fsc.service.query.QueryStringParser;
 
 import java.util.HashSet;
 import java.util.List;
@@ -65,14 +62,5 @@ public class ProfileFetcher {
 
   public List<Profile> getProfilesMatchingQuery(Query query) {
     return profileGateway.getProfilesMatching(query);
-  }
-
-  public Builder<Query, Response> parseQueryFromString(ViewProfilesListRequest request) {
-    try {
-      return Builder.ofValue(new QueryStringConverter().fromString(request.query));
-    } catch (QueryStringParser.QueryParseException e) {
-      // TODO Check for this
-      return Builder.ofResponse(ResponseFactory.invalidQuery(e.getMessage()));
-    }
   }
 }

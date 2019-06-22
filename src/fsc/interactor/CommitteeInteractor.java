@@ -4,81 +4,72 @@ import fsc.entity.Committee;
 import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
+import fsc.interactor.fetcher.CommitteeFetcher;
+import fsc.interactor.fetcher.QueryFetcher;
 import fsc.request.*;
-import fsc.response.*;
-import fsc.service.query.QueryStringConverter;
-import fsc.service.query.QueryStringParser;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
+import fsc.utils.builder.Builder;
 
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 public class CommitteeInteractor extends Interactor {
-  private CommitteeGateway gateway;
+  private CommitteeFetcher committeeFetcher;
+  private QueryFetcher queryFetcher;
 
   public CommitteeInteractor(CommitteeGateway gateway) {
-    this.gateway = gateway;
+    committeeFetcher = new CommitteeFetcher(gateway);
+    queryFetcher = new QueryFetcher();
   }
 
   public Response execute(CreateCommitteeRequest request) {
-    if (gateway.hasCommittee(request.name)) {
-      return ResponseFactory.resourceExists();
-    }
-    gateway.addCommittee(makeCommitteeFromRequest(request));
-    gateway.save();
-    return ResponseFactory.success();
+    return committeeFetcher.makeCommittee(request.name, request.description)
+                           .escapeIf(committeeFetcher::hasCommittee,
+                                     ResponseFactory.resourceExists())
+                           .perform(committeeFetcher::addCommittee)
+                           .perform(committeeFetcher::save)
+                           .resolveWith(s -> ResponseFactory.success());
   }
 
   public Response execute(ViewCommitteeListRequest request) {
-    return ResponseFactory.ofCommitteeList(gateway.getCommittees());
+    return ResponseFactory.ofCommitteeList(committeeFetcher.getCommittees());
   }
 
   public Response execute(EditCommitteeRequest request) {
-    try {
-      Committee committee = gateway.getCommittee(request.name);
-      performUpdates(committee, request.changes);
-      gateway.save();
-      return ResponseFactory.success();
-    } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return ResponseFactory.unknownCommitteeName();
-    }
+    return committeeFetcher.fetchCommittee(request.name)
+                           .perform(performUpdates(request.changes))
+                           .perform(committeeFetcher::save)
+                           .resolveWith(s -> ResponseFactory.success());
   }
 
   public Response execute(CreateSeatRequest request) {
-    try {
-      Committee committee = gateway.getCommittee(request.committeeName);
-      Query query = new QueryStringConverter().fromString(request.queryString);
-      Seat seat = new Seat(request.seatName, query);
-      if (committee.hasSeat(request.seatName)) {
-        return ResponseFactory.resourceExists();
+    return committeeFetcher.fetchCommittee(request.committeeName)
+                           .escapeIf(c -> c.hasSeat(request.seatName),
+                                     ResponseFactory.resourceExists())
+                           // TODO: Don't like how this is done
+                           // should build seat in fetcher from query+seat step
+                           .bindWith(queryFetcher.createFromString(request.queryString),
+                                     Builder.lift(createSeat(request.seatName)))
+                           .perform(committeeFetcher::save)
+                           .resolveWith(s -> ResponseFactory.success());
+
+  }
+
+  private BiFunction<Committee, Query, Committee> createSeat(String seatName) {
+    return ((committee, query) -> {
+      committee.addSeat(new Seat(seatName, query));
+      return committee;
+    });
+  }
+
+  private Consumer<Committee> performUpdates(Map<String, Object> changes) {
+    return committee -> {
+      for (String field : changes.keySet()) {
+        committee.update(field, changes.get(field));
       }
-
-      committee.addSeat(seat);
-      gateway.save();
-      return ResponseFactory.success();
-    } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return ResponseFactory.unknownCommitteeName();
-    } catch (QueryStringParser.QueryParseException e) {
-      return ResponseFactory.invalidQuery(e.getMessage());
-    }
+    };
   }
 
-  private void performUpdates(Committee committee, Map<String, Object> changes) {
-    for (String field : changes.keySet()) {
-      updateProfile(committee, field, changes.get(field));
-    }
-  }
-
-  public void updateProfile(Committee committee, String field, Object value) {
-    switch (field) {
-      case "name":
-        committee.setName((String) value);
-        break;
-      case "description":
-        committee.setDescription((String) value);
-        break;
-    }
-  }
-
-  private Committee makeCommitteeFromRequest(CreateCommitteeRequest request) {
-    return new Committee(request.name, request.description);
-  }
 }

@@ -73,5 +73,16 @@ public class Committee {
     return Objects.hash(name, description, seats);
   }
 
+  public void update(String field, Object value) {
+    switch (field) {
+      case "name":
+        setName((String) value);
+        break;
+      case "description":
+        setDescription((String) value);
+        break;
+    }
+  }
+
   public class UnknownSeatNameException extends Exception {}
 }
