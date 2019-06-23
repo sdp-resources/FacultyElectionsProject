@@ -28,6 +28,6 @@ public class GatewayBackedQueryValidator implements NameValidator {
   }
 
   public Query getQueryNamed(String name) {
-    return gateway.getAllQueries().get(name);
+    return gateway.getQuery(name);
   }
 }

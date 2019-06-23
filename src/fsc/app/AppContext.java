@@ -20,7 +20,7 @@ public class AppContext {
   public AppContext(Gateway gateway) {
     this.gateway = gateway;
     this.interactor = loadInteractors(gateway);
-    this.queryValidator = new GatewayBackedQueryValidator(AppContext.this.gateway);
+    this.queryValidator = new GatewayBackedQueryValidator(gateway);
     QueryStringParser.setNameValidator(queryValidator);
   }
 

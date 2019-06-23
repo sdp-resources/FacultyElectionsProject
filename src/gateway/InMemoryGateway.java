@@ -4,6 +4,7 @@ import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.gateway.Gateway;
+import fsc.gateway.QueryGateway;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 
@@ -166,6 +167,12 @@ public class InMemoryGateway implements Gateway {
 
   public boolean hasQuery(String name) {
     return queries.containsKey(name);
+  }
+
+  public Query getQuery(String name) throws UnknownQueryNameException {
+    if (hasQuery(name))
+      return queries.get(name);
+    throw new QueryGateway.UnknownQueryNameException();
   }
 
   public QueryValidationResult validateQueryString(String queryString) {

@@ -4,6 +4,8 @@ import fsc.entity.query.QueryValidationResult;
 import fsc.entity.query.QueryValidationResult.InvalidQueryResult;
 import fsc.entity.query.QueryValidationResult.ValidQueryResult;
 
+import java.util.Objects;
+
 public class ViewableValidationResult {
 
   public final boolean isValid;
@@ -19,5 +21,17 @@ public class ViewableValidationResult {
     } else {
       throw new RuntimeException("A QueryValidationResult must be one of two kinds");
     }
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ViewableValidationResult that = (ViewableValidationResult) o;
+    return isValid == that.isValid &&
+                 Objects.equals(message, that.message);
+  }
+
+  public int hashCode() {
+    return Objects.hash(isValid, message);
   }
 }

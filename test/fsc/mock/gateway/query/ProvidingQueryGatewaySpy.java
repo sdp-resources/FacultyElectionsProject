@@ -35,6 +35,11 @@ public class ProvidingQueryGatewaySpy implements QueryGateway {
     return namedQueries.containsKey(name);
   }
 
+  public Query getQuery(String name) {
+    requestedName = name;
+    return namedQueries.get(name);
+  }
+
   public QueryValidationResult validateQueryString(String queryString) {
     requestedValidationForString = queryString;
     return new QueryStringConverter().validateQueryString(queryString);
