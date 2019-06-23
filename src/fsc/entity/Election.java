@@ -10,14 +10,38 @@ public class Election {
   private Committee committee;
   private Seat seat;
   private String ID;
-
+  private Status status;
   private Query defaultQuery;
+
+  // TODO: Election states
+  // 0. Election state can be changed with ChangeElectionStateRequest
+  // 1. Setup:
+  //    - Admin can do BallotChangeRequest
+  //    - Admin can do AddCandidateRequest
+  //    - Admin can do RemoveCandidateRequest
+  //    - Candidates do not see DTS status
+  //    - Voters cannot vote
+  // 2. DecideToStand:
+  //    - Candidate can view and change their DTS status
+  //    - Admin cannot change ballot or add/remove candidates
+  //    - Voters cannot vote
+  // 3. Vote:
+  //    - Candidates that did not decide are automatically accepted (email notification?)
+  //    - Voters can see the election and vote
+  //    - Candidates cannot change their DTS status
+  //    - Admin cannot change ballot or add/remove candidates
+  // 4. Closed:
+  //    - Voters cannot vote
+  //    - Candidates cannot change their DTS status
+  //    - Admin cannot change ballot or add/remove candidates
+  //    - Admin can view election results
 
   public Election(Seat seat, Committee committee, Query query, Ballot ballot) {
     this.seat = seat;
     this.committee = committee;
     this.defaultQuery = query;
     this.ballot = ballot;
+    this.status = Status.Setup;
   }
 
   public String getID() {
@@ -25,6 +49,14 @@ public class Election {
   }
 
   public void setID(String ID) {this.ID = ID;}
+
+  public Status getStatus() {
+    return status;
+  }
+
+  public void setStatus(Status status) {
+    this.status = status;
+  }
 
   public Seat getSeat() {
     return seat;
@@ -61,6 +93,10 @@ public class Election {
 
   public List<Profile> getCandidateProfiles() {
     return ballot.getCandidateProfiles();
+  }
+
+  public enum Status {
+    Setup, DecideToStand, Vote, Closed
   }
 }
 
