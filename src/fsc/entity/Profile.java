@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Profile {
   private String name;
-  public String username;
+  private String username;
   private String division;
   private String contract;
   private Status status;

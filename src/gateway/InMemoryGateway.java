@@ -52,7 +52,7 @@ public class InMemoryGateway implements Gateway {
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     for (Profile currProfile : profiles) {
-      if (username.equals(currProfile.username)) return currProfile;
+      if (username.equals(currProfile.getUsername())) return currProfile;
     }
     throw new InvalidProfileUsernameException();
   }
@@ -63,7 +63,7 @@ public class InMemoryGateway implements Gateway {
 
   public boolean hasProfile(String username) {
     for (Profile currProfile : profiles) {
-      if (username.equals(currProfile.username)) return true;
+      if (username.equals(currProfile.getUsername())) return true;
     }
     return false;
   }

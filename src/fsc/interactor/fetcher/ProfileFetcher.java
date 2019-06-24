@@ -49,7 +49,7 @@ public class ProfileFetcher {
   }
 
   public Boolean profileExists(Profile profile) {
-    return profileGateway.hasProfile(profile.username);
+    return profileGateway.hasProfile(profile.getUsername());
   }
 
   public void addProfile(Profile profile) {
