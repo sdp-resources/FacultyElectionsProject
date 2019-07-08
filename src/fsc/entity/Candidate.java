@@ -7,7 +7,7 @@ public class Candidate {
   private Profile profile;
   private Status status;
 
-  public Candidate(Profile profile) {
+  Candidate(Profile profile) {
     this.profile = profile;
     status = Status.NoAnswer;
   }

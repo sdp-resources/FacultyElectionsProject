@@ -1,5 +1,6 @@
 package fsc.mock.gateway.committee;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.entity.Seat;
 import fsc.entity.query.Query;
@@ -38,7 +39,7 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
     }
 
     public Seat getSeat(String seatName) {
-      return new Seat(seatName, Query.always());
+      return AppContext.getEntityFactory().createSeat(seatName, Query.always());
     }
   }
 }

@@ -1,5 +1,6 @@
 package fsc.voting;
 
+import fsc.app.AppContext;
 import fsc.entity.Profile;
 import fsc.entity.Vote;
 
@@ -11,7 +12,7 @@ class VotingRound {
   private VotingRoundResult result;
 
   public VotingRound(List<Vote> votes) {
-    this.votes = Vote.createVoteSnapshot(votes);
+    this.votes = AppContext.getEntityFactory().createVoteSnapshot(votes);
     rankedTallies = new VoteTallier().tallyVotes(this.votes);
     result = determineResultForRound();
   }

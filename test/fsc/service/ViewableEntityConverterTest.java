@@ -1,5 +1,6 @@
 package fsc.service;
 
+import fsc.app.AppContext;
 import fsc.entity.Profile;
 import fsc.viewable.ViewableProfile;
 import org.junit.Test;
@@ -15,7 +16,8 @@ public class ViewableEntityConverterTest {
     String contract = "Tenured";
 
     ViewableEntityConverter converter = new ViewableEntityConverter();
-    Profile profile = new Profile(name, username, division, contract);
+    Profile profile = AppContext.getEntityFactory()
+                                .createProfile(name, username, division, contract);
     ViewableProfile convertedViewableProfile = converter.convert(profile);
     ViewableProfile manualViewableProfile = new ViewableProfile(name, username, division, contract);
 

@@ -1,5 +1,6 @@
 package fsc.service;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.entity.Profile;
 import org.junit.Before;
@@ -22,7 +23,8 @@ public class SerializerTest {
     String division = "ART";
     String contract = "Tenured";
 
-    Profile profile = new Profile(name, username, division, contract);
+    Profile profile = AppContext.getEntityFactory()
+                                .createProfile(name, username, division, contract);
 
     String expectedOutput = "{\"division\":\"" + division + "\"," + "\"contract\":\"" + contract + "\"," + "\"name\":\"" + name + "\"," + "\"username\":\"" + username + "\"}";
 
@@ -53,7 +55,8 @@ public class SerializerTest {
     String division = "ART";
     String contract = "Tenured";
 
-    Profile originalProfile = new Profile(name, username, division, contract);
+    Profile originalProfile = AppContext.getEntityFactory()
+                                        .createProfile(name, username, division, contract);
 
     Profile generatedProfile = serializer
                                      .stringToProfile(serializer.profileToString(originalProfile));
@@ -69,7 +72,7 @@ public class SerializerTest {
     String name = "Steering";
     String description = "Drives the car";
 
-    Committee committee = new Committee(name, description);
+    Committee committee = AppContext.getEntityFactory().createCommittee(name, description);
     String serializedCommittee = serializer.committeeToString(committee);
     String expectedString = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"}";
 
@@ -94,7 +97,7 @@ public class SerializerTest {
     String name = "Steering";
     String description = "Drives the car";
 
-    Committee originalCommittee = new Committee(name, description);
+    Committee originalCommittee = AppContext.getEntityFactory().createCommittee(name, description);
 
     Committee generatedCommittee = serializer.stringToCommittee(
           serializer.committeeToString(originalCommittee));

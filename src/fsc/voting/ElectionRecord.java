@@ -1,5 +1,6 @@
 package fsc.voting;
 
+import fsc.app.AppContext;
 import fsc.entity.Profile;
 import fsc.entity.Vote;
 import fsc.voting.VotingRoundResult.WinVotingRoundResult;
@@ -13,7 +14,7 @@ class ElectionRecord extends AbstractList<VotingRound> {
   private List<Vote> votes;
 
   public ElectionRecord(List<Vote> votes) {
-    this.votes = Vote.createVoteSnapshot(votes);
+    this.votes = AppContext.getEntityFactory().createVoteSnapshot(votes);
   }
 
   public void runElection() {

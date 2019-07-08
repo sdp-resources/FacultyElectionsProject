@@ -9,7 +9,7 @@ public class Seat {
   private Query defaultQuery;
   private final String name;
 
-  public Seat(String name, Query defaultQuery) {
+  Seat(String name, Query defaultQuery) {
 
     this.name = name;
     this.defaultQuery = defaultQuery;

@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
@@ -67,7 +68,9 @@ public class ViewVoteRecordTest {
   @Test
   public void whenVoteRecordIsPresent_returnViewableRecord() {
     List<Profile> votes = List.of(profiles.get(2), profiles.get(1));
-    electionGateway.recordVote(new VoteRecord(new Voter(voter, election), votes));
+    electionGateway.recordVote(
+          AppContext.getEntityFactory().createVoteRecord(
+                AppContext.getEntityFactory().createVoter(voter, election), votes));
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null, profileGateway);
     Response response = interactor.execute(request);

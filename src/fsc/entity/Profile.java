@@ -23,7 +23,7 @@ public class Profile {
     public Boolean isActive() { return null; }
   }
 
-  public Profile(String name, String username, String division, String contract) {
+  Profile(String name, String username, String division, String contract) {
     this.name = name;
     this.division = division;
     this.username = username;

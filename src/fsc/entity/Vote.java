@@ -3,21 +3,16 @@ package fsc.entity;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Vote extends AbstractList<Profile> {
 
   public final List<Profile> order = new ArrayList<>();
 
-  public Vote() { }
-
-  private Vote(List<Profile> profiles) {
+  Vote(List<Profile> profiles) {
     order.addAll(profiles);
   }
 
-  private static boolean isNonEmpty(Vote v) { return !v.isEmpty(); }
-
-  public static Vote of(Profile... profiles) { return new Vote(List.of(profiles)); }
+  public boolean isNonEmpty() { return !isEmpty(); }
 
   public int size() {
     return order.size();
@@ -33,15 +28,6 @@ public class Vote extends AbstractList<Profile> {
 
   public Profile remove(int index) {
     return order.remove(index);
-  }
-
-  public static List<Vote> createVoteSnapshot(List<Vote> votes) {
-    return votes.stream().filter(Vote::isNonEmpty)
-                .map(Vote::clone).collect(Collectors.toList());
-  }
-
-  public Vote clone() {
-    return new Vote(this);
   }
 
 }

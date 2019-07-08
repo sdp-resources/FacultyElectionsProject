@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.entity.Seat;
 import fsc.entity.query.Query;
@@ -27,7 +28,7 @@ public class CreateSeatInteractorTest {
   public void setup() throws QueryStringParser.QueryParseException {
     request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, QUERY_STRING);
     Query query = new QueryStringConverter().fromString(QUERY_STRING);
-    expectedSeat = new Seat(SEAT_NAME, query);
+    expectedSeat = AppContext.getEntityFactory().createSeat(SEAT_NAME, query);
   }
 
   @Test
@@ -42,7 +43,7 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesExist_thenReturnError() {
-    Committee committee = new Committee(COMMITTEE_NAME, "");
+    Committee committee = AppContext.getEntityFactory().createCommittee(COMMITTEE_NAME, "");
     committee.addSeat(expectedSeat);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway);
@@ -54,7 +55,7 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
-    Committee committee = new Committee(COMMITTEE_NAME, "");
+    Committee committee = AppContext.getEntityFactory().createCommittee(COMMITTEE_NAME, "");
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway);
     Response response = interactor.execute(request);

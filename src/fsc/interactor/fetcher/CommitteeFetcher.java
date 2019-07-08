@@ -1,5 +1,6 @@
 package fsc.interactor.fetcher;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 import fsc.response.Response;
@@ -42,7 +43,7 @@ public class CommitteeFetcher {
   }
 
   public Builder<Committee, Response> makeCommittee(String name, String description) {
-    return Builder.ofValue(new Committee(name, description));
+    return Builder.ofValue(AppContext.getEntityFactory().createCommittee(name, description));
   }
 
   public Boolean hasCommittee(Committee committee) {

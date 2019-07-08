@@ -1,5 +1,6 @@
 package fsc.interactor.fetcher;
 
+import fsc.app.AppContext;
 import fsc.entity.Profile;
 import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
@@ -45,7 +46,8 @@ public class ProfileFetcher {
 
   public Builder<Profile, Response> makeProfile(String name, String username, String division,
                                        String contract) {
-    return Builder.ofValue(new Profile(name, username, division, contract));
+    return Builder.ofValue(
+          AppContext.getEntityFactory().createProfile(name, username, division, contract));
   }
 
   public Boolean profileExists(Profile profile) {

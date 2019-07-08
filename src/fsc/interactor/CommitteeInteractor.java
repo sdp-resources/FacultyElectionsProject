@@ -1,7 +1,7 @@
 package fsc.interactor;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
-import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.interactor.fetcher.CommitteeFetcher;
@@ -59,7 +59,7 @@ public class CommitteeInteractor extends Interactor {
 
   private BiFunction<Committee, Query, Committee> createSeat(String seatName) {
     return ((committee, query) -> {
-      committee.addSeat(new Seat(seatName, query));
+      committee.addSeat(AppContext.getEntityFactory().createSeat(seatName, query));
       return committee;
     });
   }

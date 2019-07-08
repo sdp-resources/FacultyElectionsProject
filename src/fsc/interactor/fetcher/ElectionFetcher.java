@@ -1,5 +1,6 @@
 package fsc.interactor.fetcher;
 
+import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
@@ -43,7 +44,7 @@ public class ElectionFetcher extends ProfileFetcher {
   public Builder<Voter, Response> fetchVoter(String username, String electionId) {
     return fetchProfile(username)
                  .bindWith(fetchElection(electionId),
-                           Builder.lift(Voter::new));
+                           Builder.lift(AppContext.getEntityFactory()::createVoter));
 
   }
 

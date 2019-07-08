@@ -9,7 +9,7 @@ public class Committee {
 
   private final ArrayList<Seat> seats = new ArrayList<>();
 
-  public Committee(String name, String description) {
+  protected Committee(String name, String description) {
     this.name = name;
     this.description = description;
   }

@@ -1,5 +1,6 @@
 package fsc.entity;
 
+import fsc.app.AppContext;
 import fsc.entity.query.AttributeQuery;
 import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
@@ -14,12 +15,12 @@ class ElectionCreatorTest {
 
   @Before
   public void setUp() {
-    Committee committee = new Committee("f", "g");
+    Committee committee = AppContext.getEntityFactory().createCommittee("f", "g");
     Query queryStub = Query.always();
-    Seat seat = new Seat("a", queryStub);
+    Seat seat = AppContext.getEntityFactory().createSeat("a", queryStub);
     Ballot ballot = new Ballot();
     AttributeQuery query = new AttributeQuery("a", "b");
-    election = new Election(seat, committee, query, ballot);
+    election = AppContext.getEntityFactory().createElection(seat, committee, query, ballot);
   }
 
 }

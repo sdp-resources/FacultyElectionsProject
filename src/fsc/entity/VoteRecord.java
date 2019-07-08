@@ -9,7 +9,7 @@ public class VoteRecord {
   private final LocalDateTime date;
   private Voter voter;
 
-  public VoteRecord(Voter voter, List<Profile> votes) {
+  VoteRecord(Voter voter, List<Profile> votes) {
     this(voter, LocalDateTime.now(), votes);
   }
 

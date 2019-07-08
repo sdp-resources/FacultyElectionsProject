@@ -1,5 +1,6 @@
 package gateway;
 
+import fsc.app.AppContext;
 import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway.InvalidProfileUsernameException;
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class InMemoryGatewayTest {
 
   @Before
   public void setUp() {
-    profile = new Profile(NAME, USERNAME, DIVISION, CONTRACT);
+    profile = AppContext.getEntityFactory().createProfile(NAME, USERNAME, DIVISION, CONTRACT);
     gateway = new InMemoryGateway();
   }
 

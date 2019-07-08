@@ -1,5 +1,6 @@
 package fsc.app;
 
+import fsc.entity.EntityFactory;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AppContext {
+  private static EntityFactory entityFactory = new EntityFactory();
   private RequestFactory requestFactory = new RequestFactory();
   public Gateway gateway;
   public Interactor interactor;
@@ -22,6 +24,10 @@ public class AppContext {
     this.interactor = loadInteractors(gateway);
     this.queryValidator = new GatewayBackedQueryValidator(gateway);
     QueryStringParser.setNameValidator(queryValidator);
+  }
+
+  public static EntityFactory getEntityFactory() {
+    return entityFactory;
   }
 
   public Interactor loadInteractors(Gateway gateway) {

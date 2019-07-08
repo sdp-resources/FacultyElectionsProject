@@ -1,5 +1,6 @@
 package fsc.entity;
 
+import fsc.app.AppContext;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class DivisionTest {
 
   @Before
   public void setup() {
-    testDivision = new Division("SCI");
+    testDivision = AppContext.getEntityFactory().createDivision("SCI");
   }
 
   @Test

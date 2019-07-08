@@ -1,5 +1,6 @@
 package fsc.voting;
 
+import fsc.app.AppContext;
 import fsc.entity.Profile;
 import fsc.entity.Vote;
 import fsc.mock.EntityStub;
@@ -25,7 +26,7 @@ public class VotingTimingTest {
     List<Vote> votes = new ArrayList<>();
     for (int i = 0; i < VOTES; i++) {
       Collections.shuffle(candidates);
-      votes.add(Vote.of(candidates.toArray(new Profile[]{})));
+      votes.add(AppContext.getEntityFactory().createVote(candidates.toArray(new Profile[]{})));
     }
     LocalDateTime now = LocalDateTime.now();
     ElectionRecord electionRecord = new ElectionRecord(votes);

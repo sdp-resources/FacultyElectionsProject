@@ -1,5 +1,6 @@
 package fsc.entity;
 
+import fsc.app.AppContext;
 import fsc.entity.query.Query;
 import fsc.mock.EntityStub;
 import org.junit.Before;
@@ -18,9 +19,9 @@ public class CommitteeAndSeatsTest {
 
   @Before
   public void setup() {
-    committee = new Committee("cccc", "xxxx");
+    committee = AppContext.getEntityFactory().createCommittee("cccc", "xxxx");
     seats = new ArrayList<>();
-    seat = new Seat("a", Query.always());
+    seat = AppContext.getEntityFactory().createSeat("a", Query.always());
   }
 
   @Test

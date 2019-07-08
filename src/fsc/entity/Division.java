@@ -3,7 +3,7 @@ package fsc.entity;
 public class Division {
   private String divisionName;
 
-  public Division(String newDivisionName) {
+  Division(String newDivisionName) {
     this.divisionName = newDivisionName;
   }
 

@@ -1,8 +1,7 @@
 package gateway;
 
-import fsc.entity.Committee;
-import fsc.entity.Profile;
-import fsc.entity.Seat;
+import fsc.app.AppContext;
+import fsc.entity.*;
 import fsc.entity.query.AttributeQuery;
 import fsc.entity.query.Query;
 import org.json.JSONObject;
@@ -34,14 +33,14 @@ class JSONElectionDataReader implements ElectionDataReader {
     String username = json.getString("username");
     String division = json.getString("division");
     String contractType = json.getString("contract");
-    return new Profile(name, username, division, contractType);
+    return AppContext.getEntityFactory().createProfile(name, username, division, contractType);
   }
 
   private Committee makeCommittee(Object o) {
     JSONObject json = (JSONObject) o;
     String name = json.getString("name");
     String description = json.getString("description");
-    Committee committee = new Committee(name, description);
+    Committee committee = AppContext.getEntityFactory().createCommittee(name, description);
     for (Object s : json.getJSONArray("seats")) {
       committee.addSeat(makeSeat(s));
     }
@@ -52,7 +51,7 @@ class JSONElectionDataReader implements ElectionDataReader {
     JSONObject json = (JSONObject) o;
     String name = json.getString("name");
     Query query = makeQuery(json.getJSONObject("query"));
-    return new Seat(name, query);
+    return AppContext.getEntityFactory().createSeat(name, query);
   }
 
   private Query makeQuery(JSONObject o) {

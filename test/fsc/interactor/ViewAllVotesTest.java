@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
@@ -52,8 +53,14 @@ public class ViewAllVotesTest {
   public void whenVotesArePresent_returnViewableRecord() {
     List<Profile> votes1 = List.of(profiles.get(2), profiles.get(1));
     List<Profile> votes2 = List.of(profiles.get(1));
-    electionGateway.recordVote(new VoteRecord(new Voter(profiles.get(0), election), votes1));
-    electionGateway.recordVote(new VoteRecord(new Voter(profiles.get(1), election), votes2));
+    electionGateway.recordVote(AppContext.getEntityFactory()
+                                         .createVoteRecord(
+                                               AppContext.getEntityFactory()
+                                                         .createVoter(profiles.get(0), election), votes1));
+    electionGateway.recordVote(AppContext.getEntityFactory()
+                                         .createVoteRecord(
+                                               AppContext.getEntityFactory()
+                                                         .createVoter(profiles.get(1), election), votes2));
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null, profileGateway);
     Response response = interactor.execute(request);

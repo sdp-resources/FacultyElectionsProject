@@ -1,5 +1,6 @@
 package fsc.entity;
 
+import fsc.app.AppContext;
 import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.EntityStub;
@@ -19,10 +20,9 @@ public class BallotCreatorTest {
 
   @Before
   public void setUp() {
-    ballotCreator = new BallotCreator();
     mockGateway = new ProfileGatewayStub(EntityStub.getProfile(0), EntityStub.getProfile(1),
                                          EntityStub.getProfile(2));
-    ballotCreator.setProfileGateway(mockGateway);
+    ballotCreator = AppContext.getEntityFactory().createBallotCreator(mockGateway);
   }
 
   @Test

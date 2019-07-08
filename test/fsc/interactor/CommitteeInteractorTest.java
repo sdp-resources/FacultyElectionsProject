@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
@@ -19,7 +20,8 @@ public class CommitteeInteractorTest {
   @Before
   public void setup() {
     request = new CreateCommitteeRequest(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
-    expectedCommittee = new Committee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
+    expectedCommittee = AppContext.getEntityFactory()
+                                  .createCommittee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
   }
 
   @Test

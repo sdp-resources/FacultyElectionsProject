@@ -36,7 +36,7 @@ public class Election {
   //    - Admin cannot change ballot or add/remove candidates
   //    - Admin can view election results
 
-  public Election(Seat seat, Committee committee, Query query, Ballot ballot) {
+  Election(Seat seat, Committee committee, Query query, Ballot ballot) {
     this.seat = seat;
     this.committee = committee;
     this.defaultQuery = query;

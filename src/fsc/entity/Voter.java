@@ -4,7 +4,7 @@ public class Voter {
   private final Profile voter;
   private final Election election;
 
-  public Voter(Profile voter, Election election) {
+  Voter(Profile voter, Election election) {
     this.voter = voter;
     this.election = election;
   }
