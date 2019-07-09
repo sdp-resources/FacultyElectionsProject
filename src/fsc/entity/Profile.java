@@ -9,6 +9,8 @@ public class Profile {
   private String contract;
   private Status status;
 
+  public Profile() {}
+
   public enum Status {
     ACTIVE {
       public Boolean isActive() { return true; }
@@ -23,7 +25,7 @@ public class Profile {
     public Boolean isActive() { return null; }
   }
 
-  Profile(String name, String username, String division, String contract) {
+  protected Profile(String name, String username, String division, String contract) {
     this.name = name;
     this.division = division;
     this.username = username;

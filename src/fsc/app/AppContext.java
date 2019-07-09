@@ -1,6 +1,7 @@
 package fsc.app;
 
 import fsc.entity.EntityFactory;
+import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AppContext {
-  private static EntityFactory entityFactory = new EntityFactory();
+  private static EntityFactory entityFactory = new SimpleEntityFactory();
   private RequestFactory requestFactory = new RequestFactory();
   public Gateway gateway;
   public Interactor interactor;
