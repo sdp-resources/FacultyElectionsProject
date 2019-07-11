@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map />
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/assets/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="org.skiadas.local" value="d0fe7ab5-a4c8-4a1f-9d26-81b9560b1bdc" />
+        </datasource-mapping>
+        <naming-strategy-map />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/out/production" />
     <output-test url="file://$MODULE_DIR$/out/test" />
@@ -9,6 +29,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/Tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/testData" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/fitnesse" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
       <excludeFolder url="file://$MODULE_DIR$/report" />
@@ -38,5 +59,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
+    <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.16" level="project" />
   </component>
 </module>
