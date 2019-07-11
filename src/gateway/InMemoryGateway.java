@@ -1,6 +1,5 @@
 package gateway;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
@@ -144,7 +143,7 @@ public class InMemoryGateway implements Gateway {
 
   public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(AppContext.getEntityFactory().createVoter(voter.getVoter(), voter.getElection()))) return record;
+      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) return record;
     }
 
     throw new NoVoteRecordException();

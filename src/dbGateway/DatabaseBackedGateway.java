@@ -1,18 +1,19 @@
 package dbGateway;
 
-import fsc.app.AppContext;
 import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
+import fsc.entity.SimpleEntityFactory;
 
 import javax.persistence.EntityManager;
 
 public class DatabaseBackedGateway {
   private final EntityManager entityManager;
+  private EntityFactory basicFactory = new SimpleEntityFactory();
   private EntityFactory entityFactory;
 
   public DatabaseBackedGateway(EntityManager entityManager) {
     this.entityManager = entityManager;
-    entityFactory = new PersistingEntityFactory(AppContext.getEntityFactory(), entityManager);
+    entityFactory = new PersistingEntityFactory(basicFactory, entityManager);
     begin();
   }
 

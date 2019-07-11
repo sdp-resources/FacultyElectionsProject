@@ -28,7 +28,7 @@ public class VotingTimingTest {
       votes.add(entityFactory.createVote(candidates.toArray(new Profile[]{})));
     }
     LocalDateTime now = LocalDateTime.now();
-    ElectionRecord electionRecord = new ElectionRecord(votes);
+    ElectionRecord electionRecord = new ElectionRecord(entityFactory.createVoteSnapshot(votes));
     electionRecord.runElection();
     long elapsedTime = now.until(LocalDateTime.now(), MILLIS);
     System.out.println(electionRecord.numberOfRounds() + " rounds");

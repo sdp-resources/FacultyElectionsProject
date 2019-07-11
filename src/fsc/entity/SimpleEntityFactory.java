@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
 import fsc.entity.query.Query;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class SimpleEntityFactory implements EntityFactory {
   }
 
   public Vote createVote(Profile... profiles) {
-    return AppContext.getEntityFactory().createVote(List.of(profiles));
+    return createVote(List.of(profiles));
   }
 
   public Vote createVote(List<Profile> profiles) {

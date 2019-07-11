@@ -57,7 +57,7 @@ public class VotingTest {
   }
 
   private void assertVotes_produceResults(List<Vote> votes, List<VotingRoundResult> results) {
-    record = new ElectionRecord(votes);
+    record = new ElectionRecord(entityFactory.createVoteSnapshot(votes));
     record.runElection();
     assertEquals(results.size(), record.numberOfRounds());
     Iterator<VotingRoundResult> expected = results.iterator();
