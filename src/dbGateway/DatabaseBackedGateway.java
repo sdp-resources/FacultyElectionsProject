@@ -34,6 +34,9 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void close() {
+    if (entityManager.getTransaction().isActive()) {
+      entityManager.getTransaction().rollback();
+    }
     entityManager.close();
   }
 
@@ -133,11 +136,12 @@ public class DatabaseBackedGateway implements Gateway {
                                         .getResultList();  }
 
   public void addProfile(Profile profile) {
-
+    entityManager.persist(profile);
   }
 
   public boolean hasProfile(String username) {
-    return false;
+    Profile profile = find(Profile.class, username);
+    return profile != null;
   }
 
   public void addQuery(String name, Query query) {

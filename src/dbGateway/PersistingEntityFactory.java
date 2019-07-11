@@ -56,9 +56,7 @@ public class PersistingEntityFactory implements EntityFactory {
   public Profile createProfile(
         String name, String username, String division, String contract
   ) {
-    Profile profile = entityFactory.createProfile(name, username, division, contract);
-    entityManager.persist(profile);
-    return profile;
+    return entityFactory.createProfile(name, username, division, contract);
   }
 
   public Ballot createBallot() { return entityFactory.createBallot(); }
