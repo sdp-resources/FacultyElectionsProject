@@ -22,7 +22,7 @@ public class ElectionInteractor extends Interactor {
         ElectionGateway electionGateway, CommitteeGateway committeeGateway,
         ProfileGateway profileGateway, EntityFactory entityFactory
   ) {
-    this.ballotCreator = new BallotCreator(profileGateway);
+    this.ballotCreator = new BallotCreator(profileGateway, entityFactory);
     this.electionFetcher = new ElectionFetcher(electionGateway, profileGateway, committeeGateway,
                                                entityFactory);
   }
@@ -95,7 +95,7 @@ public class ElectionInteractor extends Interactor {
         Seat seat;
         seat = committee.getSeat(seatName);
         Query defaultQuery = seat.getDefaultQuery();
-        Ballot ballot = ballotCreator.getBallot(defaultQuery);
+        Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);
         Election election = electionFetcher.createElection(committee, seat, defaultQuery, ballot);
         return Builder.ofValue(election);
       } catch (Committee.UnknownSeatNameException e) {
@@ -107,7 +107,7 @@ public class ElectionInteractor extends Interactor {
   private Consumer<Election> setupBallotFromQuery(Query query) {
     return election -> {
       election.setDefaultQuery(query);
-      Ballot ballot = ballotCreator.getBallot(election.getDefaultQuery());
+      Ballot ballot = ballotCreator.getBallotFromQuery(election.getDefaultQuery());
       election.setBallot(ballot);
     };
   }

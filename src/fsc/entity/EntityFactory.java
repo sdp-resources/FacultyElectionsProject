@@ -5,6 +5,8 @@ import fsc.entity.query.Query;
 import java.util.List;
 
 public interface EntityFactory {
+  Ballot createBallot();
+
   Election createElection(
         Seat seat, Committee committee, Query query, Ballot ballot
   );
@@ -16,7 +18,7 @@ public interface EntityFactory {
   VoteRecord createVoteRecord(Voter voter, List<Profile> votes);
   Division createDivision(String newDivisionName);
   Committee createCommittee(String name, String description);
-  Candidate createCandidate(Profile profile);
+  Candidate createCandidate(Profile profile, Ballot ballot);
   Profile createProfile(
         String name, String username, String division, String contract
   );

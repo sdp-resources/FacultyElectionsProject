@@ -18,7 +18,7 @@ class ElectionCreatorTest {
     Committee committee = entityFactory.createCommittee("f", "g");
     Query queryStub = Query.always();
     Seat seat = entityFactory.createSeat("a", queryStub);
-    Ballot ballot = new Ballot();
+    Ballot ballot = entityFactory.createBallot();
     AttributeQuery query = new AttributeQuery("a", "b");
     election = entityFactory.createElection(seat, committee, query, ballot);
   }

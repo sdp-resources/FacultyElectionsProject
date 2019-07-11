@@ -1,11 +1,17 @@
 package fsc.service;
 
-import fsc.app.AppContext;
 import fsc.entity.Committee;
+import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
 import org.json.JSONObject;
 
 class Serializer {
+
+  private EntityFactory entityFactory;
+
+  Serializer(EntityFactory entityFactory) {
+    this.entityFactory = entityFactory;
+  }
 
   String profileToString(Profile profile) {
     JSONObject jsonObject = new JSONObject();
@@ -22,7 +28,7 @@ class Serializer {
     String username = Serializer.this.toString(jsonObject, "username");
     String division = toString(jsonObject, "division");
     String contract = toString(jsonObject, "contract");
-    return AppContext.getEntityFactory().createProfile(name, username, division, contract);
+    return entityFactory.createProfile(name, username, division, contract);
   }
 
   private String toString(JSONObject jsonObject, String username) {
@@ -40,7 +46,7 @@ class Serializer {
     JSONObject jsonObject = new JSONObject(string);
     String name = toString(jsonObject, "name");
     String description = toString(jsonObject, "description");
-    return AppContext.getEntityFactory().createCommittee(name, description);
+    return entityFactory.createCommittee(name, description);
   }
 
 }

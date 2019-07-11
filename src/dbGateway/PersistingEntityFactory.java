@@ -50,7 +50,8 @@ public class PersistingEntityFactory implements EntityFactory {
     return entityFactory.createCommittee(name, description);
   }
 
-  public Candidate createCandidate(Profile profile) {return entityFactory.createCandidate(profile);}
+  public Candidate createCandidate(Profile profile, Ballot ballot) {
+    return entityFactory.createCandidate(profile, ballot); }
 
   public Profile createProfile(
         String name, String username, String division, String contract
@@ -59,4 +60,6 @@ public class PersistingEntityFactory implements EntityFactory {
     entityManager.persist(profile);
     return profile;
   }
+
+  public Ballot createBallot() { return entityFactory.createBallot(); }
 }

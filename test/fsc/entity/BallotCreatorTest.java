@@ -16,23 +16,24 @@ public class BallotCreatorTest {
 
   private BallotCreator ballotCreator;
   private ProfileGateway mockGateway;
+  private SimpleEntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
     mockGateway = new ProfileGatewayStub(EntityStub.getProfile(0), EntityStub.getProfile(1),
                                          EntityStub.getProfile(2));
-    ballotCreator = new BallotCreator(mockGateway);
+    ballotCreator = new BallotCreator(mockGateway, entityFactory);
   }
 
   @Test
   public void whenGivenAlwaysFalseQuery_GetEmptyBallot() {
-    Ballot ballot = ballotCreator.getBallot(Query.never());
+    Ballot ballot = ballotCreator.getBallotFromQuery(Query.never());
     assertTrue(ballot.isEmpty());
   }
 
   @Test
   public void whenGivenAlwaysTrueQuery_AddAllProfilesToBallot() {
-    Ballot ballot = ballotCreator.getBallot(Query.always());
+    Ballot ballot = ballotCreator.getBallotFromQuery(Query.always());
     assertSameLists(ballot, mockGateway.getAllProfiles());
   }
 

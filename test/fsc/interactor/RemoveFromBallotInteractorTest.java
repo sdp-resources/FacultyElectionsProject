@@ -69,7 +69,7 @@ public class RemoveFromBallotInteractorTest {
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    election.getBallot().addCandidate(profile);
+    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
     Response response = interactor.execute(request);
 
     assertFalse(election.hasCandidate(profile));

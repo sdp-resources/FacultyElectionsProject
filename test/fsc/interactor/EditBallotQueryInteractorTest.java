@@ -1,7 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
+import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -22,6 +21,7 @@ public class EditBallotQueryInteractorTest {
   private Profile providedProfile;
   private Election election;
   private ElectionInteractor interactor;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
@@ -41,7 +41,7 @@ public class EditBallotQueryInteractorTest {
   public void whenGivenValidElectionId_replaceBallotWithNewBallotFromQuery() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
-    interactor = new ElectionInteractor(electionGateway, null, profileGateway, null);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(providedProfile));

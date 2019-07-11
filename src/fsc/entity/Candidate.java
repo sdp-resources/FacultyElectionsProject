@@ -2,13 +2,17 @@ package fsc.entity;
 
 public class Candidate {
 
-  public enum Status {NoAnswer, Declined, Accepted}
 
+
+  public enum Status {NoAnswer, Declined, Accepted;}
   private Profile profile;
+
+  private Ballot ballot;
   private Status status;
 
-  Candidate(Profile profile) {
+  Candidate(Profile profile, Ballot ballot) {
     this.profile = profile;
+    this.ballot = ballot;
     status = Status.NoAnswer;
   }
 
@@ -27,6 +31,8 @@ public class Candidate {
   public Profile getProfile() {
     return profile;
   }
+
+  public Ballot getBallot() { return ballot; }
 
   public Status getStatus() {
     return status;

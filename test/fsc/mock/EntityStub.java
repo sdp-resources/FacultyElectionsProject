@@ -7,7 +7,7 @@ public class EntityStub {
   private static EntityFactory entityFactory = new SimpleEntityFactory();
 
   public static Election simpleBallotElection() {
-    return entityFactory.createElection(null, null, null, new Ballot());
+    return entityFactory.createElection(null, null, null, entityFactory.createBallot());
   }
 
   public static Election simpleBallotElection(Ballot ballot) {

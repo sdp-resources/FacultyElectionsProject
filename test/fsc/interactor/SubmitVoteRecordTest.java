@@ -62,15 +62,15 @@ public class SubmitVoteRecordTest {
 
   @Test
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
-    election.getBallot().addCandidate(voter);
+    election.getBallot().add(entityFactory.createCandidate(voter, election.getBallot()));
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 
   @Test
   public void whenGivenMultipleVotesForCandidate_returnErrorResponse() {
-    election.getBallot().addCandidate(candidate);
-    election.getBallot().addCandidate(voter);
+    election.getBallot().add(entityFactory.createCandidate(candidate, election.getBallot()));
+    election.getBallot().add(entityFactory.createCandidate(voter, election.getBallot()));
     vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
     request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     Response response = interactor.execute(request);
@@ -79,7 +79,7 @@ public class SubmitVoteRecordTest {
 
   @Test
   public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
-    election.getBallot().addCandidate(candidate);
+    election.getBallot().add(entityFactory.createCandidate(candidate, election.getBallot()));
     interactor.execute(request);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.alreadyVoted(), response);
@@ -87,7 +87,7 @@ public class SubmitVoteRecordTest {
 
   @Test
   public void whenGivenCorrectInformation_saveRecord() {
-    election.getBallot().addCandidate(candidate);
+    election.getBallot().add(entityFactory.createCandidate(candidate, election.getBallot()));
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.success(), response);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;

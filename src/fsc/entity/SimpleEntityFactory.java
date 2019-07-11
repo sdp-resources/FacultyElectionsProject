@@ -49,8 +49,8 @@ public class SimpleEntityFactory implements EntityFactory {
     return new Committee(name, description);
   }
 
-  public Candidate createCandidate(Profile profile) {
-    return new Candidate(profile);
+  public Candidate createCandidate(Profile profile, Ballot ballot) {
+    return new Candidate(profile, ballot);
   }
 
   public Profile createProfile(
@@ -58,4 +58,6 @@ public class SimpleEntityFactory implements EntityFactory {
   ) {
     return new Profile(name, username, division, contract);
   }
+
+  public Ballot createBallot() { return new Ballot(); }
 }

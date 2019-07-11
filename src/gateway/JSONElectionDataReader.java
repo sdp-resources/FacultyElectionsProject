@@ -1,6 +1,5 @@
 package gateway;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.entity.query.AttributeQuery;
 import fsc.entity.query.Query;
@@ -16,9 +15,11 @@ import java.util.stream.StreamSupport;
 
 class JSONElectionDataReader implements ElectionDataReader {
   private JSONObject jsonObject;
+  private EntityFactory entityFactory;
 
-  public JSONElectionDataReader(File file) throws FileNotFoundException {
+  public JSONElectionDataReader(File file, EntityFactory entityFactory) throws FileNotFoundException {
     jsonObject = readJson(file);
+    this.entityFactory = entityFactory;
   }
 
   private JSONObject readJson(File file) throws FileNotFoundException {
@@ -33,14 +34,14 @@ class JSONElectionDataReader implements ElectionDataReader {
     String username = json.getString("username");
     String division = json.getString("division");
     String contractType = json.getString("contract");
-    return AppContext.getEntityFactory().createProfile(name, username, division, contractType);
+    return entityFactory.createProfile(name, username, division, contractType);
   }
 
   private Committee makeCommittee(Object o) {
     JSONObject json = (JSONObject) o;
     String name = json.getString("name");
     String description = json.getString("description");
-    Committee committee = AppContext.getEntityFactory().createCommittee(name, description);
+    Committee committee = entityFactory.createCommittee(name, description);
     for (Object s : json.getJSONArray("seats")) {
       committee.addSeat(makeSeat(s));
     }
@@ -51,7 +52,7 @@ class JSONElectionDataReader implements ElectionDataReader {
     JSONObject json = (JSONObject) o;
     String name = json.getString("name");
     Query query = makeQuery(json.getJSONObject("query"));
-    return AppContext.getEntityFactory().createSeat(name, query);
+    return entityFactory.createSeat(name, query);
   }
 
   private Query makeQuery(JSONObject o) {

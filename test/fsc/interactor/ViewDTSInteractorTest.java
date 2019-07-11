@@ -5,7 +5,8 @@ import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewDTSRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +20,7 @@ public class ViewDTSInteractorTest {
   private Profile profile;
   private ViewDTSInteractor interactor;
   private ProvidedElectionGatewaySpy gateway;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
@@ -29,7 +31,7 @@ public class ViewDTSInteractorTest {
 
   @Test
   public void whenUserIsCandidate_canGetTheirPreference() throws Ballot.NoProfileInBallotException {
-    election.getBallot().addCandidate(profile);
+    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
     Candidate candidate = election.getCandidateByUsername(profile.getUsername());
     candidate.setStatus(Candidate.Status.Accepted);
     gateway = new ProvidedElectionGatewaySpy(election);

@@ -24,7 +24,9 @@ public class VoteTest {
     candidate1 = EntityStub.getProfile(0);
     candidate2 = EntityStub.getProfile(1);
     candidate3 = EntityStub.getProfile(2);
-    ballot.addCandidates(List.of(candidate1, candidate2, candidate3));
+    ballot.add(entityFactory.createCandidate(candidate1, ballot));
+    ballot.add(entityFactory.createCandidate(candidate2, ballot));
+    ballot.add(entityFactory.createCandidate(candidate3, ballot));
   }
 
   @Test

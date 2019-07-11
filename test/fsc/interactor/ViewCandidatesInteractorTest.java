@@ -19,12 +19,12 @@ public class ViewCandidatesInteractorTest {
   private ElectionInteractor interactor;
   private EntityFactory entityFactory = new SimpleEntityFactory();
 
-  private static Ballot sampleBallot() {
-    Ballot aBallot = new Ballot();
-    aBallot.addCandidate(EntityStub.getProfile(3));
-    aBallot.addCandidate(EntityStub.getProfile(2));
-    aBallot.addCandidate(EntityStub.getProfile(1));
-    aBallot.addCandidate(EntityStub.getProfile(0));
+  private Ballot sampleBallot() {
+    Ballot aBallot = entityFactory.createBallot();
+    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(3), aBallot));
+    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(2), aBallot));
+    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(1), aBallot));
+    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(0), aBallot));
     return aBallot;
   }
 

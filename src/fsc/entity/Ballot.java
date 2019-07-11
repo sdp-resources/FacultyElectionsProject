@@ -1,7 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
-
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +9,7 @@ public class Ballot extends AbstractList<Candidate> {
 
   private final List<Candidate> candidates = new ArrayList<>();
 
-  public void addCandidate(Profile profile) {
-    add(AppContext.getEntityFactory().createCandidate(profile));
-  }
-
-  public void addCandidates(List<Profile> profiles) {
-    for (Profile profile : profiles) {
-      add(AppContext.getEntityFactory().createCandidate(profile));
-    }
-  }
+  Ballot() {}
 
   public boolean hasCandidate(Profile profile) {
     return stream().anyMatch((c) -> c.matchesProfile(profile));

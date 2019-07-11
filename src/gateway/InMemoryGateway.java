@@ -24,10 +24,11 @@ public class InMemoryGateway implements Gateway {
   private final List<Election> elections = new ArrayList<>();
   private final Map<String, Query> queries = new HashMap<>();
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
+  private static EntityFactory entityFactory = new SimpleEntityFactory();
 
   public static Gateway fromJSONFile(String path) {
     try {
-      return fromReader(new JSONElectionDataReader(new File(path)));
+      return fromReader(new JSONElectionDataReader(new File(path), entityFactory));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
       throw new RuntimeException("file not found: " + path);
@@ -135,7 +136,7 @@ public class InMemoryGateway implements Gateway {
 
   public boolean hasVoteRecord(Voter voter) {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(AppContext.getEntityFactory().createVoter(voter.getVoter(), voter.getElection()))) return true;
+      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) return true;
     }
 
     return false;
@@ -208,5 +209,9 @@ public class InMemoryGateway implements Gateway {
 
   public Collection<Election> getAllElections() {
     return new ArrayList<>(elections);
+  }
+
+  public EntityFactory getEntityFactory() {
+    return entityFactory;
   }
 }

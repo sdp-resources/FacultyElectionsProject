@@ -34,8 +34,9 @@ public class ViewAllVotesTest {
   public void setUp() {
     profiles = List.of(EntityStub.getProfile(0), EntityStub.getProfile(1),
                        EntityStub.getProfile(2));
-    Ballot ballot = new Ballot();
-    ballot.addCandidates(List.of(profiles.get(1), profiles.get(2)));
+    Ballot ballot = entityFactory.createBallot();
+    ballot.add(entityFactory.createCandidate(profiles.get(1), ballot));
+    ballot.add(entityFactory.createCandidate(profiles.get(2), ballot));
     election = EntityStub.simpleBallotElection(ballot);
     request = new ViewAllVotesRequest(election.getID());
     electionGateway = new ProvidedElectionGatewaySpy(election);

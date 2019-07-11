@@ -6,13 +6,15 @@ import fsc.gateway.ProfileGateway;
 public class BallotCreator {
 
   private ProfileGateway profileGateway;
+  private EntityFactory entityFactory;
 
-  public BallotCreator(ProfileGateway profileGateway) {
+  public BallotCreator(ProfileGateway profileGateway, EntityFactory entityFactory) {
     this.profileGateway = profileGateway;
+    this.entityFactory = entityFactory;
   }
 
-  public Ballot getBallot(Query query) {
-    Ballot ballot = new Ballot();
+  public Ballot getBallotFromQuery(Query query) {
+    Ballot ballot = entityFactory.createBallot();
     addValidProfilesToBallot(query, ballot);
     return ballot;
   }
@@ -20,12 +22,8 @@ public class BallotCreator {
   private void addValidProfilesToBallot(Query query, Ballot ballot) {
     for (Profile profile : profileGateway.getAllProfiles()) {
       if (query.isProfileValid(profile)) {
-        ballot.addCandidate(profile);
+        ballot.add(entityFactory.createCandidate(profile, ballot));
       }
     }
-  }
-
-  public void setProfileGateway(ProfileGateway profileGateway) {
-    this.profileGateway = profileGateway;
   }
 }

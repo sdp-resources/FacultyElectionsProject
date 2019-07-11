@@ -12,7 +12,7 @@ public class SerializerTest {
 
   @Before
   public void setup() {
-    serializer = new Serializer();
+    serializer = new Serializer(entityFactory);
   }
 
   @Test
