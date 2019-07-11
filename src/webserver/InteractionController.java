@@ -3,12 +3,12 @@ package webserver;
 import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.entity.Election;
+import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ViewResponse;
 import fsc.viewable.ViewableProfile;
-import gateway.InMemoryGateway;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,10 +18,10 @@ public class InteractionController {
   private ProfileInteractor profileInteractor;
   private final ContractTypeInteractor contractTypeInteractor;
   private final DivisionInteractor divisionInteractor;
-  private final InMemoryGateway gateway;
+  private final Gateway gateway;
   private final ElectionInteractor electionInteractor;
 
-  InteractionController(InMemoryGateway gateway) {
+  InteractionController(Gateway gateway) {
     profileInteractor = new ProfileInteractor(gateway, AppContext.getEntityFactory());
     contractTypeInteractor = new ContractTypeInteractor(gateway);
     divisionInteractor = new DivisionInteractor(gateway);

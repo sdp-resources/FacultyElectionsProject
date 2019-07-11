@@ -4,6 +4,7 @@ import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 
+import java.util.Collection;
 import java.util.List;
 
 public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
@@ -29,6 +30,10 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
   public boolean hasCommittee(String name) {
     submittedCommitteeName = name;
     return true;
+  }
+
+  public Collection<Committee> getAllCommittees() {
+    return null;
   }
 
   private class CommitteeStub extends Committee {

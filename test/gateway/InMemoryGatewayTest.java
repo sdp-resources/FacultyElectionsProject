@@ -3,6 +3,7 @@ package gateway;
 import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
 import fsc.entity.SimpleEntityFactory;
+import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway.InvalidProfileUsernameException;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class InMemoryGatewayTest {
   private static final String A_CONTRACT_TYPE = "aContractType";
   private static final String NATURAL_SCIENCES_DIVISION = "NatSci";
   private Profile profile;
-  private InMemoryGateway gateway;
+  private Gateway gateway;
   private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before

@@ -1,11 +1,12 @@
 package fsc;
 
+import fsc.gateway.Gateway;
 import gateway.InMemoryGateway;
 
 public class Main {
-  public static InMemoryGateway gateway = new InMemoryGateway();
+  public static Gateway gateway = new InMemoryGateway();
 
-  public InMemoryGateway getGateway() {
+  public Gateway getGateway() {
     return gateway;
   }
 }

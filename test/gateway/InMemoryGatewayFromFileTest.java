@@ -1,6 +1,7 @@
 package gateway;
 
 import fsc.entity.Profile;
+import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class InMemoryGatewayFromFileTest {
 
-  private InMemoryGateway gateway;
+  private Gateway gateway;
   private String pathname;
 
   @Before

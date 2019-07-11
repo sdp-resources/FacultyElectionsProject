@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class InteractionControllerTest {
 
-  private InMemoryGateway gateway;
+  private Gateway gateway;
   private InteractionController controller;
   private EntityFactory entityFactory = new SimpleEntityFactory();
 

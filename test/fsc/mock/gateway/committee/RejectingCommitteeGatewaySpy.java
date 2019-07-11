@@ -3,6 +3,7 @@ package fsc.mock.gateway.committee;
 import fsc.entity.Committee;
 import fsc.gateway.CommitteeGateway;
 
+import java.util.Collection;
 import java.util.List;
 
 public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
@@ -32,6 +33,10 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
   public boolean hasCommittee(String name) {
     submittedCommitteeName = name;
     return false;
+  }
+
+  public Collection<Committee> getAllCommittees() {
+    return null;
   }
 
 }

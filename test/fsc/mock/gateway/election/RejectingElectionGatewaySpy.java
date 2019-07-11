@@ -3,6 +3,7 @@ package fsc.mock.gateway.election;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
+import java.util.Collection;
 import java.util.List;
 
 public class RejectingElectionGatewaySpy implements ElectionGateway {
@@ -28,6 +29,10 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
   }
 
   public List<VoteRecord> getAllVotes(Election election) {
+    return null;
+  }
+
+  public Collection<Election> getAllElections() {
     return null;
   }
 

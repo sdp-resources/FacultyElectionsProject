@@ -1,5 +1,6 @@
 package webserver;
 
+import fsc.gateway.Gateway;
 import gateway.InMemoryGateway;
 import spark.ModelAndView;
 import spark.Request;
@@ -14,7 +15,7 @@ import static spark.Spark.*;
 class Server {
 
   private static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
-  private static final InMemoryGateway gateway = InMemoryGateway
+  private static final Gateway gateway = InMemoryGateway
                                                        .fromJSONFile("assets/data/sample.json");
   private static final InteractionController controller = new InteractionController(gateway);
 

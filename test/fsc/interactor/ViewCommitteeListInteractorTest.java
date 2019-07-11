@@ -10,6 +10,7 @@ import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -37,6 +38,10 @@ public class ViewCommitteeListInteractorTest {
       public void save() { }
 
       public boolean hasCommittee(String name) { return false; }
+
+      public Collection<Committee> getAllCommittees() {
+        return null;
+      }
     };
   }
 

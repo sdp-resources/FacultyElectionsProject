@@ -25,7 +25,7 @@ public class InMemoryGateway implements Gateway {
   private final Map<String, Query> queries = new HashMap<>();
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
 
-  public static InMemoryGateway fromJSONFile(String path) {
+  public static Gateway fromJSONFile(String path) {
     try {
       return fromReader(new JSONElectionDataReader(new File(path)));
     } catch (FileNotFoundException e) {
@@ -34,8 +34,8 @@ public class InMemoryGateway implements Gateway {
     }
   }
 
-  private static InMemoryGateway fromReader(ElectionDataReader dataReader) {
-    InMemoryGateway gateway = new InMemoryGateway();
+  private static Gateway fromReader(ElectionDataReader dataReader) {
+    Gateway gateway = new InMemoryGateway();
     dataReader.getContractTypes().forEach(gateway::addContractType);
     dataReader.getDivisions().forEach(gateway::addDivision);
     dataReader.getProfiles().forEach(gateway::addProfile);

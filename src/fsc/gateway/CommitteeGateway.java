@@ -2,6 +2,7 @@ package fsc.gateway;
 
 import fsc.entity.Committee;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface CommitteeGateway {
@@ -10,5 +11,6 @@ public interface CommitteeGateway {
   void addCommittee(Committee committee);
   void save();
   boolean hasCommittee(String name);
+  Collection<Committee> getAllCommittees();
   class UnknownCommitteeException extends Exception {}
 }

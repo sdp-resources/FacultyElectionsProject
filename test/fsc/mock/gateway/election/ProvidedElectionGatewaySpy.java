@@ -4,6 +4,7 @@ import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ProvidedElectionGatewaySpy implements ElectionGateway {
@@ -48,5 +49,9 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   public List<VoteRecord> getAllVotes(Election election) {
     return voteRecords;
+  }
+
+  public Collection<Election> getAllElections() {
+    return null;
   }
 }

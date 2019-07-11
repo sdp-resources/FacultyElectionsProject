@@ -2,6 +2,7 @@ package fsc.gateway;
 
 import fsc.entity.*;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ElectionGateway {
@@ -12,6 +13,7 @@ public interface ElectionGateway {
   VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException;
   Election getElection(String electionID) throws InvalidElectionIDException;
   List<VoteRecord> getAllVotes(Election election);
+  Collection<Election> getAllElections();
   class InvalidElectionIDException extends Exception {
     public InvalidElectionIDException() {}
   }
