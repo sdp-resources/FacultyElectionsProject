@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,10 +8,11 @@ import static org.junit.Assert.assertEquals;
 public class DivisionTest {
 
   private Division testDivision;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
-    testDivision = AppContext.getEntityFactory().createDivision("SCI");
+    testDivision = entityFactory.createDivision("SCI");
   }
 
   @Test

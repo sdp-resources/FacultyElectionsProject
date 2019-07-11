@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.EntityFactory;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.fetcher.ProfileFetcher;
 import fsc.interactor.fetcher.QueryFetcher;
@@ -13,8 +14,8 @@ public class ProfileInteractor extends Interactor {
   private ProfileFetcher profileFetcher;
   private QueryFetcher queryFetcher;
 
-  public ProfileInteractor(ProfileGateway profileGateway) {
-    profileFetcher = new ProfileFetcher(profileGateway);
+  public ProfileInteractor(ProfileGateway profileGateway, EntityFactory entityFactory) {
+    profileFetcher = new ProfileFetcher(profileGateway, entityFactory);
     queryFetcher = new QueryFetcher();
   }
 

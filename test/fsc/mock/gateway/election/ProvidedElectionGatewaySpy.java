@@ -1,6 +1,5 @@
 package fsc.mock.gateway.election;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
@@ -13,6 +12,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
   public String providedElectionId = null;
   public VoteRecord submittedVoteRecord = null;
   private List<VoteRecord> voteRecords = new ArrayList<>();
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   public ProvidedElectionGatewaySpy(Election election) {
     storedElection = election;
@@ -31,11 +31,11 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   public boolean hasVoteRecord(Voter voter) {
     return submittedVoteRecord != null && submittedVoteRecord.isRecordFor(
-          AppContext.getEntityFactory().createVoter(voter.getVoter(), voter.getElection()));
+          entityFactory.createVoter(voter.getVoter(), voter.getElection()));
   }
 
   public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
-    if (hasVoteRecord(AppContext.getEntityFactory().createVoter(voter.getVoter(), voter.getElection()))) {
+    if (hasVoteRecord(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) {
       return submittedVoteRecord;
     }
     throw new NoVoteRecordException();

@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,11 +12,11 @@ public class EditProfileTests {
   public static final String DIVISION = "SCI";
   public static final String CONTRACT = "Tenured";
   private Profile profile;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
-    profile = AppContext.getEntityFactory()
-                        .createProfile(PROFILE_NAME, PROFILE_USERNAME, DIVISION, CONTRACT);
+    profile = entityFactory.createProfile(PROFILE_NAME, PROFILE_USERNAME, DIVISION, CONTRACT);
   }
 
   @Test

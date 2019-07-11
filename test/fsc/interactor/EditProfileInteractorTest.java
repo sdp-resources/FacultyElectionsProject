@@ -1,11 +1,14 @@
 package fsc.interactor;
 
+import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
+import fsc.entity.SimpleEntityFactory;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.EditProfileRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,19 +20,20 @@ public class EditProfileInteractorTest {
   private Profile providedProfile;
   private ExistingProfileGatewaySpy profileGateway;
   private ProfileInteractor interactor;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
     providedProfile = EntityStub.getProfile(0);
     profileGateway = new ExistingProfileGatewaySpy(providedProfile);
     request = new EditProfileRequest("rossB12");
-    interactor = new ProfileInteractor(profileGateway);
+    interactor = new ProfileInteractor(profileGateway, entityFactory);
   }
 
   @Test
   public void noProfileExistsException() {
     request.changeContractType("Tenured");
-    interactor = new ProfileInteractor(new InvalidProfileGatewaySpy());
+    interactor = new ProfileInteractor(new InvalidProfileGatewaySpy(), entityFactory);
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownProfileName(), response);
   }

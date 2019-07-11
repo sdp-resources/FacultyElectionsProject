@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
@@ -29,6 +28,7 @@ public class ViewAllVotesTest {
   private ElectionGateway electionGateway;
   private ProfileGateway profileGateway;
   private List<Profile> profiles;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
@@ -44,7 +44,8 @@ public class ViewAllVotesTest {
 
   @Test
   public void whenElectionDoesNotExist_returnError() {
-    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway);
+    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway,
+                                        entityFactory);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
@@ -53,16 +54,15 @@ public class ViewAllVotesTest {
   public void whenVotesArePresent_returnViewableRecord() {
     List<Profile> votes1 = List.of(profiles.get(2), profiles.get(1));
     List<Profile> votes2 = List.of(profiles.get(1));
-    electionGateway.recordVote(AppContext.getEntityFactory()
-                                         .createVoteRecord(
-                                               AppContext.getEntityFactory()
-                                                         .createVoter(profiles.get(0), election), votes1));
-    electionGateway.recordVote(AppContext.getEntityFactory()
-                                         .createVoteRecord(
-                                               AppContext.getEntityFactory()
-                                                         .createVoter(profiles.get(1), election), votes2));
+    electionGateway.recordVote(
+          entityFactory.createVoteRecord(
+                entityFactory.createVoter(profiles.get(0), election), votes1));
+    electionGateway.recordVote(
+          entityFactory.createVoteRecord(
+                entityFactory.createVoter(profiles.get(1), election), votes2));
     electionGateway.save();
-    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway,
+                                        entityFactory);
     Response response = interactor.execute(request);
     assertTrue(response.isSuccessful());
     List<ViewableVoteRecord> result = response.getValues();

@@ -1,5 +1,7 @@
 package webserver;
 
+import fsc.entity.EntityFactory;
+import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.Gateway;
 import fsc.interactor.ProfileInteractor;
 import fsc.request.CreateProfileRequest;
@@ -17,6 +19,7 @@ public class InteractionControllerTest {
 
   private InMemoryGateway gateway;
   private InteractionController controller;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
@@ -26,7 +29,7 @@ public class InteractionControllerTest {
 
   @Test
   public void createProfileControllerSubmitsCorrectProfile() {
-    ProfileInteractorSpy interactor = new ProfileInteractorSpy(gateway);
+    ProfileInteractorSpy interactor = new ProfileInteractorSpy(gateway, entityFactory);
     controller.setProfileInteractor(interactor);
     Map<String, String> map = simpleMap("fullName", "Skiadas", "username", "skiadas", "division",
                                         "Natural Sciences", "contractType", "tenured");
@@ -53,8 +56,8 @@ public class InteractionControllerTest {
   private class ProfileInteractorSpy extends ProfileInteractor {
     CreateProfileRequest submittedRequest = null;
 
-    ProfileInteractorSpy(Gateway gateway) {
-      super(gateway);
+    ProfileInteractorSpy(Gateway gateway, EntityFactory entityFactory) {
+      super(gateway, entityFactory);
     }
 
     public Response execute(CreateProfileRequest request) {

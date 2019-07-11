@@ -1,8 +1,6 @@
 package fsc.voting;
 
-import fsc.app.AppContext;
-import fsc.entity.Profile;
-import fsc.entity.Vote;
+import fsc.entity.*;
 import fsc.mock.EntityStub;
 import org.junit.Test;
 
@@ -16,6 +14,7 @@ import static java.time.temporal.ChronoUnit.MILLIS;
 public class VotingTimingTest {
   private static final int CANDIDATES = 50;
   private static final int VOTES = 300;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Test
   public void electionOnManyCandidatesWithManyVotesRunsInReasonableTime() {
@@ -26,7 +25,7 @@ public class VotingTimingTest {
     List<Vote> votes = new ArrayList<>();
     for (int i = 0; i < VOTES; i++) {
       Collections.shuffle(candidates);
-      votes.add(AppContext.getEntityFactory().createVote(candidates.toArray(new Profile[]{})));
+      votes.add(entityFactory.createVote(candidates.toArray(new Profile[]{})));
     }
     LocalDateTime now = LocalDateTime.now();
     ElectionRecord electionRecord = new ElectionRecord(votes);

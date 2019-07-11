@@ -1,8 +1,6 @@
 package fsc.voting;
 
-import fsc.app.AppContext;
-import fsc.entity.Profile;
-import fsc.entity.Vote;
+import fsc.entity.*;
 import fsc.mock.EntityStub;
 import org.junit.Test;
 
@@ -15,6 +13,7 @@ public class CandidateTallyTest {
   private Profile cB = EntityStub.getProfile("B");
   private Profile cC = EntityStub.getProfile("C");
   private Profile cD = EntityStub.getProfile("D");
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Test
   public void candidateTalliesCanBecompared() {
@@ -39,37 +38,37 @@ public class CandidateTallyTest {
   @Test
   public void talliesPerformedCorrectly() {
     assertVotesResultInTallies(
-          List.of(AppContext.getEntityFactory().createVote(cA)),
+          List.of(entityFactory.createVote(cA)),
           List.of(new CandidateTally(cA, 1)),
           VotingRoundResult.win(cA));
     assertVotesResultInTallies(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB)),
+          List.of(entityFactory.createVote(cA, cB)),
           List.of(
                 new CandidateTally(cA, 1),
                 new CandidateTally(cB, 0, 1)),
           VotingRoundResult.win(cA));
     assertVotesResultInTallies(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB, cC),
-                  AppContext.getEntityFactory().createVote(cA, cC, cB),
-                  AppContext.getEntityFactory().createVote(cB, cA, cC)),
+          List.of(entityFactory.createVote(cA, cB, cC),
+                  entityFactory.createVote(cA, cC, cB),
+                  entityFactory.createVote(cB, cA, cC)),
           List.of(
                 new CandidateTally(cA, 2, 1),
                 new CandidateTally(cB, 1, 1, 1),
                 new CandidateTally(cC, 0, 1, 2)),
           VotingRoundResult.win(cA));
     assertVotesResultInTallies(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB, cC),
-                  AppContext.getEntityFactory().createVote(cC, cB),
-                  AppContext.getEntityFactory().createVote(cB, cA, cC)),
+          List.of(entityFactory.createVote(cA, cB, cC),
+                  entityFactory.createVote(cC, cB),
+                  entityFactory.createVote(cB, cA, cC)),
           List.of(
                 new CandidateTally(cB, 1, 2),
                 new CandidateTally(cA, 1, 1),
                 new CandidateTally(cC, 1, 0, 2)),
           VotingRoundResult.eliminate(cC));
     assertVotesResultInTallies(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB, cC),
-                  AppContext.getEntityFactory().createVote(cC, cB),
-                  AppContext.getEntityFactory().createVote(cB, cD)),
+          List.of(entityFactory.createVote(cA, cB, cC),
+                  entityFactory.createVote(cC, cB),
+                  entityFactory.createVote(cB, cD)),
           List.of(
                 new CandidateTally(cB, 1, 2),
                 new CandidateTally(cC, 1, 0, 1),
@@ -77,10 +76,10 @@ public class CandidateTallyTest {
                 new CandidateTally(cD, 0, 1)),
           VotingRoundResult.eliminate(cD));
     assertVotesResultInTallies(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB),
-                  AppContext.getEntityFactory().createVote(cB, cC),
-                  AppContext.getEntityFactory().createVote(cC, cD),
-                  AppContext.getEntityFactory().createVote(cD, cA, cB)),
+          List.of(entityFactory.createVote(cA, cB),
+                  entityFactory.createVote(cB, cC),
+                  entityFactory.createVote(cC, cD),
+                  entityFactory.createVote(cD, cA, cB)),
           List.of(
                 new CandidateTally(cB, 1, 1, 1),
                 new CandidateTally(cA, 1, 1),

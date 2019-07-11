@@ -1,7 +1,7 @@
 package fsc.interactor.fetcher;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
+import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
@@ -14,15 +14,17 @@ import java.util.List;
 public class ElectionFetcher extends ProfileFetcher {
   private ElectionGateway electionGateway;
   private CommitteeGateway committeeGateway;
+  private EntityFactory entityFactory;
 
   public ElectionFetcher(
         ElectionGateway electionGateway,
         ProfileGateway profileGateway,
-        CommitteeGateway committeeGateway
+        CommitteeGateway committeeGateway, EntityFactory entityFactory
   ) {
-    super(profileGateway);
+    super(profileGateway, entityFactory);
     this.electionGateway = electionGateway;
     this.committeeGateway = committeeGateway;
+    this.entityFactory = entityFactory;
   }
 
   public Builder<VoteRecord, Response> fetchRecord(Voter voter) {
@@ -44,7 +46,7 @@ public class ElectionFetcher extends ProfileFetcher {
   public Builder<Voter, Response> fetchVoter(String username, String electionId) {
     return fetchProfile(username)
                  .bindWith(fetchElection(electionId),
-                           Builder.lift(AppContext.getEntityFactory()::createVoter));
+                           Builder.lift(entityFactory::createVoter));
 
   }
 
@@ -93,4 +95,13 @@ public class ElectionFetcher extends ProfileFetcher {
     return electionGateway.getAllVotes(election);
   }
 
+  public VoteRecord createVoteRecord(Voter voter, List<Profile> votes) {
+    return entityFactory.createVoteRecord(voter, votes);
+  }
+
+  public Election createElection(
+        Committee committee, Seat seat, Query defaultQuery, Ballot ballot
+  ) {
+    return entityFactory.createElection(seat, committee, defaultQuery, ballot);
+  }
 }

@@ -1,11 +1,14 @@
 package fsc.interactor;
 
+import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
+import fsc.entity.SimpleEntityFactory;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.CreateProfileRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +21,7 @@ public class ProfileInteractorTest {
   ProfileInteractor interactor;
   Response response;
   Profile providedProfile = EntityStub.getProfile(0);
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
@@ -27,7 +31,7 @@ public class ProfileInteractorTest {
   @Test
   public void testCorrectExecute() {
     InvalidProfileGatewaySpy gateway = new InvalidProfileGatewaySpy();
-    interactor = new ProfileInteractor(gateway);
+    interactor = new ProfileInteractor(gateway, entityFactory);
     response = interactor.execute(request);
     assertEquals("hayfieldj", gateway.submittedUsername);
     assertEquals(ResponseFactory.success(), response);
@@ -37,7 +41,7 @@ public class ProfileInteractorTest {
   @Test
   public void testWrongUsernameExecute() {
     ExistingProfileGatewaySpy gateway = new ExistingProfileGatewaySpy(providedProfile);
-    interactor = new ProfileInteractor(gateway);
+    interactor = new ProfileInteractor(gateway, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.resourceExists(), response);
   }

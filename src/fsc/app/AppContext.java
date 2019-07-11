@@ -34,10 +34,10 @@ public class AppContext {
   public Interactor loadInteractors(Gateway gateway) {
     return new DivisionInteractor(gateway)
                  .append(new ContractTypeInteractor(gateway))
-                 .append(new ProfileInteractor(gateway))
-                 .append(new CommitteeInteractor(gateway))
+                 .append(new ProfileInteractor(gateway, getEntityFactory()))
+                 .append(new CommitteeInteractor(gateway, getEntityFactory()))
                  .append(new QueryInteractor(gateway))
-                 .append(new ElectionInteractor(gateway, gateway, gateway));
+                 .append(new ElectionInteractor(gateway, gateway, gateway, getEntityFactory()));
   }
 
   public List<ViewableProfile> getProfilesForQuery(String query) {

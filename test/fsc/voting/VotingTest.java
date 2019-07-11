@@ -1,8 +1,6 @@
 package fsc.voting;
 
-import fsc.app.AppContext;
-import fsc.entity.Profile;
-import fsc.entity.Vote;
+import fsc.entity.*;
 import fsc.mock.EntityStub;
 import org.junit.Test;
 
@@ -18,27 +16,28 @@ public class VotingTest {
   private Profile cA = EntityStub.getProfile("A");
   private Profile cB = EntityStub.getProfile("B");
   private Profile cC = EntityStub.getProfile("C");
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Test
   public void candidateWithMajorityWinsRightAway() {
-    assertVotes_produceResults(List.of(AppContext.getEntityFactory().createVote(cA, cB, cC),
-                                       AppContext.getEntityFactory().createVote(cA, cC, cB),
-                                       AppContext.getEntityFactory().createVote(cB, cA, cC)),
+    assertVotes_produceResults(List.of(entityFactory.createVote(cA, cB, cC),
+                                       entityFactory.createVote(cA, cC, cB),
+                                       entityFactory.createVote(cB, cA, cC)),
                                List.of(VotingRoundResult.win(cA)));
-    assertVotes_produceResults(List.of(AppContext.getEntityFactory().createVote(cA),
-                                       AppContext.getEntityFactory().createVote(),
-                                       AppContext.getEntityFactory().createVote()),
+    assertVotes_produceResults(List.of(entityFactory.createVote(cA),
+                                       entityFactory.createVote(),
+                                       entityFactory.createVote()),
                                List.of(VotingRoundResult.win(cA)));
   }
 
   @Test
   public void candidateWithFewestFirstPlacesIsEliminatedFirst() {
     assertVotes_produceResults(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB, cC),
-                  AppContext.getEntityFactory().createVote(cC, cA, cB),
-                  AppContext.getEntityFactory().createVote(cB, cA, cC),
-                  AppContext.getEntityFactory().createVote(cA, cB, cC),
-                  AppContext.getEntityFactory().createVote(cB, cA, cC)),
+          List.of(entityFactory.createVote(cA, cB, cC),
+                  entityFactory.createVote(cC, cA, cB),
+                  entityFactory.createVote(cB, cA, cC),
+                  entityFactory.createVote(cA, cB, cC),
+                  entityFactory.createVote(cB, cA, cC)),
           List.of(VotingRoundResult.eliminate(cC),
                   VotingRoundResult.win(cA)));
 
@@ -47,10 +46,10 @@ public class VotingTest {
   @Test
   public void whenTiedForLastOneOfTheCandidatesIsRemoved() {
     assertVotes_produceResults(
-          List.of(AppContext.getEntityFactory().createVote(cA, cB, cC),
-                  AppContext.getEntityFactory().createVote(cC, cB, cA),
-                  AppContext.getEntityFactory().createVote(cB, cC, cA),
-                  AppContext.getEntityFactory().createVote(cA, cC, cB)),
+          List.of(entityFactory.createVote(cA, cB, cC),
+                  entityFactory.createVote(cC, cB, cA),
+                  entityFactory.createVote(cB, cC, cA),
+                  entityFactory.createVote(cA, cC, cB)),
           List.of(VotingRoundResult.tied(cB, cC),
                   VotingRoundResult.tied(cA, cC),
                   VotingRoundResult.win(cC)));

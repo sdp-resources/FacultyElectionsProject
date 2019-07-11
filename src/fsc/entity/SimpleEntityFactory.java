@@ -2,7 +2,6 @@ package fsc.entity;
 
 import fsc.app.AppContext;
 import fsc.entity.query.Query;
-import fsc.gateway.ProfileGateway;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,10 +51,6 @@ public class SimpleEntityFactory implements EntityFactory {
 
   public Candidate createCandidate(Profile profile) {
     return new Candidate(profile);
-  }
-
-  public BallotCreator createBallotCreator(ProfileGateway profileGateway) {
-    return new BallotCreator(profileGateway);
   }
 
   public Profile createProfile(

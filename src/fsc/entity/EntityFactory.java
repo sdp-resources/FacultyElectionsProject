@@ -1,7 +1,6 @@
 package fsc.entity;
 
 import fsc.entity.query.Query;
-import fsc.gateway.ProfileGateway;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ public interface EntityFactory {
   Division createDivision(String newDivisionName);
   Committee createCommittee(String name, String description);
   Candidate createCandidate(Profile profile);
-  BallotCreator createBallotCreator(ProfileGateway profileGateway);
   Profile createProfile(
         String name, String username, String division, String contract
   );

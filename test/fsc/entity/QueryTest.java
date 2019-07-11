@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
 import fsc.entity.query.Query;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +11,11 @@ public class QueryTest {
 
   private Query query;
   private Profile profile;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
-    profile = AppContext.getEntityFactory().createProfile("Todd", "SmithT", "Art", "contract");
+    profile = entityFactory.createProfile("Todd", "SmithT", "Art", "contract");
   }
 
   @Test

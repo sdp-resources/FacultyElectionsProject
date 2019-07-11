@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
 import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +15,7 @@ public class VoteTest {
   private Profile candidate2;
   private Profile candidate3;
   private Vote vote;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
@@ -29,26 +29,26 @@ public class VoteTest {
 
   @Test
   public void voteForOnePerson() {
-    vote = AppContext.getEntityFactory().createVote(candidate1);
+    vote = entityFactory.createVote(candidate1);
     assertEquals(List.of(candidate1), vote.order);
   }
 
   @Test
   public void voteForMoreThanOnePerson() {
-    vote = AppContext.getEntityFactory().createVote(candidate3, candidate2);
+    vote = entityFactory.createVote(candidate3, candidate2);
     assertEquals(List.of(candidate3, candidate2), vote.order);
   }
 
   @Test
   public void removeOnePerson() {
-    vote = AppContext.getEntityFactory().createVote(candidate3, candidate2);
+    vote = entityFactory.createVote(candidate3, candidate2);
     vote.remove(candidate2);
     assertEquals(List.of(candidate3), vote.order);
   }
 
   @Test
   public void removeMultiplePeople() {
-    vote = AppContext.getEntityFactory().createVote(candidate3, candidate2, candidate1);
+    vote = entityFactory.createVote(candidate3, candidate2, candidate1);
     vote.removeAll(List.of(candidate3, candidate2));
     assertEquals(List.of(candidate1), vote.order);
   }

@@ -1,8 +1,7 @@
 package fsc.interactor;
 
-import fsc.app.AppContext;
 import fsc.entity.Committee;
-import fsc.entity.query.Query;
+import fsc.entity.EntityFactory;
 import fsc.gateway.CommitteeGateway;
 import fsc.interactor.fetcher.CommitteeFetcher;
 import fsc.interactor.fetcher.QueryFetcher;
@@ -12,15 +11,14 @@ import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
 
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 public class CommitteeInteractor extends Interactor {
   private CommitteeFetcher committeeFetcher;
   private QueryFetcher queryFetcher;
 
-  public CommitteeInteractor(CommitteeGateway gateway) {
-    committeeFetcher = new CommitteeFetcher(gateway);
+  public CommitteeInteractor(CommitteeGateway gateway, EntityFactory entityFactory) {
+    committeeFetcher = new CommitteeFetcher(gateway, entityFactory);
     queryFetcher = new QueryFetcher();
   }
 
@@ -51,17 +49,10 @@ public class CommitteeInteractor extends Interactor {
                            // TODO: Don't like how this is done
                            // should build seat in fetcher from query+seat step
                            .bindWith(queryFetcher.createFromString(request.queryString),
-                                     Builder.lift(createSeat(request.seatName)))
+                                     Builder.lift(committeeFetcher.createSeat(request.seatName)))
                            .perform(committeeFetcher::save)
                            .resolveWith(s -> ResponseFactory.success());
 
-  }
-
-  private BiFunction<Committee, Query, Committee> createSeat(String seatName) {
-    return ((committee, query) -> {
-      committee.addSeat(AppContext.getEntityFactory().createSeat(seatName, query));
-      return committee;
-    });
   }
 
   private Consumer<Committee> performUpdates(Map<String, Object> changes) {

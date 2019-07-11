@@ -7,7 +7,7 @@ public class BallotCreator {
 
   private ProfileGateway profileGateway;
 
-  BallotCreator(ProfileGateway profileGateway) {
+  public BallotCreator(ProfileGateway profileGateway) {
     this.profileGateway = profileGateway;
   }
 

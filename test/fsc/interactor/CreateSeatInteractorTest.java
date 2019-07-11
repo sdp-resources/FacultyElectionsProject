@@ -1,13 +1,12 @@
 package fsc.interactor;
 
-import fsc.app.AppContext;
-import fsc.entity.Committee;
-import fsc.entity.Seat;
+import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.mock.gateway.committee.ProvidedCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.CreateSeatRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 import org.junit.Before;
@@ -23,18 +22,19 @@ public class CreateSeatInteractorTest {
   private CreateSeatRequest request;
   private Seat expectedSeat;
   private CommitteeInteractor interactor;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() throws QueryStringParser.QueryParseException {
     request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, QUERY_STRING);
     Query query = new QueryStringConverter().fromString(QUERY_STRING);
-    expectedSeat = AppContext.getEntityFactory().createSeat(SEAT_NAME, query);
+    expectedSeat = entityFactory.createSeat(SEAT_NAME, query);
   }
 
   @Test
   public void WhenCommitteeNameDoesNotExist_thenReturnError() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
-    interactor = new CommitteeInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -43,10 +43,10 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesExist_thenReturnError() {
-    Committee committee = AppContext.getEntityFactory().createCommittee(COMMITTEE_NAME, "");
+    Committee committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
     committee.addSeat(expectedSeat);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CommitteeInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -55,9 +55,9 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
-    Committee committee = AppContext.getEntityFactory().createCommittee(COMMITTEE_NAME, "");
+    Committee committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CommitteeInteractor(gateway);
+    interactor = new CommitteeInteractor(gateway, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);

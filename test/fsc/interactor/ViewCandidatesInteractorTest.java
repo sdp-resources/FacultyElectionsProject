@@ -1,12 +1,12 @@
 package fsc.interactor;
 
-import fsc.entity.Ballot;
-import fsc.entity.Election;
+import fsc.entity.*;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.ViewCandidatesRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +17,7 @@ public class ViewCandidatesInteractorTest {
   private Ballot ballot;
   private Election election;
   private ElectionInteractor interactor;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   private static Ballot sampleBallot() {
     Ballot aBallot = new Ballot();
@@ -37,7 +38,7 @@ public class ViewCandidatesInteractorTest {
   public void canRecognizeEmptyBallot() {
     ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
     RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
-    interactor = new ElectionInteractor(electionGateway, null, null);
+    interactor = new ElectionInteractor(electionGateway, null, null, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
@@ -47,7 +48,7 @@ public class ViewCandidatesInteractorTest {
   public void canViewABallot() {
     ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
-    interactor = new ElectionInteractor(electionGateway, null, null);
+    interactor = new ElectionInteractor(electionGateway, null, null, entityFactory);
     Response initialResponse = interactor.execute(request);
 
     assertEquals(MOCK_ID, electionGateway.providedElectionId);

@@ -1,19 +1,23 @@
 package fsc.interactor.fetcher;
 
-import fsc.app.AppContext;
 import fsc.entity.Committee;
+import fsc.entity.EntityFactory;
+import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
 
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class CommitteeFetcher {
   CommitteeGateway gateway;
+  private EntityFactory entityFactory;
 
-  public CommitteeFetcher(CommitteeGateway gateway) {
+  public CommitteeFetcher(CommitteeGateway gateway, EntityFactory entityFactory) {
     this.gateway = gateway;
+    this.entityFactory = entityFactory;
   }
 
   public void addCommittee(Committee committee) {
@@ -43,10 +47,17 @@ public class CommitteeFetcher {
   }
 
   public Builder<Committee, Response> makeCommittee(String name, String description) {
-    return Builder.ofValue(AppContext.getEntityFactory().createCommittee(name, description));
+    return Builder.ofValue(entityFactory.createCommittee(name, description));
   }
 
   public Boolean hasCommittee(Committee committee) {
     return hasCommitteeNamed(committee.getName());
+  }
+
+  public BiFunction<Committee, Query, Committee> createSeat(String seatName) {
+    return ((committee, query) -> {
+      committee.addSeat(entityFactory.createSeat(seatName, query));
+      return committee;
+    });
   }
 }

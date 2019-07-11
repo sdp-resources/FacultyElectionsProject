@@ -1,8 +1,6 @@
 package fsc.service;
 
-import fsc.app.AppContext;
-import fsc.entity.Committee;
-import fsc.entity.Profile;
+import fsc.entity.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,9 +8,10 @@ import static org.junit.Assert.assertEquals;
 
 public class SerializerTest {
   private Serializer serializer;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
-  public void Setup() {
+  public void setup() {
     serializer = new Serializer();
   }
 
@@ -23,8 +22,7 @@ public class SerializerTest {
     String division = "ART";
     String contract = "Tenured";
 
-    Profile profile = AppContext.getEntityFactory()
-                                .createProfile(name, username, division, contract);
+    Profile profile = entityFactory.createProfile(name, username, division, contract);
 
     String expectedOutput = "{\"division\":\"" + division + "\"," + "\"contract\":\"" + contract + "\"," + "\"name\":\"" + name + "\"," + "\"username\":\"" + username + "\"}";
 
@@ -55,7 +53,7 @@ public class SerializerTest {
     String division = "ART";
     String contract = "Tenured";
 
-    Profile originalProfile = AppContext.getEntityFactory()
+    Profile originalProfile = entityFactory
                                         .createProfile(name, username, division, contract);
 
     Profile generatedProfile = serializer
@@ -72,7 +70,7 @@ public class SerializerTest {
     String name = "Steering";
     String description = "Drives the car";
 
-    Committee committee = AppContext.getEntityFactory().createCommittee(name, description);
+    Committee committee = entityFactory.createCommittee(name, description);
     String serializedCommittee = serializer.committeeToString(committee);
     String expectedString = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"}";
 
@@ -97,7 +95,7 @@ public class SerializerTest {
     String name = "Steering";
     String description = "Drives the car";
 
-    Committee originalCommittee = AppContext.getEntityFactory().createCommittee(name, description);
+    Committee originalCommittee = entityFactory.createCommittee(name, description);
 
     Committee generatedCommittee = serializer.stringToCommittee(
           serializer.committeeToString(originalCommittee));

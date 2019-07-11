@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.Profile;
+import fsc.entity.SimpleEntityFactory;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
@@ -30,7 +31,7 @@ public class ViewProfilesListInteractorTest {
     profile2 = EntityStub.getProfile(1);
     profile3 = EntityStub.getProfile(2);
     profileGatewaySpy = new ProfileGatewayStub(profile1, profile2, profile3);
-    interactor = new ProfileInteractor(profileGatewaySpy);
+    interactor = new ProfileInteractor(profileGatewaySpy, new SimpleEntityFactory());
   }
 
   @Test

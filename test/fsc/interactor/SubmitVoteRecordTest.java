@@ -1,8 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
-import fsc.entity.VoteRecord;
+import fsc.entity.*;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -10,7 +8,8 @@ import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.SubmitVoteRecordRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,6 +31,7 @@ public class SubmitVoteRecordTest {
   private Election election;
   private Profile candidate;
   private ElectionInteractor interactor;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
@@ -43,19 +43,19 @@ public class SubmitVoteRecordTest {
     request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(candidate, voter);
-    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
   }
 
   @Test
   public void whenGivenAnInvalidProfile_returnErrorResponse() {
-    interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy());
+    interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy(), entityFactory);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownProfileName(), response);
   }
 
   @Test
   public void whenGivenAnInvalidElectionId_returnErrorResponse() {
-    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway);
+    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway, entityFactory);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }

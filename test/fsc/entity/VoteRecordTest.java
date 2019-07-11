@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import fsc.app.AppContext;
 import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,15 +17,15 @@ public class VoteRecordTest {
   private Profile voter;
   private VoteRecord voteRecord;
   private Election election;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
     votes = List.of(EntityStub.getProfile(1), EntityStub.getProfile(2));
     voter = EntityStub.getProfile(0);
     election = EntityStub.simpleBallotElection();
-    voteRecord = AppContext.getEntityFactory()
-                           .createVoteRecord(
-                                 AppContext.getEntityFactory().createVoter(voter, election), votes);
+    voteRecord = entityFactory
+                           .createVoteRecord(entityFactory.createVoter(voter, election), votes);
   }
 
   @Test

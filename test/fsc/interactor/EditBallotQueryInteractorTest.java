@@ -32,7 +32,7 @@ public class EditBallotQueryInteractorTest {
 
   @Test
   public void whenGivenInvalidElectionId_returnErrorResponse() {
-    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, null);
+    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, null, null);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
@@ -41,7 +41,7 @@ public class EditBallotQueryInteractorTest {
   public void whenGivenValidElectionId_replaceBallotWithNewBallotFromQuery() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
-    interactor = new ElectionInteractor(electionGateway, null, profileGateway);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway, null);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(providedProfile));

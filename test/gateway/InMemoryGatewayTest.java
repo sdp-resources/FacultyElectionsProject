@@ -1,7 +1,8 @@
 package gateway;
 
-import fsc.app.AppContext;
+import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
+import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.ProfileGateway.InvalidProfileUsernameException;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,10 +23,11 @@ public class InMemoryGatewayTest {
   private static final String NATURAL_SCIENCES_DIVISION = "NatSci";
   private Profile profile;
   private InMemoryGateway gateway;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
-    profile = AppContext.getEntityFactory().createProfile(NAME, USERNAME, DIVISION, CONTRACT);
+    profile = entityFactory.createProfile(NAME, USERNAME, DIVISION, CONTRACT);
     gateway = new InMemoryGateway();
   }
 

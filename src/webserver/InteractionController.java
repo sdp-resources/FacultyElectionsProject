@@ -1,5 +1,6 @@
 package webserver;
 
+import fsc.app.AppContext;
 import fsc.entity.Committee;
 import fsc.entity.Election;
 import fsc.interactor.*;
@@ -21,10 +22,11 @@ public class InteractionController {
   private final ElectionInteractor electionInteractor;
 
   InteractionController(InMemoryGateway gateway) {
-    profileInteractor = new ProfileInteractor(gateway);
+    profileInteractor = new ProfileInteractor(gateway, AppContext.getEntityFactory());
     contractTypeInteractor = new ContractTypeInteractor(gateway);
     divisionInteractor = new DivisionInteractor(gateway);
-    electionInteractor = new ElectionInteractor(gateway, gateway, gateway);
+    electionInteractor = new ElectionInteractor(gateway, gateway, gateway,
+                                                AppContext.getEntityFactory());
     this.gateway = gateway;
   }
 

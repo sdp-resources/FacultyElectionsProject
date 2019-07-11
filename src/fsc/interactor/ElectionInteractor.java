@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
@@ -21,10 +20,11 @@ public class ElectionInteractor extends Interactor {
 
   public ElectionInteractor(
         ElectionGateway electionGateway, CommitteeGateway committeeGateway,
-        ProfileGateway profileGateway
+        ProfileGateway profileGateway, EntityFactory entityFactory
   ) {
-    this.ballotCreator = AppContext.getEntityFactory().createBallotCreator(profileGateway);
-    this.electionFetcher = new ElectionFetcher(electionGateway, profileGateway, committeeGateway);
+    this.ballotCreator = new BallotCreator(profileGateway);
+    this.electionFetcher = new ElectionFetcher(electionGateway, profileGateway, committeeGateway,
+                                               entityFactory);
   }
 
   public Response execute(CreateElectionRequest request) {
@@ -69,7 +69,7 @@ public class ElectionInteractor extends Interactor {
   public Response execute(SubmitVoteRecordRequest request) {
     return electionFetcher.fetchVoterOnlyIfNoRecord(request.username, request.electionID)
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
-                                    Builder.lift(AppContext.getEntityFactory()::createVoteRecord))
+                                    Builder.lift(electionFetcher::createVoteRecord))
                           .escapeIf(VoteRecord::someProfilesAreNotCandidates,
                                     ResponseFactory.invalidCandidate())
                           .perform(electionFetcher::submitRecord)
@@ -96,8 +96,7 @@ public class ElectionInteractor extends Interactor {
         seat = committee.getSeat(seatName);
         Query defaultQuery = seat.getDefaultQuery();
         Ballot ballot = ballotCreator.getBallot(defaultQuery);
-        Election election = AppContext.getEntityFactory()
-                                      .createElection(seat, committee, defaultQuery, ballot);
+        Election election = electionFetcher.createElection(committee, seat, defaultQuery, ballot);
         return Builder.ofValue(election);
       } catch (Committee.UnknownSeatNameException e) {
         return Builder.ofResponse(ResponseFactory.unknownCommitteeName());

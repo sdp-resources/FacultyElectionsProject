@@ -2,7 +2,6 @@ package dbGateway;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
-import fsc.gateway.ProfileGateway;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -52,10 +51,6 @@ public class PersistingEntityFactory implements EntityFactory {
   }
 
   public Candidate createCandidate(Profile profile) {return entityFactory.createCandidate(profile);}
-
-  public BallotCreator createBallotCreator(ProfileGateway profileGateway) {
-    return entityFactory.createBallotCreator(profileGateway);
-  }
 
   public Profile createProfile(
         String name, String username, String division, String contract

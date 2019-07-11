@@ -1,6 +1,6 @@
 package fsc.interactor.fetcher;
 
-import fsc.app.AppContext;
+import fsc.entity.EntityFactory;
 import fsc.entity.Profile;
 import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
@@ -13,8 +13,12 @@ import java.util.List;
 
 public class ProfileFetcher {
   public ProfileGateway profileGateway;
+  private EntityFactory entityFactory;
 
-  public ProfileFetcher(ProfileGateway profileGateway) { this.profileGateway = profileGateway;}
+  public ProfileFetcher(ProfileGateway profileGateway, EntityFactory entityFactory) {
+    this.profileGateway = profileGateway;
+    this.entityFactory = entityFactory;
+  }
 
   public Builder<Profile, Response> fetchProfile(String username) {
     try {
@@ -47,7 +51,7 @@ public class ProfileFetcher {
   public Builder<Profile, Response> makeProfile(String name, String username, String division,
                                        String contract) {
     return Builder.ofValue(
-          AppContext.getEntityFactory().createProfile(name, username, division, contract));
+          entityFactory.createProfile(name, username, division, contract));
   }
 
   public Boolean profileExists(Profile profile) {
