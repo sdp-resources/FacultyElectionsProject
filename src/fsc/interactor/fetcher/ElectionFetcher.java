@@ -1,6 +1,5 @@
 package fsc.interactor.fetcher;
 
-import fsc.app.AppContext;
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
@@ -68,7 +67,7 @@ public class ElectionFetcher extends ProfileFetcher {
 
   public Builder<Election, Response> addProfileToElection(Election election, Profile profile) {
     election.getBallot()
-            .add(AppContext.getEntityFactory().createCandidate(profile, election.getBallot()));
+            .add(entityFactory.createCandidate(profile, election.getBallot()));
 
     return Builder.ofValue(election);
   }

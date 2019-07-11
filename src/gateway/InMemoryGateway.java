@@ -47,10 +47,6 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(profiles);
   }
 
-  public List<Profile> getProfilesMatching(Query query) {
-    return profiles.stream().filter(query::isProfileValid).collect(Collectors.toList());
-  }
-
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     for (Profile currProfile : profiles) {
       if (username.equals(currProfile.getUsername())) return currProfile;

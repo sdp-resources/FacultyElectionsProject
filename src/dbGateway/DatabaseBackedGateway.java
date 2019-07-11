@@ -1,12 +1,16 @@
 package dbGateway;
 
-import fsc.entity.EntityFactory;
-import fsc.entity.Profile;
-import fsc.entity.SimpleEntityFactory;
+import fsc.entity.*;
+import fsc.entity.query.Query;
+import fsc.entity.query.QueryValidationResult;
+import fsc.gateway.Gateway;
 
 import javax.persistence.EntityManager;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
-public class DatabaseBackedGateway {
+public class DatabaseBackedGateway implements Gateway {
   private final EntityManager entityManager;
   private EntityFactory basicFactory = new SimpleEntityFactory();
   private EntityFactory entityFactory;
@@ -25,7 +29,7 @@ public class DatabaseBackedGateway {
     entityManager.getTransaction().commit();
   }
 
-  public <T> T find(Class<T> aClass, Object o) {
+  private <T> T find(Class<T> aClass, Object o) {
     return entityManager.find(aClass, o);
   }
 
@@ -42,13 +46,121 @@ public class DatabaseBackedGateway {
     entityManager.refresh(o);
   }
 
-  public Profile createProfile(
-        String name, String username, String division, String contract
-  ) {
-    return entityFactory.createProfile(name, username, division, contract);
+  public EntityFactory getEntityFactory() {
+    return entityFactory;
   }
 
-  public Profile findProfile(String username) {
-    return find(Profile.class, username);
+  public List<Committee> getCommittees() {
+    return null;
+  }
+
+  public Committee getCommittee(String name) throws UnknownCommitteeException {
+    return null;
+  }
+
+  public void addCommittee(Committee committee) {
+
+  }
+
+  public boolean hasCommittee(String name) {
+    return false;
+  }
+
+  public Collection<Committee> getAllCommittees() {
+    return null;
+  }
+
+  public void addContractType(String contract) {
+
+  }
+
+  public List<String> getAvailableContractTypes() {
+    return null;
+  }
+
+  public boolean hasContractType(String contract) {
+    return false;
+  }
+
+  public List<String> getAvailableDivisions() {
+    return null;
+  }
+
+  public void addDivision(String division) {
+
+  }
+
+  public Boolean hasDivision(String divisionName) {
+    return null;
+  }
+
+  public void addElection(Election election) {
+
+  }
+
+  public void recordVote(VoteRecord voteRecord) {
+
+  }
+
+  public boolean hasVoteRecord(Voter voter) {
+    return false;
+  }
+
+  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
+    return null;
+  }
+
+  public Election getElection(String electionID) throws InvalidElectionIDException {
+    return null;
+  }
+
+  public List<VoteRecord> getAllVotes(Election election) {
+    return null;
+  }
+
+  public Collection<Election> getAllElections() {
+    return null;
+  }
+
+  public Profile getProfile(String username) throws InvalidProfileUsernameException {
+    Profile profile = find(Profile.class, username);
+    if (profile == null) { throw new InvalidProfileUsernameException(); }
+    return profile;
+  }
+
+  public List<Profile> getAllProfiles() {
+    return (List<Profile>) entityManager.createQuery("SELECT p FROM Profile p")
+                                        .getResultList();  }
+
+  public void addProfile(Profile profile) {
+
+  }
+
+  public boolean hasProfile(String username) {
+    return false;
+  }
+
+  public void addQuery(String name, Query query) {
+
+  }
+
+  public boolean hasQuery(String name) {
+    return false;
+  }
+
+  public Query getQuery(String name) {
+    return null;
+  }
+
+  public QueryValidationResult validateQueryString(String queryString) {
+    return null;
+  }
+
+  public void save() {
+
+  }
+
+  public Map<String, Query> getAllQueries() {
+    return null;
   }
 }
