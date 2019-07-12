@@ -1,5 +1,7 @@
 package fsc.interactor;
 
+import fsc.entity.EntityFactory;
+import fsc.entity.SimpleEntityFactory;
 import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
 import fsc.request.ViewDivisionRequest;
 import fsc.response.Response;
@@ -15,6 +17,7 @@ public class ViewDivisionsTest {
   DivisionInteractor interactor;
   Response response;
   private ExistingDivisionGatewaySpy divisionGateway;
+  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setup() {
@@ -24,9 +27,9 @@ public class ViewDivisionsTest {
 
   @Test
   public void gatewayDivisionListEqualsOurDivisionList() {
-    interactor = new DivisionInteractor(divisionGateway);
+    interactor = new DivisionInteractor(divisionGateway, entityFactory);
     response = interactor.execute(request);
-    assertEquals(ResponseFactory.ofStrings(divisionGateway.divisions), response);
+    assertEquals(ResponseFactory.ofDivisions(divisionGateway.divisions), response);
   }
 
 }

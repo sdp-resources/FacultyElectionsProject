@@ -12,4 +12,10 @@
             </basic>
         </attributes>
     </entity>
+    <entity class="fsc.entity.Division" name="Division" access="PROPERTY">
+        <table name="divisions"/>
+            <attributes>
+                <id name="name"></id>
+            </attributes>
+    </entity>
 </entity-mappings>

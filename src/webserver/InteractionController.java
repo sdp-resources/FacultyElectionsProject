@@ -24,7 +24,7 @@ public class InteractionController {
   InteractionController(Gateway gateway) {
     profileInteractor = new ProfileInteractor(gateway, gateway.getEntityFactory());
     contractTypeInteractor = new ContractTypeInteractor(gateway);
-    divisionInteractor = new DivisionInteractor(gateway);
+    divisionInteractor = new DivisionInteractor(gateway, gateway.getEntityFactory());
     electionInteractor = new ElectionInteractor(gateway, gateway, gateway,
                                                 AppContext.getEntityFactory());
     this.gateway = gateway;

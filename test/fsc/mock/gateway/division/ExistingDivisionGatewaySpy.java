@@ -1,21 +1,28 @@
 package fsc.mock.gateway.division;
 
-import java.util.Arrays;
+import fsc.entity.Division;
+import fsc.entity.EntityFactory;
+import fsc.entity.SimpleEntityFactory;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExistingDivisionGatewaySpy extends MissingDivisionGatewaySpy {
-  public List<String> divisions;
+  private final EntityFactory entityFactory = new SimpleEntityFactory();
+  public List<Division> divisions = new ArrayList<>();
   public String submittedDivisionName;
 
   public ExistingDivisionGatewaySpy(String... divisions) {
-    this.divisions = Arrays.asList(divisions);
+    for (String division : divisions) {
+      addDivision(entityFactory.createDivision(division));
+    }
   }
 
-  public List<String> getAvailableDivisions() {
+  public List<Division> getAvailableDivisions() {
     return divisions;
   }
 
-  public void addDivision(String division) {
+  public void addDivision(Division division) {
     super.addDivision(division);
     divisions.add(division);
   }

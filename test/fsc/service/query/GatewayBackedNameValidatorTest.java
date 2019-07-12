@@ -1,5 +1,6 @@
 package fsc.service.query;
 
+import fsc.entity.EntityFactory;
 import fsc.entity.query.Query;
 import fsc.gateway.Gateway;
 import fsc.gateway.QueryGateway;
@@ -13,12 +14,14 @@ public class GatewayBackedNameValidatorTest {
   private Gateway gateway;
   private QueryStringConverter converter;
   private NameValidator validator;
+  private EntityFactory entityFactory;
 
   @Before
   public void setUp() {
     gateway = new InMemoryGateway();
     converter = new QueryStringConverter();
     validator = new GatewayBackedQueryValidator(gateway);
+    entityFactory = gateway.getEntityFactory();
   }
 
   @Test
@@ -37,7 +40,7 @@ public class GatewayBackedNameValidatorTest {
 
   @Test
   public void whenAskedForDivision_asksTheGateway() {
-    gateway.addDivision("Natural Sciences");
+    gateway.addDivision(entityFactory.createDivision("Natural Sciences"));
     assertTrue(validator.isValidValueForKey("division", "Natural Sciences"));
     assertFalse(validator.isValidValueForKey("division", "Nat Sciences"));
   }

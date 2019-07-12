@@ -85,16 +85,18 @@ public class DatabaseBackedGateway implements Gateway {
     return false;
   }
 
-  public List<String> getAvailableDivisions() {
-    return null;
+  public List<Division> getAvailableDivisions() {
+    return (List<Division>) entityManager.createQuery("SELECT d FROM Division d")
+                                        .getResultList();
   }
 
-  public void addDivision(String division) {
-
+  public void addDivision(Division division) {
+    entityManager.persist(division);
   }
 
   public Boolean hasDivision(String divisionName) {
-    return null;
+    Division division = find(Division.class, divisionName);
+    return division != null;
   }
 
   public void addElection(Election election) {
@@ -133,7 +135,8 @@ public class DatabaseBackedGateway implements Gateway {
 
   public List<Profile> getAllProfiles() {
     return (List<Profile>) entityManager.createQuery("SELECT p FROM Profile p")
-                                        .getResultList();  }
+                                        .getResultList();
+  }
 
   public void addProfile(Profile profile) {
     entityManager.persist(profile);

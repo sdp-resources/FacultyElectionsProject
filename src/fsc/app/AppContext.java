@@ -32,7 +32,7 @@ public class AppContext {
   }
 
   public Interactor loadInteractors(Gateway gateway) {
-    return new DivisionInteractor(gateway)
+    return new DivisionInteractor(gateway, getEntityFactory())
                  .append(new ContractTypeInteractor(gateway))
                  .append(new ProfileInteractor(gateway, getEntityFactory()))
                  .append(new CommitteeInteractor(gateway, getEntityFactory()))

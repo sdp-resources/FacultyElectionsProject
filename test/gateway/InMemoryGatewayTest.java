@@ -1,8 +1,6 @@
 package gateway;
 
-import fsc.entity.EntityFactory;
-import fsc.entity.Profile;
-import fsc.entity.SimpleEntityFactory;
+import fsc.entity.*;
 import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway.InvalidProfileUsernameException;
 import org.junit.Before;
@@ -22,6 +20,7 @@ public class InMemoryGatewayTest {
   private static final String OTHER_USERNAME = "otherUsername";
   private static final String A_CONTRACT_TYPE = "aContractType";
   private static final String NATURAL_SCIENCES_DIVISION = "NatSci";
+  private static final Division NAT_SCI_DIVISION = new Division(NATURAL_SCIENCES_DIVISION);
   private Profile profile;
   private Gateway gateway;
   private EntityFactory entityFactory = new SimpleEntityFactory();
@@ -59,8 +58,8 @@ public class InMemoryGatewayTest {
 
   @Test
   public void addedDivisions_appearInDivisionList() {
-    gateway.addDivision(NATURAL_SCIENCES_DIVISION);
-    assertThat(gateway.getAvailableDivisions(), hasItem(NATURAL_SCIENCES_DIVISION));
+    gateway.addDivision(NAT_SCI_DIVISION);
+    assertThat(gateway.getAvailableDivisions(), hasItem(NAT_SCI_DIVISION));
     assertThat(gateway.hasDivision(NATURAL_SCIENCES_DIVISION), is(true));
   }
 }

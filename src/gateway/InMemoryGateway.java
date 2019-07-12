@@ -17,7 +17,7 @@ public class InMemoryGateway implements Gateway {
 
   private final List<Profile> profiles = new ArrayList<>();
   private final List<String> contractTypes = new ArrayList<>();
-  private final List<String> divisions = new ArrayList<>();
+  private final List<Division> divisions = new ArrayList<Division>();
   private final List<Committee> committees = new ArrayList<>();
   private final List<VoteRecord> voteRecords = new ArrayList<>();
   private final List<Election> elections = new ArrayList<>();
@@ -37,7 +37,8 @@ public class InMemoryGateway implements Gateway {
   private static Gateway fromReader(ElectionDataReader dataReader) {
     Gateway gateway = new InMemoryGateway();
     dataReader.getContractTypes().forEach(gateway::addContractType);
-    dataReader.getDivisions().forEach(gateway::addDivision);
+    dataReader.getDivisions().forEach(
+          division -> gateway.addDivision(gateway.getEntityFactory().createDivision(division)));
     dataReader.getProfiles().forEach(gateway::addProfile);
     dataReader.getCommittees().forEach(gateway::addCommittee);
     return gateway;
@@ -77,15 +78,18 @@ public class InMemoryGateway implements Gateway {
     return contractTypes.contains(contract);
   }
 
-  public void addDivision(String division) {
+  public void addDivision(Division division) {
     divisions.add(division);
   }
 
   public Boolean hasDivision(String divisionName) {
-    return divisions.contains(divisionName);
+    for (Division division : divisions) {
+      if (division.getName().equals(divisionName)) { return true; }
+    }
+    return false;
   }
 
-  public List<String> getAvailableDivisions() {
+  public List<Division> getAvailableDivisions() {
     return new ArrayList<>(divisions);
   }
 
@@ -131,7 +135,9 @@ public class InMemoryGateway implements Gateway {
 
   public boolean hasVoteRecord(Voter voter) {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) return true;
+      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) {
+        return true;
+      }
     }
 
     return false;
@@ -139,7 +145,9 @@ public class InMemoryGateway implements Gateway {
 
   public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) return record;
+      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) {
+        return record;
+      }
     }
 
     throw new NoVoteRecordException();
@@ -155,7 +163,7 @@ public class InMemoryGateway implements Gateway {
 
   public List<VoteRecord> getAllVotes(Election election) {
     return voteRecords.stream().filter(r -> r.getElection().equals(election))
-          .collect(Collectors.toList());
+                      .collect(Collectors.toList());
   }
 
   public void addQuery(String name, Query query) {
@@ -167,8 +175,7 @@ public class InMemoryGateway implements Gateway {
   }
 
   public Query getQuery(String name) throws UnknownQueryNameException {
-    if (hasQuery(name))
-      return queries.get(name);
+    if (hasQuery(name)) { return queries.get(name); }
     throw new QueryGateway.UnknownQueryNameException();
   }
 

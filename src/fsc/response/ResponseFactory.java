@@ -113,4 +113,7 @@ public class ResponseFactory {
     return new ErrorResponse(errorMessage);
   }
 
+  public static Response ofDivisions(List<Division> divisions) {
+    return ofStrings(entityConverter.convertDivisions(divisions));
+  }
 }

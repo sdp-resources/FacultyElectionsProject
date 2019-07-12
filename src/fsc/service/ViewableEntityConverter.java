@@ -73,4 +73,8 @@ public class ViewableEntityConverter {
   private String convertQuery(Query query) {
     return queryStringConverter.toString(query);
   }
+
+  public List<String> convertDivisions(List<Division> divisions) {
+    return divisions.stream().map(Division::getName).collect(Collectors.toList());
+  }
 }

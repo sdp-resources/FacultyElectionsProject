@@ -33,10 +33,11 @@ public class InMemoryGatewayFromFileTest {
   public void canReadDivisions() {
     List<String> divisions = List.of("Arts and Letters", "Humanities", "Natural Sciences",
                                      "Social Sciences");
-    for (String type : divisions) {
-      assertThat(gateway.getAvailableDivisions(), hasItem(type));
+    for (String division : divisions) {
+      assertThat(gateway.getAvailableDivisions(),
+                 hasItem(gateway.getEntityFactory().createDivision(division)));
     }
-    assertThat(gateway.getAvailableDivisions(), is(divisions));
+    assertThat(gateway.getAvailableDivisions().size(), is(divisions.size()));
   }
 
   @Test
