@@ -15,13 +15,22 @@
     <entity class="fsc.entity.Division" name="Division" access="PROPERTY">
         <table name="divisions"/>
             <attributes>
-                <id name="name"></id>
+                <id name="name"/>
             </attributes>
     </entity>
     <entity class="fsc.entity.ContractType" name="ContractType" access="PROPERTY">
         <table name="contract_types"/>
         <attributes>
-            <id name="contract"></id>
+            <id name="contract"/>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.query.NamedQuery" name="NamedQuery" access="FIELD">
+        <table name="named_queries"/>
+        <attributes>
+            <id name="name"/>
+            <basic name="query">
+                <convert converter="dbGateway.converter.QueryDbConverter"/>
+            </basic>
         </attributes>
     </entity>
 </entity-mappings>

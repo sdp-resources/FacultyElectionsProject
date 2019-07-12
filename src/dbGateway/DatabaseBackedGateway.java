@@ -1,19 +1,20 @@
 package dbGateway;
 
 import fsc.entity.*;
+import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.gateway.Gateway;
+import fsc.service.query.*;
 
 import javax.persistence.EntityManager;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DatabaseBackedGateway implements Gateway {
   private final EntityManager entityManager;
   private EntityFactory basicFactory = new SimpleEntityFactory();
   private EntityFactory entityFactory;
+  private NameValidator dbValidator = new GatewayBackedQueryValidator(this);
 
   public DatabaseBackedGateway(EntityManager entityManager) {
     this.entityManager = entityManager;
@@ -150,19 +151,35 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addQuery(String name, Query query) {
-
+    entityManager.persist(new NamedQuery(name, query));
   }
 
   public boolean hasQuery(String name) {
-    return false;
+    NamedQuery query = find(NamedQuery.class, name);
+    return query != null;
+
   }
 
   public Query getQuery(String name) {
-    return null;
+    NamedQuery query = find(NamedQuery.class, name);
+
+    return query.query;
   }
 
   public QueryValidationResult validateQueryString(String queryString) {
-    return null;
+    NameValidator oldValidator = QueryStringParser.getNameValidator();
+    try {
+      QueryStringConverter queryStringConverter = new QueryStringConverter();
+      QueryStringParser.setNameValidator(dbValidator);
+      Query query = queryStringConverter.fromString(queryString);
+      String string = queryStringConverter.toString(query);
+      return new QueryValidationResult.ValidQueryResult(query, string);
+    } catch (QueryStringParser.QueryParseException e) {
+      return new QueryValidationResult.InvalidQueryResult(e.getMessage());
+    } finally {
+      QueryStringParser.setNameValidator(oldValidator);
+    }
+
   }
 
   public void save() {
@@ -170,6 +187,13 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public Map<String, Query> getAllQueries() {
-    return null;
+    List<NamedQuery> results = entityManager.createQuery("SELECT q FROM NamedQuery q")
+                                        .getResultList();
+    HashMap<String, Query> resultsMap = new HashMap<>();
+    for (NamedQuery result : results) {
+      resultsMap.put(result.name, result.query);
+    }
+
+    return resultsMap;
   }
 }

@@ -8,6 +8,8 @@ public class NamedQuery extends Query {
   public String name;
   public Query query;
 
+  public NamedQuery() {}
+
   public NamedQuery(String name, Query query) {
     this.name = name;
     this.query = query;
