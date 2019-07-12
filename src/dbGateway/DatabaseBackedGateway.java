@@ -73,16 +73,18 @@ public class DatabaseBackedGateway implements Gateway {
     return null;
   }
 
-  public void addContractType(String contract) {
-
+  public void addContractType(ContractType contractType) {
+    entityManager.persist(contractType);
   }
 
-  public List<String> getAvailableContractTypes() {
-    return null;
+  public List<ContractType> getAvailableContractTypes() {
+    return (List<ContractType>) entityManager.createQuery("SELECT c FROM ContractType c")
+                                         .getResultList();
   }
 
   public boolean hasContractType(String contract) {
-    return false;
+    ContractType contractType = find(ContractType.class, contract);
+    return contractType != null;
   }
 
   public List<Division> getAvailableDivisions() {

@@ -44,6 +44,10 @@ public class SimpleEntityFactory implements EntityFactory {
     return new Division(newDivisionName);
   }
 
+  public ContractType createContractType(String contractType) {
+    return new ContractType(contractType);
+  }
+
   public Committee createCommittee(String name, String description) {
     return new Committee(name, description);
   }

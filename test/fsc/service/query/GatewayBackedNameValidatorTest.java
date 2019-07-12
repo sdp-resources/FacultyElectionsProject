@@ -47,7 +47,7 @@ public class GatewayBackedNameValidatorTest {
 
   @Test
   public void whenAskedForContractType_asksTheGateway() {
-    gateway.addContractType("tenure-track");
+    gateway.addContractType(entityFactory.createContractType("tenure-track"));
     assertTrue(validator.isValidValueForKey("contract", "tenure-track"));
     assertFalse(validator.isValidValueForKey("contract", "something"));
   }

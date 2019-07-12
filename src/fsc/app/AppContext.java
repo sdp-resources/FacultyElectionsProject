@@ -33,7 +33,7 @@ public class AppContext {
 
   public Interactor loadInteractors(Gateway gateway) {
     return new DivisionInteractor(gateway, getEntityFactory())
-                 .append(new ContractTypeInteractor(gateway))
+                 .append(new ContractTypeInteractor(gateway, getEntityFactory()))
                  .append(new ProfileInteractor(gateway, getEntityFactory()))
                  .append(new CommitteeInteractor(gateway, getEntityFactory()))
                  .append(new QueryInteractor(gateway))

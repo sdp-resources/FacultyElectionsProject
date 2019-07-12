@@ -18,4 +18,10 @@
                 <id name="name"></id>
             </attributes>
     </entity>
+    <entity class="fsc.entity.ContractType" name="ContractType" access="PROPERTY">
+        <table name="contract_types"/>
+        <attributes>
+            <id name="contract"></id>
+        </attributes>
+    </entity>
 </entity-mappings>

@@ -19,6 +19,7 @@ public class InMemoryGatewayTest {
   private static final String CONTRACT = "contract";
   private static final String OTHER_USERNAME = "otherUsername";
   private static final String A_CONTRACT_TYPE = "aContractType";
+  public static final ContractType CONTRACT_TYPE = new ContractType(A_CONTRACT_TYPE);
   private static final String NATURAL_SCIENCES_DIVISION = "NatSci";
   private static final Division NAT_SCI_DIVISION = new Division(NATURAL_SCIENCES_DIVISION);
   private Profile profile;
@@ -52,8 +53,8 @@ public class InMemoryGatewayTest {
 
   @Test
   public void addedContractTypes_appearInContractTypeList() {
-    gateway.addContractType(A_CONTRACT_TYPE);
-    assertThat(gateway.getAvailableContractTypes(), hasItem(A_CONTRACT_TYPE));
+    gateway.addContractType(CONTRACT_TYPE);
+    assertThat(gateway.getAvailableContractTypes(), hasItem(CONTRACT_TYPE));
   }
 
   @Test

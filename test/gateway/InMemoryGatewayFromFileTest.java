@@ -1,5 +1,6 @@
 package gateway;
 
+import fsc.entity.ContractType;
 import fsc.entity.Profile;
 import fsc.gateway.Gateway;
 import fsc.gateway.ProfileGateway;
@@ -7,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.core.Is.is;
@@ -26,7 +28,11 @@ public class InMemoryGatewayFromFileTest {
   @Test
   public void canReadContractTypes() {
     List<String> types = List.of("administrative", "visiting", "tenure-track", "tenured");
-    assertThat(gateway.getAvailableContractTypes(), is(types));
+    List<ContractType> availableContractTypes = gateway.getAvailableContractTypes();
+    List<String> strings = availableContractTypes.stream()
+                                                 .map(ContractType::getContract)
+                                                 .collect(Collectors.toList());
+    assertThat(strings, is(types));
   }
 
   @Test

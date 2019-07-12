@@ -77,4 +77,8 @@ public class ViewableEntityConverter {
   public List<String> convertDivisions(List<Division> divisions) {
     return divisions.stream().map(Division::getName).collect(Collectors.toList());
   }
+
+  public List<String> convertContractTypes(List<ContractType> contractTypes) {
+    return contractTypes.stream().map(ContractType::getContract).collect(Collectors.toList());
+  }
 }

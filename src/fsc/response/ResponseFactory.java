@@ -116,4 +116,8 @@ public class ResponseFactory {
   public static Response ofDivisions(List<Division> divisions) {
     return ofStrings(entityConverter.convertDivisions(divisions));
   }
+
+  public static Response ofContractTypes(List<ContractType> contractTypes) {
+    return ofStrings(entityConverter.convertContractTypes(contractTypes));
+  }
 }

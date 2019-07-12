@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class InMemoryGateway implements Gateway {
 
   private final List<Profile> profiles = new ArrayList<>();
-  private final List<String> contractTypes = new ArrayList<>();
-  private final List<Division> divisions = new ArrayList<Division>();
+  private final List<ContractType> contractTypes = new ArrayList<>();
+  private final List<Division> divisions = new ArrayList<>();
   private final List<Committee> committees = new ArrayList<>();
   private final List<VoteRecord> voteRecords = new ArrayList<>();
   private final List<Election> elections = new ArrayList<>();
@@ -36,9 +36,13 @@ public class InMemoryGateway implements Gateway {
 
   private static Gateway fromReader(ElectionDataReader dataReader) {
     Gateway gateway = new InMemoryGateway();
-    dataReader.getContractTypes().forEach(gateway::addContractType);
-    dataReader.getDivisions().forEach(
-          division -> gateway.addDivision(gateway.getEntityFactory().createDivision(division)));
+    EntityFactory entityFactory = gateway.getEntityFactory();
+    dataReader.getContractTypes()
+              .map(entityFactory::createContractType)
+              .forEach(gateway::addContractType);
+    dataReader.getDivisions()
+              .map(entityFactory::createDivision)
+              .forEach(gateway::addDivision);
     dataReader.getProfiles().forEach(gateway::addProfile);
     dataReader.getCommittees().forEach(gateway::addCommittee);
     return gateway;
@@ -66,16 +70,19 @@ public class InMemoryGateway implements Gateway {
     return false;
   }
 
-  public void addContractType(String contractType) {
+  public void addContractType(ContractType contractType) {
     contractTypes.add(contractType);
   }
 
-  public List<String> getAvailableContractTypes() {
+  public List<ContractType> getAvailableContractTypes() {
     return new ArrayList<>(contractTypes);
   }
 
   public boolean hasContractType(String contract) {
-    return contractTypes.contains(contract);
+    for (ContractType contractType : contractTypes) {
+      if (contractType.getContract().equals(contract)) return true;
+    }
+    return false;
   }
 
   public void addDivision(Division division) {

@@ -1,25 +1,27 @@
 package fsc.mock.gateway.contractType;
 
+import fsc.entity.ContractType;
 import fsc.gateway.ContractTypeGateway;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ContractTypesGatewayStub implements ContractTypeGateway {
-  public List<String> contractTypes;
+  public List<ContractType> contractTypes = new ArrayList<>();
   public List<String> events = new ArrayList<>();
 
   public ContractTypesGatewayStub(String... contractTypes) {
-    this.contractTypes = new ArrayList<>(Arrays.asList(contractTypes));
+    for (String contractType : contractTypes) {
+      this.contractTypes.add(new ContractType(contractType));
+    }
   }
 
-  public void addContractType(String contractType) {
-    events.add("add contract type: " + contractType);
+  public void addContractType(ContractType contractType) {
+    events.add("add contract type: " + contractType.getContract());
     contractTypes.add(contractType);
   }
 
-  public List<String> getAvailableContractTypes() {
+  public List<ContractType> getAvailableContractTypes() {
     return contractTypes;
   }
 
@@ -29,6 +31,6 @@ public class ContractTypesGatewayStub implements ContractTypeGateway {
 
   public boolean hasContractType(String contract) {
     events.add("has contract type: " + contract);
-    return contractTypes.contains(contract);
+    return contractTypes.contains(new ContractType(contract));
   }
 }
