@@ -80,6 +80,16 @@ public class ElectionFetcher extends ProfileFetcher {
     }
   }
 
+  public Builder<Seat, Response> fetchSeat(String committeeName, String seatName) {
+    try {
+      return Builder.ofValue(committeeGateway.getSeat(committeeName, seatName));
+    } catch (CommitteeGateway.UnknownCommitteeException e) {
+      return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
+    } catch (CommitteeGateway.UnknownSeatNameException e) {
+      return Builder.ofResponse(ResponseFactory.unknownSeatName());
+    }
+  }
+
   public <T> void save(T entity) {
     electionGateway.save();
   }

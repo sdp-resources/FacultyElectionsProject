@@ -2,6 +2,7 @@ package fsc.interactor.fetcher;
 
 import fsc.entity.Committee;
 import fsc.entity.EntityFactory;
+import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.response.Response;
@@ -24,7 +25,7 @@ public class CommitteeFetcher {
     gateway.addCommittee(committee);
   }
 
-  public void save(Committee committee) { gateway.save(); }
+  public void save(Object o) { gateway.save(); }
 
   public void save() {
     gateway.save();
@@ -54,10 +55,9 @@ public class CommitteeFetcher {
     return hasCommitteeNamed(committee.getName());
   }
 
-  public BiFunction<Committee, Query, Committee> createSeat(String seatName) {
-    return ((committee, query) -> {
-      committee.addSeat(entityFactory.createSeat(seatName, query));
-      return committee;
-    });
+  public BiFunction<Committee, Query, Seat> createSeat(String seatName) {
+    return (committee, query) -> entityFactory.createSeat(seatName, query, committee);
   }
+
+  public void addSeat(Seat seat) { gateway.addSeat(seat); }
 }

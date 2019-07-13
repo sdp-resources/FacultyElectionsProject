@@ -19,7 +19,8 @@ public class ViewSeats {
   private static Stream<List<List<String>>> getListFromCommittee(ViewableCommittee committee) {
     return committee.seats
                  .stream()
-                 .map(s -> List.of(List.of("committee name", committee.name),
+                 .map(s -> List.of(List.of("seat id",  s.id),
+                                   List.of("committee name", committee.name),
                                    List.of("seat name", s.name),
                                    List.of("seat query", s.query)));
   }

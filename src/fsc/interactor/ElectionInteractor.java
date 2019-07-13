@@ -12,7 +12,6 @@ import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class ElectionInteractor extends Interactor {
   private BallotCreator ballotCreator;
@@ -28,8 +27,8 @@ public class ElectionInteractor extends Interactor {
   }
 
   public Response execute(CreateElectionRequest request) {
-    return electionFetcher.fetchCommittee(request.committeeName)
-                          .mapThrough(createElection(request.seatName))
+    return electionFetcher.fetchSeat(request.committeeName, request.seatName)
+                          .mapThrough(this::createElection)
                           .perform(electionFetcher::addElection)
                           .perform(electionFetcher::save)
                           .mapThrough(Builder.lift(Election::getID))
@@ -89,19 +88,13 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofVoteRecordList);
   }
 
-  private Function<Committee, Builder<Election, Response>> createElection(String seatName) {
-    return committee -> {
-      try {
-        Seat seat;
-        seat = committee.getSeat(seatName);
-        Query defaultQuery = seat.getDefaultQuery();
-        Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);
-        Election election = electionFetcher.createElection(committee, seat, defaultQuery, ballot);
-        return Builder.ofValue(election);
-      } catch (Committee.UnknownSeatNameException e) {
-        return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
-      }
-    };
+  private Builder<Election, Response> createElection(Seat seat) {
+    Query defaultQuery = seat.getDefaultQuery();
+    Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);
+    // TODO: Elections should no longer need a committee
+    Election election = electionFetcher.createElection(seat.getCommittee(), seat, defaultQuery,
+                                                       ballot);
+    return Builder.ofValue(election);
   }
 
   private Consumer<Election> setupBallotFromQuery(Query query) {

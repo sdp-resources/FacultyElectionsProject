@@ -22,8 +22,8 @@ public class PersistingEntityFactory implements EntityFactory {
         Ballot ballot
   ) {return entityFactory.createElection(seat, committee, query, ballot);}
 
-  public Seat createSeat(String name, Query defaultQuery) {
-    return entityFactory.createSeat(name, defaultQuery);
+  public Seat createSeat(String name, Query defaultQuery, Committee committee) {
+    return entityFactory.createSeat(name, defaultQuery, committee);
   }
 
   public Vote createVote(Profile... profiles) {return entityFactory.createVote(profiles);}

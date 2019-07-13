@@ -23,12 +23,14 @@ public class CreateSeatInteractorTest {
   private Seat expectedSeat;
   private CommitteeInteractor interactor;
   private EntityFactory entityFactory = new SimpleEntityFactory();
+  private Committee committee;
+  private Query query;
 
   @Before
   public void setup() throws QueryStringParser.QueryParseException {
     request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, QUERY_STRING);
-    Query query = new QueryStringConverter().fromString(QUERY_STRING);
-    expectedSeat = entityFactory.createSeat(SEAT_NAME, query);
+    query = new QueryStringConverter().fromString(QUERY_STRING);
+    committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
   }
 
   @Test
@@ -43,8 +45,7 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesExist_thenReturnError() {
-    Committee committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
-    committee.addSeat(expectedSeat);
+    expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, entityFactory);
     Response response = interactor.execute(request);
@@ -55,7 +56,6 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
-    Committee committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, entityFactory);
     Response response = interactor.execute(request);

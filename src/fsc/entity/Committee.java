@@ -1,30 +1,33 @@
 package fsc.entity;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import fsc.gateway.CommitteeGateway;
+
+import java.util.*;
 
 public class Committee {
   private String name;
   private String description;
 
-  private final ArrayList<Seat> seats = new ArrayList<>();
+  private Set<Seat> seats = new HashSet<>();
+
+  public Committee() {}
 
   protected Committee(String name, String description) {
     this.name = name;
     this.description = description;
   }
 
-  public ArrayList<Seat> getSeats() {
+  public Set<Seat> getSeats() {
     return seats;
   }
 
-  public Seat getSeat(String seatName) throws UnknownSeatNameException {
+  public Seat getSeat(String seatName) throws CommitteeGateway.UnknownSeatNameException {
     for (Seat seat : seats) {
       if (seat.getName().equals(seatName)) {
         return seat;
       }
     }
-    throw new UnknownSeatNameException();
+    throw new CommitteeGateway.UnknownSeatNameException();
   }
 
   public boolean hasSeat(String seatName) {
@@ -64,9 +67,9 @@ public class Committee {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Committee committee = (Committee) o;
-    return Objects.equals(name, committee.name) && Objects.equals(description,
-                                                                  committee.description) && seats.equals(
-          committee.seats);
+    return Objects.equals(name, committee.name) &&
+                 Objects.equals(description, committee.description) &&
+                 seats.equals(committee.seats);
   }
 
   public int hashCode() {
@@ -84,5 +87,4 @@ public class Committee {
     }
   }
 
-  public class UnknownSeatNameException extends Exception {}
 }

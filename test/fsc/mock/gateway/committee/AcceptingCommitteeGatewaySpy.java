@@ -4,7 +4,6 @@ import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 
-import java.util.Collection;
 import java.util.List;
 
 public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
@@ -21,6 +20,11 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
     return returnedCommittee;
   }
 
+  public Seat getSeat(String committeeName, String seatName) {
+    Committee committee = getCommittee(committeeName);
+    return new Seat(seatName, Query.always(), committee);
+  }
+
   @Override
   public void addCommittee(Committee committee) {
   }
@@ -32,8 +36,8 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
     return true;
   }
 
-  public Collection<Committee> getAllCommittees() {
-    return null;
+  public void addSeat(Seat seat) {
+
   }
 
   private class CommitteeStub extends Committee {
@@ -45,7 +49,7 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
     }
 
     public Seat getSeat(String seatName) {
-      return entityFactory.createSeat(seatName, Query.always());
+      return entityFactory.createSeat(seatName, Query.always(), returnedCommittee);
     }
   }
 }

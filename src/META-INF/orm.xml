@@ -33,4 +33,30 @@
             </basic>
         </attributes>
     </entity>
+    <entity class="fsc.entity.Committee" name="Committee" access="FIELD">
+        <table name="committees"/>
+        <attributes>
+            <id name="name"/>
+            <basic name="description"/>
+            <one-to-many name="seats" target-entity="fsc.entity.Seat">
+                <cascade />
+            </one-to-many>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Seat" name="Seat" access="FIELD">
+        <table name="seats"/>
+        <attributes>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="name"/>
+            <basic name="defaultQuery">
+                <convert converter="dbGateway.converter.QueryDbConverter"/>
+            </basic>
+            <many-to-one name="committee">
+                <join-column name="committee_id" nullable="false"/>
+            </many-to-one>
+            <many-to-one name="profile" target-entity="fsc.entity.Profile"/>
+        </attributes>
+    </entity>
 </entity-mappings>

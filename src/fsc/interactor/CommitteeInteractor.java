@@ -50,9 +50,9 @@ public class CommitteeInteractor extends Interactor {
                            // should build seat in fetcher from query+seat step
                            .bindWith(queryFetcher.createFromString(request.queryString),
                                      Builder.lift(committeeFetcher.createSeat(request.seatName)))
+                           .perform(committeeFetcher::addSeat)
                            .perform(committeeFetcher::save)
                            .resolveWith(s -> ResponseFactory.success());
-
   }
 
   private Consumer<Committee> performUpdates(Map<String, Object> changes) {

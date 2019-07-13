@@ -21,7 +21,6 @@ public class CommitteeAndSeatsTest {
   public void setup() {
     committee = entityFactory.createCommittee("cccc", "xxxx");
     seats = new ArrayList<>();
-    seat = entityFactory.createSeat("a", Query.always());
   }
 
   @Test
@@ -47,13 +46,14 @@ public class CommitteeAndSeatsTest {
 
   @Test
   public void committeeHasOneSeat() {
-    committee.addSeat(seat);
+    seat = entityFactory.createSeat("a", Query.always(), committee);
 
     assertThat(committee.getCommitteeSize(), is(1));
   }
 
   @Test
   public void setProfileOnSeat() {
+    seat = entityFactory.createSeat("a", Query.always(), committee);
     Profile profile = EntityStub.getProfile(0);
     seat.setProfile(profile);
 
@@ -62,6 +62,7 @@ public class CommitteeAndSeatsTest {
 
   @Test
   public void setDefaultQueryOnSeat() {
+    seat = entityFactory.createSeat("a", Query.always(), committee);
     Query query = Query.always();
     seat.setDefaultQuery(query);
 

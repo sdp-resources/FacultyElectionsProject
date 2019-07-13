@@ -60,7 +60,7 @@ public class InteractionController {
   }
 
   public Collection<Committee> getAllCommittees() {
-    return gateway.getAllCommittees();
+    return gateway.getCommittees();
   }
 
   public Response createElection(Function<String, String> params) {

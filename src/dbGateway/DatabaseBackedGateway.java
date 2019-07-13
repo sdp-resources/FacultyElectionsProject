@@ -22,7 +22,7 @@ public class DatabaseBackedGateway implements Gateway {
     begin();
   }
 
-  private void begin() {
+  public void begin() {
     entityManager.getTransaction().begin();
   }
 
@@ -41,11 +41,6 @@ public class DatabaseBackedGateway implements Gateway {
     entityManager.close();
   }
 
-  public void commitAndClose() {
-    commit();
-    close();
-  }
-
   public void refresh(Object o) {
     entityManager.refresh(o);
   }
@@ -55,23 +50,33 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public List<Committee> getCommittees() {
-    return null;
+    return (List<Committee>) entityManager.createQuery("SELECT c FROM Committee c")
+                                          .getResultList();
   }
 
   public Committee getCommittee(String name) throws UnknownCommitteeException {
-    return null;
+    Committee committee = find(Committee.class, name);
+    if (committee == null) { throw new UnknownCommitteeException(); }
+    return committee;
+  }
+
+  public Seat getSeat(String committeeName, String seatName)
+        throws UnknownCommitteeException, UnknownSeatNameException {
+    Committee committee = getCommittee(committeeName);
+    return committee.getSeat(seatName);
   }
 
   public void addCommittee(Committee committee) {
-
+    entityManager.persist(committee);
   }
 
   public boolean hasCommittee(String name) {
-    return false;
+    Committee committee = find(Committee.class, name);
+    return committee != null;
   }
 
-  public Collection<Committee> getAllCommittees() {
-    return null;
+  public void addSeat(Seat seat) {
+    entityManager.persist(seat);
   }
 
   public void addContractType(ContractType contractType) {
@@ -80,7 +85,7 @@ public class DatabaseBackedGateway implements Gateway {
 
   public List<ContractType> getAvailableContractTypes() {
     return (List<ContractType>) entityManager.createQuery("SELECT c FROM ContractType c")
-                                         .getResultList();
+                                             .getResultList();
   }
 
   public boolean hasContractType(String contract) {
@@ -90,7 +95,7 @@ public class DatabaseBackedGateway implements Gateway {
 
   public List<Division> getAvailableDivisions() {
     return (List<Division>) entityManager.createQuery("SELECT d FROM Division d")
-                                        .getResultList();
+                                         .getResultList();
   }
 
   public void addDivision(Division division) {
@@ -188,7 +193,7 @@ public class DatabaseBackedGateway implements Gateway {
 
   public Map<String, Query> getAllQueries() {
     List<NamedQuery> results = entityManager.createQuery("SELECT q FROM NamedQuery q")
-                                        .getResultList();
+                                            .getResultList();
     HashMap<String, Query> resultsMap = new HashMap<>();
     for (NamedQuery result : results) {
       resultsMap.put(result.name, result.query);

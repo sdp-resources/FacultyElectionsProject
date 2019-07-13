@@ -1,9 +1,10 @@
 package fsc.mock.gateway.committee;
 
 import fsc.entity.Committee;
+import fsc.entity.Seat;
+import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 
-import java.util.Collection;
 import java.util.List;
 
 public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
@@ -21,6 +22,12 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
     throw new UnknownCommitteeException();
   }
 
+  public Seat getSeat(String committeeName, String seatName) throws UnknownCommitteeException {
+    Committee committee = getCommittee(committeeName);
+    return new Seat(seatName, Query.always(), committee);
+
+  }
+
   @Override
   public void addCommittee(Committee committee) {
     committeeAdded = committee;
@@ -35,8 +42,6 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
     return false;
   }
 
-  public Collection<Committee> getAllCommittees() {
-    return null;
-  }
+  public void addSeat(Seat seat) { }
 
 }

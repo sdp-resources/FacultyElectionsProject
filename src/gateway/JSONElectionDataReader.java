@@ -43,16 +43,16 @@ class JSONElectionDataReader implements ElectionDataReader {
     String description = json.getString("description");
     Committee committee = entityFactory.createCommittee(name, description);
     for (Object s : json.getJSONArray("seats")) {
-      committee.addSeat(makeSeat(s));
+      makeSeat(s, committee);
     }
     return committee;
   }
 
-  private Seat makeSeat(Object o) {
+  private Seat makeSeat(Object o, Committee committee) {
     JSONObject json = (JSONObject) o;
     String name = json.getString("name");
     Query query = makeQuery(json.getJSONObject("query"));
-    return entityFactory.createSeat(name, query);
+    return entityFactory.createSeat(name, query, committee);
   }
 
   private Query makeQuery(JSONObject o) {

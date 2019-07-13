@@ -1,9 +1,9 @@
 package fsc.mock.gateway.committee;
 
 import fsc.entity.Committee;
+import fsc.entity.Seat;
 import fsc.gateway.CommitteeGateway;
 
-import java.util.Collection;
 import java.util.List;
 
 public class ProvidedCommitteeGatewaySpy implements CommitteeGateway {
@@ -24,6 +24,10 @@ public class ProvidedCommitteeGatewaySpy implements CommitteeGateway {
     return storedCommittee;
   }
 
+  public Seat getSeat(String committeeName, String seatName) {
+    return null;
+  }
+
   @Override
   public void addCommittee(Committee committee) {
   }
@@ -37,8 +41,6 @@ public class ProvidedCommitteeGatewaySpy implements CommitteeGateway {
     return name.equals(storedCommittee.getName());
   }
 
-  public Collection<Committee> getAllCommittees() {
-    return null;
-  }
+  public void addSeat(Seat seat) { }
 
 }

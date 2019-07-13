@@ -5,18 +5,34 @@ import fsc.entity.query.Query;
 import java.util.Objects;
 
 public class Seat {
+  private Long id;
   private Profile profile;
   private Query defaultQuery;
-  private final String name;
+  private Committee committee;
+  private String name;
 
-  Seat(String name, Query defaultQuery) {
+  public Seat() {}
 
+  public Seat(String name, Query defaultQuery, Committee committee) {
     this.name = name;
     this.defaultQuery = defaultQuery;
+    this.setCommittee(committee);
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long seatId) {
+    this.id = seatId;
   }
 
   public String getName() {
     return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public void setProfile(Profile profile) {
@@ -35,18 +51,23 @@ public class Seat {
     return defaultQuery;
   }
 
+  public Committee getCommittee() {
+    return committee;
+  }
+
+  public void setCommittee(Committee committee) {
+    committee.addSeat(this);
+    this.committee = committee;
+  }
+
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Seat seat = (Seat) o;
-    return Objects.equals(profile, seat.profile) && Objects.equals(defaultQuery,
-                                                                   seat.defaultQuery) && Objects
-                                                                                               .equals(
-                                                                                                     name,
-                                                                                                     seat.name);
+    return Objects.equals(id, seat.id);
   }
 
   public int hashCode() {
-    return Objects.hash(profile, defaultQuery, name);
+    return Objects.hash(id);
   }
 }

@@ -15,8 +15,8 @@ public class SimpleEntityFactory implements EntityFactory {
     return new Election(seat, committee, query, ballot);
   }
 
-  public Seat createSeat(String name, Query defaultQuery) {
-    return new Seat(name, defaultQuery);
+  public Seat createSeat(String name, Query defaultQuery, Committee committee) {
+    return new Seat(name, defaultQuery, committee);
   }
 
   public Vote createVote(Profile... profiles) {

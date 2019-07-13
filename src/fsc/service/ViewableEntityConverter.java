@@ -7,9 +7,7 @@ import fsc.viewable.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ViewableEntityConverter {
@@ -27,12 +25,13 @@ public class ViewableEntityConverter {
                                  convertSeats(committee.getSeats()));
   }
 
-  private List<ViewableSeat> convertSeats(List<Seat> seats) {
+  private List<ViewableSeat> convertSeats(Set<Seat> seats) {
     return seats.stream().map(this::convert).collect(Collectors.toList());
   }
 
   private ViewableSeat convert(Seat seat) {
-    return new ViewableSeat(seat.getName(),
+    return new ViewableSeat(Long.toString(seat.getId()),
+                            seat.getName(),
                             new QueryStringConverter().toString(seat.getDefaultQuery()));
   }
 

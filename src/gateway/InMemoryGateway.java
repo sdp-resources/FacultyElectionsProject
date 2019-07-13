@@ -24,6 +24,7 @@ public class InMemoryGateway implements Gateway {
   private final Map<String, Query> queries = new HashMap<>();
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
   private static EntityFactory entityFactory = new SimpleEntityFactory();
+  private long seatId = 0;
 
   public static Gateway fromJSONFile(String path) {
     try {
@@ -111,7 +112,7 @@ public class InMemoryGateway implements Gateway {
   }
 
   public List<Committee> getCommittees() {
-    return committees;
+    return new ArrayList<>(committees);
   }
 
   public Committee getCommittee(String committeeName) throws UnknownCommitteeException {
@@ -121,6 +122,12 @@ public class InMemoryGateway implements Gateway {
       }
     }
     throw new UnknownCommitteeException();
+  }
+
+  public Seat getSeat(String committeeName, String seatName)
+        throws UnknownCommitteeException, UnknownSeatNameException {
+    Committee committee = getCommittee(committeeName);
+    return committee.getSeat(seatName);
   }
 
   public void addCommittee(Committee committee) {
@@ -134,6 +141,10 @@ public class InMemoryGateway implements Gateway {
       }
     }
     return false;
+  }
+
+  public void addSeat(Seat seat) {
+    seat.setId(seatId++);
   }
 
   public void recordVote(VoteRecord voteRecord) {
@@ -210,10 +221,6 @@ public class InMemoryGateway implements Gateway {
 
   public Map<String, Query> getAllQueries() {
     return queries;
-  }
-
-  public List<Committee> getAllCommittees() {
-    return new ArrayList<>(committees);
   }
 
   public Collection<Election> getAllElections() {

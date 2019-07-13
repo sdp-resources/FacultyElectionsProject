@@ -1,8 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.Committee;
-import fsc.entity.EntityFactory;
-import fsc.entity.SimpleEntityFactory;
+import fsc.entity.*;
 import fsc.gateway.CommitteeGateway;
 import fsc.request.ViewCommitteeListRequest;
 import fsc.response.Response;
@@ -10,7 +8,6 @@ import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -33,15 +30,18 @@ public class ViewCommitteeListInteractorTest {
 
       public Committee getCommittee(String name) { return null; }
 
+      public Seat getSeat(String committeeName, String seatName) {
+        return null;
+      }
+
       public void addCommittee(Committee committee) { }
 
       public void save() { }
 
       public boolean hasCommittee(String name) { return false; }
 
-      public Collection<Committee> getAllCommittees() {
-        return null;
-      }
+      public void addSeat(Seat seat) { }
+
     };
   }
 
