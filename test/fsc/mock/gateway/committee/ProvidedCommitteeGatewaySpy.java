@@ -24,8 +24,9 @@ public class ProvidedCommitteeGatewaySpy implements CommitteeGateway {
     return storedCommittee;
   }
 
-  public Seat getSeat(String committeeName, String seatName) {
-    return null;
+  public Seat getSeat(String committeeName, String seatName) throws UnknownSeatNameException {
+    Committee committee = getCommittee(committeeName);
+    return committee.getSeat(seatName);
   }
 
   @Override

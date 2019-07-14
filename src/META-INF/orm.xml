@@ -38,7 +38,7 @@
         <attributes>
             <id name="name"/>
             <basic name="description"/>
-            <one-to-many name="seats" target-entity="fsc.entity.Seat">
+            <one-to-many name="seats" target-entity="fsc.entity.Seat" mapped-by="committee">
                 <cascade />
             </one-to-many>
         </attributes>

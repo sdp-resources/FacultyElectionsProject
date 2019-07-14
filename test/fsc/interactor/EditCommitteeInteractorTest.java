@@ -21,7 +21,7 @@ public class EditCommitteeInteractorTest {
 
   @Test
   public void changeOnNonexistantCommitteeGivesErrorResponse() {
-    interactor = new CommitteeInteractor(new RejectingCommitteeGatewaySpy(), entityFactory);
+    interactor = new CommitteeInteractor(new RejectingCommitteeGatewaySpy(), null, entityFactory);
     String name = "Steering";
     HashMap<String, Object> changes = new HashMap<>();
     changes.put("name", "steering wheel");
@@ -42,7 +42,7 @@ public class EditCommitteeInteractorTest {
     EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
 
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
-    interactor = new CommitteeInteractor(gateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory);
 
     Response response = interactor.execute(request);
 
@@ -62,7 +62,7 @@ public class EditCommitteeInteractorTest {
     EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
 
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
-    interactor = new CommitteeInteractor(gateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory);
 
     Response response = interactor.execute(request);
 

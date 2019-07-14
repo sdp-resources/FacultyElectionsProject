@@ -1,6 +1,7 @@
 package fsc.entity;
 
 import fsc.entity.query.Query;
+import fsc.request.EditSeatRequest;
 
 import java.util.Objects;
 
@@ -69,5 +70,19 @@ public class Seat {
 
   public int hashCode() {
     return Objects.hash(id);
+  }
+
+  public void update(String field, Object o) {
+    switch (field) {
+      case EditSeatRequest.EDIT_SEAT_PROFILE:
+        setProfile((Profile) o);
+        break;
+      case EditSeatRequest.EDIT_SEAT_NAME:
+        setName((String) o);
+        break;
+      case EditSeatRequest.EDIT_SEAT_QUERY:
+        setDefaultQuery((Query) o);
+        break;
+    }
   }
 }

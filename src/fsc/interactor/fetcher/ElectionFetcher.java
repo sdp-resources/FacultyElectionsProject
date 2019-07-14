@@ -11,7 +11,7 @@ import fsc.utils.builder.Builder;
 
 import java.util.List;
 
-public class ElectionFetcher extends ProfileFetcher {
+public class ElectionFetcher extends CommitteeFetcher {
   private ElectionGateway electionGateway;
   private CommitteeGateway committeeGateway;
   private EntityFactory entityFactory;
@@ -21,7 +21,7 @@ public class ElectionFetcher extends ProfileFetcher {
         ProfileGateway profileGateway,
         CommitteeGateway committeeGateway, EntityFactory entityFactory
   ) {
-    super(profileGateway, entityFactory);
+    super(committeeGateway,  profileGateway, entityFactory);
     this.electionGateway = electionGateway;
     this.committeeGateway = committeeGateway;
     this.entityFactory = entityFactory;
@@ -70,24 +70,6 @@ public class ElectionFetcher extends ProfileFetcher {
             .add(entityFactory.createCandidate(profile, election.getBallot()));
 
     return Builder.ofValue(election);
-  }
-
-  public Builder<Committee, Response> fetchCommittee(String committeeName) {
-    try {
-      return Builder.ofValue(committeeGateway.getCommittee(committeeName));
-    } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
-    }
-  }
-
-  public Builder<Seat, Response> fetchSeat(String committeeName, String seatName) {
-    try {
-      return Builder.ofValue(committeeGateway.getSeat(committeeName, seatName));
-    } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
-    } catch (CommitteeGateway.UnknownSeatNameException e) {
-      return Builder.ofResponse(ResponseFactory.unknownSeatName());
-    }
   }
 
   public <T> void save(T entity) {

@@ -32,7 +32,8 @@ public class ViewableEntityConverter {
   private ViewableSeat convert(Seat seat) {
     return new ViewableSeat(Long.toString(seat.getId()),
                             seat.getName(),
-                            new QueryStringConverter().toString(seat.getDefaultQuery()));
+                            new QueryStringConverter().toString(seat.getDefaultQuery()),
+                            nullOrConvert(seat.getProfile()));
   }
 
   public List<ViewableProfile> convertProfiles(List<Profile> profiles) {
@@ -79,5 +80,9 @@ public class ViewableEntityConverter {
 
   public List<String> convertContractTypes(List<ContractType> contractTypes) {
     return contractTypes.stream().map(ContractType::getContract).collect(Collectors.toList());
+  }
+
+  private ViewableProfile nullOrConvert(Profile profile) {
+    return profile == null ? null : convert(profile);
   }
 }

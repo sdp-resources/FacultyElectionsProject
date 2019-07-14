@@ -22,6 +22,7 @@ public class ViewSeats {
                  .map(s -> List.of(List.of("seat id",  s.id),
                                    List.of("committee name", committee.name),
                                    List.of("seat name", s.name),
-                                   List.of("seat query", s.query)));
+                                   List.of("seat query", s.query),
+                                   List.of("profile", s.profile == null ? "" : s.profile.name)));
   }
 }

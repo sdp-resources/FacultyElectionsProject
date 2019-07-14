@@ -35,7 +35,7 @@ public class AppContext {
     return new DivisionInteractor(gateway, getEntityFactory())
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
                  .append(new ProfileInteractor(gateway, getEntityFactory()))
-                 .append(new CommitteeInteractor(gateway, getEntityFactory()))
+                 .append(new CommitteeInteractor(gateway, gateway, getEntityFactory()))
                  .append(new QueryInteractor(gateway))
                  .append(new ElectionInteractor(gateway, gateway, gateway, getEntityFactory()));
   }
@@ -131,5 +131,9 @@ public class AppContext {
 
   public List<ViewableVoteRecord> getAllVotes(String electionId) {
     return getValues(requestFactory.viewAllVotes(electionId));
+  }
+
+  public boolean editSeat(String committeeName, String seatName, Map<String, String> changes) {
+    return isSuccessful(requestFactory.editSeat(committeeName, seatName, changes));
   }
 }

@@ -1,5 +1,6 @@
 package fsc.app;
 
+import fsc.request.EditSeatRequest;
 import fsc.request.*;
 
 import java.util.List;
@@ -84,5 +85,9 @@ public class RequestFactory {
 
   public Request viewAllVotes(String electionId) {
     return new ViewAllVotesRequest(electionId);
+  }
+
+  public Request editSeat(String committeeName, String seatName, Map<String, String> changes) {
+    return new EditSeatRequest(committeeName, seatName, changes);
   }
 }

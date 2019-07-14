@@ -5,6 +5,7 @@ import fsc.entity.EntityFactory;
 import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
+import fsc.gateway.ProfileGateway;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
@@ -12,38 +13,52 @@ import fsc.utils.builder.Builder;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class CommitteeFetcher {
-  CommitteeGateway gateway;
+public class CommitteeFetcher extends ProfileFetcher {
+  CommitteeGateway committeeGateway;
   private EntityFactory entityFactory;
 
-  public CommitteeFetcher(CommitteeGateway gateway, EntityFactory entityFactory) {
-    this.gateway = gateway;
+  public CommitteeFetcher(
+        CommitteeGateway committeeGateway, ProfileGateway profileGateway,
+        EntityFactory entityFactory
+  ) {
+    super(profileGateway,  entityFactory);
+    this.committeeGateway = committeeGateway;
     this.entityFactory = entityFactory;
   }
 
   public void addCommittee(Committee committee) {
-    gateway.addCommittee(committee);
+    committeeGateway.addCommittee(committee);
   }
 
-  public void save(Object o) { gateway.save(); }
+  public <T> void save(T entity) { save(); }
 
   public void save() {
-    gateway.save();
+    committeeGateway.save();
   }
 
   public boolean hasCommitteeNamed(String name) {
-    return gateway.hasCommittee(name);
+    return committeeGateway.hasCommittee(name);
   }
 
   public List<Committee> getCommittees() {
-    return gateway.getCommittees();
+    return committeeGateway.getCommittees();
   }
 
   public Builder<Committee, Response> fetchCommittee(String name) {
     try {
-      return Builder.ofValue(gateway.getCommittee(name));
+      return Builder.ofValue(committeeGateway.getCommittee(name));
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
+    }
+  }
+
+  public Builder<Seat, Response> fetchSeat(String committeeName, String seatName) {
+    try {
+      return Builder.ofValue(committeeGateway.getSeat(committeeName, seatName));
+    } catch (CommitteeGateway.UnknownCommitteeException e) {
+      return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
+    } catch (CommitteeGateway.UnknownSeatNameException e) {
+      return Builder.ofResponse(ResponseFactory.unknownSeatName());
     }
   }
 
@@ -59,5 +74,5 @@ public class CommitteeFetcher {
     return (committee, query) -> entityFactory.createSeat(seatName, query, committee);
   }
 
-  public void addSeat(Seat seat) { gateway.addSeat(seat); }
+  public void addSeat(Seat seat) { committeeGateway.addSeat(seat); }
 }

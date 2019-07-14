@@ -36,7 +36,7 @@ public class CreateSeatInteractorTest {
   @Test
   public void WhenCommitteeNameDoesNotExist_thenReturnError() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
-    interactor = new CommitteeInteractor(gateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -47,7 +47,7 @@ public class CreateSeatInteractorTest {
   public void WhenSeatNameDoesExist_thenReturnError() {
     expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CommitteeInteractor(gateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -57,7 +57,7 @@ public class CreateSeatInteractorTest {
   @Test
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CommitteeInteractor(gateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);

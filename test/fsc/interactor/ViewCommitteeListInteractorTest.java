@@ -46,8 +46,8 @@ public class ViewCommitteeListInteractorTest {
   }
 
   @Test
-  public void responseHasAllProvidedProfiles() {
-    CommitteeInteractor interactor = new CommitteeInteractor(committeeGateway,
+  public void responseHasAllProvidedCommittees() {
+    CommitteeInteractor interactor = new CommitteeInteractor(committeeGateway, null,
                                                              entityFactory);
     Response response = interactor.handle(request);
     Response expectedResponse = ResponseFactory.ofCommitteeList(committeeGateway.getCommittees());
