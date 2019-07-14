@@ -10,9 +10,9 @@ public class SimpleEntityFactory implements EntityFactory {
   public SimpleEntityFactory() {}
 
   public Election createElection(
-        Seat seat, Committee committee, Query query, Ballot ballot
+        Seat seat, Query query, Ballot ballot
   ) {
-    return new Election(seat, committee, query, ballot);
+    return new Election(seat, query, ballot);
   }
 
   public Seat createSeat(String name, Query defaultQuery, Committee committee) {

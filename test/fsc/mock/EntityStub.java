@@ -7,11 +7,11 @@ public class EntityStub {
   private static EntityFactory entityFactory = new SimpleEntityFactory();
 
   public static Election simpleBallotElection() {
-    return entityFactory.createElection(null, null, null, entityFactory.createBallot());
+    return entityFactory.createElection(null, null, entityFactory.createBallot());
   }
 
   public static Election simpleBallotElection(Ballot ballot) {
-    return entityFactory.createElection(null, null, null, ballot);
+    return entityFactory.createElection(null, null, ballot);
   }
 
   public static Profile getProfile(int i) {

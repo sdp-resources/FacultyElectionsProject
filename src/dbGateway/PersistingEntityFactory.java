@@ -17,10 +17,9 @@ public class PersistingEntityFactory implements EntityFactory {
     this.entityManager = entityManager;
   }
 
-  public Election createElection(
-        Seat seat, Committee committee, Query query,
-        Ballot ballot
-  ) {return entityFactory.createElection(seat, committee, query, ballot);}
+  public Election createElection(Seat seat, Query query, Ballot ballot) {
+    return entityFactory.createElection(seat, query, ballot);
+  }
 
   public Seat createSeat(String name, Query defaultQuery, Committee committee) {
     return entityFactory.createSeat(name, defaultQuery, committee);
@@ -55,7 +54,8 @@ public class PersistingEntityFactory implements EntityFactory {
   }
 
   public Candidate createCandidate(Profile profile, Ballot ballot) {
-    return entityFactory.createCandidate(profile, ballot); }
+    return entityFactory.createCandidate(profile, ballot);
+  }
 
   public Profile createProfile(
         String name, String username, String division, String contract

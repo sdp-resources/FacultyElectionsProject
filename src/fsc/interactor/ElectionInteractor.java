@@ -92,7 +92,7 @@ public class ElectionInteractor extends Interactor {
     Query defaultQuery = seat.getDefaultQuery();
     Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);
     // TODO: Elections should no longer need a committee
-    Election election = electionFetcher.createElection(seat.getCommittee(), seat, defaultQuery,
+    Election election = electionFetcher.createElection(seat, defaultQuery,
                                                        ballot);
     return Builder.ofValue(election);
   }

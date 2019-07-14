@@ -93,8 +93,8 @@ public class ElectionFetcher extends CommitteeFetcher {
   }
 
   public Election createElection(
-        Committee committee, Seat seat, Query defaultQuery, Ballot ballot
+        Seat seat, Query defaultQuery, Ballot ballot
   ) {
-    return entityFactory.createElection(seat, committee, defaultQuery, ballot);
+    return entityFactory.createElection(seat, defaultQuery, ballot);
   }
 }

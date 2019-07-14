@@ -8,7 +8,7 @@ public interface EntityFactory {
   Ballot createBallot();
 
   Election createElection(
-        Seat seat, Committee committee, Query query, Ballot ballot
+        Seat seat, Query query, Ballot ballot
   );
   Seat createSeat(String name, Query defaultQuery, Committee committee);
   Vote createVote(Profile... profiles);

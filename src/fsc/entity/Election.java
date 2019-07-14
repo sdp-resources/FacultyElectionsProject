@@ -7,7 +7,6 @@ import java.util.List;
 public class Election {
 
   private Ballot ballot;
-  private Committee committee;
   private Seat seat;
   private String ID;
   private Status status;
@@ -36,9 +35,8 @@ public class Election {
   //    - Admin cannot change ballot or add/remove candidates
   //    - Admin can view election results
 
-  Election(Seat seat, Committee committee, Query query, Ballot ballot) {
+  Election(Seat seat, Query query, Ballot ballot) {
     this.seat = seat;
-    this.committee = committee;
     this.defaultQuery = query;
     this.ballot = ballot;
     this.status = Status.Setup;
@@ -60,10 +58,6 @@ public class Election {
 
   public Seat getSeat() {
     return seat;
-  }
-
-  public Committee getCommittee() {
-    return committee;
   }
 
   public Ballot getBallot() {

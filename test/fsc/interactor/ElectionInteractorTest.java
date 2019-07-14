@@ -1,7 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.EntityFactory;
-import fsc.entity.SimpleEntityFactory;
+import fsc.entity.*;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
@@ -42,7 +41,7 @@ public class ElectionInteractorTest {
     assertEquals("Cool committee", committeeGateway.submittedCommitteeName);
     assertTrue(response.isSuccessful());
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
-    assertEquals(electionGateway.addedElection.getCommittee().getName(), request.committeeName);
+    assertEquals(request.committeeName, electionGateway.addedElection.getSeat().getCommittee().getName());
     assertTrue(electionGateway.hasSaved);
     assertEquals(ELECTION_ID, response.getValues());
   }
