@@ -21,7 +21,6 @@ public class QuerySimplifier implements Query.QueryVisitor<Query> {
   }
 
   public Query visit(NotQuery query) {
-    // TODO Anything?
     return query;
   }
 

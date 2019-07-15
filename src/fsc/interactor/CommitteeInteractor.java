@@ -53,8 +53,6 @@ public class CommitteeInteractor extends Interactor {
     return committeeFetcher.fetchCommittee(request.committeeName)
                            .escapeIf(c -> c.hasSeat(request.seatName),
                                      ResponseFactory.resourceExists())
-                           // TODO: Don't like how this is done
-                           // should build seat in fetcher from query+seat step
                            .bindWith(queryFetcher.createFromString(request.queryString),
                                      Builder.lift(committeeFetcher.createSeat(request.seatName)))
                            .perform(committeeFetcher::addSeat)
