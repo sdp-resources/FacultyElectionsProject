@@ -88,6 +88,20 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofVoteRecordList);
   }
 
+  public Response execute(EditElectionStateRequest request) {
+    return electionFetcher.fetchElection(request.electionID)
+                          .bindWith(electionFetcher.getStateFromString(request.state),
+                                    this::setElectionState)
+                          .perform(electionFetcher::save)
+                          .resolveWith(s -> ResponseFactory.success());
+  }
+
+  private Builder<Election, Response> setElectionState(Election election, Election.State state) {
+    election.setState(state);
+    //  TODO: Need to do various things depending on the state?
+    return Builder.ofValue(election);
+  }
+
   private Builder<Election, Response> createElection(Seat seat) {
     Query defaultQuery = seat.getDefaultQuery();
     Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);

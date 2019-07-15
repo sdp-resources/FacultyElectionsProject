@@ -35,11 +35,15 @@ public class Election {
   //    - Admin cannot change ballot or add/remove candidates
   //    - Admin can view election results
 
-  Election(Seat seat, Query query, Ballot ballot) {
+  public Election(Seat seat, Query query, Ballot ballot) {
     this.seat = seat;
     this.defaultQuery = query;
     this.ballot = ballot;
     this.state = State.Setup;
+  }
+
+  public Election() {
+
   }
 
   public String getID() {

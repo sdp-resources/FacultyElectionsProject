@@ -97,4 +97,12 @@ public class ElectionFetcher extends CommitteeFetcher {
   ) {
     return entityFactory.createElection(seat, defaultQuery, ballot);
   }
+
+  public Builder<Election.State, Response> getStateFromString(String state) {
+    try {
+      return Builder.ofValue(Election.State.valueOf(state));
+    } catch (java.lang.IllegalArgumentException e) {
+      return Builder.ofResponse(ResponseFactory.invalidElectionState());
+    }
+  }
 }

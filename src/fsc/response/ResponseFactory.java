@@ -120,4 +120,8 @@ public class ResponseFactory {
   public static Response ofContractTypes(List<ContractType> contractTypes) {
     return ofStrings(entityConverter.convertContractTypes(contractTypes));
   }
+
+  public static Response invalidElectionState() {
+    return new ErrorResponse(ErrorResponse.INVALID_ELECTION_STATE);
+  }
 }
