@@ -17,7 +17,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class ElectionInteractorTest {
+public class CreateElectionInteractionTest {
 
   public static final String ELECTION_ID = "an id";
   private CreateElectionRequest request;
@@ -33,7 +33,7 @@ public class ElectionInteractorTest {
   }
 
   @Test
-  public void testCorrectExecute() {
+  public void testCorrectElectionCreation() {
     electionGateway = new AddedElectionGatewaySpy(ELECTION_ID);
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway, entityFactory);
@@ -44,6 +44,7 @@ public class ElectionInteractorTest {
     assertEquals(request.committeeName, electionGateway.addedElection.getSeat().getCommittee().getName());
     assertTrue(electionGateway.hasSaved);
     assertEquals(ELECTION_ID, response.getValues());
+    assertEquals(Election.State.Setup, electionGateway.addedElection.getState());
   }
 
   @Test

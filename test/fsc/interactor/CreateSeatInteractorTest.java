@@ -12,8 +12,7 @@ import fsc.service.query.QueryStringParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class CreateSeatInteractorTest {
   public static final String COMMITTEE_NAME = "a committee";
@@ -52,6 +51,17 @@ public class CreateSeatInteractorTest {
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertEquals(ResponseFactory.resourceExists(), response);
+  }
+
+  @Test
+  public void WhenQueryStringIsInvalid_thenReturnError() {
+    request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, "anInvalid query string");
+    ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory);
+    Response response = interactor.execute(request);
+    System.out.println(response);
+    assertFalse(response.isSuccessful());
+    assertFalse(gateway.saveWasCalled);
   }
 
   @Test

@@ -14,7 +14,6 @@ public class QueryFetcher {
     try {
       return Builder.ofValue(new QueryStringConverter().fromString(queryString));
     } catch (QueryStringParser.QueryParseException e) {
-      // TODO Check for this
       return Builder.ofResponse(ResponseFactory.invalidQuery(e.getMessage()));
     }
   }
