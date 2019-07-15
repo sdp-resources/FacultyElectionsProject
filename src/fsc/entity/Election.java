@@ -9,7 +9,7 @@ public class Election {
   private Ballot ballot;
   private Seat seat;
   private String ID;
-  private Status status;
+  private State state;
   private Query defaultQuery;
 
   // TODO: Election states
@@ -39,7 +39,7 @@ public class Election {
     this.seat = seat;
     this.defaultQuery = query;
     this.ballot = ballot;
-    this.status = Status.Setup;
+    this.state = State.Setup;
   }
 
   public String getID() {
@@ -48,12 +48,12 @@ public class Election {
 
   public void setID(String ID) {this.ID = ID;}
 
-  public Status getStatus() {
-    return status;
+  public State getState() {
+    return state;
   }
 
-  public void setStatus(Status status) {
-    this.status = status;
+  public void setState(State state) {
+    this.state = state;
   }
 
   public Seat getSeat() {
@@ -89,7 +89,7 @@ public class Election {
     return ballot.getCandidateProfiles();
   }
 
-  public enum Status {
+  public enum State {
     Setup, DecideToStand, Vote, Closed
   }
 }
