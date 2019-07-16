@@ -32,7 +32,7 @@ public class ViewElectionRequestTest {
   @Before
   public void setUp() {
     profiles = new Profile[]{ EntityStub.getProfile(1), EntityStub.getProfile(2) };
-    committee = entityFactory.createCommittee("a committee", "a description");
+    committee = entityFactory.createCommittee("a committee", "a description", null);
     Seat seat = entityFactory.createSeat("a seat", Query.always(), committee);
     seat.setId(SEAT_ID);
     Ballot ballot = entityFactory.createBallot();

@@ -70,7 +70,7 @@ public class SerializerTest {
     String name = "Steering";
     String description = "Drives the car";
 
-    Committee committee = entityFactory.createCommittee(name, description);
+    Committee committee = entityFactory.createCommittee(name, description, null);
     String serializedCommittee = serializer.committeeToString(committee);
     String expectedString = "{\"name\":\"" + name + "\"," + "\"description\":\"" + description + "\"}";
 
@@ -95,7 +95,7 @@ public class SerializerTest {
     String name = "Steering";
     String description = "Drives the car";
 
-    Committee originalCommittee = entityFactory.createCommittee(name, description);
+    Committee originalCommittee = entityFactory.createCommittee(name, description, null);
 
     Committee generatedCommittee = serializer.stringToCommittee(
           serializer.committeeToString(originalCommittee));

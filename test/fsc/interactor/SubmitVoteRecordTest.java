@@ -92,7 +92,7 @@ public class SubmitVoteRecordTest {
     assertEquals(ResponseFactory.success(), response);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
     assertNotNull(submittedVoteRecord);
-    assertEquals(voter, submittedVoteRecord.getVoter());
+    // TODO: Need to assert voter has voted, but for that we need a voter
     assertCloseDates(LocalDateTime.now(), submittedVoteRecord.getDate());
     assertEquals(List.of(candidate), submittedVoteRecord.getVotes());
     assertEquals(election, submittedVoteRecord.getElection());

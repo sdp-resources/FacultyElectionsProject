@@ -10,7 +10,7 @@ public class Election {
   private Seat seat;
   private String ID;
   private State state;
-  private Query defaultQuery;
+  private Query candidateQuery;
 
   // TODO: Add Voter relationship
   // TODO: Add Votes relationship
@@ -38,9 +38,9 @@ public class Election {
   //    - Admin cannot change ballot or add/remove candidates
   //    - Admin can view election results
 
-  public Election(Seat seat, Query query, Ballot ballot) {
+  public Election(Seat seat, Query candidateQuery, Ballot ballot) {
     this.seat = seat;
-    this.defaultQuery = query;
+    this.candidateQuery = candidateQuery;
     this.ballot = ballot;
     this.state = State.Setup;
   }
@@ -75,12 +75,12 @@ public class Election {
     this.ballot = ballot;
   }
 
-  public void setDefaultQuery(Query defaultQuery) {
-    this.defaultQuery = defaultQuery;
+  public void setCandidateQuery(Query candidateQuery) {
+    this.candidateQuery = candidateQuery;
   }
 
-  public Query getDefaultQuery() {
-    return defaultQuery;
+  public Query getCandidateQuery() {
+    return candidateQuery;
   }
 
   public Candidate getCandidateByUsername(String username)

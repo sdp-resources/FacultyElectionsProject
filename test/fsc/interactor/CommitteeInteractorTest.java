@@ -23,7 +23,7 @@ public class CommitteeInteractorTest {
   @Before
   public void setup() {
     request = new CreateCommitteeRequest(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
-    expectedCommittee = entityFactory.createCommittee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
+    expectedCommittee = entityFactory.createCommittee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION, null);
   }
 
   @Test

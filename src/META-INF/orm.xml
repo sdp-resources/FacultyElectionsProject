@@ -3,6 +3,7 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
         http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+    <converter class="dbGateway.converter.QueryDbConverter" auto-apply="true"/>
     <entity class="fsc.entity.Profile" name="Profile" access="FIELD">
         <table name="profiles"/>
         <attributes>
@@ -28,9 +29,7 @@
         <table name="named_queries"/>
         <attributes>
             <id name="name"/>
-            <basic name="query">
-                <convert converter="dbGateway.converter.QueryDbConverter"/>
-            </basic>
+            <basic name="query"/>
         </attributes>
     </entity>
     <entity class="fsc.entity.Committee" name="Committee" access="FIELD">
@@ -38,6 +37,7 @@
         <attributes>
             <id name="name"/>
             <basic name="description"/>
+            <basic name="voterQuery"/>
             <one-to-many name="seats" target-entity="fsc.entity.Seat" mapped-by="committee">
                 <cascade />
             </one-to-many>
@@ -50,9 +50,7 @@
                 <generated-value/>
             </id>
             <basic name="name"/>
-            <basic name="defaultQuery">
-                <convert converter="dbGateway.converter.QueryDbConverter"/>
-            </basic>
+            <basic name="candidateQuery"/>
             <many-to-one name="committee">
                 <join-column name="committee_id" nullable="false"/>
             </many-to-one>

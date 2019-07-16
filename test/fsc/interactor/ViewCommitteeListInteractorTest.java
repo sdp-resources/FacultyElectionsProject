@@ -23,7 +23,7 @@ public class ViewCommitteeListInteractorTest {
   @Before
   public void setup() {
     request = new ViewCommitteeListRequest();
-    fec = entityFactory.createCommittee("FEC", "Faculty Evaluation Committee");
+    fec = entityFactory.createCommittee("FEC", "Faculty Evaluation Committee", null);
     committeeList = List.of(fec);
     committeeGateway = new CommitteeGateway() {
       public List<Committee> getCommittees() { return committeeList; }

@@ -29,7 +29,7 @@ public class CreateSeatInteractorTest {
   public void setup() throws QueryStringParser.QueryParseException {
     request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, QUERY_STRING);
     query = new QueryStringConverter().fromString(QUERY_STRING);
-    committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
+    committee = entityFactory.createCommittee(COMMITTEE_NAME, "", null);
   }
 
   @Test

@@ -8,6 +8,7 @@ public class VoteRecord {
   private final List<Profile> votes;
   private final LocalDateTime date;
   private Voter voter;
+  private Long recordId;
 
   VoteRecord(Voter voter, List<Profile> votes) {
     this(voter, LocalDateTime.now(), votes);
@@ -19,8 +20,12 @@ public class VoteRecord {
     this.date = date;
   }
 
-  public Profile getVoter() {
-    return voter.getVoter();
+  public Long getRecordId() {
+    return recordId;
+  }
+
+  public void setRecordId(Long recordId) {
+    this.recordId = recordId;
   }
 
   public List<Profile> getVotes() {
@@ -49,4 +54,5 @@ public class VoteRecord {
   public String toString() {
     return "VoteRecord{" + voter.getVoter().getUsername() + ", " + votes + '}';
   }
+
 }

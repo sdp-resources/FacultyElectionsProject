@@ -108,7 +108,7 @@ public class ElectionInteractor extends Interactor {
   }
 
   private Builder<Election, Response> createElection(Seat seat) {
-    Query defaultQuery = seat.getDefaultQuery();
+    Query defaultQuery = seat.getCandidateQuery();
     Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);
     Election election = electionFetcher.createElection(seat, defaultQuery, ballot);
     return Builder.ofValue(election);
@@ -116,8 +116,8 @@ public class ElectionInteractor extends Interactor {
 
   private Consumer<Election> setupBallotFromQuery(Query query) {
     return election -> {
-      election.setDefaultQuery(query);
-      Ballot ballot = ballotCreator.getBallotFromQuery(election.getDefaultQuery());
+      election.setCandidateQuery(query);
+      Ballot ballot = ballotCreator.getBallotFromQuery(election.getCandidateQuery());
       election.setBallot(ballot);
     };
   }

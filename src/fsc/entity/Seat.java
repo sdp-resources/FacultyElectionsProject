@@ -8,15 +8,15 @@ import java.util.Objects;
 public class Seat {
   private Long id;
   private Profile profile;
-  private Query defaultQuery;
+  private Query candidateQuery;
   private Committee committee;
   private String name;
 
   public Seat() {}
 
-  public Seat(String name, Query defaultQuery, Committee committee) {
+  public Seat(String name, Query candidateQuery, Committee committee) {
     this.name = name;
-    this.defaultQuery = defaultQuery;
+    this.candidateQuery = candidateQuery;
     this.setCommittee(committee);
   }
 
@@ -44,12 +44,12 @@ public class Seat {
     return profile;
   }
 
-  public void setDefaultQuery(Query defaultQuery) {
-    this.defaultQuery = defaultQuery;
+  public void setCandidateQuery(Query candidateQuery) {
+    this.candidateQuery = candidateQuery;
   }
 
-  public Query getDefaultQuery() {
-    return defaultQuery;
+  public Query getCandidateQuery() {
+    return candidateQuery;
   }
 
   public Committee getCommittee() {
@@ -81,7 +81,7 @@ public class Seat {
         setName((String) o);
         break;
       case EditSeatRequest.EDIT_SEAT_QUERY:
-        setDefaultQuery((Query) o);
+        setCandidateQuery((Query) o);
         break;
     }
   }

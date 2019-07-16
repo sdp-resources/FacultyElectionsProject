@@ -1,5 +1,6 @@
 package fsc.entity;
 
+import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 
 import java.util.*;
@@ -7,14 +8,16 @@ import java.util.*;
 public class Committee {
   private String name;
   private String description;
+  private Query voterQuery;
 
   private Set<Seat> seats = new HashSet<>();
 
   public Committee() {}
 
-  protected Committee(String name, String description) {
+  protected Committee(String name, String description, Query voterQuery) {
     this.name = name;
     this.description = description;
+    this.voterQuery = voterQuery;
   }
 
   public Set<Seat> getSeats() {
@@ -69,6 +72,7 @@ public class Committee {
     Committee committee = (Committee) o;
     return Objects.equals(name, committee.name) &&
                  Objects.equals(description, committee.description) &&
+                 Objects.equals(voterQuery, committee.voterQuery) &&
                  seats.equals(committee.seats);
   }
 
@@ -87,4 +91,11 @@ public class Committee {
     }
   }
 
+  public Query getVoterQuery() {
+    return voterQuery;
+  }
+
+  public void setVoterQuery(Query voterQuery) {
+    this.voterQuery = voterQuery;
+  }
 }

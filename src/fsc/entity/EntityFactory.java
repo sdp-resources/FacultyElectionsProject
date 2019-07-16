@@ -18,7 +18,7 @@ public interface EntityFactory {
   VoteRecord createVoteRecord(Voter voter, List<Profile> votes);
   Division createDivision(String newDivisionName);
   ContractType createContractType(String contractType);
-  Committee createCommittee(String name, String description);
+  Committee createCommittee(String name, String description, Query voterQuery);
   Candidate createCandidate(Profile profile, Ballot ballot);
   Profile createProfile(
         String name, String username, String division, String contract

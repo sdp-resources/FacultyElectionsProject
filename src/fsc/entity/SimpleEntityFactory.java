@@ -10,9 +10,9 @@ public class SimpleEntityFactory implements EntityFactory {
   public SimpleEntityFactory() {}
 
   public Election createElection(
-        Seat seat, Query query, Ballot ballot
+        Seat seat, Query candidatesQuery, Ballot ballot
   ) {
-    return new Election(seat, query, ballot);
+    return new Election(seat, candidatesQuery, ballot);
   }
 
   public Seat createSeat(String name, Query defaultQuery, Committee committee) {
@@ -48,8 +48,10 @@ public class SimpleEntityFactory implements EntityFactory {
     return new ContractType(contractType);
   }
 
-  public Committee createCommittee(String name, String description) {
-    return new Committee(name, description);
+  public Committee createCommittee(
+        String name, String description, Query voterQuery
+  ) {
+    return new Committee(name, description, voterQuery);
   }
 
   public Candidate createCandidate(Profile profile, Ballot ballot) {

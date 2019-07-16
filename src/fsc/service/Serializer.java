@@ -46,7 +46,7 @@ class Serializer {
     JSONObject jsonObject = new JSONObject(string);
     String name = toString(jsonObject, "name");
     String description = toString(jsonObject, "description");
-    return entityFactory.createCommittee(name, description);
+    return entityFactory.createCommittee(name, description, null);
   }
 
 }

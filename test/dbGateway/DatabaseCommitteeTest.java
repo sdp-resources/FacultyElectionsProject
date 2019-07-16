@@ -56,19 +56,19 @@ public class DatabaseCommitteeTest extends BasicDatabaseTest {
     saveCommitteeAndSeat();
     gateway.begin();
     seat.setName(newName);
-    seat.setDefaultQuery(Query.never());
+    seat.setCandidateQuery(Query.never());
     Profile aProfile = gateway.getProfile(profile.getUsername());
     seat.setProfile(aProfile);
     gateway.commit();
     assertEquals(profile, aProfile);
     assertEquals(seat, anotherGateway.getSeat(COMMITTEE_NAME, newName));
-    assertEquals(Query.never(), anotherGateway.getSeat(COMMITTEE_NAME, newName).getDefaultQuery());
+    assertEquals(Query.never(), anotherGateway.getSeat(COMMITTEE_NAME, newName).getCandidateQuery());
     assertEquals(profile, anotherGateway.getSeat(COMMITTEE_NAME, newName).getProfile());
   }
 
   private void saveCommitteeAndSeat() {
     committee = gateway.getEntityFactory()
-                       .createCommittee(COMMITTEE_NAME, "Faculty Evaluation");
+                       .createCommittee(COMMITTEE_NAME, "Faculty Evaluation", Query.always());
     seat = gateway.getEntityFactory().createSeat(SEAT_NAME, Query.always(), committee);
     profile = gateway.getEntityFactory().createProfile("name", "username", "", "");
     gateway.addProfile(profile);
@@ -79,7 +79,7 @@ public class DatabaseCommitteeTest extends BasicDatabaseTest {
 
   private void saveTheCommittee() {
     committee = gateway.getEntityFactory()
-                       .createCommittee(COMMITTEE_NAME, "Faculty Evaluation");
+                       .createCommittee(COMMITTEE_NAME, "Faculty Evaluation", Query.always());
     gateway.addCommittee(committee);
     gateway.commit();
   }

@@ -19,7 +19,7 @@ public class CommitteeAndSeatsTest {
 
   @Before
   public void setup() {
-    committee = entityFactory.createCommittee("cccc", "xxxx");
+    committee = entityFactory.createCommittee("cccc", "xxxx", null);
     seats = new ArrayList<>();
   }
 
@@ -64,8 +64,8 @@ public class CommitteeAndSeatsTest {
   public void setDefaultQueryOnSeat() {
     seat = entityFactory.createSeat("a", Query.always(), committee);
     Query query = Query.always();
-    seat.setDefaultQuery(query);
+    seat.setCandidateQuery(query);
 
-    assertThat(seat.getDefaultQuery(), is(query));
+    assertThat(seat.getCandidateQuery(), is(query));
   }
 }

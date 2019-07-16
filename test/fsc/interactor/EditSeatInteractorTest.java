@@ -37,7 +37,7 @@ public class EditSeatInteractorTest {
     changes = new HashMap<>();
     request = new EditSeatRequest(COMMITTEE_NAME, SEAT_NAME, changes);
     query = new QueryStringConverter().fromString(QUERY_STRING);
-    committee = entityFactory.createCommittee(COMMITTEE_NAME, "");
+    committee = entityFactory.createCommittee(COMMITTEE_NAME, "", null);
   }
 
   @Test
@@ -75,7 +75,7 @@ public class EditSeatInteractorTest {
     assertEquals(ResponseFactory.success(), response);
     assertTrue(gateway.saveWasCalled);
     assertEquals(newName, expectedSeat.getName());
-    assertEquals(query, expectedSeat.getDefaultQuery());
+    assertEquals(query, expectedSeat.getCandidateQuery());
   }
 
   @Test

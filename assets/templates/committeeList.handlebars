@@ -12,7 +12,7 @@
             <ul>
               {{#each seats}}
                 <li class="seat" data-name="{{name}}">
-                  {{name}} : {{defaultQuery.formattedString}}
+                  {{name}} : {{candidateQuery.formattedString}}
                   <form method="post" action="/election">
                     <input type="hidden" name="committee" value="FSC">
                     <input type="hidden" name="seat" value="TenuredMember">

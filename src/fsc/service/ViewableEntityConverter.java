@@ -28,7 +28,7 @@ public class ViewableEntityConverter {
   private ViewableSeat convert(Seat seat) {
     return new ViewableSeat(Long.toString(seat.getId()),
                             seat.getName(),
-                            new QueryStringConverter().toString(seat.getDefaultQuery()),
+                            new QueryStringConverter().toString(seat.getCandidateQuery()),
                             nullOrConvert(seat.getProfile()));
   }
 
@@ -57,7 +57,7 @@ public class ViewableEntityConverter {
     return new ViewableElection(election.getID(),
                                 election.getState().toString(),
                                 convert(election.getSeat()),
-                                convert(election.getDefaultQuery()),
+                                convert(election.getCandidateQuery()),
                                 convertBallot(election.getBallot()));
   }
 

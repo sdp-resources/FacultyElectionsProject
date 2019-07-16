@@ -41,7 +41,7 @@ class JSONElectionDataReader implements ElectionDataReader {
     JSONObject json = (JSONObject) o;
     String name = json.getString("name");
     String description = json.getString("description");
-    Committee committee = entityFactory.createCommittee(name, description);
+    Committee committee = entityFactory.createCommittee(name, description, null);
     for (Object s : json.getJSONArray("seats")) {
       makeSeat(s, committee);
     }

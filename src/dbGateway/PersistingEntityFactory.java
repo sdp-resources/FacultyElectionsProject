@@ -49,8 +49,10 @@ public class PersistingEntityFactory implements EntityFactory {
     return entityFactory.createContractType(contractType);
   }
 
-  public Committee createCommittee(String name, String description) {
-    return entityFactory.createCommittee(name, description);
+  public Committee createCommittee(
+        String name, String description, Query voterQuery
+  ) {
+    return entityFactory.createCommittee(name, description, voterQuery);
   }
 
   public Candidate createCandidate(Profile profile, Ballot ballot) {

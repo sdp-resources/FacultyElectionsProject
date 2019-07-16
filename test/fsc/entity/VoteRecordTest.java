@@ -30,7 +30,6 @@ public class VoteRecordTest {
 
   @Test
   public void voteRecordCreatedProperly() {
-    assertEquals(voter, voteRecord.getVoter());
     assertEquals(votes, voteRecord.getVotes());
     assertCloseDates(LocalDateTime.now(), voteRecord.getDate());
     assertEquals(election, voteRecord.getElection());
