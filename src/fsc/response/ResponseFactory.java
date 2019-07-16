@@ -124,4 +124,8 @@ public class ResponseFactory {
   public static Response invalidElectionState() {
     return new ErrorResponse(ErrorResponse.INVALID_ELECTION_STATE);
   }
+
+  public static Response ofElection(Election election) {
+    return new ViewResponse<>(entityConverter.convert(election));
+  }
 }

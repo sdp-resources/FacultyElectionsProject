@@ -96,6 +96,11 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(s -> ResponseFactory.success());
   }
 
+  public Response execute(ViewElectionRequest request) {
+    return electionFetcher.fetchElection(request.electionID)
+                          .resolveWith(ResponseFactory::ofElection);
+  }
+
   private Builder<Election, Response> setElectionState(Election election, Election.State state) {
     election.setState(state);
     //  TODO: Need to do various things depending on the state?

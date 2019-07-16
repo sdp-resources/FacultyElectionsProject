@@ -25,19 +25,11 @@ public class ViewableEntityConverter {
                                  convertSeats(committee.getSeats()));
   }
 
-  private List<ViewableSeat> convertSeats(Set<Seat> seats) {
-    return seats.stream().map(this::convert).collect(Collectors.toList());
-  }
-
   private ViewableSeat convert(Seat seat) {
     return new ViewableSeat(Long.toString(seat.getId()),
                             seat.getName(),
                             new QueryStringConverter().toString(seat.getDefaultQuery()),
                             nullOrConvert(seat.getProfile()));
-  }
-
-  public List<ViewableProfile> convertProfiles(List<Profile> profiles) {
-    return profiles.stream().map(this::convert).collect(Collectors.toList());
   }
 
   public ViewableCandidate convert(Candidate candidate) {
@@ -56,6 +48,27 @@ public class ViewableEntityConverter {
           convertProfiles(voteRecord.getVotes()));
   }
 
+  private String convert(Query query) {
+    return queryStringConverter.toString(query);
+  }
+
+  public ViewableElection convert(Election election) {
+    // TODO  Fill in Votes and Voters once they are added
+    return new ViewableElection(election.getID(),
+                                election.getState().toString(),
+                                convert(election.getSeat()),
+                                convert(election.getDefaultQuery()),
+                                convertBallot(election.getBallot()));
+  }
+
+  public List<ViewableProfile> convertProfiles(List<Profile> profiles) {
+    return profiles.stream().map(this::convert).collect(Collectors.toList());
+  }
+
+  private List<ViewableSeat> convertSeats(Set<Seat> seats) {
+    return seats.stream().map(this::convert).collect(Collectors.toList());
+  }
+
   public List<ViewableCommittee> convertCommittees(List<Committee> committees) {
     return committees.stream().map(this::convert).collect(Collectors.toList());
   }
@@ -66,12 +79,8 @@ public class ViewableEntityConverter {
 
   public Map<String, String> convertQueries(Map<String, Query> queries) {
     HashMap<String, String> returnedQueries = new HashMap<>();
-    queries.forEach((k, q) -> returnedQueries.put(k, convertQuery(q)));
+    queries.forEach((k, q) -> returnedQueries.put(k, convert(q)));
     return returnedQueries;
-  }
-
-  private String convertQuery(Query query) {
-    return queryStringConverter.toString(query);
   }
 
   public List<String> convertDivisions(List<Division> divisions) {
@@ -80,6 +89,10 @@ public class ViewableEntityConverter {
 
   public List<String> convertContractTypes(List<ContractType> contractTypes) {
     return contractTypes.stream().map(ContractType::getContract).collect(Collectors.toList());
+  }
+
+  private List<ViewableCandidate> convertBallot(Ballot ballot) {
+    return ballot.stream().map(this::convert).collect(Collectors.toList());
   }
 
   private ViewableProfile nullOrConvert(Profile profile) {

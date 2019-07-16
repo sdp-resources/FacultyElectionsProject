@@ -12,6 +12,9 @@ public class Election {
   private State state;
   private Query defaultQuery;
 
+  // TODO: Add Voter relationship
+  // TODO: Add Votes relationship
+
   // TODO: Election states
   // 0. Election state can be changed with ChangeElectionStateRequest
   // 1. Setup:
