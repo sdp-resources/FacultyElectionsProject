@@ -50,11 +50,12 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
-  public Voter getVoter(Profile profile, Election election) throws InvalidVoterException {
-    Voter voter = election.getVoter(profile);
-    if (voter == null) {
-      throw new InvalidVoterException();
+  public Voter getVoter(long voterId) throws InvalidVoterException {
+    for (Voter voter : storedElection.getVoters()) {
+      if (voter.getVoterId() == voterId) {
+        return voter;
+      }
     }
-    return voter;
+    throw new InvalidVoterException();
   }
 }

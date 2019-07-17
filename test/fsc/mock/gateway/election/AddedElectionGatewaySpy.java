@@ -43,7 +43,7 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
-  public Voter getVoter(Profile profile, Election election) {
+  public Voter getVoter(long voterId) {
     return null;
   }
 

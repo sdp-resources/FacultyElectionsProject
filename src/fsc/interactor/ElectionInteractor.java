@@ -66,7 +66,7 @@ public class ElectionInteractor extends Interactor {
   }
 
   public Response execute(SubmitVoteRecordRequest request) {
-    return electionFetcher.fetchVoterOnlyIfNoRecord(request.username, request.electionID)
+    return electionFetcher.fetchVoterOnlyIfNoRecord(request.voterId)
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
                                     Builder.lift(electionFetcher::createVoteRecordPair))
                           .escapeIf(p -> p.voteRecord.someProfilesAreNotCandidates(),

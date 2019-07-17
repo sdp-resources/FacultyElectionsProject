@@ -75,8 +75,8 @@ public class RequestFactory {
     return new AddToBallotRequest(electionId, name);
   }
 
-  public Request submitVote(String voterName, String electionID, List<String> vote) {
-    return new SubmitVoteRecordRequest(voterName, vote, electionID);
+  public Request submitVote(long voterId, List<String> vote) {
+    return new SubmitVoteRecordRequest(voterId, vote);
   }
 
   public Request viewVoteRecord(long recordId, String electionId) {

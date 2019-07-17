@@ -4,7 +4,6 @@ import fsc.entity.*;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
-import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.SubmitVoteRecordRequest;
@@ -23,6 +22,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class SubmitVoteRecordTest {
   private static final String ELECTION_ID = "1";
+  public static final int VOTER_ID = 3;
   private List<String> vote;
   private SubmitVoteRecordRequest request;
   private ProvidedElectionGatewaySpy electionGateway;
@@ -40,27 +40,22 @@ public class SubmitVoteRecordTest {
     election.setID(ELECTION_ID);
     profile = EntityStub.getProfile(0);
     voter = new Voter(profile, election);
+    voter.setVoterId(VOTER_ID);
     election.addVoter(voter);
     candidate = EntityStub.getProfile(1);
     vote = List.of(candidate.getUsername());
-    request = new SubmitVoteRecordRequest(profile.getUsername(), vote, ELECTION_ID);
+    request = new SubmitVoteRecordRequest(VOTER_ID, vote);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(candidate, profile);
     interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
   }
 
   @Test
-  public void whenGivenAnInvalidProfile_returnErrorResponse() {
+  public void whenGivenAnInvalidVoter_returnErrorResponse() {
+    election.removeVoter(voter);
     interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy(), entityFactory);
     Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.unknownProfileName(), response);
-  }
-
-  @Test
-  public void whenGivenAnInvalidElectionId_returnErrorResponse() {
-    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, profileGateway, entityFactory);
-    Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.unknownElectionID(), response);
+    assertEquals(ResponseFactory.invalidVoter(), response);
   }
 
   @Test
@@ -76,7 +71,7 @@ public class SubmitVoteRecordTest {
     election.getBallot().add(entityFactory.createCandidate(candidate, election.getBallot()));
     election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
     vote = List.of(candidate.getUsername(), profile.getUsername(), candidate.getUsername());
-    request = new SubmitVoteRecordRequest(profile.getUsername(), vote, ELECTION_ID);
+    request = new SubmitVoteRecordRequest(VOTER_ID, vote);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
     assertEquals(false, voter.hasVoted());

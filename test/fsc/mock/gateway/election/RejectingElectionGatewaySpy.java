@@ -32,7 +32,7 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
-  public Voter getVoter(Profile profile, Election election) {
+  public Voter getVoter(long voterId) throws InvalidVoterException {
     return null;
   }
 

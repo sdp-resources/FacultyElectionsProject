@@ -132,8 +132,8 @@ public class DatabaseBackedGateway implements Gateway {
     return null;
   }
 
-  public Voter getVoter(Profile profile, Election election)
-        throws InvalidVoterException {
+  public Voter getVoter(long voterId) throws InvalidVoterException {
+    // TODO
     return null;
   }
 

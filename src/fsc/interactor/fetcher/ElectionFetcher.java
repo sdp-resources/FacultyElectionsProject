@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ElectionFetcher extends CommitteeFetcher {
   private ElectionGateway electionGateway;
-  private CommitteeGateway committeeGateway;
   private EntityFactory entityFactory;
 
   public ElectionFetcher(
@@ -23,7 +22,6 @@ public class ElectionFetcher extends CommitteeFetcher {
   ) {
     super(committeeGateway, profileGateway, entityFactory);
     this.electionGateway = electionGateway;
-    this.committeeGateway = committeeGateway;
     this.entityFactory = entityFactory;
   }
 
@@ -43,28 +41,17 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
-  public Builder<Voter, Response> fetchVoter(String username, String electionId) {
-    return fetchProfile(username)
-                 .bindWith(fetchElection(electionId),
-                           this::fetchVoterFromProfileAndElection);
-
-  }
-
-  private Builder<Voter, Response> fetchVoterFromProfileAndElection(
-        Profile profile,
-        Election election
-  ) {
+  public Builder<Voter, Response> fetchVoter(long voterId) {
     try {
-      return Builder.ofValue(electionGateway.getVoter(profile, election));
+      return Builder.ofValue(electionGateway.getVoter(voterId));
     } catch (ElectionGateway.InvalidVoterException e) {
       return Builder.ofResponse(ResponseFactory.invalidVoter());
     }
   }
 
-  public Builder<Voter, Response> fetchVoterOnlyIfNoRecord(String username, String electionID) {
-    return fetchVoter(username, electionID)
-                 .escapeIf(Voter::hasVoted,
-                           ResponseFactory.alreadyVoted());
+  public Builder<Voter, Response> fetchVoterOnlyIfNoRecord(long voterId) {
+    return fetchVoter(voterId).escapeIf(Voter::hasVoted,
+                                        ResponseFactory.alreadyVoted());
   }
 
   public Builder<Election, Response> removeProfile(Election election, Profile profile) {

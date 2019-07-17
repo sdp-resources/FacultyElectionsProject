@@ -13,7 +13,7 @@ public interface ElectionGateway {
   Election getElection(String electionID) throws InvalidElectionIDException;
   List<VoteRecord> getAllVotes(Election election);
   Collection<Election> getAllElections();
-  Voter getVoter(Profile profile, Election election) throws InvalidVoterException;
+  Voter getVoter(long voterId) throws InvalidVoterException;
   class InvalidElectionIDException extends Exception {
     public InvalidElectionIDException() {}
   }

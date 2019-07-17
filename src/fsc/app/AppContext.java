@@ -121,8 +121,8 @@ public class AppContext {
     return isSuccessful(requestFactory.addCandidate(electionId, name));
   }
 
-  public boolean submitVote(String voterName, String electionID, List<String> vote) {
-    return isSuccessful(requestFactory.submitVote(voterName, electionID, vote));
+  public boolean submitVote(long voterId, List<String> vote) {
+    return isSuccessful(requestFactory.submitVote(voterId, vote));
   }
 
   public ViewableVoteRecord getVoteRecord(long recordId, String electionId) {

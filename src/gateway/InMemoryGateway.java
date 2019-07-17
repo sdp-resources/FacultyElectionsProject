@@ -218,9 +218,9 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(elections);
   }
 
-  public Voter getVoter(Profile profile, Election election) throws InvalidVoterException {
+  public Voter getVoter(long voterId) throws InvalidVoterException {
     for (Voter voter : voters) {
-      if (voter.getProfile().equals(profile) && voter.getElection().equals(election)) {
+      if (voter.getVoterId() == voterId) {
         return voter;
       }
     }

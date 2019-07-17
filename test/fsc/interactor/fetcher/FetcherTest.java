@@ -68,23 +68,22 @@ public class FetcherTest {
     electionGateway = new RejectingElectionGatewaySpy();
     electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, null);
     Response response = electionFetcher.fetchElection(election.getID())
-                                       .resolveWith(election1 -> {
-                                         fail();
-                                         return null;
-                                       });
+                                       .resolveWith(election1 -> failTest());
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
-  public void whenGivenInvalidProfileId_voterFetcherReturnsError() {
+  public void whenGivenInvalidVoterId_voterFetcherReturnsError() {
     profileGateway = new InvalidProfileGatewaySpy();
     electionGateway = new ProvidedElectionGatewaySpy(election);
     electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, new SimpleEntityFactory());
-    Response response = electionFetcher.fetchVoter("something else", election.getID())
-                                      .resolveWith(voter -> {
-                                        fail();
-                                        return null;
-                                      });;
-    assertEquals(ResponseFactory.unknownProfileName(), response);
+    Response response = electionFetcher.fetchVoter(5)
+                                      .resolveWith(voter -> failTest());
+    assertEquals(ResponseFactory.invalidVoter(), response);
+  }
+
+  public Response failTest() {
+    fail();
+    return null;
   }
 }

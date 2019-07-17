@@ -3,13 +3,11 @@ package fsc.request;
 import java.util.List;
 
 public class SubmitVoteRecordRequest extends Request {
-  public final String username;
+  public final long voterId;
   public final List<String> vote;
-  public final String electionID;
 
-  public SubmitVoteRecordRequest(String username, List<String> vote, String electionID) {
-    this.username = username;
+  public SubmitVoteRecordRequest(long voterId, List<String> vote) {
+    this.voterId = voterId;
     this.vote = vote;
-    this.electionID = electionID;
   }
 }
