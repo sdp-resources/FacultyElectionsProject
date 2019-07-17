@@ -22,27 +22,30 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class SubmitVoteRecordTest {
-  public static final String ELECTION_ID = "1";
+  private static final String ELECTION_ID = "1";
   private List<String> vote;
   private SubmitVoteRecordRequest request;
   private ProvidedElectionGatewaySpy electionGateway;
-  private Profile voter;
+  private Profile profile;
   private ProfileGateway profileGateway;
   private Election election;
   private Profile candidate;
   private ElectionInteractor interactor;
   private EntityFactory entityFactory = new SimpleEntityFactory();
+  private Voter voter;
 
   @Before
   public void setup() {
     election = EntityStub.simpleBallotElection();
     election.setID(ELECTION_ID);
-    voter = EntityStub.getProfile(0);
+    profile = EntityStub.getProfile(0);
+    voter = new Voter(profile, election);
+    election.addVoter(voter);
     candidate = EntityStub.getProfile(1);
     vote = List.of(candidate.getUsername());
-    request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
+    request = new SubmitVoteRecordRequest(profile.getUsername(), vote, ELECTION_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
-    profileGateway = new ProfileGatewayStub(candidate, voter);
+    profileGateway = new ProfileGatewayStub(candidate, profile);
     interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
   }
 
@@ -62,19 +65,21 @@ public class SubmitVoteRecordTest {
 
   @Test
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
-    election.getBallot().add(entityFactory.createCandidate(voter, election.getBallot()));
+    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.invalidCandidate(), response);
+    assertEquals(false, voter.hasVoted());
   }
 
   @Test
   public void whenGivenMultipleVotesForCandidate_returnErrorResponse() {
     election.getBallot().add(entityFactory.createCandidate(candidate, election.getBallot()));
-    election.getBallot().add(entityFactory.createCandidate(voter, election.getBallot()));
-    vote = List.of(candidate.getUsername(), voter.getUsername(), candidate.getUsername());
-    request = new SubmitVoteRecordRequest(voter.getUsername(), vote, ELECTION_ID);
+    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
+    vote = List.of(candidate.getUsername(), profile.getUsername(), candidate.getUsername());
+    request = new SubmitVoteRecordRequest(profile.getUsername(), vote, ELECTION_ID);
     Response response = interactor.execute(request);
     assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
+    assertEquals(false, voter.hasVoted());
   }
 
   @Test
@@ -86,17 +91,26 @@ public class SubmitVoteRecordTest {
   }
 
   @Test
+  public void whenGivenAVoterProfileNotInVotesList_preventThemFromVoting() {
+    election.removeVoter(voter);
+    Response response = interactor.execute(request);
+    assertEquals(ResponseFactory.invalidVoter(), response);
+    assertEquals(false, electionGateway.hasSaved);
+  }
+
+  @Test
   public void whenGivenCorrectInformation_saveRecord() {
     election.getBallot().add(entityFactory.createCandidate(candidate, election.getBallot()));
     Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.success(), response);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
     assertNotNull(submittedVoteRecord);
-    // TODO: Need to assert voter has voted, but for that we need a voter
+    assertEquals(ResponseFactory.ofVoteRecord(submittedVoteRecord), response);
     assertCloseDates(LocalDateTime.now(), submittedVoteRecord.getDate());
     assertEquals(List.of(candidate), submittedVoteRecord.getVotes());
     assertEquals(election, submittedVoteRecord.getElection());
+    assertEquals(voter, election.getVoter(profile));
     assertTrue(electionGateway.hasSaved);
+    assertEquals(true, voter.hasVoted());
   }
 
 }

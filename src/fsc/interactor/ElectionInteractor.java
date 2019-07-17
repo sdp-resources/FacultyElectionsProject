@@ -68,17 +68,16 @@ public class ElectionInteractor extends Interactor {
   public Response execute(SubmitVoteRecordRequest request) {
     return electionFetcher.fetchVoterOnlyIfNoRecord(request.username, request.electionID)
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
-                                    Builder.lift(electionFetcher::createVoteRecord))
-                          .escapeIf(VoteRecord::someProfilesAreNotCandidates,
+                                    Builder.lift(electionFetcher::createVoteRecordPair))
+                          .escapeIf(p -> p.voteRecord.someProfilesAreNotCandidates(),
                                     ResponseFactory.invalidCandidate())
                           .perform(electionFetcher::submitRecord)
                           .perform(electionFetcher::save)
-                          .resolveWith(s -> ResponseFactory.success());
+                          .resolveWith(p -> ResponseFactory.ofVoteRecord(p.voteRecord));
   }
 
   public Response execute(ViewVoteRecordRequest request) {
-    return electionFetcher.fetchVoter(request.username, request.electionID)
-                          .mapThrough(electionFetcher::fetchRecord)
+    return electionFetcher.fetchRecord(request.recordId)
                           .resolveWith(ResponseFactory::ofVoteRecord);
   }
 

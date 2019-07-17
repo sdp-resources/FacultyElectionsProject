@@ -36,8 +36,8 @@ public class SimpleEntityFactory implements EntityFactory {
     return new Voter(voter, election);
   }
 
-  public VoteRecord createVoteRecord(Voter voter, List<Profile> votes) {
-    return new VoteRecord(voter, votes);
+  public VoteRecord createVoteRecord(Election election, List<Profile> votes) {
+    return new VoteRecord(election, votes);
   }
 
   public Division createDivision(String newDivisionName) {

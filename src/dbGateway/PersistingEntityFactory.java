@@ -37,9 +37,9 @@ public class PersistingEntityFactory implements EntityFactory {
     return entityFactory.createVoter(voter, election);
   }
 
-  public VoteRecord createVoteRecord(
-        Voter voter, List<Profile> votes
-  ) {return entityFactory.createVoteRecord(voter, votes);}
+  public VoteRecord createVoteRecord(Election election, List<Profile> votes) {
+    return entityFactory.createVoteRecord(election, votes);
+  }
 
   public Division createDivision(String newDivisionName) {
     return entityFactory.createDivision(newDivisionName);

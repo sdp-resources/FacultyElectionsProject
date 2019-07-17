@@ -8,16 +8,17 @@ import java.util.List;
 public interface ElectionGateway {
   void save();
   void addElection(Election election);
-  void recordVote(VoteRecord voteRecord);
-  boolean hasVoteRecord(Voter voter);
-  VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException;
+  void addVoteRecord(VoteRecord voteRecord);
+  VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException;
   Election getElection(String electionID) throws InvalidElectionIDException;
   List<VoteRecord> getAllVotes(Election election);
   Collection<Election> getAllElections();
+  Voter getVoter(Profile profile, Election election) throws InvalidVoterException;
   class InvalidElectionIDException extends Exception {
     public InvalidElectionIDException() {}
   }
 
-  class NoVoteRecordException extends Exception {
-  }
+  class NoVoteRecordException extends Exception {}
+
+  class InvalidVoterException extends Exception {}
 }

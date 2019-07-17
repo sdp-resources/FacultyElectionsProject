@@ -25,21 +25,16 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   }
 
-  public void recordVote(VoteRecord voteRecord) {
+  public void addVoteRecord(VoteRecord voteRecord) {
     submittedVoteRecord = voteRecord;
     voteRecords.add(voteRecord);
   }
 
-  public boolean hasVoteRecord(Voter voter) {
-    return submittedVoteRecord != null && submittedVoteRecord.isRecordFor(
-          entityFactory.createVoter(voter.getVoter(), voter.getElection()));
-  }
-
-  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
-    if (hasVoteRecord(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) {
+  public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
+    if (submittedVoteRecord != null && submittedVoteRecord.getRecordId().equals(recordId)) {
       return submittedVoteRecord;
     }
-    throw new NoVoteRecordException();
+    throw new  NoVoteRecordException();
   }
 
   public Election getElection(String electionID) {
@@ -53,5 +48,13 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   public Collection<Election> getAllElections() {
     return null;
+  }
+
+  public Voter getVoter(Profile profile, Election election) throws InvalidVoterException {
+    Voter voter = election.getVoter(profile);
+    if (voter == null) {
+      throw new InvalidVoterException();
+    }
+    return voter;
   }
 }

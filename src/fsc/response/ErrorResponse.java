@@ -15,6 +15,7 @@ public class ErrorResponse implements Response {
   public static final String MULTIPLE_RANKS_FOR_CANDIDATE = "Multiple rankings for the same candidate";
   public static final String NO_VOTE_RECORDED = "No vote has been recorded for that username";
   public static final String INVALID_ELECTION_STATE = "This is not a valid election state";
+  public static final String INVALID_VOTER = "You are not eligible to vote on this election";
   public String message;
 
   public ErrorResponse(String s) {

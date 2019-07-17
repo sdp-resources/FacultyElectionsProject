@@ -111,15 +111,12 @@ public class DatabaseBackedGateway implements Gateway {
 
   }
 
-  public void recordVote(VoteRecord voteRecord) {
+  public void addVoteRecord(VoteRecord voteRecord) {
 
   }
 
-  public boolean hasVoteRecord(Voter voter) {
-    return false;
-  }
-
-  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
+  public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
+    // TODO
     return null;
   }
 
@@ -132,6 +129,11 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public Collection<Election> getAllElections() {
+    return null;
+  }
+
+  public Voter getVoter(Profile profile, Election election)
+        throws InvalidVoterException {
     return null;
   }
 

@@ -13,13 +13,9 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
 
   public void addElection(Election election) { }
 
-  public void recordVote(VoteRecord voteRecord) {}
+  public void addVoteRecord(VoteRecord voteRecord) {}
 
-  public boolean hasVoteRecord(String username, String electionID) {
-    return false;
-  }
-
-  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
+  public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
     throw new NoVoteRecordException();
   }
 
@@ -36,7 +32,8 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
-  public boolean hasVoteRecord(Voter voter) {
-    return hasVoteRecord(voter.getVoter().getUsername(), voter.getElection().getID());
+  public Voter getVoter(Profile profile, Election election) {
+    return null;
   }
+
 }

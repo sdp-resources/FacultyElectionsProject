@@ -10,8 +10,8 @@ public class ViewVoteRecord {
 
   private ViewableVoteRecord voteRecord;
 
-  public ViewVoteRecord(String electionId, String username) {
-    voteRecord = TestContext.app.getVoteRecord(electionId, username);
+  public ViewVoteRecord(String recordId, String electionId) {
+    voteRecord = TestContext.app.getVoteRecord(Long.valueOf(recordId), electionId);
   }
 
   public List<List<List<String>>> query() {

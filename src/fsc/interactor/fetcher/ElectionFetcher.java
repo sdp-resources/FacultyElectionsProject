@@ -21,15 +21,15 @@ public class ElectionFetcher extends CommitteeFetcher {
         ProfileGateway profileGateway,
         CommitteeGateway committeeGateway, EntityFactory entityFactory
   ) {
-    super(committeeGateway,  profileGateway, entityFactory);
+    super(committeeGateway, profileGateway, entityFactory);
     this.electionGateway = electionGateway;
     this.committeeGateway = committeeGateway;
     this.entityFactory = entityFactory;
   }
 
-  public Builder<VoteRecord, Response> fetchRecord(Voter voter) {
+  public Builder<VoteRecord, Response> fetchRecord(long recordId) {
     try {
-      return Builder.ofValue(electionGateway.getVoteRecord(voter));
+      return Builder.ofValue(electionGateway.getVoteRecord(recordId));
     } catch (ElectionGateway.NoVoteRecordException e) {
       return Builder.ofResponse(ResponseFactory.noVote());
     }
@@ -46,13 +46,24 @@ public class ElectionFetcher extends CommitteeFetcher {
   public Builder<Voter, Response> fetchVoter(String username, String electionId) {
     return fetchProfile(username)
                  .bindWith(fetchElection(electionId),
-                           Builder.lift(entityFactory::createVoter));
+                           this::fetchVoterFromProfileAndElection);
 
+  }
+
+  private Builder<Voter, Response> fetchVoterFromProfileAndElection(
+        Profile profile,
+        Election election
+  ) {
+    try {
+      return Builder.ofValue(electionGateway.getVoter(profile, election));
+    } catch (ElectionGateway.InvalidVoterException e) {
+      return Builder.ofResponse(ResponseFactory.invalidVoter());
+    }
   }
 
   public Builder<Voter, Response> fetchVoterOnlyIfNoRecord(String username, String electionID) {
     return fetchVoter(username, electionID)
-                 .escapeIf(electionGateway::hasVoteRecord,
+                 .escapeIf(Voter::hasVoted,
                            ResponseFactory.alreadyVoted());
   }
 
@@ -80,21 +91,21 @@ public class ElectionFetcher extends CommitteeFetcher {
     electionGateway.addElection(election);
   }
 
-  public void submitRecord(VoteRecord voteRecord) {
-    electionGateway.recordVote(voteRecord);
+  public void submitRecord(VoteRecordPair pair) {
+    pair.voter.setVoted(true);
+    electionGateway.addVoteRecord(pair.voteRecord);
   }
 
   public List<VoteRecord> getAllVotes(Election election) {
     return electionGateway.getAllVotes(election);
   }
 
-  public VoteRecord createVoteRecord(Voter voter, List<Profile> votes) {
-    return entityFactory.createVoteRecord(voter, votes);
+  public VoteRecordPair createVoteRecordPair(Voter voter, List<Profile> votes) {
+    return new VoteRecordPair(voter,
+                              entityFactory.createVoteRecord(voter.getElection(), votes));
   }
 
-  public Election createElection(
-        Seat seat, Query defaultQuery, Ballot ballot
-  ) {
+  public Election createElection(Seat seat, Query defaultQuery, Ballot ballot) {
     return entityFactory.createElection(seat, defaultQuery, ballot);
   }
 
@@ -103,6 +114,16 @@ public class ElectionFetcher extends CommitteeFetcher {
       return Builder.ofValue(Election.State.valueOf(state));
     } catch (java.lang.IllegalArgumentException e) {
       return Builder.ofResponse(ResponseFactory.invalidElectionState());
+    }
+  }
+
+  public class VoteRecordPair {
+    public final Voter voter;
+    public final VoteRecord voteRecord;
+
+    VoteRecordPair(Voter voter, VoteRecord voteRecord) {
+      this.voter = voter;
+      this.voteRecord = voteRecord;
     }
   }
 }

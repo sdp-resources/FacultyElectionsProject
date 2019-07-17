@@ -128,4 +128,8 @@ public class ResponseFactory {
   public static Response ofElection(Election election) {
     return new ViewResponse<>(entityConverter.convert(election));
   }
+
+  public static Response invalidVoter() {
+    return new ErrorResponse(ErrorResponse.INVALID_VOTER);
+  }
 }

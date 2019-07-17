@@ -1,11 +1,11 @@
 package fsc.request;
 
 public class ViewVoteRecordRequest extends Request {
-  public final String username;
+  public final long recordId;
   public final String electionID;
 
-  public ViewVoteRecordRequest(String username, String electionID) {
-    this.username = username;
+  public ViewVoteRecordRequest(long recordId, String electionID) {
+    this.recordId = recordId;
     this.electionID = electionID;
   }
 }

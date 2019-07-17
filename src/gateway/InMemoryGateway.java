@@ -25,6 +25,7 @@ public class InMemoryGateway implements Gateway {
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
   private static EntityFactory entityFactory = new SimpleEntityFactory();
   private long seatId = 0;
+  private List<Voter> voters = new ArrayList<>();
 
   public static Gateway fromJSONFile(String path) {
     try {
@@ -147,23 +148,13 @@ public class InMemoryGateway implements Gateway {
     seat.setId(seatId++);
   }
 
-  public void recordVote(VoteRecord voteRecord) {
+  public void addVoteRecord(VoteRecord voteRecord) {
     voteRecords.add(voteRecord);
   }
 
-  public boolean hasVoteRecord(Voter voter) {
+  public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
     for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
-    for (VoteRecord record : voteRecords) {
-      if (record.isRecordFor(entityFactory.createVoter(voter.getVoter(), voter.getElection()))) {
+      if (record.getRecordId().equals(recordId)) {
         return record;
       }
     }
@@ -225,6 +216,15 @@ public class InMemoryGateway implements Gateway {
 
   public Collection<Election> getAllElections() {
     return new ArrayList<>(elections);
+  }
+
+  public Voter getVoter(Profile profile, Election election) throws InvalidVoterException {
+    for (Voter voter : voters) {
+      if (voter.getProfile().equals(profile) && voter.getElection().equals(election)) {
+        return voter;
+      }
+    }
+    throw new InvalidVoterException();
   }
 
   public EntityFactory getEntityFactory() {

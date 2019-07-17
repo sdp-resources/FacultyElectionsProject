@@ -5,8 +5,6 @@ import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
-import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
-import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.ViewVoteRecordRequest;
 import fsc.response.Response;
@@ -22,8 +20,8 @@ import static org.junit.Assert.*;
 
 public class ViewVoteRecordTest {
 
+  public static final long RECORD_ID = 1;
   private ViewVoteRecordRequest request;
-  private Profile voter;
   private Election election;
   private ElectionInteractor interactor;
   private ElectionGateway electionGateway;
@@ -35,30 +33,14 @@ public class ViewVoteRecordTest {
   public void setUp() {
     profiles = List.of(EntityStub.getProfile(0), EntityStub.getProfile(1),
                        EntityStub.getProfile(2));
-    voter = profiles.get(0);
+
     Ballot ballot = entityFactory.createBallot();
     ballot.add(entityFactory.createCandidate(profiles.get(1), ballot));
     ballot.add(entityFactory.createCandidate(profiles.get(2), ballot));
     election = EntityStub.simpleBallotElection(ballot);
-    request = new ViewVoteRecordRequest(voter.getUsername(), election.getID());
+    request = new ViewVoteRecordRequest(RECORD_ID, election.getID());
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(profiles.toArray(new Profile[]{}));
-  }
-
-  @Test
-  public void whenVoterDoesNotExist_returnError() {
-    interactor = new ElectionInteractor(electionGateway, null,
-                                        new InvalidProfileGatewaySpy(), entityFactory);
-    Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.unknownProfileName(), response);
-  }
-
-  @Test
-  public void whenElectionDoesNotExist_returnError() {
-    interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null,
-                                        profileGateway, entityFactory);
-    Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
   @Test
@@ -72,9 +54,9 @@ public class ViewVoteRecordTest {
   @Test
   public void whenVoteRecordIsPresent_returnViewableRecord() {
     List<Profile> votes = List.of(profiles.get(2), profiles.get(1));
-    electionGateway.recordVote(
-          entityFactory.createVoteRecord(
-                entityFactory.createVoter(voter, election), votes));
+    VoteRecord voteRecord = entityFactory.createVoteRecord(election, votes);
+    voteRecord.setRecordId(RECORD_ID);
+    electionGateway.addVoteRecord(voteRecord);
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);

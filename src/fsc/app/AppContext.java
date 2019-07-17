@@ -125,8 +125,8 @@ public class AppContext {
     return isSuccessful(requestFactory.submitVote(voterName, electionID, vote));
   }
 
-  public ViewableVoteRecord getVoteRecord(String electionId, String voter) {
-    return getValues(requestFactory.viewVoteRecord(voter, electionId));
+  public ViewableVoteRecord getVoteRecord(long recordId, String electionId) {
+    return getValues(requestFactory.viewVoteRecord(recordId, electionId));
   }
 
   public List<ViewableVoteRecord> getAllVotes(String electionId) {

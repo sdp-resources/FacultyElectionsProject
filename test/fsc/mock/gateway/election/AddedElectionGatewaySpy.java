@@ -25,9 +25,9 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
     hasSaved = false;
   }
 
-  public void recordVote(VoteRecord voteRecord) {}
+  public void addVoteRecord(VoteRecord voteRecord) {}
 
-  public VoteRecord getVoteRecord(Voter voter) throws NoVoteRecordException {
+  public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
     throw new NoVoteRecordException();
   }
 
@@ -43,7 +43,8 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
-  public boolean hasVoteRecord(Voter voter) {
-    return false;
+  public Voter getVoter(Profile profile, Election election) {
+    return null;
   }
+
 }

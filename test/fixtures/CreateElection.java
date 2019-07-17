@@ -18,5 +18,10 @@ public class CreateElection {
   public boolean addCandidate(String name) {
     return TestContext.app.addCandidate(electionId, name);
   }
+
+  public boolean createVoter(String username, String electionId) {
+    // TODO: Need to be able to add voters
+    return false;
+  }
 }
 

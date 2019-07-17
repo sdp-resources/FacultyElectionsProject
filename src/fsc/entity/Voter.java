@@ -1,20 +1,34 @@
 package fsc.entity;
 
 public class Voter {
-  private final Profile voter;
-  private final Election election;
+  private long voterId;
+  private Profile profile;
+  private Election election;
+  private boolean voted;
 
-  Voter(Profile voter, Election election) {
-    this.voter = voter;
+  public Voter(Profile profile, Election election) {
+    this.profile = profile;
+    setElection(election);
+  }
+
+  public long getVoterId() {
+    return voterId;
+  }
+
+  public void setVoterId(long voterId) {
+    this.voterId = voterId;
+  }
+
+  public void setElection(Election election) {
     this.election = election;
   }
 
   public boolean equals(Voter other) {
-    return voter.equals(other.voter) && election.equals(other.election);
+    return profile.equals(other.profile) && election.equals(other.election);
   }
 
-  public Profile getVoter() {
-    return voter;
+  public Profile getProfile() {
+    return profile;
   }
 
   public Election getElection() {
@@ -22,6 +36,14 @@ public class Voter {
   }
 
   public String toString() {
-    return "Voter{" + voter.getUsername() + ", " + election.getID() + '}';
+    return "Voter{" + profile.getUsername() + ", " + election.getID() + '}';
+  }
+
+  public boolean hasVoted() {
+    return voted;
+  }
+
+  public void setVoted(boolean voted) {
+    this.voted = voted;
   }
 }

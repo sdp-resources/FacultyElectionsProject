@@ -2,6 +2,7 @@ package fsc.entity;
 
 import fsc.entity.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Election {
@@ -11,6 +12,7 @@ public class Election {
   private String ID;
   private State state;
   private Query candidateQuery;
+  private List<Voter> voters;
 
   // TODO: Add Voter relationship
   // TODO: Add Votes relationship
@@ -43,10 +45,11 @@ public class Election {
     this.candidateQuery = candidateQuery;
     this.ballot = ballot;
     this.state = State.Setup;
+    setVoters(new ArrayList<>());
   }
 
   public Election() {
-
+    setVoters(new ArrayList<>());
   }
 
   public String getID() {
@@ -94,6 +97,31 @@ public class Election {
 
   public List<Profile> getCandidateProfiles() {
     return ballot.getCandidateProfiles();
+  }
+
+  public void addVoter(Voter voter) {
+    getVoters().add(voter);
+    voter.setElection(this);
+  }
+
+  public void removeVoter(Voter voter) {
+    getVoters().remove(voter);
+  }
+
+  public Voter getVoter(Profile profile) {
+    for (Voter voter : getVoters()) {
+      if (voter.getProfile().equals(profile)) { return voter; }
+    }
+
+    return null;
+  }
+
+  public List<Voter> getVoters() {
+    return voters;
+  }
+
+  public void setVoters(List<Voter> voters) {
+    this.voters = voters;
   }
 
   public enum State {

@@ -24,8 +24,9 @@ public class VoteRecordTest {
     votes = List.of(EntityStub.getProfile(1), EntityStub.getProfile(2));
     voter = EntityStub.getProfile(0);
     election = EntityStub.simpleBallotElection();
-    voteRecord = entityFactory
-                           .createVoteRecord(entityFactory.createVoter(voter, election), votes);
+    voteRecord = entityFactory.createVoteRecord(
+          entityFactory.createVoter(voter, election).getElection(),
+          votes);
   }
 
   @Test
