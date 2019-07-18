@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class ViewableVoteRecord {
+  public final Long recordId;
   public final String timestamp;
-  public final String electionID;
   public final List<ViewableProfile> votes;
 
-  public ViewableVoteRecord(String timestamp, String electionID, List<ViewableProfile> votes) {
+  public ViewableVoteRecord(String timestamp, Long recordId, List<ViewableProfile> votes) {
     this.timestamp = timestamp;
-    this.electionID = electionID;
+    this.recordId = recordId;
     this.votes = votes;
   }
 
@@ -19,11 +19,11 @@ public class ViewableVoteRecord {
     if (o == null || getClass() != o.getClass()) return false;
     ViewableVoteRecord that = (ViewableVoteRecord) o;
     return timestamp.equals(that.timestamp) &&
-                 electionID.equals(that.electionID) &&
+                 recordId.equals(that.recordId) &&
                  votes.equals(that.votes);
   }
 
   public int hashCode() {
-    return Objects.hash(timestamp, electionID, votes);
+    return Objects.hash(timestamp, recordId, votes);
   }
 }

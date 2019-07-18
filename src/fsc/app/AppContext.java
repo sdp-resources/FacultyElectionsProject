@@ -121,12 +121,12 @@ public class AppContext {
     return isSuccessful(requestFactory.addCandidate(electionId, name));
   }
 
-  public boolean submitVote(long voterId, List<String> vote) {
-    return isSuccessful(requestFactory.submitVote(voterId, vote));
+  public ViewableVoteRecord submitVote(long voterId, List<String> vote) {
+    return getValues(requestFactory.submitVote(voterId, vote));
   }
 
-  public ViewableVoteRecord getVoteRecord(long recordId, String electionId) {
-    return getValues(requestFactory.viewVoteRecord(recordId, electionId));
+  public ViewableVoteRecord getVoteRecord(long recordId) {
+    return getValues(requestFactory.viewVoteRecord(recordId));
   }
 
   public List<ViewableVoteRecord> getAllVotes(String electionId) {
@@ -135,5 +135,9 @@ public class AppContext {
 
   public boolean editSeat(String committeeName, String seatName, Map<String, String> changes) {
     return isSuccessful(requestFactory.editSeat(committeeName, seatName, changes));
+  }
+
+  public ViewableVoter addVoter(String username, String electionId) {
+    return getValues(requestFactory.addVoter(username, electionId));
   }
 }

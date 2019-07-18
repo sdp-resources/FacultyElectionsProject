@@ -47,4 +47,6 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
     return null;
   }
 
+  public void addVoter(Voter voter) { }
+
 }

@@ -16,6 +16,9 @@ public class ErrorResponse implements Response {
   public static final String NO_VOTE_RECORDED = "No vote has been recorded for that username";
   public static final String INVALID_ELECTION_STATE = "This is not a valid election state";
   public static final String INVALID_VOTER = "You are not eligible to vote on this election";
+  public static final String VOTER_EXISTS = "This voter already exists";
+  public static final String IMPROPER_ELECTION_STATE = "The operation cannot be performed on " +
+                                                             "this election state";
   public String message;
 
   public ErrorResponse(String s) {

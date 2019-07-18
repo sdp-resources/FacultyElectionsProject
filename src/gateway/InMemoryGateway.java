@@ -26,6 +26,8 @@ public class InMemoryGateway implements Gateway {
   private static EntityFactory entityFactory = new SimpleEntityFactory();
   private long seatId = 0;
   private List<Voter> voters = new ArrayList<>();
+  private long voterId = 0;
+  private long voteRecordId = 0;
 
   public static Gateway fromJSONFile(String path) {
     try {
@@ -150,6 +152,7 @@ public class InMemoryGateway implements Gateway {
 
   public void addVoteRecord(VoteRecord voteRecord) {
     voteRecords.add(voteRecord);
+    voteRecord.setRecordId(voteRecordId++);
   }
 
   public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
@@ -225,6 +228,19 @@ public class InMemoryGateway implements Gateway {
       }
     }
     throw new InvalidVoterException();
+  }
+
+  public void addVoter(Voter voter) throws ExistingVoterException {
+    if (hasVoter(voter.getProfile(), voter.getElection())) {
+      throw new ExistingVoterException();
+    }
+    voters.add(voter);
+    voter.setVoterId(voterId++);
+    voter.getElection().addVoter(voter);
+  }
+
+  private boolean hasVoter(Profile profile, Election election) {
+    return election.getVoter(profile) != null;
   }
 
   public EntityFactory getEntityFactory() {

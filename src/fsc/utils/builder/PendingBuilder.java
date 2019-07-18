@@ -13,6 +13,10 @@ class PendingBuilder<S, E> implements Builder<S, E> {
     return shouldEscape.apply(value) ? new ResolvedBuilder<>(escape) : this;
   }
 
+  public Builder<S, E> escapeUnless(Function<S, Boolean> shouldEscape, E escape) {
+    return shouldEscape.apply(value) ? this : new ResolvedBuilder<>(escape);
+  }
+
   public Builder<S, E> perform(Consumer<S> consumer) {
     consumer.accept(value);
     return this;

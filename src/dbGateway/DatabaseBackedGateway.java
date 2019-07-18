@@ -137,6 +137,10 @@ public class DatabaseBackedGateway implements Gateway {
     return null;
   }
 
+  public void addVoter(Voter voter) {
+    // TODO
+  }
+
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
     Profile profile = find(Profile.class, username);
     if (profile == null) { throw new InvalidProfileUsernameException(); }

@@ -14,6 +14,7 @@ public interface ElectionGateway {
   List<VoteRecord> getAllVotes(Election election);
   Collection<Election> getAllElections();
   Voter getVoter(long voterId) throws InvalidVoterException;
+  void addVoter(Voter voter) throws ExistingVoterException;
   class InvalidElectionIDException extends Exception {
     public InvalidElectionIDException() {}
   }
@@ -21,4 +22,6 @@ public interface ElectionGateway {
   class NoVoteRecordException extends Exception {}
 
   class InvalidVoterException extends Exception {}
+
+  class ExistingVoterException extends Exception { }
 }

@@ -38,7 +38,7 @@ public class ViewVoteRecordTest {
     ballot.add(entityFactory.createCandidate(profiles.get(1), ballot));
     ballot.add(entityFactory.createCandidate(profiles.get(2), ballot));
     election = EntityStub.simpleBallotElection(ballot);
-    request = new ViewVoteRecordRequest(RECORD_ID, election.getID());
+    request = new ViewVoteRecordRequest(RECORD_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(profiles.toArray(new Profile[]{}));
   }
@@ -61,11 +61,12 @@ public class ViewVoteRecordTest {
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
     Response response = interactor.execute(request);
+    System.out.println(response);
     assertTrue(response.isSuccessful());
     ViewableEntityConverter entityConverter = new ViewableEntityConverter();
     ViewableVoteRecord resultRecord = response.getValues();
     assertEquals(entityConverter.convertProfiles(votes), resultRecord.votes);
-    assertEquals(election.getID(), resultRecord.electionID);
+    assertEquals(RECORD_ID, resultRecord.recordId.longValue());
     assertNotNull(resultRecord.timestamp);
   }
 }

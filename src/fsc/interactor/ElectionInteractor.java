@@ -100,6 +100,15 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofElection);
   }
 
+  public Response execute(AddVoterRequest request) {
+    return electionFetcher.fetchProfile(request.username)
+                          .bindWith(electionFetcher.fetchElectionInSetupState(request.electionId),
+                                    electionFetcher::createVoter)
+                          .mapThrough(electionFetcher::addVoter)
+                          .perform(electionFetcher::save)
+                          .resolveWith(ResponseFactory::ofVoter);
+  }
+
   private Builder<Election, Response> setElectionState(Election election, Election.State state) {
     election.setState(state);
     //  TODO: Need to do various things depending on the state?

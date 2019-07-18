@@ -124,6 +124,10 @@ public class Election {
     this.voters = voters;
   }
 
+  public boolean isInSetupState() {
+    return state.equals(State.Setup);
+  }
+
   public enum State {
     Setup, DecideToStand, Vote, Closed
   }

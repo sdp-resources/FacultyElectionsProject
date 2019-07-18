@@ -41,6 +41,12 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
+  public Builder<Election, Response> fetchElectionInSetupState(String electionId) {
+    return fetchElection(electionId)
+                 .escapeUnless(Election::isInSetupState,
+                               ResponseFactory.improperElectionState());
+  }
+
   public Builder<Voter, Response> fetchVoter(long voterId) {
     try {
       return Builder.ofValue(electionGateway.getVoter(voterId));
@@ -101,6 +107,19 @@ public class ElectionFetcher extends CommitteeFetcher {
       return Builder.ofValue(Election.State.valueOf(state));
     } catch (java.lang.IllegalArgumentException e) {
       return Builder.ofResponse(ResponseFactory.invalidElectionState());
+    }
+  }
+
+  public Builder<Voter, Response> createVoter(Profile profile, Election election) {
+    return Builder.ofValue(entityFactory.createVoter(profile, election));
+  }
+
+  public Builder<Voter, Response> addVoter(Voter voter) {
+    try {
+      electionGateway.addVoter(voter);
+      return Builder.ofValue(voter);
+    } catch (ElectionGateway.ExistingVoterException e) {
+      return Builder.ofResponse(ResponseFactory.voterExists());
     }
   }
 

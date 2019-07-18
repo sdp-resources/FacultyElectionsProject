@@ -132,4 +132,16 @@ public class ResponseFactory {
   public static Response invalidVoter() {
     return new ErrorResponse(ErrorResponse.INVALID_VOTER);
   }
+
+  public static Response voterExists() {
+    return new ErrorResponse(ErrorResponse.VOTER_EXISTS);
+  }
+
+  public static Response ofVoter(Voter voter) {
+    return new ViewResponse<>(entityConverter.convert(voter));
+  }
+
+  public static Response improperElectionState() {
+    return new ErrorResponse(ErrorResponse.IMPROPER_ELECTION_STATE);
+  }
 }

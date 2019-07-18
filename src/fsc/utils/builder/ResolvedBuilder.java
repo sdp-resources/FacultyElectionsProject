@@ -17,6 +17,10 @@ public class ResolvedBuilder<S, E> implements Builder<S, E> {
     return this;
   }
 
+  public Builder<S, E> escapeUnless(Function<S, Boolean> shouldEscape, E escape) {
+    return this;
+  }
+
   public <T> Builder<T, E> mapThrough(Function<S, Builder<T, E>> mapper) {
     return (Builder<T, E>) this;
   }

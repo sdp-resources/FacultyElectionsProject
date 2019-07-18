@@ -44,7 +44,7 @@ public class ViewableEntityConverter {
   public ViewableVoteRecord convert(VoteRecord voteRecord) {
     return new ViewableVoteRecord(
           convert(voteRecord.getDate()),
-          voteRecord.getElection().getID(),
+          voteRecord.getRecordId(),
           convertProfiles(voteRecord.getVotes()));
   }
 
@@ -97,5 +97,12 @@ public class ViewableEntityConverter {
 
   private ViewableProfile nullOrConvert(Profile profile) {
     return profile == null ? null : convert(profile);
+  }
+
+  public ViewableVoter convert(Voter voter) {
+    return new ViewableVoter(voter.getVoterId(),
+                             voter.hasVoted(),
+                             convert(voter.getProfile()),
+                             convert(voter.getElection()));
   }
 }

@@ -8,8 +8,11 @@ import java.util.List;
 
 public class RejectingElectionGatewaySpy implements ElectionGateway {
   public String requestedElectionId;
+  public boolean hasSaved = false;
 
-  public void save() { }
+  public void save() {
+    hasSaved = true;
+  }
 
   public void addElection(Election election) { }
 
@@ -35,5 +38,7 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
   public Voter getVoter(long voterId) throws InvalidVoterException {
     return null;
   }
+
+  public void addVoter(Voter voter) { }
 
 }

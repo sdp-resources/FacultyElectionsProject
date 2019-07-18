@@ -14,7 +14,7 @@ public class Committee {
 
   public Committee() {}
 
-  protected Committee(String name, String description, Query voterQuery) {
+  public Committee(String name, String description, Query voterQuery) {
     this.name = name;
     this.description = description;
     this.voterQuery = voterQuery;

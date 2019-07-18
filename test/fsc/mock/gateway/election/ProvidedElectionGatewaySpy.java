@@ -8,7 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class ProvidedElectionGatewaySpy implements ElectionGateway {
+  public static final int VOTER_ID = 7;
+  private static final long RECORD_ID = 5;
   public boolean hasSaved;
+  public Voter submittedVoter = null;
   private Election storedElection;
   public String providedElectionId = null;
   public VoteRecord submittedVoteRecord = null;
@@ -27,6 +30,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
 
   public void addVoteRecord(VoteRecord voteRecord) {
     submittedVoteRecord = voteRecord;
+    if (voteRecord.getRecordId() == null) { voteRecord.setRecordId(RECORD_ID); }
     voteRecords.add(voteRecord);
   }
 
@@ -34,7 +38,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
     if (submittedVoteRecord != null && submittedVoteRecord.getRecordId().equals(recordId)) {
       return submittedVoteRecord;
     }
-    throw new  NoVoteRecordException();
+    throw new NoVoteRecordException();
   }
 
   public Election getElection(String electionID) {
@@ -57,5 +61,27 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
       }
     }
     throw new InvalidVoterException();
+  }
+
+  public void provideVoter(Voter voter) {
+    storedElection.addVoter(voter);
+  }
+
+  public void addVoter(Voter voter) throws ExistingVoterException {
+    if (voterExists(voter)) { throw new ElectionGateway.ExistingVoterException(); }
+    submittedVoter = voter;
+    voter.setVoterId(VOTER_ID);
+    storedElection.addVoter(voter);
+  }
+
+  private boolean voterExists(Voter voter) {
+    for (Voter storedVoter : storedElection.getVoters()) {
+      if (storedVoter.getProfile().equals(voter.getProfile()) &&
+                storedVoter.getElection().equals(voter.getElection())) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

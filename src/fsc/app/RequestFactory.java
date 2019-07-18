@@ -1,6 +1,5 @@
 package fsc.app;
 
-import fsc.request.EditSeatRequest;
 import fsc.request.*;
 
 import java.util.List;
@@ -79,8 +78,8 @@ public class RequestFactory {
     return new SubmitVoteRecordRequest(voterId, vote);
   }
 
-  public Request viewVoteRecord(long recordId, String electionId) {
-    return new ViewVoteRecordRequest(recordId, electionId);
+  public Request viewVoteRecord(long recordId) {
+    return new ViewVoteRecordRequest(recordId);
   }
 
   public Request viewAllVotes(String electionId) {
@@ -89,5 +88,9 @@ public class RequestFactory {
 
   public Request editSeat(String committeeName, String seatName, Map<String, String> changes) {
     return new EditSeatRequest(committeeName, seatName, changes);
+  }
+
+  public Request addVoter(String username, String electionId) {
+    return new AddVoterRequest(username, electionId);
   }
 }
