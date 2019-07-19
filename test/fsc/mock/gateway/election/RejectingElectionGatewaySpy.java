@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class RejectingElectionGatewaySpy implements ElectionGateway {
-  public String requestedElectionId;
+  public Long requestedElectionId;
   public boolean hasSaved = false;
 
   public void save() {
@@ -22,7 +22,7 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     throw new NoVoteRecordException();
   }
 
-  public Election getElection(String electionID) throws InvalidElectionIDException {
+  public Election getElection(long electionID) throws InvalidElectionIDException {
     requestedElectionId = electionID;
     throw new InvalidElectionIDException();
   }

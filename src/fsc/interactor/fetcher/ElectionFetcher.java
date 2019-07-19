@@ -33,7 +33,7 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
-  public Builder<Election, Response> fetchElection(String electionID) {
+  public Builder<Election, Response> fetchElection(long electionID) {
     try {
       return Builder.ofValue(electionGateway.getElection(electionID));
     } catch (ElectionGateway.InvalidElectionIDException e) {
@@ -41,7 +41,7 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
-  public Builder<Election, Response> fetchElectionInSetupState(String electionId) {
+  public Builder<Election, Response> fetchElectionInSetupState(Long electionId) {
     return fetchElection(electionId)
                  .escapeUnless(Election::isInSetupState,
                                ResponseFactory.improperElectionState());

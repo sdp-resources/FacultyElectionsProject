@@ -9,9 +9,9 @@ import java.util.List;
 public class AddedElectionGatewaySpy implements ElectionGateway {
   public Election addedElection;
   public boolean hasSaved = false;
-  private String electionId;
+  private Long electionId;
 
-  public AddedElectionGatewaySpy(String electionId) {
+  public AddedElectionGatewaySpy(long electionId) {
     this.electionId = electionId;
   }
 
@@ -31,8 +31,8 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
     throw new NoVoteRecordException();
   }
 
-  public Election getElection(String electionID) {
-    return null;
+  public Election getElection(long electionID) throws InvalidElectionIDException {
+    throw new InvalidElectionIDException();
   }
 
   public List<VoteRecord> getAllVotes(Election election) {

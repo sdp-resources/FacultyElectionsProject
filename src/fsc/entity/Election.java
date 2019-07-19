@@ -9,13 +9,14 @@ public class Election {
 
   private Ballot ballot;
   private Seat seat;
-  private String ID;
+  private Long ID;
   private State state;
   private Query candidateQuery;
   private List<Voter> voters;
 
   // TODO: Add Voter relationship
   // TODO: Add Votes relationship
+  // TODO: Add dates to elections?
 
   // TODO: Election states
   // 0. Election state can be changed with ChangeElectionStateRequest
@@ -52,11 +53,11 @@ public class Election {
     setVoters(new ArrayList<>());
   }
 
-  public String getID() {
+  public Long getID() {
     return ID;
   }
 
-  public void setID(String ID) {this.ID = ID;}
+  public void setID(Long ID) {this.ID = ID;}
 
   public State getState() {
     return state;

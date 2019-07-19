@@ -7,9 +7,12 @@ public class EntityStub {
 
   private static EntityFactory entityFactory = new SimpleEntityFactory();
   private static long seatId = 0;
+  private static long ELECTION_ID = 0;
 
   public static Election simpleBallotElection() {
-    return entityFactory.createElection(seat(), query(), entityFactory.createBallot());
+    Election election = entityFactory.createElection(seat(), query(), entityFactory.createBallot());
+    election.setID(ELECTION_ID++);
+    return election;
   }
 
   public static Query query() {
@@ -27,7 +30,10 @@ public class EntityStub {
   }
 
   public static Election simpleBallotElection(Ballot ballot) {
-    return entityFactory.createElection(null, null, ballot);
+    Election election = entityFactory.createElection(null, null, ballot);
+    election.setID(ELECTION_ID++);
+
+    return election;
   }
 
   public static Profile getProfile(int i) {

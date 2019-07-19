@@ -70,7 +70,7 @@ public class RequestFactory {
     return new CreateElectionRequest(seatName, committeeName);
   }
 
-  public Request addCandidate(String electionId, String name) {
+  public Request addCandidate(Long electionId, String name) {
     return new AddToBallotRequest(electionId, name);
   }
 
@@ -82,7 +82,7 @@ public class RequestFactory {
     return new ViewVoteRecordRequest(recordId);
   }
 
-  public Request viewAllVotes(String electionId) {
+  public Request viewAllVotes(Long electionId) {
     return new ViewAllVotesRequest(electionId);
   }
 
@@ -90,7 +90,7 @@ public class RequestFactory {
     return new EditSeatRequest(committeeName, seatName, changes);
   }
 
-  public Request addVoter(String username, String electionId) {
+  public Request addVoter(String username, Long electionId) {
     return new AddVoterRequest(username, electionId);
   }
 }

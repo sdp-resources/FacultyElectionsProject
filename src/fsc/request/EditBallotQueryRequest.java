@@ -3,10 +3,10 @@ package fsc.request;
 import fsc.entity.query.Query;
 
 public class EditBallotQueryRequest extends Request {
-  public final String electionID;
+  public final long electionID;
   public final Query query;
 
-  public EditBallotQueryRequest(String electionId, Query query) {
+  public EditBallotQueryRequest(long electionId, Query query) {
     this.electionID = electionId;
     this.query = query;
   }

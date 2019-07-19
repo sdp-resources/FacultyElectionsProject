@@ -1,6 +1,7 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -15,9 +16,9 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.junit.Assert.*;
 
-public class AddToBallotInteractorTest {
+public class AddToBallotInteractorTest extends ElectionTest {
 
-  private final String ELECTION_ID = "98705439870539870";
+  private final long ELECTION_ID = 1;
   private final String profileUsername = "hayfieldj";
   private AddToBallotRequest request;
   private Election election;

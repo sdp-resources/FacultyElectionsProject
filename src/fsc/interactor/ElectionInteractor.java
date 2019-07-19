@@ -31,8 +31,7 @@ public class ElectionInteractor extends Interactor {
                           .mapThrough(this::createElection)
                           .perform(electionFetcher::addElection)
                           .perform(electionFetcher::save)
-                          .mapThrough(Builder.lift(Election::getID))
-                          .resolveWith(ResponseFactory::ofString);
+                          .resolveWith(ResponseFactory::ofElection);
   }
 
   public Response execute(EditBallotQueryRequest request) {

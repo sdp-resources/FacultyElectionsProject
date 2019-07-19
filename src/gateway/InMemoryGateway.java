@@ -28,6 +28,7 @@ public class InMemoryGateway implements Gateway {
   private List<Voter> voters = new ArrayList<>();
   private long voterId = 0;
   private long voteRecordId = 0;
+  private long electionId = 0;
 
   public static Gateway fromJSONFile(String path) {
     try {
@@ -111,6 +112,7 @@ public class InMemoryGateway implements Gateway {
   public void addBallot(Ballot ballot) {}
 
   public void addElection(Election election) {
+    election.setID(electionId++);
     elections.add(election);
   }
 
@@ -165,9 +167,9 @@ public class InMemoryGateway implements Gateway {
     throw new NoVoteRecordException();
   }
 
-  public Election getElection(String electionID) throws InvalidElectionIDException {
+  public Election getElection(long electionID) throws InvalidElectionIDException {
     for (Election election : elections) {
-      if (election.getID().equals(electionID)) return election;
+      if (election.getID().equals(electionID)) { return election; }
     }
 
     throw new InvalidElectionIDException();
@@ -205,13 +207,7 @@ public class InMemoryGateway implements Gateway {
     addIdsToElections();
   }
 
-  private void addIdsToElections() {
-    int id = 1;
-    for (Election election : elections) {
-      election.setID("election" + id);
-      id++;
-    }
-  }
+  private void addIdsToElections() { }
 
   public Map<String, Query> getAllQueries() {
     return queries;

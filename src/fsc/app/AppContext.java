@@ -71,7 +71,7 @@ public class AppContext {
     return isSuccessful(requestFactory.addSeat(committeeName, seatName, query));
   }
 
-  public String createElection(String committeeName, String seatName) {
+  public ViewableElection createElection(String committeeName, String seatName) {
     return getValues(requestFactory.createElection(committeeName, seatName));
   }
 
@@ -117,7 +117,7 @@ public class AppContext {
     return getResponse(request).getValues();
   }
 
-  public boolean addCandidate(String electionId, String name) {
+  public boolean addCandidate(Long electionId, String name) {
     return isSuccessful(requestFactory.addCandidate(electionId, name));
   }
 
@@ -129,7 +129,7 @@ public class AppContext {
     return getValues(requestFactory.viewVoteRecord(recordId));
   }
 
-  public List<ViewableVoteRecord> getAllVotes(String electionId) {
+  public List<ViewableVoteRecord> getAllVotes(Long electionId) {
     return getValues(requestFactory.viewAllVotes(electionId));
   }
 
@@ -137,7 +137,7 @@ public class AppContext {
     return isSuccessful(requestFactory.editSeat(committeeName, seatName, changes));
   }
 
-  public ViewableVoter addVoter(String username, String electionId) {
+  public ViewableVoter addVoter(String username, Long electionId) {
     return getValues(requestFactory.addVoter(username, electionId));
   }
 }

@@ -108,7 +108,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addElection(Election election) {
-
+    entityManager.persist(election);
   }
 
   public void addVoteRecord(VoteRecord voteRecord) {
@@ -120,8 +120,10 @@ public class DatabaseBackedGateway implements Gateway {
     return null;
   }
 
-  public Election getElection(String electionID) throws InvalidElectionIDException {
-    return null;
+  public Election getElection(long electionID) throws InvalidElectionIDException {
+    Election election = find(Election.class, electionID);
+    if (election == null) { throw new InvalidElectionIDException(); }
+    return election;
   }
 
   public List<VoteRecord> getAllVotes(Election election) {

@@ -1,6 +1,7 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.interactor.ViewDTSInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -12,9 +13,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ViewDTSInteractorTest {
+public class ViewDTSInteractorTest extends ElectionTest {
 
-  private String electionID = "1";
+  private final long ELECTION_ID = 1;
   private ViewDTSRequest request;
   private Election election;
   private Profile profile;
@@ -26,7 +27,7 @@ public class ViewDTSInteractorTest {
   public void setUp() {
     election = EntityStub.simpleBallotElection();
     profile = EntityStub.getProfile(0);
-    request = new ViewDTSRequest(profile.getUsername(), electionID);
+    request = new ViewDTSRequest(profile.getUsername(), ELECTION_ID);
   }
 
   @Test
@@ -37,7 +38,7 @@ public class ViewDTSInteractorTest {
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ViewDTSInteractor(gateway);
     Response response = interactor.execute(request);
-    assertEquals(electionID, gateway.providedElectionId);
+    assertElectionIdEquals(gateway.providedElectionId, ELECTION_ID);
     assertEquals(ResponseFactory.ofCandidate(candidate), response);
   }
 
@@ -46,7 +47,7 @@ public class ViewDTSInteractorTest {
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ViewDTSInteractor(gateway);
     Response response = interactor.execute(request);
-    assertEquals(electionID, gateway.providedElectionId);
+    assertElectionIdEquals(gateway.providedElectionId, ELECTION_ID);
     assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 

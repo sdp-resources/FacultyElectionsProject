@@ -1,7 +1,8 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
 import fsc.gateway.ProfileGateway;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RemoveFromBallotInteractorTest {
 
-  private final String ballotID = "98705439870539870";
+  private final long ELECTION_ID = 2;
   private final String profileUsername = "hayfieldj";
   private RemoveFromBallotRequest request;
   private Election election;
@@ -30,7 +31,7 @@ public class RemoveFromBallotInteractorTest {
 
   @Before
   public void setUp() {
-    request = new RemoveFromBallotRequest(ballotID, profileUsername);
+    request = new RemoveFromBallotRequest(ELECTION_ID, profileUsername);
     election = EntityStub.simpleBallotElection();
     profile = EntityStub.getProfile(0);
     electionGateway = new ProvidedElectionGatewaySpy(election);

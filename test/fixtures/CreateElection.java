@@ -1,17 +1,13 @@
 package fixtures;
 
 public class CreateElection {
-  private String electionId;
+  private long electionId;
 
   public CreateElection(String committeeName, String seatName) {
-    electionId = TestContext.app.createElection(committeeName, seatName);
+    electionId = TestContext.app.createElection(committeeName, seatName).electionID;
   }
 
-  public boolean electionIdIsNotNull() {
-    return electionId != null;
-  }
-
-  public String getElectionId() {
+  public long getElectionId() {
     return electionId;
   }
 
@@ -19,7 +15,7 @@ public class CreateElection {
     return TestContext.app.addCandidate(electionId, name);
   }
 
-  public long createVoter(String username, String electionId) {
+  public long createVoter(String username, Long electionId) {
     return TestContext.app.addVoter(username, electionId).voterId;
   }
 }

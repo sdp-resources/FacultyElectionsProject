@@ -7,6 +7,7 @@ import fsc.gateway.CommitteeGateway;
 import java.util.List;
 
 public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
+  private static final long SEAT_ID = 2;
   public String submittedCommitteeName = null;
   public Committee returnedCommittee = null;
 
@@ -22,7 +23,9 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
 
   public Seat getSeat(String committeeName, String seatName) {
     Committee committee = getCommittee(committeeName);
-    return new Seat(seatName, Query.always(), committee);
+    Seat seat = new Seat(seatName, Query.always(), committee);
+    seat.setId(SEAT_ID);
+    return seat;
   }
 
   @Override

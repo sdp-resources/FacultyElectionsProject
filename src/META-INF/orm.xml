@@ -32,6 +32,40 @@
             <basic name="query"/>
         </attributes>
     </entity>
+    <entity class="fsc.entity.Election" name="Election" access="FIELD">
+        <table name="elections"/>
+        <attributes>
+            <id name="ID">
+                <generated-value/>
+            </id>
+            <basic name="seat"/>
+            <basic name="state">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <!--   TODO: remove the transient  -->
+            <many-to-one name="seat" target-entity="fsc.entity.Seat">
+                <cascade><cascade-merge/></cascade>
+            </many-to-one>
+            <one-to-many name="voters" target-entity="fsc.entity.Voter" mapped-by="election">
+                <cascade><cascade-all/></cascade>
+            </one-to-many>
+            <transient name="ballot" />
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Voter" name="Voter" access="FIELD">
+        <table name="voters" />
+        <attributes>
+            <id name="voterId">
+                <generated-value/>
+            </id>
+            <many-to-one name="profile" target-entity="fsc.entity.Profile">
+                <cascade><cascade-merge/></cascade>
+            </many-to-one>
+            <many-to-one name="election" target-entity="fsc.entity.Election">
+                <cascade><cascade-merge/></cascade>
+            </many-to-one>
+        </attributes>
+    </entity>
     <entity class="fsc.entity.Committee" name="Committee" access="FIELD">
         <table name="committees"/>
         <attributes>

@@ -1,6 +1,7 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -16,10 +17,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AddViewRemoveVoterTest {
+public class AddViewRemoveVoterTest extends ElectionTest {
 
   private static final String USERNAME = "username";
-  private static final String ELECTION_ID = "electionId";
+  private static final long ELECTION_ID = 5;
   private static final long VOTER_ID = 3;
   private EntityFactory entityFactory = new SimpleEntityFactory();
   private ViewableEntityConverter converter = new ViewableEntityConverter();
@@ -51,7 +52,7 @@ public class AddViewRemoveVoterTest {
     assertNotNull(electionGateway.submittedVoter);
     ViewableVoter responseVoter = response.getValues();
     assertEquals(USERNAME, responseVoter.profile.getUsername());
-    assertEquals(ELECTION_ID, responseVoter.election.electionID);
+    assertElectionIdEquals(responseVoter.election.electionID, ELECTION_ID);
   }
 
   @Test
@@ -76,7 +77,7 @@ public class AddViewRemoveVoterTest {
     response = interactor.execute(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
-    assertEquals(ELECTION_ID, electionGateway.requestedElectionId);
+    assertElectionIdEquals(electionGateway.requestedElectionId, ELECTION_ID);
     assertFalse(electionGateway.hasSaved);
   }
 

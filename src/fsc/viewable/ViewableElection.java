@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class ViewableElection {
 
-  public final String electionID;
+  public final long electionID;
   public final String state;
   public final ViewableSeat seat;
   public final String query;
   public final List<ViewableCandidate> candidates;
 
   public ViewableElection(
-        String electionID, String state, ViewableSeat seat,
+        long electionID, String state, ViewableSeat seat,
         String query, List<ViewableCandidate> candidates
   ) {
     this.electionID = electionID;

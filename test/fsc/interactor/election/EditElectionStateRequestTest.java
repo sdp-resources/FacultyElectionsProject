@@ -1,7 +1,8 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.Election;
 import fsc.entity.SimpleEntityFactory;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.EditElectionStateRequest;
@@ -12,9 +13,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class EditElectionStateRequestTest {
+public class EditElectionStateRequestTest extends ElectionTest {
 
-  public static final String ELECTION_ID = "1";
+  public static final long ELECTION_ID = 1;
   private EditElectionStateRequest request;
   private SimpleEntityFactory entityFactory = new SimpleEntityFactory();
   private ElectionInteractor interactor;
@@ -35,7 +36,7 @@ public class EditElectionStateRequestTest {
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
-    assertEquals(ELECTION_ID, electionGateway.requestedElectionId);
+    assertElectionIdEquals(electionGateway.requestedElectionId, ELECTION_ID);
   }
 
   @Test
@@ -46,7 +47,7 @@ public class EditElectionStateRequestTest {
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.invalidElectionState(), response);
-    assertEquals(ELECTION_ID, electionGateway.providedElectionId);
+    assertElectionIdEquals(electionGateway.providedElectionId, ELECTION_ID);
   }
 
   @Test
@@ -59,9 +60,10 @@ public class EditElectionStateRequestTest {
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.success(), response);
-    assertEquals(ELECTION_ID, electionGateway.providedElectionId);
+    assertElectionIdEquals(electionGateway.providedElectionId, ELECTION_ID);
     assertEquals(state, election.getState());
     assertEquals(true, electionGateway.hasSaved);
 
   }
+
 }

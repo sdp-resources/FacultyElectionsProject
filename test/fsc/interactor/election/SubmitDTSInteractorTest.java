@@ -1,6 +1,7 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.interactor.SubmitDTSInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -13,9 +14,9 @@ import org.junit.Test;
 import static fsc.entity.Candidate.Status;
 import static org.junit.Assert.*;
 
-public class SubmitDTSInteractorTest {
+public class SubmitDTSInteractorTest extends ElectionTest {
 
-  private String electionID = "12345";
+  private long electionID = 12345;
   private Status status = Status.Declined;
   private Election election;
 
@@ -41,7 +42,7 @@ public class SubmitDTSInteractorTest {
     Response response = interactor.execute(request);
 
     assertEquals(ResponseFactory.success(), response);
-    assertEquals(electionID, electionGatewaySpy.providedElectionId);
+    assertElectionIdEquals(electionGatewaySpy.providedElectionId, electionID);
     assertEquals(status, election.getCandidateByUsername(profile.getUsername()).getStatus());
     assertTrue(electionGatewaySpy.hasSaved);
   }

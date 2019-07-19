@@ -10,7 +10,7 @@ public interface ElectionGateway {
   void addElection(Election election);
   void addVoteRecord(VoteRecord voteRecord);
   VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException;
-  Election getElection(String electionID) throws InvalidElectionIDException;
+  Election getElection(long electionID) throws InvalidElectionIDException;
   List<VoteRecord> getAllVotes(Election election);
   Collection<Election> getAllElections();
   Voter getVoter(long voterId) throws InvalidVoterException;

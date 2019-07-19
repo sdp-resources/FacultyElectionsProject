@@ -1,6 +1,7 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -12,8 +13,8 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class ViewCandidatesInteractorTest {
-  public static final String MOCK_ID = "mockID";
+public class ViewCandidatesInteractorTest extends ElectionTest {
+  public static final long ELECTION_ID = 3;
   private Ballot ballot;
   private Election election;
   private ElectionInteractor interactor;
@@ -36,7 +37,7 @@ public class ViewCandidatesInteractorTest {
 
   @Test
   public void canRecognizeEmptyBallot() {
-    ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
+    ViewCandidatesRequest request = new ViewCandidatesRequest(ELECTION_ID);
     RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, null, null, entityFactory);
     Response response = interactor.execute(request);
@@ -46,12 +47,12 @@ public class ViewCandidatesInteractorTest {
 
   @Test
   public void canViewABallot() {
-    ViewCandidatesRequest request = new ViewCandidatesRequest(MOCK_ID);
+    ViewCandidatesRequest request = new ViewCandidatesRequest(ELECTION_ID);
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ElectionInteractor(electionGateway, null, null, entityFactory);
     Response initialResponse = interactor.execute(request);
 
-    assertEquals(MOCK_ID, electionGateway.providedElectionId);
+    assertElectionIdEquals(electionGateway.providedElectionId, ELECTION_ID);
     assertEquals(ResponseFactory.ofProfileList(ballot.getCandidateProfiles()), initialResponse);
   }
 

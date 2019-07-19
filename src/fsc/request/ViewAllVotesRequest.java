@@ -1,9 +1,9 @@
 package fsc.request;
 
 public class ViewAllVotesRequest extends Request {
-  public final String electionID;
+  public final long electionID;
 
-  public ViewAllVotesRequest(String electionID) {
+  public ViewAllVotesRequest(long electionID) {
     this.electionID = electionID;
   }
 }

@@ -1,7 +1,8 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
@@ -15,7 +16,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.junit.Assert.*;
 
-public class EditBallotQueryInteractorTest {
+public class EditBallotQueryInteractorTest extends ElectionTest {
 
   private EditBallotQueryRequest request;
   private Profile providedProfile;
@@ -26,7 +27,7 @@ public class EditBallotQueryInteractorTest {
   @Before
   public void setUp() {
     providedProfile = EntityStub.getProfile(0);
-    request = new EditBallotQueryRequest("556", Query.always());
+    request = new EditBallotQueryRequest(556, Query.always());
     election = EntityStub.simpleBallotElection();
   }
 
@@ -46,7 +47,7 @@ public class EditBallotQueryInteractorTest {
     assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(providedProfile));
     assertEquals(request.query, election.getCandidateQuery());
-    assertEquals(request.electionID, electionGateway.providedElectionId);
+    assertElectionIdEquals(electionGateway.providedElectionId, request.electionID);
     assertTrue(profileGateway.getAllProfilesWasCalled);
     assertTrue(electionGateway.hasSaved);
   }

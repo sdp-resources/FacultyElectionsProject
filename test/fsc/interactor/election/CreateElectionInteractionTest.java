@@ -1,7 +1,10 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.EntityFactory;
+import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.ProfileGateway;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.mock.gateway.election.AddedElectionGatewaySpy;
@@ -9,6 +12,7 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.CreateElectionRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.viewable.ViewableElection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,9 +21,9 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class CreateElectionInteractionTest {
+public class CreateElectionInteractionTest extends ElectionTest {
 
-  public static final String ELECTION_ID = "an id";
+  public static final long ELECTION_ID = 6;
   private CreateElectionRequest request;
   private ElectionInteractor interactor;
   private Response response;
@@ -27,6 +31,7 @@ public class CreateElectionInteractionTest {
   private AddedElectionGatewaySpy electionGateway;
   private EntityFactory entityFactory = new SimpleEntityFactory();
 
+  // TODO: election creation request should use seat id?
   @Before
   public void setup() {
     request = new CreateElectionRequest("President", "Cool committee");
@@ -43,13 +48,14 @@ public class CreateElectionInteractionTest {
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
     assertEquals(request.committeeName, electionGateway.addedElection.getSeat().getCommittee().getName());
     assertTrue(electionGateway.hasSaved);
-    assertEquals(ELECTION_ID, response.getValues());
+    ViewableElection createdElection = response.getValues();
+    assertElectionIdEquals(createdElection.electionID, ELECTION_ID);
     assertEquals(Election.State.Setup, electionGateway.addedElection.getState());
   }
 
   @Test
   public void whenCommitteeNameIsMissingThenReturnsErrorResponse() {
-    electionGateway = new AddedElectionGatewaySpy("an id");
+    electionGateway = new AddedElectionGatewaySpy(2);
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway, entityFactory);
     response = interactor.execute(request);

@@ -67,6 +67,7 @@ public class FetcherTest {
   public void whenGivenInvalidElectionId_fetcherThrowsError() {
     electionGateway = new RejectingElectionGatewaySpy();
     electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, null);
+    election.setID(Long.valueOf(3));
     Response response = electionFetcher.fetchElection(election.getID())
                                        .resolveWith(election1 -> failTest());
     assertEquals(ResponseFactory.unknownElectionID(), response);

@@ -13,7 +13,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
   public boolean hasSaved;
   public Voter submittedVoter = null;
   private Election storedElection;
-  public String providedElectionId = null;
+  public Long providedElectionId = null;
   public VoteRecord submittedVoteRecord = null;
   private List<VoteRecord> voteRecords = new ArrayList<>();
   private EntityFactory entityFactory = new SimpleEntityFactory();
@@ -41,7 +41,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
     throw new NoVoteRecordException();
   }
 
-  public Election getElection(String electionID) {
+  public Election getElection(long electionID) {
     providedElectionId = electionID;
     return storedElection;
   }

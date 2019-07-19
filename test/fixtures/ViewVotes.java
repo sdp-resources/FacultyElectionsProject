@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class ViewVotes {
 
-  private String electionId;
+  private Long electionId;
 
-  public ViewVotes(String electionId) {
+  public ViewVotes(Long electionId) {
     this.electionId = electionId;
   }
 

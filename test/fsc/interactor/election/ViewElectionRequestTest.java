@@ -1,8 +1,9 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.committee.ProvidedCommitteeGatewaySpy;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -16,9 +17,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ViewElectionRequestTest {
+public class ViewElectionRequestTest extends ElectionTest {
 
-  public static final String ELECTION_ID = "1";
+  public static final long ELECTION_ID = 1;
   public static final long SEAT_ID = 3;
   private ViewElectionRequest request = new ViewElectionRequest(ELECTION_ID);
   private SimpleEntityFactory entityFactory = new SimpleEntityFactory();
@@ -49,7 +50,7 @@ public class ViewElectionRequestTest {
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
-    assertEquals(ELECTION_ID, electionGateway.requestedElectionId);
+    assertElectionIdEquals(electionGateway.requestedElectionId, ELECTION_ID);
   }
 
   @Test

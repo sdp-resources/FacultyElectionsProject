@@ -1,7 +1,8 @@
-package fsc.interactor;
+package fsc.interactor.election;
 
 import fsc.entity.*;
 import fsc.gateway.ProfileGateway;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
@@ -20,8 +21,8 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class SubmitVoteRecordTest {
-  private static final String ELECTION_ID = "1";
+public class SubmitVoteRecordTest extends ElectionTest {
+  private static final long ELECTION_ID = 1;
   public static final int VOTER_ID = 3;
   private List<String> vote;
   private SubmitVoteRecordRequest request;
