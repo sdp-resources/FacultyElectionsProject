@@ -1,8 +1,6 @@
 package fsc.interactor.election;
 
 import fsc.entity.Election;
-import fsc.entity.EntityFactory;
-import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
@@ -29,7 +27,6 @@ public class CreateElectionInteractionTest extends ElectionTest {
   private Response response;
   private ProfileGateway profileGateway = new ProfileGatewayStub();
   private AddedElectionGatewaySpy electionGateway;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   // TODO: election creation request should use seat id?
   @Before

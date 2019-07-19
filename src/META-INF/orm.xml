@@ -42,14 +42,14 @@
             <basic name="state">
                 <enumerated>STRING</enumerated>
             </basic>
-            <!--   TODO: remove the transient  -->
             <many-to-one name="seat" target-entity="fsc.entity.Seat">
                 <cascade><cascade-merge/></cascade>
             </many-to-one>
             <one-to-many name="voters" target-entity="fsc.entity.Voter" mapped-by="election">
                 <cascade><cascade-all/></cascade>
             </one-to-many>
-            <transient name="ballot" />
+            <!--   TODO: remove the transient  -->
+            <transient name="candidates" />
         </attributes>
     </entity>
     <entity class="fsc.entity.Voter" name="Voter" access="FIELD">

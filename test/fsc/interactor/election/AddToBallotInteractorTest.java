@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 
 public class AddToBallotInteractorTest extends ElectionTest {
 
-  private final long ELECTION_ID = 1;
   private final String profileUsername = "hayfieldj";
   private AddToBallotRequest request;
   private Election election;
@@ -26,13 +25,11 @@ public class AddToBallotInteractorTest extends ElectionTest {
   private ElectionInteractor interactor;
   private Profile profile;
   private ProfileGatewayStub profileGateway;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
-    request = new AddToBallotRequest(ELECTION_ID, profileUsername);
-    election = EntityStub.simpleBallotElection();
-    election.setID(ELECTION_ID);
+    election = EntityStub.simpleElectionWithCandidates();
+    request = new AddToBallotRequest(election.getID(), profileUsername);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profile = EntityStub.getProfile(0);
     profileGateway = new ProfileGatewayStub(profile);

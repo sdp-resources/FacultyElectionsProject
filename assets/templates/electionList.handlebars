@@ -11,7 +11,7 @@
             <h3>Seat: {{seat.name}}</h3>
             Ballot:
             <ul>
-              {{#with ballot}}
+              {{#with candidates}}
                 {{#each candidates}}
                   <li class="candidate" data-name="{{profile.name}}">
                     {{profile.name}} ({{profile.username}})

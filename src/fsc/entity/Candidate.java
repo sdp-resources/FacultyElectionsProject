@@ -1,18 +1,24 @@
 package fsc.entity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Candidate {
-
-
+  public static List<Profile> toProfiles(List<Candidate> candidates) {
+    return candidates.stream().filter(Candidate::hasNotDeclined)
+                     .map(Candidate::getProfile).collect(Collectors.toList());
+  }
 
   public enum Status {NoAnswer, Declined, Accepted;}
-  private Profile profile;
 
-  private Ballot ballot;
+  private Profile profile;
+  private Election election;
   private Status status;
 
-  Candidate(Profile profile, Ballot ballot) {
+  Candidate(Profile profile, Election election) {
     this.profile = profile;
-    this.ballot = ballot;
+    setElection(election);
+
     status = Status.NoAnswer;
   }
 
@@ -32,7 +38,13 @@ public class Candidate {
     return profile;
   }
 
-  public Ballot getBallot() { return ballot; }
+  public Election getElection() {
+    return election;
+  }
+
+  public void setElection(Election election) {
+    this.election = election;
+  }
 
   public Status getStatus() {
     return status;

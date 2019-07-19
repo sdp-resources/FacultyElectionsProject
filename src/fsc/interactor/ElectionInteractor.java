@@ -11,17 +11,13 @@ import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
 
-import java.util.function.Consumer;
-
 public class ElectionInteractor extends Interactor {
-  private BallotCreator ballotCreator;
   private ElectionFetcher electionFetcher;
 
   public ElectionInteractor(
         ElectionGateway electionGateway, CommitteeGateway committeeGateway,
         ProfileGateway profileGateway, EntityFactory entityFactory
   ) {
-    this.ballotCreator = new BallotCreator(profileGateway, entityFactory);
     this.electionFetcher = new ElectionFetcher(electionGateway, profileGateway, committeeGateway,
                                                entityFactory);
   }
@@ -36,7 +32,7 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(EditBallotQueryRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .perform(setupBallotFromQuery(request.query))
+                          .perform(election -> setupNewDefaultQuery(election, request.query))
                           .perform(electionFetcher::save)
                           .resolveWith(s -> ResponseFactory.success());
   }
@@ -115,18 +111,14 @@ public class ElectionInteractor extends Interactor {
   }
 
   private Builder<Election, Response> createElection(Seat seat) {
-    Query defaultQuery = seat.getCandidateQuery();
-    Ballot ballot = ballotCreator.getBallotFromQuery(defaultQuery);
-    Election election = electionFetcher.createElection(seat, defaultQuery, ballot);
+    Election election = electionFetcher.createElection(seat);
+    setupNewDefaultQuery(election, seat.getCandidateQuery());
     return Builder.ofValue(election);
   }
 
-  private Consumer<Election> setupBallotFromQuery(Query query) {
-    return election -> {
-      election.setCandidateQuery(query);
-      Ballot ballot = ballotCreator.getBallotFromQuery(election.getCandidateQuery());
-      election.setBallot(ballot);
-    };
+  private void setupNewDefaultQuery(Election election, Query query) {
+    election.setCandidateQuery(query);
+    electionFetcher.repopulateCandidatesListFromStoredQuery(election);
   }
 
 }

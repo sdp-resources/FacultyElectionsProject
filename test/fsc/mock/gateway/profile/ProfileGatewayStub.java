@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class ProfileGatewayStub implements ProfileGateway {
   private final List<Profile> profiles;
-  public boolean getAllProfilesWasCalled = false;
+  public boolean getProfilesWasCalled = false;
 
   public ProfileGatewayStub(Profile... profiles) {
     this.profiles = Arrays.asList(profiles);
@@ -37,11 +37,12 @@ public class ProfileGatewayStub implements ProfileGateway {
   }
 
   public List<Profile> getAllProfiles() {
-    getAllProfilesWasCalled = true;
+    getProfilesWasCalled = true;
     return profiles;
   }
 
   public List<Profile> getProfilesMatching(Query query) {
+    getProfilesWasCalled = true;
     return profiles.stream().filter(query::isProfileValid).collect(Collectors.toList());
   }
 }

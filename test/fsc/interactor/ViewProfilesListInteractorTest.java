@@ -38,7 +38,7 @@ public class ViewProfilesListInteractorTest {
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
     Response response = interactor.handle(request);
     Response expectedResponse = ResponseFactory.ofProfileList(profileGatewaySpy.getAllProfiles());
-    assertTrue(profileGatewaySpy.getAllProfilesWasCalled);
+    assertTrue(profileGatewaySpy.getProfilesWasCalled);
     assertEquals(expectedResponse, response);
   }
 

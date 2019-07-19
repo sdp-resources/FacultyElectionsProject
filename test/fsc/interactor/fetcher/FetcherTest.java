@@ -30,7 +30,7 @@ public class FetcherTest {
   @Before
   public void setUp() {
     profile = EntityStub.getProfile(0);
-    election = EntityStub.simpleBallotElection();
+    election = EntityStub.simpleElectionWithCandidates();
   }
 
   @Test

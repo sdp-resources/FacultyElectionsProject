@@ -1,6 +1,8 @@
 package dbGateway;
 
-import fsc.entity.*;
+import fsc.entity.Committee;
+import fsc.entity.Election;
+import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
 import org.junit.Test;
@@ -25,9 +27,7 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
                                                   Query.always());
     Seat seat = gateway.getEntityFactory().createSeat("seat name", Query.always(),
                                                       committee);
-    BallotCreator ballotCreator = new BallotCreator(gateway, gateway.getEntityFactory());
-    Ballot ballot = ballotCreator.getBallotFromQuery(seat.getCandidateQuery());
-    election = gateway.getEntityFactory().createElection(seat, Query.always(), ballot);
+    election = gateway.getEntityFactory().createElection(seat);
     gateway.addCommittee(committee);
     gateway.addSeat(seat);
     gateway.addElection(election);

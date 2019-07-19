@@ -22,13 +22,12 @@ public class EditBallotQueryInteractorTest extends ElectionTest {
   private Profile providedProfile;
   private Election election;
   private ElectionInteractor interactor;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
     providedProfile = EntityStub.getProfile(0);
     request = new EditBallotQueryRequest(556, Query.always());
-    election = EntityStub.simpleBallotElection();
+    election = EntityStub.simpleElectionWithCandidates();
   }
 
   @Test
@@ -48,7 +47,7 @@ public class EditBallotQueryInteractorTest extends ElectionTest {
     assertThat(election.getCandidateProfiles(), hasItem(providedProfile));
     assertEquals(request.query, election.getCandidateQuery());
     assertElectionIdEquals(electionGateway.providedElectionId, request.electionID);
-    assertTrue(profileGateway.getAllProfilesWasCalled);
+    assertTrue(profileGateway.getProfilesWasCalled);
     assertTrue(electionGateway.hasSaved);
   }
 }

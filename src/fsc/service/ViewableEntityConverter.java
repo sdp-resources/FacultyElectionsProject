@@ -58,7 +58,7 @@ public class ViewableEntityConverter {
                                 election.getState().toString(),
                                 convert(election.getSeat()),
                                 convert(election.getCandidateQuery()),
-                                convertBallot(election.getBallot()));
+                                convertBallot(election.getCandidates()));
   }
 
   public List<ViewableProfile> convertProfiles(List<Profile> profiles) {
@@ -91,7 +91,7 @@ public class ViewableEntityConverter {
     return contractTypes.stream().map(ContractType::getContract).collect(Collectors.toList());
   }
 
-  private List<ViewableCandidate> convertBallot(Ballot ballot) {
+  private List<ViewableCandidate> convertBallot(Collection<Candidate> ballot) {
     return ballot.stream().map(this::convert).collect(Collectors.toList());
   }
 

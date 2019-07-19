@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class ViewVoteRecordTest {
+public class ViewVoteRecordTest extends ElectionTest {
 
   public static final long RECORD_ID = 1;
   private ViewVoteRecordRequest request;
@@ -28,17 +28,12 @@ public class ViewVoteRecordTest {
   private ElectionGateway electionGateway;
   private ProfileGateway profileGateway;
   private List<Profile> profiles;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
     profiles = List.of(EntityStub.getProfile(0), EntityStub.getProfile(1),
                        EntityStub.getProfile(2));
-
-    Ballot ballot = entityFactory.createBallot();
-    ballot.add(entityFactory.createCandidate(profiles.get(1), ballot));
-    ballot.add(entityFactory.createCandidate(profiles.get(2), ballot));
-    election = EntityStub.simpleBallotElection(ballot);
+    election = EntityStub.simpleElectionWithCandidates(profiles.get(1), profiles.get(2));
     request = new ViewVoteRecordRequest(RECORD_ID);
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(profiles.toArray(new Profile[]{}));

@@ -21,7 +21,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ViewAllVotesTest {
+public class ViewAllVotesTest extends ElectionTest {
 
   private ViewAllVotesRequest request;
   private Election election;
@@ -29,16 +29,12 @@ public class ViewAllVotesTest {
   private ElectionGateway electionGateway;
   private ProfileGateway profileGateway;
   private List<Profile> profiles;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
     profiles = List.of(EntityStub.getProfile(0), EntityStub.getProfile(1),
                        EntityStub.getProfile(2));
-    Ballot ballot = entityFactory.createBallot();
-    ballot.add(entityFactory.createCandidate(profiles.get(1), ballot));
-    ballot.add(entityFactory.createCandidate(profiles.get(2), ballot));
-    election = EntityStub.simpleBallotElection(ballot);
+    election = EntityStub.simpleElectionWithCandidates(profiles.get(1), profiles.get(2));
     request = new ViewAllVotesRequest(election.getID());
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(profiles.toArray(new Profile[]{}));

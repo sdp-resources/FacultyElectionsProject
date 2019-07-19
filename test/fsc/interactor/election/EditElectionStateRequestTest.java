@@ -1,8 +1,8 @@
 package fsc.interactor.election;
 
 import fsc.entity.Election;
-import fsc.entity.SimpleEntityFactory;
 import fsc.interactor.ElectionInteractor;
+import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
 import fsc.request.EditElectionStateRequest;
@@ -15,39 +15,36 @@ import static org.junit.Assert.assertEquals;
 
 public class EditElectionStateRequestTest extends ElectionTest {
 
-  public static final long ELECTION_ID = 1;
   private EditElectionStateRequest request;
-  private SimpleEntityFactory entityFactory = new SimpleEntityFactory();
   private ElectionInteractor interactor;
   private Response response;
   private Election election;
 
   @Before
   public void setUp() {
-    election = new Election();
-    election.setID(ELECTION_ID);
+    election = EntityStub.simpleElectionWithCandidates();
   }
 
   @Test
   public void whenElectionIdIsInvalid_throwAnError() {
     RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
-    request = new EditElectionStateRequest(ELECTION_ID, "invalid");
+    request = new EditElectionStateRequest(election.getID(), "invalid");
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
-    assertElectionIdEquals(electionGateway.requestedElectionId, ELECTION_ID);
+    assertElectionIdEquals(electionGateway.requestedElectionId, election.getID());
   }
 
   @Test
   public void whenStateIsInvalid_throwAnError() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
-    request = new EditElectionStateRequest(ELECTION_ID, "invalid");
+    request = new EditElectionStateRequest(election.getID(), "invalid");
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.invalidElectionState(), response);
-    assertElectionIdEquals(electionGateway.providedElectionId, ELECTION_ID);
+    assertElectionIdEquals(electionGateway.providedElectionId, election.getID());
   }
 
   @Test
@@ -55,12 +52,12 @@ public class EditElectionStateRequestTest extends ElectionTest {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     Election.State state = Election.State.DecideToStand;
     String stateString = state.toString();
-    request = new EditElectionStateRequest(ELECTION_ID, stateString);
+    request = new EditElectionStateRequest(election.getID(), stateString);
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.success(), response);
-    assertElectionIdEquals(electionGateway.providedElectionId, ELECTION_ID);
+    assertElectionIdEquals(electionGateway.providedElectionId, election.getID());
     assertEquals(state, election.getState());
     assertEquals(true, electionGateway.hasSaved);
 

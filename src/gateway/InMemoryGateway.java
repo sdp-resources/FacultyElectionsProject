@@ -105,11 +105,11 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(divisions);
   }
 
-  public Ballot getBallot(String id) {
+  public Collection<Candidate> getBallot(String id) {
     return null;
   }
 
-  public void addBallot(Ballot ballot) {}
+  public void addBallot(Collection<Candidate> ballot) {}
 
   public void addElection(Election election) {
     election.setID(electionId++);

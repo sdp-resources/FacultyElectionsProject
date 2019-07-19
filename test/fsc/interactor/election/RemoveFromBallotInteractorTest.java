@@ -18,21 +18,19 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class RemoveFromBallotInteractorTest {
+public class RemoveFromBallotInteractorTest extends ElectionTest {
 
-  private final long ELECTION_ID = 2;
   private final String profileUsername = "hayfieldj";
   private RemoveFromBallotRequest request;
   private Election election;
   private Profile profile;
   private ProvidedElectionGatewaySpy electionGateway;
   private ElectionInteractor interactor;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
-    request = new RemoveFromBallotRequest(ELECTION_ID, profileUsername);
-    election = EntityStub.simpleBallotElection();
+    election = EntityStub.simpleElectionWithCandidates();
+    request = new RemoveFromBallotRequest(election.getID(), profileUsername);
     profile = EntityStub.getProfile(0);
     electionGateway = new ProvidedElectionGatewaySpy(election);
   }
@@ -56,13 +54,13 @@ public class RemoveFromBallotInteractorTest {
   }
 
   @Test
-  public void removeFromEmptyBallot() {
+  public void removeFromEmptyBallotDoesNotDoAnything() {
     ProfileGateway profileGateway = new ProfileGatewayStub(profile);
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
     Response response = interactor.execute(request);
 
-    assertEquals(ResponseFactory.invalidCandidate(), response);
+    assertEquals(ResponseFactory.success(), response);
   }
 
   @Test
@@ -70,7 +68,8 @@ public class RemoveFromBallotInteractorTest {
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
+    election.getCandidates().add(entityFactory.createCandidate(profile,
+                                                               election));
     Response response = interactor.execute(request);
 
     assertFalse(election.hasCandidate(profile));

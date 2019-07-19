@@ -1,6 +1,8 @@
 package fsc.interactor.election;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.Profile;
+import fsc.entity.Voter;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -10,7 +12,6 @@ import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.AddVoterRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableVoter;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,11 +21,8 @@ import static org.junit.Assert.*;
 public class AddViewRemoveVoterTest extends ElectionTest {
 
   private static final String USERNAME = "username";
-  private static final long ELECTION_ID = 5;
   private static final long VOTER_ID = 3;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
-  private ViewableEntityConverter converter = new ViewableEntityConverter();
-  private AddVoterRequest request = new AddVoterRequest(USERNAME, ELECTION_ID);
+  private AddVoterRequest request;
   private Election election;
   private ElectionInteractor interactor;
   private Response response;
@@ -33,11 +31,11 @@ public class AddViewRemoveVoterTest extends ElectionTest {
 
   @Before
   public void setUp() {
-    election = EntityStub.simpleBallotElection();
+    election = EntityStub.simpleElectionWithCandidates();
     profile = EntityStub.getProfile(USERNAME);
-    election.setID(ELECTION_ID);
     voter = new Voter(profile, election);
     voter.setVoterId(VOTER_ID);
+    request = new AddVoterRequest(USERNAME, election.getID());
   }
 
   @Test
@@ -52,7 +50,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     assertNotNull(electionGateway.submittedVoter);
     ViewableVoter responseVoter = response.getValues();
     assertEquals(USERNAME, responseVoter.profile.getUsername());
-    assertElectionIdEquals(responseVoter.election.electionID, ELECTION_ID);
+    assertElectionIdEquals(responseVoter.election.electionID, election.getID());
   }
 
   @Test
@@ -77,7 +75,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     response = interactor.execute(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
-    assertElectionIdEquals(electionGateway.requestedElectionId, ELECTION_ID);
+    assertElectionIdEquals(electionGateway.requestedElectionId, election.getID());
     assertFalse(electionGateway.hasSaved);
   }
 

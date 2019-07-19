@@ -9,6 +9,7 @@ import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElectionFetcher extends CommitteeFetcher {
@@ -61,17 +62,14 @@ public class ElectionFetcher extends CommitteeFetcher {
   }
 
   public Builder<Election, Response> removeProfile(Election election, Profile profile) {
-    try {
-      election.getBallot().remove(profile);
+      election.removeCandidate(profile);
       return Builder.ofValue(election);
-    } catch (Ballot.NoProfileInBallotException e) {
-      return Builder.ofResponse(ResponseFactory.invalidCandidate());
-    }
+
   }
 
   public Builder<Election, Response> addProfileToElection(Election election, Profile profile) {
-    election.getBallot()
-            .add(entityFactory.createCandidate(profile, election.getBallot()));
+    election.getCandidates()
+            .add(entityFactory.createCandidate(profile, election));
 
     return Builder.ofValue(election);
   }
@@ -98,8 +96,8 @@ public class ElectionFetcher extends CommitteeFetcher {
                               entityFactory.createVoteRecord(voter.getElection(), votes));
   }
 
-  public Election createElection(Seat seat, Query defaultQuery, Ballot ballot) {
-    return entityFactory.createElection(seat, defaultQuery, ballot);
+  public Election createElection(Seat seat) {
+    return entityFactory.createElection(seat);
   }
 
   public Builder<Election.State, Response> getStateFromString(String state) {
@@ -123,7 +121,19 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
+  public void repopulateCandidatesListFromStoredQuery(Election election) {
+    election.setCandidates(new ArrayList<>());
+    addValidCandidatesToElection(election.getCandidateQuery(), election);
+  }
+
+  public void addValidCandidatesToElection(Query query, Election election) {
+    for (Profile profile : profileGateway.getProfilesMatching(query)) {
+        election.addCandidate(entityFactory.createCandidate(profile, election));
+    }
+  }
+
   public class VoteRecordPair {
+
     public final Voter voter;
     public final VoteRecord voteRecord;
 

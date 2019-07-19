@@ -9,12 +9,6 @@ public class EntityStub {
   private static long seatId = 0;
   private static long ELECTION_ID = 0;
 
-  public static Election simpleBallotElection() {
-    Election election = entityFactory.createElection(seat(), query(), entityFactory.createBallot());
-    election.setID(ELECTION_ID++);
-    return election;
-  }
-
   public static Query query() {
     return Query.always();
   }
@@ -29,16 +23,19 @@ public class EntityStub {
     return new Committee("committee name", "committee description", query());
   }
 
-  public static Election simpleBallotElection(Ballot ballot) {
-    Election election = entityFactory.createElection(null, null, ballot);
+  public static Election simpleElectionWithCandidates(Profile... profiles) {
+    Election election = entityFactory.createElection(seat());
     election.setID(ELECTION_ID++);
+
+    for (Profile profile : profiles) {
+      election.addCandidate(entityFactory.createCandidate(profile, election));
+    }
 
     return election;
   }
 
   public static Profile getProfile(int i) {
-    return entityFactory
-                     .createProfile("name" + i, "username" + i, "division", "contract");
+    return entityFactory.createProfile("name" + i, "username" + i, "division", "contract");
   }
 
   public static Profile getProfile(String username) {

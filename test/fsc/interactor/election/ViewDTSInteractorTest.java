@@ -1,6 +1,7 @@
 package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.gateway.ElectionGateway;
 import fsc.interactor.ViewDTSInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -15,30 +16,30 @@ import static org.junit.Assert.assertEquals;
 
 public class ViewDTSInteractorTest extends ElectionTest {
 
-  private final long ELECTION_ID = 1;
   private ViewDTSRequest request;
   private Election election;
   private Profile profile;
   private ViewDTSInteractor interactor;
   private ProvidedElectionGatewaySpy gateway;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
-    election = EntityStub.simpleBallotElection();
+    election = EntityStub.simpleElectionWithCandidates();
     profile = EntityStub.getProfile(0);
-    request = new ViewDTSRequest(profile.getUsername(), ELECTION_ID);
+    request = new ViewDTSRequest(profile.getUsername(), election.getID());
   }
 
   @Test
-  public void whenUserIsCandidate_canGetTheirPreference() throws Ballot.NoProfileInBallotException {
-    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
+  public void whenUserIsCandidate_canGetTheirPreference() throws
+                                                          ElectionGateway.NoProfileInBallotException {
+    election.getCandidates().add(entityFactory.createCandidate(profile,
+                                                               election));
     Candidate candidate = election.getCandidateByUsername(profile.getUsername());
     candidate.setStatus(Candidate.Status.Accepted);
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ViewDTSInteractor(gateway);
     Response response = interactor.execute(request);
-    assertElectionIdEquals(gateway.providedElectionId, ELECTION_ID);
+    assertElectionIdEquals(gateway.providedElectionId, election.getID());
     assertEquals(ResponseFactory.ofCandidate(candidate), response);
   }
 
@@ -47,7 +48,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ViewDTSInteractor(gateway);
     Response response = interactor.execute(request);
-    assertElectionIdEquals(gateway.providedElectionId, ELECTION_ID);
+    assertElectionIdEquals(gateway.providedElectionId, election.getID());
     assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 

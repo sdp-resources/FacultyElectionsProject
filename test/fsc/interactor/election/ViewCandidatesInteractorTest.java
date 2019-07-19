@@ -14,30 +14,19 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 public class ViewCandidatesInteractorTest extends ElectionTest {
-  public static final long ELECTION_ID = 3;
-  private Ballot ballot;
   private Election election;
   private ElectionInteractor interactor;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
-
-  private Ballot sampleBallot() {
-    Ballot aBallot = entityFactory.createBallot();
-    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(3), aBallot));
-    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(2), aBallot));
-    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(1), aBallot));
-    aBallot.add(entityFactory.createCandidate(EntityStub.getProfile(0), aBallot));
-    return aBallot;
-  }
 
   @Before
   public void setup() {
-    ballot = sampleBallot();
-    election = EntityStub.simpleBallotElection(ballot);
+    election = EntityStub.simpleElectionWithCandidates(
+          EntityStub.getProfile(0), EntityStub.getProfile(1),
+          EntityStub.getProfile(2), EntityStub.getProfile(3));
   }
 
   @Test
   public void canRecognizeEmptyBallot() {
-    ViewCandidatesRequest request = new ViewCandidatesRequest(ELECTION_ID);
+    ViewCandidatesRequest request = new ViewCandidatesRequest(election.getID());
     RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, null, null, entityFactory);
     Response response = interactor.execute(request);
@@ -47,13 +36,14 @@ public class ViewCandidatesInteractorTest extends ElectionTest {
 
   @Test
   public void canViewABallot() {
-    ViewCandidatesRequest request = new ViewCandidatesRequest(ELECTION_ID);
+    ViewCandidatesRequest request = new ViewCandidatesRequest(election.getID());
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ElectionInteractor(electionGateway, null, null, entityFactory);
     Response initialResponse = interactor.execute(request);
 
-    assertElectionIdEquals(electionGateway.providedElectionId, ELECTION_ID);
-    assertEquals(ResponseFactory.ofProfileList(ballot.getCandidateProfiles()), initialResponse);
+    assertElectionIdEquals(electionGateway.providedElectionId, election.getID());
+    assertEquals(ResponseFactory.ofProfileList(election.getCandidateProfiles()),
+                 initialResponse);
   }
 
 }

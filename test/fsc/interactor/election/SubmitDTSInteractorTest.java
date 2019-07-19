@@ -1,6 +1,7 @@
 package fsc.interactor.election;
 
 import fsc.entity.*;
+import fsc.gateway.ElectionGateway;
 import fsc.interactor.SubmitDTSInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -24,11 +25,10 @@ public class SubmitDTSInteractorTest extends ElectionTest {
   private DTSRequest request;
   private SubmitDTSInteractor interactor;
   private Profile profile;
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Before
   public void setUp() {
-    election = EntityStub.simpleBallotElection();
+    election = EntityStub.simpleElectionWithCandidates();
     profile = EntityStub.getProfile(0);
     request = new DTSRequest(electionID, profile.getUsername(), status);
     electionGatewaySpy = new ProvidedElectionGatewaySpy(election);
@@ -37,8 +37,9 @@ public class SubmitDTSInteractorTest extends ElectionTest {
 
   @Test
   public void whenCandidateIsInElection_thenRecordTheirStatus()
-        throws Ballot.NoProfileInBallotException {
-    election.getBallot().add(entityFactory.createCandidate(profile, election.getBallot()));
+        throws ElectionGateway.NoProfileInBallotException {
+    election.getCandidates().add(entityFactory.createCandidate(profile,
+                                                               election));
     Response response = interactor.execute(request);
 
     assertEquals(ResponseFactory.success(), response);

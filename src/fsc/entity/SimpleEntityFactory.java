@@ -2,6 +2,7 @@ package fsc.entity;
 
 import fsc.entity.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,10 +10,8 @@ public class SimpleEntityFactory implements EntityFactory {
 
   public SimpleEntityFactory() {}
 
-  public Election createElection(
-        Seat seat, Query candidatesQuery, Ballot ballot
-  ) {
-    return new Election(seat, candidatesQuery, ballot);
+  public Election createElection(Seat seat) {
+    return new Election(seat);
   }
 
   public Seat createSeat(String name, Query defaultQuery, Committee committee) {
@@ -54,8 +53,8 @@ public class SimpleEntityFactory implements EntityFactory {
     return new Committee(name, description, voterQuery);
   }
 
-  public Candidate createCandidate(Profile profile, Ballot ballot) {
-    return new Candidate(profile, ballot);
+  public Candidate createCandidate(Profile profile, Election election) {
+    return new Candidate(profile, election);
   }
 
   public Profile createProfile(
@@ -64,5 +63,5 @@ public class SimpleEntityFactory implements EntityFactory {
     return new Profile(name, username, division, contract);
   }
 
-  public Ballot createBallot() { return new Ballot(); }
+  public List<Candidate> createBallot() { return new ArrayList<>(); }
 }

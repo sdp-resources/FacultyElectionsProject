@@ -1,13 +1,14 @@
 package fsc.entity;
 
 import fsc.entity.query.Query;
+import fsc.gateway.ElectionGateway;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Election {
 
-  private Ballot ballot;
+  private List<Candidate> candidates = new ArrayList<>();
   private Seat seat;
   private Long ID;
   private State state;
@@ -28,23 +29,22 @@ public class Election {
   //    - Voters cannot vote
   // 2. DecideToStand:
   //    - Candidate can view and change their DTS status
-  //    - Admin cannot change ballot or add/remove candidates
+  //    - Admin cannot change candidates or add/remove candidates
   //    - Voters cannot vote
   // 3. Vote:
   //    - Candidates that did not decide are automatically accepted (email notification?)
   //    - Voters can see the election and vote
   //    - Candidates cannot change their DTS status
-  //    - Admin cannot change ballot or add/remove candidates
+  //    - Admin cannot change candidates or add/remove candidates
   // 4. Closed:
   //    - Voters cannot vote
   //    - Candidates cannot change their DTS status
-  //    - Admin cannot change ballot or add/remove candidates
+  //    - Admin cannot change candidates or add/remove candidates
   //    - Admin can view election results
 
-  public Election(Seat seat, Query candidateQuery, Ballot ballot) {
+  public Election(Seat seat) {
     this.seat = seat;
-    this.candidateQuery = candidateQuery;
-    this.ballot = ballot;
+    this.candidateQuery = seat.getCandidateQuery();
     this.state = State.Setup;
     setVoters(new ArrayList<>());
   }
@@ -71,12 +71,12 @@ public class Election {
     return seat;
   }
 
-  public Ballot getBallot() {
-    return ballot;
+  public List<Candidate> getCandidates() {
+    return candidates;
   }
 
-  public void setBallot(Ballot ballot) {
-    this.ballot = ballot;
+  public void setCandidates(List<Candidate> candidates) {
+    this.candidates = candidates;
   }
 
   public void setCandidateQuery(Query candidateQuery) {
@@ -88,16 +88,28 @@ public class Election {
   }
 
   public Candidate getCandidateByUsername(String username)
-        throws Ballot.NoProfileInBallotException {
-    return ballot.getCandidateByUsername(username);
+        throws ElectionGateway.NoProfileInBallotException {
+    for (Candidate candidate : candidates) {
+      if (candidate.matchesUsername(username)) return candidate;
+    }
+    throw new ElectionGateway.NoProfileInBallotException();
+  }
+
+  public void addCandidate(Candidate candidate) {
+    candidates.add(candidate);
+    candidate.setElection(this);
   }
 
   public boolean hasCandidate(Profile profile) {
-    return ballot.hasCandidate(profile);
+    return candidates.stream().anyMatch((c) -> c.matchesProfile(profile));
+  }
+
+  public void removeCandidate(Profile profile) {
+    candidates.removeIf(i -> i.matchesProfile(profile));
   }
 
   public List<Profile> getCandidateProfiles() {
-    return ballot.getCandidateProfiles();
+    return Candidate.toProfiles(candidates);
   }
 
   public void addVoter(Voter voter) {
@@ -132,5 +144,6 @@ public class Election {
   public enum State {
     Setup, DecideToStand, Vote, Closed
   }
+
 }
 

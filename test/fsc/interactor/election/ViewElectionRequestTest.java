@@ -1,7 +1,8 @@
 package fsc.interactor.election;
 
-import fsc.entity.*;
-import fsc.entity.query.Query;
+import fsc.entity.Committee;
+import fsc.entity.Election;
+import fsc.entity.Profile;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
@@ -19,28 +20,18 @@ import static org.junit.Assert.assertEquals;
 
 public class ViewElectionRequestTest extends ElectionTest {
 
-  public static final long ELECTION_ID = 1;
-  public static final long SEAT_ID = 3;
-  private ViewElectionRequest request = new ViewElectionRequest(ELECTION_ID);
-  private SimpleEntityFactory entityFactory = new SimpleEntityFactory();
+  private ViewElectionRequest request;
   private ElectionInteractor interactor;
   private Response response;
   private Election election;
-  private Committee committee;
+  private Committee committee = null;
   private Profile[] profiles;
-  ;
 
   @Before
   public void setUp() {
     profiles = new Profile[]{ EntityStub.getProfile(1), EntityStub.getProfile(2) };
-    committee = entityFactory.createCommittee("a committee", "a description", null);
-    Seat seat = entityFactory.createSeat("a seat", Query.always(), committee);
-    seat.setId(SEAT_ID);
-    Ballot ballot = entityFactory.createBallot();
-    election = entityFactory.createElection(seat, Query.always(), ballot);
-    election.setID(ELECTION_ID);
-    election.getBallot().add(entityFactory.createCandidate(profiles[0], election.getBallot()));
-    request = new ViewElectionRequest(ELECTION_ID);
+    election = EntityStub.simpleElectionWithCandidates(profiles[0]);
+    request = new ViewElectionRequest(election.getID());
   }
 
   @Test
@@ -50,7 +41,7 @@ public class ViewElectionRequestTest extends ElectionTest {
                                         null, entityFactory);
     response = interactor.execute(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
-    assertElectionIdEquals(electionGateway.requestedElectionId, ELECTION_ID);
+    assertElectionIdEquals(electionGateway.requestedElectionId, election.getID());
   }
 
   @Test

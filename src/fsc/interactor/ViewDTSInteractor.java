@@ -5,11 +5,13 @@ import fsc.gateway.ElectionGateway;
 import fsc.request.ViewDTSRequest;
 import fsc.response.*;
 
+import java.util.Collection;
+
 public class ViewDTSInteractor {
 
   private ElectionGateway electionGateway;
   public Profile profile;
-  public Ballot ballot;
+  public Collection<Candidate> ballot;
   public Candidate candidate;
 
   public ViewDTSInteractor(ElectionGateway electionGateway) {
@@ -23,7 +25,7 @@ public class ViewDTSInteractor {
       return ResponseFactory.ofCandidate(candidate);
     } catch (ElectionGateway.InvalidElectionIDException e) {
       return ResponseFactory.unknownElectionID();
-    } catch (Ballot.NoProfileInBallotException e) {
+    } catch (ElectionGateway.NoProfileInBallotException e) {
       return ResponseFactory.invalidCandidate();
     }
   }
