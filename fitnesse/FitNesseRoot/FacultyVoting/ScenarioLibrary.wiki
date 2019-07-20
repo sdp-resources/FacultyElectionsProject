@@ -54,8 +54,8 @@
 
 !3 Committees
 
-|scenario|Given committee with name _ and description _ |name,description|
-|ensure|create committee;|@name|@description|
+|scenario|Given committee with name _ and description _ and voter query _|name,description,voterQuery|
+|ensure|create committee;|@name|@description|@voterQuery|
 
 |scenario|Given seats _ _ _|committeeName,seatName,seatQuery|
 |ensure|create seat;|@committeeName|@seatName|@seatQuery|

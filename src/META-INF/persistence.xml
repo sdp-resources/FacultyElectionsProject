@@ -12,6 +12,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="hanoverSummer2016"/>
+            <property name="hibernate.connection.autocommit" value="false"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB53Dialect" />
             <property name="hibernate.dialect.storage_engine" value="innodb" />
             <property name="hibernate.archive.autodetection" value="class"/>

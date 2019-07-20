@@ -1,6 +1,7 @@
 package fsc.interactor;
 
 import fsc.entity.*;
+import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.request.ViewCommitteeListRequest;
 import fsc.response.Response;
@@ -23,7 +24,7 @@ public class ViewCommitteeListInteractorTest {
   @Before
   public void setup() {
     request = new ViewCommitteeListRequest();
-    fec = entityFactory.createCommittee("FEC", "Faculty Evaluation Committee", null);
+    fec = entityFactory.createCommittee("FEC", "Faculty Evaluation Committee", Query.never());
     committeeList = List.of(fec);
     committeeGateway = new CommitteeGateway() {
       public List<Committee> getCommittees() { return committeeList; }

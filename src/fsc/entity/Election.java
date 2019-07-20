@@ -5,6 +5,7 @@ import fsc.gateway.ElectionGateway;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Election {
 
@@ -141,9 +142,24 @@ public class Election {
     return state.equals(State.Setup);
   }
 
-  public enum State {
-    Setup, DecideToStand, Vote, Closed
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Election election = (Election) o;
+    return seat.equals(election.seat) &&
+                 ID.equals(election.ID) &&
+                 state == election.state &&
+                 candidateQuery.equals(election.candidateQuery);
   }
 
+  public int hashCode() {
+    return Objects.hash(seat, ID, state, candidateQuery);
+  }
+
+  public enum State {
+    Setup, DecideToStand, Vote, Closed;
+
+  }
 }
 

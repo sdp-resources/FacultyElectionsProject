@@ -7,10 +7,13 @@ public class ViewableCommittee {
   public String name;
   public String description;
   public List<ViewableSeat> seats;
+  public String voterQuery;
 
-  public ViewableCommittee(String name, String description, List<ViewableSeat> seats) {
+  public ViewableCommittee(String name, String description, String voterQuery,
+                           List<ViewableSeat> seats) {
     this.name = name;
     this.description = description;
+    this.voterQuery = voterQuery;
     this.seats = seats;
   }
 

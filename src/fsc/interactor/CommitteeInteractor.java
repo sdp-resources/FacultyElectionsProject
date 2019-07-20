@@ -30,12 +30,15 @@ public class CommitteeInteractor extends Interactor {
   }
 
   public Response execute(CreateCommitteeRequest request) {
-    return committeeFetcher.makeCommittee(request.name, request.description)
-                           .escapeIf(committeeFetcher::hasCommittee,
-                                     ResponseFactory.resourceExists())
-                           .perform(committeeFetcher::addCommittee)
-                           .perform(committeeFetcher::save)
-                           .resolveWith(s -> ResponseFactory.success());
+    return queryFetcher.createFromString(request.voterQuery)
+                       .mapThrough(q -> committeeFetcher.makeCommittee(request.name,
+                                                                       request.description,
+                                                                       q))
+                       .escapeIf(committeeFetcher::hasCommittee,
+                                 ResponseFactory.resourceExists())
+                       .perform(committeeFetcher::addCommittee)
+                       .perform(committeeFetcher::save)
+                       .resolveWith(s -> ResponseFactory.success());
   }
 
   public Response execute(ViewCommitteeListRequest request) {
@@ -91,7 +94,7 @@ public class CommitteeInteractor extends Interactor {
                                .mapThrough(makeEntryWithKey(entry.getKey()));
       case EditSeatRequest.EDIT_SEAT_QUERY:
         return queryFetcher.createFromString(entry.getValue())
-              .mapThrough(makeEntryWithKey(entry.getKey()));
+                           .mapThrough(makeEntryWithKey(entry.getKey()));
       default:
         return Builder.ofValue(Map.entry(entry.getKey(), entry.getValue()));
     }

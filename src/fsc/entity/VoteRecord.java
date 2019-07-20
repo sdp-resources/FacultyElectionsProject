@@ -5,10 +5,12 @@ import java.util.List;
 
 public class VoteRecord {
 
-  private final List<Profile> votes;
-  private final LocalDateTime date;
+  private List<Profile> votes;
+  private LocalDateTime date;
   private Election election;
   private Long recordId;
+
+  public VoteRecord() {}
 
   VoteRecord(Election election, List<Profile> votes) {
     this(election, LocalDateTime.now(), votes);

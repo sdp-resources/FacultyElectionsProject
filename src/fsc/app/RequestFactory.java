@@ -50,8 +50,8 @@ public class RequestFactory {
     return new ViewCommitteeListRequest();
   }
 
-  public Request createCommittee(String name, String description) {
-    return new CreateCommitteeRequest(name, description);
+  public Request createCommittee(String name, String description, String voterQueryString) {
+    return new CreateCommitteeRequest(name, description, voterQueryString);
   }
 
   public Request addSeat(String committeeName, String seatName, String query) {

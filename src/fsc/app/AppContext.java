@@ -63,8 +63,8 @@ public class AppContext {
     return getValues(requestFactory.viewProfile(username));
   }
 
-  public boolean addCommittee(String name, String description) {
-    return isSuccessful(requestFactory.createCommittee(name, description));
+  public boolean addCommittee(String name, String description, String voterQueryString) {
+    return isSuccessful(requestFactory.createCommittee(name, description, voterQueryString));
   }
 
   public boolean addSeat(String committeeName, String seatName, String query) {
@@ -110,7 +110,16 @@ public class AppContext {
   }
 
   private Response getResponse(Request request) {
-    return interactor.handle(request);
+    try {
+      gateway.begin();
+      Response response = interactor.handle(request);
+      if (!response.isSuccessful()) { gateway.rollback(); }
+      gateway.commit();
+      return response;
+    } catch (Exception e) {
+      gateway.rollback();
+      throw e;
+    }
   }
 
   private <T> T getValues(Request request) {
@@ -139,5 +148,9 @@ public class AppContext {
 
   public ViewableVoter addVoter(String username, Long electionId) {
     return getValues(requestFactory.addVoter(username, electionId));
+  }
+
+  public void shutdown() {
+    gateway.shutdown();
   }
 }

@@ -8,6 +8,7 @@ import java.util.*;
 public class Committee {
   private String name;
   private String description;
+
   private Query voterQuery;
 
   private Set<Seat> seats = new HashSet<>();
@@ -97,5 +98,13 @@ public class Committee {
 
   public void setVoterQuery(Query voterQuery) {
     this.voterQuery = voterQuery;
+  }
+
+  public String toString() {
+    return "Committee{" +
+                 "name='" + name + '\'' +
+                 ", description='" + description + '\'' +
+                 ", voterQuery=" + voterQuery +
+                 '}';
   }
 }

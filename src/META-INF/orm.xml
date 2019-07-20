@@ -15,9 +15,9 @@
     </entity>
     <entity class="fsc.entity.Division" name="Division" access="PROPERTY">
         <table name="divisions"/>
-            <attributes>
-                <id name="name"/>
-            </attributes>
+        <attributes>
+            <id name="name"/>
+        </attributes>
     </entity>
     <entity class="fsc.entity.ContractType" name="ContractType" access="PROPERTY">
         <table name="contract_types"/>
@@ -43,27 +43,62 @@
                 <enumerated>STRING</enumerated>
             </basic>
             <many-to-one name="seat" target-entity="fsc.entity.Seat">
-                <cascade><cascade-merge/></cascade>
+                <cascade>
+                    <cascade-merge/>
+                </cascade>
             </many-to-one>
             <one-to-many name="voters" target-entity="fsc.entity.Voter" mapped-by="election">
-                <cascade><cascade-all/></cascade>
+                <cascade>
+                    <cascade-all/>
+                </cascade>
             </one-to-many>
-            <!--   TODO: remove the transient  -->
-            <transient name="candidates" />
+            <one-to-many name="candidates" target-entity="fsc.entity.Candidate" mapped-by="election">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Candidate" access="PROPERTY">
+        <table name="candidates"/>
+        <attributes>
+            <embedded-id name="candidateId"/>
+
+            <many-to-one name="election" maps-id="electionId">
+                <join-column name="election_id"/>
+            </many-to-one>
+            <many-to-one name="profile" maps-id="username">
+                <join-column name="profile_username"/>
+            </many-to-one>
         </attributes>
     </entity>
     <entity class="fsc.entity.Voter" name="Voter" access="FIELD">
-        <table name="voters" />
+        <table name="voters"/>
         <attributes>
             <id name="voterId">
                 <generated-value/>
             </id>
             <many-to-one name="profile" target-entity="fsc.entity.Profile">
-                <cascade><cascade-merge/></cascade>
+                <cascade>
+                    <cascade-merge/>
+                </cascade>
             </many-to-one>
             <many-to-one name="election" target-entity="fsc.entity.Election">
-                <cascade><cascade-merge/></cascade>
+                <cascade>
+                    <cascade-merge/>
+                </cascade>
             </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.VoteRecord" name="VoteRecord" access="FIELD">
+        <table name="vote_records"/>
+        <attributes>
+            <id name="recordId">
+                <generated-value/>
+            </id>
+            <many-to-one name="election" target-entity="fsc.entity.Election">
+            </many-to-one>
+            <transient name="votes"/>
         </attributes>
     </entity>
     <entity class="fsc.entity.Committee" name="Committee" access="FIELD">
@@ -73,7 +108,7 @@
             <basic name="description"/>
             <basic name="voterQuery"/>
             <one-to-many name="seats" target-entity="fsc.entity.Seat" mapped-by="committee">
-                <cascade />
+                <cascade/>
             </one-to-many>
         </attributes>
     </entity>
@@ -91,4 +126,5 @@
             <many-to-one name="profile" target-entity="fsc.entity.Profile"/>
         </attributes>
     </entity>
+    <embeddable class="fsc.entity.Candidate$CandidateId" access="FIELD"/>
 </entity-mappings>

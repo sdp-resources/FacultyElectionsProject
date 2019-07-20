@@ -10,9 +10,10 @@ public class BasicDatabaseTest {
 
   @Before
   public void setUp() {
-    gateway = gatewayFactory.beginSession();
-    anotherGateway = gatewayFactory.beginSession();
-
+    gateway = gatewayFactory.obtainGateway();
+    anotherGateway = gatewayFactory.obtainGateway();
+    gateway.begin();
+    anotherGateway.begin();
   }
 
   @After

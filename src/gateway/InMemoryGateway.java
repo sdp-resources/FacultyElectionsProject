@@ -239,6 +239,26 @@ public class InMemoryGateway implements Gateway {
     return election.getVoter(profile) != null;
   }
 
+  public void begin() {
+
+  }
+
+  public void commit() {
+
+  }
+
+  public void close() {
+
+  }
+
+  public void rollback() {
+
+  }
+
+  public void shutdown() {
+
+  }
+
   public EntityFactory getEntityFactory() {
     return entityFactory;
   }

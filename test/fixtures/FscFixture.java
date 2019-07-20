@@ -23,8 +23,8 @@ public class FscFixture {
     return TestContext.app.hasContractType(contractType);
   }
 
-  public boolean createCommittee(String name, String description) {
-    return TestContext.app.addCommittee(name, description);
+  public boolean createCommittee(String name, String description, String voterQueryString) {
+    return TestContext.app.addCommittee(name, description, voterQueryString);
   }
 
   public boolean addNamedQuery(String name, String queryString) {
@@ -33,5 +33,9 @@ public class FscFixture {
 
   public boolean createSeat(String committeeName, String seatName, String query) {
     return TestContext.app.addSeat(committeeName, seatName, query);
+  }
+
+  public void closeContext() {
+    TestContext.closeAppContext();
   }
 }

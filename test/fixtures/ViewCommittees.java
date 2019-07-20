@@ -18,6 +18,7 @@ public class ViewCommittees {
   private static List<List<String>> getListFromCommittee(ViewableCommittee committee) {
     return List.of(List.of("name", committee.name),
                    List.of("description", committee.description),
+                   List.of("voter query", committee.voterQuery),
                    List.of("number of seats", String.valueOf(committee.seats.size())));
   }
 }

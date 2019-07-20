@@ -22,6 +22,7 @@ public class ViewableEntityConverter {
 
   private ViewableCommittee convert(Committee committee) {
     return new ViewableCommittee(committee.getName(), committee.getDescription(),
+                                 convert(committee.getVoterQuery()),
                                  convertSeats(committee.getSeats()));
   }
 

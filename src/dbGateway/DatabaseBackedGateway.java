@@ -19,7 +19,6 @@ public class DatabaseBackedGateway implements Gateway {
   public DatabaseBackedGateway(EntityManager entityManager) {
     this.entityManager = entityManager;
     entityFactory = new PersistingEntityFactory(basicFactory, entityManager);
-    begin();
   }
 
   public void begin() {
@@ -27,7 +26,9 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void commit() {
-    entityManager.getTransaction().commit();
+    if (entityManager.getTransaction().isActive()) {
+      entityManager.getTransaction().commit();
+    }
   }
 
   private <T> T find(Class<T> aClass, Object o) {
@@ -35,9 +36,17 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void close() {
+    rollback();
+    entityManager.close();
+  }
+
+  public void rollback() {
     if (entityManager.getTransaction().isActive()) {
       entityManager.getTransaction().rollback();
     }
+  }
+
+  public void shutdown() {
     entityManager.close();
   }
 
@@ -112,12 +121,13 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addVoteRecord(VoteRecord voteRecord) {
-
+    entityManager.persist(voteRecord);
   }
 
   public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
-    // TODO
-    return null;
+    VoteRecord voteRecord = find(VoteRecord.class, recordId);
+    if (voteRecord == null) { throw new NoVoteRecordException(); }
+    return voteRecord;
   }
 
   public Election getElection(long electionID) throws InvalidElectionIDException {
@@ -135,12 +145,13 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public Voter getVoter(long voterId) throws InvalidVoterException {
-    // TODO
-    return null;
+    Voter voter = find(Voter.class, voterId);
+    if (voter == null) { throw new InvalidVoterException(); }
+    return voter;
   }
 
   public void addVoter(Voter voter) {
-    // TODO
+    entityManager.persist(voter);
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {

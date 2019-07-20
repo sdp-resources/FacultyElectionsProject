@@ -62,8 +62,10 @@ public class CommitteeFetcher extends ProfileFetcher {
     }
   }
 
-  public Builder<Committee, Response> makeCommittee(String name, String description) {
-    return Builder.ofValue(entityFactory.createCommittee(name, description, null));
+  public Builder<Committee, Response> makeCommittee(
+        String name, String description, Query voterQuery
+  ) {
+    return Builder.ofValue(entityFactory.createCommittee(name, description, voterQuery));
   }
 
   public Boolean hasCommittee(Committee committee) {

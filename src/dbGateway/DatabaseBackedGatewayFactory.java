@@ -7,10 +7,10 @@ public class DatabaseBackedGatewayFactory {
   private EntityManagerFactory sessionFactory;
 
   public DatabaseBackedGatewayFactory() {
-    this.sessionFactory = Persistence.createEntityManagerFactory("org.skiadas.local");
+      this.sessionFactory = Persistence.createEntityManagerFactory("org.skiadas.local");
   }
 
-  public DatabaseBackedGateway beginSession() {
+  public DatabaseBackedGateway obtainGateway() {
     return new DatabaseBackedGateway(sessionFactory.createEntityManager());
   }
 }

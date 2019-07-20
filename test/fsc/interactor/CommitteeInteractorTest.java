@@ -3,6 +3,7 @@ package fsc.interactor;
 import fsc.entity.Committee;
 import fsc.entity.EntityFactory;
 import fsc.entity.SimpleEntityFactory;
+import fsc.entity.query.Query;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
 import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.CreateCommitteeRequest;
@@ -22,8 +23,9 @@ public class CommitteeInteractorTest {
 
   @Before
   public void setup() {
-    request = new CreateCommitteeRequest(COMMITTEE_NAME, COMMITTEE_DESCRIPTION);
-    expectedCommittee = entityFactory.createCommittee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION, null);
+    request = new CreateCommitteeRequest(COMMITTEE_NAME, COMMITTEE_DESCRIPTION, "all");
+    expectedCommittee = entityFactory.createCommittee(COMMITTEE_NAME, COMMITTEE_DESCRIPTION,
+                                                      Query.all());
   }
 
   @Test

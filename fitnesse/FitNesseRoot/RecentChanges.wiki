@@ -1,7 +1,9 @@
-|FacultyVoting.Voting.CanCastAVote||13:28:07 Fri, Jul 19, 2019|
-|FacultyVoting.ScenarioLibrary||16:46:19 Thu, Jul 18, 2019|
-|FacultyVoting.Committees.CanEditSeatInformation||11:57:50 Sun, Jul 14, 2019|
-|FacultyVoting.Committees.CanCreateCommitteeAndSeats||20:28:41 Sat, Jul 13, 2019|
+|FacultyVoting.Voting.CanCastAVote||17:52:10 Sat, Jul 20, 2019|
+|FacultyVoting.TearDown||17:48:54 Sat, Jul 20, 2019|
+|FacultyVoting.Committees.CanEditSeatInformation||17:22:46 Sat, Jul 20, 2019|
+|FacultyVoting.Committees.CanCreateCommitteeAndSeats||17:10:51 Sat, Jul 20, 2019|
+|FacultyVoting.ScenarioLibrary||17:09:59 Sat, Jul 20, 2019|
+|FacultyVoting||15:38:43 Sat, Jul 20, 2019|
 |FacultyVoting.Queries.CanValidateQueryStrings||20:56:58 Sat, Jun 15, 2019|
 |FacultyVoting.Queries.CanApplyQueriesToProfiles||13:57:44 Sat, Jun 15, 2019|
 |FacultyVoting.Queries.CanCreateAndViewQueries||17:39:44 Fri, Jun 14, 2019|
@@ -18,7 +20,6 @@
 |FacultyVoting.Profiles.ScenarioLibrary||11:34:39 Tue, May 28, 2019|
 |FacultyVoting.Profiles.SetUp||11:31:32 Tue, May 28, 2019|
 |FacultyVoting.Profiles.CannotAddExistingProfiles||20:16:58 Mon, May 27, 2019|
-|FacultyVoting||19:42:42 Mon, May 27, 2019|
 |FacultyVoting.Profiles.CanViewContractTypes||19:20:13 Mon, May 27, 2019|
 |FacultyVoting.Profiles.CanViewDivisions||19:19:39 Mon, May 27, 2019|
 |FacultyVoting.Profiles.CanViewDivisions.CanViewContractTypes||19:11:38 Mon, May 27, 2019|
