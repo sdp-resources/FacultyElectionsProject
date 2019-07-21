@@ -3,21 +3,18 @@ package fsc.entity;
 import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Election {
 
-  private List<Candidate> candidates = new ArrayList<>();
+  private Collection<Candidate> candidates = new ArrayList<>();
   private Seat seat;
   private Long ID;
   private State state;
   private Query candidateQuery;
-  private List<Voter> voters;
+  private Collection<Voter> voters = new ArrayList<>();
+  private Collection<VoteRecord> voteRecords = new ArrayList<>();
 
-  // TODO: Add Voter relationship
-  // TODO: Add Votes relationship
   // TODO: Add dates to elections?
 
   // TODO: Election states
@@ -43,15 +40,12 @@ public class Election {
   //    - Admin cannot change candidates or add/remove candidates
   //    - Admin can view election results
 
+  public Election() { }
+
   public Election(Seat seat) {
     this.seat = seat;
     this.candidateQuery = seat.getCandidateQuery();
     this.state = State.Setup;
-    setVoters(new ArrayList<>());
-  }
-
-  public Election() {
-    setVoters(new ArrayList<>());
   }
 
   public Long getID() {
@@ -72,7 +66,7 @@ public class Election {
     return seat;
   }
 
-  public List<Candidate> getCandidates() {
+  public Collection<Candidate> getCandidates() {
     return candidates;
   }
 
@@ -105,11 +99,15 @@ public class Election {
     return candidates.stream().anyMatch((c) -> c.matchesProfile(profile));
   }
 
+  public boolean hasCandidate(String username) {
+    return candidates.stream().anyMatch((c) -> c.matchesUsername(username));
+  }
+
   public void removeCandidate(Profile profile) {
     candidates.removeIf(i -> i.matchesProfile(profile));
   }
 
-  public List<Profile> getCandidateProfiles() {
+  public Collection<Profile> getCandidateProfiles() {
     return Candidate.toProfiles(candidates);
   }
 
@@ -130,12 +128,20 @@ public class Election {
     return null;
   }
 
-  public List<Voter> getVoters() {
+  public Collection<Voter> getVoters() {
     return voters;
   }
 
-  public void setVoters(List<Voter> voters) {
+  public void setVoters(Collection<Voter> voters) {
     this.voters = voters;
+  }
+
+  public Collection<VoteRecord> getVoteRecords() {
+    return voteRecords;
+  }
+
+  public void setVoteRecords(Collection<VoteRecord> voteRecords) {
+    this.voteRecords = voteRecords;
   }
 
   public boolean isInSetupState() {

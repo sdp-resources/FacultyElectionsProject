@@ -46,7 +46,7 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
     return storedElection;
   }
 
-  public List<VoteRecord> getAllVotes(Election election) {
+  public Collection<VoteRecord> getAllVotes(Election election) {
     return voteRecords;
   }
 

@@ -4,7 +4,6 @@ import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
 import java.util.Collection;
-import java.util.List;
 
 public class RejectingElectionGatewaySpy implements ElectionGateway {
   public Long requestedElectionId;
@@ -27,7 +26,7 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     throw new InvalidElectionIDException();
   }
 
-  public List<VoteRecord> getAllVotes(Election election) {
+  public Collection<VoteRecord> getAllVotes(Election election) {
     return null;
   }
 

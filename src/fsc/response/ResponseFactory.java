@@ -7,6 +7,7 @@ import fsc.service.Context;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.ViewableValidationResult;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class ResponseFactory {
     ResponseFactory.entityConverter = entityConverter;
   }
 
-  public static Response ofProfileList(List<Profile> profiles) {
+  public static Response ofProfileList(Collection<Profile> profiles) {
     return new ViewResponse<>(entityConverter.convertProfiles(profiles));
   }
 
@@ -53,7 +54,7 @@ public class ResponseFactory {
     return new ViewResponse<>(entityConverter.convert(voteRecord));
   }
 
-  public static Response ofVoteRecordList(List<VoteRecord> voteRecordList) {
+  public static Response ofVoteRecordList(Collection<VoteRecord> voteRecordList) {
     return new ViewResponse<>(entityConverter.convertVoteRecordList(voteRecordList));
   }
 

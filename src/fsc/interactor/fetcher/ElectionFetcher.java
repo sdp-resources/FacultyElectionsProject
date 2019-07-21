@@ -10,6 +10,7 @@ import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ElectionFetcher extends CommitteeFetcher {
@@ -87,7 +88,7 @@ public class ElectionFetcher extends CommitteeFetcher {
     electionGateway.addVoteRecord(pair.voteRecord);
   }
 
-  public List<VoteRecord> getAllVotes(Election election) {
+  public Collection<VoteRecord> getAllVotes(Election election) {
     return electionGateway.getAllVotes(election);
   }
 

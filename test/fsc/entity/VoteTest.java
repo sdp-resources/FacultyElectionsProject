@@ -4,12 +4,13 @@ import fsc.mock.EntityStub;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class VoteTest {
-  private List<Candidate> candidates;
+  private Collection<Candidate> candidates;
   private Election election;
   private Candidate candidate1;
   private Candidate candidate2;

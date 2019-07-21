@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static fsc.entity.VoteRecordTest.assertCloseDates;
 import static junit.framework.TestCase.assertTrue;
@@ -104,7 +105,12 @@ public class SubmitVoteRecordTest extends ElectionTest {
     assertNotNull(submittedVoteRecord);
     assertEquals(ResponseFactory.ofVoteRecord(submittedVoteRecord), response);
     assertCloseDates(LocalDateTime.now(), submittedVoteRecord.getDate());
-    assertEquals(List.of(candidate), submittedVoteRecord.getVotes());
+    List<Profile> candidateProfiles = List.of(this.candidate);
+    List<String> candidateUsernames = candidateProfiles.stream()
+                                                       .map(Profile::getUsername)
+                                                       .collect(Collectors.toList());
+
+    assertEquals(candidateUsernames, submittedVoteRecord.getVotes());
     assertEquals(election, submittedVoteRecord.getElection());
     assertEquals(voter, election.getVoter(profile));
     assertTrue(electionGateway.hasSaved);

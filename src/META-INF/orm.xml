@@ -52,6 +52,11 @@
                     <cascade-all/>
                 </cascade>
             </one-to-many>
+            <one-to-many name="voteRecords" target-entity="fsc.entity.VoteRecord" mapped-by="election">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
             <one-to-many name="candidates" target-entity="fsc.entity.Candidate" mapped-by="election">
                 <cascade>
                     <cascade-all/>
@@ -98,7 +103,13 @@
             </id>
             <many-to-one name="election" target-entity="fsc.entity.Election">
             </many-to-one>
-            <transient name="votes"/>
+            <element-collection name="votes" fetch="EAGER">
+                <order-column name="rank"/>
+                <column name="vote_for"/>
+                <collection-table name="votes">
+                <join-column name="record_id" />
+                </collection-table>
+            </element-collection>
         </attributes>
     </entity>
     <entity class="fsc.entity.Committee" name="Committee" access="FIELD">

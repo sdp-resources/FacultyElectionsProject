@@ -8,6 +8,7 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -42,7 +43,7 @@ public class BallotCreatorTest {
     assertSameLists(election.getCandidates(), mockGateway.getAllProfiles());
   }
 
-  private void assertSameLists(List<Candidate> list1, List<Profile> list2) {
+  private void assertSameLists(Collection<Candidate> list1, List<Profile> list2) {
     for (Candidate candidate: list1) {
       assertTrue(list2.contains(candidate.getProfile()));
     }

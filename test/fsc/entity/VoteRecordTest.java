@@ -1,6 +1,7 @@
 package fsc.entity;
 
 import fsc.mock.EntityStub;
+import fsc.service.ViewableEntityConverter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +32,8 @@ public class VoteRecordTest {
 
   @Test
   public void voteRecordCreatedProperly() {
-    assertEquals(votes, voteRecord.getVotes());
+    assertEquals(new ViewableEntityConverter().getUsernames(votes),
+                 voteRecord.getVotes());
     assertCloseDates(LocalDateTime.now(), voteRecord.getDate());
     assertEquals(election, voteRecord.getElection());
   }

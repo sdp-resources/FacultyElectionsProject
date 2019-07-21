@@ -136,8 +136,9 @@ public class DatabaseBackedGateway implements Gateway {
     return election;
   }
 
-  public List<VoteRecord> getAllVotes(Election election) {
-    return null;
+  public Collection<VoteRecord> getAllVotes(Election election) {
+    entityManager.refresh(election);
+    return election.getVoteRecords();
   }
 
   public Collection<Election> getAllElections() {

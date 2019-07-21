@@ -175,7 +175,7 @@ public class InMemoryGateway implements Gateway {
     throw new InvalidElectionIDException();
   }
 
-  public List<VoteRecord> getAllVotes(Election election) {
+  public Collection<VoteRecord> getAllVotes(Election election) {
     return voteRecords.stream().filter(r -> r.getElection().equals(election))
                       .collect(Collectors.toList());
   }

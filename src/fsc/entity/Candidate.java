@@ -1,6 +1,7 @@
 package fsc.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ public class Candidate {
   private Election election;
 
   private Status status;
+
   Candidate(Profile profile, Election election) {
     setCandidateId(new CandidateId(profile.getUsername(), election.getID()));
     this.profile = profile;
@@ -32,6 +34,7 @@ public class Candidate {
 
     status = Status.NoAnswer;
   }
+
   boolean matchesUsername(String username) {
     return profile.getUsername().equals(username);
   }
@@ -68,7 +71,7 @@ public class Candidate {
     this.status = status;
   }
 
-  public static List<Profile> toProfiles(List<Candidate> candidates) {
+  public static List<Profile> toProfiles(Collection<Candidate> candidates) {
     return candidates.stream().filter(Candidate::hasNotDeclined)
                      .map(Candidate::getProfile).collect(Collectors.toList());
   }

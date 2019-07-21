@@ -61,7 +61,7 @@ public class ViewVoteRecordTest extends ElectionTest {
     assertTrue(response.isSuccessful());
     ViewableEntityConverter entityConverter = new ViewableEntityConverter();
     ViewableVoteRecord resultRecord = response.getValues();
-    assertEquals(entityConverter.convertProfiles(votes), resultRecord.votes);
+    assertEquals(entityConverter.getUsernames(votes), resultRecord.votes);
     assertEquals(RECORD_ID, resultRecord.recordId.longValue());
     assertNotNull(resultRecord.timestamp);
   }

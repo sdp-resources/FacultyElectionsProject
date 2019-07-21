@@ -1,6 +1,5 @@
 package fixtures;
 
-import fsc.viewable.ViewableProfile;
 import fsc.viewable.ViewableVoteRecord;
 
 import java.util.List;
@@ -16,11 +15,7 @@ public class ViewVoteRecord {
 
   public List<List<List<String>>> query() {
     return voteRecord.votes.stream()
-                           .map(this::getListFromProfile)
+                           .map(s -> List.of(List.of("name", s)))
                            .collect(Collectors.toList());
-  }
-
-  private List<List<String>> getListFromProfile(ViewableProfile profile) {
-    return List.of(List.of("name", profile.getUsername()));
   }
 }

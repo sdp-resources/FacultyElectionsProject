@@ -5,6 +5,7 @@ import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -57,13 +58,21 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
   }
 
   @Test
-  public void canAddAVoteRecord() throws ElectionGateway.NoVoteRecordException {
+  public void canAddAVoteRecord()
+        throws ElectionGateway.NoVoteRecordException, ElectionGateway.InvalidElectionIDException {
     saveTheElection();
     Voter voter = saveAVoter();
     VoteRecord voteRecord = castAVote(voter);
     assertNotNull(voteRecord.getRecordId());
     VoteRecord voteRecord1 = anotherGateway.getVoteRecord(voteRecord.getRecordId());
     assertEquals(voteRecord, voteRecord1);
+    Election election = anotherGateway.getElection(this.election.getID());
+    Collection<VoteRecord> voteRecords = election.getVoteRecords();
+    assertEquals(1, voteRecords.size());
+    for (VoteRecord record : voteRecords) {
+      assertEquals(voteRecord, record);
+    }
+
   }
 
   public Voter saveAVoter() {
@@ -87,8 +96,6 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
     gateway.save();
     gateway.commit();
     return voteRecord;
-
-
   }
 
   private void saveTheElection() {

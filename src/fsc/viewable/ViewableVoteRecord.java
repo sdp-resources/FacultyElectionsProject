@@ -6,9 +6,9 @@ import java.util.Objects;
 public class ViewableVoteRecord {
   public final Long recordId;
   public final String timestamp;
-  public final List<ViewableProfile> votes;
+  public final List<String> votes;
 
-  public ViewableVoteRecord(String timestamp, Long recordId, List<ViewableProfile> votes) {
+  public ViewableVoteRecord(String timestamp, Long recordId, List<String> votes) {
     this.timestamp = timestamp;
     this.recordId = recordId;
     this.votes = votes;

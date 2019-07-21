@@ -25,8 +25,6 @@ public class ViewVotes {
   }
 
   private String concatenateNames(ViewableVoteRecord record) {
-    return record.votes.stream()
-                       .map(v -> v.username)
-                       .collect(Collectors.joining(","));
+    return String.join(",", record.votes);
   }
 }

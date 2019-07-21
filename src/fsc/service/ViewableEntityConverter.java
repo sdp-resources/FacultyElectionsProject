@@ -46,7 +46,7 @@ public class ViewableEntityConverter {
     return new ViewableVoteRecord(
           convert(voteRecord.getDate()),
           voteRecord.getRecordId(),
-          convertProfiles(voteRecord.getVotes()));
+          voteRecord.getVotes());
   }
 
   private String convert(Query query) {
@@ -62,7 +62,7 @@ public class ViewableEntityConverter {
                                 convertBallot(election.getCandidates()));
   }
 
-  public List<ViewableProfile> convertProfiles(List<Profile> profiles) {
+  public Collection<ViewableProfile> convertProfiles(Collection<Profile> profiles) {
     return profiles.stream().map(this::convert).collect(Collectors.toList());
   }
 
@@ -74,7 +74,7 @@ public class ViewableEntityConverter {
     return committees.stream().map(this::convert).collect(Collectors.toList());
   }
 
-  public List<ViewableVoteRecord> convertVoteRecordList(List<VoteRecord> voteRecordList) {
+  public List<ViewableVoteRecord> convertVoteRecordList(Collection<VoteRecord> voteRecordList) {
     return voteRecordList.stream().map(this::convert).collect(Collectors.toList());
   }
 
@@ -105,5 +105,9 @@ public class ViewableEntityConverter {
                              voter.hasVoted(),
                              convert(voter.getProfile()),
                              convert(voter.getElection()));
+  }
+
+  public List<String> getUsernames(List<Profile> profiles) {
+    return profiles.stream().map(Profile::getUsername).collect(Collectors.toList());
   }
 }

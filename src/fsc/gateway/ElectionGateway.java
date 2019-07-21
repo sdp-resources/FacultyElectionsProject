@@ -11,7 +11,7 @@ public interface ElectionGateway {
   void addVoteRecord(VoteRecord voteRecord);
   VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException;
   Election getElection(long electionID) throws InvalidElectionIDException;
-  List<VoteRecord> getAllVotes(Election election);
+  Collection<VoteRecord> getAllVotes(Election election);
   Collection<Election> getAllElections();
   Voter getVoter(long voterId) throws InvalidVoterException;
   void addVoter(Voter voter) throws ExistingVoterException;
