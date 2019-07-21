@@ -8,8 +8,6 @@ import fsc.viewable.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class ViewableEntityConverter {
 
@@ -52,9 +50,9 @@ public class ViewableEntityConverter {
 
   public ViewableVoter convert(Voter voter) {
     return new ViewableVoter(voter.getVoterId(),
+                             voter.getElection().getID(),
                              voter.hasVoted(),
-                             convert(voter.getProfile()),
-                             convert(voter.getElection()));
+                             convert(voter.getProfile()));
   }
 
   public ViewableVoteRecord convert(VoteRecord voteRecord) {
@@ -74,31 +72,28 @@ public class ViewableEntityConverter {
                                 election.getState().toString(),
                                 convert(election.getSeat()),
                                 convert(election.getCandidateQuery()),
-                                convertCandidates(election.getCandidates()));
-  }
-
-  private <T, S> List<T> convertList(Collection<S> items, Function<S, T> f) {
-    return items.stream().map(f).collect(Collectors.toList());
+                                convertCandidates(election.getCandidates()),
+                                convertVoters(election.getVoters()));
   }
 
   private Collection<ViewableVoter> convertVoters(Collection<Voter> voters) {
-    return convertList(voters, this::convert);
+    return MyUtils.convertList(voters, this::convert);
   }
 
   public Collection<ViewableProfile> convertProfiles(Collection<Profile> profiles) {
-    return convertList(profiles, this::convert);
+    return MyUtils.convertList(profiles, this::convert);
   }
 
   private List<ViewableSeat> convertSeats(Set<Seat> seats) {
-    return convertList(seats, this::convert);
+    return MyUtils.convertList(seats, this::convert);
   }
 
   public List<ViewableCommittee> convertCommittees(List<Committee> committees) {
-    return convertList(committees, this::convert);
+    return MyUtils.convertList(committees, this::convert);
   }
 
   public List<ViewableVoteRecord> convertVoteRecordList(Collection<VoteRecord> voteRecordList) {
-    return convertList(voteRecordList, this::convert);
+    return MyUtils.convertList(voteRecordList, this::convert);
   }
 
   public Map<String, String> convertQueries(Map<String, Query> queries) {
@@ -108,15 +103,15 @@ public class ViewableEntityConverter {
   }
 
   public List<String> convertDivisions(List<Division> divisions) {
-    return convertList(divisions, this::convert);
+    return MyUtils.convertList(divisions, this::convert);
   }
 
   public List<String> convertContractTypes(List<ContractType> contractTypes) {
-    return convertList(contractTypes, this::convert);
+    return MyUtils.convertList(contractTypes, this::convert);
   }
 
   private List<ViewableCandidate> convertCandidates(Collection<Candidate> candidates) {
-    return convertList(candidates, this::convert);
+    return MyUtils.convertList(candidates, this::convert);
   }
 
   private ViewableProfile nullOrConvert(Profile profile) {
@@ -124,6 +119,10 @@ public class ViewableEntityConverter {
   }
 
   public List<String> getUsernames(List<Profile> profiles) {
-    return convertList(profiles, Profile::getUsername);
+    return MyUtils.convertList(profiles, Profile::getUsername);
+  }
+
+  public List<ViewableElection> convertElectionList(Collection<Election> elections) {
+    return MyUtils.convertList(elections, this::convert);
   }
 }
