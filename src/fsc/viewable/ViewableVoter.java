@@ -4,17 +4,16 @@ import java.util.Objects;
 
 public class ViewableVoter {
   public final long voterId;
+  public final long electionId;
   public final boolean voted;
   public final ViewableProfile profile;
-  public final ViewableElection election;
 
   public ViewableVoter(
-        long voterId, boolean voted, ViewableProfile profile,
-        ViewableElection election
+        long voterId, long electionId, boolean voted, ViewableProfile profile
   ) {
     this.voterId = voterId;
     this.profile = profile;
-    this.election = election;
+    this.electionId = electionId;
     this.voted = voted;
   }
 
@@ -25,11 +24,11 @@ public class ViewableVoter {
     return voterId == that.voterId &&
                  voted == that.voted &&
                  Objects.equals(profile, that.profile) &&
-                 Objects.equals(election, that.election);
+                 Objects.equals(electionId, that.electionId);
   }
 
   public int hashCode() {
-    return Objects.hash(voterId, voted, profile, election);
+    return Objects.hash(voterId, voted, profile, electionId);
   }
 
   public String toString() {
@@ -37,7 +36,7 @@ public class ViewableVoter {
                  "voterId=" + voterId +
                  ", voted=" + voted +
                  ", profile=" + profile.username +
-                 ", election=" + election.electionID +
+                 ", election=" + electionId +
                  '}';
   }
 }

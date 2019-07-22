@@ -3,19 +3,19 @@ package fsc.entity;
 import fsc.entity.query.Query;
 import fsc.gateway.ElectionGateway;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Election {
 
   private Collection<Candidate> candidates = new ArrayList<>();
   private Seat seat;
+  private LocalDateTime date;
   private Long ID;
   private State state;
   private Query candidateQuery;
   private Collection<Voter> voters = new ArrayList<>();
   private Collection<VoteRecord> voteRecords = new ArrayList<>();
-
-  // TODO: Add dates to elections?
 
   // TODO: Election states
   // 0. Election state can be changed with ChangeElectionStateRequest
@@ -46,6 +46,7 @@ public class Election {
     this.seat = seat;
     this.candidateQuery = seat.getCandidateQuery();
     this.state = State.Setup;
+    this.date = LocalDateTime.now();
   }
 
   public Long getID() {
@@ -161,6 +162,10 @@ public class Election {
 
   public int hashCode() {
     return Objects.hash(seat, ID, state, candidateQuery);
+  }
+
+  public void addVoteRecord(VoteRecord voteRecord) {
+    this.voteRecords.add(voteRecord);
   }
 
   public enum State {

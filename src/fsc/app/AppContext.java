@@ -10,6 +10,7 @@ import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
 import fsc.viewable.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -152,5 +153,13 @@ public class AppContext {
 
   public void shutdown() {
     gateway.shutdown();
+  }
+
+  public Collection<ViewableElection> getAllElections() {
+    return getValues(requestFactory.viewAllElections());
+  }
+
+  public ViewableElection viewElection(Long electionId) {
+    return getValues(requestFactory.viewElection(electionId));
   }
 }

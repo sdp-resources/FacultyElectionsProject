@@ -52,6 +52,7 @@ public class VoteRecord {
 
   public void setElection(Election election) {
     this.election = election;
+    election.addVoteRecord(this);
   }
 
   public List<String> getVotes() {

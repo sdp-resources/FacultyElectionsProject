@@ -110,7 +110,11 @@ public class ElectionFetcher extends CommitteeFetcher {
   }
 
   public Builder<Voter, Response> createVoter(Profile profile, Election election) {
-    return Builder.ofValue(entityFactory.createVoter(profile, election));
+    return Builder.ofValue(makeVoter(profile, election));
+  }
+
+  public Voter makeVoter(Profile profile, Election election) {
+    return entityFactory.createVoter(profile, election);
   }
 
   public Builder<Voter, Response> addVoter(Voter voter) {
@@ -132,6 +136,11 @@ public class ElectionFetcher extends CommitteeFetcher {
         election.addCandidate(entityFactory.createCandidate(profile, election));
     }
   }
+
+  public Builder<Collection<Election>, Response> fetchAllElections() {
+    return Builder.ofValue(electionGateway.getAllElections());
+  }
+
 
   public class VoteRecordPair {
 

@@ -50,7 +50,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     assertNotNull(electionGateway.submittedVoter);
     ViewableVoter responseVoter = response.getValues();
     assertEquals(USERNAME, responseVoter.profile.getUsername());
-    assertElectionIdEquals(responseVoter.election.electionID, election.getID());
+    assertElectionIdEquals(responseVoter.electionId, election.getID());
   }
 
   @Test

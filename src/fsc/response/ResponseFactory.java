@@ -145,4 +145,8 @@ public class ResponseFactory {
   public static Response improperElectionState() {
     return new ErrorResponse(ErrorResponse.IMPROPER_ELECTION_STATE);
   }
+
+  public static Response ofElectionList(Collection<Election> elections) {
+    return new ViewResponse<>(entityConverter.convertElectionList(elections));
+  }
 }

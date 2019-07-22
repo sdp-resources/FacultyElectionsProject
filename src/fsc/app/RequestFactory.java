@@ -93,4 +93,14 @@ public class RequestFactory {
   public Request addVoter(String username, Long electionId) {
     return new AddVoterRequest(username, electionId);
   }
+
+  // TODO: Only for admins
+  public Request viewAllElections() {
+    return new ViewAllElectionsRequest();
+  }
+
+  // TODO: Only for admins?
+  public Request viewElection(Long electionId) {
+    return new ViewElectionRequest(electionId);
+  }
 }

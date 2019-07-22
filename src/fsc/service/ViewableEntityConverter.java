@@ -67,13 +67,13 @@ public class ViewableEntityConverter {
   }
 
   public ViewableElection convert(Election election) {
-    // TODO  Fill in Votes and Voters once they are added
     return new ViewableElection(election.getID(),
                                 election.getState().toString(),
                                 convert(election.getSeat()),
                                 convert(election.getCandidateQuery()),
                                 convertCandidates(election.getCandidates()),
-                                convertVoters(election.getVoters()));
+                                convertVoters(election.getVoters()),
+                                convertVoteRecordList(election.getVoteRecords()));
   }
 
   private Collection<ViewableVoter> convertVoters(Collection<Voter> voters) {

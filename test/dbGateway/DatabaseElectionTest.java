@@ -64,14 +64,15 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
     Voter voter = saveAVoter();
     VoteRecord voteRecord = castAVote(voter);
     assertNotNull(voteRecord.getRecordId());
-    VoteRecord voteRecord1 = anotherGateway.getVoteRecord(voteRecord.getRecordId());
-    assertEquals(voteRecord, voteRecord1);
-    Election election = anotherGateway.getElection(this.election.getID());
-    Collection<VoteRecord> voteRecords = election.getVoteRecords();
+    Election election1 = anotherGateway.getElection(this.election.getID());
+    Collection<VoteRecord> voteRecords = election1.getVoteRecords();
+    assertEquals(1, election.getVoteRecords().size());
     assertEquals(1, voteRecords.size());
     for (VoteRecord record : voteRecords) {
       assertEquals(voteRecord, record);
     }
+    VoteRecord voteRecord1 = anotherGateway.getVoteRecord(voteRecord.getRecordId());
+    assertEquals(voteRecord, voteRecord1);
 
   }
 

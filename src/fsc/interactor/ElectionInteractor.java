@@ -9,7 +9,10 @@ import fsc.interactor.fetcher.ElectionFetcher;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.service.MyUtils;
 import fsc.utils.builder.Builder;
+
+import java.util.List;
 
 public class ElectionInteractor extends Interactor {
   private ElectionFetcher electionFetcher;
@@ -28,6 +31,11 @@ public class ElectionInteractor extends Interactor {
                           .perform(electionFetcher::addElection)
                           .perform(electionFetcher::save)
                           .resolveWith(ResponseFactory::ofElection);
+  }
+
+  public Response execute(ViewAllElectionsRequest request) {
+    return electionFetcher.fetchAllElections()
+                          .resolveWith(ResponseFactory::ofElectionList);
   }
 
   public Response execute(EditBallotQueryRequest request) {
@@ -113,6 +121,14 @@ public class ElectionInteractor extends Interactor {
   private Builder<Election, Response> createElection(Seat seat) {
     Election election = electionFetcher.createElection(seat);
     setupNewDefaultQuery(election, seat.getCandidateQuery());
+    return populateVoterListForElection(election);
+  }
+
+  private Builder<Election, Response> populateVoterListForElection(Election election) {
+    Query voterQuery = election.getSeat().getCommittee().getVoterQuery();
+    List<Profile> voterProfiles = electionFetcher.getProfilesMatchingQuery(voterQuery);
+    election.setVoters(MyUtils.convertList(voterProfiles,
+                                           p -> electionFetcher.makeVoter(p, election)));
     return Builder.ofValue(election);
   }
 

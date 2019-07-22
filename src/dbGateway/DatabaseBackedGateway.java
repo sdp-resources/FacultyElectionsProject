@@ -142,7 +142,8 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public Collection<Election> getAllElections() {
-    return null;
+    return entityManager.createQuery("SELECT e FROM Election e")
+                                        .getResultList();
   }
 
   public Voter getVoter(long voterId) throws InvalidVoterException {
@@ -162,7 +163,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public List<Profile> getAllProfiles() {
-    return (List<Profile>) entityManager.createQuery("SELECT p FROM Profile p")
+    return entityManager.createQuery("SELECT p FROM Profile p")
                                         .getResultList();
   }
 
