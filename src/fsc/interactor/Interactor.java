@@ -61,7 +61,16 @@ public abstract class Interactor {
     return request.getSession().isAuthorizedForRole(role);
   }
 
+  public boolean isAuthorizedAsUser(Request request, String username) {
+    return request.getSession().matchesUser(username);
+  }
+
   public boolean isAuthorizedAsAdmin(Request request) {
     return isAuthorizedForRole(request, Authorizer.Role.ROLE_ADMIN);
+  }
+
+  public boolean isAuthorizedAsAdminOrUser(Request request, String username) {
+    return isAuthorizedAsAdmin(request) ||
+          isAuthorizedAsUser(request, username);
   }
 }

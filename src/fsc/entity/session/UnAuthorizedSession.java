@@ -10,4 +10,8 @@ public class UnAuthorizedSession implements Session {
   public boolean isAuthorizedForRole(Authorizer.Role role) {
     return false;
   }
+
+  public boolean matchesUser(String username) {
+    return false;
+  }
 }

@@ -23,12 +23,39 @@ public class ViewProfileInteractorTest {
     ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
 
     ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
+    request.setSession(EntityStub.adminSession());
     ProfileInteractor interactor = new ProfileInteractor(gatewaySpy, entityFactory);
     Response response = interactor.execute(request);
 
     assertEquals(request.username, gatewaySpy.providedUsername);
     assertEquals(ResponseFactory.ofProfile(profile), response);
   }
+
+  @Test
+  public void usersCanViewTheirOwnProfiles() {
+    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
+
+    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
+    request.setSession(EntityStub.userSession(profile.getUsername()));
+    ProfileInteractor interactor = new ProfileInteractor(gatewaySpy, entityFactory);
+    Response response = interactor.execute(request);
+
+    assertEquals(request.username, gatewaySpy.providedUsername);
+    assertEquals(ResponseFactory.ofProfile(profile), response);
+  }
+
+  @Test
+  public void usersCannotViewOtherUsersProfiles() {
+    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
+
+    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
+    request.setSession(EntityStub.userSession(profile.getUsername()+"other"));
+    ProfileInteractor interactor = new ProfileInteractor(gatewaySpy, entityFactory);
+    Response response = interactor.execute(request);
+
+    assertEquals(ResponseFactory.notAuthorized(), response);
+  }
+
 
   @Test
   public void whenViewingMissingProfile_returnErrorResponse() {

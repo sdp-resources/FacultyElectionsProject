@@ -43,6 +43,8 @@ public class ProfileInteractor extends Interactor {
   public Response execute(ViewProfileRequest request) {
     return profileFetcher
                  .fetchProfile(request.username)
+                 .escapeUnless(isAuthorizedAsAdminOrUser(request, request.username),
+                               ResponseFactory.notAuthorized())
                  .resolveWith(ResponseFactory::ofProfile);
   }
 

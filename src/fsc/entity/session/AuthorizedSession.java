@@ -40,4 +40,8 @@ public class AuthorizedSession implements Session {
   public boolean isAuthorizedForRole(Authorizer.Role requiredRole) {
     return role.equals(requiredRole);
   }
+
+  public boolean matchesUser(String username) {
+    return this.username.equals(username);
+  }
 }
