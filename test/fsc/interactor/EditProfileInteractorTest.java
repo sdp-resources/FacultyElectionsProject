@@ -9,7 +9,6 @@ import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.request.EditProfileRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +26,7 @@ public class EditProfileInteractorTest {
     providedProfile = EntityStub.getProfile(0);
     profileGateway = new ExistingProfileGatewaySpy(providedProfile);
     request = new EditProfileRequest("rossB12");
+    request.setSession(EntityStub.adminSession());
     interactor = new ProfileInteractor(profileGateway, entityFactory);
   }
 
@@ -70,17 +70,25 @@ public class EditProfileInteractorTest {
     request.changeActiveStatus("active");
     interactor.execute(request);
     assertTrue(providedProfile.isActive());
-    Assert.assertEquals(request.username, profileGateway.providedUsername);
-    Assert.assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
-
+    assertEquals(request.username, profileGateway.providedUsername);
+    assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
   }
 
   @Test
   public void spyRemembersUsername() {
     request.changeActiveStatus("inactive");
-    interactor.execute(request);
+    Response response = interactor.execute(request);
+    assertTrue(response.isSuccessful());
     assertFalse(providedProfile.isActive());
-    Assert.assertEquals(request.username, profileGateway.providedUsername);
-    Assert.assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
+    assertEquals(request.username, profileGateway.providedUsername);
+    assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
+  }
+
+  @Test
+  public void whenNonAdminUserIsLoggedIn_throwError() {
+    request.setSession(EntityStub.userSession(providedProfile.getUsername()));
+    request.changeActiveStatus("inactive");
+    Response response = interactor.execute(request);
+    assertEquals(ResponseFactory.notAuthorized(), response);
   }
 }
