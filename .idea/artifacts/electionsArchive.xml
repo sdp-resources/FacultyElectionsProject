@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="electionsArchive">
+    <output-path>$PROJECT_DIR$/out/artifacts/electionsArchive</output-path>
+    <root id="archive" name="electionsArchive.war">
+      <element id="artifact" artifact-name="elections" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/.idea/web/WEB-INF/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

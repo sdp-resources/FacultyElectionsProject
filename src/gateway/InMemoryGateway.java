@@ -8,8 +8,7 @@ import fsc.gateway.QueryGateway;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,12 +30,8 @@ public class InMemoryGateway implements Gateway {
   private long electionId = 0;
 
   public static Gateway fromJSONFile(String path) {
-    try {
-      return fromReader(new JSONElectionDataReader(new File(path), entityFactory));
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-      throw new RuntimeException("file not found: " + path);
-    }
+      InputStream stream = InMemoryGateway.class.getResourceAsStream(path);
+      return fromReader(new JSONElectionDataReader(stream, entityFactory));
   }
 
   private static Gateway fromReader(ElectionDataReader dataReader) {

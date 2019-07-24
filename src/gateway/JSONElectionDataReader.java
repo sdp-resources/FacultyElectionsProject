@@ -6,9 +6,7 @@ import fsc.entity.query.Query;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Spliterator;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -17,14 +15,13 @@ class JSONElectionDataReader implements ElectionDataReader {
   private JSONObject jsonObject;
   private EntityFactory entityFactory;
 
-  public JSONElectionDataReader(File file, EntityFactory entityFactory) throws FileNotFoundException {
+  public JSONElectionDataReader(InputStream file, EntityFactory entityFactory) {
     jsonObject = readJson(file);
     this.entityFactory = entityFactory;
   }
 
-  private JSONObject readJson(File file) throws FileNotFoundException {
-    FileReader reader = new FileReader(file);
-    JSONTokener tokener = new JSONTokener(reader);
+  private JSONObject readJson(InputStream file) {
+    JSONTokener tokener = new JSONTokener(file);
     return new JSONObject(tokener);
   }
 

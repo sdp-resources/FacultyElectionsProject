@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="elections">
+    <output-path>$PROJECT_DIR$/out/artifacts/elections</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FacultyElectionsProject" />
+          <element id="jpa-descriptors" facet="FacultyElectionsProject/jpa/JPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql:mysql-connector-java:8.0.16" />
+          <element id="library" level="project" name="Hibernate 5.4.2-5.4.2" />
+          <element id="library" level="project" name="org.json:json:20180813" />
+          <element id="library" level="project" name="org.slf4j:slf4j-simple:1.7.26" />
+          <element id="library" level="project" name="com.sparkjava:spark-core:2.9.1" />
+          <element id="library" level="project" name="com.sparkjava:spark-template-handlebars:2.7.1" />
+          <element id="file-copy" path="$PROJECT_DIR$/fitnesse/fitnesse-standalone.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="FacultyElectionsProject/web/Web" />
+    </root>
+  </artifact>
+</component>
