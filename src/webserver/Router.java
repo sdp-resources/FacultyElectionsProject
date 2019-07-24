@@ -10,14 +10,14 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.HashMap;
 
 public class Router {
-  static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();//  private static final Gateway gateway = InMemoryGateway.fromJSONFile("assets/data/sample.json");
+  static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
   static Gateway gateway;
   static AppContext appContext;
 
   public static void setupRoutes(String resourcePath) {
     String path = resourcePath + "/data/sample.json";
+    // TODO: Move to a app-context pool
     gateway = InMemoryGateway.fromJSONFile(path);
-    // TODO: Move towards using AppContext
     appContext = new AppContext(gateway);
 
     Spark.staticFiles.location("/public");
@@ -38,8 +38,9 @@ public class Router {
   }
 
   static Object createElection(Request req, Response res) {
-    ViewableElection election = appContext.createElection(getParam(req, "committee"),
-                                                          getParam(req, "seat"));
+    fsc.response.Response response = appContext.createElection(getParam(req, "committee"),
+                                                                getParam(req, "seat"));
+    ViewableElection election = response.getValues();
     System.out.println(election);
     res.redirect("/election");
     return null;
@@ -55,10 +56,11 @@ public class Router {
   }
 
   static Object createProfile(Request req, Response res) {
-    boolean profileCreated = appContext.addProfile(
+    fsc.response.Response response = appContext.addProfile(
           getParam(req, "fullName"), getParam(req, "username"),
           getParam(req, "division"), getParam(req, "contractType")
     );
+    boolean profileCreated = response.isSuccessful();
     if (profileCreated) {
       res.redirect("/profile");
     } else {
@@ -68,21 +70,21 @@ public class Router {
   }
 
   static Object showAllCommitteesPage(Request req, Response res) {
-    HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
+    HashMap<Object, Object> returnedHash = new HashMap<>();
     returnedHash.put("committees", appContext.getAllCommittees());
     return serveTemplate("/committeeList.handlebars", returnedHash);
   }
 
   static Object showAllProfilesPage(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
-    returnedHash.put("profiles", appContext.getProfilesForQuery("all"));
-    returnedHash.put("contractTypes", appContext.getAllContractTypes());
-    returnedHash.put("divisions", appContext.getAllDivisions());
+    returnedHash.put("profiles", appContext.getProfilesMatchingQuery("all").getValues());
+    returnedHash.put("contractTypes", appContext.getAllContractTypes().getValues());
+    returnedHash.put("divisions", appContext.getAllDivisions().getValues());
     return serveTemplate("/profilesList.handlebars", returnedHash);
   }
 
   static Object serveIndex(Request req, Response res) {
-    return serveTemplate("/login.handlebars", new HashMap<Object, Object>());
+    return serveTemplate("/login.handlebars", new HashMap<>());
   }
 
   static Object processLogin(Request req, Response res) {

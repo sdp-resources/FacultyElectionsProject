@@ -12,17 +12,17 @@ public class RequestFactory {
     return new CreateNamedQueryRequest(name, queryString);
   }
 
-  Request viewProfilesList(String query) {
+  public Request viewProfilesList(String query) {
     return new ViewProfilesListRequest(query);
   }
 
-  Request createProfile(
+  public Request createProfile(
         String fullname, String username, String contractType, String division
   ) {
     return new CreateProfileRequest(fullname, username, division, contractType);
   }
 
-  Request viewProfile(String username) {
+  public Request viewProfile(String username) {
     return new ViewProfileRequest(username);
   }
 
@@ -30,11 +30,11 @@ public class RequestFactory {
     return new EditProfileRequest(username, changes);
   }
 
-  Request addDivision(String division) {
+  public Request addDivision(String division) {
     return new AddDivisionRequest(division);
   }
 
-  Request addContractType(String contractType) {
+  public Request addContractType(String contractType) {
     return new AddContractTypeRequest(contractType);
   }
 

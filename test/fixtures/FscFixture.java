@@ -36,6 +36,6 @@ public class FscFixture {
   }
 
   public void closeContext() {
-    TestContext.closeAppContext();
+    TestContext.app.shutdown();
   }
 }
