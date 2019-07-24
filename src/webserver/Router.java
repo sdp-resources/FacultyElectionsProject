@@ -1,6 +1,8 @@
 package webserver;
 
+import fsc.app.AppContext;
 import fsc.gateway.Gateway;
+import fsc.viewable.ViewableElection;
 import gateway.InMemoryGateway;
 import spark.*;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -10,13 +12,13 @@ import java.util.HashMap;
 public class Router {
   static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();//  private static final Gateway gateway = InMemoryGateway.fromJSONFile("assets/data/sample.json");
   static Gateway gateway;
-  static InteractionController controller;
+  static AppContext appContext;
 
   public static void setupRoutes(String resourcePath) {
     String path = resourcePath + "/data/sample.json";
     gateway = InMemoryGateway.fromJSONFile(path);
     // TODO: Move towards using AppContext
-    controller = new InteractionController(gateway);
+    appContext = new AppContext(gateway);
 
     Spark.staticFiles.location("/public");
     Spark.get("/", Router::serveIndex);
@@ -31,15 +33,20 @@ public class Router {
 
   static Object showElections(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
-    returnedHash.put("values", controller.getAllElections());
+    returnedHash.put("values", appContext.getAllElections());
     return serveTemplate("/electionList.handlebars", returnedHash);
   }
 
   static Object createElection(Request req, Response res) {
-    fsc.response.Response response = controller.createElection(req::queryParams);
-    System.out.println(response);
+    ViewableElection election = appContext.createElection(getParam(req, "committee"),
+                                                          getParam(req, "seat"));
+    System.out.println(election);
     res.redirect("/election");
     return null;
+  }
+
+  private static String getParam(Request req, String committee) {
+    return req.queryParams(committee);
   }
 
   static Object getProfile(Request req, Response res) {
@@ -48,24 +55,29 @@ public class Router {
   }
 
   static Object createProfile(Request req, Response res) {
-    fsc.response.Response response = controller.createProfile(req::queryParams);
-    System.out.println(response);
-    // TODO: Handle error response
-    res.redirect("/profile");
+    boolean profileCreated = appContext.addProfile(
+          getParam(req, "fullName"), getParam(req, "username"),
+          getParam(req, "division"), getParam(req, "contractType")
+    );
+    if (profileCreated) {
+      res.redirect("/profile");
+    } else {
+      // TODO: Handle error response
+    }
     return null;
   }
 
   static Object showAllCommitteesPage(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
-    returnedHash.put("committees", controller.getAllCommittees());
+    returnedHash.put("committees", appContext.getAllCommittees());
     return serveTemplate("/committeeList.handlebars", returnedHash);
   }
 
   static Object showAllProfilesPage(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
-    returnedHash.put("profiles", controller.getAllProfiles());
-    returnedHash.put("contractTypes", controller.getAllContractTypes());
-    returnedHash.put("divisions", controller.getAllDivisions());
+    returnedHash.put("profiles", appContext.getProfilesForQuery("all"));
+    returnedHash.put("contractTypes", appContext.getAllContractTypes());
+    returnedHash.put("divisions", appContext.getAllDivisions());
     return serveTemplate("/profilesList.handlebars", returnedHash);
   }
 
@@ -74,8 +86,8 @@ public class Router {
   }
 
   static Object processLogin(Request req, Response res) {
-    System.out.println(req.queryParams("username"));
-    System.out.println(req.queryParams("password"));
+    System.out.println(getParam(req, "username"));
+    System.out.println(getParam(req, "password"));
     return "null";
   }
 

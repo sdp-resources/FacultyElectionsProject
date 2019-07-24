@@ -162,4 +162,12 @@ public class AppContext {
   public ViewableElection viewElection(Long electionId) {
     return getValues(requestFactory.viewElection(electionId));
   }
+
+  public Collection<String> getAllContractTypes() {
+    return getValues(requestFactory.viewContractTypeList());
+  }
+
+  public Collection<String> getAllDivisions() {
+    return getValues(requestFactory.viewDivisionList());
+  }
 }
