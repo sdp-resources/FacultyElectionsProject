@@ -2,6 +2,7 @@
 Test
 ---
 -|script|
+|given admin user logged in|
 |given standard divisions|
 |given standard contract types|
 

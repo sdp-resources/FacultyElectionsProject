@@ -41,7 +41,7 @@ public class LoginInteractorTest {
     String password = "1234";
     LoginRequest request = new LoginRequest(username, password);
 
-    String expectedRole = "Admin";
+    Authorizer.Role expectedRole = Authorizer.Role.ROLE_ADMIN;
     String expectedToken = "jlksdfgj";
 
     Authenticator authenticator = new AcceptingAuthenticatorDummy();
@@ -52,10 +52,10 @@ public class LoginInteractorTest {
 
     LoginResponse response = (LoginResponse) loginInteractor.execute(request);
 
-    assertEquals(expectedRole, response.role);
+    assertEquals(expectedRole.toString(), response.role);
     assertEquals(expectedToken, response.token);
     assertEquals(sessionGateway.addedSession.getToken(), response.token);
-    assertEquals(sessionGateway.addedSession.getRole(), response.role);
+    assertEquals(expectedRole, sessionGateway.addedSession.getRole());
     assertTrue(sessionGateway.saveCalled);
   }
 

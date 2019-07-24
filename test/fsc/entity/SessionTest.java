@@ -1,6 +1,7 @@
 package fsc.entity;
 
 import fsc.entity.session.AuthorizedSession;
+import fsc.service.Authorizer;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ public class SessionTest {
 
   @Test
   public void canCreateSession() {
-    String role = "Administrator";
+    Authorizer.Role role = Authorizer.Role.ROLE_ADMIN;
     String username = "admin";
     String token = "random-string";
 

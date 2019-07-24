@@ -1,6 +1,13 @@
 package fixtures;
 
+import fsc.mock.EntityStub;
+
 public class FscFixture {
+  public boolean addAdminSession() {
+    TestContext.app.setSession(EntityStub.adminSession());
+    return true;
+  }
+
   public boolean addProfile(
         String fullname, String username, String contractType, String division
   ) {

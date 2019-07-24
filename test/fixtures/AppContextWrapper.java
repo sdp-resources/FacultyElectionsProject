@@ -1,7 +1,11 @@
 package fixtures;
 
 import fsc.app.AppContext;
+import fsc.entity.session.Session;
+import fsc.entity.session.UnAuthorizedSession;
 import fsc.gateway.Gateway;
+import fsc.request.Request;
+import fsc.response.Response;
 import fsc.viewable.*;
 
 import java.util.Collection;
@@ -9,10 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 class AppContextWrapper {
-  private final AppContext appContext;
+  private final TestableAppContext appContext;
 
   AppContextWrapper(Gateway gateway) {
-    appContext = new AppContext(gateway);
+    appContext = new TestableAppContext(gateway);
+  }
+
+  void setSession(Session session) {
+    appContext.setSession(session);
   }
 
   boolean addProfile(
@@ -127,4 +135,24 @@ class AppContextWrapper {
     appContext.shutdown();
   }
 
+  private class TestableAppContext extends AppContext {
+    private Session session = new UnAuthorizedSession();
+
+    TestableAppContext(Gateway gateway) {
+      super(gateway);
+    }
+
+    public Response getResponse(Request request) {
+      request.setSession(session);
+      return super.getResponse(request);
+    }
+
+    public void setSession(Session session) {
+      this.session = session;
+    }
+
+    public Session getSession() {
+      return session;
+    }
+  }
 }

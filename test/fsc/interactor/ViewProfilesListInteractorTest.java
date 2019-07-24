@@ -36,6 +36,7 @@ public class ViewProfilesListInteractorTest {
 
   @Test
   public void profileGatewayHasNoErrorsResponseHasAllProfiles() {
+    request.setSession(EntityStub.adminSession());
     Response response = interactor.handle(request);
     Response expectedResponse = ResponseFactory.ofProfileList(profileGatewaySpy.getAllProfiles());
     assertTrue(profileGatewaySpy.getProfilesWasCalled);
@@ -46,8 +47,17 @@ public class ViewProfilesListInteractorTest {
   public void whenSetToViewActiveProfiles_ignoreInactiveProfiles() {
     profile2.setInactive();
     request = new ViewProfilesListRequest("status equals active");
+    request.setSession(EntityStub.adminSession());
     Response response = interactor.handle(request);
     Response expectedResponse = ResponseFactory.ofProfileList(List.of(profile1, profile3));
+    assertEquals(expectedResponse, response);
+  }
+
+  @Test
+  public void whenActiveUserIsNotAdmin_returnError() {
+    request.setSession(EntityStub.userSession("skiadas"));
+    Response response = interactor.handle(request);
+    Response expectedResponse = ResponseFactory.notAuthorized();
     assertEquals(expectedResponse, response);
   }
 }

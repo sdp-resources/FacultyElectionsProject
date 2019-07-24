@@ -2,6 +2,10 @@ package fsc.mock;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
+import fsc.entity.session.AuthorizedSession;
+import fsc.service.Authorizer;
+
+import java.time.LocalDateTime;
 
 public class EntityStub {
 
@@ -40,5 +44,19 @@ public class EntityStub {
 
   public static Profile getProfile(String username) {
     return entityFactory.createProfile(username, username, "division", "contract");
+  }
+
+  public static AuthorizedSession adminSession() {
+    return new AuthorizedSession(Authorizer.Role.ROLE_ADMIN, "admin",
+                                 "token", anHourFromNow());
+  }
+
+  public static AuthorizedSession userSession(String username) {
+    return new AuthorizedSession(Authorizer.Role.ROLE_USER, username,
+                                 "token", anHourFromNow());
+  }
+
+  public static LocalDateTime anHourFromNow() {
+    return LocalDateTime.now().plusHours(1);
   }
 }

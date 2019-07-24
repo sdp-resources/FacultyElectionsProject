@@ -33,7 +33,7 @@ public class LoginInteractor {
                                                     ((AuthorizedSession) authorization)
                                                           .getExpirationTime()));
     sessionGateway.save();
-    return new LoginResponse(((AuthorizedSession) authorization).getRole(),
+    return new LoginResponse(((AuthorizedSession) authorization).getRole().toString(),
                              ((AuthorizedSession) authorization).getToken());
   }
 

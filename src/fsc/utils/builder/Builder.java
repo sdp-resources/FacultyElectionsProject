@@ -21,7 +21,13 @@ public interface Builder<S, E> {
   }
 
   Builder<S, E> escapeIf(Function<S, Boolean> shouldEscape, E escape);
+  default Builder<S, E> escapeIf(Boolean shouldEscape, E escape) {
+    return escapeIf(r -> shouldEscape, escape);
+  }
   Builder<S, E> escapeUnless(Function<S, Boolean> shouldEscape, E escape);
+  default Builder<S, E> escapeUnless(Boolean shouldEscape, E escape) {
+    return escapeUnless(r -> shouldEscape, escape);
+  }
   Builder<S, E> perform(Consumer<S> consumer);
   <T> Builder<T, E> mapThrough(Function<S, Builder<T, E>> mapper);
   <T, R> Builder<R, E> bindWith(Builder<T, E> other, BiFunction<S, T, Builder<R, E>> combiner);

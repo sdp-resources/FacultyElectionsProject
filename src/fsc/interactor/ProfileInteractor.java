@@ -23,6 +23,7 @@ public class ProfileInteractor extends Interactor {
     return profileFetcher
                  .makeProfile(request.name, request.username,
                               request.division, request.contract)
+                 .escapeUnless(isAuthorizedAsAdmin(request), ResponseFactory.notAuthorized())
                  .escapeIf(profileFetcher::profileExists,
                            ResponseFactory.resourceExists())
                  .perform(profileFetcher::addProfile)
@@ -46,7 +47,10 @@ public class ProfileInteractor extends Interactor {
 
   public Response execute(ViewProfilesListRequest request) {
     return queryFetcher.createFromString(request.query)
+                       .escapeUnless(isAuthorizedAsAdmin(request),
+                                     ResponseFactory.notAuthorized())
           .mapThrough(Builder.lift(profileFetcher::getProfilesMatchingQuery))
           .resolveWith(ResponseFactory::ofProfileList);
   }
+
 }

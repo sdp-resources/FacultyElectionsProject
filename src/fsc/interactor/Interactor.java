@@ -3,6 +3,7 @@ package fsc.interactor;
 import fsc.request.Request;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.service.Authorizer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -54,5 +55,13 @@ public abstract class Interactor {
   public Interactor append(Interactor other) {
     next = next == null ? other : next.append(other);
     return this;
+  }
+
+  public boolean isAuthorizedForRole(Request request, Authorizer.Role role) {
+    return request.getSession().isAuthorizedForRole(role);
+  }
+
+  public boolean isAuthorizedAsAdmin(Request request) {
+    return isAuthorizedForRole(request, Authorizer.Role.ROLE_ADMIN);
   }
 }

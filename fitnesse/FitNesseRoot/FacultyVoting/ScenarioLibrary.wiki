@@ -1,5 +1,10 @@
 !contents -R2 -g -p -f -h
 
+!3 Sessions
+
+|scenario|given admin user logged in|
+|add admin session|
+
 !3 Profiles
 
 |scenario|Given user with name _ username _ division _ and contract type _ |fullname,username,division,contractType|
