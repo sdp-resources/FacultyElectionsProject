@@ -53,7 +53,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
   public void whenGivenAnInvalidVoter_returnErrorResponse() {
     election.removeVoter(voter);
     interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy(), entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidVoter(), response);
   }
 
@@ -61,7 +61,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
     election.getCandidates().add(entityFactory.createCandidate(profile,
                                                                election));
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidCandidate(), response);
     assertEquals(false, voter.hasVoted());
   }
@@ -74,7 +74,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
                                                                election));
     vote = List.of(candidate.getUsername(), profile.getUsername(), candidate.getUsername());
     request = new SubmitVoteRecordRequest(VOTER_ID, vote);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
     assertEquals(false, voter.hasVoted());
   }
@@ -83,15 +83,15 @@ public class SubmitVoteRecordTest extends ElectionTest {
   public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
     election.getCandidates().add(entityFactory.createCandidate(candidate,
                                                                election));
-    interactor.execute(request);
-    Response response = interactor.execute(request);
+    interactor.handle(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.alreadyVoted(), response);
   }
 
   @Test
   public void whenGivenAVoterProfileNotInVotesList_preventThemFromVoting() {
     election.removeVoter(voter);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidVoter(), response);
     assertEquals(false, electionGateway.hasSaved);
   }
@@ -100,7 +100,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
   public void whenGivenCorrectInformation_saveRecord() {
     election.getCandidates().add(entityFactory.createCandidate(candidate,
                                                                election));
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
     assertNotNull(submittedVoteRecord);
     assertEquals(ResponseFactory.ofVoteRecord(submittedVoteRecord), response);

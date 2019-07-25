@@ -40,7 +40,7 @@ public class QueryValidationTest {
   private void assertValidQueryReturnsValidResult(String queryString)
         throws QueryStringParser.QueryParseException {
     QueryValidationRequest request = new QueryValidationRequest(queryString);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     Query query = converter.fromString(queryString);
     assertEquals(ResponseFactory.ofQueryResult(
           new ValidQueryResult(query, converter.toString(query))),

@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 public class ProfileInteractorTest {
 
@@ -30,21 +29,11 @@ public class ProfileInteractorTest {
   }
 
   @Test
-  public void whenUserIsNotAdmin_returnError() {
-    InvalidProfileGatewaySpy gateway = new InvalidProfileGatewaySpy();
-    interactor = new ProfileInteractor(gateway, entityFactory);
-    request.setSession(EntityStub.userSession("hayfieldj"));
-    response = interactor.execute(request);
-    assertEquals(ResponseFactory.notAuthorized(), response);
-    assertFalse(gateway.hasSaved);
-  }
-
-  @Test
   public void testCorrectExecute() {
     InvalidProfileGatewaySpy gateway = new InvalidProfileGatewaySpy();
     interactor = new ProfileInteractor(gateway, entityFactory);
     request.setSession(EntityStub.adminSession());
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.success(), response);
     assertEquals("hayfieldj", gateway.submittedUsername);
     assertTrue(gateway.hasSaved);
@@ -55,7 +44,7 @@ public class ProfileInteractorTest {
     ExistingProfileGatewaySpy gateway = new ExistingProfileGatewaySpy(providedProfile);
     interactor = new ProfileInteractor(gateway, entityFactory);
     request.setSession(EntityStub.adminSession());
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.resourceExists(), response);
   }
 }

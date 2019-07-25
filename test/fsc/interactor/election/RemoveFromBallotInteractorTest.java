@@ -39,7 +39,7 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
   public void ballotDoesNotExist() {
     interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null,
                                         new ProfileGatewayStub(profile), entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
@@ -48,7 +48,7 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
   public void profileDoesNotExist() {
     interactor = new ElectionInteractor(electionGateway, null,
                                         new InvalidProfileGatewaySpy(), entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownProfileName(), response);
   }
@@ -58,7 +58,7 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
     ProfileGateway profileGateway = new ProfileGatewayStub(profile);
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
   }
@@ -70,7 +70,7 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
                                         profileGateway, entityFactory);
     election.getCandidates().add(entityFactory.createCandidate(profile,
                                                                election));
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertFalse(election.hasCandidate(profile));
     assertEquals(ResponseFactory.success(), response);

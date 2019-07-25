@@ -38,7 +38,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
     candidate.setStatus(Candidate.Status.Accepted);
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ViewDTSInteractor(gateway);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertElectionIdEquals(gateway.providedElectionId, election.getID());
     assertEquals(ResponseFactory.ofCandidate(candidate), response);
   }
@@ -47,7 +47,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
   public void whenUserIsNotCandidate_errorReturned() {
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ViewDTSInteractor(gateway);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertElectionIdEquals(gateway.providedElectionId, election.getID());
     assertEquals(ResponseFactory.invalidCandidate(), response);
   }
@@ -56,7 +56,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
   public void whenElectionDoesNotExist_thenError() {
     RejectingElectionGatewaySpy rejectingGateway = new RejectingElectionGatewaySpy();
     interactor = new ViewDTSInteractor(rejectingGateway);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }

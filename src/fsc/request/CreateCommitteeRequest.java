@@ -10,4 +10,8 @@ public class CreateCommitteeRequest extends Request {
     this.description = description;
     this.voterQuery = voterQuery;
   }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

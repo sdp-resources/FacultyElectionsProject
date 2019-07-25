@@ -3,7 +3,7 @@ package fsc.interactor;
 import fsc.entity.EntityFactory;
 import fsc.entity.SimpleEntityFactory;
 import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
-import fsc.request.ViewDivisionRequest;
+import fsc.request.ViewDivisionListRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import org.junit.Before;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ViewDivisionsTest {
 
-  ViewDivisionRequest request;
+  ViewDivisionListRequest request;
   DivisionInteractor interactor;
   Response response;
   private ExistingDivisionGatewaySpy divisionGateway;
@@ -21,14 +21,14 @@ public class ViewDivisionsTest {
 
   @Before
   public void setup() {
-    request = new ViewDivisionRequest();
+    request = new ViewDivisionListRequest();
     divisionGateway = new ExistingDivisionGatewaySpy("SCI", "ART");
   }
 
   @Test
   public void gatewayDivisionListEqualsOurDivisionList() {
     interactor = new DivisionInteractor(divisionGateway, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.ofDivisions(divisionGateway.divisions), response);
   }
 

@@ -2,7 +2,7 @@ package fixtures;
 
 import fsc.app.AppContext;
 import fsc.entity.session.Session;
-import fsc.entity.session.UnAuthorizedSession;
+import fsc.entity.session.UnauthenticatedSession;
 import fsc.gateway.Gateway;
 import fsc.request.Request;
 import fsc.response.Response;
@@ -134,9 +134,9 @@ class AppContextWrapper {
   void shutdown() {
     appContext.shutdown();
   }
-
   private class TestableAppContext extends AppContext {
-    private Session session = new UnAuthorizedSession();
+
+    private Session session = new UnauthenticatedSession();
 
     TestableAppContext(Gateway gateway) {
       super(gateway);

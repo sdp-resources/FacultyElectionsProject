@@ -9,4 +9,8 @@ public class AddVoterRequest extends Request {
     this.username = username;
     this.electionId = electionId;
   }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

@@ -6,4 +6,8 @@ public class ViewAllVotesRequest extends Request {
   public ViewAllVotesRequest(long electionID) {
     this.electionID = electionID;
   }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

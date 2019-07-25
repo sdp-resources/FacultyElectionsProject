@@ -2,7 +2,7 @@ package fsc.entity.session;
 
 import fsc.service.Authorizer;
 
-public class UnAuthorizedSession implements Session {
+public class UnauthenticatedSession implements Session {
   public boolean isAuthorized() {
     return false;
   }

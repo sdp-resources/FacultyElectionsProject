@@ -40,7 +40,7 @@ public class SubmitDTSInteractorTest extends ElectionTest {
         throws ElectionGateway.NoProfileInBallotException {
     election.getCandidates().add(entityFactory.createCandidate(profile,
                                                                election));
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
     assertElectionIdEquals(electionGatewaySpy.providedElectionId, electionID);
@@ -50,7 +50,7 @@ public class SubmitDTSInteractorTest extends ElectionTest {
 
   @Test
   public void whenCandidateIsNotInElection_thenError() {
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.invalidCandidate(), response);
     assertFalse(electionGatewaySpy.hasSaved);
@@ -60,7 +60,7 @@ public class SubmitDTSInteractorTest extends ElectionTest {
   public void whenElectionDoesNotExist_thenError() {
     RejectingElectionGatewaySpy rejectingGateway = new RejectingElectionGatewaySpy();
     interactor = new SubmitDTSInteractor(rejectingGateway);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }

@@ -2,7 +2,9 @@ package fsc.mock;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
-import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.AuthenticatedSession;
+import fsc.entity.session.Session;
+import fsc.entity.session.UnauthenticatedSession;
 import fsc.service.Authorizer;
 
 import java.time.LocalDateTime;
@@ -46,14 +48,18 @@ public class EntityStub {
     return entityFactory.createProfile(username, username, "division", "contract");
   }
 
-  public static AuthorizedSession adminSession() {
-    return new AuthorizedSession(Authorizer.Role.ROLE_ADMIN, "admin",
-                                 "token", anHourFromNow());
+  public static AuthenticatedSession adminSession() {
+    return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN, "admin",
+                                    "token", anHourFromNow());
   }
 
-  public static AuthorizedSession userSession(String username) {
-    return new AuthorizedSession(Authorizer.Role.ROLE_USER, username,
-                                 "token", anHourFromNow());
+  public static AuthenticatedSession userSession(String username) {
+    return new AuthenticatedSession(Authorizer.Role.ROLE_USER, username,
+                                    "token", anHourFromNow());
+  }
+
+  public static Session unauthenticatedSession() {
+    return new UnauthenticatedSession();
   }
 
   public static LocalDateTime anHourFromNow() {

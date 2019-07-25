@@ -1,6 +1,6 @@
 package fsc.service.authorizer;
 
-import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.Session;
 
 import java.time.LocalDateTime;
@@ -16,6 +16,6 @@ public class AcceptingAuthorizerStub extends AuthorizerDummy {
 
   @Override
   public Session authorize(String username, String password) {
-    return new AuthorizedSession(role, username, token, LocalDateTime.now());
+    return new AuthenticatedSession(role, username, token, LocalDateTime.now());
   }
 }

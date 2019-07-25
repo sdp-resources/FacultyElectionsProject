@@ -5,15 +5,15 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 
-public class AuthorizeInteractor {
+public class SessionInteractor extends Interactor {
   private SessionGateway sessionGateway;
 
-  public AuthorizeInteractor(SessionGateway sessionGateway) {
+  public SessionInteractor(SessionGateway sessionGateway) {
     this.sessionGateway = sessionGateway;
   }
 
-  public boolean canHandle(Request request) {
-    return true;
+  public Response handle(Request request) {
+    return execute(request);
   }
 
   public Response execute(Request request) {

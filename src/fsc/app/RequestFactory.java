@@ -39,7 +39,7 @@ public class RequestFactory {
   }
 
   Request viewDivisionList() {
-    return new ViewDivisionRequest();
+    return new ViewDivisionListRequest();
   }
 
   Request viewContractTypeList() {

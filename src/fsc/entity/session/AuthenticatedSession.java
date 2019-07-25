@@ -4,13 +4,13 @@ import fsc.service.Authorizer;
 
 import java.time.LocalDateTime;
 
-public class AuthorizedSession implements Session {
+public class AuthenticatedSession implements Session {
   private final Authorizer.Role role;
   private final String username;
   private final String token;
   private final LocalDateTime expirationTime;
 
-  public AuthorizedSession(
+  public AuthenticatedSession(
         Authorizer.Role role, String username, String token, LocalDateTime expirationTime
   ) {
     this.role = role;

@@ -39,7 +39,7 @@ public class ViewElectionRequestTest extends ElectionTest {
     RejectingElectionGatewaySpy electionGateway = new RejectingElectionGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
     assertElectionIdEquals(electionGateway.requestedElectionId, election.getID());
   }
@@ -51,7 +51,7 @@ public class ViewElectionRequestTest extends ElectionTest {
     ProfileGateway profileGateway = new ExistingProfileGatewaySpy(profiles);
     interactor = new ElectionInteractor(electionGateway, committeeGateway,
                                         profileGateway, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.ofElection(election), response);
     assertEquals(false, electionGateway.hasSaved);
   }

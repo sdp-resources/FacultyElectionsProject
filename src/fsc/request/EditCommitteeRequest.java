@@ -1,5 +1,7 @@
 package fsc.request;
 
+import fsc.interactor.Interactor;
+
 import java.util.Map;
 
 public class EditCommitteeRequest extends Request {
@@ -9,5 +11,9 @@ public class EditCommitteeRequest extends Request {
   public EditCommitteeRequest(String name, Map<String, Object> changes) {
     this.name = name;
     this.changes = changes;
+  }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
   }
 }

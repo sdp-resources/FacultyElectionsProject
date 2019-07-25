@@ -7,4 +7,7 @@ public class AddContractTypeRequest extends Request {
     this.contractType = contractType;
   }
 
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

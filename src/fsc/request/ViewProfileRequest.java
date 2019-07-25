@@ -6,4 +6,8 @@ public class ViewProfileRequest extends Request {
   public ViewProfileRequest(String username) {
     this.username = username;
   }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

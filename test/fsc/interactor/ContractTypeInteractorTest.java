@@ -46,7 +46,7 @@ public class ContractTypeInteractorTest {
   public void correctlyErrorsOnAddingExistingContract() {
     request = new AddContractTypeRequest(EXISTING_CONTRACT);
     interactor = new ContractTypeInteractor(contractTypeGateWay, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.resourceExists(), response);
     assertEquals(List.of("has contract type: " + EXISTING_CONTRACT), contractTypeGateWay.events);
   }

@@ -1,5 +1,7 @@
 package fsc.request;
 
+import fsc.interactor.Interactor;
+
 import java.util.Map;
 
 public class EditSeatRequest extends Request {
@@ -16,5 +18,9 @@ public class EditSeatRequest extends Request {
     this.committeeName = committeeName;
     this.seatName = seatName;
     this.changes = changes;
+  }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
   }
 }

@@ -1,6 +1,6 @@
 package fsc.entity;
 
-import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.AuthenticatedSession;
 import fsc.service.Authorizer;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import static junit.framework.TestCase.assertEquals;
 
 public class SessionTest {
-  private AuthorizedSession session;
+  private AuthenticatedSession session;
 
   @Test
   public void canCreateSession() {
@@ -20,7 +20,7 @@ public class SessionTest {
 
     LocalDateTime expirationTime = LocalDateTime.now().plus(10, MINUTES);
 
-    session = new AuthorizedSession(role, username, token, expirationTime);
+    session = new AuthenticatedSession(role, username, token, expirationTime);
 
     assertEquals(token, session.getToken());
     assertEquals(username, session.getUsername());

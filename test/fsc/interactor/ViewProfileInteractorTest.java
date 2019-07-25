@@ -23,37 +23,11 @@ public class ViewProfileInteractorTest {
     ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
 
     ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
-    request.setSession(EntityStub.adminSession());
     ProfileInteractor interactor = new ProfileInteractor(gatewaySpy, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(request.username, gatewaySpy.providedUsername);
     assertEquals(ResponseFactory.ofProfile(profile), response);
-  }
-
-  @Test
-  public void usersCanViewTheirOwnProfiles() {
-    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
-
-    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
-    request.setSession(EntityStub.userSession(profile.getUsername()));
-    ProfileInteractor interactor = new ProfileInteractor(gatewaySpy, entityFactory);
-    Response response = interactor.execute(request);
-
-    assertEquals(request.username, gatewaySpy.providedUsername);
-    assertEquals(ResponseFactory.ofProfile(profile), response);
-  }
-
-  @Test
-  public void usersCannotViewOtherUsersProfiles() {
-    ExistingProfileGatewaySpy gatewaySpy = new ExistingProfileGatewaySpy(profile);
-
-    ViewProfileRequest request = new ViewProfileRequest(profile.getUsername());
-    request.setSession(EntityStub.userSession(profile.getUsername()+"other"));
-    ProfileInteractor interactor = new ProfileInteractor(gatewaySpy, entityFactory);
-    Response response = interactor.execute(request);
-
-    assertEquals(ResponseFactory.notAuthorized(), response);
   }
 
 
@@ -63,7 +37,7 @@ public class ViewProfileInteractorTest {
 
     ViewProfileRequest request = new ViewProfileRequest("BoogieA14");
     ProfileInteractor viewInteractor = new ProfileInteractor(gatewaySpy, entityFactory);
-    Response response = viewInteractor.execute(request);
+    Response response = viewInteractor.handle(request);
 
     assertEquals(request.username, gatewaySpy.submittedUsername);
     assertEquals(ResponseFactory.unknownProfileName(), response);

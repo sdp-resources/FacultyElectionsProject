@@ -1,6 +1,6 @@
 package fsc.interactor;
 
-import fsc.entity.session.AuthorizedSession;
+import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.Session;
 import fsc.gateway.SessionGateway;
 import fsc.request.LoginRequest;
@@ -8,7 +8,7 @@ import fsc.response.*;
 import fsc.service.Authenticator;
 import fsc.service.Authorizer;
 
-public class LoginInteractor {
+public class LoginInteractor extends Interactor {
   private SessionGateway sessionGateway;
   private Authorizer authorizer;
   private Authenticator authenticator;
@@ -26,15 +26,15 @@ public class LoginInteractor {
     if (!authorization.isAuthorized()) {
       return ResponseFactory.notAuthorized();
     }
-    sessionGateway.addSession(new AuthorizedSession(((AuthorizedSession) authorization).getRole(),
-                                                    ((AuthorizedSession) authorization)
+    sessionGateway.addSession(new AuthenticatedSession(((AuthenticatedSession) authorization).getRole(),
+                                                       ((AuthenticatedSession) authorization)
                                                           .getUsername(),
-                                                    ((AuthorizedSession) authorization).getToken(),
-                                                    ((AuthorizedSession) authorization)
+                                                       ((AuthenticatedSession) authorization).getToken(),
+                                                       ((AuthenticatedSession) authorization)
                                                           .getExpirationTime()));
     sessionGateway.save();
-    return new LoginResponse(((AuthorizedSession) authorization).getRole().toString(),
-                             ((AuthorizedSession) authorization).getToken());
+    return new LoginResponse(((AuthenticatedSession) authorization).getRole().toString(),
+                             ((AuthenticatedSession) authorization).getToken());
   }
 
 }

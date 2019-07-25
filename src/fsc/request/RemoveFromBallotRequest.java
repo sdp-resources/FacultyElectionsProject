@@ -1,5 +1,7 @@
 package fsc.request;
 
+import fsc.interactor.Interactor;
+
 public class RemoveFromBallotRequest extends Request {
   public final String username;
   public final Long electionID;
@@ -7,5 +9,9 @@ public class RemoveFromBallotRequest extends Request {
   public RemoveFromBallotRequest(Long electionID, String username) {
     this.electionID = electionID;
     this.username = username;
+  }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
   }
 }

@@ -31,7 +31,7 @@ public class EditElectionStateRequestTest extends ElectionTest {
     request = new EditElectionStateRequest(election.getID(), "invalid");
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
     assertElectionIdEquals(electionGateway.requestedElectionId, election.getID());
   }
@@ -42,7 +42,7 @@ public class EditElectionStateRequestTest extends ElectionTest {
     request = new EditElectionStateRequest(election.getID(), "invalid");
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidElectionState(), response);
     assertElectionIdEquals(electionGateway.providedElectionId, election.getID());
   }
@@ -55,7 +55,7 @@ public class EditElectionStateRequestTest extends ElectionTest {
     request = new EditElectionStateRequest(election.getID(), stateString);
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.success(), response);
     assertElectionIdEquals(electionGateway.providedElectionId, election.getID());
     assertEquals(state, election.getState());

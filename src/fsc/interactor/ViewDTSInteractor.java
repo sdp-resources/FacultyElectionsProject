@@ -7,7 +7,7 @@ import fsc.response.*;
 
 import java.util.Collection;
 
-public class ViewDTSInteractor {
+public class ViewDTSInteractor extends Interactor {
 
   private ElectionGateway electionGateway;
   public Profile profile;

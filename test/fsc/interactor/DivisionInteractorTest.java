@@ -28,7 +28,7 @@ public class DivisionInteractorTest {
   public void testCorrectExecute() {
     MissingDivisionGatewaySpy testGateway = new MissingDivisionGatewaySpy();
     interactor = new DivisionInteractor(testGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.success(), response);
     assertEquals(List.of("has division: " + A_DIVISION, "add division: " + A_DIVISION, "save"),
                  testGateway.events);
@@ -38,7 +38,7 @@ public class DivisionInteractorTest {
   public void testAlreadyExistsExecute() {
     ExistingDivisionGatewaySpy testGateway = new ExistingDivisionGatewaySpy();
     interactor = new DivisionInteractor(testGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.resourceExists(), response);
     assertEquals(List.of("has division: " + A_DIVISION), testGateway.events);
   }

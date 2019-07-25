@@ -1,76 +1,147 @@
 package fsc.interactor;
 
-import fsc.request.Request;
+import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.service.Authorizer;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public abstract class Interactor {
-  public Response execute(Request request) {
-    return ResponseFactory.cannotHandle();
-  }
-
-  public Interactor next = null;
-
-  public boolean canHandle(Request request) {
-    try {
-      getExecuteForRequest(request);
-      return true;
-    } catch (NoSuchMethodException e) {
-      return false;
-    }
-  }
-
-  public Response handle(Request request) {
-    return canHandle(request) ? callAppropriateExecute(request)
-                              : passOn(request);
-  }
-
-  private Response callAppropriateExecute(Request request) {
-    try {
-      return (Response) getExecuteForRequest(request).invoke(this, request);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException("Should really not be happening" + e.getMessage());
-    } catch (InvocationTargetException e) {
-      if (e.getTargetException() instanceof RuntimeException) {
-        throw (RuntimeException) e.getTargetException();
-      }
-      throw new RuntimeException(e.getTargetException());
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException("Should not be happening:" + e.getMessage());
-    }
-  }
-
-  public Response passOn(Request request) {
-    return next == null ? ResponseFactory.cannotHandle() : next.handle(request);
-  }
-
-  private Method getExecuteForRequest(Request request) throws NoSuchMethodException {
-    return this.getClass().getDeclaredMethod("execute", request.getClass());
-  }
+  private final RequestVisitor visitor = new ExecutingRequestVisitor(this);
+  Interactor next = null;
 
   public Interactor append(Interactor other) {
     next = next == null ? other : next.append(other);
     return this;
   }
 
-  public boolean isAuthorizedForRole(Request request, Authorizer.Role role) {
-    return request.getSession().isAuthorizedForRole(role);
+  public <T extends Request> Response handle(T request) {
+    return (Response) visitor.visit(request);
   }
 
-  public boolean isAuthorizedAsUser(Request request, String username) {
-    return request.getSession().matchesUser(username);
+  public Response execute(CreateProfileRequest request) {
+    return delegate(request);
   }
 
-  public boolean isAuthorizedAsAdmin(Request request) {
-    return isAuthorizedForRole(request, Authorizer.Role.ROLE_ADMIN);
+  public Response execute(ViewProfileRequest request) {
+    return delegate(request);
   }
 
-  public boolean isAuthorizedAsAdminOrUser(Request request, String username) {
-    return isAuthorizedAsAdmin(request) ||
-          isAuthorizedAsUser(request, username);
+  public Response execute(ViewProfilesListRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(EditProfileRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(AddDivisionRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewDivisionListRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(AddContractTypeRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewContractsRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(CreateNamedQueryRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewNamedQueryListRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(QueryValidationRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(CreateCommitteeRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(EditCommitteeRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewCommitteeListRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(CreateSeatRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(EditSeatRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(EditElectionStateRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(LoginRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewAllElectionsRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewCandidatesRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewElectionRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(AddToBallotRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(AddVoterRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewAllVotesRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewDTSRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(SubmitVoteRecordRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(CreateElectionRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(RemoveFromBallotRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(EditBallotQueryRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(DTSRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewVoteRecordRequest request) {
+    return delegate(request);
+  }
+
+  Response delegate(Request request) {
+    return next == null ? ResponseFactory.cannotHandle() : next.handle(request);
   }
 }

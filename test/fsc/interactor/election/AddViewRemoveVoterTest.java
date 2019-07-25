@@ -43,7 +43,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(profile);
     interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
 
     assertTrue(response.isSuccessful());
     assertTrue(electionGateway.hasSaved);
@@ -60,7 +60,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
 
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownProfileName(), response);
     assertEquals(USERNAME, profileGateway.submittedUsername);
     assertFalse(electionGateway.hasSaved);
@@ -72,7 +72,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     interactor = new ElectionInteractor(electionGateway, null,
                                         new ExistingProfileGatewaySpy(profile),
                                         entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
     assertElectionIdEquals(electionGateway.requestedElectionId, election.getID());
@@ -86,7 +86,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     interactor = new ElectionInteractor(electionGateway, null,
                                         new ExistingProfileGatewaySpy(profile),
                                         entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
 
     assertEquals(1, election.getVoters().size());
     assertEquals(ResponseFactory.voterExists(), response);
@@ -100,7 +100,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     election.setState(Election.State.DecideToStand);
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
 
     assertEquals(ResponseFactory.improperElectionState(), response);
     assertFalse(electionGateway.hasSaved);

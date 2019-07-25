@@ -8,6 +8,11 @@ public class FscFixture {
     return true;
   }
 
+  public boolean addUserSession(String username) {
+    TestContext.app.setSession(EntityStub.userSession(username));
+    return true;
+  }
+
   public boolean addProfile(
         String fullname, String username, String contractType, String division
   ) {
@@ -42,6 +47,14 @@ public class FscFixture {
     return TestContext.app.addSeat(committeeName, seatName, query);
   }
 
+  public boolean canRequestProfile(String username) {
+    try {
+      TestContext.app.getProfile(username);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
   public void closeContext() {
     TestContext.app.shutdown();
   }

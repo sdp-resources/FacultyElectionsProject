@@ -1,3 +1,12 @@
+|FacultyVoting.Queries.CanValidateQueryStrings||18:31:41 Thu, Jul 25, 2019|
+|FacultyVoting.Queries.CanRecognizeIncorrectQueries||18:31:33 Thu, Jul 25, 2019|
+|FacultyVoting.Queries.CanCreateAndViewQueries||18:31:25 Thu, Jul 25, 2019|
+|FacultyVoting.Profiles.CanViewDivisions||18:30:33 Thu, Jul 25, 2019|
+|FacultyVoting.Profiles.CanViewContractTypes||18:30:15 Thu, Jul 25, 2019|
+|FacultyVoting.Profiles.OnlyAdminsCanAddNewProfilesOrEditProfiles||18:09:38 Thu, Jul 25, 2019|
+|FacultyVoting.Profiles.OnlyAdminsCanAddNewProfiles||17:36:52 Thu, Jul 25, 2019|
+|FacultyVoting.ScenarioLibrary||17:19:01 Thu, Jul 25, 2019|
+|FacultyVoting.Profiles.OnlyAdminsAndCorrespondingUserCanViewProfile||17:18:34 Thu, Jul 25, 2019|
 |FacultyVoting.Voting.CanCreateElection||18:45:46 Wed, Jul 24, 2019|
 |FacultyVoting.Voting.CanCastAVote||18:45:39 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CannotAddExistingProfiles||18:45:10 Wed, Jul 24, 2019|
@@ -8,12 +17,8 @@
 |FacultyVoting.Profiles.CanViewProfiles||18:25:02 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanSetProfileAsInactive||18:24:37 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanFilterProfileList||18:21:59 Wed, Jul 24, 2019|
-|FacultyVoting.ScenarioLibrary||18:21:26 Wed, Jul 24, 2019|
 |FacultyVoting.TearDown||17:48:54 Sat, Jul 20, 2019|
 |FacultyVoting||15:38:43 Sat, Jul 20, 2019|
-|FacultyVoting.Queries.CanValidateQueryStrings||20:56:58 Sat, Jun 15, 2019|
-|FacultyVoting.Queries.CanCreateAndViewQueries||17:39:44 Fri, Jun 14, 2019|
-|FacultyVoting.Queries.CanRecognizeIncorrectQueries||17:26:49 Fri, Jun 14, 2019|
 |FacultyVoting.Queries||17:06:16 Thu, Jun 13, 2019|
 |FacultyVoting.Committees.CanCreateCommittee||20:41:07 Sat, Jun 08, 2019|
 |FacultyVoting.Committees||19:19:48 Sat, Jun 08, 2019|
@@ -21,8 +26,6 @@
 |FacultyVoting.Voting||18:40:26 Sat, Jun 08, 2019|
 |FacultyVoting.Profiles.ScenarioLibrary||11:34:39 Tue, May 28, 2019|
 |FacultyVoting.Profiles.SetUp||11:31:32 Tue, May 28, 2019|
-|FacultyVoting.Profiles.CanViewContractTypes||19:20:13 Mon, May 27, 2019|
-|FacultyVoting.Profiles.CanViewDivisions||19:19:39 Mon, May 27, 2019|
 |FacultyVoting.Profiles.CanViewDivisions.CanViewContractTypes||19:11:38 Mon, May 27, 2019|
 |FacultyVoting.SetUp||18:06:01 Mon, May 27, 2019|
 |FacultyVoting.Divisions.CanViewDivisions||16:31:56 Mon, May 27, 2019|

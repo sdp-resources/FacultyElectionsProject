@@ -1,6 +1,5 @@
 package fsc.interactor;
 
-import fsc.request.Request;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNull;
@@ -29,11 +28,6 @@ public class InteractorChainingTest {
 
     public String toString() {
       return "Interactor " + name;
-    }
-
-    public boolean canHandle(Request request) {
-      canHandleCalled = true;
-      return false;
     }
 
   }

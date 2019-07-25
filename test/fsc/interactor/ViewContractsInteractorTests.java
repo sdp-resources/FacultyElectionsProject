@@ -19,7 +19,7 @@ public class ViewContractsInteractorTests {
     ViewContractsRequest request = new ViewContractsRequest();
     ContractTypesGatewayStub gateway = new ContractTypesGatewayStub("tenure_track", "tenured");
     ContractTypeInteractor interactor = new ContractTypeInteractor(gateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.ofContractTypes(gateway.contractTypes), response);
   }

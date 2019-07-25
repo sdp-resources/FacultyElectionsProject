@@ -7,19 +7,16 @@ import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class AuthorizeInteractorTest {
   @Test
   public void sessionGatewayWithNoTokensCanHandleAndGivesErrorResponse() {
     SessionGateway sessionGateway = new RejectingSessionGatewayStub();
-    AuthorizeInteractor authorizeInteractor = new AuthorizeInteractor(sessionGateway);
+    SessionInteractor authorizeInteractor = new SessionInteractor(sessionGateway);
     ViewProfilesListRequest request = new ViewProfilesListRequest();
-    boolean canHandleRequest = authorizeInteractor.canHandle(request);
-    Response response = authorizeInteractor.execute(request);
+    Response response = authorizeInteractor.handle(request);
 
     assertEquals(ResponseFactory.notAuthorized(), response);
-    assertTrue(canHandleRequest);
   }
 }

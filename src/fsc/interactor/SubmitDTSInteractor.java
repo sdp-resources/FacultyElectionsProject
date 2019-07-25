@@ -7,7 +7,7 @@ import fsc.response.*;
 
 import java.util.Collection;
 
-public class SubmitDTSInteractor {
+public class SubmitDTSInteractor extends Interactor {
 
   private ElectionGateway electionGateway;
   public Profile profile;

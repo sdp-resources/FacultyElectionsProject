@@ -26,7 +26,6 @@ public class EditProfileInteractorTest {
     providedProfile = EntityStub.getProfile(0);
     profileGateway = new ExistingProfileGatewaySpy(providedProfile);
     request = new EditProfileRequest("rossB12");
-    request.setSession(EntityStub.adminSession());
     interactor = new ProfileInteractor(profileGateway, entityFactory);
   }
 
@@ -41,14 +40,14 @@ public class EditProfileInteractorTest {
   @Test
   public void canTakeProfile() {
     request.changeContractType("Untenured");
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.success(), response);
   }
 
   @Test
   public void canEditSingleField() {
     request.changeContractType("Untenured");
-    interactor.execute(request);
+    interactor.handle(request);
     assertNotEquals("Tenured", providedProfile.getContract());
   }
 
@@ -57,7 +56,7 @@ public class EditProfileInteractorTest {
     request.changeFullname("Bill Mill");
     request.changeDivision("Science");
     request.changeContractType("Sabbatical");
-    interactor.execute(request);
+    interactor.handle(request);
     assertEquals("Bill Mill", providedProfile.getName());
     assertEquals("Sabbatical", providedProfile.getContract());
     assertEquals("Science", providedProfile.getDivision());
@@ -66,9 +65,9 @@ public class EditProfileInteractorTest {
   @Test
   public void canTestStatus() {
     request.changeActiveStatus("inactive");
-    interactor.execute(request);
+    interactor.handle(request);
     request.changeActiveStatus("active");
-    interactor.execute(request);
+    interactor.handle(request);
     assertTrue(providedProfile.isActive());
     assertEquals(request.username, profileGateway.providedUsername);
     assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
@@ -77,18 +76,10 @@ public class EditProfileInteractorTest {
   @Test
   public void spyRemembersUsername() {
     request.changeActiveStatus("inactive");
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertTrue(response.isSuccessful());
     assertFalse(providedProfile.isActive());
     assertEquals(request.username, profileGateway.providedUsername);
     assertTrue(ExistingProfileGatewaySpy.profileHasBeenEdited);
-  }
-
-  @Test
-  public void whenNonAdminUserIsLoggedIn_throwError() {
-    request.setSession(EntityStub.userSession(providedProfile.getUsername()));
-    request.changeActiveStatus("inactive");
-    Response response = interactor.execute(request);
-    assertEquals(ResponseFactory.notAuthorized(), response);
   }
 }

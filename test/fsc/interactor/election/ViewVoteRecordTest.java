@@ -43,7 +43,7 @@ public class ViewVoteRecordTest extends ElectionTest {
   public void whenNoVoteHasBeenCast_returnError() {
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.noVote(), response);
   }
 
@@ -56,7 +56,7 @@ public class ViewVoteRecordTest extends ElectionTest {
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     System.out.println(response);
     assertTrue(response.isSuccessful());
     ViewableEntityConverter entityConverter = new ViewableEntityConverter();

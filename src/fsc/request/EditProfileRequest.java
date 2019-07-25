@@ -1,6 +1,7 @@
 package fsc.request;
 
 import fsc.entity.Profile;
+import fsc.interactor.Interactor;
 
 import java.util.*;
 
@@ -54,6 +55,10 @@ public class EditProfileRequest extends Request {
 
   public void changeActiveStatus(Object value) {
     changes.add(ProfileChange.activeStatus(value));
+  }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
   }
 
   public static abstract class ProfileChange {

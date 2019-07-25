@@ -14,4 +14,8 @@ public class CreateProfileRequest extends Request {
     this.division = division;
     this.contract = contract;
   }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

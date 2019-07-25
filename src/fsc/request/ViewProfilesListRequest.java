@@ -1,5 +1,7 @@
 package fsc.request;
 
+import fsc.interactor.Interactor;
+
 public class ViewProfilesListRequest extends Request {
   public final String query;
 
@@ -9,5 +11,9 @@ public class ViewProfilesListRequest extends Request {
 
   public ViewProfilesListRequest() {
     this("all");
+  }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
   }
 }

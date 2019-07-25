@@ -36,7 +36,7 @@ public class CreateSeatInteractorTest {
   public void WhenCommitteeNameDoesNotExist_thenReturnError() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertEquals(ResponseFactory.unknownCommitteeName(), response);
@@ -47,7 +47,7 @@ public class CreateSeatInteractorTest {
     expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertEquals(ResponseFactory.resourceExists(), response);
@@ -58,7 +58,7 @@ public class CreateSeatInteractorTest {
     request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, "anInvalid query string");
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     System.out.println(response);
     assertFalse(response.isSuccessful());
     assertFalse(gateway.saveWasCalled);
@@ -68,7 +68,7 @@ public class CreateSeatInteractorTest {
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertTrue(committee.hasSeat(SEAT_NAME));

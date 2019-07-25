@@ -39,7 +39,7 @@ public class CreateElectionInteractionTest extends ElectionTest {
     electionGateway = new AddedElectionGatewaySpy(ELECTION_ID);
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals("Cool committee", committeeGateway.submittedCommitteeName);
     assertTrue(response.isSuccessful());
     assertEquals(request.seatName, electionGateway.addedElection.getSeat().getName());
@@ -55,7 +55,7 @@ public class CreateElectionInteractionTest extends ElectionTest {
     electionGateway = new AddedElectionGatewaySpy(2);
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
     interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway, entityFactory);
-    response = interactor.execute(request);
+    response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownCommitteeName(), response);
     assertNull(electionGateway.addedElection);
     assertNotNull(committeeGateway.submittedCommitteeName);

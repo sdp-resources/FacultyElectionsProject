@@ -27,7 +27,7 @@ public class EditCommitteeInteractorTest {
     changes.put("name", "steering wheel");
     EditCommitteeRequest request = new EditCommitteeRequest(name, changes);
 
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownCommitteeName(), response);
   }
@@ -44,7 +44,7 @@ public class EditCommitteeInteractorTest {
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
 
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
     assertEquals(newName, gateway.returnedCommittee.getName());
@@ -64,7 +64,7 @@ public class EditCommitteeInteractorTest {
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
 
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
     assertEquals(newName, gateway.returnedCommittee.getName());

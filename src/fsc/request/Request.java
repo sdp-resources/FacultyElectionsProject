@@ -1,11 +1,11 @@
 package fsc.request;
 
 import fsc.entity.session.Session;
-import fsc.entity.session.UnAuthorizedSession;
+import fsc.entity.session.UnauthenticatedSession;
 
 public abstract class Request {
   public String token;
-  private Session session = new UnAuthorizedSession();
+  private Session session = new UnauthenticatedSession();
 
   public Session getSession() {
     return session;
@@ -14,4 +14,6 @@ public abstract class Request {
   public void setSession(Session session) {
     this.session = session;
   }
+
+  public abstract Object accept(RequestVisitor visitor);
 }

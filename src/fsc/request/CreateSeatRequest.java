@@ -1,5 +1,7 @@
 package fsc.request;
 
+import fsc.interactor.Interactor;
+
 public class CreateSeatRequest extends Request {
   public final String committeeName;
   public final String seatName;
@@ -9,5 +11,9 @@ public class CreateSeatRequest extends Request {
     this.committeeName = committeeName;
     this.seatName = seatName;
     this.queryString = queryString;
+  }
+
+  public Object accept(RequestVisitor visitor) {
+    return visitor.visit(this);
   }
 }

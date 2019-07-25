@@ -33,7 +33,8 @@ public class AppContext {
   }
 
   public Interactor loadInteractors(Gateway gateway) {
-    return new DivisionInteractor(gateway, getEntityFactory())
+    return new AuthorizingInteractor(gateway)
+                 .append(new DivisionInteractor(gateway, getEntityFactory()))
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
                  .append(new ProfileInteractor(gateway, getEntityFactory()))
                  .append(new CommitteeInteractor(gateway, gateway, getEntityFactory()))
@@ -57,8 +58,10 @@ public class AppContext {
   public Response addProfile(
         String fullname, String username, String contractType, String division
   ) {
-    return getResponse(requestFactory.createProfile(fullname, username,
-                                                    contractType, division));
+    Response response = getResponse(requestFactory.createProfile(fullname, username,
+                                                                 contractType, division));
+    System.out.println(response);
+    return response;
   }
 
   public Response getProfile(String username) {

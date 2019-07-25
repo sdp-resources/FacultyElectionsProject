@@ -23,7 +23,6 @@ public class ProfileInteractor extends Interactor {
     return profileFetcher
                  .makeProfile(request.name, request.username,
                               request.division, request.contract)
-                 .escapeUnless(isAuthorizedAsAdmin(request), ResponseFactory.notAuthorized())
                  .escapeIf(profileFetcher::profileExists,
                            ResponseFactory.resourceExists())
                  .perform(profileFetcher::addProfile)
@@ -34,7 +33,6 @@ public class ProfileInteractor extends Interactor {
   public Response execute(EditProfileRequest request) {
     return profileFetcher
                  .fetchProfile(request.username)
-                 .escapeUnless(isAuthorizedAsAdmin(request), ResponseFactory.notAuthorized())
                  .perform(request::applyChangesTo)
                  .perform(profileFetcher::save)
                  .resolveWith((s -> ResponseFactory.success()));
@@ -43,15 +41,11 @@ public class ProfileInteractor extends Interactor {
   public Response execute(ViewProfileRequest request) {
     return profileFetcher
                  .fetchProfile(request.username)
-                 .escapeUnless(isAuthorizedAsAdminOrUser(request, request.username),
-                               ResponseFactory.notAuthorized())
                  .resolveWith(ResponseFactory::ofProfile);
   }
 
   public Response execute(ViewProfilesListRequest request) {
     return queryFetcher.createFromString(request.query)
-                       .escapeUnless(isAuthorizedAsAdmin(request),
-                                     ResponseFactory.notAuthorized())
                        .mapThrough(Builder.lift(profileFetcher::getProfilesMatchingQuery))
                        .resolveWith(ResponseFactory::ofProfileList);
   }

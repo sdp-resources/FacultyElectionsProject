@@ -3,7 +3,7 @@ package fsc.interactor;
 import fsc.entity.EntityFactory;
 import fsc.gateway.DivisionGateway;
 import fsc.request.AddDivisionRequest;
-import fsc.request.ViewDivisionRequest;
+import fsc.request.ViewDivisionListRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 
@@ -26,7 +26,7 @@ public class DivisionInteractor extends Interactor {
     return ResponseFactory.success();
   }
 
-  public Response execute(ViewDivisionRequest request) {
+  public Response execute(ViewDivisionListRequest request) {
     return ResponseFactory.ofDivisions(gateway.getAvailableDivisions());
   }
 }

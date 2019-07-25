@@ -30,7 +30,7 @@ public class LoginInteractorTest {
     LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
                                                           authenticator);
 
-    Response response = loginInteractor.execute(request);
+    Response response = loginInteractor.handle(request);
 
     assertEquals(ResponseFactory.notAuthorized(), response);
   }
@@ -50,7 +50,7 @@ public class LoginInteractorTest {
     LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
                                                           authenticator);
 
-    LoginResponse response = (LoginResponse) loginInteractor.execute(request);
+    LoginResponse response = (LoginResponse) loginInteractor.handle(request);
 
     assertEquals(expectedRole.toString(), response.role);
     assertEquals(expectedToken, response.token);
@@ -72,6 +72,6 @@ public class LoginInteractorTest {
     LoginInteractor loginInteractor = new LoginInteractor(sessionGateway, authorizer,
                                                           authenticator);
 
-    LoginResponse response = (LoginResponse) loginInteractor.execute(request);
+    LoginResponse response = (LoginResponse) loginInteractor.handle(request);
   }
 }

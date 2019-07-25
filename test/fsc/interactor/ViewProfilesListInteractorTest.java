@@ -53,11 +53,4 @@ public class ViewProfilesListInteractorTest {
     assertEquals(expectedResponse, response);
   }
 
-  @Test
-  public void whenActiveUserIsNotAdmin_returnError() {
-    request.setSession(EntityStub.userSession("skiadas"));
-    Response response = interactor.handle(request);
-    Response expectedResponse = ResponseFactory.notAuthorized();
-    assertEquals(expectedResponse, response);
-  }
 }

@@ -44,7 +44,7 @@ public class EditSeatInteractorTest {
   public void WhenCommitteeNameDoesNotExist_thenReturnError() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertEquals(ResponseFactory.unknownCommitteeName(), response);
@@ -54,7 +54,7 @@ public class EditSeatInteractorTest {
   public void WhenSeatNameDoesNotExist_returnError() {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownSeatName(), response);
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertFalse(gateway.saveWasCalled);
@@ -69,7 +69,7 @@ public class EditSeatInteractorTest {
     expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertEquals(ResponseFactory.success(), response);
@@ -86,7 +86,7 @@ public class EditSeatInteractorTest {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     InvalidProfileGatewaySpy profileGateway = new InvalidProfileGatewaySpy();
     interactor = new CommitteeInteractor(gateway, profileGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownProfileName(), response);
     assertEquals(profileName, profileGateway.submittedUsername);
@@ -102,7 +102,7 @@ public class EditSeatInteractorTest {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
     interactor = new CommitteeInteractor(gateway, profileGateway, entityFactory);
-    Response response = interactor.execute(request);
+    Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
     assertTrue(gateway.saveWasCalled);
