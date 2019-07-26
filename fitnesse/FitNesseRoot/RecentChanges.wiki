@@ -1,3 +1,6 @@
+|FacultyVoting||15:46:39 Fri, Jul 26, 2019|
+|FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||15:45:11 Fri, Jul 26, 2019|
+|FacultyVoting.Accounts||13:08:34 Fri, Jul 26, 2019|
 |FacultyVoting.Queries.CanValidateQueryStrings||18:31:41 Thu, Jul 25, 2019|
 |FacultyVoting.Queries.CanRecognizeIncorrectQueries||18:31:33 Thu, Jul 25, 2019|
 |FacultyVoting.Queries.CanCreateAndViewQueries||18:31:25 Thu, Jul 25, 2019|
@@ -18,7 +21,6 @@
 |FacultyVoting.Profiles.CanSetProfileAsInactive||18:24:37 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanFilterProfileList||18:21:59 Wed, Jul 24, 2019|
 |FacultyVoting.TearDown||17:48:54 Sat, Jul 20, 2019|
-|FacultyVoting||15:38:43 Sat, Jul 20, 2019|
 |FacultyVoting.Queries||17:06:16 Thu, Jun 13, 2019|
 |FacultyVoting.Committees.CanCreateCommittee||20:41:07 Sat, Jun 08, 2019|
 |FacultyVoting.Committees||19:19:48 Sat, Jun 08, 2019|

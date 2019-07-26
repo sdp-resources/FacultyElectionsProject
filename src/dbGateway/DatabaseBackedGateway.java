@@ -4,6 +4,8 @@ import fsc.entity.*;
 import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
+import fsc.entity.session.AuthenticatedSession;
+import fsc.entity.session.Session;
 import fsc.gateway.Gateway;
 import fsc.service.query.*;
 
@@ -206,6 +208,32 @@ public class DatabaseBackedGateway implements Gateway {
       QueryStringParser.setNameValidator(oldValidator);
     }
 
+  }
+
+  public PasswordRecord getPasswordRecordFor(String username) throws UnknownUsernameException {
+    PasswordRecord record = find(PasswordRecord.class, username);
+    if (record == null) { throw new UnknownUsernameException(); }
+
+    return record;
+  }
+
+  public boolean hasPasswordRecordFor(String username) {
+    PasswordRecord record = find(PasswordRecord.class, username);
+    return record != null;
+  }
+
+  public void addPasswordRecord(PasswordRecord record) {
+    entityManager.persist(record);
+  }
+
+  public void addSession(AuthenticatedSession session) {
+    // TODO
+
+  }
+
+  public Session getSession(String token) throws NoSessionWithThatTokenException {
+    // TODO
+    return null;
   }
 
   public void save() {

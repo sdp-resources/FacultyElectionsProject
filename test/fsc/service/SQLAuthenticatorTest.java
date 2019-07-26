@@ -36,7 +36,7 @@ public class SQLAuthenticatorTest {
 
   @Test
   public void ifNameIsInDatabaseButPasswordIsWrong_returnUnauthenticatedSession() {
-    PasswordRecord record = new PasswordRecord(ADMIN, PASSWORD, Authorizer.Role.ROLE_ADMIN);
+    PasswordRecord record = new PasswordRecord(ADMIN, hashedPassword, Authorizer.Role.ROLE_ADMIN);
     gateway.addPasswordRecord(record);
     Credentials falseCredentials = new Credentials(ADMIN, WRONG_PASSWORD);
     session = authenticator.authenticateWithCredentials(falseCredentials);

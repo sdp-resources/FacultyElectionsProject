@@ -35,11 +35,18 @@ public class SQLAuthenticator implements Authenticator {
     }
   }
 
+  public PasswordRecord createPasswordRecord(
+        String username, String password, Authorizer.Role role
+  ) {
+    Credentials credentials = new Credentials(username, password);
+    return new PasswordRecord(username, hashPassword(credentials), role);
+  }
+
   private LocalDateTime generateExpiryDate() {
     return LocalDateTime.now().plusMinutes(SESSION_DURATION_MINUTES);
   }
 
-  String hashPassword(Credentials credentials) {
+  public static String hashPassword(Credentials credentials) {
     String saltedString = SALT + credentials.getUsername() + credentials.getPassword();
     return CryptoWrapper.toSha256(saltedString);
   }

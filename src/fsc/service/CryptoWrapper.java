@@ -17,7 +17,7 @@ public class CryptoWrapper {
     return base64Encoder.encodeToString(randomBytes);
   }
 
-  public static String toSha256(String saltedString) {
-    return DigestUtils.sha256Hex(saltedString);
+  public static String toSha256(String string) {
+    return DigestUtils.sha256Hex(string);
   }
 }

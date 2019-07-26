@@ -1,7 +1,7 @@
 package fsc.request;
 
 public interface RequestVisitor {
-  default Object visit(Request request) {
+  default Object doVisit(Request request) {
     return request.accept(this);
   }
   Object visit(ViewAllVotesRequest request);
@@ -35,4 +35,5 @@ public interface RequestVisitor {
   Object visit(ViewElectionRequest request);
   Object visit(DTSRequest request);
   Object visit(EditElectionStateRequest request);
+  Object visit(AddPasswordRecordRequest request);
 }

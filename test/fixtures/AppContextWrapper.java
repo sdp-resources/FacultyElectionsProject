@@ -134,6 +134,11 @@ class AppContextWrapper {
   void shutdown() {
     appContext.shutdown();
   }
+
+  public boolean addPasswordRecord(String username, String password, String role) {
+    return appContext.addPasswordRecord(username, password, role).isSuccessful();
+  }
+
   private class TestableAppContext extends AppContext {
 
     private Session session = new UnauthenticatedSession();

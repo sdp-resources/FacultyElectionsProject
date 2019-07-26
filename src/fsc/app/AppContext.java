@@ -6,6 +6,8 @@ import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
 import fsc.response.Response;
+import fsc.service.Authenticator;
+import fsc.service.SQLAuthenticator;
 import fsc.service.query.GatewayBackedQueryValidator;
 import fsc.service.query.QueryStringParser;
 
@@ -33,7 +35,9 @@ public class AppContext {
   }
 
   public Interactor loadInteractors(Gateway gateway) {
+    Authenticator authenticator = new SQLAuthenticator(gateway);
     return new AuthorizingInteractor(gateway)
+                 .append(new LoginInteractor(gateway, authenticator, gateway))
                  .append(new DivisionInteractor(gateway, getEntityFactory()))
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
                  .append(new ProfileInteractor(gateway, getEntityFactory()))
@@ -153,6 +157,10 @@ public class AppContext {
 
   public Response getVoteRecord(long recordId) {
     return getResponse(requestFactory.viewVoteRecord(recordId));
+  }
+
+  public Response addPasswordRecord(String username, String password, String role) {
+    return getResponse(requestFactory.addPasswordRecord(username, password, role));
   }
 
   public void shutdown() {

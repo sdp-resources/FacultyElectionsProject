@@ -15,5 +15,6 @@ WhereUsed: no
 !path ../lib/hibernate-core-5.4.2.Final.jar
 !path ../lib/**.jar
 !path /Users/haris/.m2/repository/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar
+!path /Users/haris/.m2/repository/commons-codec/commons-codec/1.8/commons-codec-1.8.jar
 
 !define TEST_SYSTEM {slim} 

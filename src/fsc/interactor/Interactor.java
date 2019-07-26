@@ -14,7 +14,7 @@ public abstract class Interactor {
   }
 
   public <T extends Request> Response handle(T request) {
-    return (Response) visitor.visit(request);
+    return (Response) visitor.doVisit(request);
   }
 
   public Response execute(CreateProfileRequest request) {
@@ -138,6 +138,10 @@ public abstract class Interactor {
   }
 
   public Response execute(ViewVoteRecordRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(AddPasswordRecordRequest request) {
     return delegate(request);
   }
 

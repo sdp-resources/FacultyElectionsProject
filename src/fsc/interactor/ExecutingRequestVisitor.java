@@ -130,4 +130,8 @@ class ExecutingRequestVisitor implements RequestVisitor {
   public Object visit(EditElectionStateRequest request) {
     return interactor.execute(request);
   }
+
+  public Object visit(AddPasswordRecordRequest request) {
+    return interactor.execute(request);
+  }
 }

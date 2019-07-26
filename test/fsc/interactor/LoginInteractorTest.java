@@ -27,7 +27,7 @@ public class LoginInteractorTest {
 
     Authenticator authenticator = new RejectingAuthenticatorSpy();
     sessionGateway = new SessionGatewaySpy();
-    loginInteractor = new LoginInteractor(sessionGateway, authenticator);
+    loginInteractor = new LoginInteractor(sessionGateway, authenticator, null);
 
     Response response = loginInteractor.handle(request);
 
@@ -44,7 +44,7 @@ public class LoginInteractorTest {
 
     AcceptingAuthenticatorSpy authenticator = new AcceptingAuthenticatorSpy();
     sessionGateway = new SessionGatewaySpy();
-    loginInteractor = new LoginInteractor(sessionGateway, authenticator);
+    loginInteractor = new LoginInteractor(sessionGateway, authenticator, null);
 
     Response response = loginInteractor.handle(request);
 

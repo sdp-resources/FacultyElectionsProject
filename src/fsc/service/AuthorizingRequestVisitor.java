@@ -9,7 +9,7 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   public AuthorizingRequestVisitor(Gateway gateway) {this.gateway = gateway;}
 
   public boolean isAuthorized(Request request) {
-    return (boolean) visit(request);
+    return (boolean) doVisit(request);
   }
 
   public Object visit(ViewElectionRequest request) {
@@ -143,6 +143,10 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(EditElectionStateRequest request) {
+    return isAuthorizedAsAdmin(request);
+  }
+
+  public Object visit(AddPasswordRecordRequest request) {
     return isAuthorizedAsAdmin(request);
   }
 

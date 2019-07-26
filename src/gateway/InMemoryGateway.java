@@ -3,6 +3,8 @@ package gateway;
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
+import fsc.entity.session.AuthenticatedSession;
+import fsc.entity.session.Session;
 import fsc.gateway.Gateway;
 import fsc.gateway.QueryGateway;
 import fsc.service.query.QueryStringConverter;
@@ -196,6 +198,29 @@ public class InMemoryGateway implements Gateway {
     } catch (QueryStringParser.QueryParseException e) {
       return new QueryValidationResult.InvalidQueryResult(e.getMessage());
     }
+  }
+
+  public PasswordRecord getPasswordRecordFor(String username) throws UnknownUsernameException {
+    // TODO
+    return null;
+  }
+
+  public boolean hasPasswordRecordFor(String username) {
+    // TODO
+    return false;
+  }
+
+  public void addPasswordRecord(PasswordRecord record) {
+    // TODO
+  }
+
+  public void addSession(AuthenticatedSession session) {
+    // TODO
+  }
+
+  public Session getSession(String token) throws NoSessionWithThatTokenException {
+    // TODO
+    return null;
   }
 
   public void save() {

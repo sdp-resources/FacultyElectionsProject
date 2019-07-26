@@ -2,6 +2,8 @@ package fsc.entity;
 
 import fsc.service.Authorizer;
 
+import java.util.Objects;
+
 public class PasswordRecord {
   private String username;
   private String password;
@@ -38,5 +40,26 @@ public class PasswordRecord {
 
   public void setRole(Authorizer.Role role) {
     this.role = role;
+  }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PasswordRecord that = (PasswordRecord) o;
+    return username.equals(that.username) &&
+                 password.equals(that.password) &&
+                 role == that.role;
+  }
+
+  public int hashCode() {
+    return Objects.hash(username, password, role);
+  }
+
+  public String toString() {
+    return "PasswordRecord{" +
+                 "username='" + username + '\'' +
+                 ", password='" + password + '\'' +
+                 ", role=" + role +
+                 '}';
   }
 }

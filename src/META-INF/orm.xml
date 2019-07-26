@@ -136,5 +136,15 @@
             <many-to-one name="profile" target-entity="fsc.entity.Profile"/>
         </attributes>
     </entity>
+    <entity class="fsc.entity.PasswordRecord">
+        <table name="passwords"/>
+        <attributes>
+            <id name="username"/>
+            <basic name="password"/>
+            <basic name="role">
+                <enumerated>STRING</enumerated>
+            </basic>
+        </attributes>
+    </entity>
     <embeddable class="fsc.entity.Candidate$CandidateId" access="FIELD"/>
 </entity-mappings>
