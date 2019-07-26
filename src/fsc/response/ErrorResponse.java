@@ -19,6 +19,7 @@ public class ErrorResponse implements Response {
   public static final String VOTER_EXISTS = "This voter already exists";
   public static final String IMPROPER_ELECTION_STATE = "The operation cannot be performed on " +
                                                              "this election state";
+  public static final String INVALID_CREDENTIALS = "The username and password are invalid";
   public String message;
 
   public ErrorResponse(String s) {

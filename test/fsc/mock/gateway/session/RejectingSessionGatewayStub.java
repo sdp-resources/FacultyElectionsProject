@@ -3,7 +3,7 @@ package fsc.mock.gateway.session;
 import fsc.entity.session.Session;
 import fsc.gateway.SessionGateway;
 
-public class RejectingSessionGatewayStub extends SessionGatewayDummy {
+public class RejectingSessionGatewayStub extends SessionGatewayStub {
   @Override
   public Session getSession(String token) throws SessionGateway.NoSessionWithThatTokenException {
     throw new SessionGateway.NoSessionWithThatTokenException();

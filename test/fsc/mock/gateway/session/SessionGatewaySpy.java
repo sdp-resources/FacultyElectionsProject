@@ -3,7 +3,7 @@ package fsc.mock.gateway.session;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.Session;
 
-public class SessionGatewaySpy extends SessionGatewayDummy {
+public class SessionGatewaySpy extends SessionGatewayStub {
   public AuthenticatedSession addedSession = null;
   public boolean saveCalled = false;
 

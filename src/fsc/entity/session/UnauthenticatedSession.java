@@ -3,7 +3,7 @@ package fsc.entity.session;
 import fsc.service.Authorizer;
 
 public class UnauthenticatedSession implements Session {
-  public boolean isAuthorized() {
+  public boolean isAuthenticated() {
     return false;
   }
 

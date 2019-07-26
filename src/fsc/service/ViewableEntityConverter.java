@@ -2,6 +2,7 @@ package fsc.service;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
+import fsc.entity.session.AuthenticatedSession;
 import fsc.service.query.QueryStringConverter;
 import fsc.viewable.*;
 
@@ -74,6 +75,13 @@ public class ViewableEntityConverter {
                                 convertCandidates(election.getCandidates()),
                                 convertVoters(election.getVoters()),
                                 convertVoteRecordList(election.getVoteRecords()));
+  }
+
+  public ViewableSession convert(AuthenticatedSession session) {
+    return new ViewableSession(session.getUsername(),
+                               session.getRole().toString(),
+                               session.getToken(),
+                               session.getExpirationTime().toString());
   }
 
   private Collection<ViewableVoter> convertVoters(Collection<Voter> voters) {

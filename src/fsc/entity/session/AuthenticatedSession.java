@@ -33,7 +33,7 @@ public class AuthenticatedSession implements Session {
 
   public LocalDateTime getExpirationTime() { return expirationTime; }
 
-  public boolean isAuthorized() {
+  public boolean isAuthenticated() {
     return true;
   }
 

@@ -6,35 +6,27 @@ import fsc.gateway.SessionGateway;
 import fsc.request.LoginRequest;
 import fsc.response.*;
 import fsc.service.Authenticator;
-import fsc.service.Authorizer;
+import fsc.service.Credentials;
 
 public class LoginInteractor extends Interactor {
   private SessionGateway sessionGateway;
-  private Authorizer authorizer;
   private Authenticator authenticator;
 
-  LoginInteractor(
-        SessionGateway sessionGateway, Authorizer authorizer, Authenticator authenticator
-  ) {
+  LoginInteractor(SessionGateway sessionGateway, Authenticator authenticator) {
     this.sessionGateway = sessionGateway;
-    this.authorizer = authorizer;
     this.authenticator = authenticator;
   }
 
   public Response execute(LoginRequest request) {
-    Session authorization = authorizer.authorize(request.username, request.password);
-    if (!authorization.isAuthorized()) {
-      return ResponseFactory.notAuthorized();
+    Credentials credentials = new Credentials(request.username, request.password);
+    Session session = authenticator.authenticateWithCredentials(credentials);
+    if (!session.isAuthenticated()) {
+      return ResponseFactory.invalidCredentials();
     }
-    sessionGateway.addSession(new AuthenticatedSession(((AuthenticatedSession) authorization).getRole(),
-                                                       ((AuthenticatedSession) authorization)
-                                                          .getUsername(),
-                                                       ((AuthenticatedSession) authorization).getToken(),
-                                                       ((AuthenticatedSession) authorization)
-                                                          .getExpirationTime()));
+    AuthenticatedSession authenticatedSession = (AuthenticatedSession) session;
+    sessionGateway.addSession(authenticatedSession);
     sessionGateway.save();
-    return new LoginResponse(((AuthenticatedSession) authorization).getRole().toString(),
-                             ((AuthenticatedSession) authorization).getToken());
+    return ResponseFactory.ofAuthenticatedSession(authenticatedSession);
   }
 
 }
