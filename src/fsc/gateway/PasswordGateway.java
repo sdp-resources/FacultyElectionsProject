@@ -1,6 +1,9 @@
 package fsc.gateway;
 
+import fsc.entity.PasswordRecord;
+
 public interface PasswordGateway {
-  boolean checkCredentials(String username, String password);
-  void updateCredentials(String username, String password);
+  PasswordRecord getPasswordRecordFor(String username) throws UnknownUsernameException;
+  void addPasswordRecord(PasswordRecord record);
+  class UnknownUsernameException extends Exception {}
 }

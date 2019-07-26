@@ -78,5 +78,6 @@
     <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
     <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.16" level="project" />
+    <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.codec:1.8" level="project" />
   </component>
 </module>
