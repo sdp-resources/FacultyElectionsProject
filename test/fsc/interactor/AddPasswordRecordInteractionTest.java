@@ -75,6 +75,6 @@ public class AddPasswordRecordInteractionTest {
 //    assertEquals(authenticator.token, viewableSession.token);
 //    assertEquals(sessionGateway.addedSession.getToken(), viewableSession.token);
 //    assertEquals(expectedRole, sessionGateway.addedSession.getRole());
-//    assertTrue(sessionGateway.saveCalled);
+//    assertTrue(sessionGateway.hasSaved);
 //  }
 }

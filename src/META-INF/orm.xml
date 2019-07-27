@@ -3,7 +3,6 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
         http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
-    <converter class="dbGateway.converter.QueryDbConverter" auto-apply="true"/>
     <entity class="fsc.entity.Profile" name="Profile" access="FIELD">
         <table name="profiles"/>
         <attributes>
@@ -146,5 +145,18 @@
             </basic>
         </attributes>
     </entity>
+    <entity class="fsc.entity.session.AuthenticatedSession" access="FIELD">
+        <table name="authenticated_sessions"/>
+        <attributes>
+            <id name="token"/>
+            <basic name="role">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="username"/>
+            <basic name="expirationTime"/>
+        </attributes>
+    </entity>
     <embeddable class="fsc.entity.Candidate$CandidateId" access="FIELD"/>
+    <converter class="dbGateway.converter.QueryDbConverter" auto-apply="true"/>
+    <converter class="dbGateway.converter.LocalDateTimeConverter" auto-apply="true"/>
 </entity-mappings>

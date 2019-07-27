@@ -1,17 +1,16 @@
 package fsc.mock.gateway.session;
 
 import fsc.entity.session.AuthenticatedSession;
-import fsc.entity.session.Session;
 
 public class SessionGatewaySpy extends SessionGatewayStub {
   public AuthenticatedSession addedSession = null;
-  public boolean saveCalled = false;
+  public boolean hasSaved = false;
 
-  private Session storedSession;
+  private AuthenticatedSession storedSession;
 
   public SessionGatewaySpy() {}
 
-  public SessionGatewaySpy(Session storedSession) {
+  public SessionGatewaySpy(AuthenticatedSession storedSession) {
     this.storedSession = storedSession;
   }
 
@@ -21,12 +20,15 @@ public class SessionGatewaySpy extends SessionGatewayStub {
   }
 
   @Override
-  public Session getSession(String token) {
-    return storedSession;
+  public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
+    if (storedSession != null && storedSession.getToken().equals(token)) {
+      return storedSession;
+    }
+    throw new InvalidOrExpiredTokenException();
   }
 
   @Override
   public void save() {
-    saveCalled = true;
+    hasSaved = true;
   }
 }

@@ -20,6 +20,7 @@ public class ErrorResponse implements Response {
   public static final String IMPROPER_ELECTION_STATE = "The operation cannot be performed on " +
                                                              "this election state";
   public static final String INVALID_CREDENTIALS = "The username and password are invalid";
+  public static final String INVALID_SESSION = "Session token no longer valid";
   public String message;
 
   public ErrorResponse(String s) {

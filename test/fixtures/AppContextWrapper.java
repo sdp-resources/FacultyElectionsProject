@@ -39,8 +39,8 @@ class AppContextWrapper {
     return appContext.editProfile(username, changes).isSuccessful();
   }
 
-  Collection<String> getAllContractTypes() {
-    return appContext.getAllContractTypes().getValues();
+  Collection<String> getAllContractTypes(String token) {
+    return appContext.getAllContractTypes(token).getValues();
   }
 
   Collection<String> getAllDivisions() {
@@ -55,12 +55,12 @@ class AppContextWrapper {
     return appContext.getProfile(username).getValues();
   }
 
-  boolean addContractType(String contractType) {
-    return appContext.addContractType(contractType).isSuccessful();
+  boolean addContractType(String contractType, String token) {
+    return appContext.addContractType(contractType, token).isSuccessful();
   }
 
   boolean hasContractType(String contractType) {
-    Collection<String> result = getAllContractTypes();
+    Collection<String> result = getAllContractTypes(null);
     return result.contains(contractType);
   }
 
@@ -139,8 +139,12 @@ class AppContextWrapper {
     return appContext.addPasswordRecord(username, password, role).isSuccessful();
   }
 
-  private class TestableAppContext extends AppContext {
+  public String login(String username, String password) {
+    ViewableSession session = appContext.login(username, password).getValues();
+    return session.token;
+  }
 
+  private class TestableAppContext extends AppContext {
     private Session session = new UnauthenticatedSession();
 
     TestableAppContext(Gateway gateway) {
@@ -148,8 +152,11 @@ class AppContextWrapper {
     }
 
     public Response getResponse(Request request) {
+      MyLogger.info("Sending request: " + request);
       request.setSession(session);
-      return super.getResponse(request);
+      Response response = super.getResponse(request);
+      MyLogger.info("Got response: " + response);
+      return response;
     }
 
     public void setSession(Session session) {

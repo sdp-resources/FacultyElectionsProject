@@ -158,4 +158,8 @@ public class ResponseFactory {
   public static Response ofAuthenticatedSession(AuthenticatedSession session) {
     return new ViewResponse<>(entityConverter.convert(session));
   }
+
+  public static Response invalidSession() {
+    return new ErrorResponse(ErrorResponse.INVALID_SESSION);
+  }
 }

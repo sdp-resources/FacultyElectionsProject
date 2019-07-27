@@ -1,5 +1,6 @@
-|FacultyVoting||15:46:39 Fri, Jul 26, 2019|
-|FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||15:45:11 Fri, Jul 26, 2019|
+|FacultyVoting||19:56:37 Sat, Jul 27, 2019|
+|FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||21:01:28 Fri, Jul 26, 2019|
+|FacultyVoting.ScenarioLibrary||18:00:23 Fri, Jul 26, 2019|
 |FacultyVoting.Accounts||13:08:34 Fri, Jul 26, 2019|
 |FacultyVoting.Queries.CanValidateQueryStrings||18:31:41 Thu, Jul 25, 2019|
 |FacultyVoting.Queries.CanRecognizeIncorrectQueries||18:31:33 Thu, Jul 25, 2019|
@@ -8,7 +9,6 @@
 |FacultyVoting.Profiles.CanViewContractTypes||18:30:15 Thu, Jul 25, 2019|
 |FacultyVoting.Profiles.OnlyAdminsCanAddNewProfilesOrEditProfiles||18:09:38 Thu, Jul 25, 2019|
 |FacultyVoting.Profiles.OnlyAdminsCanAddNewProfiles||17:36:52 Thu, Jul 25, 2019|
-|FacultyVoting.ScenarioLibrary||17:19:01 Thu, Jul 25, 2019|
 |FacultyVoting.Profiles.OnlyAdminsAndCorrespondingUserCanViewProfile||17:18:34 Thu, Jul 25, 2019|
 |FacultyVoting.Voting.CanCreateElection||18:45:46 Wed, Jul 24, 2019|
 |FacultyVoting.Voting.CanCastAVote||18:45:39 Wed, Jul 24, 2019|

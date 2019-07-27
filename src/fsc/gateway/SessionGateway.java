@@ -1,11 +1,19 @@
 package fsc.gateway;
 
 import fsc.entity.session.AuthenticatedSession;
-import fsc.entity.session.Session;
 
 public interface SessionGateway {
   void addSession(AuthenticatedSession session);
-  Session getSession(String token) throws NoSessionWithThatTokenException;
+  AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException;
+  default AuthenticatedSession getActiveSession(String token)
+        throws InvalidOrExpiredTokenException {
+    AuthenticatedSession session = getSession(token);
+    if (session.hasExpired()) {
+      throw new InvalidOrExpiredTokenException();
+    }
+
+    return session;
+  }
   void save();
-  class NoSessionWithThatTokenException extends Exception {}
+  class InvalidOrExpiredTokenException extends Exception {}
 }

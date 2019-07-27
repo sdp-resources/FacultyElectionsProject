@@ -105,4 +105,8 @@ public class RequestFactory {
   public Request addPasswordRecord(String username, String password, String role) {
     return new AddPasswordRecordRequest(username, password, role);
   }
+
+  public Request login(String username, String password) {
+    return new LoginRequest(username, password);
+  }
 }

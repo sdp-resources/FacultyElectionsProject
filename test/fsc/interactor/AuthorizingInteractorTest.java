@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.entity.session.UnauthenticatedSession;
 import fsc.gateway.Gateway;
 import fsc.request.Request;
 import fsc.request.ViewProfilesListRequest;
@@ -14,6 +15,7 @@ public class AuthorizingInteractorTest {
                                   .append(new ProfileInteractor(gateway,
                                                                 gateway.getEntityFactory()));
     Request request = new ViewProfilesListRequest();
+    request.setSession(new UnauthenticatedSession());
     interactor.handle(request);
   }
 }

@@ -5,7 +5,6 @@ import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
-import fsc.entity.session.Session;
 import fsc.gateway.Gateway;
 import fsc.service.query.*;
 
@@ -24,12 +23,16 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void begin() {
-    entityManager.getTransaction().begin();
+    if (!entityManager.getTransaction().isActive()) {
+      entityManager.getTransaction().begin();
+    }
   }
 
   public void commit() {
     if (entityManager.getTransaction().isActive()) {
+      // TODO: Maybe  try to begin it, then always commit?
       entityManager.getTransaction().commit();
+    } else {
     }
   }
 
@@ -227,17 +230,18 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addSession(AuthenticatedSession session) {
-    // TODO
-
+    entityManager.persist(session);
   }
 
-  public Session getSession(String token) throws NoSessionWithThatTokenException {
-    // TODO
-    return null;
+  public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
+    AuthenticatedSession session = find(AuthenticatedSession.class, token);
+    if (session == null) throw new InvalidOrExpiredTokenException();
+
+    return session;
   }
 
   public void save() {
-
+    commit();
   }
 
   public Map<String, Query> getAllQueries() {

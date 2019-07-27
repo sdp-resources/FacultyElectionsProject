@@ -41,7 +41,6 @@ public class Router {
     fsc.response.Response response = appContext.createElection(getParam(req, "committee"),
                                                                 getParam(req, "seat"));
     ViewableElection election = response.getValues();
-    System.out.println(election);
     res.redirect("/election");
     return null;
   }
@@ -78,7 +77,7 @@ public class Router {
   static Object showAllProfilesPage(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
     returnedHash.put("profiles", appContext.getProfilesMatchingQuery("all").getValues());
-    returnedHash.put("contractTypes", appContext.getAllContractTypes().getValues());
+    returnedHash.put("contractTypes", appContext.getAllContractTypes(null).getValues());
     returnedHash.put("divisions", appContext.getAllDivisions().getValues());
     return serveTemplate("/profilesList.handlebars", returnedHash);
   }
@@ -88,8 +87,6 @@ public class Router {
   }
 
   static Object processLogin(Request req, Response res) {
-    System.out.println(getParam(req, "username"));
-    System.out.println(getParam(req, "password"));
     return "null";
   }
 

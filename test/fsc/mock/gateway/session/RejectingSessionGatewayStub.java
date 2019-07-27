@@ -1,11 +1,10 @@
 package fsc.mock.gateway.session;
 
-import fsc.entity.session.Session;
-import fsc.gateway.SessionGateway;
+import fsc.entity.session.AuthenticatedSession;
 
 public class RejectingSessionGatewayStub extends SessionGatewayStub {
   @Override
-  public Session getSession(String token) throws SessionGateway.NoSessionWithThatTokenException {
-    throw new SessionGateway.NoSessionWithThatTokenException();
+  public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
+    throw new InvalidOrExpiredTokenException();
   }
 }

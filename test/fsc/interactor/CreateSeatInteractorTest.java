@@ -59,7 +59,6 @@ public class CreateSeatInteractorTest {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory);
     Response response = interactor.handle(request);
-    System.out.println(response);
     assertFalse(response.isSuccessful());
     assertFalse(gateway.saveWasCalled);
   }

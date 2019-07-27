@@ -3,6 +3,11 @@ package fixtures;
 import fsc.mock.EntityStub;
 
 public class FscFixture {
+  public boolean removeSession() {
+    TestContext.app.setSession(null);
+    return true;
+  }
+
   public boolean addAdminSession() {
     TestContext.app.setSession(EntityStub.adminSession());
     return true;
@@ -11,6 +16,10 @@ public class FscFixture {
   public boolean addUserSession(String username) {
     TestContext.app.setSession(EntityStub.userSession(username));
     return true;
+  }
+
+  public boolean addPasswordRecord(String username, String password, String role) {
+    return TestContext.app.addPasswordRecord(username, password, role);
   }
 
   public boolean addProfile(
@@ -24,7 +33,7 @@ public class FscFixture {
   }
 
   public boolean addContractType(String contractType) {
-    return TestContext.app.addContractType(contractType);
+    return TestContext.app.addContractType(contractType, null);
   }
 
   public boolean validDivision(String division) {

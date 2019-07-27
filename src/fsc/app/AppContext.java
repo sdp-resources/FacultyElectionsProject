@@ -36,7 +36,8 @@ public class AppContext {
 
   public Interactor loadInteractors(Gateway gateway) {
     Authenticator authenticator = new SQLAuthenticator(gateway);
-    return new AuthorizingInteractor(gateway)
+    return new AuthenticatingInteractor(gateway)
+                 .append(new AuthorizingInteractor(gateway))
                  .append(new LoginInteractor(gateway, authenticator, gateway))
                  .append(new DivisionInteractor(gateway, getEntityFactory()))
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
@@ -50,8 +51,11 @@ public class AppContext {
     try {
       gateway.begin();
       Response response = interactor.handle(request);
-      if (!response.isSuccessful()) { gateway.rollback(); }
-      gateway.commit();
+      if (!response.isSuccessful()) {
+        gateway.rollback();
+      } else {
+        gateway.commit();
+      }
       return response;
     } catch (Exception e) {
       gateway.rollback();
@@ -59,12 +63,16 @@ public class AppContext {
     }
   }
 
+  private Request withToken(String token, Request request) {
+    request.token = token;
+    return request;
+  }
+
   public Response addProfile(
         String fullname, String username, String contractType, String division
   ) {
     Response response = getResponse(requestFactory.createProfile(fullname, username,
                                                                  contractType, division));
-    System.out.println(response);
     return response;
   }
 
@@ -80,12 +88,12 @@ public class AppContext {
     return getResponse(requestFactory.editProfile(username, changes));
   }
 
-  public Response getAllContractTypes() {
-    return getResponse(requestFactory.viewContractTypeList());
+  public Response getAllContractTypes(String token) {
+    return getResponse(withToken(token, requestFactory.viewContractTypeList()));
   }
 
-  public Response addContractType(String contractType) {
-    return getResponse(requestFactory.addContractType(contractType));
+  public Response addContractType(String contractType, String token) {
+    return getResponse(withToken(token, requestFactory.addContractType(contractType)));
   }
 
   public Response getAllDivisions() {
@@ -166,4 +174,9 @@ public class AppContext {
   public void shutdown() {
     gateway.shutdown();
   }
+
+  public Response login(String username, String password) {
+    return getResponse(requestFactory.login(username, password));
+  }
+
 }

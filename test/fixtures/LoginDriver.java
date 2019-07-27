@@ -10,8 +10,16 @@ public class LoginDriver {
     this.password = password;
   }
 
-  public boolean addPasswordRecord(String username, String password, String role) {
-    return TestContext.app.addPasswordRecord(username, password, role);
+  public String logIn() {
+    return TestContext.app.login(username, password);
+  }
+
+  public boolean makeRequestWithToken(String token) {
+    try {
+      return TestContext.app.addContractType("aType" +  token, token);
+    } catch (Exception e) {
+      return false;
+    }
   }
 }
 

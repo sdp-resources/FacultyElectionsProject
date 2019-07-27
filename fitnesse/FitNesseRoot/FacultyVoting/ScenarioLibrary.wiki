@@ -8,6 +8,9 @@
 |scenario|given logged in user _|username|
 |add user session|@username|
 
+|scenario|without a preset session|
+|remove session|
+
 !3 Profiles
 
 |scenario|Given user with name _ username _ division _ and contract type _ |fullname,username,division,contractType|

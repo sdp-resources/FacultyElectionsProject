@@ -4,7 +4,6 @@ import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
-import fsc.entity.session.Session;
 import fsc.gateway.Gateway;
 import fsc.gateway.QueryGateway;
 import fsc.service.query.QueryStringConverter;
@@ -218,7 +217,7 @@ public class InMemoryGateway implements Gateway {
     // TODO
   }
 
-  public Session getSession(String token) throws NoSessionWithThatTokenException {
+  public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
     // TODO
     return null;
   }
