@@ -13,7 +13,9 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="inmemoryH2" />
           <factory-entry name="org.skiadas.local" value="d0fe7ab5-a4c8-4a1f-9d26-81b9560b1bdc" />
+          <factory-entry name="testdb" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
@@ -53,7 +55,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.sparkjava:spark-core:2.9.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="org.slf4j:slf4j-simple:1.7.26" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.slf4j:slf4j-simple:1.7.26" level="project" />
     <orderEntry type="library" name="com.sparkjava:spark-template-handlebars:2.7.1" level="project" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit4">
@@ -66,7 +68,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="org.json:json:20180813" level="project" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/fitnesse/fitnesse-standalone.jar!/" />
@@ -79,5 +81,8 @@
     <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.16" level="project" />
     <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.codec:1.8" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.xerial:sqlite-jdbc:3.28.0" level="project" />
+    <orderEntry type="library" name="com.github.gwenn:sqlite-dialect:0.1.0" level="project" />
+    <orderEntry type="library" name="com.h2database:h2:1.4.185" level="project" />
   </component>
 </module>

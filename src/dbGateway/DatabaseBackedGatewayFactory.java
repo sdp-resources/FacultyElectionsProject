@@ -7,7 +7,10 @@ public class DatabaseBackedGatewayFactory {
   private EntityManagerFactory sessionFactory;
 
   public DatabaseBackedGatewayFactory() {
-      this.sessionFactory = Persistence.createEntityManagerFactory("org.skiadas.local");
+//    String persistenceUnitName = "org.skiadas.local";
+//    String persistenceUnitName = "testdb";
+    String persistenceUnitName = "inmemoryH2";
+    this.sessionFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
   }
 
   public DatabaseBackedGateway obtainGateway() {
