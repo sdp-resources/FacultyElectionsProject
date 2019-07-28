@@ -29,11 +29,8 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void commit() {
-    if (entityManager.getTransaction().isActive()) {
-      // TODO: Maybe  try to begin it, then always commit?
-      entityManager.getTransaction().commit();
-    } else {
-    }
+    begin();
+    entityManager.getTransaction().commit();
   }
 
   private <T> T find(Class<T> aClass, Object o) {
@@ -81,7 +78,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addCommittee(Committee committee) {
-    entityManager.persist(committee);
+    persist(committee);
   }
 
   public boolean hasCommittee(String name) {
@@ -90,11 +87,16 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addSeat(Seat seat) {
-    entityManager.persist(seat);
+    persist(seat);
+  }
+
+  private void persist(Object o) {
+    begin();
+    entityManager.persist(o);
   }
 
   public void addContractType(ContractType contractType) {
-    entityManager.persist(contractType);
+    persist(contractType);
   }
 
   public List<ContractType> getAvailableContractTypes() {
@@ -113,7 +115,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addDivision(Division division) {
-    entityManager.persist(division);
+    persist(division);
   }
 
   public Boolean hasDivision(String divisionName) {
@@ -122,11 +124,11 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addElection(Election election) {
-    entityManager.persist(election);
+    persist(election);
   }
 
   public void addVoteRecord(VoteRecord voteRecord) {
-    entityManager.persist(voteRecord);
+    persist(voteRecord);
   }
 
   public VoteRecord getVoteRecord(long recordId) throws NoVoteRecordException {
@@ -158,7 +160,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addVoter(Voter voter) {
-    entityManager.persist(voter);
+    persist(voter);
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
@@ -173,7 +175,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addProfile(Profile profile) {
-    entityManager.persist(profile);
+    persist(profile);
   }
 
   public boolean hasProfile(String username) {
@@ -182,7 +184,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addQuery(String name, Query query) {
-    entityManager.persist(new NamedQuery(name, query));
+    persist(new NamedQuery(name, query));
   }
 
   public boolean hasQuery(String name) {
@@ -223,11 +225,11 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addPasswordRecord(PasswordRecord record) {
-    entityManager.persist(record);
+    persist(record);
   }
 
   public void addSession(AuthenticatedSession session) {
-    entityManager.persist(session);
+    persist(session);
   }
 
   public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
