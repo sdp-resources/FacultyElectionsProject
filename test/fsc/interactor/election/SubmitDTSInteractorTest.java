@@ -1,6 +1,7 @@
 package fsc.interactor.election;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.Profile;
 import fsc.gateway.ElectionGateway;
 import fsc.interactor.SubmitDTSInteractor;
 import fsc.mock.EntityStub;

@@ -26,6 +26,11 @@ public class QuerySimplifier implements Query.QueryVisitor<Query> {
 
   public Query visit(NamedQuery query) { return query; }
 
+  public Query visit(UnknownNamedQuery query) {
+    throw new RuntimeException("The contents of an unspecified named query were examined. " +
+                                     "This should not be happening");
+  }
+
   private Stream<Query> flattenOr(Query q) {
     return (q instanceof OrQuery ? ((OrQuery) q).queries : List.of(q)).stream();
   }

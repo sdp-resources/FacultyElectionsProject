@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class CreateNamedQueryRequest extends Request {
   public final String name;
   public final String queryString;

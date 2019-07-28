@@ -1,7 +1,6 @@
 package fsc.request;
 
 import fsc.entity.query.Query;
-import fsc.interactor.Interactor;
 
 public class EditBallotQueryRequest extends Request {
   public final long electionID;

@@ -1,7 +1,6 @@
 package fsc.request;
 
 import fsc.entity.Profile;
-import fsc.interactor.Interactor;
 
 import java.util.*;
 

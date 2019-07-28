@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class ViewCandidatesRequest extends Request {
   public final Long electionID;
 

@@ -1,6 +1,8 @@
 package dbGateway;
 
-import fsc.entity.*;
+import fsc.entity.Committee;
+import fsc.entity.Profile;
+import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ProfileGateway;

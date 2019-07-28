@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 import java.util.List;
 
 public class SubmitVoteRecordRequest extends Request {

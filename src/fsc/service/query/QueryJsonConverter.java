@@ -66,4 +66,9 @@ public class QueryJsonConverter implements Query.QueryVisitor<JSONObject> {
   public JSONObject visit(NamedQuery query) {
     return new JSONObject().put(query.name, true);
   }
+
+  public JSONObject visit(UnknownNamedQuery query) {
+    throw new RuntimeException("The contents of an unspecified named query were examined. " +
+                                     "This should not be happening");
+  }
 }

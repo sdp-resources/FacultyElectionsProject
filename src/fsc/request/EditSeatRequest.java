@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 import java.util.Map;
 
 public class EditSeatRequest extends Request {

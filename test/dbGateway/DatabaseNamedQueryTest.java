@@ -4,7 +4,9 @@ import fsc.entity.ContractType;
 import fsc.entity.Division;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
-import fsc.service.query.*;
+import fsc.service.query.QueryStringConverter;
+import fsc.service.query.QueryStringParser;
+import fsc.service.query.ValidatingQueryStringParserFactory;
 import org.junit.Test;
 
 import java.util.Map;
@@ -32,11 +34,9 @@ public class DatabaseNamedQueryTest extends BasicDatabaseTest {
   public void savedQueriesCanBeReferredToInOtherQueries()
         throws QueryStringParser.QueryParseException {
     saveBothQueries();
-    NameValidator oldValidator = QueryStringParser.getNameValidator();
-    QueryStringParser.setNameValidator(new GatewayBackedQueryValidator(gateway));
-    QueryStringConverter converter = new QueryStringConverter();
+    QueryStringConverter converter =
+          new QueryStringConverter(new ValidatingQueryStringParserFactory(gateway.getNameValidator()));
     Query resultQuery = converter.fromString(IS_TENURED + " and " + IS_NAT_SCI);
-    QueryStringParser.setNameValidator(oldValidator);
     assertEquals(Query.all(Query.named(IS_TENURED, query),
                            Query.named(IS_NAT_SCI, divisionQuery)),
                  resultQuery);

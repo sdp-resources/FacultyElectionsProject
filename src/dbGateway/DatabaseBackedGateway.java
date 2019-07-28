@@ -148,7 +148,7 @@ public class DatabaseBackedGateway implements Gateway {
 
   public Collection<Election> getAllElections() {
     return entityManager.createQuery("SELECT e FROM Election e")
-                                        .getResultList();
+                        .getResultList();
   }
 
   public Voter getVoter(long voterId) throws InvalidVoterException {
@@ -169,7 +169,7 @@ public class DatabaseBackedGateway implements Gateway {
 
   public List<Profile> getAllProfiles() {
     return entityManager.createQuery("SELECT p FROM Profile p")
-                                        .getResultList();
+                        .getResultList();
   }
 
   public void addProfile(Profile profile) {
@@ -198,17 +198,14 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public QueryValidationResult validateQueryString(String queryString) {
-    NameValidator oldValidator = QueryStringParser.getNameValidator();
     try {
-      QueryStringConverter queryStringConverter = new QueryStringConverter();
-      QueryStringParser.setNameValidator(dbValidator);
+      QueryStringParserFactory parserFactory = new ValidatingQueryStringParserFactory(dbValidator);
+      QueryStringConverter queryStringConverter = new QueryStringConverter(parserFactory);
       Query query = queryStringConverter.fromString(queryString);
       String string = queryStringConverter.toString(query);
       return new QueryValidationResult.ValidQueryResult(query, string);
     } catch (QueryStringParser.QueryParseException e) {
       return new QueryValidationResult.InvalidQueryResult(e.getMessage());
-    } finally {
-      QueryStringParser.setNameValidator(oldValidator);
     }
 
   }
@@ -253,5 +250,9 @@ public class DatabaseBackedGateway implements Gateway {
     }
 
     return resultsMap;
+  }
+
+  public NameValidator getNameValidator() {
+    return dbValidator;
   }
 }

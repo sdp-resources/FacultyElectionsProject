@@ -1,7 +1,8 @@
 package fsc.interactor;
 
 import fsc.gateway.Gateway;
-import fsc.request.*;
+import fsc.request.Request;
+import fsc.request.RequestVisitor;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.service.AuthorizingRequestVisitor;

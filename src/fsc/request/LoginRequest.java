@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class LoginRequest extends Request {
   public final String username;
   public final String password;

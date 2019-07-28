@@ -43,7 +43,7 @@ public class EditSeatInteractorTest {
   @Test
   public void WhenCommitteeNameDoesNotExist_thenReturnError() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
-    interactor = new CommitteeInteractor(gateway, null, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
     Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -53,7 +53,7 @@ public class EditSeatInteractorTest {
   @Test
   public void WhenSeatNameDoesNotExist_returnError() {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CommitteeInteractor(gateway, null, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownSeatName(), response);
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -68,7 +68,7 @@ public class EditSeatInteractorTest {
     changes.put(EditSeatRequest.EDIT_SEAT_QUERY, new QueryStringConverter().toString(query));
     expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
-    interactor = new CommitteeInteractor(gateway, null, entityFactory);
+    interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
     Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -85,7 +85,7 @@ public class EditSeatInteractorTest {
     expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     InvalidProfileGatewaySpy profileGateway = new InvalidProfileGatewaySpy();
-    interactor = new CommitteeInteractor(gateway, profileGateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, profileGateway, entityFactory, null);
     Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownProfileName(), response);
@@ -101,7 +101,7 @@ public class EditSeatInteractorTest {
     expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
-    interactor = new CommitteeInteractor(gateway, profileGateway, entityFactory);
+    interactor = new CommitteeInteractor(gateway, profileGateway, entityFactory, null);
     Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);

@@ -1,9 +1,10 @@
 package fsc.gateway;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.VoteRecord;
+import fsc.entity.Voter;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface ElectionGateway {
   void save();

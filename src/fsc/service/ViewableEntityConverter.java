@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ViewableEntityConverter {
+  public ViewableEntityConverter() { }
 
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;

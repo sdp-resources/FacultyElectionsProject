@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class QueryValidationRequest extends Request {
   public final String queryString;
 

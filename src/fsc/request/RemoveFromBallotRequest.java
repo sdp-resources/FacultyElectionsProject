@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class RemoveFromBallotRequest extends Request {
   public final String username;
   public final Long electionID;

@@ -7,6 +7,16 @@ import java.util.stream.Collectors;
 
 public class QueryStringConverter implements Query.QueryVisitor<String> {
 
+  private QueryStringParserFactory parserFactory;
+
+  public QueryStringConverter() {
+    this(new SimpleQueryStringParserFactory());
+  }
+
+  public QueryStringConverter(QueryStringParserFactory parserFactory) {
+    this.parserFactory = parserFactory;
+  }
+
   public String visit(AndQuery query) {
     if (query.queries.size() == 0) { return "all"; }
     return query.queries.stream().map(this::visit)
@@ -36,8 +46,13 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
     return query.name;
   }
 
+  public String visit(UnknownNamedQuery query) {
+    throw new RuntimeException("The contents of an unspecified named query were examined. " +
+                                     "This should not be happening");
+  }
+
   public Query fromString(String s) throws QueryStringParser.QueryParseException {
-    return new QueryStringParser(s).parse();
+    return parserFactory.createQueryStringParser(s).parse();
   }
 
   public String toString(Query query) { return visit(query); }

@@ -1,6 +1,8 @@
 package fsc.mock.gateway.election;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.VoteRecord;
+import fsc.entity.Voter;
 import fsc.gateway.ElectionGateway;
 
 import java.util.Collection;

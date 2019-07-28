@@ -3,7 +3,9 @@ package fsc.entity;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Committee {
   private String name;

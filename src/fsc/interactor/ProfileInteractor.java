@@ -7,6 +7,7 @@ import fsc.interactor.fetcher.QueryFetcher;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.service.query.NameValidator;
 import fsc.utils.builder.Builder;
 
 public class ProfileInteractor extends Interactor {
@@ -14,9 +15,12 @@ public class ProfileInteractor extends Interactor {
   private ProfileFetcher profileFetcher;
   private QueryFetcher queryFetcher;
 
-  public ProfileInteractor(ProfileGateway profileGateway, EntityFactory entityFactory) {
+  public ProfileInteractor(
+        ProfileGateway profileGateway, EntityFactory entityFactory,
+        NameValidator validator
+  ) {
     profileFetcher = new ProfileFetcher(profileGateway, entityFactory);
-    queryFetcher = new QueryFetcher();
+    queryFetcher = new QueryFetcher(validator);
   }
 
   public Response execute(CreateProfileRequest request) {

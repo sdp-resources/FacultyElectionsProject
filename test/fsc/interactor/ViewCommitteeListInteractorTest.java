@@ -49,7 +49,7 @@ public class ViewCommitteeListInteractorTest {
   @Test
   public void responseHasAllProvidedCommittees() {
     CommitteeInteractor interactor = new CommitteeInteractor(committeeGateway, null,
-                                                             entityFactory);
+                                                             entityFactory, null);
     Response response = interactor.handle(request);
     Response expectedResponse = ResponseFactory.ofCommitteeList(committeeGateway.getCommittees());
     assertEquals(expectedResponse, response);

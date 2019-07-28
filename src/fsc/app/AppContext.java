@@ -8,8 +8,6 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.service.Authenticator;
 import fsc.service.SQLAuthenticator;
-import fsc.service.query.GatewayBackedQueryValidator;
-import fsc.service.query.QueryStringParser;
 
 import java.util.List;
 import java.util.Map;
@@ -19,15 +17,10 @@ public class AppContext {
   public RequestFactory requestFactory = new RequestFactory();
   public Gateway gateway;
   public Interactor interactor;
-  private GatewayBackedQueryValidator queryValidator;
 
   public AppContext(Gateway gateway) {
     this.gateway = gateway;
     this.interactor = loadInteractors(gateway);
-    this.queryValidator = new GatewayBackedQueryValidator(gateway);
-    // TODO: Make queryValidator a local element of the executor
-    QueryStringParser.setNameValidator(queryValidator);
-
   }
 
   public static EntityFactory getEntityFactory() {
@@ -41,8 +34,8 @@ public class AppContext {
                  .append(new LoginInteractor(gateway, authenticator, gateway))
                  .append(new DivisionInteractor(gateway, getEntityFactory()))
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
-                 .append(new ProfileInteractor(gateway, getEntityFactory()))
-                 .append(new CommitteeInteractor(gateway, gateway, getEntityFactory()))
+                 .append(new ProfileInteractor(gateway, getEntityFactory(), gateway.getNameValidator()))
+                 .append(new CommitteeInteractor(gateway, gateway, getEntityFactory(), gateway.getNameValidator()))
                  .append(new QueryInteractor(gateway))
                  .append(new ElectionInteractor(gateway, gateway, gateway, getEntityFactory()));
   }

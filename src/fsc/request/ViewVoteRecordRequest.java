@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class ViewVoteRecordRequest extends Request {
   public final long recordId;
 

@@ -3,7 +3,7 @@ package dbGateway;
 import fsc.entity.Profile;
 import fsc.entity.query.Query;
 import fsc.gateway.ProfileGateway;
-import org.junit.*;
+import org.junit.Test;
 
 import java.util.List;
 

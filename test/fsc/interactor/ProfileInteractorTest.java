@@ -31,7 +31,7 @@ public class ProfileInteractorTest {
   @Test
   public void testCorrectExecute() {
     InvalidProfileGatewaySpy gateway = new InvalidProfileGatewaySpy();
-    interactor = new ProfileInteractor(gateway, entityFactory);
+    interactor = new ProfileInteractor(gateway, entityFactory, null);
     request.setSession(EntityStub.adminSession());
     response = interactor.handle(request);
     assertEquals(ResponseFactory.success(), response);
@@ -42,7 +42,7 @@ public class ProfileInteractorTest {
   @Test
   public void testWrongUsernameExecute() {
     ExistingProfileGatewaySpy gateway = new ExistingProfileGatewaySpy(providedProfile);
-    interactor = new ProfileInteractor(gateway, entityFactory);
+    interactor = new ProfileInteractor(gateway, entityFactory, null);
     request.setSession(EntityStub.adminSession());
     response = interactor.handle(request);
     assertEquals(ResponseFactory.resourceExists(), response);

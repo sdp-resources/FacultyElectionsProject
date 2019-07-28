@@ -31,7 +31,7 @@ public class CommitteeInteractorTest {
   @Test
   public void ExecuteCreatesCorrectResponseType() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
-    CommitteeInteractor interactor = new CommitteeInteractor(gateway, null, entityFactory);
+    CommitteeInteractor interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
     Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
@@ -44,7 +44,7 @@ public class CommitteeInteractorTest {
   @Test
   public void ExecuteCreatesAFailedResponse() {
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
-    CommitteeInteractor interactor = new CommitteeInteractor(gateway, null, entityFactory);
+    CommitteeInteractor interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
     Response response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);

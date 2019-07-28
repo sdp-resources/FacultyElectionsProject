@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class ViewProfilesListRequest extends Request {
   public final String query;
 

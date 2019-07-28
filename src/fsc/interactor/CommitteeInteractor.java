@@ -10,6 +10,7 @@ import fsc.interactor.fetcher.QueryFetcher;
 import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.service.query.NameValidator;
 import fsc.utils.builder.Builder;
 
 import java.util.HashMap;
@@ -23,10 +24,10 @@ public class CommitteeInteractor extends Interactor {
 
   public CommitteeInteractor(
         CommitteeGateway committeeGateway, ProfileGateway profileGateway,
-        EntityFactory entityFactory
+        EntityFactory entityFactory, NameValidator nameValidator
   ) {
     committeeFetcher = new CommitteeFetcher(committeeGateway, profileGateway, entityFactory);
-    queryFetcher = new QueryFetcher();
+    queryFetcher = new QueryFetcher(nameValidator);
   }
 
   public Response execute(CreateCommitteeRequest request) {

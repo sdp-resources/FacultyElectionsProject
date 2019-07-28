@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class ViewDTSRequest extends Request {
   public final String username;
   public final Long electionID;

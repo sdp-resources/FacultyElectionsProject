@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class EditElectionStateRequest extends Request {
   public final Long electionID;
   public final String state;

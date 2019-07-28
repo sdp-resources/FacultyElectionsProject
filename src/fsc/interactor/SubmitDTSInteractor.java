@@ -1,9 +1,12 @@
 package fsc.interactor;
 
-import fsc.entity.*;
+import fsc.entity.Candidate;
+import fsc.entity.Election;
+import fsc.entity.Profile;
 import fsc.gateway.ElectionGateway;
 import fsc.request.DTSRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 
 import java.util.Collection;
 

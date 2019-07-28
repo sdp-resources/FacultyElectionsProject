@@ -5,7 +5,8 @@ import fsc.entity.SimpleEntityFactory;
 import fsc.mock.gateway.division.ExistingDivisionGatewaySpy;
 import fsc.mock.gateway.division.MissingDivisionGatewaySpy;
 import fsc.request.AddDivisionRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 

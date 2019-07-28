@@ -1,6 +1,7 @@
 package fsc.interactor.election;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.Profile;
 import fsc.entity.query.Query;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;

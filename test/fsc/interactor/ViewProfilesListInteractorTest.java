@@ -7,6 +7,7 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.ViewProfilesListRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.service.query.AcceptingNameValidator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class ViewProfilesListInteractorTest {
     profile2 = EntityStub.getProfile(1);
     profile3 = EntityStub.getProfile(2);
     profileGatewaySpy = new ProfileGatewayStub(profile1, profile2, profile3);
-    interactor = new ProfileInteractor(profileGatewaySpy, new SimpleEntityFactory());
+    interactor = new ProfileInteractor(profileGatewaySpy, new SimpleEntityFactory(), new AcceptingNameValidator());
   }
 
   @Test

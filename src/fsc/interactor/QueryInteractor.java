@@ -8,7 +8,8 @@ import fsc.gateway.QueryGateway;
 import fsc.request.CreateNamedQueryRequest;
 import fsc.request.QueryValidationRequest;
 import fsc.request.ViewNamedQueryListRequest;
-import fsc.response.*;
+import fsc.response.Response;
+import fsc.response.ResponseFactory;
 
 import java.util.Map;
 

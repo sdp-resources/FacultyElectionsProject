@@ -13,7 +13,8 @@ public class AuthorizingInteractorTest {
     Gateway gateway = new InMemoryGateway();
     Interactor interactor = new AuthorizingInteractor(gateway)
                                   .append(new ProfileInteractor(gateway,
-                                                                gateway.getEntityFactory()));
+                                                                gateway.getEntityFactory(),
+                                                                null));
     Request request = new ViewProfilesListRequest();
     request.setSession(new UnauthenticatedSession());
     interactor.handle(request);

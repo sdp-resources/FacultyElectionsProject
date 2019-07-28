@@ -1,7 +1,5 @@
 package fsc.request;
 
-import fsc.interactor.Interactor;
-
 public class CreateElectionRequest extends Request {
   public final String seatName;
   public final String committeeName;

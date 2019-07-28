@@ -1,6 +1,8 @@
 package fsc.interactor.election;
 
-import fsc.entity.*;
+import fsc.entity.Election;
+import fsc.entity.Profile;
+import fsc.entity.VoteRecord;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.ElectionInteractor;

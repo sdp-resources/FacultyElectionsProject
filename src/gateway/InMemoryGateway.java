@@ -6,8 +6,7 @@ import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.gateway.Gateway;
 import fsc.gateway.QueryGateway;
-import fsc.service.query.QueryStringConverter;
-import fsc.service.query.QueryStringParser;
+import fsc.service.query.*;
 
 import java.io.InputStream;
 import java.util.*;
@@ -22,13 +21,15 @@ public class InMemoryGateway implements Gateway {
   private final List<VoteRecord> voteRecords = new ArrayList<>();
   private final List<Election> elections = new ArrayList<>();
   private final Map<String, Query> queries = new HashMap<>();
-  private QueryStringConverter queryStringConverter = new QueryStringConverter();
   private static EntityFactory entityFactory = new SimpleEntityFactory();
   private long seatId = 0;
   private List<Voter> voters = new ArrayList<>();
   private long voterId = 0;
   private long voteRecordId = 0;
   private long electionId = 0;
+  private AcceptingNameValidator nameValidator = new AcceptingNameValidator();
+  private QueryStringConverter queryStringConverter = new QueryStringConverter(
+        new ValidatingQueryStringParserFactory(nameValidator));
 
   public static Gateway fromJSONFile(String path) {
       InputStream stream = InMemoryGateway.class.getResourceAsStream(path);
@@ -276,6 +277,10 @@ public class InMemoryGateway implements Gateway {
 
   public void shutdown() {
 
+  }
+
+  public NameValidator getNameValidator() {
+    return nameValidator;
   }
 
   public EntityFactory getEntityFactory() {

@@ -6,7 +6,9 @@ import fsc.mock.gateway.session.SessionGatewaySpy;
 import fsc.request.AddPasswordRecordRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.service.*;
+import fsc.service.Authorizer;
+import fsc.service.SQLAuthenticator;
+import fsc.service.SimplePasswordGatewaySpy;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

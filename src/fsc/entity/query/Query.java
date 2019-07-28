@@ -51,6 +51,7 @@ public abstract class Query {
     T visit(AttributeQuery query);
     T visit(NotQuery query);
     T visit(NamedQuery query);
+    T visit(UnknownNamedQuery query);
   }
 
 }

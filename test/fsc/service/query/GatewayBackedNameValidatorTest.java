@@ -19,7 +19,7 @@ public class GatewayBackedNameValidatorTest {
   @Before
   public void setUp() {
     gateway = new InMemoryGateway();
-    converter = new QueryStringConverter();
+    converter = new QueryStringConverter(new ValidatingQueryStringParserFactory(gateway.getNameValidator()));
     validator = new GatewayBackedQueryValidator(gateway);
     entityFactory = gateway.getEntityFactory();
   }
