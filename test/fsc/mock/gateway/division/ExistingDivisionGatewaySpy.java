@@ -27,10 +27,6 @@ public class ExistingDivisionGatewaySpy extends MissingDivisionGatewaySpy {
     divisions.add(division);
   }
 
-  public void save() {
-    super.save();
-  }
-
   public Boolean hasDivision(String divisionName) {
     super.hasDivision(divisionName);
     submittedDivisionName = divisionName;

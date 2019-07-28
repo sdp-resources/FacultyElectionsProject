@@ -3,9 +3,10 @@ package fsc.entity.query;
 import fsc.entity.Profile;
 import fsc.service.query.QuerySimplifier;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Query {
+public abstract class Query implements Serializable {
   public static Query always() { return Query.all(); }
 
   public static Query never() { return Query.any(); }

@@ -1,7 +1,6 @@
 package fsc.service.query;
 
 import fsc.entity.query.Query;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -65,10 +64,6 @@ public class QueryStringConverterTest {
                                          Query.all(Query.any(Query.always(), Query.never()),
                                                    Query.any(Query.always(), Query.never())));
   }
-
-  @Ignore
-  @Test
-  public void invalidStringsCannotBeParsed() {}
 
   private void assertStringCorrespondsToQuery(String string, Query query)
         throws QueryStringParser.QueryParseException {

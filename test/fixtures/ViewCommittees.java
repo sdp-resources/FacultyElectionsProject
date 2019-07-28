@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ViewCommittees {
-
-  public ViewCommittees() { }
-
   public List<List<List<String>>> query() {
     return TestContext.app.getAllCommittees().stream()
                           .map(ViewCommittees::getListFromCommittee)

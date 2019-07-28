@@ -6,7 +6,7 @@
     <entity class="fsc.entity.Profile" name="Profile" access="FIELD">
         <table name="profiles"/>
         <attributes>
-            <id name="username"></id>
+            <id name="username"/>
             <basic name="status">
                 <enumerated>STRING</enumerated>
             </basic>
@@ -37,7 +37,6 @@
             <id name="ID">
                 <generated-value/>
             </id>
-            <basic name="seat"/>
             <basic name="state">
                 <enumerated>STRING</enumerated>
             </basic>
@@ -105,7 +104,7 @@
                 <order-column name="rank"/>
                 <column name="vote_for"/>
                 <collection-table name="votes">
-                <join-column name="record_id" />
+                    <join-column name="record_id"/>
                 </collection-table>
             </element-collection>
         </attributes>

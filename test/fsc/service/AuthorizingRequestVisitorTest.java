@@ -37,10 +37,6 @@ public class AuthorizingRequestVisitorTest {
     assertIsNotAuthorized(createProfile(), unauthenticated());
   }
 
-  @Test
-  public void name() {
-  }
-
   private void assertIsNotAuthorized(Request request, Session session) {
     request.setSession(session);
     assertEquals(false, authorizer.isAuthorized(request));

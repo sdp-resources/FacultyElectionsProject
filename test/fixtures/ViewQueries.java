@@ -5,9 +5,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ViewQueries {
-
-  public ViewQueries() { }
-
   public List<List<List<String>>> query() {
     return TestContext.app.getAllQueries().entrySet()
                           .stream()

@@ -24,7 +24,7 @@ public class SQLAuthenticatorTest {
     credentials = new Credentials(ADMIN, PASSWORD);
     gateway = new SimplePasswordGatewaySpy();
     authenticator = new SQLAuthenticator(gateway);
-    hashedPassword = ((SQLAuthenticator) authenticator).hashPassword(credentials);
+    hashedPassword = SQLAuthenticator.hashPassword(credentials);
   }
 
   @Test

@@ -17,7 +17,7 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
 
   public Committee getCommittee(String name) {
     submittedCommitteeName = name;
-    returnedCommittee = new CommitteeStub(name, "Description");
+    returnedCommittee = new CommitteeStub(name);
     return returnedCommittee;
   }
 
@@ -47,8 +47,8 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
 
     private EntityFactory entityFactory = new SimpleEntityFactory();
 
-    CommitteeStub(String name, String description) {
-      super(name, description, Query.always());
+    CommitteeStub(String name) {
+      super(name, "Description", Query.always());
     }
 
     public Seat getSeat(String seatName) {

@@ -91,7 +91,7 @@ class QueryStringTokenizer {
       case '"': location += tokenizer.sval.length() + 2; return;
       case '(':
       case ')': location += 1; return;
-      case TT_EOF: ; return;
+      case TT_EOF: return;
     }
   }
 

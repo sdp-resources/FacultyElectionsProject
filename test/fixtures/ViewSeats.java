@@ -7,9 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ViewSeats {
-
-  public ViewSeats() { }
-
   public List<List<List<String>>> query() {
     return TestContext.app.getAllCommittees().stream()
                           .flatMap(ViewSeats::getListFromCommittee)

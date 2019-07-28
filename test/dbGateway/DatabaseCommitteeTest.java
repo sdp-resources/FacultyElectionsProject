@@ -6,7 +6,6 @@ import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ProfileGateway;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,11 +18,6 @@ public class DatabaseCommitteeTest extends BasicDatabaseTest {
   private Committee committee;
   private Seat seat;
   private Profile profile;
-
-  @Before
-  public void setUp() {
-    super.setUp();
-  }
 
   @Test
   public void canCreateACommittee() throws CommitteeGateway.UnknownCommitteeException {

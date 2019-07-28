@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ViewElections {
-
-
-  public ViewElections() { }
-
   public List<List<List<String>>> query() {
     return TestContext.app.getAllElections()
                           .stream()

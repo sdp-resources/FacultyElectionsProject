@@ -100,8 +100,8 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public List<ContractType> getAvailableContractTypes() {
-    return (List<ContractType>) entityManager.createQuery("SELECT c FROM ContractType c")
-                                             .getResultList();
+    return entityManager.createQuery("SELECT c FROM ContractType c")
+                        .getResultList();
   }
 
   public boolean hasContractType(String contract) {
@@ -110,8 +110,8 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public List<Division> getAvailableDivisions() {
-    return (List<Division>) entityManager.createQuery("SELECT d FROM Division d")
-                                         .getResultList();
+    return entityManager.createQuery("SELECT d FROM Division d")
+                        .getResultList();
   }
 
   public void addDivision(Division division) {

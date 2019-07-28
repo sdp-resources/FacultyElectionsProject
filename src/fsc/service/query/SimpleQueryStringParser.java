@@ -90,8 +90,8 @@ public class SimpleQueryStringParser implements QueryStringParser {
     return b;
   }
 
-  private QueryStringTokenizer.ParseToken skip() {
-    return advanceAndGetToken();
+  private void skip() {
+    advanceAndGetToken();
   }
 
   private QueryStringTokenizer.ParseToken advanceAndGetToken() {

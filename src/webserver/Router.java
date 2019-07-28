@@ -32,7 +32,7 @@ public class Router {
   }
 
   static Object showElections(Request req, Response res) {
-    HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
+    HashMap<Object, Object> returnedHash = new HashMap<>();
     returnedHash.put("values", appContext.getAllElections());
     return serveTemplate("/electionList.handlebars", returnedHash);
   }
@@ -75,7 +75,7 @@ public class Router {
   }
 
   static Object showAllProfilesPage(Request req, Response res) {
-    HashMap<Object, Object> returnedHash = new HashMap<Object, Object>();
+    HashMap<Object, Object> returnedHash = new HashMap<>();
     returnedHash.put("profiles", appContext.getProfilesMatchingQuery("all").getValues());
     returnedHash.put("contractTypes", appContext.getAllContractTypes(null).getValues());
     returnedHash.put("divisions", appContext.getAllDivisions().getValues());

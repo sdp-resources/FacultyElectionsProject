@@ -13,11 +13,15 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="inmemoryH2" />
+          <factory-entry name="inmemoryH2" value="3f3e9e3c-901f-4e87-ae4f-e3fac72a256a" />
           <factory-entry name="org.skiadas.local" value="d0fe7ab5-a4c8-4a1f-9d26-81b9560b1bdc" />
-          <factory-entry name="testdb" />
+          <factory-entry name="testdb" value="404813e9-6a04-4e63-b42d-8c405f1e782f" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="inmemoryH2" value="org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl" />
+          <unit-entry name="org.skiadas.local" value="org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl" />
+          <unit-entry name="testdb" value="org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl" />
+        </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
       </configuration>
     </facet>

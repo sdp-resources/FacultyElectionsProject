@@ -2,7 +2,6 @@ package fsc.interactor;
 
 import fsc.entity.PasswordRecord;
 import fsc.gateway.PasswordGateway;
-import fsc.mock.gateway.session.SessionGatewaySpy;
 import fsc.request.AddPasswordRecordRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
@@ -16,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 
 public class AddPasswordRecordInteractionTest {
   private LoginInteractor interactor;
-  private SessionGatewaySpy sessionGateway;
   private SimplePasswordGatewaySpy passwordGateway = new SimplePasswordGatewaySpy();
   private AddPasswordRecordRequest request;
 

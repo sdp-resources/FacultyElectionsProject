@@ -66,15 +66,16 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
   }
 
   private void submitCorrectNewContractTypeRequest(String token) {
-    Response response = returnWithNewContext(
-          appContext -> appContext.addContractType("aType", token));
-    assertTrue(response.isSuccessful());
+    assertTrue(submitRequest(token).isSuccessful());
   }
 
   private void submitIncorrectNewContractTypeRequest(String token) {
-    Response response = returnWithNewContext(
+    assertFalse(submitRequest(token).isSuccessful());
+  }
+
+  private Response submitRequest(String token) {
+    return returnWithNewContext(
           appContext -> appContext.addContractType("aType", token));
-    assertFalse(response.isSuccessful());
   }
 
   private void examineSessionExpiryTimeIsAtThirtyMinutes(String token) {

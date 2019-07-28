@@ -106,7 +106,9 @@ public class InMemoryGateway implements Gateway {
     return null;
   }
 
-  public void addBallot(Collection<Candidate> ballot) {}
+  public void addBallot(Collection<Candidate> ballot) {
+    // TODO
+  }
 
   public void addElection(Election election) {
     election.setID(electionId++);
@@ -227,7 +229,9 @@ public class InMemoryGateway implements Gateway {
     addIdsToElections();
   }
 
-  private void addIdsToElections() { }
+  private void addIdsToElections() {
+    // TODO
+  }
 
   public Map<String, Query> getAllQueries() {
     return queries;

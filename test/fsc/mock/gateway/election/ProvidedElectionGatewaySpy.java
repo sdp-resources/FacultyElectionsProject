@@ -16,7 +16,6 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
   public Long providedElectionId = null;
   public VoteRecord submittedVoteRecord = null;
   private List<VoteRecord> voteRecords = new ArrayList<>();
-  private EntityFactory entityFactory = new SimpleEntityFactory();
 
   public ProvidedElectionGatewaySpy(Election election) {
     storedElection = election;

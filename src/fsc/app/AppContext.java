@@ -64,9 +64,8 @@ public class AppContext {
   public Response addProfile(
         String fullname, String username, String contractType, String division
   ) {
-    Response response = getResponse(requestFactory.createProfile(fullname, username,
-                                                                 contractType, division));
-    return response;
+    return getResponse(requestFactory.createProfile(fullname, username,
+                                                    contractType, division));
   }
 
   public Response getProfile(String username) {

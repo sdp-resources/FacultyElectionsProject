@@ -14,14 +14,6 @@ import java.util.Map;
 public class ResponseFactory {
   static ViewableEntityConverter entityConverter = new ViewableEntityConverter();
 
-  public static ViewableEntityConverter getEntityConverter() {
-    return entityConverter;
-  }
-
-  public static void setEntityConverter(ViewableEntityConverter entityConverter) {
-    ResponseFactory.entityConverter = entityConverter;
-  }
-
   public static Response ofProfileList(Collection<Profile> profiles) {
     return new ViewResponse<>(entityConverter.convertProfiles(profiles));
   }
@@ -56,10 +48,6 @@ public class ResponseFactory {
 
   public static Response ofVoteRecordList(Collection<VoteRecord> voteRecordList) {
     return new ViewResponse<>(entityConverter.convertVoteRecordList(voteRecordList));
-  }
-
-  public static Response ofString(String string) {
-    return new ViewResponse<>(string);
   }
 
   public static Response success() {
