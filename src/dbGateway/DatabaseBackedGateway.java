@@ -9,13 +9,20 @@ import fsc.gateway.Gateway;
 import fsc.service.query.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DatabaseBackedGateway implements Gateway {
+  public static final int SESSION_CLEANUP_THRESHOLD = 1000;
   private final EntityManager entityManager;
   private EntityFactory basicFactory = new SimpleEntityFactory();
   private EntityFactory entityFactory;
   private NameValidator dbValidator = new GatewayBackedQueryValidator(this);
+  private AtomicInteger addSessionRequests = new AtomicInteger(0);
 
   public DatabaseBackedGateway(EntityManager entityManager) {
     this.entityManager = entityManager;
@@ -229,7 +236,26 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public void addSession(AuthenticatedSession session) {
+    if (timeToCleanUpSessions()) {
+      cleanUpSessions();
+    }
     persist(session);
+  }
+
+  public void cleanUpSessions() {
+    begin();
+    CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+    CriteriaDelete<AuthenticatedSession> delete = builder.createCriteriaDelete(AuthenticatedSession.class);
+    Root<AuthenticatedSession> root = delete.from(AuthenticatedSession.class);
+    delete.where(builder.greaterThan(root.get("expirationTime"), LocalDateTime.now()));
+    entityManager.createQuery(delete).executeUpdate();
+    commit();
+  }
+
+  private boolean timeToCleanUpSessions() {
+    boolean shouldCleanup = addSessionRequests.incrementAndGet() > SESSION_CLEANUP_THRESHOLD;
+    if (shouldCleanup) { addSessionRequests.set(0); }
+    return shouldCleanup;
   }
 
   public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
@@ -238,6 +264,11 @@ public class DatabaseBackedGateway implements Gateway {
 
     return session;
   }
+
+  public List<AuthenticatedSession> getAllSessions() {
+    return entityManager.createQuery("SELECT s FROM AuthenticatedSession s").getResultList();
+  }
+
 
   public void save() {
     commit();
