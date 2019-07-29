@@ -1,6 +1,5 @@
 package fsc.entity;
 
-import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class VoteRecord {
 
-  @Transient   // TODO: Remove
   private List<String> votes;
   private LocalDateTime date;
   private Election election;

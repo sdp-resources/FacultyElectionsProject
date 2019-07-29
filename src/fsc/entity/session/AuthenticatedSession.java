@@ -2,10 +2,12 @@ package fsc.entity.session;
 
 import fsc.service.Authorizer;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class AuthenticatedSession implements Session {
+  public static final Duration STANDARD_SESSION_DURATION = Duration.ofMinutes(30);
   private Authorizer.Role role;
   private String username;
   private String token;
@@ -79,5 +81,13 @@ public class AuthenticatedSession implements Session {
                  ", token='" + token + '\'' +
                  ", expirationTime=" + expirationTime +
                  '}';
+  }
+
+  public void setStandardExpirationTime() {
+    setExpirationTime(standardExpirationTime());
+  }
+
+  public LocalDateTime standardExpirationTime() {
+    return LocalDateTime.now().plus(STANDARD_SESSION_DURATION);
   }
 }

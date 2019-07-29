@@ -8,8 +8,6 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 
-import java.time.LocalDateTime;
-
 public class AuthenticatingInteractor extends Interactor {
   private SessionGateway sessionGateway;
 
@@ -35,21 +33,16 @@ public class AuthenticatingInteractor extends Interactor {
   private Session authenticate(Request request)
         throws SessionGateway.InvalidOrExpiredTokenException {
     return request.token == null ? new UnauthenticatedSession()
-                                 : getActiveSession(request);
+                                 : getActiveSession(request.token);
   }
 
-  private AuthenticatedSession getActiveSession(Request request)
+  private AuthenticatedSession getActiveSession(String token)
         throws SessionGateway.InvalidOrExpiredTokenException {
-    AuthenticatedSession session = sessionGateway.getActiveSession(request.token);
-    session.setExpirationTime(thirtyMinutesFromNow());
+    AuthenticatedSession session = sessionGateway.getActiveSession(token);
+    session.setStandardExpirationTime();
     sessionGateway.save();
 
     return session;
-  }
-
-  // TODO: Find a better way to standardize session duration
-  private LocalDateTime thirtyMinutesFromNow() {
-    return LocalDateTime.now().plusMinutes(30);
   }
 
 }
