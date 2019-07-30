@@ -1,9 +1,7 @@
 package dbGateway;
 
-import fsc.app.AppContext;
 import fsc.entity.PasswordRecord;
 import fsc.entity.session.AuthenticatedSession;
-import fsc.gateway.Gateway;
 import fsc.gateway.SessionGateway;
 import fsc.response.Response;
 import fsc.service.Authorizer;
@@ -11,9 +9,8 @@ import fsc.service.SQLAuthenticator;
 import fsc.viewable.ViewableSession;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -82,37 +79,15 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
     withNewGateway(gateway -> {
       try {
         AuthenticatedSession session = gateway.getSession(token);
-        LocalDateTime expirationTime = session.getExpirationTime();
-        LocalDateTime now = LocalDateTime.now();
-        assertTrue(expirationTime.isAfter(now.plusMinutes(27)));
-        assertTrue(expirationTime.isBefore(now.plusMinutes(33)));
+        assertDifferenceWithinOneMinute(session.getExpirationTime(), LocalDateTime.now());
       } catch (SessionGateway.InvalidOrExpiredTokenException e) {
         throw new RuntimeException("failed");
       }
     });
   }
 
-  private <T> T returnWithNewContext(Function<AppContext, T> tasks) {
-    return returnWithNewGateway(gateway -> tasks.apply(new AppContext(gateway)));
-
-  }
-
-  private void withNewContext(Consumer<AppContext> tasks) {
-    withNewGateway(gateway -> tasks.accept(new AppContext(gateway)));
-
-  }
-
-  private <T> T returnWithNewGateway(Function<Gateway, T> gatewayTasks) {
-    DatabaseBackedGateway gateway = gatewayFactory.obtainGateway();
-    T returnedValue = gatewayTasks.apply(gateway);
-    gateway.shutdown();
-    return returnedValue;
-  }
-
-  private void withNewGateway(Consumer<Gateway> gatewayTasks) {
-    DatabaseBackedGateway gateway = gatewayFactory.obtainGateway();
-    gatewayTasks.accept(gateway);
-    gateway.shutdown();
+  private void assertDifferenceWithinOneMinute(LocalDateTime time1, LocalDateTime time2) {
+    assertTrue(Duration.between(time1, time2).abs().getSeconds() <= 60);
   }
 
   private LocalDateTime tenMinutesFromNow() {
