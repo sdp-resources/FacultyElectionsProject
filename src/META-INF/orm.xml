@@ -3,6 +3,9 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
         http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+    <persistence-unit-metadata>
+        <xml-mapping-metadata-complete/>
+    </persistence-unit-metadata>
     <entity class="fsc.entity.Profile" name="Profile" access="FIELD">
         <table name="profiles"/>
         <attributes>

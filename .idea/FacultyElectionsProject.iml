@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
-    <facet type="hibernate" name="Hibernate">
-      <configuration>
-        <datasource-map />
-        <naming-strategy-map />
-        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/assets/hibernate.cfg.xml" />
-      </configuration>
-    </facet>
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
@@ -52,12 +45,14 @@
       <sourceFolder url="file://$MODULE_DIR$/Tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/testData" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/generated" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/generated_tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/fitnesse" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
       <excludeFolder url="file://$MODULE_DIR$/report" />
     </content>
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="library" name="com.sparkjava:spark-core:2.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="org.slf4j:slf4j-simple:1.7.26" level="project" />
     <orderEntry type="library" name="com.sparkjava:spark-template-handlebars:2.7.1" level="project" />
@@ -82,11 +77,11 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
-    <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.16" level="project" />
     <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.codec:1.8" level="project" />
     <orderEntry type="library" scope="TEST" name="org.xerial:sqlite-jdbc:3.28.0" level="project" />
     <orderEntry type="library" name="com.github.gwenn:sqlite-dialect:0.1.0" level="project" />
     <orderEntry type="library" name="com.h2database:h2:1.4.185" level="project" />
+    <orderEntry type="library" name="org.hibernate:hibernate-jpamodelgen:5.4.3.Final" level="project" />
   </component>
 </module>
