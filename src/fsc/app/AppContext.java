@@ -139,6 +139,10 @@ public class AppContext {
     return getResponse(requestFactory.createElection(committeeName, seatName));
   }
 
+  public Response setElectionState(Long electionId, String state) {
+    return getResponse(requestFactory.setElectionState(electionId, state));
+  }
+
   public Response viewElection(Long electionId) {
     return getResponse(requestFactory.viewElection(electionId));
   }
@@ -170,5 +174,4 @@ public class AppContext {
   public Response login(String username, String password) {
     return getResponse(requestFactory.login(username, password));
   }
-
 }

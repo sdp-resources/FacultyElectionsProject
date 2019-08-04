@@ -12,11 +12,14 @@ import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.request.RemoveFromBallotRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class RemoveFromBallotInteractorTest extends ElectionTest {
@@ -77,4 +80,22 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
     assertEquals(ResponseFactory.success(), response);
     assertTrue(electionGateway.hasSaved);
   }
+
+  @Test
+  public void removingFromBallotNotInSetupModeGivesErrors() {
+    ProfileGatewayStub profileGateway = new ProfileGatewayStub(profile);
+    interactor = new ElectionInteractor(electionGateway, null,
+                                        profileGateway, entityFactory);
+    election.getCandidates().add(entityFactory.createCandidate(profile,
+                                                               election));
+    election.setState(Election.State.Vote);
+    Assert.assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.DecideToStand);
+    Assert.assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.Closed);
+    Assert.assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertThat(election.getCandidateProfiles(), hasItem(profile));
+    Assert.assertFalse(electionGateway.hasSaved);
+  }
+
 }

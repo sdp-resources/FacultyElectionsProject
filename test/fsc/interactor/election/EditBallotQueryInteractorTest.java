@@ -29,6 +29,7 @@ public class EditBallotQueryInteractorTest extends ElectionTest {
     providedProfile = EntityStub.getProfile(0);
     request = new EditBallotQueryRequest(556, Query.always());
     election = EntityStub.simpleElectionWithCandidates();
+    election.setCandidateQuery(Query.never());
   }
 
   @Test
@@ -36,6 +37,21 @@ public class EditBallotQueryInteractorTest extends ElectionTest {
     interactor = new ElectionInteractor(new RejectingElectionGatewaySpy(), null, null, null);
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownElectionID(), response);
+  }
+
+  @Test
+  public void whenElectionIsNotInSetupMode_ThrowError() {
+    ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
+    ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
+    interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
+    election.setState(Election.State.DecideToStand);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.Vote);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.Closed);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertFalse(electionGateway.hasSaved);
+    assertEquals(Query.never(), election.getCandidateQuery());
   }
 
   @Test

@@ -17,23 +17,45 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return true;
   }
 
-  public Object visit(DTSRequest request) {
-    // TODO
-    return true;
-  }
-
 
   public Object visit(LoginRequest request) {
     // TODO
     return true;
   }
 
-  public Object visit(CreateProfileRequest request) {
-    return isAuthorizedAsAdmin(request);
-  }
-
   public Object visit(ViewProfileRequest request) {
     return isAuthorizedAsAdminOrUser(request, request.username);
+  }
+
+  public Object visit(SetDTSRequest request) {
+    return isAuthorizedAsAdminOrUser(request, request.username);
+  }
+
+  public Object visit(ViewDTSRequest request) {
+    return isAuthorizedAsAdminOrUser(request, request.username);
+  }
+
+  public Object visit(ViewCandidatesRequest request) {
+    // TODO: Probably any logged in user plus admin?
+    return true;
+  }
+
+  public Object visit(SubmitVoteRecordRequest request) {
+    // TODO: Must check somewhere that voter matches user
+    // One idea: Add username in addition to voter id in request
+    // Check username matches user here,
+    // check username matches voter in handler
+    return true;
+  }
+
+
+  public Object visit(ViewActiveElectionsRequest request) {
+    return isAuthenticated(request);
+  }
+
+  // Admin-only actions
+  public Object visit(CreateProfileRequest request) {
+    return isAuthorizedAsAdmin(request);
   }
 
   public Object visit(ViewProfilesListRequest request) {
@@ -44,27 +66,9 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return isAuthorizedAsAdmin(request);
   }
 
-  public Object visit(ViewDTSRequest request) {
-    // TODO
-    return true;
-  }
-
-  public Object visit(ViewCandidatesRequest request) {
-    // TODO: Probably any logged in user plus admin?
-    return true;
-  }
-
   public Object visit(ViewAllElectionsRequest request) {
-    // TODO: Does that mean elections they can vote?
-    return true;
+    return isAuthorizedAsAdmin(request);
   }
-
-  public Object visit(SubmitVoteRecordRequest request) {
-    // TODO: Must be user (eligibility to vote is elsewhere
-    return true;
-  }
-
-  // Admin-only actions
 
   public Object visit(RemoveFromBallotRequest request) {
     return isAuthorizedAsAdmin(request);
@@ -165,5 +169,9 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
 
   private boolean isAuthorizedForRole(Request request, Authorizer.Role role) {
     return request.getSession().isAuthorizedForRole(role);
+  }
+
+  private boolean isAuthenticated(ViewActiveElectionsRequest request) {
+    return request.getSession().isAuthenticated();
   }
 }

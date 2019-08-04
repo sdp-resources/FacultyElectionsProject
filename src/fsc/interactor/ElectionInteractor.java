@@ -13,6 +13,7 @@ import fsc.service.MyUtils;
 import fsc.utils.builder.Builder;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class ElectionInteractor extends Interactor {
   private ElectionFetcher electionFetcher;
@@ -38,8 +39,15 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofElectionList);
   }
 
+  public Response execute(ViewActiveElectionsRequest request) {
+    return electionFetcher.fetchActiveElections()
+                          .resolveWith(ResponseFactory::ofElectionList);
+  }
+
   public Response execute(EditBallotQueryRequest request) {
     return electionFetcher.fetchElection(request.electionID)
+                          .escapeUnless(Election::isInSetupState,
+                                        ResponseFactory.improperElectionState())
                           .perform(election -> setupNewDefaultQuery(election, request.query))
                           .perform(electionFetcher::save)
                           .resolveWith(s -> ResponseFactory.success());
@@ -53,6 +61,8 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(AddToBallotRequest request) {
     return electionFetcher.fetchElection(request.electionID)
+                          .escapeUnless(Election::isInSetupState,
+                                        ResponseFactory.improperElectionState())
                           .bindWith(electionFetcher.fetchProfile(request.username),
                                     electionFetcher::addProfileToElection)
                           .perform(electionFetcher::save)
@@ -61,6 +71,8 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(RemoveFromBallotRequest request) {
     return electionFetcher.fetchElection(request.electionID)
+                          .escapeUnless(Election::isInSetupState,
+                                        ResponseFactory.improperElectionState())
                           .bindWith(electionFetcher.fetchProfile(request.username),
                                     electionFetcher::removeProfile)
                           .perform(electionFetcher::save)
@@ -70,6 +82,10 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(SubmitVoteRecordRequest request) {
     return electionFetcher.fetchVoterOnlyIfNoRecord(request.voterId)
+                          .escapeUnless(sessionMatchesVoter(request),
+                                        ResponseFactory.notAuthorized())
+                          .escapeUnless(Voter::canVote,
+                                        ResponseFactory.improperElectionState())
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
                                     Builder.lift(electionFetcher::createVoteRecordPair))
                           .escapeIf(p -> p.voteRecord.someProfilesAreNotCandidates(),
@@ -77,6 +93,10 @@ public class ElectionInteractor extends Interactor {
                           .perform(electionFetcher::submitRecord)
                           .perform(electionFetcher::save)
                           .resolveWith(p -> ResponseFactory.ofVoteRecord(p.voteRecord));
+  }
+
+  private Function<Voter, Boolean> sessionMatchesVoter(Request request) {
+    return voter -> request.getSession().matchesUser(voter.getProfile().getUsername());
   }
 
   public Response execute(ViewVoteRecordRequest request) {
@@ -112,10 +132,38 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofVoter);
   }
 
+  public Response execute(ViewDTSRequest request) {
+    return electionFetcher.fetchElection(request.electionID)
+                          .escapeIf(Election::isInSetupState,
+                                    ResponseFactory.improperElectionState())
+                          .mapThrough(electionFetcher.getCandidate(request.username))
+                          .resolveWith(ResponseFactory::ofCandidate);
+  }
+
+  public Response execute(SetDTSRequest request) {
+    return electionFetcher.fetchElection(request.electionID)
+                          .escapeUnless(Election::isInDecideToStandState,
+                                        ResponseFactory.improperElectionState())
+                          .mapThrough(electionFetcher.getCandidate(request.username))
+                          .perform(c -> c.setStatus(request.status))
+                          .perform(electionFetcher::save)
+                          .resolveWith(c -> ResponseFactory.success());
+  }
+
   private Builder<Election, Response> setElectionState(Election election, Election.State state) {
     election.setState(state);
-    //  TODO: Need to do various things depending on the state?
+    if (election.isInVoteState()) {
+      automaticallyAddUndecidedCandidates(election);
+    }
     return Builder.ofValue(election);
+  }
+
+  private void automaticallyAddUndecidedCandidates(Election election) {
+    // TODO: Allow listeners to react
+    for (Candidate candidate : election.getCandidates())
+      if (candidate.hasNotResponded())
+        candidate.setStatusAccepted();
+
   }
 
   private Builder<Election, Response> createElection(Seat seat) {

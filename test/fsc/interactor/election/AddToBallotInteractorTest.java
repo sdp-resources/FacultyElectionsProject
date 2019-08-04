@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
 
 public class AddToBallotInteractorTest extends ElectionTest {
@@ -63,6 +64,19 @@ public class AddToBallotInteractorTest extends ElectionTest {
     assertEquals(ResponseFactory.success(), response);
     assertThat(election.getCandidateProfiles(), hasItem(profile));
     assertTrue(electionGateway.hasSaved);
+  }
 
+  @Test
+  public void addingToBallotNotInSetupModeGivesErrors() {
+    interactor = new ElectionInteractor(electionGateway, null,
+                                        profileGateway, entityFactory);
+    election.setState(Election.State.Vote);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.DecideToStand);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.Closed);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertThat(election.getCandidateProfiles(), not(hasItem(profile)));
+    assertFalse(electionGateway.hasSaved);
   }
 }

@@ -144,6 +144,10 @@ class AppContextWrapper {
     return session.token;
   }
 
+  public Response setElectionState(Long electionId, String state) {
+    return appContext.setElectionState(electionId, state);
+  }
+
   private class TestableAppContext extends AppContext {
     private Session session = new UnauthenticatedSession();
 

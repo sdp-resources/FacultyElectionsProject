@@ -1,3 +1,5 @@
+|FacultyVoting.Voting.CanCreateElection||12:30:48 Sun, Aug 04, 2019|
+|FacultyVoting.Voting.CanCastAVote||21:38:05 Tue, Jul 30, 2019|
 |FacultyVoting||19:56:37 Sat, Jul 27, 2019|
 |FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||21:01:28 Fri, Jul 26, 2019|
 |FacultyVoting.ScenarioLibrary||18:00:23 Fri, Jul 26, 2019|
@@ -10,8 +12,6 @@
 |FacultyVoting.Profiles.OnlyAdminsCanAddNewProfilesOrEditProfiles||18:09:38 Thu, Jul 25, 2019|
 |FacultyVoting.Profiles.OnlyAdminsCanAddNewProfiles||17:36:52 Thu, Jul 25, 2019|
 |FacultyVoting.Profiles.OnlyAdminsAndCorrespondingUserCanViewProfile||17:18:34 Thu, Jul 25, 2019|
-|FacultyVoting.Voting.CanCreateElection||18:45:46 Wed, Jul 24, 2019|
-|FacultyVoting.Voting.CanCastAVote||18:45:39 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CannotAddExistingProfiles||18:45:10 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanEditProfiles||18:44:23 Wed, Jul 24, 2019|
 |FacultyVoting.Committees.CanEditSeatInformation||18:44:04 Wed, Jul 24, 2019|

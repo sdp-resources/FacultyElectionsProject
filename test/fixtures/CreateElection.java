@@ -18,5 +18,9 @@ public class CreateElection {
   public long createVoter(String username, Long electionId) {
     return TestContext.app.addVoter(username, electionId).voterId;
   }
+
+  public boolean setElectionState(Long electionId, String state) {
+    return TestContext.app.setElectionState(electionId, state).isSuccessful();
+  }
 }
 

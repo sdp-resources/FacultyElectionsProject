@@ -19,8 +19,7 @@ import java.util.stream.Collectors;
 
 import static fsc.entity.VoteRecordTest.assertCloseDates;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class SubmitVoteRecordTest extends ElectionTest {
   public static final int VOTER_ID = 3;
@@ -37,6 +36,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
   @Before
   public void setup() {
     election = EntityStub.simpleElectionWithCandidates();
+    election.setState(Election.State.Vote);
     profile = EntityStub.getProfile(0);
     voter = new Voter(profile, election);
     voter.setVoterId(VOTER_ID);
@@ -44,6 +44,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
     candidate = EntityStub.getProfile(1);
     vote = List.of(candidate.getUsername());
     request = new SubmitVoteRecordRequest(VOTER_ID, vote);
+    request.setSession(EntityStub.userSession(profile.getUsername()));
     electionGateway = new ProvidedElectionGatewaySpy(election);
     profileGateway = new ProfileGatewayStub(candidate, profile);
     interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
@@ -52,15 +53,15 @@ public class SubmitVoteRecordTest extends ElectionTest {
   @Test
   public void whenGivenAnInvalidVoter_returnErrorResponse() {
     election.removeVoter(voter);
-    interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy(), entityFactory);
+    interactor = new ElectionInteractor(electionGateway, null, new InvalidProfileGatewaySpy(),
+                                        entityFactory);
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidVoter(), response);
   }
 
   @Test
   public void whenGivenVoteForNonCandidate_returnErrorResponse() {
-    election.getCandidates().add(entityFactory.createCandidate(profile,
-                                                               election));
+    addCandidate(election, profile);
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidCandidate(), response);
     assertEquals(false, voter.hasVoted());
@@ -68,12 +69,11 @@ public class SubmitVoteRecordTest extends ElectionTest {
 
   @Test
   public void whenGivenMultipleVotesForCandidate_returnErrorResponse() {
-    election.getCandidates().add(entityFactory.createCandidate(candidate,
-                                                               election));
-    election.getCandidates().add(entityFactory.createCandidate(profile,
-                                                               election));
+    addCandidate(election, candidate);
+    addCandidate(election, profile);
     vote = List.of(candidate.getUsername(), profile.getUsername(), candidate.getUsername());
     request = new SubmitVoteRecordRequest(VOTER_ID, vote);
+    request.setSession(EntityStub.userSession(profile.getUsername()));
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.multipleRanksForCandidate(), response);
     assertEquals(false, voter.hasVoted());
@@ -81,8 +81,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
 
   @Test
   public void whenGivenSecondVoteFromSameVoter_returnErrorResponse() {
-    election.getCandidates().add(entityFactory.createCandidate(candidate,
-                                                               election));
+    addCandidate(election, candidate);
     interactor.handle(request);
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.alreadyVoted(), response);
@@ -97,9 +96,34 @@ public class SubmitVoteRecordTest extends ElectionTest {
   }
 
   @Test
+  public void whenSessionUserDoesNotMatchVoter_returnError() {
+    addCandidate(election, candidate);
+    request.setSession(EntityStub.userSession(candidate.getUsername()));
+    assertEquals(ResponseFactory.notAuthorized(), interactor.handle(request));
+    assertEquals(false, electionGateway.hasSaved);
+    assertEquals(false, voter.hasVoted());
+  }
+
+  @Test
+  public void whenElectionIsNotInVoteMode_returnError() {
+    addCandidate(election, candidate);
+    election.setState(Election.State.Setup);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertEquals(false, electionGateway.hasSaved);
+    assertEquals(false, voter.hasVoted());
+    election.setState(Election.State.DecideToStand);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertEquals(false, electionGateway.hasSaved);
+    assertEquals(false, voter.hasVoted());
+    election.setState(Election.State.Closed);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertEquals(false, electionGateway.hasSaved);
+    assertEquals(false, voter.hasVoted());
+  }
+
+  @Test
   public void whenGivenCorrectInformation_saveRecord() {
-    election.getCandidates().add(entityFactory.createCandidate(candidate,
-                                                               election));
+    addCandidate(election, candidate);
     Response response = interactor.handle(request);
     VoteRecord submittedVoteRecord = electionGateway.submittedVoteRecord;
     assertNotNull(submittedVoteRecord);
@@ -117,4 +141,8 @@ public class SubmitVoteRecordTest extends ElectionTest {
     assertEquals(true, voter.hasVoted());
   }
 
+  private void addCandidate(Election election, Profile profile) {
+    election.getCandidates()
+            .add(entityFactory.createCandidate(profile, election));
+  }
 }

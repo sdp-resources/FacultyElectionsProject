@@ -12,6 +12,8 @@ import fsc.utils.builder.Builder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ElectionFetcher extends CommitteeFetcher {
   private ElectionGateway electionGateway;
@@ -63,8 +65,8 @@ public class ElectionFetcher extends CommitteeFetcher {
   }
 
   public Builder<Election, Response> removeProfile(Election election, Profile profile) {
-      election.removeCandidate(profile);
-      return Builder.ofValue(election);
+    election.removeCandidate(profile);
+    return Builder.ofValue(election);
 
   }
 
@@ -133,7 +135,7 @@ public class ElectionFetcher extends CommitteeFetcher {
 
   public void addValidCandidatesToElection(Query query, Election election) {
     for (Profile profile : profileGateway.getProfilesMatching(query)) {
-        election.addCandidate(entityFactory.createCandidate(profile, election));
+      election.addCandidate(entityFactory.createCandidate(profile, election));
     }
   }
 
@@ -141,6 +143,23 @@ public class ElectionFetcher extends CommitteeFetcher {
     return Builder.ofValue(electionGateway.getAllElections());
   }
 
+  public Function<Election, Builder<Candidate, Response>> getCandidate(String username) {
+    return election -> {
+      try {
+        return Builder.ofValue(election.getCandidateByUsername(username));
+      } catch (ElectionGateway.NoProfileInBallotException e) {
+        return Builder.ofResponse(ResponseFactory.invalidCandidate());
+      }
+    };
+  }
+
+  public Builder<Collection<Election>, Response> fetchActiveElections() {
+    Collection<Election> activeElections =
+          electionGateway.getAllElections()
+                         .stream().filter(Election::isActive)
+                         .collect(Collectors.toList());
+    return Builder.ofValue(activeElections);
+  }
 
   public class VoteRecordPair {
 

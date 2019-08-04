@@ -33,7 +33,8 @@ public interface RequestVisitor {
   Object visit(CreateElectionRequest request);
   Object visit(EditBallotQueryRequest request);
   Object visit(ViewElectionRequest request);
-  Object visit(DTSRequest request);
+  Object visit(SetDTSRequest request);
   Object visit(EditElectionStateRequest request);
   Object visit(AddPasswordRecordRequest request);
+  Object visit(ViewActiveElectionsRequest request);
 }

@@ -79,7 +79,8 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
     withNewGateway(gateway -> {
       try {
         AuthenticatedSession session = gateway.getSession(token);
-        assertDifferenceWithinOneMinute(session.getExpirationTime(), LocalDateTime.now());
+        assertDifferenceWithinOneMinute(session.getExpirationTime(),
+                                        LocalDateTime.now().plusMinutes(30));
       } catch (SessionGateway.InvalidOrExpiredTokenException e) {
         throw new RuntimeException("failed");
       }

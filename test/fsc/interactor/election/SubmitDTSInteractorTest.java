@@ -1,13 +1,14 @@
 package fsc.interactor.election;
 
+import fsc.entity.Candidate;
 import fsc.entity.Election;
 import fsc.entity.Profile;
 import fsc.gateway.ElectionGateway;
-import fsc.interactor.SubmitDTSInteractor;
+import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
 import fsc.mock.gateway.election.RejectingElectionGatewaySpy;
-import fsc.request.DTSRequest;
+import fsc.request.SetDTSRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import org.junit.Before;
@@ -23,17 +24,18 @@ public class SubmitDTSInteractorTest extends ElectionTest {
   private Election election;
 
   private ProvidedElectionGatewaySpy electionGatewaySpy;
-  private DTSRequest request;
-  private SubmitDTSInteractor interactor;
+  private SetDTSRequest request;
+  private ElectionInteractor interactor;
   private Profile profile;
 
   @Before
   public void setUp() {
     election = EntityStub.simpleElectionWithCandidates();
+    election.setState(Election.State.DecideToStand);
     profile = EntityStub.getProfile(0);
-    request = new DTSRequest(electionID, profile.getUsername(), status);
+    request = new SetDTSRequest(electionID, profile.getUsername(), status);
     electionGatewaySpy = new ProvidedElectionGatewaySpy(election);
-    interactor = new SubmitDTSInteractor(electionGatewaySpy);
+    interactor = new ElectionInteractor(electionGatewaySpy, null, null, null);
   }
 
   @Test
@@ -60,10 +62,25 @@ public class SubmitDTSInteractorTest extends ElectionTest {
   @Test
   public void whenElectionDoesNotExist_thenError() {
     RejectingElectionGatewaySpy rejectingGateway = new RejectingElectionGatewaySpy();
-    interactor = new SubmitDTSInteractor(rejectingGateway);
+    interactor = new ElectionInteractor(rejectingGateway, null, null, null);
     Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.unknownElectionID(), response);
+  }
+
+  @Test
+  public void whenElectionNotInDTSState_thenError() {
+    election.setState(Election.State.Setup);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.Vote);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    election.setState(Election.State.Closed);
+    assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
+    assertFalse(electionGatewaySpy.hasSaved);
+    for (Candidate candidate : election.getCandidates()) {
+      assertEquals(Status.NoAnswer, candidate.getStatus());
+    }
+
   }
 }
 

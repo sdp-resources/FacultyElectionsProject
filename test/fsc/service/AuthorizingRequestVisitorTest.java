@@ -37,6 +37,13 @@ public class AuthorizingRequestVisitorTest {
     assertIsNotAuthorized(createProfile(), unauthenticated());
   }
 
+  @Test
+  public void viewActiveElectionsOnlyAuthenticatedUsers() {
+    assertIsAuthorized(new ViewActiveElectionsRequest(), admin());
+    assertIsAuthorized(new ViewActiveElectionsRequest(), user("skiadas"));
+    assertIsNotAuthorized(new ViewActiveElectionsRequest(), unauthenticated());
+  }
+
   private void assertIsNotAuthorized(Request request, Session session) {
     request.setSession(session);
     assertEquals(false, authorizer.isAuthorized(request));

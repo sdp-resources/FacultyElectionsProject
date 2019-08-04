@@ -1,5 +1,6 @@
 package fsc.interactor.election;
 
+import fsc.entity.Candidate;
 import fsc.entity.Election;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
@@ -11,7 +12,8 @@ import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static fsc.entity.Election.State.*;
+import static org.junit.Assert.*;
 
 public class EditElectionStateRequestTest extends ElectionTest {
 
@@ -50,9 +52,8 @@ public class EditElectionStateRequestTest extends ElectionTest {
   @Test
   public void whenElectionExistsAndStateIsValid_transitionToNewState() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
-    Election.State state = Election.State.DecideToStand;
-    String stateString = state.toString();
-    request = new EditElectionStateRequest(election.getID(), stateString);
+    Election.State state = DecideToStand;
+    request = new EditElectionStateRequest(election.getID(), state.toString());
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);
     response = interactor.handle(request);
@@ -60,7 +61,27 @@ public class EditElectionStateRequestTest extends ElectionTest {
     assertElectionIdEquals(electionGateway.providedElectionId, election.getID());
     assertEquals(state, election.getState());
     assertEquals(true, electionGateway.hasSaved);
+  }
 
+  @Test
+  public void ifNewStateIsVoteAutomaticallyAcceptForAllNonrespondedCandidates() {
+    ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
+    interactor = new ElectionInteractor(electionGateway, null,
+                                        null, entityFactory);
+    election.setState(Setup);
+    Candidate candidate1 = entityFactory.createCandidate(EntityStub.getProfile(1), election);
+    election.addCandidate(candidate1);
+    Candidate candidate2 = entityFactory.createCandidate(EntityStub.getProfile(2), election);
+    election.addCandidate(candidate2);
+    candidate2.setStatusDeclined();
+    request = new EditElectionStateRequest(election.getID(), DecideToStand.toString());
+    interactor.handle(request);
+    assertFalse(candidate1.hasAccepted());
+    assertTrue(candidate2.hasDeclined());
+    request = new EditElectionStateRequest(election.getID(), Vote.toString());
+    interactor.handle(request);
+    assertTrue(candidate1.hasAccepted());
+    assertTrue(candidate2.hasDeclined());
   }
 
 }

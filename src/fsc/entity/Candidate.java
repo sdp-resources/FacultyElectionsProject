@@ -17,14 +17,13 @@ public class Candidate {
     this.candidateId = candidateId;
   }
 
-  public enum Status {NoAnswer, Declined, Accepted}
+  public enum Status {NoAnswer, Declined, Accepted;}
 
   private CandidateId candidateId;
 
   private Profile profile;
 
   private Election election;
-
   private Status status;
 
   Candidate(Profile profile, Election election) {
@@ -41,10 +40,6 @@ public class Candidate {
 
   public boolean matchesProfile(Profile profile) {
     return this.profile.equals(profile);
-  }
-
-  public boolean hasNotDeclined() {
-    return !status.equals(Status.Declined);
   }
 
   public Profile getProfile() {
@@ -69,6 +64,31 @@ public class Candidate {
 
   public void setStatus(Status status) {
     this.status = status;
+  }
+
+  // TODO: Should be happening from Status internally??
+  public boolean hasAccepted() {
+    return status.equals(Status.Accepted);
+  }
+
+  public boolean hasDeclined() {
+    return status.equals(Status.Declined);
+  }
+
+  public boolean hasNotDeclined() {
+    return !status.equals(Status.Declined);
+  }
+
+  public boolean hasNotResponded() {
+    return status.equals(Status.NoAnswer);
+  }
+
+  public void setStatusAccepted() {
+    setStatus(Status.Accepted);
+  }
+
+  public void setStatusDeclined() {
+    setStatus(Status.Declined);
   }
 
   public static List<Profile> toProfiles(Collection<Candidate> candidates) {
@@ -98,8 +118,8 @@ public class Candidate {
   public int hashCode() {
     return Objects.hash(candidateId, profile, election, status);
   }
-
   private static class CandidateId implements Serializable {
+
 
     private String username;
     private Long electionId;

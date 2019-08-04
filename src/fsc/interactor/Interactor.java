@@ -133,7 +133,7 @@ public abstract class Interactor {
     return delegate(request);
   }
 
-  public Response execute(DTSRequest request) {
+  public Response execute(SetDTSRequest request) {
     return delegate(request);
   }
 
@@ -142,6 +142,10 @@ public abstract class Interactor {
   }
 
   public Response execute(AddPasswordRecordRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(ViewActiveElectionsRequest request) {
     return delegate(request);
   }
 

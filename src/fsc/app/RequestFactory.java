@@ -109,4 +109,8 @@ public class RequestFactory {
   public Request login(String username, String password) {
     return new LoginRequest(username, password);
   }
+
+  public Request setElectionState(Long electionId, String state) {
+    return new EditElectionStateRequest(electionId, state);
+  }
 }

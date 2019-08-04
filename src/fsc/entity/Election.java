@@ -18,26 +18,26 @@ public class Election {
   private Collection<VoteRecord> voteRecords = new ArrayList<>();
 
   // TODO: Election states
-  // 0. Election state can be changed with ChangeElectionStateRequest
+  // 0. DONE Election state can be changed with ChangeElectionStateRequest
   // 1. Setup:
-  //    - Admin can do BallotChangeRequest
-  //    - Admin can do AddCandidateRequest
-  //    - Admin can do RemoveCandidateRequest
-  //    - Candidates do not see DTS status
-  //    - Voters cannot vote
+  //    - DONE Admin can do BallotChangeRequest
+  //    - DONE Admin can do AddCandidateRequest
+  //    - DONE Admin can do RemoveCandidateRequest
+  //    - DONE Candidates do not see DTS status
+  //    - DONE Voters cannot vote
   // 2. DecideToStand:
-  //    - Candidate can view and change their DTS status
-  //    - Admin cannot change candidates or add/remove candidates
-  //    - Voters cannot vote
+  //    - DONE Candidate can view and change their DTS status
+  //    - DONE Admin cannot change candidates or add/remove candidates
+  //    - DONE Voters cannot vote
   // 3. Vote:
-  //    - Candidates that did not decide are automatically accepted (email notification?)
+  //    - DONE Candidates that did not decide are automatically accepted (email notification?)
   //    - Voters can see the election and vote
-  //    - Candidates cannot change their DTS status
-  //    - Admin cannot change candidates or add/remove candidates
+  //    - DONE Candidates cannot change their DTS status
+  //    - DONE Admin cannot change candidates or add/remove candidates
   // 4. Closed:
-  //    - Voters cannot vote
-  //    - Candidates cannot change their DTS status
-  //    - Admin cannot change candidates or add/remove candidates
+  //    - DONE Voters cannot vote
+  //    - DONE Candidates cannot change their DTS status
+  //    - DONE Admin cannot change candidates or add/remove candidates
   //    - Admin can view election results
 
   public Election() { }
@@ -149,6 +149,17 @@ public class Election {
     return state.equals(State.Setup);
   }
 
+  public boolean isActive() {
+    return state.equals(State.DecideToStand) || state.equals(State.Vote);
+  }
+
+  public boolean isInVoteState() {
+    return state.equals(State.Vote);
+  }
+
+  public boolean isInDecideToStandState() {
+    return state.equals(State.DecideToStand);
+  }
 
   public boolean equals(Object o) {
     if (this == o) return true;

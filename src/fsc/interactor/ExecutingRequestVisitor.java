@@ -123,7 +123,7 @@ class ExecutingRequestVisitor implements RequestVisitor {
     return interactor.execute(request);
   }
 
-  public Object visit(DTSRequest request) {
+  public Object visit(SetDTSRequest request) {
     return interactor.execute(request);
   }
 
@@ -132,6 +132,10 @@ class ExecutingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(AddPasswordRecordRequest request) {
+    return interactor.execute(request);
+  }
+
+  public Object visit(ViewActiveElectionsRequest request) {
     return interactor.execute(request);
   }
 }

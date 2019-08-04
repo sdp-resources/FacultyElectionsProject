@@ -64,6 +64,7 @@ public class FscFixture {
       return false;
     }
   }
+
   public void closeContext() {
     TestContext.app.shutdown();
   }

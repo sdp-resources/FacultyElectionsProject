@@ -43,6 +43,10 @@ public class Voter {
     return voted;
   }
 
+  public boolean canVote() {
+    return election.isInVoteState();
+  }
+
   public void setVoted(boolean voted) {
     this.voted = voted;
   }
@@ -64,5 +68,4 @@ public class Voter {
   public String toString() {
     return "Voter{" + profile.getUsername() + ", " + election.getID() + '}';
   }
-
 }
