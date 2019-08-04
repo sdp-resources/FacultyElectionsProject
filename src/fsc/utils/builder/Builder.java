@@ -23,6 +23,9 @@ public interface Builder<S, E> {
   Builder<S, E> escapeIf(Function<S, Boolean> shouldEscape, E escape);
   Builder<S, E> escapeUnless(Function<S, Boolean> shouldEscape, E escape);
   Builder<S, E> perform(Consumer<S> consumer);
+  default <T> Builder<T, E> transform(Function<Builder<S, E>, Builder<T, E>> transformer) {
+    return transformer.apply(this);
+  }
   <T> Builder<T, E> mapThrough(Function<S, Builder<T, E>> mapper);
   <T, R> Builder<R, E> bindWith(Builder<T, E> other, BiFunction<S, T, Builder<R, E>> combiner);
   E resolveWith(Function<S, E> process);

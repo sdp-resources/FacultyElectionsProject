@@ -149,6 +149,10 @@ public abstract class Interactor {
     return delegate(request);
   }
 
+  public Response execute(ViewVoterRequest request) {
+    return delegate(request);
+  }
+
   Response delegate(Request request) {
     return next == null ? ResponseFactory.cannotHandle() : next.handle(request);
   }

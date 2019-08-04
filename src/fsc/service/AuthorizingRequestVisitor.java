@@ -35,6 +35,11 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return isAuthorizedAsAdminOrUser(request, request.username);
   }
 
+  public Object visit(ViewVoterRequest request) {
+    // TODO: Test it
+    return isAuthorizedAsAdminOrUser(request, request.username);
+  }
+
   public Object visit(ViewCandidatesRequest request) {
     // TODO: Probably any logged in user plus admin?
     return true;

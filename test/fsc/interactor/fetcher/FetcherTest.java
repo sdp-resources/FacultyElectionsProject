@@ -12,6 +12,7 @@ import fsc.mock.gateway.profile.InvalidProfileGatewaySpy;
 import fsc.mock.gateway.profile.ProfileGatewayStub;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.utils.builder.Builder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,7 +56,8 @@ public class FetcherTest {
   public void whenGivenValidElectionId_fetcherReturnsElection() {
     electionGateway = new ProvidedElectionGatewaySpy(election);
     electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, null);
-    Response response = electionFetcher.fetchElection(election.getID())
+    Response response = ((Builder<Election, Response>) electionFetcher
+                                                             .fetchElection(election.getID()))
                                        .resolveWith(election1 -> {
                                          assertEquals(election, election1);
                                          return ResponseFactory.success();
@@ -68,7 +70,8 @@ public class FetcherTest {
     electionGateway = new RejectingElectionGatewaySpy();
     electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, null);
     election.setID((long) 3);
-    Response response = electionFetcher.fetchElection(election.getID())
+    Response response = ((Builder<Election, Response>) electionFetcher
+                                                             .fetchElection(election.getID()))
                                        .resolveWith(election1 -> failTest());
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }

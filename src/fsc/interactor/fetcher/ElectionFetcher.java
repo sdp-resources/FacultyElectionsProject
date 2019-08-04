@@ -12,7 +12,6 @@ import fsc.utils.builder.Builder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ElectionFetcher extends CommitteeFetcher {
@@ -37,32 +36,30 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
-  public Builder<Election, Response> fetchElection(long electionID) {
+  public ElectionBuilder fetchElection(long electionID) {
     try {
-      return Builder.ofValue(electionGateway.getElection(electionID));
+      return new ElectionBuilder(Builder.ofValue(electionGateway.getElection(electionID)));
     } catch (ElectionGateway.InvalidElectionIDException e) {
-      return Builder.ofResponse(ResponseFactory.unknownElectionID());
+      return new ElectionBuilder(Builder.ofResponse(ResponseFactory.unknownElectionID()));
     }
   }
 
-  public Builder<Election, Response> fetchElectionInSetupState(Long electionId) {
-    return fetchElection(electionId)
-                 .escapeUnless(Election::isInSetupState,
-                               ResponseFactory.improperElectionState());
+  public ElectionBuilder fetchElectionInSetupState(Long electionId) {
+    return fetchElection(electionId).reportImproperStateUnless(Election::isInSetupState);
   }
 
-  public Builder<Voter, Response> fetchVoter(long voterId) {
+  public VoterBuilder fetchVoter(long voterId) {
     try {
-      return Builder.ofValue(electionGateway.getVoter(voterId));
+      return new VoterBuilder(Builder.ofValue(electionGateway.getVoter(voterId)));
     } catch (ElectionGateway.InvalidVoterException e) {
-      return Builder.ofResponse(ResponseFactory.invalidVoter());
+      return new VoterBuilder(Builder.ofResponse(ResponseFactory.invalidVoter()));
     }
   }
 
-  public Builder<Voter, Response> fetchVoterOnlyIfNoRecord(long voterId) {
-    return fetchVoter(voterId).escapeIf(Voter::hasVoted,
-                                        ResponseFactory.alreadyVoted());
+  public VoterBuilder fetchVoterOnlyIfNoRecord(long voterId) {
+    return fetchVoter(voterId).escapeIfVoted();
   }
+
 
   public Builder<Election, Response> removeProfile(Election election, Profile profile) {
     election.removeCandidate(profile);
@@ -143,22 +140,20 @@ public class ElectionFetcher extends CommitteeFetcher {
     return Builder.ofValue(electionGateway.getAllElections());
   }
 
-  public Function<Election, Builder<Candidate, Response>> getCandidate(String username) {
-    return election -> {
-      try {
-        return Builder.ofValue(election.getCandidateByUsername(username));
-      } catch (ElectionGateway.NoProfileInBallotException e) {
-        return Builder.ofResponse(ResponseFactory.invalidCandidate());
-      }
-    };
-  }
-
   public Builder<Collection<Election>, Response> fetchActiveElections() {
     Collection<Election> activeElections =
           electionGateway.getAllElections()
                          .stream().filter(Election::isActive)
                          .collect(Collectors.toList());
     return Builder.ofValue(activeElections);
+  }
+
+  public Builder<Voter, Response> locateVoter(Election election, Profile profile) {
+    Voter voter = election.getVoter(profile);
+
+    return voter == null ?
+           Builder.ofResponse(ResponseFactory.invalidVoter()) :
+           Builder.ofValue(voter);
   }
 
   public class VoteRecordPair {
@@ -171,4 +166,5 @@ public class ElectionFetcher extends CommitteeFetcher {
       this.voteRecord = voteRecord;
     }
   }
+
 }

@@ -138,4 +138,8 @@ class ExecutingRequestVisitor implements RequestVisitor {
   public Object visit(ViewActiveElectionsRequest request) {
     return interactor.execute(request);
   }
+
+  public Object visit(ViewVoterRequest request) {
+    return interactor.execute(request);
+  }
 }

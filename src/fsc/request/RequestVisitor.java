@@ -37,4 +37,5 @@ public interface RequestVisitor {
   Object visit(EditElectionStateRequest request);
   Object visit(AddPasswordRecordRequest request);
   Object visit(ViewActiveElectionsRequest request);
+  Object visit(ViewVoterRequest request);
 }

@@ -2,6 +2,7 @@ package fsc.interactor;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
+import fsc.entity.session.Session;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
@@ -44,10 +45,17 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofElectionList);
   }
 
+  public Response execute(ViewVoterRequest request) {
+    return electionFetcher.fetchElection(request.electionID)
+                          .reportImproperStateUnless(Election::isInVoteState)
+                          .bindWith(electionFetcher.fetchProfile(request.username),
+                                    electionFetcher::locateVoter)
+                          .resolveWith(ResponseFactory::ofVoter);
+  }
+
   public Response execute(EditBallotQueryRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .escapeUnless(Election::isInSetupState,
-                                        ResponseFactory.improperElectionState())
+                          .reportImproperStateUnless(Election::isInSetupState)
                           .perform(election -> setupNewDefaultQuery(election, request.query))
                           .perform(electionFetcher::save)
                           .resolveWith(s -> ResponseFactory.success());
@@ -55,14 +63,13 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(ViewCandidatesRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .mapThrough(Builder.lift(Election::getCandidateProfiles))
+                          .getCandidateProfiles()
                           .resolveWith(ResponseFactory::ofProfileList);
   }
 
   public Response execute(AddToBallotRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .escapeUnless(Election::isInSetupState,
-                                        ResponseFactory.improperElectionState())
+                          .reportImproperStateUnless(Election::isInSetupState)
                           .bindWith(electionFetcher.fetchProfile(request.username),
                                     electionFetcher::addProfileToElection)
                           .perform(electionFetcher::save)
@@ -71,8 +78,7 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(RemoveFromBallotRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .escapeUnless(Election::isInSetupState,
-                                        ResponseFactory.improperElectionState())
+                          .reportImproperStateUnless(Election::isInSetupState)
                           .bindWith(electionFetcher.fetchProfile(request.username),
                                     electionFetcher::removeProfile)
                           .perform(electionFetcher::save)
@@ -82,21 +88,20 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(SubmitVoteRecordRequest request) {
     return electionFetcher.fetchVoterOnlyIfNoRecord(request.voterId)
-                          .escapeUnless(sessionMatchesVoter(request),
-                                        ResponseFactory.notAuthorized())
-                          .escapeUnless(Voter::canVote,
-                                        ResponseFactory.improperElectionState())
+                          .reportUnauthorizedUnless(sessionMatchesVoter(request.getSession()))
+                          .reportImproperStateUnless(Voter::canVote)
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
                                     Builder.lift(electionFetcher::createVoteRecordPair))
                           .escapeIf(p -> p.voteRecord.someProfilesAreNotCandidates(),
                                     ResponseFactory.invalidCandidate())
                           .perform(electionFetcher::submitRecord)
                           .perform(electionFetcher::save)
-                          .resolveWith(p -> ResponseFactory.ofVoteRecord(p.voteRecord));
+                          .mapThrough(p -> Builder.ofValue(p.voteRecord))
+                          .resolveWith(ResponseFactory::ofVoteRecord);
   }
 
-  private Function<Voter, Boolean> sessionMatchesVoter(Request request) {
-    return voter -> request.getSession().matchesUser(voter.getProfile().getUsername());
+  private Function<Voter, Boolean> sessionMatchesVoter(Session session) {
+    return voter -> session.matchesUser(voter.getProfile().getUsername());
   }
 
   public Response execute(ViewVoteRecordRequest request) {
@@ -119,7 +124,7 @@ public class ElectionInteractor extends Interactor {
   }
 
   public Response execute(ViewElectionRequest request) {
-    return electionFetcher.fetchElection(request.electionID)
+    return ((Builder<Election, Response>) electionFetcher.fetchElection(request.electionID))
                           .resolveWith(ResponseFactory::ofElection);
   }
 
@@ -134,17 +139,15 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(ViewDTSRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .escapeIf(Election::isInSetupState,
-                                    ResponseFactory.improperElectionState())
-                          .mapThrough(electionFetcher.getCandidate(request.username))
+                          .reportImproperStateIf(Election::isInSetupState)
+                          .retrieveCandidate(request.username)
                           .resolveWith(ResponseFactory::ofCandidate);
   }
 
   public Response execute(SetDTSRequest request) {
     return electionFetcher.fetchElection(request.electionID)
-                          .escapeUnless(Election::isInDecideToStandState,
-                                        ResponseFactory.improperElectionState())
-                          .mapThrough(electionFetcher.getCandidate(request.username))
+                          .reportImproperStateUnless(Election::isInDecideToStandState)
+                          .retrieveCandidate(request.username)
                           .perform(c -> c.setStatus(request.status))
                           .perform(electionFetcher::save)
                           .resolveWith(c -> ResponseFactory.success());
@@ -160,9 +163,9 @@ public class ElectionInteractor extends Interactor {
 
   private void automaticallyAddUndecidedCandidates(Election election) {
     // TODO: Allow listeners to react
-    for (Candidate candidate : election.getCandidates())
-      if (candidate.hasNotResponded())
-        candidate.setStatusAccepted();
+    for (Candidate candidate : election.getCandidates()) {
+      if (candidate.hasNotResponded()) { candidate.setStatusAccepted(); }
+    }
 
   }
 
