@@ -34,7 +34,6 @@ public class QueryValidationTest {
     assertValidQueryReturnsValidResult("division equals \"Natural Sciences\"");
     assertValidQueryReturnsValidResult("contract equals \"tenure-track\" or " +
                                              "division equals \"Natural Sciences\"");
-    assertValidQueryReturnsValidResult("isActive");
   }
 
   private void assertValidQueryReturnsValidResult(String queryString)
@@ -43,7 +42,7 @@ public class QueryValidationTest {
     Response response = interactor.handle(request);
     Query query = converter.fromString(queryString);
     assertEquals(ResponseFactory.ofQueryResult(
-          new ValidQueryResult(query, converter.toString(query))),
+          new ValidQueryResult(query, converter.toString(query), null)),
                  response);
     assertTrue(((ViewResponse<ViewableValidationResult>) response).getValues().isValid);
   }

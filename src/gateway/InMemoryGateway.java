@@ -193,13 +193,7 @@ public class InMemoryGateway implements Gateway {
   }
 
   public QueryValidationResult validateQueryString(String queryString) {
-    try {
-      Query query = queryStringConverter.fromString(queryString);
-      String string = queryStringConverter.toString(query);
-      return new QueryValidationResult.ValidQueryResult(query, string);
-    } catch (QueryStringParser.QueryParseException e) {
-      return new QueryValidationResult.InvalidQueryResult(e.getMessage());
-    }
+      return queryStringConverter.validateQueryString(queryString);
   }
 
   public PasswordRecord getPasswordRecordFor(String username) throws UnknownUsernameException {

@@ -12,11 +12,14 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return (boolean) doVisit(request);
   }
 
+  public Object visit(QueryValidationRequest request) {
+    return true;
+  }
+
   public Object visit(ViewElectionRequest request) {
     // TODO
     return true;
   }
-
 
   public Object visit(LoginRequest request) {
     // TODO
@@ -46,13 +49,8 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(SubmitVoteRecordRequest request) {
-    // TODO: Must check somewhere that voter matches user
-    // One idea: Add username in addition to voter id in request
-    // Check username matches user here,
-    // check username matches voter in handler
-    return true;
+    return isAuthorizedAsAdminOrUser(request, request.username);
   }
-
 
   public Object visit(ViewActiveElectionsRequest request) {
     return isAuthenticated(request);
@@ -108,10 +106,6 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(ViewNamedQueryListRequest request) {
-    return isAuthorizedAsAdmin(request);
-  }
-
-  public Object visit(QueryValidationRequest request) {
     return isAuthorizedAsAdmin(request);
   }
 

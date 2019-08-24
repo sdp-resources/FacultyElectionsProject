@@ -1,60 +1,147 @@
 package webserver;
 
+import dbGateway.DatabaseBackedGatewayFactory;
 import fsc.app.AppContext;
 import fsc.gateway.Gateway;
 import fsc.viewable.ViewableElection;
-import gateway.InMemoryGateway;
-import spark.*;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+import spark.Request;
+import spark.Response;
+import spark.Spark;
 
 import java.util.HashMap;
 
 public class Router {
-  static final HandlebarsTemplateEngine templateEngine = new HandlebarsTemplateEngine();
-  static Gateway gateway;
-  static AppContext appContext;
+  protected Gateway gateway;
+  private AppContext appContext;
 
-  public static void setupRoutes(String resourcePath) {
+  public void setupRoutes(String resourcePath) {
     String path = resourcePath + "/data/sample.json";
     // TODO: Move to a app-context pool
-    gateway = InMemoryGateway.fromJSONFile(path);
+    //    gateway = InMemoryGateway.fromJSONFile(path);
+    gateway = DatabaseBackedGatewayFactory.getInstance("org.skiadas.local")
+                                          .obtainGateway();
     appContext = new AppContext(gateway);
 
     Spark.staticFiles.location("/public");
-    Spark.get("/", Router::serveIndex);
-    Spark.post("/login", Router::processLogin);
-    Spark.get("/profile", Router::showAllProfilesPage);
-    Spark.post("/profile", Router::createProfile);
-    Spark.get("/profile/:username", Router::getProfile);
-    Spark.get("/committee", Router::showAllCommitteesPage);
-    Spark.post("/election", Router::createElection);
-    Spark.get("/election", Router::showElections);
+    Spark.get(Path.root(), this::getIndexPage);
+    Spark.get(Path.login(), this::getLogin);
+    Spark.post(Path.login(), this::postLogin);
+    Spark.get(Path.logout(), this::getLogout);
+    Spark.get(Path.user(), this::showUserIndexPage);
+    Spark.post(Path.decideToStand(), this::handleDecideToStand);
+    Spark.get(Path.ballot(), this::showBallotPage);
+    Spark.post(Path.ballot(), this::postBallot);
+    Spark.get(Path.admin(), this::showAdminIndexPage);
+    Spark.get(Path.adminProfile(), this::showAllProfiles);
+    Spark.get(Path.adminCommittee(), this::showAllCommitteesPage);
+    Spark.get(Path.adminElection(), this::showAllElections);
+    Spark.get(Path.validate(), this::validateQuery);
+    Spark.post("/admin/profile", this::createProfile);
+    Spark.get("/admin/profile/:username", this::getProfile);
+    Spark.post("/admin/profile/:username", this::editProfile);
+    Spark.get("/admin/election/:electionid", this::showSingleElection);
+    Spark.post("/admin/election/:electionid", this::editElection);
+    Spark.post("/admin/election", this::createElection);
+    Spark.exception(RequestHandler.RequireAuthenticationException.class,
+                    this::handleUnauthorizedAccess);
+    Spark.exception(UserRequestHandler.FailedRequestException.class,
+                    this::handleFailedRequestException);
   }
 
-  static Object showElections(Request req, Response res) {
+  private Object validateQuery(Request req, Response res) {
+    return new QueryValidationHandler(req, res, appContext).validateQuery();
+  }
+
+  private void handleFailedRequestException(UserRequestHandler.FailedRequestException e,
+                                                                  Request req, Response res) {
+    new RequestHandler(req, res, appContext)
+          .redirectWithFlash(e.getRedirectPath(), e.getMessage());
+  }
+
+
+  private void handleUnauthorizedAccess(Exception e, Request req, Response res) {
+    new RequestHandler(req, res, appContext)
+          .redirectWithFlash(Path.login(), "You must log in to access that page");
+
+  }
+
+  private Object editProfile(Request request, Response response) {
+    return null;
+  }
+
+  private Object editElection(Request request, Response response) {
+    return null;
+  }
+
+  private Object showSingleElection(Request request, Response response) {
+    return null;
+  }
+
+  private Object showAllProfiles(Request req, Response res) {
+    return new AdminRequestHandler(req, res, appContext).processGetProfiles();
+  }
+
+  private Object postBallot(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).processPostBallot();
+  }
+
+  private Object showBallotPage(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).processGetBallot();
+  }
+
+  private Object handleDecideToStand(Request req, Response res) {
+    return new ElectionRequestHandler(req,  res, appContext).processPostDecideToStand();
+  }
+
+  private Object showUserIndexPage(Request req, Response res) {
+    return new UserRequestHandler(req, res, appContext).processGetIndex();
+  }
+
+  private Object getIndexPage(Request req, Response res) {
+    return new LoginRequestHandler(req, res, appContext).processGetIndex();
+  }
+
+  private Object getLogin(Request req, Response res) {
+    return new LoginRequestHandler(req, res, appContext).processGetLogin();
+  }
+
+  private Object postLogin(Request req, Response res) {
+    return new LoginRequestHandler(req, res, appContext).processPostLogin();
+  }
+
+  private Object getLogout(Request req, Response res) {
+    return new LoginRequestHandler(req, res, appContext).processGetLogout();
+  }
+
+  private Object showAdminIndexPage(Request req, Response res) {
+    return new AdminRequestHandler(req, res, appContext).processGetIndex();
+  }
+
+  private Object showAllElections(Request req, Response res) {
     HashMap<Object, Object> returnedHash = new HashMap<>();
     returnedHash.put("values", appContext.getAllElections());
-    return serveTemplate("/electionList.handlebars", returnedHash);
+    return new LoginRequestHandler(req, res, appContext)
+                 .oldServeTemplate("/electionList.handlebars", returnedHash);
   }
 
-  static Object createElection(Request req, Response res) {
+  private Object createElection(Request req, Response res) {
     fsc.response.Response response = appContext.createElection(getParam(req, "committee"),
-                                                                getParam(req, "seat"));
+                                                               getParam(req, "seat"));
     ViewableElection election = response.getValues();
     res.redirect("/election");
     return null;
   }
 
-  private static String getParam(Request req, String committee) {
+  private String getParam(Request req, String committee) {
     return req.queryParams(committee);
   }
 
-  static Object getProfile(Request req, Response res) {
+  private Object getProfile(Request req, Response res) {
     // TODO
     return null;
   }
 
-  static Object createProfile(Request req, Response res) {
+  private Object createProfile(Request req, Response res) {
     fsc.response.Response response = appContext.addProfile(
           getParam(req, "fullName"), getParam(req, "username"),
           getParam(req, "division"), getParam(req, "contractType")
@@ -68,29 +155,17 @@ public class Router {
     return null;
   }
 
-  static Object showAllCommitteesPage(Request req, Response res) {
-    HashMap<Object, Object> returnedHash = new HashMap<>();
-    returnedHash.put("committees", appContext.getAllCommittees());
-    return serveTemplate("/committeeList.handlebars", returnedHash);
+  private Object showAllCommitteesPage(Request req, Response res) {
+    return new CommitteeRequestHandler(req, res, appContext).processGetAdminCommittee();
   }
 
-  static Object showAllProfilesPage(Request req, Response res) {
-    HashMap<Object, Object> returnedHash = new HashMap<>();
-    returnedHash.put("profiles", appContext.getProfilesMatchingQuery("all").getValues());
-    returnedHash.put("contractTypes", appContext.getAllContractTypes(null).getValues());
-    returnedHash.put("divisions", appContext.getAllDivisions().getValues());
-    return serveTemplate("/profilesList.handlebars", returnedHash);
-  }
+//  private Object showUserProfile(Request req, Response res) {
+//    HashMap<Object, Object> returnedHash = new HashMap<>();
+//    returnedHash.put("profiles", appContext.getProfilesMatchingQuery("all", ).getValues());
+//    returnedHash.put("contractTypes", appContext.getAllContractTypes(null).getValues());
+//    returnedHash.put("divisions", appContext.getAllDivisions().getValues());
+//    return new LoginRequestHandler(req, res, appContext)
+//                 .oldServeTemplate("/profilesList.handlebars", returnedHash);
+//  }
 
-  static Object serveIndex(Request req, Response res) {
-    return serveTemplate("/login.handlebars", new HashMap<>());
-  }
-
-  static Object processLogin(Request req, Response res) {
-    return "null";
-  }
-
-  static String serveTemplate(String templatePath, HashMap<Object, Object> model) {
-    return templateEngine.render(new ModelAndView(model, templatePath));
-  }
 }

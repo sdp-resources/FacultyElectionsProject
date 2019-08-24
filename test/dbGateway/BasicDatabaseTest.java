@@ -9,7 +9,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class BasicDatabaseTest {
-  protected final DatabaseBackedGatewayFactory gatewayFactory = new DatabaseBackedGatewayFactory();
+  protected final DatabaseBackedGatewayFactory gatewayFactory = new DatabaseBackedGatewayFactory(
+        "inmemoryH2");
   protected DatabaseBackedGateway gateway;
   protected DatabaseBackedGateway anotherGateway;
 

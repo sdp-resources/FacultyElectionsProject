@@ -74,8 +74,8 @@ public class RequestFactory {
     return new AddToBallotRequest(electionId, name);
   }
 
-  public Request submitVote(long voterId, List<String> vote) {
-    return new SubmitVoteRecordRequest(voterId, vote);
+  public Request submitVote(long voterId, String username, List<String> vote) {
+    return new SubmitVoteRecordRequest(voterId, username, vote);
   }
 
   public Request viewVoteRecord(long recordId) {
@@ -92,6 +92,10 @@ public class RequestFactory {
 
   public Request addVoter(String username, Long electionId) {
     return new AddVoterRequest(username, electionId);
+  }
+
+  public Request viewActiveElections() {
+    return new ViewActiveElectionsRequest();
   }
 
   public Request viewAllElections() {
@@ -112,5 +116,13 @@ public class RequestFactory {
 
   public Request setElectionState(Long electionId, String state) {
     return new EditElectionStateRequest(electionId, state);
+  }
+
+  public Request setDTS(long electionId, String username, String status) {
+    return new SetDTSRequest(electionId, username, status);
+  }
+
+  public Request viewCandidates(long electionId) {
+    return new ViewCandidatesRequest(electionId);
   }
 }

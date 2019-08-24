@@ -1,0 +1,49 @@
+{{> header.hbs}}
+
+{{#*inline "stylesheets"}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.bootstrap.min.css"
+        integrity="sha256-HJmq7ZsJyNO0AZz/dTSiU984iDC5BSvR5It5SnGTyRg=" crossorigin="anonymous" />
+{{/inline}}
+
+<div class="row mt-8">
+  <div class="col-sm-4">
+    <div class="card">
+      <h4 class="card-title">Profiles</h4>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>username</th>
+          <th>name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each profiles}}
+          <tr>
+            <td>{{username}}</td>
+            <td>{{name}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{{> footer.hbs}}
+
+{{#*inline "javascripts"}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.min.js"
+          integrity="sha256-R3NffQkOJUqmiutQHnxEURXUXZru/7GMdM6CdH673Qw=" crossorigin="anonymous"></script>
+  <script>
+  jQuery(function($){
+	  $('.table').footable();
+  });
+
+
+
+
+
+
+
+  </script>
+{{/inline}}

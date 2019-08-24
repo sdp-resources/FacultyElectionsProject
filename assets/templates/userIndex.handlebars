@@ -1,0 +1,82 @@
+{{> header.hbs}}
+
+<div class="row mt-8">
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Profile</h3>
+        {{#with profile}}
+          <dl>
+            <dt>Name (username)</dt>
+            <dd>{{name}} ({{username}})</dd>
+            <dt>Division</dt>
+            <dd>{{division}}</dd>
+            <dt>Classification</dt>
+            <dd>{{contract}}</dd>
+          </dl>
+        {{/with}}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <h3>Current Elections</h3>
+    {{#each elections}}
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <h5 class="card-header">{{election.seat.name}}</h5>
+            <div class="card-body">
+              <h6 class="card-subtitle text-muted">state: {{election.state}}</h6>
+              {{#if inDecideToStand}}
+                <div class="container">
+                  {{#if candidateStatus}}
+                    <div class="row">
+                      <div class="col-xs-12">Candidate status: {{candidateStatus}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <form class="form" action="{{path 'decideToStand' election.electionID}}" method="POST">
+                          <label for="decideToStand{{election.electionID}}" class="sr-only">Change status:</label>
+                          <div class="form-group form-row">
+                            <select class="form-control form-control-sm" name="decideToStand"
+                                    id="decideToStand{{election.electionID}}">
+                              <option value="" disabled selected hidden>Choose ...</option>
+                              <option value="Willing">WILLING to stand</option>
+                              <option value="Declined">DECLINE to stand</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Change</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  {{else}}
+                    <p class="card-text">You are not a candidate.</p>
+                  {{/if}}
+                </div>
+              {{/if}}
+              {{#if inVote}}
+                <div class="card-text">
+                  {{#if voter}}
+                    {{#if voter.voted}}
+                      <p class="card-text">You have already voted.</p>
+                    {{else}}
+                      <form action="{{path 'ballot' election.electionID}}">
+                        <input type="hidden" name="voterId" value="{{voter.voterId}}">
+                        <button class="btn btn-success btn-sm">View Ballot</button>
+                      </form>
+                    {{/if}}
+                  {{else}}
+                    <p class="card-text">You are not eligible to vote.</p>
+                  {{/if}}
+                </div>
+              {{/if}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+{{> footer.hbs}}

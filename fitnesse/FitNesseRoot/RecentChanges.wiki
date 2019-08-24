@@ -1,5 +1,5 @@
-|FacultyVoting.Voting.CanCreateElection||12:30:48 Sun, Aug 04, 2019|
-|FacultyVoting.Voting.CanCastAVote||21:38:05 Tue, Jul 30, 2019|
+|FacultyVoting.Voting.CanCastAVote||19:25:52 Sun, Aug 04, 2019|
+|FacultyVoting.Voting.CanCreateElection||19:25:25 Sun, Aug 04, 2019|
 |FacultyVoting||19:56:37 Sat, Jul 27, 2019|
 |FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||21:01:28 Fri, Jul 26, 2019|
 |FacultyVoting.ScenarioLibrary||18:00:23 Fri, Jul 26, 2019|

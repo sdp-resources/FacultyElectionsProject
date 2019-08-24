@@ -10,14 +10,17 @@ public class ViewableValidationResult {
 
   public final boolean isValid;
   public final String message;
+  public final String expandedString;
 
   public ViewableValidationResult(QueryValidationResult result) {
     if (result instanceof ValidQueryResult) {
       this.isValid = true;
       this.message = ((ValidQueryResult) result).normalizedQueryString;
+      this.expandedString = ((ValidQueryResult) result).expandedQueryString;
     } else if (result  instanceof InvalidQueryResult) {
       this.isValid = false;
       this.message = ((InvalidQueryResult) result).errorMessage;
+      this.expandedString = null;
     } else {
       throw new RuntimeException("A QueryValidationResult must be one of two kinds");
     }

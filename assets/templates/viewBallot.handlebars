@@ -1,0 +1,65 @@
+{{> header.hbs}}
+
+<div class="row mt-8">
+  <div class="col-sm-4">
+    <div class="card">
+      <h4 class="card-header">Not selected</h4>
+      <div class="card-body">
+        <ul id="nonselected" class="list-group list-group-flush">
+          {{#each candidates}}
+            <li data-candidate="{{username}}" class="btn btn-outline-dark btn-block">
+              {{name}}
+            </li>
+          {{/each}}
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <h4 class="card-header">Selected</h4>
+      <div class="card-body">
+        <ul id="selected" class="list-group list-group-flush"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <form action="{{path 'ballot' electionId}}" method="POST">
+      <input type="hidden" name="voterId" value="{{voterId}}">
+      <input type="hidden" name="votes" id="votes" value="">
+      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+    </form>
+  </div>
+</div>
+
+{{> footer.hbs}}
+
+{{#*inline "javascripts"}}
+<script>
+  $(function() {
+    $("#nonselected").on("click", "li", function() {
+      let index = $("#selected li").length + 1;
+      $("#selected").append(this);
+      $(this).append("<span class='badge badge-pill badge-secondary text-right'>" + index + "</span>");
+      updateHiddenField()
+    })
+    $("#selected").on("click", "li", function() {
+      $("#nonselected").append(this);
+      $(this).find("span").remove();
+      $("#selected li").each(function(index) {
+        $(this).find("span").text(index + 1);
+      });
+      updateHiddenField()
+    })
+  });
+
+  function updateHiddenField() {
+    let names = $("#selected li")
+      .map(function(i, el) { return $(el).data("candidate"); })
+      .toArray().join(",");
+    $("#votes").val(names);
+  }
+
+</script>
+{{/inline}}

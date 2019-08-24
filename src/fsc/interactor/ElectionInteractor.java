@@ -2,7 +2,6 @@ package fsc.interactor;
 
 import fsc.entity.*;
 import fsc.entity.query.Query;
-import fsc.entity.session.Session;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
@@ -88,7 +87,6 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(SubmitVoteRecordRequest request) {
     return electionFetcher.fetchVoterOnlyIfNoRecord(request.voterId)
-                          .reportUnauthorizedUnless(sessionMatchesVoter(request.getSession()))
                           .reportImproperStateUnless(Voter::canVote)
                           .bindWith(electionFetcher.fetchProfilesIfNoDuplicates(request.vote),
                                     Builder.lift(electionFetcher::createVoteRecordPair))
@@ -98,10 +96,6 @@ public class ElectionInteractor extends Interactor {
                           .perform(electionFetcher::save)
                           .mapThrough(p -> Builder.ofValue(p.voteRecord))
                           .resolveWith(ResponseFactory::ofVoteRecord);
-  }
-
-  private Function<Voter, Boolean> sessionMatchesVoter(Session session) {
-    return voter -> session.matchesUser(voter.getProfile().getUsername());
   }
 
   public Response execute(ViewVoteRecordRequest request) {
@@ -125,7 +119,7 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(ViewElectionRequest request) {
     return ((Builder<Election, Response>) electionFetcher.fetchElection(request.electionID))
-                          .resolveWith(ResponseFactory::ofElection);
+                 .resolveWith(ResponseFactory::ofElection);
   }
 
   public Response execute(AddVoterRequest request) {
@@ -148,9 +142,20 @@ public class ElectionInteractor extends Interactor {
     return electionFetcher.fetchElection(request.electionID)
                           .reportImproperStateUnless(Election::isInDecideToStandState)
                           .retrieveCandidate(request.username)
-                          .perform(c -> c.setStatus(request.status))
+                          .mapThrough(setStatusFromString(request.status))
                           .perform(electionFetcher::save)
                           .resolveWith(c -> ResponseFactory.success());
+  }
+
+  private Function<Candidate, Builder<Candidate, Response>> setStatusFromString(String status) {
+    return (Candidate candidate) -> {
+      try {
+        candidate.setStatus(Candidate.Status.valueOf(status));
+        return Builder.ofValue(candidate);
+      } catch (IllegalArgumentException e) {
+        return Builder.ofResponse(ResponseFactory.invalidCandidateStatus());
+      }
+    };
   }
 
   private Builder<Election, Response> setElectionState(Election election, Election.State state) {

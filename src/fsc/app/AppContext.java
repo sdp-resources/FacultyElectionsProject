@@ -34,8 +34,10 @@ public class AppContext {
                  .append(new LoginInteractor(gateway, authenticator, gateway))
                  .append(new DivisionInteractor(gateway, getEntityFactory()))
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
-                 .append(new ProfileInteractor(gateway, getEntityFactory(), gateway.getNameValidator()))
-                 .append(new CommitteeInteractor(gateway, gateway, getEntityFactory(), gateway.getNameValidator()))
+                 .append(new ProfileInteractor(gateway, getEntityFactory(),
+                                               gateway.getNameValidator()))
+                 .append(new CommitteeInteractor(gateway, gateway, getEntityFactory(),
+                                                 gateway.getNameValidator()))
                  .append(new QueryInteractor(gateway))
                  .append(new ElectionInteractor(gateway, gateway, gateway, getEntityFactory()));
   }
@@ -68,12 +70,12 @@ public class AppContext {
                                                     contractType, division));
   }
 
-  public Response getProfile(String username) {
-    return getResponse(requestFactory.viewProfile(username));
+  public Response getProfile(String username, String token) {
+    return getResponse(withToken(token, requestFactory.viewProfile(username)));
   }
 
-  public Response getProfilesMatchingQuery(String query) {
-    return getResponse(requestFactory.viewProfilesList(query));
+  public Response getProfilesMatchingQuery(String query, String token) {
+    return getResponse(withToken(token, requestFactory.viewProfilesList(query)));
   }
 
   public Response editProfile(String username, Map<String, String> changes) {
@@ -108,8 +110,8 @@ public class AppContext {
     return getResponse(requestFactory.validateQuery(string));
   }
 
-  public Response getAllCommittees() {
-    return getResponse(requestFactory.viewCommitteeList());
+  public Response getAllCommittees(String token) {
+    return getResponse(withToken(token, requestFactory.viewCommitteeList()));
   }
 
   public Response addCommittee(String name, String description, String voterQueryString) {
@@ -129,6 +131,10 @@ public class AppContext {
         String committeeName, String seatName, Map<String, String> changes
   ) {
     return getResponse(requestFactory.editSeat(committeeName, seatName, changes));
+  }
+
+  public Response getActiveElections(String token) {
+    return getResponse(withToken(token, requestFactory.viewActiveElections()));
   }
 
   public Response getAllElections() {
@@ -155,8 +161,10 @@ public class AppContext {
     return getResponse(requestFactory.viewAllVotes(electionId));
   }
 
-  public Response submitVote(long voterId, List<String> vote) {
-    return getResponse(requestFactory.submitVote(voterId, vote));
+  public Response submitVote(
+        long voterId, String username, List<String> vote, String token
+  ) {
+    return getResponse(withToken(token, requestFactory.submitVote(voterId, username, vote)));
   }
 
   public Response getVoteRecord(long recordId) {
@@ -173,5 +181,13 @@ public class AppContext {
 
   public Response login(String username, String password) {
     return getResponse(requestFactory.login(username, password));
+  }
+
+  public Response setDTS(long electionId, String username, String status, String token) {
+    return getResponse(withToken(token, requestFactory.setDTS(electionId, username, status)));
+  }
+
+  public Response viewBallot(long electionid, String token) {
+    return getResponse(withToken(token, requestFactory.viewCandidates(electionid)));
   }
 }

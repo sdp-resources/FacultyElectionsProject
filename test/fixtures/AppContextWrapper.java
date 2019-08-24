@@ -32,7 +32,7 @@ class AppContextWrapper {
   }
 
   List<ViewableProfile> getProfilesForQuery(String query) {
-    return appContext.getProfilesMatchingQuery(query).getValues();
+    return appContext.getProfilesMatchingQuery(query, null).getValues();
   }
 
   boolean editProfile(String username, Map<String, String> changes) {
@@ -48,11 +48,11 @@ class AppContextWrapper {
   }
 
   List<ViewableCommittee> getAllCommittees() {
-    return appContext.getAllCommittees().getValues();
+    return appContext.getAllCommittees(null).getValues();
   }
 
   ViewableProfile getProfile(String username) {
-    return appContext.getProfile(username).getValues();
+    return appContext.getProfile(username, "").getValues();
   }
 
   boolean addContractType(String contractType, String token) {
@@ -115,8 +115,8 @@ class AppContextWrapper {
     return appContext.getAllVotes(electionId).getValues();
   }
 
-  ViewableVoteRecord submitVote(long voterId, List<String> vote) {
-    return appContext.submitVote(voterId, vote).getValues();
+  ViewableVoteRecord submitVote(long voterId, String username, List<String> vote) {
+    return appContext.submitVote(voterId, username, vote, null).getValues();
   }
 
   ViewableVoteRecord getVoteRecord(long recordId) {

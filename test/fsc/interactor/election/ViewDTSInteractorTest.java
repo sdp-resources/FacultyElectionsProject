@@ -38,7 +38,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
                                                                election));
     election.setState(Election.State.DecideToStand);
     Candidate candidate = election.getCandidateByUsername(profile.getUsername());
-    candidate.setStatus(Candidate.Status.Accepted);
+    candidate.setStatus(Candidate.Status.Willing);
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ElectionInteractor(gateway, null, null, null);
     Response response = interactor.handle(request);
@@ -71,7 +71,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
     election.getCandidates().add(entityFactory.createCandidate(profile,
                                                                election));
     Candidate candidate = election.getCandidateByUsername(profile.getUsername());
-    candidate.setStatus(Candidate.Status.Accepted);
+    candidate.setStatus(Candidate.Status.Willing);
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ElectionInteractor(gateway, null, null, null);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));

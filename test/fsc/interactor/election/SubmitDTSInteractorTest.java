@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class SubmitDTSInteractorTest extends ElectionTest {
 
   private long electionID = 12345;
-  private Status status = Status.Declined;
+  private String status = Status.Declined.toString();
   private Election election;
 
   private ProvidedElectionGatewaySpy electionGatewaySpy;
@@ -47,7 +47,8 @@ public class SubmitDTSInteractorTest extends ElectionTest {
 
     assertEquals(ResponseFactory.success(), response);
     assertElectionIdEquals(electionGatewaySpy.providedElectionId, electionID);
-    assertEquals(status, election.getCandidateByUsername(profile.getUsername()).getStatus());
+    assertEquals(Status.valueOf(status),
+                 election.getCandidateByUsername(profile.getUsername()).getStatus());
     assertTrue(electionGatewaySpy.hasSaved);
   }
 
@@ -56,6 +57,16 @@ public class SubmitDTSInteractorTest extends ElectionTest {
     Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.invalidCandidate(), response);
+    assertFalse(electionGatewaySpy.hasSaved);
+  }
+
+  @Test
+  public void whenAssignedStatusIsNotValidValue_thenError() {
+    election.getCandidates().add(entityFactory.createCandidate(profile, election));
+    request = new SetDTSRequest(electionID, profile.getUsername(), "bogus");
+    Response response = interactor.handle(request);
+
+    assertEquals(ResponseFactory.invalidCandidateStatus(), response);
     assertFalse(electionGatewaySpy.hasSaved);
   }
 

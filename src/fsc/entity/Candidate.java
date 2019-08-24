@@ -17,7 +17,7 @@ public class Candidate {
     this.candidateId = candidateId;
   }
 
-  public enum Status {NoAnswer, Declined, Accepted;}
+  public enum Status {NoAnswer, Declined, Willing;}
 
   private CandidateId candidateId;
 
@@ -26,7 +26,7 @@ public class Candidate {
   private Election election;
   private Status status;
 
-  Candidate(Profile profile, Election election) {
+  public Candidate(Profile profile, Election election) {
     setCandidateId(new CandidateId(profile.getUsername(), election.getID()));
     this.profile = profile;
     setElection(election);
@@ -66,9 +66,13 @@ public class Candidate {
     this.status = status;
   }
 
+  public void setStatusFromString(String status) {
+    this.status = Status.valueOf(status);
+  }
+
   // TODO: Should be happening from Status internally??
   public boolean hasAccepted() {
-    return status.equals(Status.Accepted);
+    return status.equals(Status.Willing);
   }
 
   public boolean hasDeclined() {
@@ -84,7 +88,7 @@ public class Candidate {
   }
 
   public void setStatusAccepted() {
-    setStatus(Status.Accepted);
+    setStatus(Status.Willing);
   }
 
   public void setStatusDeclined() {

@@ -4,26 +4,49 @@
   <div class="row">
     <div class="col-sm-8">
       <h2>Committees</h2>
-      <ul>
-        {{#each values}}
-          <li class="committee" data-name="{{name}}">
-            <h4>{{name}}</h4>
-            <p>{{description}}</p>
-            <ul>
-              {{#each seats}}
-                <li class="seat" data-name="{{name}}">
-                  {{name}} : {{candidateQuery.formattedString}}
-                  <form method="post" action="/election">
-                    <input type="hidden" name="committee" value="FSC">
-                    <input type="hidden" name="seat" value="TenuredMember">
-                    <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
-                  </form>
-                </li>
-              {{/each}}
-            </ul>
-          </li>
+      <div>
+        Query edit test
+  <div class="form">
+    <div class="form-group query-validate">
+      <input type="text" class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary">Go</button>
+      </div>
+    </div>
+  </div>
+      </div>
+      <div class="accordion" id="committees">
+        {{#each committees}}
+          <div class="committee card" data-name="{{name}}">
+            <div class="card-header">
+              <h5>
+                <button class="btn btn-block btn-link" type="button" data-toggle="collapse"
+                data-target="#{{name}}" aria-expanded="false" aria-controls="{{name}}">
+                  {{name}}
+                </button>
+              </h5>
+            </div>
+            <div class="collapse" id="{{name}}">
+              <div class="card-body">
+                <p class="card-text">{{description}}</p>
+                <p class="card-text">Eligible to vote: {{voterQuery}}</p>
+                <ul>
+                  {{#each seats}}
+                    <li class="seat" data-name="{{name}}">
+                      {{name}} : {{query}}
+                      <form method="post" action="/election">
+                        <input type="hidden" name="committee" value="FSC">
+                        <input type="hidden" name="seat" value="TenuredMember">
+                        <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
+                      </form>
+                    </li>
+                  {{/each}}
+                </ul>
+              </div>
+            </div>
+          </div>
         {{/each}}
-      </ul>
+      </div>
     </div>
   </div>
 </div>

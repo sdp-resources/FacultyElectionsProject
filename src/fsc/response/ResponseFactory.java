@@ -149,4 +149,8 @@ public class ResponseFactory {
   public static Response invalidSession() {
     return new ErrorResponse(ErrorResponse.INVALID_SESSION);
   }
+
+  public static Response invalidCandidateStatus() {
+    return new ErrorResponse(ErrorResponse.INVALID_CANDIDATE_STATE);
+  }
 }

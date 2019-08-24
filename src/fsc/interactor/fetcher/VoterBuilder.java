@@ -18,11 +18,6 @@ public class VoterBuilder extends DelegatingBuilder<Voter, Response> {
                                            ResponseFactory.alreadyVoted()));
   }
 
-  public VoterBuilder reportUnauthorizedUnless(Function<Voter, Boolean> isAuthorized) {
-    return newWithBuilder(builder.escapeUnless(isAuthorized,
-                                               ResponseFactory.notAuthorized()));
-  }
-
   protected VoterBuilder newWithBuilder(Builder<Voter, Response> builder) {
     return new VoterBuilder(builder);
   }

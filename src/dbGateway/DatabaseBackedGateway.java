@@ -207,16 +207,9 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public QueryValidationResult validateQueryString(String queryString) {
-    try {
       QueryStringParserFactory parserFactory = new ValidatingQueryStringParserFactory(dbValidator);
       QueryStringConverter queryStringConverter = new QueryStringConverter(parserFactory);
-      Query query = queryStringConverter.fromString(queryString);
-      String string = queryStringConverter.toString(query);
-      return new QueryValidationResult.ValidQueryResult(query, string);
-    } catch (QueryStringParser.QueryParseException e) {
-      return new QueryValidationResult.InvalidQueryResult(e.getMessage());
-    }
-
+      return queryStringConverter.validateQueryString(queryString);
   }
 
   public PasswordRecord getPasswordRecordFor(String username) throws UnknownUsernameException {
@@ -240,6 +233,14 @@ public class DatabaseBackedGateway implements Gateway {
       cleanUpSessions();
     }
     persist(session);
+  }
+
+  public void deleteSession(String token) {
+    try {
+      AuthenticatedSession session = getSession(token);
+      entityManager.remove(session);
+    } catch (InvalidOrExpiredTokenException e) {
+    }
   }
 
   public void cleanUpSessions() {

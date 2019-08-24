@@ -17,6 +17,22 @@ public class ViewableCommittee {
     this.seats = seats;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public List<ViewableSeat> getSeats() {
+    return seats;
+  }
+
+  public String getVoterQuery() {
+    return voterQuery;
+  }
+
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

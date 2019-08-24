@@ -9,7 +9,7 @@ public class TestContext {
     // TODO: Make this part more configurable
     //
     //    app = new AppContextWrapper(new InMemoryGateway());
-    DatabaseBackedGatewayFactory gatewayFactory = new DatabaseBackedGatewayFactory();
+    DatabaseBackedGatewayFactory gatewayFactory = new DatabaseBackedGatewayFactory("inmemoryH2");
     app = new AppContextWrapper(gatewayFactory.obtainGateway());
   }
 }

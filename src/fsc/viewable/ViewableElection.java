@@ -28,6 +28,34 @@ public class ViewableElection {
     this.votes = votes;
   }
 
+  public long getElectionID() {
+    return electionID;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public ViewableSeat getSeat() {
+    return seat;
+  }
+
+  public String getQuery() {
+    return query;
+  }
+
+  public Collection<ViewableCandidate> getCandidates() {
+    return candidates;
+  }
+
+  public Collection<ViewableVoter> getVoters() {
+    return voters;
+  }
+
+  public Collection<ViewableVoteRecord> getVotes() {
+    return votes;
+  }
+
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

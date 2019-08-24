@@ -31,10 +31,11 @@ public class Election {
   //    - DONE Voters cannot vote
   // 3. Vote:
   //    - DONE Candidates that did not decide are automatically accepted (email notification?)
-  //    - Voters can see the election and vote
+  //    - DONE Voters can see the election and vote
   //    - DONE Candidates cannot change their DTS status
   //    - DONE Admin cannot change candidates or add/remove candidates
   // 4. Closed:
+  //    - Stores the election tally record
   //    - DONE Voters cannot vote
   //    - DONE Candidates cannot change their DTS status
   //    - DONE Admin cannot change candidates or add/remove candidates

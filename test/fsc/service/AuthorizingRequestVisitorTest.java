@@ -7,6 +7,8 @@ import fsc.request.*;
 import gateway.InMemoryGateway;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class AuthorizingRequestVisitorTest {
@@ -27,6 +29,14 @@ public class AuthorizingRequestVisitorTest {
     assertIsAuthorized(new ViewProfileRequest("skiadas"), user("skiadas"));
     assertIsNotAuthorized(new ViewProfileRequest("skiadas"), user("other"));
     assertIsNotAuthorized(new ViewProfileRequest("skiadas"), unauthenticated());
+  }
+
+  @Test
+  public void submitVoteRecordAuthorizedForAdminsOrTheUser() {
+    assertIsAuthorized(aVoteRecordRequest(), admin());
+    assertIsAuthorized(aVoteRecordRequest(), user("skiadas"));
+    assertIsNotAuthorized(aVoteRecordRequest(), user("other"));
+    assertIsNotAuthorized(aVoteRecordRequest(), unauthenticated());
   }
 
   @Test
@@ -68,6 +78,10 @@ public class AuthorizingRequestVisitorTest {
 
   public CreateProfileRequest createProfile() {
     return new CreateProfileRequest("name", "skiadas", null, null);
+  }
+
+  private SubmitVoteRecordRequest aVoteRecordRequest() {
+    return new SubmitVoteRecordRequest(1, "skiadas", List.of());
   }
 
 }

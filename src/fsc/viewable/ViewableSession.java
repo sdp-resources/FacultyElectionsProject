@@ -12,4 +12,8 @@ public class ViewableSession {
     this.token = token;
     this.expires = expires;
   }
+
+  public String getUsername() {
+    return username;
+  }
 }

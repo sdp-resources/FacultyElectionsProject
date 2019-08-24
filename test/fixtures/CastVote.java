@@ -6,9 +6,11 @@ import java.util.List;
 public class CastVote {
   private List<String> vote = new ArrayList<>();
   private long voterId;
+  private String username;
 
-  public CastVote(String voterId) {
+  public CastVote(String voterId, String username) {
     this.voterId = Long.valueOf(voterId);
+    this.username = username;
   }
 
   public void addVoteFor(String candidate) {
@@ -16,7 +18,7 @@ public class CastVote {
   }
 
   public long submit() {
-    return TestContext.app.submitVote(voterId, vote).recordId;
+    return TestContext.app.submitVote(voterId, username, vote).recordId;
   }
 }
 

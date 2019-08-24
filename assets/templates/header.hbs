@@ -7,15 +7,35 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+  {{#> stylesheets}}{{/stylesheets}}
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item"><a href="profile" class="nav-link">Profiles</a></li>
-    <li class="nav-item"><a href="election" class="nav-link">Elections</a></li>
-    <li class="nav-item"><a href="committee" class="nav-link">Committees</a></li>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item"><a href="{{path 'root'}}" class="nav-link">Home</a></li>
+    {{#if isAdmin}}
+      <li class="nav-item"><a href="{{path 'adminProfile'}}" class="nav-link">Profiles</a></li>
+      <li class="nav-item"><a href="/admin/election" class="nav-link">Election</a></li>
+      <li class="nav-item"><a href="/admin/committee" class="nav-link">Committee</a></li>
+    {{/if}}
   </ul>
+  {{#if session}}
+  <ul class="navbar-nav mt-2">
+    <li class="nav-item text-muted">Logged in as {{session.username}}
+      <a href="{{path 'logout'}}">Logout</a>
+    </li>
+  </ul>
+  {{/if}}
 </nav>
+<div class="container">
+{{#if flash}}
+  <div class="alert alert-warning" role="alert">
+    {{ flash }}
+    <button type="button" class="close" aria-label="Close">
+      <span data-dismiss="alert" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{{/if}}

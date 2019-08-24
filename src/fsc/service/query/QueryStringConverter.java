@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class QueryStringConverter implements Query.QueryVisitor<String> {
 
   private QueryStringParserFactory parserFactory;
+  private QueryExpanderVisitor expander = new QueryExpanderVisitor();
 
   public QueryStringConverter() {
     this(new SimpleQueryStringParserFactory());
@@ -60,9 +61,14 @@ public class QueryStringConverter implements Query.QueryVisitor<String> {
   public QueryValidationResult validateQueryString(String queryString) {
     try {
       Query query = fromString(queryString);
-      return new QueryValidationResult.ValidQueryResult(query, toString(query));
+      return new QueryValidationResult.ValidQueryResult(query, toString(query),
+                                                        toExpandedString(query));
     } catch (QueryStringParser.QueryParseException e) {
       return new QueryValidationResult.InvalidQueryResult(e.getMessage());
     }
+  }
+
+  private String toExpandedString(Query query) {
+    return visit(expander.visit(query));
   }
 }
