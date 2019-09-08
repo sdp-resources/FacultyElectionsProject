@@ -1,6 +1,7 @@
 package gateway;
 
 import fsc.entity.*;
+import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
@@ -189,6 +190,11 @@ public class InMemoryGateway implements Gateway {
 
   public Query getQuery(String name) throws UnknownQueryNameException {
     if (hasQuery(name)) { return queries.get(name); }
+    throw new QueryGateway.UnknownQueryNameException();
+  }
+
+  public NamedQuery getNamedQuery(String name) throws UnknownQueryNameException {
+    if (hasQuery(name)) { return Query.named(name, queries.get(name)); }
     throw new QueryGateway.UnknownQueryNameException();
   }
 

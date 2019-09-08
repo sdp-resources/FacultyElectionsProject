@@ -48,6 +48,7 @@
       <sourceFolder url="file://$MODULE_DIR$/generated" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/generated_tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/fitnesse" />
+      <excludeFolder url="file://$MODULE_DIR$/htmlTestPages" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
       <excludeFolder url="file://$MODULE_DIR$/report" />
     </content>
@@ -84,5 +85,7 @@
     <orderEntry type="library" name="com.h2database:h2:1.4.185" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-jpamodelgen:5.4.3.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="org.jsoup:jsoup:1.12.1" level="project" />
+    <orderEntry type="library" name="697621dfbe" level="application" />
+    <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
   </component>
 </module>

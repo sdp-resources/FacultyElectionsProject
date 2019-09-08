@@ -101,6 +101,10 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return isAuthorizedAsAdmin(request);
   }
 
+  public Object visit(EditNamedQueryRequest request) {
+    return isAuthorizedAsAdmin(request);
+  }
+
   public Object visit(EditSeatRequest request) {
     return isAuthorizedAsAdmin(request);
   }

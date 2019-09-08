@@ -1,0 +1,51 @@
+{{> header.hbs}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>Named Queries</h2>
+      <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th>Query</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each queries}}
+          <tr>
+            <td>{{@key}}</td>
+            <td>
+              <form class="form-inline" action="{{path "queryNamed" @key}}" method="POST" autocomplete="off">
+                <div class="form-group w-100 queryControl" data-value="{{this}}">
+                </div>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{{> footer.hbs}}
+
+{{#*inline "javascripts"}}
+    <script src="js/queryControl.js"></script>
+    <script>$(function($) {
+        $.queryControl();
+    });
+    </script>
+    <script>
+      $(function($) {
+         $("tr").on("saveQuery", function(e) {
+          let link = $(this).find('form').prop('action');
+          let queryString = $(e.target).val();
+          $.ajax({
+            url: link,
+            method: 'POST',
+            data: { queryString: queryString }
+          });
+        });
+      });
+    </script>
+{{/inline}}

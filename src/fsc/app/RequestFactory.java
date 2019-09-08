@@ -125,4 +125,8 @@ public class RequestFactory {
   public Request viewCandidates(long electionId) {
     return new ViewCandidatesRequest(electionId);
   }
+
+  public Request editNamedQuery(String name, String queryString) {
+    return new EditNamedQueryRequest(name, queryString);
+  }
 }

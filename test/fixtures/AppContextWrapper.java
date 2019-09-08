@@ -78,7 +78,7 @@ class AppContextWrapper {
   }
 
   Map<String, String> getAllQueries() {
-    return appContext.getAllQueries().getValues();
+    return appContext.getAllQueries(null).getValues();
   }
 
   ViewableValidationResult validateString(String string) {

@@ -23,6 +23,7 @@ public interface RequestVisitor {
   Object visit(RemoveFromBallotRequest request);
   Object visit(EditCommitteeRequest request);
   Object visit(CreateNamedQueryRequest request);
+  Object visit(EditNamedQueryRequest request);
   Object visit(EditSeatRequest request);
   Object visit(ViewNamedQueryListRequest request);
   Object visit(QueryValidationRequest request);

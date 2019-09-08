@@ -102,8 +102,8 @@ public class AppContext {
     return getResponse(requestFactory.createNamedQuery(name, queryString));
   }
 
-  public Response getAllQueries() {
-    return getResponse(requestFactory.viewQueryList());
+  public Response getAllQueries(String token) {
+    return getResponse(withToken(token, requestFactory.viewQueryList()));
   }
 
   public Response validateQueryString(String string) {
@@ -189,5 +189,9 @@ public class AppContext {
 
   public Response viewBallot(long electionid, String token) {
     return getResponse(withToken(token, requestFactory.viewCandidates(electionid)));
+  }
+
+  public Response editNamedQuery(String token, String name, String queryString) {
+    return getResponse(withToken(token, requestFactory.editNamedQuery(name, queryString)));
   }
 }

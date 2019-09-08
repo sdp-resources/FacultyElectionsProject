@@ -83,6 +83,10 @@ class ExecutingRequestVisitor implements RequestVisitor {
     return interactor.execute(request);
   }
 
+  public Object visit(EditNamedQueryRequest request) {
+    return interactor.execute(request);
+  }
+
   public Object visit(EditSeatRequest request) {
     return interactor.execute(request);
   }

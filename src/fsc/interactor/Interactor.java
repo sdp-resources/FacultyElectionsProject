@@ -156,4 +156,8 @@ public abstract class Interactor {
   Response delegate(Request request) {
     return next == null ? ResponseFactory.cannotHandle() : next.handle(request);
   }
+
+  public Response execute(EditNamedQueryRequest request) {
+    return delegate(request);
+  }
 }

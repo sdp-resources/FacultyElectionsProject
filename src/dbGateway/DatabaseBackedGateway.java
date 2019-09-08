@@ -206,6 +206,12 @@ public class DatabaseBackedGateway implements Gateway {
     return query.query;
   }
 
+  public NamedQuery getNamedQuery(String name) throws UnknownQueryNameException {
+    NamedQuery query = find(NamedQuery.class, name);
+    if  (query == null) { throw new UnknownQueryNameException(); }
+    return query;
+  }
+
   public QueryValidationResult validateQueryString(String queryString) {
       QueryStringParserFactory parserFactory = new ValidatingQueryStringParserFactory(dbValidator);
       QueryStringConverter queryStringConverter = new QueryStringConverter(parserFactory);

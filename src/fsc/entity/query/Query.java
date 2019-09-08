@@ -30,11 +30,11 @@ public abstract class Query implements Serializable {
   }
 
 
-  public static Query named(String name) {
+  public static NamedQuery named(String name) {
     return named(name, null);
   }
 
-  public static Query named(String aName, Query query) {
+  public static NamedQuery named(String aName, Query query) {
     return new NamedQuery(aName, query);
   }
 

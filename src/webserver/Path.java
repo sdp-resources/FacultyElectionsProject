@@ -18,15 +18,23 @@ public class Path {
   static String validate() {
     return join("validate");
   }
-  static String query() { return join("query"); }
+  static String queryAll() { return join("admin", "query"); }
+
+  public static String queryNamed() {
+    return queryNamed(":name");
+  }
+
+  public static String queryNamed(String name) {
+    return join("admin", "query", name);
+  }
 
   static String user() {
     return join("user");
   }
-
   static String ballot() {
     return ballot(":electionid");
   }
+
   static String admin() {
     return join("admin");
   }

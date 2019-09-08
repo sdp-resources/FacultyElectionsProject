@@ -6,38 +6,52 @@ import fsc.entity.query.QueryValidationResult;
 import fsc.gateway.QueryGateway;
 import fsc.service.query.QueryStringConverter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProvidingQueryGatewaySpy implements QueryGateway {
-  private final Map<String, Query> namedQueries = new HashMap<>();
+  private final List<NamedQuery> namedQueries = new ArrayList<>();
   public String requestedName;
   public Query addedQuery;
   public String requestedValidationForString;
   public boolean hasSaved;
   public String addedQueryName;
 
-  public ProvidingQueryGatewaySpy(Query... queries) {
-    for (Query query : queries) {
-      NamedQuery namedQuery = (NamedQuery) query;
-      addQuery(namedQuery.name, namedQuery.query);
+  public ProvidingQueryGatewaySpy(NamedQuery... queries) {
+    for (NamedQuery query : queries) {
+      namedQueries.add(query);
     }
   }
 
   public void addQuery(String name, Query query) {
     addedQueryName = name;
     addedQuery = query;
-    namedQueries.put(name, query);
+    namedQueries.add(Query.named(name, query));
   }
 
   public boolean hasQuery(String name) {
     requestedName = name;
-    return namedQueries.containsKey(name);
+    for (NamedQuery namedQuery : namedQueries) {
+      if (namedQuery.name.equals(name)) { return true; }
+    }
+    return false;
   }
 
   public Query getQuery(String name) {
     requestedName = name;
-    return namedQueries.get(name);
+    for (NamedQuery namedQuery : namedQueries) {
+      if (namedQuery.name.equals(name)) { return namedQuery.query; }
+    }
+    return null;
+  }
+
+  public NamedQuery getNamedQuery(String name) throws UnknownQueryNameException {
+    requestedName = name;
+    for (NamedQuery namedQuery : namedQueries) {
+      if (namedQuery.name.equals(name)) {
+        return namedQuery;
+      }
+    }
+    throw new UnknownQueryNameException();
   }
 
   public QueryValidationResult validateQueryString(String queryString) {
@@ -46,10 +60,16 @@ public class ProvidingQueryGatewaySpy implements QueryGateway {
   }
 
   public void save() {
-    if (addedQueryName != null) { hasSaved = true; }
+    if (addedQueryName != null || requestedName != null) { hasSaved = true; }
   }
 
+  // TODO: Need to fix this at some point, should not have to return Map
   public Map<String, Query> getAllQueries() {
-    return namedQueries;
+    Map<String, Query> queryMap = new HashMap<>();
+    for (NamedQuery namedQuery : namedQueries) {
+      queryMap.put(namedQuery.name, namedQuery.query);
+    }
+
+    return queryMap;
   }
 }

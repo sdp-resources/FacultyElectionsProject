@@ -46,8 +46,7 @@ public class WebClient {
   }
 
   protected void setup(
-        String url, String method, Map<String, String> parameters,
-        boolean followRedirects
+        String url, String method, Map<String, String> parameters, boolean followRedirects
   ) {
     prepareConnection(url, method, parameters, followRedirects);
     execute();

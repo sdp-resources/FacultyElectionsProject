@@ -11,6 +11,21 @@ public class QueryValidationHandler extends RequestHandler {
     super(req, res, appContext);
   }
 
+  public Object processGetQueries() {
+    requireSessionAndAdminRole();
+    modelSet("queries", appContext.getAllQueries(session.token).getValues());
+    return serveTemplate("namedQueries.handlebars");
+  }
+
+  public Object processEditNamedQuery() {
+    requireSessionAndAdminRole();
+    String name = getRequestParameter("name");
+    String queryString = getRequestParameter("queryString");
+    // TODO: Need to create and implement EditNamedQuery request
+    appContext.editNamedQuery(session.token, name, queryString);
+    return "";
+  }
+
   public Object validateQuery() {
     setTypeToJSON();
     String queryString = getRequestParameter("query");
@@ -20,7 +35,6 @@ public class QueryValidationHandler extends RequestHandler {
   }
 
   private Object invalidResponse(ViewableValidationResult result) {
-    setStatusCode(404);
     JSONObject returnValue = new JSONObject();
     returnValue.put("error", result.message);
     return returnValue.toString();

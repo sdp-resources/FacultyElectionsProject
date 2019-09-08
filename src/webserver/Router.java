@@ -32,6 +32,9 @@ public class Router {
     Spark.get(Path.ballot(), this::showBallotPage);
     Spark.post(Path.ballot(), this::postBallot);
     Spark.get(Path.admin(), this::showAdminIndexPage);
+    Spark.get(Path.queryAll(), this::showNamedQueries);
+    Spark.get(Path.queryNamed(), this::getNamedQuery);
+    Spark.post(Path.queryNamed(), this::editNamedQuery);
     Spark.get(Path.adminProfile(), this::showAllProfiles);
     Spark.get(Path.adminCommittee(), this::showAllCommitteesPage);
     Spark.get(Path.adminElection(), this::showAllElections);
@@ -46,6 +49,18 @@ public class Router {
                     this::handleUnauthorizedAccess);
     Spark.exception(UserRequestHandler.FailedRequestException.class,
                     this::handleFailedRequestException);
+  }
+
+  private Object editNamedQuery(Request req, Response res) {
+    return new QueryValidationHandler(req, res, appContext).processEditNamedQuery();
+  }
+
+  private Object getNamedQuery(Request request, Response response) {
+    return null;
+  }
+
+  private Object showNamedQueries(Request req, Response res) {
+    return new QueryValidationHandler(req, res, appContext).processGetQueries();
   }
 
   private Object validateQuery(Request req, Response res) {

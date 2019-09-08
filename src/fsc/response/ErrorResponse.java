@@ -22,6 +22,7 @@ public class ErrorResponse implements Response {
   public static final String INVALID_CREDENTIALS = "The username and password are invalid";
   public static final String INVALID_SESSION = "Session token no longer valid";
   public static final String INVALID_CANDIDATE_STATE = "Not a valid candidate state";
+  public static final String INVALID_QUERY_NAME = "Unknown query name";
   public String message;
 
   public ErrorResponse(String s) {

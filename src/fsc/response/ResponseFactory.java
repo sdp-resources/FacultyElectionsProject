@@ -153,4 +153,8 @@ public class ResponseFactory {
   public static Response invalidCandidateStatus() {
     return new ErrorResponse(ErrorResponse.INVALID_CANDIDATE_STATE);
   }
+
+  public static Response invalidQueryName() {
+    return new ErrorResponse(ErrorResponse.INVALID_QUERY_NAME);
+  }
 }
