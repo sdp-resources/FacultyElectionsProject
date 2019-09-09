@@ -8,11 +8,15 @@ import java.util.Map;
 
 public class WebClients {
   static WebClient normalLoggedInClient() {
-    return getLoginPostClient("skiadas", "apassword", true);
+    return loggedInClient("skiadas", "apassword");
   }
 
   static WebClient adminLoggedInClient() {
-    return getLoginPostClient("admin", "adminpass", true);
+    return loggedInClient("admin", "adminpass");
+  }
+
+  private static WebClient loggedInClient(String skiadas, String apassword) {
+    return getLoginPostClient(skiadas, apassword, true);
   }
 
   static WebClient getLoginPostClient(
@@ -28,11 +32,11 @@ public class WebClients {
     for (Election election : ServerTest.router.getGateway().getAllElections()) {
       if (election.isInVoteState()) {
         for (Voter voter : election.getVoters()) {
-          if (voter.getProfile().getUsername().equals("skiadas") && !voter.hasVoted()) {
+          if (voter.getProfile().getUsername().equals("wilsont") && !voter.hasVoted()) {
             HashMap<String, String> parameters = new HashMap<String, String>();
             parameters.put("voterId", String.valueOf(voter.getVoterId()));
             String ballotLink = Path.ballot(election.getID());
-            return normalLoggedInClient()
+            return loggedInClient("wilsont", "apassword")
                          .follow(ballotLink, "GET", parameters, false);
           }
         }

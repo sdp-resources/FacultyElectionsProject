@@ -44,8 +44,7 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(ViewCandidatesRequest request) {
-    // TODO: Probably any logged in user plus admin?
-    return true;
+    return isAuthenticated(request);
   }
 
   public Object visit(SubmitVoteRecordRequest request) {
@@ -174,7 +173,7 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return request.getSession().isAuthorizedForRole(role);
   }
 
-  private boolean isAuthenticated(ViewActiveElectionsRequest request) {
+  private boolean isAuthenticated(Request request) {
     return request.getSession().isAuthenticated();
   }
 }
