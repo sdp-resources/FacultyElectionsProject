@@ -87,5 +87,8 @@
     <orderEntry type="library" scope="TEST" name="org.jsoup:jsoup:1.12.1" level="project" />
     <orderEntry type="library" name="697621dfbe" level="application" />
     <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
+    <orderEntry type="library" name="com.github.jknack:handlebars:4.1.2" level="project" />
+    <orderEntry type="library" name="com.github.jknack:handlebars-guava-cache:4.1.2" level="project" />
+    <orderEntry type="library" name="com.github.jknack:handlebars-helpers:4.1.2" level="project" />
   </component>
 </module>
