@@ -4,45 +4,53 @@
   <div class="row">
     <div class="col-sm-8">
       <h2>Committees</h2>
-      <div>
-        Query edit test
-  <div class="form">
-    <div class="form-group query-validate">
-      <input type="text" class="form-control">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary">Go</button>
-      </div>
-    </div>
-  </div>
-      </div>
       <div class="accordion" id="committees">
         {{#each committees}}
+          {{#assign "committeeName"}}{{name}}{{/assign}}
           <div class="committee card" data-name="{{name}}">
             <div class="card-header">
               <h5>
                 <button class="btn btn-block btn-link" type="button" data-toggle="collapse"
-                data-target="#{{name}}" aria-expanded="false" aria-controls="{{name}}">
+                        data-target="#{{name}}" aria-expanded="false" aria-controls="{{name}}">
                   {{name}}
                 </button>
               </h5>
             </div>
             <div class="collapse" id="{{name}}">
               <div class="card-body">
-                <p class="card-text">{{description}}</p>
-                <p class="card-text">Eligible to vote: {{voterQuery}}</p>
-                <ul>
-                  {{#each seats}}
-                    <li class="seat" data-name="{{name}}">
-                      {{name}} : {{query}}
-                      <form method="post" action="/election">
-                        <input type="hidden" name="committee" value="FSC">
-                        <input type="hidden" name="seat" value="TenuredMember">
-                        <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
-                      </form>
-                    </li>
-                  {{/each}}
-                </ul>
+                <h4 class="card-title">{{description}}</h4>
+                <form class="form-inline" action="{{path "committee" name}}" method="POST" autocomplete="off">
+                  <div class="form-group row w-100">
+                    <label for="voterQuery-{{name}}" class="col-4 col-form-label">Eligible to vote:</label>
+                    <div id="voterQuery-{{name}}" class="col-8 queryControl"
+                         data-value="{{voterQuery}}"></div>
+                  </div>
+                </form>
               </div>
+              <ul class="list-group list-group-flush">
+                {{#each seats}}
+                  <li class="list-group-item seat" data-name="{{name}}">
+                    <h5 class="row justify-content-center">Seat {{name}}</h5>
+                    <form class="form-inline" action="{{path "seat" committeeName name}}" method="POST"
+                          autocomplete="off">
+                      <div class="form-group row w-100">
+                        <label for="candidateQuery-{{committeeName}}-{{name}}" class="col-4 col-form-label">Eligible to
+                          stand:</label>
+                        <div id="candidateQuery-{{committeeName}}-{{name}}" class="col-8 queryControl"
+                             data-value="{{query}}"></div>
+                      </div>
+                    </form>
+
+                    <form class="form-inline justify-content-center" method="post" action="{{path "adminElection"}}">
+                      <div class="form-group row">
+                        <input type="hidden" name="committee" value="{{committeeName}}">
+                        <input type="hidden" name="seat" value="{{name}}">
+                        <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
+                      </div>
+                    </form>
+                  </li>
+                {{/each}}
+              </ul>
             </div>
           </div>
         {{/each}}
@@ -51,3 +59,25 @@
   </div>
 </div>
 {{> footer.hbs}}
+
+
+{{#*inline "javascripts"}}
+  <script src="js/queryControl.js"></script>
+  <script>$(function ($) {
+    $.queryControl();
+  });
+  </script>
+  <script>
+    $(function ($) {
+      $("tr").on("saveQuery", function (e) {
+        let link = $(this).find('form').prop('action');
+        let queryString = $(e.target).val();
+        $.ajax({
+          url: link,
+          method: 'POST',
+          data: {queryString: queryString}
+        });
+      });
+    });
+  </script>
+{{/inline}}

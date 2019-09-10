@@ -92,6 +92,7 @@ public class Committee {
         setDescription((String) value);
         break;
     }
+    // TODO: account for query-changing case
   }
 
   public Query getVoterQuery() {

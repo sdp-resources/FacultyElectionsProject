@@ -1,5 +1,6 @@
 package webserver;
 
+import com.github.jknack.handlebars.helper.AssignHelper;
 import fsc.app.AppContext;
 import fsc.response.ErrorResponse;
 import fsc.viewable.ViewableProfile;
@@ -18,6 +19,7 @@ public class RequestHandler {
 
   {
     templateEngine.registerHelper("path", HandlebarsHelpers.path());
+    templateEngine.registerHelper("assign", new AssignHelper());
   }
 
   public RequestHandler(

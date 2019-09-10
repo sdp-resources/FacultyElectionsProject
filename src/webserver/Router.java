@@ -21,7 +21,8 @@ public class Router {
     gateway = DatabaseBackedGatewayFactory.getInstance("org.skiadas.local")
                                           .obtainGateway();
     appContext = new AppContext(gateway);
-
+    // TODO: add edit committee path for changing committee details
+    // TODO: Add edit seat path for changing seat details
     Spark.staticFiles.location("/public");
     Spark.get(Path.root(), this::getIndexPage);
     Spark.get(Path.login(), this::getLogin);
