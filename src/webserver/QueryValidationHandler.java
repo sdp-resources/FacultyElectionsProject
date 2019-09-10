@@ -1,6 +1,7 @@
 package webserver;
 
 import fsc.app.AppContext;
+import fsc.response.ErrorResponse;
 import fsc.viewable.ViewableValidationResult;
 import org.json.JSONObject;
 import spark.Request;
@@ -13,7 +14,12 @@ public class QueryValidationHandler extends RequestHandler {
 
   public Object processGetQueries() {
     requireSessionAndAdminRole();
-    modelSet("queries", appContext.getAllQueries(session.token).getValues());
+    fsc.response.Response response = appContext.getAllQueries(session.token);
+    // TODO: That's certainly the wrong redirect
+    if (!response.isSuccessful()) {
+      throw new FailedRequestException((ErrorResponse) response, Path.login());
+    }
+    modelSet("queries", response.getValues());
     return serveTemplate("namedQueries.handlebars");
   }
 
@@ -21,9 +27,11 @@ public class QueryValidationHandler extends RequestHandler {
     requireSessionAndAdminRole();
     String name = getRequestParameter("name");
     String queryString = getRequestParameter("queryString");
-    // TODO: Need to create and implement EditNamedQuery request
-    appContext.editNamedQuery(session.token, name, queryString);
-    return "";
+    fsc.response.Response response = appContext.editNamedQuery(session.token, name, queryString);
+    if (!response.isSuccessful()) {
+      throw new FailedRequestException((ErrorResponse) response, Path.login());
+    }
+    return redirect(Path.queryNamed(name));
   }
 
   public Object validateQuery() {

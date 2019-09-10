@@ -2,11 +2,15 @@ package webserver;
 
 import fsc.entity.Election;
 import fsc.entity.Voter;
+import fsc.entity.query.Query;
 import fsc.response.ErrorResponse;
+import fsc.service.query.QueryStringConverter;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 public class RoutesTest extends ServerTest {
 
@@ -94,6 +98,27 @@ public class RoutesTest extends ServerTest {
     WebClients.normalLoggedInClient()
               .followGet(Path.user()).assertResponseCodeIs(200)
               .followGet(Path.user()).assertResponseCodeIs(200);
+  }
+
+  @Test
+  public void adminCanEditNamedQueries() {
+    QueryStringConverter queryStringConverter = new QueryStringConverter();
+    Map<String, Query> queries = router.getGateway().getAllQueries();
+    for (String name : queries.keySet()) {
+      HashMap<String, String> parameters = new HashMap<>();
+      parameters.put("queryString", "contract equals \"untenured\"");
+      WebClients.adminLoggedInClient()
+                .followGet(Path.queryAll())
+                .assertResponseCodeIs(200)
+                .assertMatch(Matcher.contains(name))
+                .assertMatch(Matcher.attribute("",
+                                               "data-value",
+                                               queryStringConverter.toString(queries.get(name))))
+                .followPost(Path.queryNamed(name), parameters)
+                .assertRedirectsTo(Path.queryNamed(name));
+      assertEquals(Query.has("contract", "untenured"), router.getGateway().getQuery(name));
+    }
+
   }
 
   @Test
