@@ -2,49 +2,58 @@ package webserver;
 
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
+import java.io.*;
+import java.nio.file.*;
 
 public class SamplePageGenerator extends ServerTest {
 
   private String testPageDir = System.getProperty("user.dir") + "/htmlTestPages/";
+  private FileSystem fileSystem = FileSystems.getDefault();
 
   @Test
   public void createPages() throws IOException {
-    createSymbolicLinksIfNotExisting();
+    copyOverAssets();
+    createDirectoryIfNotExists("admin");
     writePageToFile("login.html",
                     WebClient.get(Path.login()));
     writePageToFile("userHome.html",
                     WebClients.normalLoggedInClient().followGet(Path.user()));
     writePageToFile("adminHome.html",
                     WebClients.adminLoggedInClient().followGet(Path.admin()));
-    writePageToFile("committees.html",
+    writePageToFile("admin/committees.html",
                     WebClients.adminLoggedInClient().followGet(Path.adminCommittee()));
-    writePageToFile("namedQueries.html",
+    writePageToFile("admin/namedQueries.html",
                     WebClients.adminLoggedInClient().followGet(Path.queryAll()));
-    writePageToFile("adminProfiles.html",
+    writePageToFile("admin/adminProfiles.html",
                     WebClients.adminLoggedInClient().followGet(Path.adminProfile()));
     writePageToFile("voting.html",
                     WebClients.getActiveElectionClient());
   }
 
-  private void createSymbolicLinksIfNotExisting() throws IOException {
-    ensureSymbolicLink("css");
-    ensureSymbolicLink("js");
+  private void copyOverAssets() throws IOException {
+    copyAssetsForDirectory("css");
+    copyAssetsForDirectory("js");
   }
 
-  private void ensureSymbolicLink(String directoryName) throws IOException {
-    FileSystem fileSystem = FileSystems.getDefault();
-    java.nio.file.Path path = fileSystem.getPath(testPageDir, directoryName);
-    java.nio.file.Path targetPath = fileSystem.getPath(testPageDir,
+  private void copyAssetsForDirectory(String directoryName) throws IOException {
+    java.nio.file.Path sourcePath = fileSystem.getPath(testPageDir,
                                                        "..", "assets", "public",
                                                        directoryName);
-    if (!Files.isSymbolicLink(path)) {
-      Files.createSymbolicLink(path, targetPath);
+
+    createDirectoryIfNotExists(directoryName);
+
+    File source = new File(String.valueOf(sourcePath));
+    for (File file : source.listFiles()) {
+      Files.copy(file.toPath(),
+                 fileSystem.getPath(testPageDir, directoryName, file.getName()),
+                 StandardCopyOption.REPLACE_EXISTING);
+    }
+  }
+
+  private void createDirectoryIfNotExists(String directoryName) throws IOException {
+    java.nio.file.Path path = fileSystem.getPath(testPageDir, directoryName);
+    if (!Files.exists(path)) {
+      Files.createDirectory(path);
     }
   }
 

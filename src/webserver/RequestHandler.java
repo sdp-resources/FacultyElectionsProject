@@ -20,7 +20,8 @@ public class RequestHandler {
     templateEngine.registerHelper("path", HandlebarsHelpers.path());
   }
 
-  public RequestHandler(Request req, Response res, AppContext appContext
+  public RequestHandler(
+        Request req, Response res, AppContext appContext
   ) {
     this.req = req;
     this.res = res;
@@ -45,6 +46,7 @@ public class RequestHandler {
   }
 
   protected String serveTemplate(String templatePath) {
+    modelSet("basePath", getRelativeBasePath());
     Session requestSession = req.session();
     ViewableSession session = requestSession.attribute("session");
     modelSet("session", session);
@@ -55,6 +57,13 @@ public class RequestHandler {
     requestSession.removeAttribute("flash");
 
     return templateEngine.render(new ModelAndView(model, templatePath));
+  }
+
+  private String getRelativeBasePath() {
+    return req.pathInfo()
+                            .replaceAll("\\w+", "..")
+                            .replaceFirst("/..", "")
+                            .replaceFirst("/", "");
   }
 
   protected void loadSessionAndUserProfile() {
