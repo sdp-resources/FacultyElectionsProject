@@ -58,7 +58,7 @@ public class ViewVoteRecordTest extends ElectionTest {
     electionGateway.save();
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
-    Response response = interactor.handle(request);
+    Response<ViewableVoteRecord> response = interactor.handle(request);
     assertTrue(response.isSuccessful());
     ViewableEntityConverter entityConverter = new ViewableEntityConverter();
     ViewableVoteRecord resultRecord = response.getValues();

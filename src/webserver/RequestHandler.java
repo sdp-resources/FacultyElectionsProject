@@ -8,6 +8,7 @@ import fsc.viewable.ViewableSession;
 import spark.*;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 public class RequestHandler {
   private static final MyHandlebarsTemplateEngine templateEngine = new MyHandlebarsTemplateEngine();
@@ -63,9 +64,9 @@ public class RequestHandler {
 
   private String getRelativeBasePath() {
     return req.pathInfo()
-                            .replaceAll("\\w+", "..")
-                            .replaceFirst("/..", "")
-                            .replaceFirst("/", "");
+              .replaceAll("\\w+", "..")
+              .replaceFirst("/..", "")
+              .replaceFirst("/", "");
   }
 
   protected void loadSessionAndUserProfile() {
@@ -97,9 +98,8 @@ public class RequestHandler {
   }
 
   private ViewableProfile requireExistingSessionProfile(ViewableSession session) {
-    fsc.response.Response response = appContext.getProfile(session.username, session.token);
-    if (response.isSuccessful()) return response.getValues();
-    throw new FailedRequestException((ErrorResponse) response, Path.login());
+    return appContext.getProfile(session.username, session.token)
+                     .getValues(onErrorRedirectTo(Path.login()));
   }
 
   protected void modelSet(String key, Object elections) {
@@ -136,14 +136,24 @@ public class RequestHandler {
     res.status(statusCode);
   }
 
+  <T> Function<String, T> onErrorRedirectTo(String redirectPath) {
+    return message -> {
+      throw new FailedRequestException(message, redirectPath);
+    };
+  }
+
+  protected Long getRequestParameterLong(String electionid) {
+    return Long.valueOf(getRequestParameter(electionid));
+  }
+
   protected class RequireAuthenticationException extends RuntimeException {}
 
   public class FailedRequestException extends RuntimeException {
     private String message;
     private String redirectPath;
 
-    public FailedRequestException(ErrorResponse response, String redirectPath) {
-      this.message = response.message;
+    public FailedRequestException(String message, String redirectPath) {
+      this.message = message;
       this.redirectPath = redirectPath;
     }
 

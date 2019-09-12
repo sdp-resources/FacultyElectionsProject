@@ -1,6 +1,7 @@
 package webserver;
 
 import fsc.app.AppContext;
+import fsc.viewable.ViewableSession;
 import spark.Request;
 import spark.Response;
 
@@ -12,8 +13,8 @@ public class LoginRequestHandler extends RequestHandler {
 
   public Object processGetIndex() {
     loadSession();
-    if (session.role.equals("ROLE_ADMIN")) return redirect("/admin");
-    if (session.role.equals("ROLE_USER")) return redirect("/user");
+    if (session.role.equals("ROLE_ADMIN")) return redirect(Path.admin());
+    if (session.role.equals("ROLE_USER")) return redirect(Path.user());
     return null;
   }
 
@@ -22,18 +23,19 @@ public class LoginRequestHandler extends RequestHandler {
   }
 
   Object processPostLogin() {
-    fsc.response.Response response = appContext.login(getRequestParameter("username"),
+    fsc.response.Response<ViewableSession> response = appContext.login(getRequestParameter("username"),
                                                       getRequestParameter("password"));
     if (!response.isSuccessful())
-      return redirectWithFlash("/login", response);
+      return redirectWithFlash(Path.login(), response);
 
-    storeSession(response.getValues());
-    return redirect("/");
+    ViewableSession session = response.getValues();
+    storeSession(session);
+    return redirect(Path.root());
   }
 
   public Object processGetLogout() {
     invalidateCurrentSession();
-    return redirect("/login");
+    return redirect(Path.login());
   }
 
 }

@@ -13,8 +13,8 @@ public abstract class Interactor {
     return this;
   }
 
-  public <T extends Request> Response handle(T request) {
-    return (Response) visitor.doVisit(request);
+  public <T extends Request, S> Response<S> handle(T request) {
+    return (Response<S>) visitor.doVisit(request);
   }
 
   public Response execute(CreateProfileRequest request) {
@@ -153,7 +153,7 @@ public abstract class Interactor {
     return delegate(request);
   }
 
-  Response delegate(Request request) {
+  <S> Response<S> delegate(Request request) {
     return next == null ? ResponseFactory.cannotHandle() : next.handle(request);
   }
 

@@ -155,10 +155,10 @@ class AppContextWrapper {
       super(gateway);
     }
 
-    public Response getResponse(Request request) {
+    public <T> Response<T> getResponse(Request request) {
       MyLogger.info("Sending request: " + request);
       request.setSession(session);
-      Response response = super.getResponse(request);
+      Response<T> response = super.getResponse(request);
       MyLogger.info("Got response: " + response);
       return response;
     }

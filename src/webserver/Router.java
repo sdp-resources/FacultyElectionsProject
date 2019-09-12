@@ -141,7 +141,7 @@ public class Router {
   }
 
   private Object createElection(Request req, Response res) {
-    fsc.response.Response response = appContext.createElection(getParam(req, "committee"),
+    fsc.response.Response<ViewableElection> response = appContext.createElection(getParam(req, "committee"),
                                                                getParam(req, "seat"));
     ViewableElection election = response.getValues();
     res.redirect("/election");

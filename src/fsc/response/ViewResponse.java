@@ -1,8 +1,9 @@
 package fsc.response;
 
 import java.util.Objects;
+import java.util.function.Function;
 
-public class ViewResponse<T> implements Response {
+public class ViewResponse<T> implements Response<T> {
 
   private final T values;
 
@@ -30,6 +31,10 @@ public class ViewResponse<T> implements Response {
   }
 
   public T getValues() {
+    return values;
+  }
+
+  public T getValues(Function<String, T> failureHandler) {
     return values;
   }
 }

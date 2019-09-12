@@ -15,7 +15,7 @@ public class AuthorizingInteractor extends Interactor {
   }
 
   @Override
-  public <T extends Request> Response handle(T request) {
+  public <T extends Request, S> Response<S> handle(T request) {
     if (isAuthorized(request)) {
       return delegate(request);
     }

@@ -1,11 +1,11 @@
 package webserver;
 
 import fsc.app.AppContext;
-import fsc.response.ErrorResponse;
 import spark.Request;
 import spark.Response;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ElectionRequestHandler extends RequestHandler {
   public ElectionRequestHandler(Request req, Response res, AppContext appContext) {
@@ -14,45 +14,43 @@ public class ElectionRequestHandler extends RequestHandler {
 
   public Object processPostDecideToStand() {
     loadSessionAndUserProfile();
-    fsc.response.Response response = appContext.setDTS(
-          Long.valueOf(getRequestParameter("electionid")),
-          session.username,
-          getRequestParameter("decideToStand"),
-          session.token
-    );
-    if (!response.isSuccessful()) {
-      throw new FailedRequestException((ErrorResponse) response, "/user");
-    }
+    submitDecisionToStand(getRequestParameterLong("electionid"),
+                          getRequestParameter("decideToStand"));
 
-    return redirect("/user");
+    return redirect(Path.user());
+  }
+
+  private void submitDecisionToStand(Long electionId, String decision) {
+    appContext.setDTS(electionId, session.username, decision, session.token)
+              .getValues(onErrorRedirectTo(Path.user()));
   }
 
   public Object processGetBallot() {
     loadSessionAndUserProfile();
-    fsc.response.Response response = appContext.viewBallot(
-          Long.valueOf(getRequestParameter("electionid")), session.token);
 
-    if (!response.isSuccessful()) {
-      throw new FailedRequestException((ErrorResponse) response, "/user");
-    }
-    modelSet("electionId", getRequestParameter("electionid"));
+    Long electionId = getRequestParameterLong("electionid");
+    modelSet("candidates", getCandidates(electionId));
+    modelSet("electionId", electionId);
     modelSet("voterId", getRequestParameter("voterId"));
-    modelSet("candidates", response.getValues());
 
     return serveTemplate("/viewBallot.handlebars");
   }
 
+  private Object getCandidates(Long electionId) {
+    return appContext.viewBallot(electionId, session.token)
+                     .getValues(onErrorRedirectTo(Path.user()));
+  }
+
   public Object processPostBallot() {
     loadSessionAndUserProfile();
-    fsc.response.Response response = appContext.submitVote(
-          Long.valueOf(getRequestParameter("voterId")),
-          session.username,
-          Arrays.asList(getRequestParameter("votes").split(",")),
-          session.token);
-    if (!response.isSuccessful()) {
-      throw new FailedRequestException((ErrorResponse) response, "/user");
-    }
+    submitVote(getRequestParameterLong("voterId"),
+               Arrays.asList(getRequestParameter("votes").split(",")));
 
-    return redirectWithFlash("/user", "Your vote was recorded!");
+    return redirectWithFlash(Path.user(), "Your vote was recorded!");
+  }
+
+  private void submitVote(Long voterId, List<String> votes) {
+    appContext.submitVote(voterId, session.username, votes, session.token)
+              .getValues(onErrorRedirectTo(Path.user()));
   }
 }

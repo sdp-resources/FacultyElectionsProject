@@ -12,7 +12,7 @@ public class SimpleInteractorSpy extends Interactor {
     this.name = name;
   }
 
-  public Response handle(Request request) {
+  public <T extends Request, S> Response<S> handle(T request) {
     handleCalled = true;
     return null;
   }

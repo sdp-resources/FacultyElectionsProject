@@ -1,5 +1,6 @@
 package fsc.app;
 
+import fsc.entity.Candidate;
 import fsc.entity.EntityFactory;
 import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.Gateway;
@@ -8,7 +9,9 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.service.Authenticator;
 import fsc.service.SQLAuthenticator;
+import fsc.viewable.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -42,10 +45,10 @@ public class AppContext {
                  .append(new ElectionInteractor(gateway, gateway, gateway, getEntityFactory()));
   }
 
-  public Response getResponse(Request request) {
+  public <T> Response<T> getResponse(Request request) {
     try {
       gateway.begin();
-      Response response = interactor.handle(request);
+      Response<T> response = interactor.handle(request);
       if (!response.isSuccessful()) {
         gateway.rollback();
       } else {
@@ -70,11 +73,11 @@ public class AppContext {
                                                     contractType, division));
   }
 
-  public Response getProfile(String username, String token) {
+  public Response<ViewableProfile> getProfile(String username, String token) {
     return getResponse(withToken(token, requestFactory.viewProfile(username)));
   }
 
-  public Response getProfilesMatchingQuery(String query, String token) {
+  public Response<List<ViewableProfile>> getProfilesMatchingQuery(String query, String token) {
     return getResponse(withToken(token, requestFactory.viewProfilesList(query)));
   }
 
@@ -82,7 +85,7 @@ public class AppContext {
     return getResponse(requestFactory.editProfile(username, changes));
   }
 
-  public Response getAllContractTypes(String token) {
+  public Response<Collection<String>> getAllContractTypes(String token) {
     return getResponse(withToken(token, requestFactory.viewContractTypeList()));
   }
 
@@ -90,7 +93,7 @@ public class AppContext {
     return getResponse(withToken(token, requestFactory.addContractType(contractType)));
   }
 
-  public Response getAllDivisions() {
+  public Response<Collection<String>> getAllDivisions() {
     return getResponse(requestFactory.viewDivisionList());
   }
 
@@ -102,15 +105,15 @@ public class AppContext {
     return getResponse(requestFactory.createNamedQuery(name, queryString));
   }
 
-  public Response getAllQueries(String token) {
+  public Response<Map<String, String>> getAllQueries(String token) {
     return getResponse(withToken(token, requestFactory.viewQueryList()));
   }
 
-  public Response validateQueryString(String string) {
+  public Response<ViewableValidationResult> validateQueryString(String string) {
     return getResponse(requestFactory.validateQuery(string));
   }
 
-  public Response getAllCommittees(String token) {
+  public Response<List<ViewableCommittee>> getAllCommittees(String token) {
     return getResponse(withToken(token, requestFactory.viewCommitteeList()));
   }
 
@@ -133,15 +136,15 @@ public class AppContext {
     return getResponse(requestFactory.editSeat(committeeName, seatName, changes));
   }
 
-  public Response getActiveElections(String token) {
+  public Response<Collection<ViewableElection>> getActiveElections(String token) {
     return getResponse(withToken(token, requestFactory.viewActiveElections()));
   }
 
-  public Response getAllElections() {
+  public Response<Collection<ViewableElection>> getAllElections() {
     return getResponse(requestFactory.viewAllElections());
   }
 
-  public Response createElection(String committeeName, String seatName) {
+  public Response<ViewableElection> createElection(String committeeName, String seatName) {
     return getResponse(requestFactory.createElection(committeeName, seatName));
   }
 
@@ -149,25 +152,25 @@ public class AppContext {
     return getResponse(requestFactory.setElectionState(electionId, state));
   }
 
-  public Response viewElection(Long electionId) {
+  public Response<ViewableElection> viewElection(Long electionId) {
     return getResponse(requestFactory.viewElection(electionId));
   }
 
-  public Response addVoter(String username, Long electionId) {
+  public Response<ViewableVoter> addVoter(String username, Long electionId) {
     return getResponse(requestFactory.addVoter(username, electionId));
   }
 
-  public Response getAllVotes(Long electionId) {
+  public Response<List<ViewableVoteRecord>> getAllVotes(Long electionId) {
     return getResponse(requestFactory.viewAllVotes(electionId));
   }
 
-  public Response submitVote(
+  public Response<ViewableVoteRecord> submitVote(
         long voterId, String username, List<String> vote, String token
   ) {
     return getResponse(withToken(token, requestFactory.submitVote(voterId, username, vote)));
   }
 
-  public Response getVoteRecord(long recordId) {
+  public Response<ViewableVoteRecord> getVoteRecord(long recordId) {
     return getResponse(requestFactory.viewVoteRecord(recordId));
   }
 
@@ -179,19 +182,19 @@ public class AppContext {
     gateway.shutdown();
   }
 
-  public Response login(String username, String password) {
+  public Response<ViewableSession> login(String username, String password) {
     return getResponse(requestFactory.login(username, password));
   }
 
-  public Response setDTS(long electionId, String username, String status, String token) {
+  public Response<Candidate> setDTS(long electionId, String username, String status, String token) {
     return getResponse(withToken(token, requestFactory.setDTS(electionId, username, status)));
   }
 
-  public Response viewBallot(long electionid, String token) {
+  public Response<Collection<ViewableProfile>> viewBallot(long electionid, String token) {
     return getResponse(withToken(token, requestFactory.viewCandidates(electionid)));
   }
 
-  public Response editNamedQuery(String token, String name, String queryString) {
+  public <T> Response<T> editNamedQuery(String token, String name, String queryString) {
     return getResponse(withToken(token, requestFactory.editNamedQuery(name, queryString)));
   }
 }

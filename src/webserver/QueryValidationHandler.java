@@ -1,7 +1,6 @@
 package webserver;
 
 import fsc.app.AppContext;
-import fsc.response.ErrorResponse;
 import fsc.viewable.ViewableValidationResult;
 import org.json.JSONObject;
 import spark.Request;
@@ -14,12 +13,9 @@ public class QueryValidationHandler extends RequestHandler {
 
   public Object processGetQueries() {
     requireSessionAndAdminRole();
-    fsc.response.Response response = appContext.getAllQueries(session.token);
-    // TODO: That's certainly the wrong redirect
-    if (!response.isSuccessful()) {
-      throw new FailedRequestException((ErrorResponse) response, Path.login());
-    }
-    modelSet("queries", response.getValues());
+    Object queries = appContext.getAllQueries(session.token)
+                               .getValues(onErrorRedirectTo(Path.queryAll()));
+    modelSet("queries", queries);
     return serveTemplate("namedQueries.handlebars");
   }
 
@@ -27,17 +23,15 @@ public class QueryValidationHandler extends RequestHandler {
     requireSessionAndAdminRole();
     String name = getRequestParameter("name");
     String queryString = getRequestParameter("queryString");
-    fsc.response.Response response = appContext.editNamedQuery(session.token, name, queryString);
-    if (!response.isSuccessful()) {
-      throw new FailedRequestException((ErrorResponse) response, Path.login());
-    }
+    appContext.editNamedQuery(session.token, name, queryString)
+              .getValues(onErrorRedirectTo(Path.queryNamed(name)));
     return redirect(Path.queryNamed(name));
   }
 
   public Object validateQuery() {
     setTypeToJSON();
     String queryString = getRequestParameter("query");
-    fsc.response.Response response = appContext.validateQueryString(queryString);
+    fsc.response.Response<ViewableValidationResult> response = appContext.validateQueryString(queryString);
     ViewableValidationResult result = response.getValues();
     return result.isValid ? validResponse(result) : invalidResponse(result);
   }

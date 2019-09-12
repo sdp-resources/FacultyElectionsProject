@@ -24,7 +24,7 @@ public class CreateElectionInteractionTest extends ElectionTest {
   public static final long ELECTION_ID = 6;
   private CreateElectionRequest request;
   private ElectionInteractor interactor;
-  private Response response;
+  private Response<ViewableElection> response;
   private ProfileGateway profileGateway = new ProfileGatewayStub();
   private AddedElectionGatewaySpy electionGateway;
 

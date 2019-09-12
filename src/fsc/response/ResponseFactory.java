@@ -5,6 +5,7 @@ import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.service.ViewableEntityConverter;
+import fsc.viewable.ViewableProfile;
 import fsc.viewable.ViewableValidationResult;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class ResponseFactory {
   static ViewableEntityConverter entityConverter = new ViewableEntityConverter();
 
-  public static Response ofProfileList(Collection<Profile> profiles) {
+  public static Response<Collection<ViewableProfile>> ofProfileList(Collection<Profile> profiles) {
     return new ViewResponse<>(entityConverter.convertProfiles(profiles));
   }
 
@@ -74,16 +75,16 @@ public class ResponseFactory {
     return new ErrorResponse(ErrorResponse.RESOURCE_EXISTS);
   }
 
-  public static Response notAuthorized() {
-    return new ErrorResponse(ErrorResponse.NOT_AUTHORIZED);
+  public static <S>Response<S> notAuthorized() {
+    return new ErrorResponse<>(ErrorResponse.NOT_AUTHORIZED);
   }
 
   public static Response invalidCandidate() {
     return new ErrorResponse(ErrorResponse.INVALID_CANDIDATE);
   }
 
-  public static Response cannotHandle() {
-    return new ErrorResponse(ErrorResponse.NO_HANDLERS);
+  public static <S> Response<S> cannotHandle() {
+    return new ErrorResponse<>(ErrorResponse.NO_HANDLERS);
   }
 
   public static Response alreadyVoted() {
@@ -146,8 +147,8 @@ public class ResponseFactory {
     return new ViewResponse<>(entityConverter.convert(session));
   }
 
-  public static Response invalidSession() {
-    return new ErrorResponse(ErrorResponse.INVALID_SESSION);
+  public static <T> Response<T> invalidSession() {
+    return new ErrorResponse<>(ErrorResponse.INVALID_SESSION);
   }
 
   public static Response invalidCandidateStatus() {

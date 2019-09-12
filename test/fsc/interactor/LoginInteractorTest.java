@@ -46,7 +46,7 @@ public class LoginInteractorTest {
     sessionGateway = new SessionGatewaySpy();
     loginInteractor = new LoginInteractor(sessionGateway, authenticator, null);
 
-    Response response = loginInteractor.handle(request);
+    Response<ViewableSession> response = loginInteractor.handle(request);
 
     ViewableSession viewableSession = response.getValues();
 

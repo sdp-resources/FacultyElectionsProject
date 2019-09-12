@@ -6,7 +6,6 @@ import fsc.mock.gateway.query.ProvidingQueryGatewaySpy;
 import fsc.request.QueryValidationRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.response.ViewResponse;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
 import fsc.viewable.ViewableValidationResult;
@@ -39,11 +38,11 @@ public class QueryValidationTest {
   private void assertValidQueryReturnsValidResult(String queryString)
         throws QueryStringParser.QueryParseException {
     QueryValidationRequest request = new QueryValidationRequest(queryString);
-    Response response = interactor.handle(request);
+    Response<ViewableValidationResult> response = interactor.handle(request);
     Query query = converter.fromString(queryString);
     assertEquals(ResponseFactory.ofQueryResult(
           new ValidQueryResult(query, converter.toString(query), null)),
                  response);
-    assertTrue(((ViewResponse<ViewableValidationResult>) response).getValues().isValid);
+    assertTrue(response.getValues().isValid);
   }
 }

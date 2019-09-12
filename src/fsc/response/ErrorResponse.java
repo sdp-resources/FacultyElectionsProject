@@ -1,8 +1,9 @@
 package fsc.response;
 
 import java.util.Objects;
+import java.util.function.Function;
 
-public class ErrorResponse implements Response {
+public class ErrorResponse<T> implements Response<T> {
   public static final String NO_PROFILE_WITH_THAT_USERNAME = "Unknown username";
   public static final String UNKNOWN_COMMITTEE_NAME = "Unknown Committee Name";
   public static final String UNKNOWN_SEAT_NAME = "Unknown Seat Name";
@@ -45,5 +46,9 @@ public class ErrorResponse implements Response {
 
   public boolean isSuccessful() {
     return false;
+  }
+
+  public T getValues(Function<String, T> failureHandler) {
+    return failureHandler.apply(message);
   }
 }

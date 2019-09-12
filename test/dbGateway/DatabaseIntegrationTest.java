@@ -43,7 +43,7 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
 
   private String logInAsAdminAndRetrieveToken() {
     return returnWithNewContext(appContext -> {
-      Response response = appContext.login("admin", "mypassword");
+      Response<ViewableSession> response = appContext.login("admin", "mypassword");
       ViewableSession session = response.getValues();
       return session.token;
     });

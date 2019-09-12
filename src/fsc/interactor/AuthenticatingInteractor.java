@@ -16,7 +16,7 @@ public class AuthenticatingInteractor extends Interactor {
   }
 
   @Override
-  public <T extends Request> Response handle(T request) {
+  public <T extends Request, S> Response<S> handle(T request) {
     try {
       if (request.getSession() == null) {
         request.setSession(authenticate(request));

@@ -25,7 +25,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
   private AddVoterRequest request;
   private Election election;
   private ElectionInteractor interactor;
-  private Response response;
+  private Response<ViewableVoter> response;
   private Profile profile;
   private Voter voter;
 
