@@ -120,7 +120,11 @@ public class InMemoryGateway implements Gateway {
     return new ArrayList<>(committees);
   }
 
-  public Committee getCommittee(String committeeName) throws UnknownCommitteeException {
+  public Committee getCommittee(Long id) throws UnknownCommitteeException {
+    return null;
+  }
+
+  public Committee getCommitteeByName(String committeeName) throws UnknownCommitteeException {
     for (Committee committee : committees) {
       if (committee.getName().equals(committeeName)) {
         return committee;
@@ -131,7 +135,7 @@ public class InMemoryGateway implements Gateway {
 
   public Seat getSeat(String committeeName, String seatName)
         throws UnknownCommitteeException, UnknownSeatNameException {
-    Committee committee = getCommittee(committeeName);
+    Committee committee = getCommitteeByName(committeeName);
     return committee.getSeat(seatName);
   }
 

@@ -115,7 +115,10 @@
     <entity class="fsc.entity.Committee" name="Committee" access="FIELD">
         <table name="committees"/>
         <attributes>
-            <id name="name"/>
+            <id name="id">
+                <generated-value/>
+            </id>
+            <basic name="name"/>
             <basic name="description"/>
             <basic name="voterQuery"/>
             <one-to-many name="seats" target-entity="fsc.entity.Seat" mapped-by="committee">

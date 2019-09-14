@@ -44,9 +44,9 @@ public class CommitteeFetcher extends ProfileFetcher {
     return committeeGateway.getCommittees();
   }
 
-  public Builder<Committee, Response> fetchCommittee(String name) {
+  public Builder<Committee, Response> fetchCommittee(Long id) {
     try {
-      return Builder.ofValue(committeeGateway.getCommittee(name));
+      return Builder.ofValue(committeeGateway.getCommittee(id));
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
     }

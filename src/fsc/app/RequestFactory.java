@@ -54,8 +54,8 @@ public class RequestFactory {
     return new CreateCommitteeRequest(name, description, voterQueryString);
   }
 
-  public Request addSeat(String committeeName, String seatName, String query) {
-    return new CreateSeatRequest(committeeName, seatName, query);
+  public Request addSeat(Long committeeId, String seatName, String query) {
+    return new CreateSeatRequest(committeeId, seatName, query);
   }
 
   public Request viewQueryList() {
@@ -128,5 +128,9 @@ public class RequestFactory {
 
   public Request editNamedQuery(String name, String queryString) {
     return new EditNamedQueryRequest(name, queryString);
+  }
+
+  public Request editCommittee(long id, Map<String, Object> changes) {
+    return new EditCommitteeRequest(id, changes);
   }
 }

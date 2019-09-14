@@ -76,7 +76,7 @@ public class DatabaseCommitteeTest extends BasicDatabaseTest {
 
   private Committee getCommitteeOrNull(Gateway gateway, String committeeName) {
     try {
-      return gateway.getCommittee(committeeName);
+      return gateway.getCommitteeByName(committeeName);
     } catch (CommitteeGateway.UnknownCommitteeException e) {
       return null;
     }

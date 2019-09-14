@@ -110,7 +110,7 @@ public class WebClient {
     return follow(path, "GET", false);
   }
 
-  WebClient followPost(String path, HashMap<String, String> parameters) {
+  WebClient followPost(String path, Map<String, String> parameters) {
     return follow(path, "POST", parameters, false);
   }
 
@@ -119,7 +119,7 @@ public class WebClient {
   }
 
   public WebClient follow(
-        String path, String method, HashMap<String, String> parameters, boolean followRedirects
+        String path, String method, Map<String, String> parameters, boolean followRedirects
   ) {
     setup(path, method, parameters, followRedirects);
     return this;

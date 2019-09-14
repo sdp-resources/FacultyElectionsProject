@@ -18,14 +18,14 @@ public class EditCommitteeInteractorTest {
 
   private CommitteeInteractor interactor;
   private EntityFactory entityFactory = new SimpleEntityFactory();
+  private int committeeId = 0;
 
   @Test
   public void changeOnNonexistantCommitteeGivesErrorResponse() {
     interactor = new CommitteeInteractor(new RejectingCommitteeGatewaySpy(), null, entityFactory, null);
-    String name = "Steering";
     HashMap<String, Object> changes = new HashMap<>();
     changes.put("name", "steering wheel");
-    EditCommitteeRequest request = new EditCommitteeRequest(name, changes);
+    EditCommitteeRequest request = new EditCommitteeRequest(0, changes);
 
     Response response = interactor.handle(request);
 
@@ -34,12 +34,11 @@ public class EditCommitteeInteractorTest {
 
   @Test
   public void changeOnProfileMakesChangeToGateway() {
-    String originalName = "steering";
     String newName = "steering wheel";
 
     Map<String, Object> changes = new HashMap<>();
     changes.put("name", newName);
-    EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
+    EditCommitteeRequest request = new EditCommitteeRequest(committeeId, changes);
 
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
     interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
@@ -47,19 +46,19 @@ public class EditCommitteeInteractorTest {
     Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
+    assertEquals(committeeId, (long) gateway.submittedCommitteeId);
     assertEquals(newName, gateway.returnedCommittee.getName());
   }
 
   @Test
   public void canMakeMultipleChanges() {
-    String originalName = "steering";
     String newName = "steering wheel";
     String newDescription = "This turns the car real well.";
 
     Map<String, Object> changes = new HashMap<>();
     changes.put("name", newName);
     changes.put("description", newDescription);
-    EditCommitteeRequest request = new EditCommitteeRequest(originalName, changes);
+    EditCommitteeRequest request = new EditCommitteeRequest(committeeId, changes);
 
     AcceptingCommitteeGatewaySpy gateway = new AcceptingCommitteeGatewaySpy();
     interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
@@ -67,6 +66,7 @@ public class EditCommitteeInteractorTest {
     Response response = interactor.handle(request);
 
     assertEquals(ResponseFactory.success(), response);
+    assertEquals(committeeId, (long) gateway.submittedCommitteeId);
     assertEquals(newName, gateway.returnedCommittee.getName());
     assertEquals(newDescription, gateway.returnedCommittee.getDescription());
   }

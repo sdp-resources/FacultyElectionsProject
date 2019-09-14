@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 public class CreateSeatInteractorTest {
   public static final String COMMITTEE_NAME = "a committee";
   public static final String SEAT_NAME = "a seat";
+  private Long COMMITTEE_ID = Long.valueOf(5);
   private static final String QUERY_STRING = "status equals active";
   private CreateSeatRequest request;
   private Seat expectedSeat;
@@ -29,7 +30,7 @@ public class CreateSeatInteractorTest {
 
   @Before
   public void setup() throws QueryStringParser.QueryParseException {
-    request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, QUERY_STRING);
+    request = new CreateSeatRequest(COMMITTEE_ID, SEAT_NAME, QUERY_STRING);
     query = new QueryStringConverter().fromString(QUERY_STRING);
     committee = entityFactory.createCommittee(COMMITTEE_NAME, "", null);
     nameValidator = new AcceptingNameValidator();
@@ -41,7 +42,7 @@ public class CreateSeatInteractorTest {
     interactor = new CommitteeInteractor(gateway, null, entityFactory, nameValidator);
     Response response = interactor.handle(request);
 
-    assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
+    assertEquals(COMMITTEE_ID, gateway.submittedCommitteeId);
     assertEquals(ResponseFactory.unknownCommitteeName(), response);
   }
 
@@ -52,13 +53,13 @@ public class CreateSeatInteractorTest {
     interactor = new CommitteeInteractor(gateway, null, entityFactory, nameValidator);
     Response response = interactor.handle(request);
 
-    assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
+    assertEquals(COMMITTEE_ID, gateway.submittedCommitteeId);
     assertEquals(ResponseFactory.resourceExists(), response);
   }
 
   @Test
   public void WhenQueryStringIsInvalid_thenReturnError() {
-    request = new CreateSeatRequest(COMMITTEE_NAME, SEAT_NAME, "anInvalid query string");
+    request = new CreateSeatRequest(COMMITTEE_ID, SEAT_NAME, "anInvalid query string");
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory, nameValidator);
     Response response = interactor.handle(request);
@@ -72,7 +73,7 @@ public class CreateSeatInteractorTest {
     interactor = new CommitteeInteractor(gateway, null, entityFactory, nameValidator);
     Response response = interactor.handle(request);
 
-    assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
+    assertEquals(COMMITTEE_ID, gateway.submittedCommitteeId);
     assertTrue(committee.hasSeat(SEAT_NAME));
     assertTrue(gateway.saveWasCalled);
     assertEquals(ResponseFactory.success(), response);

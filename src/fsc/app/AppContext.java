@@ -117,17 +117,25 @@ public class AppContext {
     return getResponse(withToken(token, requestFactory.viewCommitteeList()));
   }
 
-  public Response addCommittee(String name, String description, String voterQueryString) {
-    return getResponse(
-          requestFactory.createCommittee(name, description, voterQueryString));
+  public Response<ViewableCommittee> addCommittee(String name, String description,
+                                          String voterQueryString) {
+    return getResponse(requestFactory.createCommittee(name, description, voterQueryString));
+  }
+
+  public Response editCommittee(String id, Map<String, Object> changes, String token) {
+    return getResponse(withToken(token,
+                                 requestFactory.editCommittee(Long.valueOf(id),
+                                                              changes)));
   }
 
   public Response addCandidate(Long electionId, String name) {
     return getResponse(requestFactory.addCandidate(electionId, name));
   }
 
-  public Response addSeat(String committeeName, String seatName, String query) {
-    return getResponse(requestFactory.addSeat(committeeName, seatName, query));
+  public Response addSeat(
+        Long committeeId, String seatName, String query
+  ) {
+    return getResponse(requestFactory.addSeat(committeeId, seatName, query));
   }
 
   public Response editSeat(

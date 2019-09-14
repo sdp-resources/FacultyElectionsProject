@@ -15,7 +15,6 @@ public class Router {
   private AppContext appContext;
 
   public void setupRoutes(String resourcePath) {
-    String path = resourcePath + "/data/sample.json";
     // TODO: Move to a app-context pool
     //    gateway = InMemoryGateway.fromJSONFile(path);
     gateway = DatabaseBackedGatewayFactory.getInstance("org.skiadas.local")
@@ -37,7 +36,8 @@ public class Router {
     Spark.get(Path.queryNamed(), this::getNamedQuery);
     Spark.post(Path.queryNamed(), this::editNamedQuery);
     Spark.get(Path.adminProfile(), this::showAllProfiles);
-    Spark.get(Path.adminCommittee(), this::showAllCommitteesPage);
+    Spark.get(Path.adminAllCommittees(), this::showAllCommitteesPage);
+    Spark.post(Path.committee(), this::editCommitteeSettings);
     Spark.get(Path.adminElection(), this::showAllElections);
     Spark.get(Path.validate(), this::validateQuery);
     Spark.post("/admin/profile", this::createProfile);
@@ -50,6 +50,10 @@ public class Router {
                     this::handleUnauthorizedAccess);
     Spark.exception(UserRequestHandler.FailedRequestException.class,
                     this::handleFailedRequestException);
+  }
+
+  private Object editCommitteeSettings(Request req, Response res) {
+    return new CommitteeRequestHandler(req, res, appContext).processPostCommittee();
   }
 
   private Object editNamedQuery(Request req, Response res) {
@@ -68,12 +72,13 @@ public class Router {
     return new QueryValidationHandler(req, res, appContext).validateQuery();
   }
 
-  private void handleFailedRequestException(UserRequestHandler.FailedRequestException e,
-                                                                  Request req, Response res) {
+  private void handleFailedRequestException(
+        UserRequestHandler.FailedRequestException e,
+        Request req, Response res
+  ) {
     new RequestHandler(req, res, appContext)
           .redirectWithFlash(e.getRedirectPath(), e.getMessage());
   }
-
 
   private void handleUnauthorizedAccess(Exception e, Request req, Response res) {
     new RequestHandler(req, res, appContext)
@@ -106,7 +111,7 @@ public class Router {
   }
 
   private Object handleDecideToStand(Request req, Response res) {
-    return new ElectionRequestHandler(req,  res, appContext).processPostDecideToStand();
+    return new ElectionRequestHandler(req, res, appContext).processPostDecideToStand();
   }
 
   private Object showUserIndexPage(Request req, Response res) {
@@ -141,8 +146,9 @@ public class Router {
   }
 
   private Object createElection(Request req, Response res) {
-    fsc.response.Response<ViewableElection> response = appContext.createElection(getParam(req, "committee"),
-                                                               getParam(req, "seat"));
+    fsc.response.Response<ViewableElection> response = appContext.createElection(
+          getParam(req, "committee"),
+          getParam(req, "seat"));
     ViewableElection election = response.getValues();
     res.redirect("/election");
     return null;
@@ -174,14 +180,4 @@ public class Router {
   private Object showAllCommitteesPage(Request req, Response res) {
     return new CommitteeRequestHandler(req, res, appContext).processGetAdminCommittee();
   }
-
-//  private Object showUserProfile(Request req, Response res) {
-//    HashMap<Object, Object> returnedHash = new HashMap<>();
-//    returnedHash.put("profiles", appContext.getProfilesMatchingQuery("all", ).getValues());
-//    returnedHash.put("contractTypes", appContext.getAllContractTypes(null).getValues());
-//    returnedHash.put("divisions", appContext.getAllDivisions().getValues());
-//    return new LoginRequestHandler(req, res, appContext)
-//                 .oldServeTemplate("/profilesList.handlebars", returnedHash);
-//  }
-
 }

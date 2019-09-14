@@ -21,7 +21,7 @@ public class SamplePageGenerator extends ServerTest {
     writePageToFile("adminHome.html",
                     WebClients.adminLoggedInClient().followGet(Path.admin()));
     writePageToFile("admin/committees.html",
-                    WebClients.adminLoggedInClient().followGet(Path.adminCommittee()));
+                    WebClients.adminLoggedInClient().followGet(Path.adminAllCommittees()));
     writePageToFile("admin/namedQueries.html",
                     WebClients.adminLoggedInClient().followGet(Path.queryAll()));
     writePageToFile("admin/adminProfiles.html",

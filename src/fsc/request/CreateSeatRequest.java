@@ -1,12 +1,14 @@
 package fsc.request;
 
 public class CreateSeatRequest extends Request {
-  public final String committeeName;
+  public final Long committeeId;
   public final String seatName;
   public final String queryString;
 
-  public CreateSeatRequest(String committeeName, String seatName, String queryString) {
-    this.committeeName = committeeName;
+  public CreateSeatRequest(
+        Long committeeId, String seatName, String queryString
+  ) {
+    this.committeeId = committeeId;
     this.seatName = seatName;
     this.queryString = queryString;
   }

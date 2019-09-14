@@ -11,19 +11,25 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
   public String submittedCommitteeName = null;
   public Committee committeeAdded = null;
   public boolean hasSaved = false;
+  public Long submittedCommitteeId;
 
   public List<Committee> getCommittees() {
     return null;
   }
 
   @Override
-  public Committee getCommittee(String name) throws UnknownCommitteeException {
+  public Committee getCommitteeByName(String name) throws UnknownCommitteeException {
     submittedCommitteeName = name;
     throw new UnknownCommitteeException();
   }
 
+  public Committee getCommittee(Long id) throws UnknownCommitteeException {
+    submittedCommitteeId = id;
+    throw new UnknownCommitteeException();
+  }
+
   public Seat getSeat(String committeeName, String seatName) throws UnknownCommitteeException {
-    Committee committee = getCommittee(committeeName);
+    Committee committee = getCommitteeByName(committeeName);
     return new Seat(seatName, Query.always(), committee);
 
   }

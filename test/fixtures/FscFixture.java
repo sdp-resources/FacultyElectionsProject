@@ -44,7 +44,7 @@ public class FscFixture {
     return TestContext.app.hasContractType(contractType);
   }
 
-  public boolean createCommittee(String name, String description, String voterQueryString) {
+  public Long createCommittee(String name, String description, String voterQueryString) {
     return TestContext.app.addCommittee(name, description, voterQueryString);
   }
 
@@ -52,8 +52,10 @@ public class FscFixture {
     return TestContext.app.addNamedQuery(name, queryString);
   }
 
-  public boolean createSeat(String committeeName, String seatName, String query) {
-    return TestContext.app.addSeat(committeeName, seatName, query);
+  public boolean createSeat(
+        Long committeeId, String seatName, String query
+  ) {
+    return TestContext.app.addSeat(committeeId, seatName, query);
   }
 
   public boolean canRequestProfile(String username) {

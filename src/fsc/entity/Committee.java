@@ -14,6 +14,15 @@ public class Committee {
   private Query voterQuery;
 
   private Set<Seat> seats = new HashSet<>();
+  private Long id;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public Committee() {}
 
@@ -91,6 +100,8 @@ public class Committee {
       case "description":
         setDescription((String) value);
         break;
+      case "voterQuery":
+        setVoterQuery((Query) value);
     }
     // TODO: account for query-changing case
   }

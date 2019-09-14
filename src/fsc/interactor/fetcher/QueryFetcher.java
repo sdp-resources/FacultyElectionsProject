@@ -7,7 +7,7 @@ import fsc.service.query.*;
 import fsc.utils.builder.Builder;
 
 public class QueryFetcher {
-  private QueryStringConverter converter;
+  public QueryStringConverter converter;
 
   public QueryFetcher(NameValidator validator) {
     converter = new QueryStringConverter(new ValidatingQueryStringParserFactory(validator));

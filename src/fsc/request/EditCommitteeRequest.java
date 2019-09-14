@@ -3,11 +3,11 @@ package fsc.request;
 import java.util.Map;
 
 public class EditCommitteeRequest extends Request {
-  public final String name;
+  public final long id;
   public final Map<String, Object> changes;
 
-  public EditCommitteeRequest(String name, Map<String, Object> changes) {
-    this.name = name;
+  public EditCommitteeRequest(long id, Map<String, Object> changes) {
+    this.id = id;
     this.changes = changes;
   }
 

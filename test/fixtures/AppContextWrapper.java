@@ -85,12 +85,12 @@ class AppContextWrapper {
     return appContext.validateQueryString(string).getValues();
   }
 
-  boolean addCommittee(String name, String description, String voterQueryString) {
-    return appContext.addCommittee(name, description, voterQueryString).isSuccessful();
+  Long addCommittee(String name, String description, String voterQueryString) {
+    return appContext.addCommittee(name, description, voterQueryString).getValues().id;
   }
 
-  boolean addSeat(String committeeName, String seatName, String query) {
-    return appContext.addSeat(committeeName, seatName, query).isSuccessful();
+  boolean addSeat(Long committeeId, String seatName, String query) {
+    return appContext.addSeat(committeeId, seatName, query).isSuccessful();
   }
 
   boolean editSeat(

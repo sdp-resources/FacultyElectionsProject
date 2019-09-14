@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface CommitteeGateway {
   List<Committee> getCommittees();
-  Committee getCommittee(String name) throws UnknownCommitteeException;
+  Committee getCommitteeByName(String name) throws UnknownCommitteeException;
+  Committee getCommittee(Long id) throws UnknownCommitteeException;
   Seat getSeat(String committeeName, String seatName) throws UnknownCommitteeException,
                                                              UnknownSeatNameException;
   void addCommittee(Committee committee);

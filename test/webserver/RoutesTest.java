@@ -1,8 +1,10 @@
 package webserver;
 
+import fsc.entity.Committee;
 import fsc.entity.Election;
 import fsc.entity.Voter;
 import fsc.entity.query.Query;
+import fsc.gateway.CommitteeGateway;
 import fsc.response.ErrorResponse;
 import fsc.service.query.QueryStringConverter;
 import org.junit.Test;
@@ -202,7 +204,7 @@ public class RoutesTest extends ServerTest {
     WebClients.adminLoggedInClient()
               .assertMatch(Matcher.attribute("", "href", Path.adminProfile()))
               .assertMatch(Matcher.attribute("", "href", Path.adminElection()))
-              .assertMatch(Matcher.attribute("", "href", Path.adminCommittee()));
+              .assertMatch(Matcher.attribute("", "href", Path.adminAllCommittees()));
   }
 
   @Test
@@ -216,9 +218,26 @@ public class RoutesTest extends ServerTest {
   @Test
   public void adminCommitteePageContainsAllCommittees() {
     WebClients.adminLoggedInClient()
-              .followGet(Path.adminCommittee())
+              .followGet(Path.adminAllCommittees())
               .assertMatch(Matcher.contains("Faculty Evaluation Committee"))
               .assertMatch(Matcher.contains("Faculty Steering Committee"));
+  }
+
+  @Test
+  public void adminEditCommitteePageWorks() throws CommitteeGateway.UnknownCommitteeException {
+    String committeeName = "BoT-Rep";
+    Committee committee = router.getGateway().getCommitteeByName(committeeName);
+    Map<String, String> params = new HashMap<>();
+    params.put("changes", "{ description: \"another description\", name: \"BoT\", " +
+                                "voterQuery: \"isTenured\" }");
+    WebClients.adminLoggedInClient()
+              .followPost(Path.committee(committee.getId()), params)
+              .assertRedirectsTo(Path.adminAllCommittees());
+    Committee newCommittee = router.getGateway().getCommittee(committee.getId());
+    assertEquals("BoT", newCommittee.getName());
+    assertEquals("another description", newCommittee.getDescription());
+    QueryStringConverter queryStringConverter = new QueryStringConverter();
+    assertEquals("isTenured", queryStringConverter.toString(newCommittee.getVoterQuery()));
   }
 
   @Test

@@ -65,11 +65,11 @@
 
 !3 Committees
 
-|scenario|Given committee with name _ and description _ and voter query _|name,description,voterQuery|
-|ensure|create committee;|@name|@description|@voterQuery|
+|scenario|Given committees _ _ _ _|name,description,voterQuery,committeeId?|
+|$committeeId=|create committee;|@name|@description|@voterQuery|
 
-|scenario|Given seats _ _ _|committeeName,seatName,seatQuery|
-|ensure|create seat;|@committeeName|@seatName|@seatQuery|
+|scenario|Given seats _ _ _|committeeId,seatName,seatQuery|
+|ensure|create seat;|@committeeId|@seatName|@seatQuery|
 
 !3 Elections
 

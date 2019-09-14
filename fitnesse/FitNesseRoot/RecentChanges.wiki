@@ -1,8 +1,10 @@
-|FacultyVoting.Voting.CanCastAVote||19:25:52 Sun, Aug 04, 2019|
-|FacultyVoting.Voting.CanCreateElection||19:25:25 Sun, Aug 04, 2019|
+|FacultyVoting.Committees.CanEditSeatInformation||22:41:15 Sat, Sep 14, 2019|
+|FacultyVoting.Voting.CanCreateElection||22:15:35 Sat, Sep 14, 2019|
+|FacultyVoting.Voting.CanCastAVote||22:10:16 Sat, Sep 14, 2019|
+|FacultyVoting.Committees.CanCreateCommitteeAndSeats||21:32:36 Sat, Sep 14, 2019|
+|FacultyVoting.ScenarioLibrary||21:12:49 Sat, Sep 14, 2019|
 |FacultyVoting||19:56:37 Sat, Jul 27, 2019|
 |FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||21:01:28 Fri, Jul 26, 2019|
-|FacultyVoting.ScenarioLibrary||18:00:23 Fri, Jul 26, 2019|
 |FacultyVoting.Accounts||13:08:34 Fri, Jul 26, 2019|
 |FacultyVoting.Queries.CanValidateQueryStrings||18:31:41 Thu, Jul 25, 2019|
 |FacultyVoting.Queries.CanRecognizeIncorrectQueries||18:31:33 Thu, Jul 25, 2019|
@@ -14,8 +16,6 @@
 |FacultyVoting.Profiles.OnlyAdminsAndCorrespondingUserCanViewProfile||17:18:34 Thu, Jul 25, 2019|
 |FacultyVoting.Profiles.CannotAddExistingProfiles||18:45:10 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanEditProfiles||18:44:23 Wed, Jul 24, 2019|
-|FacultyVoting.Committees.CanEditSeatInformation||18:44:04 Wed, Jul 24, 2019|
-|FacultyVoting.Committees.CanCreateCommitteeAndSeats||18:43:51 Wed, Jul 24, 2019|
 |FacultyVoting.Queries.CanApplyQueriesToProfiles||18:25:18 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanViewProfiles||18:25:02 Wed, Jul 24, 2019|
 |FacultyVoting.Profiles.CanSetProfileAsInactive||18:24:37 Wed, Jul 24, 2019|

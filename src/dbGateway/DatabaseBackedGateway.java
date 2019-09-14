@@ -9,9 +9,8 @@ import fsc.gateway.Gateway;
 import fsc.service.query.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.Root;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -72,15 +71,31 @@ public class DatabaseBackedGateway implements Gateway {
                                           .getResultList();
   }
 
-  public Committee getCommittee(String name) throws UnknownCommitteeException {
-    Committee committee = find(Committee.class, name);
+  public Committee getCommitteeByName(String name) throws UnknownCommitteeException {
+    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+    CriteriaQuery<Committee> q = cb.createQuery(Committee.class);
+    Root<Committee> c = q.from(Committee.class);
+    ParameterExpression<String> nameParam = cb.parameter(String.class);
+    q.select(c).where(cb.equal(c.get("name"), nameParam));
+    TypedQuery<Committee> query = entityManager.createQuery(q);
+    query.setParameter(nameParam, name);
+
+    List<Committee> resultList = query.getResultList();
+    if (resultList.isEmpty())
+      throw new UnknownCommitteeException();
+    return resultList.get(0);
+  }
+
+  public Committee getCommittee(Long id) throws UnknownCommitteeException {
+    Committee committee = find(Committee.class, id);
     if (committee == null) { throw new UnknownCommitteeException(); }
     return committee;
   }
 
   public Seat getSeat(String committeeName, String seatName)
         throws UnknownCommitteeException, UnknownSeatNameException {
-    Committee committee = getCommittee(committeeName);
+    Committee committee = getCommitteeByName(committeeName);
     return committee.getSeat(seatName);
   }
 
@@ -89,8 +104,13 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public boolean hasCommittee(String name) {
-    Committee committee = find(Committee.class, name);
-    return committee != null;
+    //TODO: Cleanup
+    try {
+      getCommitteeByName(name);
+      return true;
+    } catch (UnknownCommitteeException e) {
+      return false;
+    }
   }
 
   public void addSeat(Seat seat) {

@@ -29,8 +29,9 @@ public class ViewableEntityConverter {
                                profile.getContract());
   }
 
-  private ViewableCommittee convert(Committee committee) {
-    return new ViewableCommittee(committee.getName(), committee.getDescription(),
+  public ViewableCommittee convert(Committee committee) {
+    return new ViewableCommittee(committee.getId(),
+                                 committee.getName(), committee.getDescription(),
                                  convert(committee.getVoterQuery()),
                                  convertSeats(committee.getSeats()));
   }

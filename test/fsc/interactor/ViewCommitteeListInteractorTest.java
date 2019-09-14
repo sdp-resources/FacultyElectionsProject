@@ -29,7 +29,11 @@ public class ViewCommitteeListInteractorTest {
     committeeGateway = new CommitteeGateway() {
       public List<Committee> getCommittees() { return committeeList; }
 
-      public Committee getCommittee(String name) { return null; }
+      public Committee getCommitteeByName(String name) { return null; }
+
+      public Committee getCommittee(Long id) {
+        return null;
+      }
 
       public Seat getSeat(String committeeName, String seatName) {
         return null;

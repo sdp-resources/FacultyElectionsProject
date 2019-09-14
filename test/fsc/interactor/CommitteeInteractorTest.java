@@ -9,6 +9,7 @@ import fsc.mock.gateway.committee.RejectingCommitteeGatewaySpy;
 import fsc.request.CreateCommitteeRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.viewable.ViewableCommittee;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,13 +33,15 @@ public class CommitteeInteractorTest {
   public void ExecuteCreatesCorrectResponseType() {
     RejectingCommitteeGatewaySpy gateway = new RejectingCommitteeGatewaySpy();
     CommitteeInteractor interactor = new CommitteeInteractor(gateway, null, entityFactory, null);
-    Response response = interactor.handle(request);
+    Response<ViewableCommittee> response = interactor.handle(request);
 
     assertEquals(COMMITTEE_NAME, gateway.submittedCommitteeName);
     assertNotNull(gateway.committeeAdded);
     assertEquals(expectedCommittee, gateway.committeeAdded);
     assertTrue(gateway.hasSaved);
-    assertEquals(ResponseFactory.success(), response);
+    ViewableCommittee createdCommittee = response.getValues();
+    assertEquals(COMMITTEE_NAME, createdCommittee.name);
+    assertEquals(COMMITTEE_DESCRIPTION, createdCommittee.description);
   }
 
   @Test

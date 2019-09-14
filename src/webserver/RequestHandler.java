@@ -108,7 +108,9 @@ public class RequestHandler {
 
   protected String getRequestParameter(String key) {
     if (req.queryMap().hasKey(key)) return req.queryParams(key);
-    if (req.params().containsKey(":" + key)) return req.params(":" + key);
+    String paramKey = ":" + key.toLowerCase();
+    if (req.params().containsKey(paramKey)) return req.params(
+          paramKey);
     throw new RuntimeException("Requested parameter not present: " + key);
   }
 

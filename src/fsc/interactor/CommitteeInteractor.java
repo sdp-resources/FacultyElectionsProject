@@ -3,6 +3,7 @@ package fsc.interactor;
 import fsc.entity.Committee;
 import fsc.entity.EntityFactory;
 import fsc.entity.Seat;
+import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.fetcher.CommitteeFetcher;
@@ -11,11 +12,11 @@ import fsc.request.*;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.service.query.NameValidator;
+import fsc.service.query.QueryStringParser;
 import fsc.utils.builder.Builder;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CommitteeInteractor extends Interactor {
@@ -39,7 +40,7 @@ public class CommitteeInteractor extends Interactor {
                                  ResponseFactory.resourceExists())
                        .perform(committeeFetcher::addCommittee)
                        .perform(committeeFetcher::save)
-                       .resolveWith(s -> ResponseFactory.success());
+                       .resolveWith(ResponseFactory::ofCommittee);
   }
 
   public Response execute(ViewCommitteeListRequest request) {
@@ -47,14 +48,38 @@ public class CommitteeInteractor extends Interactor {
   }
 
   public Response execute(EditCommitteeRequest request) {
-    return committeeFetcher.fetchCommittee(request.name)
-                           .perform(performUpdates(request.changes))
+    return committeeFetcher.fetchCommittee(request.id)
+                           .bindWith(validateCommitteeChanges(request.changes),
+                                     this::performCommitteeUpdates)
                            .perform(committeeFetcher::save)
                            .resolveWith(s -> ResponseFactory.success());
   }
 
+  private Builder<Map<String, Object>, Response> validateCommitteeChanges(
+        Map<String, Object> changes
+  ) {
+    for (String key : changes.keySet()) {
+      switch (key) {
+        case "name":
+        case "description": break;
+        case "voterQuery":
+          try {
+            Query query = queryFetcher.converter.fromString((String) changes.get(key));
+            changes.put(key, query);
+            break;
+          } catch (QueryStringParser.QueryParseException e) {
+            return Builder.ofResponse(ResponseFactory.invalidQuery("Invalid voter query"));
+          }
+        default:
+          return Builder.ofResponse(ResponseFactory.invalidKey(key));
+      }
+    }
+
+    return Builder.ofValue(changes);
+  }
+
   public Response execute(CreateSeatRequest request) {
-    return committeeFetcher.fetchCommittee(request.committeeName)
+    return committeeFetcher.fetchCommittee(request.committeeId)
                            .escapeIf(c -> c.hasSeat(request.seatName),
                                      ResponseFactory.resourceExists())
                            .bindWith(queryFetcher.createFromString(request.queryString),
@@ -115,6 +140,8 @@ public class CommitteeInteractor extends Interactor {
     return result;
   }
 
+  // TODO: Perhaps  these  two methods can become one using
+  //  some sort of "Updatable" interface
   private Builder<Seat, Response> performSeatUpdates(
         Seat seat,
         Map<String, Object> changes
@@ -125,11 +152,12 @@ public class CommitteeInteractor extends Interactor {
     return Builder.ofValue(seat);
   }
 
-  private Consumer<Committee> performUpdates(Map<String, Object> changes) {
-    return committee -> {
-      for (String field : changes.keySet()) {
-        committee.update(field, changes.get(field));
-      }
-    };
+  private Builder<Committee, Response> performCommitteeUpdates(
+        Committee committee, Map<String, Object> changes
+  ) {
+    for (String field : changes.keySet()) {
+      committee.update(field, changes.get(field));
+    }
+    return Builder.ofValue(committee);
   }
 }

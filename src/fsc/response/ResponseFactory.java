@@ -5,6 +5,7 @@ import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.service.ViewableEntityConverter;
+import fsc.viewable.ViewableCommittee;
 import fsc.viewable.ViewableProfile;
 import fsc.viewable.ViewableValidationResult;
 
@@ -37,6 +38,10 @@ public class ResponseFactory {
 
   public static Response ofCommitteeList(List<Committee> committees) {
     return new ViewResponse<>(entityConverter.convertCommittees(committees));
+  }
+
+  public static Response<ViewableCommittee> ofCommittee(Committee committee) {
+    return new ViewResponse<>(entityConverter.convert(committee));
   }
 
   public static Response ofQueryResult(QueryValidationResult result) {
@@ -158,4 +163,9 @@ public class ResponseFactory {
   public static Response invalidQueryName() {
     return new ErrorResponse(ErrorResponse.INVALID_QUERY_NAME);
   }
+
+  public static Response invalidKey(String key) {
+    return new ErrorResponse("Invalid Key: " + key);
+  }
+
 }

@@ -47,12 +47,20 @@ public class Path {
     return join("admin", "election");
   }
 
-  static String adminCommittee() {
+  static String adminAllCommittees() {
     return join("admin", "committee");
   }
 
-  static String committee(String committeeName) {
-    return join("admin", "committee", committeeName);
+  static  String committee() {
+    return committee(":committeeName");
+  }
+
+  static String committee(Long committeeId) {
+    return committee(String.valueOf(committeeId));
+  }
+
+  static String committee(String committeeId) {
+    return join("admin", "committee", committeeId);
   }
 
   static String seat(String committeeName, String seatName) {
