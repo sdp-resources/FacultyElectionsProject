@@ -18,7 +18,7 @@ public class RequestHandler {
   protected HashMap<Object, Object> model = new HashMap<>();
   protected ViewableSession session;
 
-  {
+  static {
     templateEngine.registerHelper("path", HandlebarsHelpers.path());
     templateEngine.registerHelper("assign", new AssignHelper());
   }

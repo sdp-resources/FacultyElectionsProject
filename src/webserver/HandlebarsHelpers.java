@@ -24,7 +24,7 @@ public class HandlebarsHelpers {
         paramClasses[i] = options.params[i].getClass();
         if (paramClasses[i].equals(Integer.class)) {
           paramClasses[i] = Long.class;
-          options.params[i] = Long.valueOf((int) options.params[i]);
+          options.params[i] = (long) (int) options.params[i];
         }
       }
       try {

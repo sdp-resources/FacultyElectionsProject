@@ -17,9 +17,7 @@ public class ProvidingQueryGatewaySpy implements QueryGateway {
   public String addedQueryName;
 
   public ProvidingQueryGatewaySpy(NamedQuery... queries) {
-    for (NamedQuery query : queries) {
-      namedQueries.add(query);
-    }
+    Collections.addAll(namedQueries, queries);
   }
 
   public void addQuery(String name, Query query) {

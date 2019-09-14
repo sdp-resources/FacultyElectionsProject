@@ -17,7 +17,7 @@ public class Candidate {
     this.candidateId = candidateId;
   }
 
-  public enum Status {NoAnswer, Declined, Willing;}
+  public enum Status {NoAnswer, Declined, Willing}
 
   private CandidateId candidateId;
 

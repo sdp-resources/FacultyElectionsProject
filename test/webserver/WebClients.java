@@ -22,7 +22,7 @@ public class WebClients {
   static WebClient getLoginPostClient(
         String username, String apassword, boolean followRedirects
   ) {
-    Map<String, String> parameters = new HashMap<String, String>();
+    Map<String, String> parameters = new HashMap<>();
     parameters.put("username", username);
     parameters.put("password", apassword);
     return WebClient.post(Path.login(), parameters, followRedirects);
@@ -33,7 +33,7 @@ public class WebClients {
       if (election.isInVoteState()) {
         for (Voter voter : election.getVoters()) {
           if (voter.getProfile().getUsername().equals("wilsont") && !voter.hasVoted()) {
-            HashMap<String, String> parameters = new HashMap<String, String>();
+            HashMap<String, String> parameters = new HashMap<>();
             parameters.put("voterId", String.valueOf(voter.getVoterId()));
             String ballotLink = Path.ballot(election.getID());
             return loggedInClient("wilsont", "apassword")
