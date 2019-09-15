@@ -1,8 +1,8 @@
-|FacultyVoting.Committees.CanEditSeatInformation||22:41:15 Sat, Sep 14, 2019|
-|FacultyVoting.Voting.CanCreateElection||22:15:35 Sat, Sep 14, 2019|
-|FacultyVoting.Voting.CanCastAVote||22:10:16 Sat, Sep 14, 2019|
-|FacultyVoting.Committees.CanCreateCommitteeAndSeats||21:32:36 Sat, Sep 14, 2019|
-|FacultyVoting.ScenarioLibrary||21:12:49 Sat, Sep 14, 2019|
+|FacultyVoting.Voting.CanCreateElection||13:46:33 Sun, Sep 15, 2019|
+|FacultyVoting.Voting.CanCastAVote||13:45:26 Sun, Sep 15, 2019|
+|FacultyVoting.Committees.CanEditSeatInformation||12:20:18 Sun, Sep 15, 2019|
+|FacultyVoting.Committees.CanCreateCommitteeAndSeats||02:20:06 Sun, Sep 15, 2019|
+|FacultyVoting.ScenarioLibrary||02:17:57 Sun, Sep 15, 2019|
 |FacultyVoting||19:56:37 Sat, Jul 27, 2019|
 |FacultyVoting.Accounts.AdminCanLoginAndMaintainSession||21:01:28 Fri, Jul 26, 2019|
 |FacultyVoting.Accounts||13:08:34 Fri, Jul 26, 2019|

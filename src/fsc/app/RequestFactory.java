@@ -66,8 +66,8 @@ public class RequestFactory {
     return new QueryValidationRequest(string);
   }
 
-  public Request createElection(String committeeName, String seatName) {
-    return new CreateElectionRequest(seatName, committeeName);
+  public Request createElection(long seatId) {
+    return new CreateElectionRequest(seatId);
   }
 
   public Request addCandidate(Long electionId, String name) {
@@ -86,8 +86,8 @@ public class RequestFactory {
     return new ViewAllVotesRequest(electionId);
   }
 
-  public Request editSeat(String committeeName, String seatName, Map<String, String> changes) {
-    return new EditSeatRequest(committeeName, seatName, changes);
+  public Request editSeat(long seatId, Map<String, String> changes) {
+    return new EditSeatRequest(seatId, changes);
   }
 
   public Request addVoter(String username, Long electionId) {

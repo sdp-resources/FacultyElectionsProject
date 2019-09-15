@@ -6,13 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SeatEdit {
-  private String committeeName;
-  private String seatName;
   private Map<String, String> changes = new HashMap<>();
+  private long seatId;
 
-  public SeatEdit(String committeeName, String seatName) {
-    this.committeeName = committeeName;
-    this.seatName = seatName;
+  public SeatEdit(long seatId) {
+    this.seatId = seatId;
   }
 
   public void setName(String name) {
@@ -28,7 +26,7 @@ public class SeatEdit {
   }
 
   public boolean sendRequest() {
-    return TestContext.app.editSeat(committeeName, seatName, changes);
+    return TestContext.app.editSeat(seatId, changes);
   }
 }
 

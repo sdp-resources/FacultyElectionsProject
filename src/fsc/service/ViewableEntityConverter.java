@@ -36,8 +36,8 @@ public class ViewableEntityConverter {
                                  convertSeats(committee.getSeats()));
   }
 
-  private ViewableSeat convert(Seat seat) {
-    return new ViewableSeat(Long.toString(seat.getId()),
+  public ViewableSeat convert(Seat seat) {
+    return new ViewableSeat(seat.getId(),
                             seat.getName(),
                             convert(seat.getCandidateQuery()),
                             nullOrConvert(seat.getProfile()));

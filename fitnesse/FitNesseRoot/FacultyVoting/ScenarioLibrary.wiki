@@ -68,8 +68,8 @@
 |scenario|Given committees _ _ _ _|name,description,voterQuery,committeeId?|
 |$committeeId=|create committee;|@name|@description|@voterQuery|
 
-|scenario|Given seats _ _ _|committeeId,seatName,seatQuery|
-|ensure|create seat;|@committeeId|@seatName|@seatQuery|
+|scenario|Given seats _ _ _ _|committeeId,seatName,seatQuery,seatId?|
+|$seatId=|create seat;|@committeeId|@seatName|@seatQuery|
 
 !3 Elections
 

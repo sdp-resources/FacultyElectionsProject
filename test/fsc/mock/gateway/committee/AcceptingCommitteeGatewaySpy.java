@@ -3,6 +3,7 @@ package fsc.mock.gateway.committee;
 import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
+import fsc.mock.EntityStub;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
   public String submittedCommitteeName = null;
   public Committee returnedCommittee = null;
   public Long submittedCommitteeId = null;
+  public Seat returnedSeat = null;
 
   public List<Committee> getCommittees() {
     return null;
@@ -28,7 +30,13 @@ public class AcceptingCommitteeGatewaySpy implements CommitteeGateway {
     return returnedCommittee;
   }
 
-  public Seat getSeat(String committeeName, String seatName) {
+  public Seat getSeat(Long seatId) throws UnknownSeatNameException {
+    returnedSeat = EntityStub.seat();
+    returnedSeat.setId(seatId);
+    return returnedSeat;
+  }
+
+  public Seat getSeatByCommitteeAndSeatName(String committeeName, String seatName) {
     Committee committee = getCommitteeByName(committeeName);
     Seat seat = new Seat(seatName, Query.always(), committee);
     seat.setId(SEAT_ID);

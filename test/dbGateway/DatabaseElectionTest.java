@@ -40,6 +40,17 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
     for (Candidate candidate1 : anotherGatewayElection.getCandidates()) {
       assertEquals(candidate, candidate1);
     }
+    // TODO: Trying to add an existing candidate should behave reasonably
+    // Need to amend this test to do that or create another test
+    gateway.begin();
+    Profile profile2 = gateway.getEntityFactory()
+                             .createProfile("Theresa  Wilson", "wilsont",
+                                            "Natural Sciences", "tenure-track");
+    gateway.addProfile(profile2);
+    Candidate candidate2 = gateway.getEntityFactory().createCandidate(profile2, election);
+    election.addCandidate(candidate2);
+    gateway.save();
+    gateway.commit();
   }
 
   @Test

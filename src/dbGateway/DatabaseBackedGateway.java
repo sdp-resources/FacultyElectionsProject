@@ -93,7 +93,13 @@ public class DatabaseBackedGateway implements Gateway {
     return committee;
   }
 
-  public Seat getSeat(String committeeName, String seatName)
+  public Seat getSeat(Long seatId) throws UnknownSeatNameException {
+    Seat seat = find(Seat.class, seatId);
+    if (seat == null) { throw new UnknownSeatNameException(); }
+    return seat;
+  }
+
+  public Seat getSeatByCommitteeAndSeatName(String committeeName, String seatName)
         throws UnknownCommitteeException, UnknownSeatNameException {
     Committee committee = getCommitteeByName(committeeName);
     return committee.getSeat(seatName);

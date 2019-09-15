@@ -10,6 +10,7 @@ import fsc.response.ResponseFactory;
 import fsc.service.query.AcceptingNameValidator;
 import fsc.service.query.QueryStringConverter;
 import fsc.service.query.QueryStringParser;
+import fsc.viewable.ViewableSeat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,10 +19,9 @@ import static org.junit.Assert.*;
 public class CreateSeatInteractorTest {
   public static final String COMMITTEE_NAME = "a committee";
   public static final String SEAT_NAME = "a seat";
-  private Long COMMITTEE_ID = Long.valueOf(5);
+  private Long COMMITTEE_ID = 5L;
   private static final String QUERY_STRING = "status equals active";
   private CreateSeatRequest request;
-  private Seat expectedSeat;
   private CommitteeInteractor interactor;
   private EntityFactory entityFactory = new SimpleEntityFactory();
   private Committee committee;
@@ -48,7 +48,7 @@ public class CreateSeatInteractorTest {
 
   @Test
   public void WhenSeatNameDoesExist_thenReturnError() {
-    expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
+    Seat expectedSeat = entityFactory.createSeat(SEAT_NAME, query, committee);
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory, nameValidator);
     Response response = interactor.handle(request);
@@ -71,11 +71,13 @@ public class CreateSeatInteractorTest {
   public void WhenSeatNameDoesNotExist_addSeatAndSave() {
     ProvidedCommitteeGatewaySpy gateway = new ProvidedCommitteeGatewaySpy(committee);
     interactor = new CommitteeInteractor(gateway, null, entityFactory, nameValidator);
-    Response response = interactor.handle(request);
+    Response<ViewableSeat> response = interactor.handle(request);
 
     assertEquals(COMMITTEE_ID, gateway.submittedCommitteeId);
     assertTrue(committee.hasSeat(SEAT_NAME));
     assertTrue(gateway.saveWasCalled);
-    assertEquals(ResponseFactory.success(), response);
+    ViewableSeat returnedSeat = response.getValues();
+    assertEquals(SEAT_NAME, returnedSeat.name);
+
   }
 }

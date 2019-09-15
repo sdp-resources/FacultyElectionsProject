@@ -5,9 +5,7 @@ public class CreateSeatRequest extends Request {
   public final String seatName;
   public final String queryString;
 
-  public CreateSeatRequest(
-        Long committeeId, String seatName, String queryString
-  ) {
+  public CreateSeatRequest(Long committeeId, String seatName, String queryString) {
     this.committeeId = committeeId;
     this.seatName = seatName;
     this.queryString = queryString;

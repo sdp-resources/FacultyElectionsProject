@@ -52,7 +52,7 @@ public class FscFixture {
     return TestContext.app.addNamedQuery(name, queryString);
   }
 
-  public boolean createSeat(
+  public Long createSeat(
         Long committeeId, String seatName, String query
   ) {
     return TestContext.app.addSeat(committeeId, seatName, query);

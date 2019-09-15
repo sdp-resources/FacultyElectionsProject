@@ -3,8 +3,8 @@ package fixtures;
 public class CreateElection {
   private long electionId;
 
-  public CreateElection(String committeeName, String seatName) {
-    electionId = TestContext.app.createElection(committeeName, seatName).electionID;
+  public CreateElection(long seatId) {
+    electionId = TestContext.app.createElection(seatId).electionID;
   }
 
   public long getElectionId() {

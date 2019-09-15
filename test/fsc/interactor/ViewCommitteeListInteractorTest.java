@@ -35,7 +35,11 @@ public class ViewCommitteeListInteractorTest {
         return null;
       }
 
-      public Seat getSeat(String committeeName, String seatName) {
+      public Seat getSeat(Long seatId) throws UnknownSeatNameException {
+        return null;
+      }
+
+      public Seat getSeatByCommitteeAndSeatName(String committeeName, String seatName) {
         return null;
       }
 

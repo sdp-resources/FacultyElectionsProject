@@ -5,9 +5,7 @@ import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.service.ViewableEntityConverter;
-import fsc.viewable.ViewableCommittee;
-import fsc.viewable.ViewableProfile;
-import fsc.viewable.ViewableValidationResult;
+import fsc.viewable.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,6 +40,10 @@ public class ResponseFactory {
 
   public static Response<ViewableCommittee> ofCommittee(Committee committee) {
     return new ViewResponse<>(entityConverter.convert(committee));
+  }
+
+  public static Response<ViewableSeat> ofSeat(Seat seat) {
+    return new ViewResponse<>(entityConverter.convert(seat));
   }
 
   public static Response ofQueryResult(QueryValidationResult result) {
@@ -167,5 +169,4 @@ public class ResponseFactory {
   public static Response invalidKey(String key) {
     return new ErrorResponse("Invalid Key: " + key);
   }
-
 }

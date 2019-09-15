@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 public class CommitteeFetcher extends ProfileFetcher {
-  CommitteeGateway committeeGateway;
+  private CommitteeGateway committeeGateway;
   private EntityFactory entityFactory;
 
   public CommitteeFetcher(
@@ -52,15 +52,14 @@ public class CommitteeFetcher extends ProfileFetcher {
     }
   }
 
-  public Builder<Seat, Response> fetchSeat(String committeeName, String seatName) {
+  public Builder<Seat, Response> fetchSeat(Long seatId) {
     try {
-      return Builder.ofValue(committeeGateway.getSeat(committeeName, seatName));
-    } catch (CommitteeGateway.UnknownCommitteeException e) {
-      return Builder.ofResponse(ResponseFactory.unknownCommitteeName());
+      return Builder.ofValue(committeeGateway.getSeat(seatId));
     } catch (CommitteeGateway.UnknownSeatNameException e) {
       return Builder.ofResponse(ResponseFactory.unknownSeatName());
     }
   }
+
 
   public Builder<Committee, Response> makeCommittee(
         String name, String description, Query voterQuery

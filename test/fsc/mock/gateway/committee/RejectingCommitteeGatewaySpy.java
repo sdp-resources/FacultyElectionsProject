@@ -28,7 +28,11 @@ public class RejectingCommitteeGatewaySpy implements CommitteeGateway {
     throw new UnknownCommitteeException();
   }
 
-  public Seat getSeat(String committeeName, String seatName) throws UnknownCommitteeException {
+  public Seat getSeat(Long seatId) throws UnknownSeatNameException {
+    throw new UnknownSeatNameException();
+  }
+
+  public Seat getSeatByCommitteeAndSeatName(String committeeName, String seatName) throws UnknownCommitteeException {
     Committee committee = getCommitteeByName(committeeName);
     return new Seat(seatName, Query.always(), committee);
 

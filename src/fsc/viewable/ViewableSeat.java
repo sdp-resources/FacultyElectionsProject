@@ -3,16 +3,20 @@ package fsc.viewable;
 import java.util.Objects;
 
 public class ViewableSeat {
+  public Long id;
   public String name;
   public String query;
-  public String id;
   public ViewableProfile profile;
 
-  public ViewableSeat(String id, String name, String query, ViewableProfile profile) {
+  public ViewableSeat(Long id, String name, String query, ViewableProfile profile) {
     this.id = id;
     this.name = name;
     this.query = query;
     this.profile = profile;
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getName() {
@@ -21,10 +25,6 @@ public class ViewableSeat {
 
   public String getQuery() {
     return query;
-  }
-
-  public String getId() {
-    return id;
   }
 
   public ViewableProfile getProfile() {

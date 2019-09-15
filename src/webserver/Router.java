@@ -145,10 +145,10 @@ public class Router {
                  .oldServeTemplate("/electionList.handlebars", returnedHash);
   }
 
+  // TODO: Need to clean this up and move it
   private Object createElection(Request req, Response res) {
     fsc.response.Response<ViewableElection> response = appContext.createElection(
-          getParam(req, "committee"),
-          getParam(req, "seat"));
+          Long.valueOf(getParam(req, "seatId")));
     ViewableElection election = response.getValues();
     res.redirect("/election");
     return null;

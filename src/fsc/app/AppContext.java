@@ -132,16 +132,15 @@ public class AppContext {
     return getResponse(requestFactory.addCandidate(electionId, name));
   }
 
-  public Response addSeat(
+  public Response<ViewableSeat> addSeat(
         Long committeeId, String seatName, String query
   ) {
     return getResponse(requestFactory.addSeat(committeeId, seatName, query));
   }
 
-  public Response editSeat(
-        String committeeName, String seatName, Map<String, String> changes
-  ) {
-    return getResponse(requestFactory.editSeat(committeeName, seatName, changes));
+  // TODO this and editCommittee should return the viewable changed entities
+  public Response editSeat(long seatId, Map<String, String> changes) {
+    return getResponse(requestFactory.editSeat(seatId, changes));
   }
 
   public Response<Collection<ViewableElection>> getActiveElections(String token) {
@@ -152,8 +151,8 @@ public class AppContext {
     return getResponse(requestFactory.viewAllElections());
   }
 
-  public Response<ViewableElection> createElection(String committeeName, String seatName) {
-    return getResponse(requestFactory.createElection(committeeName, seatName));
+  public Response<ViewableElection> createElection(long seatId) {
+    return getResponse(requestFactory.createElection(seatId));
   }
 
   public Response setElectionState(Long electionId, String state) {

@@ -86,11 +86,11 @@ public class CommitteeInteractor extends Interactor {
                                      Builder.lift(committeeFetcher.createSeat(request.seatName)))
                            .perform(committeeFetcher::addSeat)
                            .perform(committeeFetcher::save)
-                           .resolveWith(s -> ResponseFactory.success());
+                           .resolveWith(ResponseFactory::ofSeat);
   }
 
   public Response execute(EditSeatRequest request) {
-    return committeeFetcher.fetchSeat(request.committeeName, request.seatName)
+    return committeeFetcher.fetchSeat(request.seatId)
                            .bindWith(prepareSeatChanges(request.changes),
                                      this::performSeatUpdates)
                            .perform(committeeFetcher::save)

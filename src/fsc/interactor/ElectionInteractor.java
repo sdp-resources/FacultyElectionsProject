@@ -27,7 +27,7 @@ public class ElectionInteractor extends Interactor {
   }
 
   public Response execute(CreateElectionRequest request) {
-    return electionFetcher.fetchSeat(request.committeeName, request.seatName)
+    return electionFetcher.fetchSeat(request.seatId)
                           .mapThrough(this::createElection)
                           .perform(electionFetcher::addElection)
                           .perform(electionFetcher::save)
