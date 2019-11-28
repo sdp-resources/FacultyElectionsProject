@@ -56,6 +56,7 @@ public class AppContext {
       }
       return response;
     } catch (Exception e) {
+      // TODO: Use finally?
       gateway.rollback();
       throw e;
     }

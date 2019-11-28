@@ -3,6 +3,12 @@ out/*
 \.idea/misc\.xml
 \.idea/workspace\.xml
 \.idea/encodings\.xml
+\.idea/libraries
+\.idea/dataSources
+build
+htmlTestPages
+.gradle
+sqliteTest.db
 
 report
 # Compiled class file

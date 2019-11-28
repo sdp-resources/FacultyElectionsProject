@@ -38,16 +38,15 @@
         <mapping-file>META-INF/orm.xml</mapping-file>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost/elections?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="hanoverSummer2016"/>
             <property name="hibernate.connection.autocommit" value="false"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB53Dialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.dialect.storage_engine" value="innodb" />
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="false"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
     </persistence-unit>
 </persistence>

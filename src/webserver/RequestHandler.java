@@ -5,13 +5,18 @@ import fsc.app.AppContext;
 import fsc.response.ErrorResponse;
 import fsc.viewable.ViewableProfile;
 import fsc.viewable.ViewableSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.*;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.function.Function;
 
 public class RequestHandler {
-  private static final MyHandlebarsTemplateEngine templateEngine = new MyHandlebarsTemplateEngine();
+  private static final MyHandlebarsTemplateEngine templateEngine =
+        new MyHandlebarsTemplateEngine(new File("templates"));
   private final Request req;
   private final Response res;
   protected AppContext appContext;
@@ -21,6 +26,9 @@ public class RequestHandler {
   static {
     templateEngine.registerHelper("path", HandlebarsHelpers.path());
     templateEngine.registerHelper("assign", new AssignHelper());
+    Logger logger = LoggerFactory.getLogger(RequestHandler.class);
+    logger.error("Running from location:" + Paths.get("").toAbsolutePath());
+
   }
 
   public RequestHandler(

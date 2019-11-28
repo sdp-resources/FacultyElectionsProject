@@ -32,9 +32,8 @@ public class InMemoryGateway implements Gateway {
   private QueryStringConverter queryStringConverter = new QueryStringConverter(
         new ValidatingQueryStringParserFactory(nameValidator));
 
-  public static Gateway fromJSONFile(String path) {
-      InputStream stream = InMemoryGateway.class.getResourceAsStream(path);
-      return fromReader(new JSONElectionDataReader(stream, entityFactory));
+  public static Gateway fromJSONFile(InputStream stream) {
+    return fromReader(new JSONElectionDataReader(stream, entityFactory));
   }
 
   private static Gateway fromReader(ElectionDataReader dataReader) {

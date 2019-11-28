@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
+<module external.linked.project.id="FacultyElectionsProject" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="edu.hanover" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="edu.hanover" externalSystemModuleVersion="1.0-SNAPSHOT" linkedProjectId="FacultyElectionsProject" linkedProjectPath="$MODULE_DIR$" rootProjectPath="$MODULE_DIR$" />
   <component name="FacetManager">
     <facet type="jpa" name="JPA">
       <configuration>
@@ -15,7 +16,7 @@
           <unit-entry name="org.skiadas.local" value="org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl" />
           <unit-entry name="testdb" value="org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl" />
         </naming-strategy-map>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
     <facet type="web" name="Web">
@@ -35,18 +36,10 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/out/production" />
-    <output-test url="file://$MODULE_DIR$/out/test" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/testData" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/generated" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/generated_tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/fitnesse" />
       <excludeFolder url="file://$MODULE_DIR$/htmlTestPages" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
@@ -54,41 +47,5 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" name="com.sparkjava:spark-core:2.9.1" level="project" />
-    <orderEntry type="library" name="org.slf4j:slf4j-simple:1.7.26" level="project" />
-    <orderEntry type="library" name="com.sparkjava:spark-template-handlebars:2.7.1" level="project" />
-    <orderEntry type="module-library" scope="TEST">
-      <library name="JUnit4">
-        <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="org.json:json:20180813" level="project" />
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/fitnesse/fitnesse-standalone.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Hibernate 5.4.2-5.4.2" level="project" />
-    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.16" level="project" />
-    <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.codec:1.8" level="project" />
-    <orderEntry type="library" scope="TEST" name="org.xerial:sqlite-jdbc:3.28.0" level="project" />
-    <orderEntry type="library" name="com.github.gwenn:sqlite-dialect:0.1.0" level="project" />
-    <orderEntry type="library" name="com.h2database:h2:1.4.185" level="project" />
-    <orderEntry type="library" name="org.hibernate:hibernate-jpamodelgen:5.4.3.Final" level="project" />
-    <orderEntry type="library" scope="TEST" name="org.jsoup:jsoup:1.12.1" level="project" />
-    <orderEntry type="library" name="697621dfbe" level="application" />
-    <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
-    <orderEntry type="library" name="com.github.jknack:handlebars:4.1.2" level="project" />
-    <orderEntry type="library" name="com.github.jknack:handlebars-guava-cache:4.1.2" level="project" />
-    <orderEntry type="library" name="com.github.jknack:handlebars-helpers:4.1.2" level="project" />
   </component>
 </module>

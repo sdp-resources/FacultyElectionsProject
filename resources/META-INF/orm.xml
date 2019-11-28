@@ -104,7 +104,7 @@
             </id>
             <many-to-one name="election" target-entity="fsc.entity.Election"/>
             <element-collection name="votes" fetch="EAGER">
-                <order-column name="rank"/>
+                <order-column name="vote_rank"/>
                 <column name="vote_for"/>
                 <collection-table name="votes">
                     <join-column name="record_id"/>

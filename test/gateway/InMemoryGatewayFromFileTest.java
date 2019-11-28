@@ -7,6 +7,9 @@ import fsc.gateway.ProfileGateway;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +23,9 @@ public class InMemoryGatewayFromFileTest {
   private String pathname;
 
   @Before
-  public void setUp() {
-    pathname = "/data/sample.json";
-    gateway = InMemoryGateway.fromJSONFile(pathname);
+  public void setUp() throws IOException {
+    pathname = "assets/data/sample.json";
+    gateway = InMemoryGateway.fromJSONFile(Files.newInputStream(Paths.get(pathname)));
   }
 
   @Test
