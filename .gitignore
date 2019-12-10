@@ -5,6 +5,7 @@ out/*
 \.idea/encodings\.xml
 \.idea/libraries
 \.idea/dataSources
+\.idea/\.name
 build
 .gradle
 
@@ -34,4 +35,4 @@ report
 hs_err_pid*
 
 \.idea/uiDesigner\.xml
-# fitnesse/FitNesseRoot/*
+src/fitnesse/FitNesseRoot/*
