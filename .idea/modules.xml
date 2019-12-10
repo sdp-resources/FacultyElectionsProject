@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/FacultyElectionsProject.iml" filepath="$PROJECT_DIR$/.idea/FacultyElectionsProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FacultyElectionsProject.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FacultyElectionsProject.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FacultyElectionsProject.test.iml" filepath="$PROJECT_DIR$/.idea/modules/FacultyElectionsProject.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/edu.hanover.FacultyElectionsProject.main.iml" filepath="$PROJECT_DIR$/.idea/modules/edu.hanover.FacultyElectionsProject.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/edu.hanover.FacultyElectionsProject.test.iml" filepath="$PROJECT_DIR$/.idea/modules/edu.hanover.FacultyElectionsProject.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/facultyElections.iml" filepath="$PROJECT_DIR$/.idea/modules/facultyElections.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/facultyElections.main.iml" filepath="$PROJECT_DIR$/.idea/modules/facultyElections.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/facultyElections.test.iml" filepath="$PROJECT_DIR$/.idea/modules/facultyElections.test.iml" />
     </modules>
   </component>
 </project>

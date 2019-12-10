@@ -7,7 +7,6 @@
       </profile>
       <profile name="MyAnnotationProfile" enabled="true">
         <outputRelativeToContentRoot value="true" />
-        <module name="FacultyElectionsProject" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -15,10 +14,12 @@
       <module name="edu.hanover.facultyElections.test" target="1.8" />
       <module name="edu.hanover.FacultyElectionsProject.main" target="1.9" />
       <module name="edu.hanover.FacultyElectionsProject.test" target="1.9" />
-      <module name="facultyElections.main" target="1.8" />
-      <module name="facultyElections.test" target="1.8" />
+      <module name="facultyElections.main" target="1.9" />
+      <module name="facultyElections.test" target="1.9" />
       <module name="FacultyElectionsProject.main" target="1.8" />
       <module name="FacultyElectionsProject.test" target="1.8" />
+      <module name="tempArtifactId.main" target="1.9" />
+      <module name="tempArtifactId.test" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>

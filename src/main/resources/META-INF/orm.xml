@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+        http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+    <persistence-unit-metadata>
+        <xml-mapping-metadata-complete/>
+    </persistence-unit-metadata>
+    <sequence-generator name="native" initial-value="1" sequence-name="my_seq" allocation-size="1"/>
+    <entity class="fsc.entity.Profile" name="Profile" access="FIELD">
+        <table name="profiles"/>
+        <attributes>
+            <id name="username"/>
+            <basic name="status">
+                <enumerated>STRING</enumerated>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Division" name="Division" access="PROPERTY">
+        <table name="divisions"/>
+        <attributes>
+            <id name="name"/>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.ContractType" name="ContractType" access="PROPERTY">
+        <table name="contract_types"/>
+        <attributes>
+            <id name="contract"/>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.query.NamedQuery" name="NamedQuery" access="FIELD">
+        <table name="named_queries"/>
+        <attributes>
+            <id name="name"/>
+            <basic name="query"/>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Election" name="Election" access="FIELD">
+        <table name="elections"/>
+        <attributes>
+            <id name="ID">
+                <generated-value generator="native" strategy="SEQUENCE"/>
+            </id>
+            <basic name="state">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <many-to-one name="seat" target-entity="fsc.entity.Seat">
+                <cascade>
+                    <cascade-merge/>
+                </cascade>
+            </many-to-one>
+            <one-to-many name="voters" target-entity="fsc.entity.Voter" mapped-by="election">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+            <one-to-many name="voteRecords" target-entity="fsc.entity.VoteRecord" mapped-by="election">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+            <one-to-many name="candidates" target-entity="fsc.entity.Candidate" mapped-by="election">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Candidate" access="PROPERTY">
+        <table name="candidates"/>
+        <attributes>
+            <embedded-id name="candidateId"/>
+
+            <many-to-one name="election" maps-id="electionId">
+                <join-column name="election_id"/>
+            </many-to-one>
+            <many-to-one name="profile" maps-id="username">
+                <join-column name="profile_username"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Voter" name="Voter" access="FIELD">
+        <table name="voters"/>
+        <attributes>
+            <id name="voterId">
+                <generated-value generator="native" strategy="SEQUENCE"/>
+            </id>
+            <many-to-one name="profile" target-entity="fsc.entity.Profile">
+                <cascade>
+                    <cascade-merge/>
+                </cascade>
+            </many-to-one>
+            <many-to-one name="election" target-entity="fsc.entity.Election">
+                <cascade>
+                    <cascade-merge/>
+                </cascade>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.VoteRecord" name="VoteRecord" access="FIELD">
+        <table name="vote_records"/>
+        <attributes>
+            <id name="recordId">
+                <generated-value generator="native" strategy="SEQUENCE"/>
+            </id>
+            <many-to-one name="election" target-entity="fsc.entity.Election"/>
+            <element-collection name="votes" fetch="EAGER">
+                <order-column name="vote_rank"/>
+                <column name="vote_for"/>
+                <collection-table name="votes">
+                    <join-column name="record_id"/>
+                </collection-table>
+            </element-collection>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Committee" name="Committee" access="FIELD">
+        <table name="committees"/>
+        <attributes>
+            <id name="id">
+                <generated-value generator="native" strategy="SEQUENCE"/>
+            </id>
+            <basic name="name"/>
+            <basic name="description"/>
+            <basic name="voterQuery"/>
+            <one-to-many name="seats" target-entity="fsc.entity.Seat" mapped-by="committee">
+                <cascade/>
+            </one-to-many>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.Seat" name="Seat" access="FIELD">
+        <table name="seats"/>
+        <attributes>
+            <id name="id">
+                <generated-value generator="native" strategy="SEQUENCE"/>
+            </id>
+            <basic name="name"/>
+            <basic name="candidateQuery"/>
+            <many-to-one name="committee">
+                <join-column name="committee_id" nullable="false"/>
+            </many-to-one>
+            <many-to-one name="profile" target-entity="fsc.entity.Profile"/>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.PasswordRecord">
+        <table name="passwords"/>
+        <attributes>
+            <id name="username"/>
+            <basic name="password"/>
+            <basic name="role">
+                <enumerated>STRING</enumerated>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="fsc.entity.session.AuthenticatedSession" access="FIELD">
+        <table name="authenticated_sessions"/>
+        <attributes>
+            <id name="token"/>
+            <basic name="role">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="username"/>
+            <basic name="expirationTime"/>
+        </attributes>
+    </entity>
+    <embeddable class="fsc.entity.Candidate$CandidateId" access="FIELD"/>
+    <converter class="dbGateway.converter.QueryDbConverter" auto-apply="true"/>
+    <converter class="dbGateway.converter.LocalDateTimeConverter" auto-apply="true"/>
+</entity-mappings>

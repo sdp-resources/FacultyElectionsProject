@@ -6,9 +6,7 @@ out/*
 \.idea/libraries
 \.idea/dataSources
 build
-htmlTestPages
 .gradle
-sqliteTest.db
 
 report
 # Compiled class file
@@ -36,5 +34,4 @@ report
 hs_err_pid*
 
 \.idea/uiDesigner\.xml
-fitnesse/FitNesseRoot/files/testResults
-fitnesse/FitNesseRoot/*
+# fitnesse/FitNesseRoot/*

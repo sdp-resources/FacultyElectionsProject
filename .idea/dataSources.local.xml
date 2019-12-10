@@ -37,5 +37,14 @@
       <user-name>root</user-name>
       <introspection-schemas>*:</introspection-schemas>
     </data-source>
+    <data-source name="MariaDB - testdb@localhost" uuid="7405a677-54ba-4484-b3f1-2610d4277465">
+      <database-info product="MariaDB" version="10.3.17-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.4.1" dbms="MARIADB" exact-version="10.3.17" exact-driver-version="2.4">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>haris</user-name>
+    </data-source>
   </component>
 </project>

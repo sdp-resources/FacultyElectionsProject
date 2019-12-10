@@ -8,7 +8,7 @@
           <element id="jpa-descriptors" facet="FacultyElectionsProject/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
-          <element id="file-copy" path="$PROJECT_DIR$/fitnesse/fitnesse-standalone.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/src/fitnesse/fitnesse-standalone.jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="FacultyElectionsProject/web/Web" />
