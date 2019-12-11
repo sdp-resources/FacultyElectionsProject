@@ -1,16 +1,21 @@
 {{> header.hbs}}
 
-<div class="row mt-8">
+<div class="row mt-8 pt-2">
   <div class="col-sm-4">
     <div class="card">
       <h4 class="card-header">Not selected</h4>
       <div class="card-body">
         <ul id="nonselected" class="list-group list-group-flush">
           {{#each candidates}}
-            <li data-candidate="{{username}}" class="btn btn-outline-dark btn-block text-left">
-              <img src="https://it.hanover.edu/utilities/photos/photo.php?username={{username}}"
-                   alt="" class="img-thumbnail d-inline-block" style="height: 4em">
-              <span class="d-inline-block">{{name}}</span>
+            <li data-candidate="{{username}}"
+                draggable="true" id="candidate-{{username}}"
+                class="candidate btn btn-outline-dark btn-block text-left">
+              <div class="media">
+                <img class="mr-3 m-1"
+                     src="https://it.hanover.edu/utilities/photos/photo.php?username={{username}}"
+                alt="{{name}}" style="height: 4em">
+                <div class="align-self-center media-body">{{name}}</div>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -20,48 +25,169 @@
   </div>
   <div class="col-sm-4">
     <div class="card">
-      <h4 class="card-header">Selected</h4>
+      <h4 class="card-header">Selected
+        <form action="{{path 'ballot' electionId}}" method="POST" class="float-right">
+          <input type="hidden" name="voterId" value="{{voterId}}">
+          <input type="hidden" name="votes" id="votes" value="">
+          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+        </form>
+      </h4>
       <div class="card-body">
         <ul id="selected" class="list-group list-group-flush"></ul>
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
-    <form action="{{path 'ballot' electionId}}" method="POST">
-      <input type="hidden" name="voterId" value="{{voterId}}">
-      <input type="hidden" name="votes" id="votes" value="">
-      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-    </form>
-  </div>
 </div>
+
+<style>
+  .dragTarget {
+    border-color: burlywood;
+    border-width: 1px;
+    border-style: solid;
+  }
+</style>
 
 {{> footer.hbs}}
 
 {{#*inline "javascripts"}}
 <script>
-  $(function() {
-    $("#nonselected").on("click", "li", function() {
-      let index = $("#selected li").length + 1;
-      $("#selected").append(this);
-      $(this).append("<span class='order badge badge-pill badge-secondary text-right'>" + index + "</span>");
-      updateHiddenField()
-    })
-    $("#selected").on("click", "li", function() {
-      $("#nonselected").append(this);
-      $(this).find(".order").remove();
-      $("#selected li").each(function(index) {
-        $(this).find(".order").text(index + 1);
+  $(function () {
+    const $nonselected = $("#nonselected");
+    const $selected = $("#selected");
+
+    $nonselected.on("click", "li", e => addAtIndex(e.currentTarget));
+    $selected.on("click", "li", e => deselect(e.currentTarget));
+    setupDragAndDrop();
+
+    function markAsSelected(elem) {
+      $(elem).addClass('selected').find(".media-body")
+              .append("<span class='order badge badge-pill badge-secondary float-right'></span>");
+    }
+
+    function addAtIndex(elem, index) {
+      const $selectedCandidates = $selected.find(".candidate");
+      if (!index) {
+        index = $selectedCandidates.length + 1;
+      }
+      if (index === 1) {
+        $selected.prepend(elem);
+      } else {
+        $selectedCandidates.eq(index - 2).after(elem);
+      }
+      markAsSelected(elem);
+      renumber();
+    }
+
+    function deselect(elem) {
+      $nonselected.prepend(elem);
+      $(elem).removeClass('selected').find(".order").remove();
+      renumber();
+    }
+
+    function renumber() {
+      $("#selected li").each((index, elem) => {
+        $(elem).find(".order").text(index + 1);
       });
-      updateHiddenField()
-    })
+      updateHiddenField();
+    }
+
+    function getTransferItem(e) {
+      const transferItemId = e.dataTransfer.getData('text/plain');
+      return $(document.getElementById(transferItemId));
+    }
+
+    function prepareDrag(e) {
+      e.dataTransfer.setData('text/plain', e.currentTarget.id);
+      e.dataTransfer.setDragImage($(e.currentTarget).find("img")[0], 0, 0);
+    }
+
+    function getCurrentOrder($currentTarget) {
+      return parseInt($currentTarget.find(".order").text());
+    }
+
+    function insertTransferItemRelativetoCurrent($transfer, $current) {
+      if (!$transfer.hasClass('selected')) {
+        markAsSelected($transfer);
+        $current.before($transfer);
+      } else {
+        const targetOrder = getCurrentOrder($current);
+        const transferOrder = getCurrentOrder($transfer);
+        if (targetOrder < transferOrder) {
+          $current.before($transfer);
+        } else if (targetOrder > transferOrder) {
+          $current.after($transfer);
+        }
+      }
+    }
+
+    document.addEventListener('dragend', e => clearDragTargets());
+
+    function clearDragTargets() {
+      $('.dragTarget').removeClass('dragTarget');
+    }
+
+    function setDragTarget(target) {
+      clearDragTargets();
+      $(target).addClass('dragTarget');
+    }
+
+    function setupDragAndDrop() {
+      const selectedParent = document.getElementById("selected").parentNode;
+      const nonselectedParent = document.getElementById("nonselected").parentNode;
+      const allElements = document.getElementsByClassName("candidate");
+
+      selectedParent.addEventListener('dragenter', e => {
+        e.preventDefault();
+        setDragTarget(e.currentTarget);
+      });
+      selectedParent.addEventListener('dragover', e => e.preventDefault());
+
+      nonselectedParent.addEventListener('dragenter', e => {
+        e.preventDefault();
+        setDragTarget(e.currentTarget);
+      });
+      nonselectedParent.addEventListener('dragover', e => e.preventDefault());
+
+      selectedParent.addEventListener('drop', e => {
+        const $transferItem = getTransferItem(e);
+        if ($transferItem.hasClass('selected')) {
+          return false;
+        }
+        markAsSelected($transferItem);
+        $(e.currentTarget).find("#selected").append($transferItem);
+        renumber();
+      });
+      nonselectedParent.addEventListener('drop', e => {
+        deselect(getTransferItem(e));
+        e.preventDefault();
+      });
+
+      for (const el of allElements) {
+        el.addEventListener('dragstart', e => prepareDrag(e));
+        el.addEventListener('dragenter', e => {
+          e.preventDefault();
+          e.stopPropagation();
+          setDragTarget(e.currentTarget);
+        });
+        el.addEventListener('dragover', e => e.preventDefault());
+        el.addEventListener('drop', e => {
+          const $currentTarget = $(e.currentTarget);
+          if ($currentTarget.hasClass('selected')) {
+            e.stopPropagation();
+            insertTransferItemRelativetoCurrent(getTransferItem(e), $currentTarget);
+            renumber();
+          }
+          // nonselected will handle this drop
+        });
+      }
+    }
+
+    function updateHiddenField() {
+      let names = $("#selected li")
+              .map((i, el) => $(el).data("candidate"))
+              .toArray().join(",");
+      $("#votes").val(names);
+    }
   });
-
-  function updateHiddenField() {
-    let names = $("#selected li")
-      .map(function(i, el) { return $(el).data("candidate"); })
-      .toArray().join(",");
-    $("#votes").val(names);
-  }
-
 </script>
 {{/inline}}

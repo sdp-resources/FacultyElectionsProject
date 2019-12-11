@@ -1,10 +1,9 @@
 {{> header.hbs}}
-
 <div class="row mt-3">
   <div class="col-sm-3">
     {{#with profile}}
       <div class="media border border-dark border-rounded bg-light">
-        <img class="top mr-3 m-1 d-block"
+        <img class="mr-3 m-1"
              src="https://it.hanover.edu/utilities/photos/photo.php?username={{username}}"
         alt="{{name}}" style="height: 4em">
         <div class="media-body">
@@ -19,76 +18,83 @@
   </div>
   <div class="col-sm-9">
     <h3>Current Elections</h3>
-    <div class="card-deck">
+  <div class="card-deck">
 
-      {{#each elections}}
-        <div class="card">
-          <h5 class="card-header">{{election.seat.name}}
-            {{#if inDecideToStand}}
-              {{#eq candidateStatus "Willing"}}
-                <i class="float-right text-success fas fa-user-check"></i>
+    {{#each elections}}
+      <div class="card">
+        <h5 class="card-header">{{election.seat.name}}
+          {{#eq election.state "DecideToStand"}}
+            {{#eq candidateStatus "Willing"}}
+              <i class="float-right text-success fas fa-user-check"></i>
+            {{else}}
+              {{#eq candidateStatus "Declined"}}
+                <i class="float-right text-danger fas fa-user-times"></i>
               {{else}}
-                {{#eq candidateStatus "Declined"}}
-                  <i class="float-right text-danger fas fa-user-times"></i>
-                {{else}}
-                  {{#eq candidateStatus "NoAnswer"}}
-                      <i class="float-right text-warning far fa-question-circle"></i>
-                  {{/eq}}
+                {{#eq candidateStatus "NoAnswer"}}
+                  <i class="float-right text-warning far fa-question-circle"></i>
                 {{/eq}}
               {{/eq}}
+            {{/eq}}
+          {{else}}
+            {{#if voter}}
+              {{#if voter.voted}}
+                <i class="float-right text-success fas fa-person-booth"></i>
+              {{else}}
+                <i class="float-right text-warning fas fa-person-booth"></i>
+              {{/if}}
             {{/if}}
-          </h5>
-          <div class="card-body">
-            <h6 class="card-subtitle text-muted">state: {{election.state}}</h6>
-            {{#if inDecideToStand}}
-              <div class="container">
-                {{#eq candidateStatus "null"}}
-                  <p class="card-text">You are not a candidate.</p>
-                {{else}}
-                  <div class="row">
-                    <div class="col-xs-12">Candidate status: {{candidateStatus}}</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <form class="form" action="{{path 'decideToStand' election.electionID}}" method="POST">
-                        <label for="decideToStand{{election.electionID}}" class="sr-only">Change status:</label>
-                        <div class="form-group form-row">
-                          <select class="form-control form-control-sm" name="decideToStand"
-                                  id="decideToStand{{election.electionID}}">
-                            <option value="" disabled selected hidden>Choose ...</option>
-                            <option value="Willing" {{#eq candidateStatus "Willing"}}selected{{/eq}}>WILLING to stand</option>
-                            <option value="Declined" {{#eq candidateStatus "Declined"}}selected{{/eq}}>DECLINE to stand</option>
-                          </select>
-                          <button type="submit" class="btn btn-primary btn-sm">Change</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                {{/eq}}
-              </div>
-            {{/if}}
-            {{#if inVote}}
-              <div class="card-text">
-                {{#if voter}}
-                  {{#if voter.voted}}
-                    <p class="card-text">You have already voted.</p>
-                  {{else}}
-                    <form action="{{path 'ballot' election.electionID}}">
-                      <input type="hidden" name="voterId" value="{{voter.voterId}}">
-                      <button class="btn btn-success btn-sm">View Ballot</button>
-                    </form>
-                  {{/if}}
-                {{else}}
-                  <p class="card-text">You are not eligible to vote.</p>
-                {{/if}}
-              </div>
+          {{/eq}}
+        </h5>
+      <div class="card-body p-2 m-1">
+        <h6 class="card-subtitle sr-only">state: {{election.state}}</h6>
+        {{#eq election.state "DecideToStand"}}
+          {{#eq candidateStatus "null"}}
+            <p class="card-text">You are not a candidate.</p>
+          {{else}}
+              <form class="form decideToStand" action="{{path 'decideToStand' election.electionID}}" method="POST">
+                <label for="decideToStand{{election.electionID}}" class="sr-only">Change status:</label>
+                <div class="form-row">
+                  <input type="hidden" name="decideToStand" id="decideToStand{{election.electionID}}" value="{{candidateStatus}}">
+                  <button type="submit" data-value="Declined" class="btn btn-lg w-100 m-1 btn-outline-danger">Decline to stand</button>
+                  <button type="submit" data-value="Willing" class="btn btn-lg w-100 m-1 btn-outline-success">Willing to stand</button>
+                </div>
+              </form>
+          {{/eq}}
+        {{/eq}}
+        {{#eq election.state "Vote"}}
+          <div class="card-text">
+            {{#if voter}}
+              {{#if voter.voted}}
+                <p class="card-text">You have already voted.</p>
+              {{else}}
+                <form action="{{path 'ballot' election.electionID}}">
+                  <input type="hidden" name="voterId" value="{{voter.voterId}}">
+                  <button class="btn btn-success btn-lg w-100 m-1">View Ballot</button>
+                </form>
+              {{/if}}
+            {{else}}
+              <p class="card-text">You are not eligible to vote.</p>
             {{/if}}
           </div>
+        {{/eq}}
+      </div>
 
-        </div>
-      {{/each}}
     </div>
+    {{/each}}
   </div>
+</div>
 </div>
 
 {{> footer.hbs}}
+
+{{#*inline "javascripts"}}
+  <script>
+    $(() => {
+      $('form.decideToStand').on('click', 'button', (e) => {
+        const btn = e.currentTarget;
+        const form = $(btn).closest('form');
+        $(form).find('input[name="decideToStand"]').val($(btn).data('value'));
+      });
+    });
+  </script>
+{{/inline}}

@@ -14,10 +14,14 @@ public class ElectionRequestHandler extends RequestHandler {
 
   public Object processPostDecideToStand() {
     loadSessionAndUserProfile();
+    String decideToStand = getRequestParameter("decideToStand");
     submitDecisionToStand(getRequestParameterLong("electionid"),
-                          getRequestParameter("decideToStand"));
+                          decideToStand);
 
-    return redirect(Path.user());
+    String message = decideToStand.equals("Willing")
+                     ? "You elected to stand"
+                     : "You declined to stand";
+    return redirectWithFlash(Path.user(), message);
   }
 
   private void submitDecisionToStand(Long electionId, String decision) {

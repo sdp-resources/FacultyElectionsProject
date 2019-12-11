@@ -9,7 +9,7 @@ import webserver.PersistentUnitLocator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class BasicDatabaseTest {
+public abstract class BasicDatabaseTest {
   protected final DatabaseBackedGatewayFactory gatewayFactory =
         new DatabaseBackedGatewayFactory(PersistentUnitLocator.get());
   protected DatabaseBackedGateway gateway;
