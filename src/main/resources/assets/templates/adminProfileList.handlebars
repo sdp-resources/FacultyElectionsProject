@@ -2,47 +2,43 @@
 
 {{#*inline "stylesheets"}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.bootstrap.min.css"
-        integrity="sha256-HJmq7ZsJyNO0AZz/dTSiU984iDC5BSvR5It5SnGTyRg=" crossorigin="anonymous" />
+        integrity="sha256-HJmq7ZsJyNO0AZz/dTSiU984iDC5BSvR5It5SnGTyRg=" crossorigin="anonymous"/>
 {{/inline}}
 
-<div class="row mt-8">
-  <div class="col-sm-4">
-    <div class="card">
-      <h4 class="card-title">Profiles</h4>
-      <table class="table">
-        <thead>
+<div class="row">
+  <div class="col">
+    <h2>Users</h2>
+    <table class="table table-bordered table-hover table-sm">
+      <thead class="thead-light">
+      <tr>
+        <th style="width: 2em;"></th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Division</th>
+        <th>Contract Type</th>
+      </tr>
+      </thead>
+      {{#each profiles}}
         <tr>
-          <th>username</th>
-          <th>name</th>
+          <td class="p-1"><img class="m-0" src="https://it.hanover.edu/utilities/photos/photo.php?username={{username}}" alt="{{name}}" style="height: 2em"></td>
+          <td>{{name}}</td>
+          <td>{{username}}</td>
+          <td>{{division}}</td>
+          <td>{{contract}}</td>
         </tr>
-        </thead>
-        <tbody>
-        {{#each profiles}}
-          <tr>
-            <td>{{username}}</td>
-            <td>{{name}}</td>
-          </tr>
-        {{/each}}
-        </tbody>
-      </table>
-    </div>
+      {{/each}}
+    </table>
   </div>
 </div>
-
 {{> footer.hbs}}
 
 {{#*inline "javascripts"}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.min.js"
           integrity="sha256-R3NffQkOJUqmiutQHnxEURXUXZru/7GMdM6CdH673Qw=" crossorigin="anonymous"></script>
   <script>
-  jQuery(function($){
-	  $('.table').footable();
-  });
-
-
-
-
-
+    jQuery(function ($) {
+      $('.table').footable();
+    });
 
 
   </script>
