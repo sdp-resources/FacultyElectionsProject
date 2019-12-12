@@ -4,7 +4,6 @@ import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.Gateway;
 import fsc.service.Authorizer;
-import fsc.service.SQLAuthenticator;
 import fsc.service.query.*;
 
 import java.util.List;
@@ -158,8 +157,7 @@ public class DataFixture {
   }
 
   private void addPasswordRecord(String username, String password, Authorizer.Role role) {
-    SQLAuthenticator authenticator = new SQLAuthenticator(gateway);
-    PasswordRecord passwordRecord = authenticator.createPasswordRecord(username, password, role);
+    PasswordRecord passwordRecord = PasswordRecord.create(username, password, role);
     gateway.addPasswordRecord(passwordRecord);
     gateway.save();
   }

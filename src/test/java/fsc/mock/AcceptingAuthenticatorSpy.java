@@ -1,6 +1,5 @@
 package fsc.mock;
 
-import fsc.entity.PasswordRecord;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.Session;
 import fsc.service.Authenticator;
@@ -18,10 +17,5 @@ public class AcceptingAuthenticatorSpy implements Authenticator {
                                     credentials.getUsername(),
                                     token,
                                     LocalDateTime.now().plusHours(1));
-  }
-  public PasswordRecord createPasswordRecord(
-        String username, String password, Authorizer.Role role
-  ) {
-    return null;
   }
 }

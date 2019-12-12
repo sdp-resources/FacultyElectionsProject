@@ -44,9 +44,7 @@ public class LoginInteractor extends Interactor {
       return ResponseFactory.resourceExists();
     }
     Authorizer.Role role = Authorizer.Role.valueOf(request.role);
-    PasswordRecord record = authenticator.createPasswordRecord(request.username,
-                                                               request.password,
-                                                               role);
+    PasswordRecord record = PasswordRecord.create(request.username, request.password, role);
     passwordGateway.addPasswordRecord(record);
     passwordGateway.save();
     return ResponseFactory.success();

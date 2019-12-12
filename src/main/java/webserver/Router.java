@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Router {
   protected Gateway gateway;
   private AppContext appContext;
-  private String persistenceUnit = "org.skiadas.local";
+  private String persistenceUnit = "inmemoryH2";
 
   public void setupRoutes(String resourcePath) {
     // TODO: Move to a app-context pool

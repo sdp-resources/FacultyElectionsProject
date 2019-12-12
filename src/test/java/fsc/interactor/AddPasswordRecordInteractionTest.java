@@ -5,9 +5,7 @@ import fsc.gateway.PasswordGateway;
 import fsc.request.AddPasswordRecordRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.service.Authorizer;
-import fsc.service.SQLAuthenticator;
-import fsc.service.SimplePasswordGatewaySpy;
+import fsc.service.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,8 +23,8 @@ public class AddPasswordRecordInteractionTest {
     Authorizer.Role role = Authorizer.Role.ROLE_ADMIN;
     request = new AddPasswordRecordRequest(username, password, role.toString());
 
-    SQLAuthenticator authenticator = new SQLAuthenticator(passwordGateway);
-    PasswordRecord record = authenticator.createPasswordRecord(username, password, role);
+    SQLAuthenticator authenticator = new SQLAuthenticator(passwordGateway, new SessionCreator());
+    PasswordRecord record = PasswordRecord.create(username, password, role);
     passwordGateway.addPasswordRecord(record);
     interactor = new LoginInteractor(null, authenticator, passwordGateway);
 
@@ -43,7 +41,7 @@ public class AddPasswordRecordInteractionTest {
     Authorizer.Role role = Authorizer.Role.ROLE_ADMIN;
     request = new AddPasswordRecordRequest(username, password, role.toString());
 
-    SQLAuthenticator authenticator = new SQLAuthenticator(passwordGateway);
+    SQLAuthenticator authenticator = new SQLAuthenticator(passwordGateway, new SessionCreator());
     interactor = new LoginInteractor(null, authenticator, passwordGateway);
 
     Response response = interactor.handle(request);

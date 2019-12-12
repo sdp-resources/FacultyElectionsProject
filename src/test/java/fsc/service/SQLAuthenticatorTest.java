@@ -17,14 +17,14 @@ public class SQLAuthenticatorTest {
   private Authenticator authenticator;
   private Session session;
   private SimplePasswordGatewaySpy gateway;
-  private String hashedPassword;
+  private PasswordRecord passwordRecord;
 
   @Before
   public void setUp() {
     credentials = new Credentials(ADMIN, PASSWORD);
     gateway = new SimplePasswordGatewaySpy();
-    authenticator = new SQLAuthenticator(gateway);
-    hashedPassword = SQLAuthenticator.hashPassword(credentials);
+    authenticator = new SQLAuthenticator(gateway, new SessionCreator());
+    passwordRecord = PasswordRecord.create(ADMIN, PASSWORD, Authorizer.Role.ROLE_ADMIN);
   }
 
   @Test
@@ -36,8 +36,7 @@ public class SQLAuthenticatorTest {
 
   @Test
   public void ifNameIsInDatabaseButPasswordIsWrong_returnUnauthenticatedSession() {
-    PasswordRecord record = new PasswordRecord(ADMIN, hashedPassword, Authorizer.Role.ROLE_ADMIN);
-    gateway.addPasswordRecord(record);
+    gateway.addPasswordRecord(passwordRecord);
     Credentials falseCredentials = new Credentials(ADMIN, WRONG_PASSWORD);
     session = authenticator.authenticateWithCredentials(falseCredentials);
     assertFalse(session.isAuthenticated());
@@ -46,14 +45,13 @@ public class SQLAuthenticatorTest {
 
   @Test
   public void ifNameIsInDatabaseAndPasswordMatches_returnAuthenticatedSession() {
-    PasswordRecord record = new PasswordRecord(ADMIN, hashedPassword, Authorizer.Role.ROLE_ADMIN);
-    gateway.addPasswordRecord(record);
+    gateway.addPasswordRecord(passwordRecord);
     session = authenticator.authenticateWithCredentials(credentials);
     assertTrue(session.isAuthenticated());
     AuthenticatedSession authenticatedSession = (AuthenticatedSession) this.session;
     assertNotNull(authenticatedSession.getExpirationTime());
     assertEquals(ADMIN, authenticatedSession.getUsername());
-    assertEquals(record.getRole(), authenticatedSession.getRole());
+    assertEquals(passwordRecord.getRole(), authenticatedSession.getRole());
     assertEquals(gateway.requestedUsername, credentials.getUsername());
   }
 }

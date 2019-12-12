@@ -7,8 +7,7 @@ import fsc.gateway.Gateway;
 import fsc.interactor.*;
 import fsc.request.Request;
 import fsc.response.Response;
-import fsc.service.Authenticator;
-import fsc.service.SQLAuthenticator;
+import fsc.service.*;
 import fsc.viewable.*;
 
 import java.util.Collection;
@@ -31,7 +30,10 @@ public class AppContext {
   }
 
   public Interactor loadInteractors(Gateway gateway) {
-    Authenticator authenticator = new SQLAuthenticator(gateway);
+    SessionCreator sessionCreator = new SessionCreator();
+    Authenticator authenticator = new DelegatingAuthenticator(
+          new SQLAuthenticator(gateway, sessionCreator),
+          new LDAPAuthenticator(sessionCreator));
     return new AuthenticatingInteractor(gateway)
                  .append(new AuthorizingInteractor(gateway))
                  .append(new LoginInteractor(gateway, authenticator, gateway))
@@ -118,8 +120,10 @@ public class AppContext {
     return getResponse(withToken(token, requestFactory.viewCommitteeList()));
   }
 
-  public Response<ViewableCommittee> addCommittee(String name, String description,
-                                          String voterQueryString) {
+  public Response<ViewableCommittee> addCommittee(
+        String name, String description,
+        String voterQueryString
+  ) {
     return getResponse(requestFactory.createCommittee(name, description, voterQueryString));
   }
 

@@ -108,7 +108,7 @@ public class DatabaseBasicBehaviorTest {
 
 
   private PasswordRecord aPasswordRecord() {
-    return new PasswordRecord("admin", "something", Authorizer.Role.ROLE_ADMIN);
+    return PasswordRecord.create("admin", "something", Authorizer.Role.ROLE_ADMIN);
   }
 
 }

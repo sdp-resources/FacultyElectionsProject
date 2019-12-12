@@ -5,7 +5,6 @@ import fsc.entity.session.AuthenticatedSession;
 import fsc.gateway.SessionGateway;
 import fsc.response.Response;
 import fsc.service.Authorizer;
-import fsc.service.SQLAuthenticator;
 import fsc.viewable.ViewableSession;
 import org.junit.Test;
 
@@ -32,10 +31,8 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
   private void setUpAdminAccount() {
     withNewGateway(gateway -> {
       gateway.begin();
-      PasswordRecord passwordRecord = new SQLAuthenticator(gateway)
-                                            .createPasswordRecord("admin",
-                                                                  "mypassword",
-                                                                  Authorizer.Role.ROLE_ADMIN);
+      PasswordRecord passwordRecord = PasswordRecord.create("admin", "mypassword",
+                                                            Authorizer.Role.ROLE_ADMIN);
       gateway.addPasswordRecord(passwordRecord);
       gateway.save();
     });
