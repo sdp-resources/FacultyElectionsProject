@@ -1,84 +1,83 @@
 {{> header.hbs}}
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2>Committees</h2>
-      <div class="accordion" id="committees">
-        {{#each committees}}
-          {{#assign "committeeName"}}{{name}}{{/assign}}
-          {{#assign "committeeId"}}{{id}}{{/assign}}
-          <div class="committee card" data-name="{{name}}">
-            <div class="card-header">
-              <h5>
-                <button class="btn btn-block btn-link" type="button" data-toggle="collapse"
-                        data-target="#{{name}}" aria-expanded="false" aria-controls="{{name}}">
-                  {{name}}
-                </button>
-              </h5>
-            </div>
-            <div class="collapse" id="{{id}}">
-              <div class="card-body">
-                <h4 class="card-title">{{description}}</h4>
-                <form class="form-inline" action="{{path "committee" id}}" method="POST" autocomplete="off">
-                  <div class="form-group row w-100">
-                    <label for="voterQuery-{{id}}" class="col-4 col-form-label">Eligible to vote:</label>
-                    <div id="voterQuery-{{id}}" class="col-8 queryControl"
-                         data-value="{{voterQuery}}"></div>
-                  </div>
-                </form>
-              </div>
-              <ul class="list-group list-group-flush">
-                {{#each seats}}
-                  <li class="list-group-item seat" data-name="{{name}}">
-                    <h5 class="row justify-content-center">Seat {{name}}</h5>
-                    <form class="form-inline" action="{{path "seat" committeeName name}}" method="POST"
-                          autocomplete="off">
-                      <div class="form-group row w-100">
-                        <label for="candidateQuery-{{committeeId}}-{{name}}" class="col-4 col-form-label">Eligible to
-                          stand:</label>
-                        <div id="candidateQuery-{{committeeId}}-{{name}}" class="col-8 queryControl"
-                             data-value="{{query}}"></div>
-                      </div>
-                    </form>
-
-                    <form class="form-inline justify-content-center" method="post" action="{{path "adminElection"}}">
-                      <div class="form-group row">
-                        <input type="hidden" name="committee" value="{{committeeId}}">
-                        <input type="hidden" name="seat" value="{{name}}">
-                        <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
-                      </div>
-                    </form>
-                  </li>
-                {{/each}}
-              </ul>
-            </div>
-          </div>
-        {{/each}}
+<div class="row">
+<div class="col">
+  <h2>Committees</h2>
+  <ul class="nav nav-tabs" id="committees" role="tablist">
+    {{#each committees}}
+      <li class="nav-item">
+        <a class="nav-link" id="committee-{{id}}-tab" data-toggle="tab" href="#committee-{{id}}" role="tab"
+           aria-controls="committee-{{id}}"
+           aria-selected="false">{{name}}</a>
+      </li>
+    {{/each}}
+  </ul>
+<div class="tab-content">
+{{#each committees}}
+  <div class="tab-pane committee" id="committee-{{id}}" role="tabpanel" aria-labelledby="committee-{{id}}-tab">
+  {{#assign "committeeName"}}{{name}}{{/assign}}
+  {{#assign "committeeId"}}{{id}}{{/assign}}
+    <h4 class="m-2 text-center">{{description}}</h4>
+    <form class="form-inline w-50 mx-auto" action="{{path "committee" id}}" method="POST" autocomplete="off">
+      <div class="form-group row w-100">
+        <label for="voterQuery-{{id}}" class="col-4 col-form-label">Eligible to vote:</label>
+        <div id="voterQuery-{{id}}" class="col-8 queryControl"
+             data-value="{{voterQuery}}"></div>
       </div>
-    </div>
+    </form>
+      {{#each seats}}
+        {{#eq 0 (remainder @index 3)}}
+        <div class="m-2 card-deck justify-content-center">
+        {{/eq}}
+        <div class="card flex-grow-0" data-name="{{name}}" style="flex-basis: auto; width: 30%;">
+          <h5 class="card-header justify-content-center">Seat {{name}}</h5>
+          <div class="card-body">
+            <form class="form" action="{{path "seat" committeeName name}}" method="POST"
+                  autocomplete="off">
+              <div class="form-group text-center">
+                <label for="candidateQuery-{{committeeId}}-{{name}}" class="col-form-label">Eligible to
+                  stand:</label>
+                <div id="candidateQuery-{{committeeId}}-{{name}}" class="queryControl"
+                     data-value="{{query}}">
+                </div>
+              </div>
+            </form>
+
+            <form class="form-inline justify-content-center" method="post" action="{{path "adminElection"}}">
+              <div class="form-group row">
+                <input type="hidden" name="committee" value="{{committeeId}}">
+                <input type="hidden" name="seat" value="{{name}}">
+                <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
+              </div>
+            </form>
+          </div>
+        </div>
+        {{#or (eq @last "last") (eq 2 (remainder @index 3))}}
+        </div>
+        {{/or}}
+      {{/each}}
   </div>
+{{/each}}
 </div>
 {{> footer.hbs}}
 
 
 {{#*inline "javascripts"}}
-  <script src="js/queryControl.js"></script>
-  <script>$(function ($) {
-    $.queryControl();
-  });
-  </script>
-  <script>
-    $(function ($) {
-      $("tr").on("saveQuery", function (e) {
-        let link = $(this).find('form').prop('action');
-        let queryString = $(e.target).val();
-        $.ajax({
-          url: link,
-          method: 'POST',
-          data: {queryString: queryString}
+    <script src="js/queryControl.js"></script>
+    <script>$(function ($) {
+      $.queryControl();
+    });
+    </script>
+    <script>
+      $(function ($) {
+        $("tr").on("saveQuery", function (e) {
+          let link = $(this).find('form').prop('action');
+          let queryString = $(e.target).val();
+          $.ajax({
+            url: link,
+            method: 'POST',
+            data: {queryString: queryString}
+          });
         });
       });
-    });
-  </script>
+    </script>
 {{/inline}}

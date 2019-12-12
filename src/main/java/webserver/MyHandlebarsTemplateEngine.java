@@ -1,5 +1,6 @@
 package webserver;
 
+import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.helper.AssignHelper;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
@@ -17,7 +18,10 @@ public class MyHandlebarsTemplateEngine extends HandlebarsTemplateEngine {
     handlebars.registerHelpers(ConditionalHelpers.class);
     registerHelper("path", HandlebarsHelpers.path());
     registerHelper("assign", new AssignHelper());
-
+    registerHelper("remainder", (Helper<Integer>) (number, options) -> {
+      Integer modulo = options.param(0);
+      return number % modulo;
+    });
   }
 
   public <T> void registerHelper(String name, Helper<T> helper) {
@@ -25,4 +29,6 @@ public class MyHandlebarsTemplateEngine extends HandlebarsTemplateEngine {
       handlebars.registerHelper(name, helper);
     }
   }
+
+  public Handlebars getHandlebars() { return handlebars; }
 }
