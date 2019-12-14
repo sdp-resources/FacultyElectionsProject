@@ -1,9 +1,5 @@
 package fsc.voting;
 
-import fsc.app.AppContext;
-import fsc.entity.Profile;
-import fsc.entity.Vote;
-
 import java.util.List;
 
 class VotingRound {
@@ -12,7 +8,7 @@ class VotingRound {
   private VotingRoundResult result;
 
   public VotingRound(List<Vote> votes) {
-    this.votes = AppContext.getEntityFactory().createVoteSnapshot(votes);
+    this.votes = Vote.snapshot(votes);
     rankedTallies = new VoteTallier().tallyVotes(this.votes);
     result = determineResultForRound();
   }
@@ -27,25 +23,25 @@ class VotingRound {
   }
 
   private VotingRoundResult topCandidateWins() {
-    return VotingRoundResult.win(firstCandidate().profile);
+    return VotingRoundResult.win(firstCandidate().target);
   }
 
-  private VotingRoundResult resultFromTiedForLast(Profile[] candidates) {
+  private VotingRoundResult resultFromTiedForLast(VoteTarget[] candidates) {
     return candidates.length == 1 ? lastCandidateEliminated() : VotingRoundResult.tied(candidates);
   }
 
   private VotingRoundResult lastCandidateEliminated() {
-    return VotingRoundResult.eliminate(lastCandidate().profile);
+    return VotingRoundResult.eliminate(lastCandidate().target);
   }
 
   private CandidateTally firstCandidate() {
     return rankedTallies.get(0);
   }
 
-  private Profile[] tiedForLast() {
+  private VoteTarget[] tiedForLast() {
     return rankedTallies.stream().filter(lastCandidate()::equals)
-                        .map(candidateTally -> candidateTally.profile)
-                        .toArray(Profile[]::new);
+                        .map(candidateTally -> candidateTally.target)
+                        .toArray(VoteTarget[]::new);
   }
 
   private CandidateTally lastCandidate() {

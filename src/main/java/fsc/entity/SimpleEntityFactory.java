@@ -4,7 +4,6 @@ import fsc.entity.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SimpleEntityFactory implements EntityFactory {
 
@@ -16,19 +15,6 @@ public class SimpleEntityFactory implements EntityFactory {
 
   public Seat createSeat(String name, Query defaultQuery, Committee committee) {
     return new Seat(name, defaultQuery, committee);
-  }
-
-  public Vote createVote(Profile... profiles) {
-    return createVote(List.of(profiles));
-  }
-
-  public Vote createVote(List<Profile> profiles) {
-    return new Vote(profiles);
-  }
-
-  public List<Vote> createVoteSnapshot(List<Vote> votes) {
-    return votes.stream().filter(Vote::isNonEmpty)
-                .map(this::createVote).collect(Collectors.toList());
   }
 
   public Voter createVoter(Profile voter, Election election) {

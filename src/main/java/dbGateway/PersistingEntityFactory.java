@@ -25,14 +25,6 @@ public class PersistingEntityFactory implements EntityFactory {
     return entityFactory.createSeat(name, defaultQuery, committee);
   }
 
-  public Vote createVote(Profile... profiles) {return entityFactory.createVote(profiles);}
-
-  public Vote createVote(List<Profile> profiles) {return entityFactory.createVote(profiles);}
-
-  public List<Vote> createVoteSnapshot(List<Vote> votes) {
-    return entityFactory.createVoteSnapshot(votes);
-  }
-
   public Voter createVoter(Profile voter, Election election) {
     return entityFactory.createVoter(voter, election);
   }

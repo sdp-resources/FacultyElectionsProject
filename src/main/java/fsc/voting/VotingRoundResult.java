@@ -1,25 +1,23 @@
 package fsc.voting;
 
-import fsc.entity.Profile;
-
 import java.util.*;
 
-interface VotingRoundResult {
-  static VotingRoundResult win(Profile cA) {
+public interface VotingRoundResult {
+  static VotingRoundResult win(VoteTarget cA) {
     return new WinVotingRoundResult(cA);
   }
-  static VotingRoundResult eliminate(Profile candidate) {
+  static VotingRoundResult eliminate(VoteTarget candidate) {
     return new EliminationVotingRoundResult(candidate);
   }
-  static VotingRoundResult tied(Profile... candidates) {
+  static VotingRoundResult tied(VoteTarget... candidates) {
     return new DrawVotingResult(candidates);
   }
-  Profile getCandidate();
+  VoteTarget getCandidate();
 
   class EliminationVotingRoundResult implements VotingRoundResult {
-    public final Profile candidate;
+    public final VoteTarget candidate;
 
-    public EliminationVotingRoundResult(Profile candidate) {
+    public EliminationVotingRoundResult(VoteTarget candidate) {
       this.candidate = candidate;
     }
 
@@ -38,15 +36,15 @@ interface VotingRoundResult {
       return "Eliminated{" + candidate + '}';
     }
 
-    public Profile getCandidate() {
+    public VoteTarget getCandidate() {
       return candidate;
     }
   }
 
   class WinVotingRoundResult implements VotingRoundResult {
-    public final Profile candidate;
+    public final VoteTarget candidate;
 
-    public WinVotingRoundResult(Profile candidate) { this.candidate = candidate; }
+    public WinVotingRoundResult(VoteTarget candidate) { this.candidate = candidate; }
 
     public boolean equals(Object o) {
       if (this == o) return true;
@@ -63,15 +61,15 @@ interface VotingRoundResult {
       return "Winner{" + candidate + '}';
     }
 
-    public Profile getCandidate() {
+    public VoteTarget getCandidate() {
       return candidate;
     }
   }
 
   class DrawVotingResult implements VotingRoundResult {
-    public final Set<Profile> candidates;
+    public final Set<VoteTarget> candidates;
 
-    public DrawVotingResult(Profile[] candidates) {
+    public DrawVotingResult(VoteTarget[] candidates) {
       this.candidates = new HashSet<>(Arrays.asList(candidates));
     }
 
@@ -90,8 +88,8 @@ interface VotingRoundResult {
       return "Draw{" + candidates + '}';
     }
 
-    public Profile getCandidate() {
-      Iterator<Profile> iterator = candidates.iterator();
+    public VoteTarget getCandidate() {
+      Iterator<VoteTarget> iterator = candidates.iterator();
       if (iterator.hasNext()) { return iterator.next(); }
       throw new RuntimeException("Should not have NO candidates tied to last");
     }

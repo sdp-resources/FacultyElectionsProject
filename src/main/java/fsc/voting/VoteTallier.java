@@ -1,12 +1,9 @@
 package fsc.voting;
 
-import fsc.entity.Profile;
-import fsc.entity.Vote;
-
 import java.util.*;
 
 class VoteTallier {
-  private Map<Profile, CandidateTally> tallies = new HashMap<>();
+  private Map<VoteTarget, CandidateTally> tallies = new HashMap<>();
 
   List<CandidateTally> tallyVotes(List<Vote> votes) {
     votes.forEach(this::countVote);
@@ -19,15 +16,15 @@ class VoteTallier {
     }
   }
 
-  private CandidateTally getTally(Profile candidate) {
+  private CandidateTally getTally(VoteTarget candidate) {
     if (!tallies.containsKey(candidate)) {
       tallies.put(candidate, new CandidateTally(candidate));
     }
     return tallies.get(candidate);
   }
 
-  private List<CandidateTally> computeTallies(Map<Profile, CandidateTally> profileTallies) {
-    List<CandidateTally> tallyList = new ArrayList<>(profileTallies.values());
+  private List<CandidateTally> computeTallies(Map<VoteTarget, CandidateTally> targetTallies) {
+    List<CandidateTally> tallyList = new ArrayList<>(targetTallies.values());
     tallyList.sort(CandidateTally.rankComparator);
     return tallyList;
   }

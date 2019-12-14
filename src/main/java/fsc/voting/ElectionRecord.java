@@ -1,7 +1,5 @@
 package fsc.voting;
 
-import fsc.entity.Profile;
-import fsc.entity.Vote;
 import fsc.voting.VotingRoundResult.WinVotingRoundResult;
 
 import java.util.AbstractList;
@@ -26,7 +24,7 @@ public class ElectionRecord extends AbstractList<VotingRound> {
   }
 
   private void eliminateACandidate() {
-    Profile candidate = getLastResult().getCandidate();
+    VoteTarget candidate = getLastResult().getCandidate();
     votes.forEach(vote -> vote.remove(candidate));
   }
 

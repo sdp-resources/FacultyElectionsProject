@@ -7,13 +7,8 @@ import java.util.List;
 public interface EntityFactory {
   List<Candidate> createBallot();
 
-  Election createElection(
-        Seat seat
-  );
+  Election createElection(Seat seat);
   Seat createSeat(String name, Query defaultQuery, Committee committee);
-  Vote createVote(Profile... profiles);
-  Vote createVote(List<Profile> profiles);
-  List<Vote> createVoteSnapshot(List<Vote> votes);
   Voter createVoter(Profile voter, Election election);
   VoteRecord createVoteRecord(Election election, List<Profile> votes);
   Division createDivision(String newDivisionName);

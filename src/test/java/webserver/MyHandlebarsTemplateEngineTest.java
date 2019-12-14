@@ -3,6 +3,8 @@ package webserver;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import fsc.entity.Election;
+import fsc.voting.VoteTarget;
+import fsc.voting.VotingRoundResult;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,6 +23,34 @@ public class MyHandlebarsTemplateEngineTest {
   public void setUp() {
     engine = new MyHandlebarsTemplateEngine();
     handlebars = engine.getHandlebars();
+  }
+
+  @Test
+  public void lengthHelperWorks() throws IOException {
+    assertTemplateInContextProduces(
+          "{{length this}}",
+          List.of(1, 2, 3),
+          "3");
+    assertTemplateInContextProduces(
+          "{{length this}}",
+          List.of(),
+          "0");
+  }
+
+  @Test
+  public void formatResultHelperWorks() throws IOException {
+    assertTemplateInContextProduces(
+          "{{formatResult this}}",
+          VotingRoundResult.win(VoteTarget.from("x")),
+          "Won: x");
+    assertTemplateInContextProduces(
+          "{{formatResult this}}",
+          VotingRoundResult.tied(VoteTarget.from("x"), VoteTarget.from("y")),
+          "Tied: x y");
+    assertTemplateInContextProduces(
+          "{{formatResult this}}",
+          VotingRoundResult.eliminate(VoteTarget.from("x")),
+          "Eliminated: x");
   }
 
   @Test

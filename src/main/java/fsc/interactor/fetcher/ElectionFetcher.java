@@ -7,9 +7,9 @@ import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import fsc.response.ViewResponse;
 import fsc.utils.builder.Builder;
 import fsc.voting.ElectionRecord;
+import fsc.voting.Vote;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -172,14 +172,10 @@ public class ElectionFetcher extends CommitteeFetcher {
   }
 
   private Builder<ElectionRecord, Response> retrieveRecord(Election e) {
-    Collection<VoteRecord> voteRecords = e.getVoteRecords();
-    List<Vote> votes = voteRecords.stream()
-                                  .map(VoteRecord::getVotes)
-                                  .map(this::fetchProfiles)
-                                  .map(b -> b.resolveWith(
-                                        profileList -> new ViewResponse(new Vote(profileList))))
-                                  .map(r -> ((ViewResponse<Vote>) r).getValues())
-                                  .collect(Collectors.toList());
+    List<Vote> votes = e.getVoteRecords().stream()
+                        .map(VoteRecord::getVotes)
+                        .map(Vote::fromUsernames)
+                        .collect(Collectors.toList());
 
     ElectionRecord electionRecord = new ElectionRecord(votes);
     electionRecord.runElection();

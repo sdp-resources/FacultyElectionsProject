@@ -1,19 +1,15 @@
 package fsc.voting;
 
-import fsc.entity.Profile;
-
 import java.util.*;
 
 public class CandidateTally implements Comparable<CandidateTally> {
-  public static final Comparator<CandidateTally> alphaComparator =
-        Comparator.comparing(o -> o.profile.getUsername());
   public static final Comparator<CandidateTally> rankComparator = new ReverseRankComparator();
 
-  public final Profile profile;
+  public final VoteTarget target;
   private final List<Integer> rankCounts;
 
-  public CandidateTally(Profile profile, Integer... rankCounts) {
-    this.profile = profile;
+  public CandidateTally(VoteTarget target, Integer... rankCounts) {
+    this.target = target;
     this.rankCounts = new ArrayList<>(Arrays.asList(rankCounts));
   }
 
@@ -23,8 +19,6 @@ public class CandidateTally implements Comparable<CandidateTally> {
     }
     rankCounts.set(rank, rankCounts.get(rank) + 1);
   }
-
-  public String getUsername() { return profile.getUsername(); }
 
   public boolean isMorePreferredThan(CandidateTally other) {
     return compareTo(other) < 0;
