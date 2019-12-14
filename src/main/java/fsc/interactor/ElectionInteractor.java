@@ -98,6 +98,11 @@ public class ElectionInteractor extends Interactor {
                           .resolveWith(ResponseFactory::ofVoteRecord);
   }
 
+  public Response execute(GetElectionResultsRequest request) {
+    return electionFetcher.fetchElectionResults(request.electionID)
+          .resolveWith(ResponseFactory::ofElectionRecord);
+  }
+
   public Response execute(ViewVoteRecordRequest request) {
     return electionFetcher.fetchRecord(request.recordId)
                           .resolveWith(ResponseFactory::ofVoteRecord);
@@ -127,6 +132,14 @@ public class ElectionInteractor extends Interactor {
                           .bindWith(electionFetcher.fetchElectionInSetupState(request.electionId),
                                     electionFetcher::createVoter)
                           .mapThrough(electionFetcher::addVoter)
+                          .perform(electionFetcher::save)
+                          .resolveWith(ResponseFactory::ofVoter);
+  }
+
+  public Response execute(RemoveVoterRequest request) {
+    return electionFetcher.fetchProfile(request.username)
+                          .bindWith(electionFetcher.fetchElectionInSetupState(request.electionId),
+                                    electionFetcher::removeVoter)
                           .perform(electionFetcher::save)
                           .resolveWith(ResponseFactory::ofVoter);
   }

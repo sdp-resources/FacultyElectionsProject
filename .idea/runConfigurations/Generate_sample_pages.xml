@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Generate sample pages" type="JUnit" factoryName="JUnit">
+    <module name="facultyElections.test" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="webserver.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="webserver" />
+    <option name="MAIN_CLASS_NAME" value="webserver.SamplePageGenerator" />
+    <option name="METHOD_NAME" value="createPages" />
+    <option name="TEST_OBJECT" value="method" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    <envs>
+      <env name="USE_LOCAL_DB" value="true" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

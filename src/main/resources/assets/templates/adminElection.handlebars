@@ -1,0 +1,183 @@
+{{> header.hbs}}
+<div class="row">
+  <div class="col">
+    <h2>Election for {{election.seat.name}}</h2>
+    <form class="form-inline" action="{{path "adminElection" election.electionID}}" method="post">
+      <div class="form-group">
+        <label for="state">Current state:</label>
+        <select class="form-control mx-2" name="state" id="selectState">
+          {{#each states}}
+            <option value="{{this}}" {{#eq this.string election.state}}selected="selected"{{/eq}}>{{this}}</option>
+          {{/each}}
+        </select>
+        <button type="submit" class="btn btn-danger">Change State</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row  mt-2">
+<div class="col">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="candidates-tab" data-toggle="tab" href="#candidates" role="tab"
+         aria-controls="candidates" aria-selected="false">Candidates</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="voters-tab" data-toggle="tab" href="#voters" role="tab"
+         aria-controls="voters" aria-selected="false">Voters</a>
+
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="records-tab" data-toggle="tab" href="#records" role="tab"
+         aria-controls="records" aria-selected="false">Votes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="results-tab" data-toggle="tab" href="#results" role="tab"
+         aria-controls="results" aria-selected="false">Results</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="candidates" role="tabpanel" aria-labelledby="candidates-tab">
+      <h4>Candidates</h4>
+      <form action="{{path 'candidateAdd' election.electionID}}" class="w-50" method="post">
+        <div class="form-group">
+          <select name="username" id="addCandidate"
+                  class="form-control selectpicker w-75"
+                  title="User to add ..."
+                  data-live-search="true">
+            {{#each missingCandidates}}
+              <option value="{{username}}">{{name}}</option>
+            {{/each}}
+          </select>
+          {{#eq election.state "Setup"}}
+            <button type="submit" class="btn btn-primary">Add Candidate</button>
+          {{else}}
+            <button type="submit" class="btn btn-primary" disabled
+                    title="Candidates can only be added in Setup phase">Add Candidate
+            </button>
+          {{/eq}}
+        </div>
+      </form>
+      <table class="table table-condensed w-50">
+        <thead>
+        <tr>
+          <th class="w-75">Name</th>
+          <th class="w-25 text-center">Status</th>
+          <th class="w-25">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each election.candidates}}
+          <tr>
+            <td>{{profile.name}}</td>
+            <td class="text-center">{{> candidateStatus.hbs status.string}}</td>
+            <td class="text-center">
+              <form action="{{path "candidateDelete" election.electionID profile.username}}"
+                    method="post">
+                {{#eq election.state "Setup"}}
+                  <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+                {{else}}
+                  <button class="btn btn-danger" disabled
+                          title="Candidates can only be removed during Setup phase">
+                    <i class="fas fa-times"></i>
+                  </button>
+                {{/eq}}
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="voters" role="tabpanel" aria-labelledby="voters-tab">
+      <h4>Voters</h4>
+      <form action="{{path 'voterAdd' election.electionID}}" class="w-50" method="post">
+        <div class="form-group">
+          <select name="username" id="addVoter"
+                  class="form-control selectpicker w-75"
+                  title="User to add ..."
+                  data-live-search="true">
+            {{#each missingVoters}}
+              <option value="{{username}}">{{name}}</option>
+            {{/each}}
+          </select>
+          {{#eq election.state "Setup"}}
+            <button type="submit" class="btn btn-primary">Add Voter</button>
+          {{else}}
+            <button type="submit" class="btn btn-primary" disabled
+                    title="Voters can only be added in Setup phase">Add Voter
+            </button>
+          {{/eq}}
+        </div>
+      </form>
+      <table class="table table-condensed w-50">
+        <thead>
+        <tr>
+          <th class="w-75">Name</th>
+          <th class="w-25 text-center">Voted</th>
+          <th class="w-25">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each election.voters}}
+          <tr>
+            <td>{{profile.name}}</td>
+            <td class="text-center">
+              {{#if voted}}
+                <i class="text-success fas fa-person-booth"></i>
+              {{else}}
+                <i class="text-warning fas fa-person-booth"></i>
+              {{/if}}
+            </td>
+            <td class="text-center">
+              <form action="{{path "voterDelete" election.electionID profile.username}}"
+                    method="post">
+                {{#eq election.state "Setup"}}
+                  <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+                {{else}}
+                  <button class="btn btn-danger" disabled
+                          title="Voters can only be removed during Setup phase">
+                    <i class="fas fa-times"></i>
+                  </button>
+                {{/eq}}
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="records" role="tabpanel" aria-labelledby="records-tab">
+      <h4>Vote Records</h4>
+      <table class="table table-condensed w-100">
+        <thead>
+        <tr>
+          <th style="width: 5%;">id</th>
+          <th class="w-25 text-center">timestamp</th>
+          <th class="w-50">votes</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each election.votes}}
+          <tr>
+            <td>{{recordId}}</td>
+            <td class="text-center">{{datetime timestamp "dd-MM-yyyy hh:mm"}}</td>
+            <td>{{join votes " "}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="results" role="tabpanel" aria-labelledby="results-tab">
+      <h4>Vote results</h4>
+      {{results}}
+
+    </div>
+  </div>
+{{> footer.hbs}}
+{{#block "stylesheets"}}
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+{{/block}}
+{{#block "javascripts"}}
+    <script src="js/bootstrap-select.min.js"></script>
+{{/block}}

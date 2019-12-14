@@ -21,8 +21,8 @@
     <li class="nav-item"><a href="{{path 'root'}}" class="nav-link">Home</a></li>
     {{#if isAdmin}}
       <li class="nav-item"><a href="{{path 'adminProfile'}}" class="nav-link">Profiles</a></li>
-      <li class="nav-item"><a href="/admin/election" class="nav-link">Election</a></li>
-      <li class="nav-item"><a href="/admin/committee" class="nav-link">Committee</a></li>
+      <li class="nav-item"><a href="{{path 'adminElections'}}" class="nav-link">Election</a></li>
+      <li class="nav-item"><a href="{{path 'adminAllCommittees'}}" class="nav-link">Committee</a></li>
       <li class="nav-item"><a href="{{path 'queryAll'}}" class="nav-link">Queries</a></li>
 
     {{/if}}

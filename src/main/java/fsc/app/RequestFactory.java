@@ -91,7 +91,7 @@ public class RequestFactory {
   }
 
   public Request addVoter(String username, Long electionId) {
-    return new AddVoterRequest(username, electionId);
+    return new AddVoterRequest(electionId, username);
   }
 
   public Request viewActiveElections() {
@@ -132,5 +132,17 @@ public class RequestFactory {
 
   public Request editCommittee(long id, Map<String, Object> changes) {
     return new EditCommitteeRequest(id, changes);
+  }
+
+  public Request removeCandidate(Long electionid, String username) {
+    return new RemoveFromBallotRequest(electionid, username);
+  }
+
+  public Request removeVoter(Long electionid, String username) {
+    return new RemoveVoterRequest(electionid, username);
+  }
+
+  public Request getElectionResults(long electionID) {
+    return new GetElectionResultsRequest(electionID);
   }
 }

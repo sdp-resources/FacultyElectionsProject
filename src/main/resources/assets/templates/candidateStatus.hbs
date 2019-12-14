@@ -1,0 +1,11 @@
+{{#eq this "Willing"}}
+  <i class="{{classes}} text-success fas fa-user-check"></i>
+{{else}}
+  {{#eq this "Declined"}}
+    <i class="{{classes}} text-danger fas fa-user-times"></i>
+  {{else}}
+    {{#eq this "NoAnswer"}}
+      <i class="{{classes}} text-warning far fa-question-circle"></i>
+    {{/eq}}
+  {{/eq}}
+{{/eq}}

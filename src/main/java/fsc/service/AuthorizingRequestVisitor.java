@@ -43,6 +43,14 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
     return isAuthorizedAsAdminOrUser(request, request.username);
   }
 
+  public Object visit(RemoveVoterRequest request) {
+    return isAuthorizedAsAdmin(request);
+  }
+
+  public Object visit(GetElectionResultsRequest request) {
+    return isAuthorizedAsAdmin(request);
+  }
+
   public Object visit(ViewCandidatesRequest request) {
     return isAuthenticated(request);
   }

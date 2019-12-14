@@ -1,29 +1,22 @@
 {{> header.hbs}}
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2>Elections</h2>
-      <ul>
-        {{#each values}}
-          <li class="election" data-name="{{name}}">
-            <h4>For committee: {{committee.name}}</h4>
-            <h3>Seat: {{seat.name}}</h3>
-            Ballot:
-            <ul>
-              {{#with candidates}}
-                {{#each candidates}}
-                  <li class="candidate" data-name="{{profile.name}}">
-                    {{profile.name}} ({{profile.username}})
-                  </li>
-                {{/each}}
-
-              {{/with}}
-            </ul>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+<div class="row">
+  <div class="col-sm-8">
+    <h2 class="m-2">Elections</h2>
+    <table class="table table-condensed">
+      <tbody>
+      {{#each elections}}
+        <tr class="election" data-name="{{name}}">
+          <td>{{committee.name}}</td>
+          <td>{{seat.name}}</td>
+          <td>{{state}}</td>
+          <td>
+            <form action="{{path 'adminElection' electionID}}">
+              <button type="submit" class="btn btn-success">Edit</button></form></td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
   </div>
 </div>
 {{> footer.hbs}}

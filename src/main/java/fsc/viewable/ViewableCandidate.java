@@ -13,6 +13,10 @@ public class ViewableCandidate {
     this.status = status;
   }
 
+  public ViewableProfile getProfile() {
+    return profile;
+  }
+
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

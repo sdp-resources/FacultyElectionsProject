@@ -1,6 +1,5 @@
 package webserver;
 
-import com.github.jknack.handlebars.helper.AssignHelper;
 import fsc.app.AppContext;
 import fsc.response.ErrorResponse;
 import fsc.viewable.ViewableProfile;
@@ -46,15 +45,6 @@ public class RequestHandler {
     req.session().attribute("flash", message);
   }
 
-  String oldServeTemplate(String templatePath, HashMap<Object, Object> model) {
-    Session requestSession = req.session();
-    model.put("session", requestSession.attribute("session"));
-    model.put("flash", requestSession.attribute("flash"));
-    requestSession.removeAttribute("flash");
-
-    return templateEngine.render(new ModelAndView(model, templatePath));
-  }
-
   protected String serveTemplate(String templatePath) {
     modelSet("basePath", getRelativeBasePath());
     Session requestSession = req.session();
@@ -66,7 +56,7 @@ public class RequestHandler {
     modelSet("flash", requestSession.attribute("flash"));
     requestSession.removeAttribute("flash");
 
-    return templateEngine.render(new ModelAndView(model, templatePath));
+    return templateEngine.render(model, templatePath);
   }
 
   private String getRelativeBasePath() {
@@ -116,8 +106,10 @@ public class RequestHandler {
   protected String getRequestParameter(String key) {
     if (req.queryMap().hasKey(key)) return req.queryParams(key);
     String paramKey = ":" + key.toLowerCase();
-    if (req.params().containsKey(paramKey)) return req.params(
-          paramKey);
+    if (req.params().containsKey(paramKey)) {
+      return req.params(
+            paramKey);
+    }
     throw new RuntimeException("Requested parameter not present: " + key);
   }
 
@@ -151,8 +143,8 @@ public class RequestHandler {
     };
   }
 
-  protected Long getRequestParameterLong(String electionid) {
-    return Long.valueOf(getRequestParameter(electionid));
+  protected Long getRequestParameterLong(String name) {
+    return Long.valueOf(getRequestParameter(name));
   }
 
   protected class RequireAuthenticationException extends RuntimeException {}

@@ -7,7 +7,7 @@ public class ViewResponse<T> implements Response<T> {
 
   private final T values;
 
-  ViewResponse(T values) {
+  public ViewResponse(T values) {
     this.values = values;
   }
 

@@ -16,7 +16,7 @@ public class CandidateTallyTest {
   private EntityFactory entityFactory = new SimpleEntityFactory();
 
   @Test
-  public void candidateTalliesCanBecompared() {
+  public void candidateTalliesCanBeCompared() {
     assertTrue(new CandidateTally(cA, 2)
                      .isMorePreferredThan(new CandidateTally(cB, 1)));
     assertFalse(new CandidateTally(cA, 1)

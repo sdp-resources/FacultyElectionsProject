@@ -32,7 +32,7 @@ public class Path {
     return join("user");
   }
   static String ballot() {
-    return ballot(":electionid");
+    return ballot(":electionId");
   }
 
   static String admin() {
@@ -43,7 +43,7 @@ public class Path {
     return join("admin", "profile");
   }
 
-  static String adminElection() {
+  static String adminElections() {
     return join("admin", "election");
   }
 
@@ -57,6 +57,18 @@ public class Path {
 
   static String committee(Long committeeId) {
     return committee(String.valueOf(committeeId));
+  }
+
+  static String adminElection() {
+    return adminElection(":electionId");
+  }
+
+  static String adminElection(Long electionID) {
+    return adminElection(String.valueOf(electionID));
+  }
+
+  static String adminElection(String s) {
+    return join("election", s);
   }
 
   static String committee(String committeeId) {
@@ -74,7 +86,7 @@ public class Path {
   }
 
   public static String decideToStand() {
-    return decideToStand(":electionid");
+    return decideToStand(":electionId");
   }
 
   private static String decideToStand(String name) {
@@ -91,5 +103,53 @@ public class Path {
 
   private static String join(String... parts) {
     return "/" + String.join("/", parts);
+  }
+
+  public static String candidateAdd() {
+    return candidateAdd(":electionID");
+  }
+
+  public static String candidateAdd(String s) {
+    return join("candidate", "add", s);
+  }
+
+  public static String candidateAdd(Long electionid) {
+    return candidateAdd(String.valueOf(electionid));
+  }
+
+  public static String voterAdd() {
+    return voterAdd(":electionID");
+  }
+
+  public static String voterAdd(String s) {
+    return join("voter", "add", s);
+  }
+
+  public static String voterAdd(Long electionid) {
+    return voterAdd(String.valueOf(electionid));
+  }
+
+  public static String candidateDelete() {
+    return candidateDelete(":electionID", ":username");
+  }
+
+  public static String candidateDelete(String electionId, String username) {
+    return join("candidate", "delete", electionId, username);
+  }
+
+  public static String candidateDelete(Long electionId, String username) {
+    return candidateDelete(String.valueOf(electionId), username);
+  }
+
+  public static String voterDelete() {
+    return voterDelete(":electionID", ":username");
+  }
+
+  public static String voterDelete(String electionId, String username) {
+    return join("voter", "add", electionId, username);
+  }
+
+  public static String voterDelete(Long electionId, String username) {
+    return voterDelete( String.valueOf(electionId), username);
   }
 }

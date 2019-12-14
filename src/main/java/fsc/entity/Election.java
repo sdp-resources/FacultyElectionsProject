@@ -181,8 +181,11 @@ public class Election {
   }
 
   public enum State {
-    Setup, DecideToStand, Vote, Closed
+    Setup, DecideToStand, Vote, Closed;
 
+    public String getString() {
+      return this.toString();
+    }
   }
 }
 

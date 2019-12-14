@@ -62,7 +62,7 @@ public class ProfileFetcher {
     profileGateway.addProfile(profile);
   }
 
-  public void save(Profile profile) {
+  public <T> void save(T entity) {
     profileGateway.save();
   }
 

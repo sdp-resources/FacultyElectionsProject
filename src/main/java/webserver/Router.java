@@ -3,12 +3,9 @@ package webserver;
 import dbGateway.DatabaseBackedGatewayFactory;
 import fsc.app.AppContext;
 import fsc.gateway.Gateway;
-import fsc.viewable.ViewableElection;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
-
-import java.util.HashMap;
 
 public class Router {
   protected Gateway gateway;
@@ -24,6 +21,7 @@ public class Router {
     // TODO: add edit committee path for changing committee details
     // TODO: Add edit seat path for changing seat details
     Spark.staticFiles.location(new AssetLoader().pathTo("/public"));
+
     Spark.get(Path.root(), this::getIndexPage);
     Spark.get(Path.login(), this::getLogin);
     Spark.post(Path.login(), this::postLogin);
@@ -39,18 +37,37 @@ public class Router {
     Spark.get(Path.adminProfile(), this::showAllProfiles);
     Spark.get(Path.adminAllCommittees(), this::showAllCommitteesPage);
     Spark.post(Path.committee(), this::editCommitteeSettings);
-    Spark.get(Path.adminElection(), this::showAllElections);
+    Spark.get(Path.adminElections(), this::showAllElections);
+    Spark.get(Path.adminElection(), this::showSingleElection);
     Spark.get(Path.validate(), this::validateQuery);
     Spark.post("/admin/profile", this::createProfile);
     Spark.get("/admin/profile/:username", this::getProfile);
     Spark.post("/admin/profile/:username", this::editProfile);
-    Spark.get("/admin/election/:electionid", this::showSingleElection);
-    Spark.post("/admin/election/:electionid", this::editElection);
-    Spark.post("/admin/election", this::createElection);
+    Spark.post(Path.candidateDelete(), this::deleteCandidate);
+    Spark.post(Path.candidateAdd(), this::addCandidate);
+    Spark.post(Path.voterDelete(), this::deleteVoter);
+    Spark.post(Path.voterAdd(), this::addVoter);
+    Spark.post(Path.adminElection(), this::editElectionState);
+    Spark.post(Path.adminElections(), this::createElection);
     Spark.exception(RequestHandler.RequireAuthenticationException.class,
                     this::handleUnauthorizedAccess);
     Spark.exception(UserRequestHandler.FailedRequestException.class,
                     this::handleFailedRequestException);
+  }
+
+  private Object addVoter(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).addVoter();
+  }
+
+  private Object deleteVoter(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).deleteVoter();
+  }
+  private Object addCandidate(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).addCandidate();
+  }
+
+  private Object deleteCandidate(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).deleteCandidate();
   }
 
   private Object editCommitteeSettings(Request req, Response res) {
@@ -91,12 +108,12 @@ public class Router {
     return null;
   }
 
-  private Object editElection(Request request, Response response) {
-    return null;
+  private Object editElectionState(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).changeElectionState();
   }
 
-  private Object showSingleElection(Request request, Response response) {
-    return null;
+  private Object showSingleElection(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).showElection();
   }
 
   private Object showAllProfiles(Request req, Response res) {
@@ -139,20 +156,12 @@ public class Router {
     return new AdminRequestHandler(req, res, appContext).processGetIndex();
   }
 
-  private Object showAllElections(Request req, Response res) {
-    HashMap<Object, Object> returnedHash = new HashMap<>();
-    returnedHash.put("values", appContext.getAllElections());
-    return new LoginRequestHandler(req, res, appContext)
-                 .oldServeTemplate("/electionList.handlebars", returnedHash);
+  private Object createElection(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).createElection();
   }
 
-  // TODO: Need to clean this up and move it
-  private Object createElection(Request req, Response res) {
-    fsc.response.Response<ViewableElection> response = appContext.createElection(
-          Long.valueOf(getParam(req, "seatId")));
-    ViewableElection election = response.getValues();
-    res.redirect("/election");
-    return null;
+  private Object showAllElections(Request req, Response res) {
+    return new ElectionRequestHandler(req, res, appContext).showElections();
   }
 
   private String getParam(Request req, String committee) {

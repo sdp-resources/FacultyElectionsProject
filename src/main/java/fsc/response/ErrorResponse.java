@@ -24,6 +24,7 @@ public class ErrorResponse<T> implements Response<T> {
   public static final String INVALID_SESSION = "Session token no longer valid";
   public static final String INVALID_CANDIDATE_STATE = "Not a valid candidate state";
   public static final String INVALID_QUERY_NAME = "Unknown query name";
+  public static final String VOTER_MISSING = "This is not a valid voter for this election.";
   public String message;
 
   public ErrorResponse(String s) {

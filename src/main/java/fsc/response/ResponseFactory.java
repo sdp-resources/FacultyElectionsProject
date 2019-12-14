@@ -6,6 +6,7 @@ import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.*;
+import fsc.voting.ElectionRecord;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +19,9 @@ public class ResponseFactory {
     return new ViewResponse<>(entityConverter.convertProfiles(profiles));
   }
 
+  public static Response ofElectionRecord(ElectionRecord record) {
+    return new ViewResponse<>(record);
+  }
   public static Response ofProfile(Profile profile) {
     return new ViewResponse<>(entityConverter.convert(profile));
   }
@@ -168,5 +172,9 @@ public class ResponseFactory {
 
   public static Response invalidKey(String key) {
     return new ErrorResponse("Invalid Key: " + key);
+  }
+
+  public static Response voterMissing() {
+    return new ErrorResponse(ErrorResponse.VOTER_MISSING);
   }
 }

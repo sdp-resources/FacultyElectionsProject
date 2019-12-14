@@ -8,7 +8,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
-class ElectionRecord extends AbstractList<VotingRound> {
+public class ElectionRecord extends AbstractList<VotingRound> {
   private List<VotingRound> rounds = new ArrayList<>();
   private List<Vote> votes;
 
@@ -17,6 +17,7 @@ class ElectionRecord extends AbstractList<VotingRound> {
   }
 
   public void runElection() {
+    if (votes.size() == 0) { return; }
     computeNextRound();
     while (!lastRoundHadWinner()) {
       eliminateACandidate();

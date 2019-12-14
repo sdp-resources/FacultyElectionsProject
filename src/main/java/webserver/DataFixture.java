@@ -6,6 +6,7 @@ import fsc.gateway.Gateway;
 import fsc.service.Authorizer;
 import fsc.service.query.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class DataFixture {
@@ -53,6 +54,8 @@ public class DataFixture {
     Profile wilson = addProfile("Theresa Wilson", "wilsont", "Natural Sciences", "untenured");
     Profile johnson = addProfile("Kate Johnson", "johnsonk", "Humanities", "tenured");
     Profile stokes = addProfile("Kay Stokes", "stokes", "Arts and Letters", "administrator");
+    addProfile("Barb Wahl", "wahl", "Natural Sciences", "tenured");
+    addProfile("Uschi Appelt", "appelt", "Arts and Letters", "administrator");
     Committee cof = addCommittee("CoF", "Committee of the Faculty", isTenuredOrUntenured);
     Committee fec = addCommittee("FEC", "Faculty Evaluation Committee", isTenuredOrUntenured);
     Committee fsc = addCommittee("FSC", "Faculty Steering Committee", isActiveAndNotChaplain);
@@ -125,6 +128,9 @@ public class DataFixture {
     Election election4 = addElection(fecTenured3, Election.State.DecideToStand,
                                      List.of(johnson),
                                      List.of(wilson, johnson, stokes));
+    addVoteRecord(election2, skiadas, List.of(wilson, johnson, stokes));
+    addVoteRecord(election2, wilson, List.of(johnson, stokes, skiadas));
+    addVoteRecord(election2, stokes, List.of(skiadas, johnson));
   }
 
   private Query queryFromString(String queryString) {
@@ -196,5 +202,13 @@ public class DataFixture {
     }
     gateway.save();
     return election;
+  }
+
+  private VoteRecord addVoteRecord(Election election, Profile voterProfile, List<Profile> votes) {
+    election.getVoter(voterProfile).setVoted(true);
+    VoteRecord voteRecord = new VoteRecord(election, LocalDateTime.now(), votes);
+    gateway.addVoteRecord(voteRecord);
+    gateway.save();
+    return voteRecord;
   }
 }

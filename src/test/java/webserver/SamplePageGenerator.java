@@ -1,9 +1,11 @@
 package webserver;
 
+import fsc.entity.Election;
 import org.junit.Test;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.Collection;
 
 public class SamplePageGenerator extends ServerTest {
 
@@ -26,8 +28,22 @@ public class SamplePageGenerator extends ServerTest {
                     WebClients.adminLoggedInClient().followGet(Path.queryAll()));
     writePageToFile("admin/adminProfiles.html",
                     WebClients.adminLoggedInClient().followGet(Path.adminProfile()));
-    writePageToFile("voting.html",
-                    WebClients.getActiveElectionClient());
+    writePageToFile("admin/elections.html",
+                    WebClients.adminLoggedInClient().followGet(Path.adminElections()));
+    for (Election election : getElections()) {
+      writePageToFile("admin/adminElection" + election.getID() + ".html",
+                      WebClients.adminLoggedInClient().followGet(Path.adminElection(election.getID())));
+    }
+    try {
+      writePageToFile("voting.html",
+                      WebClients.getActiveElectionClient());
+    } catch (RuntimeException e) {
+      System.out.println(e);
+    }
+  }
+
+  private Collection<Election> getElections() {
+    return router.getGateway().getAllElections();
   }
 
   private void copyOverAssets() throws IOException {
@@ -50,9 +66,6 @@ public class SamplePageGenerator extends ServerTest {
 
   private void createDirectoryIfNotExists(String directoryName) throws IOException {
     java.nio.file.Path path = fileSystem.getPath(testPageDir, directoryName);
-    System.out.println(testPageDir);
-    System.out.println(directoryName);
-    System.out.println(path);
     if (!Files.exists(path)) {
       Files.createDirectories(path);
     }

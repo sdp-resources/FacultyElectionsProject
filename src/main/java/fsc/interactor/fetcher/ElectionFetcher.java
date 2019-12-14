@@ -7,7 +7,9 @@ import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
+import fsc.response.ViewResponse;
 import fsc.utils.builder.Builder;
+import fsc.voting.ElectionRecord;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,7 +61,6 @@ public class ElectionFetcher extends CommitteeFetcher {
   public VoterBuilder fetchVoterOnlyIfNoRecord(long voterId) {
     return fetchVoter(voterId).escapeIfVoted();
   }
-
 
   public Builder<Election, Response> removeProfile(Election election, Profile profile) {
     election.removeCandidate(profile);
@@ -154,6 +155,35 @@ public class ElectionFetcher extends CommitteeFetcher {
     return voter == null ?
            Builder.ofResponse(ResponseFactory.invalidVoter()) :
            Builder.ofValue(voter);
+  }
+
+  public Builder<Voter, Response> removeVoter(Profile profile, Election election) {
+    Voter voter = election.getVoter(profile);
+    if (voter == null) {
+      return Builder.ofResponse(ResponseFactory.voterMissing());
+    }
+    election.removeVoter(voter);
+    return Builder.ofValue(voter);
+  }
+
+  public Builder<ElectionRecord, Response> fetchElectionResults(long electionID) {
+    return fetchElection(electionID)
+                 .mapThrough(this::retrieveRecord);
+  }
+
+  private Builder<ElectionRecord, Response> retrieveRecord(Election e) {
+    Collection<VoteRecord> voteRecords = e.getVoteRecords();
+    List<Vote> votes = voteRecords.stream()
+                                  .map(VoteRecord::getVotes)
+                                  .map(this::fetchProfiles)
+                                  .map(b -> b.resolveWith(
+                                        profileList -> new ViewResponse(new Vote(profileList))))
+                                  .map(r -> ((ViewResponse<Vote>) r).getValues())
+                                  .collect(Collectors.toList());
+
+    ElectionRecord electionRecord = new ElectionRecord(votes);
+    electionRecord.runElection();
+    return Builder.ofValue(electionRecord);
   }
 
   public class VoteRecordPair {

@@ -23,7 +23,7 @@ public class HandlebarsHelpersTest {
     assertCompilationGives("Stuff here {{path 'ballot' 5}} stuff later",
                            "Stuff here /ballot/5 stuff later");
     assertCompilationGives("Stuff here {{path 'ballot'}} stuff later",
-                           "Stuff here /ballot/:electionid stuff later");
+                           "Stuff here /ballot/:electionId stuff later");
   }
 
   @Test(expected = RuntimeException.class)

@@ -204,7 +204,7 @@ public class RoutesTest extends ServerTest {
               .assertResponseCodeIs(200);
     WebClients.adminLoggedInClient()
               .assertMatch(Matcher.attribute("", "href", Path.adminProfile()))
-              .assertMatch(Matcher.attribute("", "href", Path.adminElection()))
+              .assertMatch(Matcher.attribute("", "href", Path.adminElections()))
               .assertMatch(Matcher.attribute("", "href", Path.adminAllCommittees()));
   }
 

@@ -8,7 +8,7 @@ public class Vote extends AbstractList<Profile> {
 
   public final List<Profile> order = new ArrayList<>();
 
-  Vote(List<Profile> profiles) {
+  public Vote(List<Profile> profiles) {
     order.addAll(profiles);
   }
 

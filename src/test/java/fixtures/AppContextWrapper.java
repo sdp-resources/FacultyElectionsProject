@@ -97,16 +97,16 @@ class AppContextWrapper {
     return appContext.editSeat(seatId, changes).isSuccessful();
   }
 
-  ViewableElection createElection(long seatId) {
-    return appContext.createElection(seatId).getValues();
+  ViewableElection createElection(long seatId, String token) {
+    return appContext.createElection(seatId, token).getValues();
   }
 
   boolean addCandidate(Long electionId, String name) {
-    return appContext.addCandidate(electionId, name).isSuccessful();
+    return appContext.addCandidate(electionId, name, null).isSuccessful();
   }
 
   ViewableVoter addVoter(String username, Long electionId) {
-    return appContext.addVoter(username, electionId).getValues();
+    return appContext.addVoter(electionId, username, null).getValues();
   }
 
   List<ViewableVoteRecord> getAllVotes(Long electionId) {
@@ -122,11 +122,11 @@ class AppContextWrapper {
   }
 
   Collection<ViewableElection> getAllElections() {
-    return appContext.getAllElections().getValues();
+    return appContext.getAllElections(null).getValues();
   }
 
   ViewableElection viewElection(Long electionId) {
-    return appContext.viewElection(electionId).getValues();
+    return appContext.viewElection(electionId, null).getValues();
   }
 
   void shutdown() {
@@ -143,7 +143,7 @@ class AppContextWrapper {
   }
 
   public Response setElectionState(Long electionId, String state) {
-    return appContext.setElectionState(electionId, state);
+    return appContext.setElectionState(electionId, state, null);
   }
 
   private class TestableAppContext extends AppContext {

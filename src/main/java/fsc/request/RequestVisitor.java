@@ -39,4 +39,6 @@ public interface RequestVisitor {
   Object visit(AddPasswordRecordRequest request);
   Object visit(ViewActiveElectionsRequest request);
   Object visit(ViewVoterRequest request);
+  Object visit(RemoveVoterRequest request);
+  Object visit(GetElectionResultsRequest request);
 }

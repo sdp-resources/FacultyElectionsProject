@@ -24,17 +24,7 @@
       <div class="card">
         <h5 class="card-header">{{election.seat.name}}
           {{#eq election.state "DecideToStand"}}
-            {{#eq candidateStatus "Willing"}}
-              <i class="float-right text-success fas fa-user-check"></i>
-            {{else}}
-              {{#eq candidateStatus "Declined"}}
-                <i class="float-right text-danger fas fa-user-times"></i>
-              {{else}}
-                {{#eq candidateStatus "NoAnswer"}}
-                  <i class="float-right text-warning far fa-question-circle"></i>
-                {{/eq}}
-              {{/eq}}
-            {{/eq}}
+            {{> candidateStatus.hbs candidateStatus classes="float-right"}}
           {{else}}
             {{#if voter}}
               {{#if voter.voted}}

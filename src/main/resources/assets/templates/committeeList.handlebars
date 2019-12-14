@@ -11,53 +11,50 @@
       </li>
     {{/each}}
   </ul>
-<div class="tab-content">
-{{#each committees}}
-  <div class="tab-pane committee" id="committee-{{id}}" role="tabpanel" aria-labelledby="committee-{{id}}-tab">
-  {{#assign "committeeName"}}{{name}}{{/assign}}
-  {{#assign "committeeId"}}{{id}}{{/assign}}
-    <h4 class="m-2 text-center">{{description}}</h4>
-    <form class="form-inline w-50 mx-auto" action="{{path "committee" id}}" method="POST" autocomplete="off">
-      <div class="form-group row w-100">
-        <label for="voterQuery-{{id}}" class="col-4 col-form-label">Eligible to vote:</label>
-        <div id="voterQuery-{{id}}" class="col-8 queryControl"
-             data-value="{{voterQuery}}"></div>
-      </div>
-    </form>
-      {{#each seats}}
-        {{#eq 0 (remainder @index 3)}}
-        <div class="m-2 card-deck justify-content-center">
-        {{/eq}}
-        <div class="card flex-grow-0" data-name="{{name}}" style="flex-basis: auto; width: 30%;">
-          <h5 class="card-header justify-content-center">Seat {{name}}</h5>
-          <div class="card-body">
-            <form class="form" action="{{path "seat" committeeName name}}" method="POST"
-                  autocomplete="off">
-              <div class="form-group text-center">
-                <label for="candidateQuery-{{committeeId}}-{{name}}" class="col-form-label">Eligible to
-                  stand:</label>
-                <div id="candidateQuery-{{committeeId}}-{{name}}" class="queryControl"
-                     data-value="{{query}}">
-                </div>
-              </div>
-            </form>
-
-            <form class="form-inline justify-content-center" method="post" action="{{path "adminElection"}}">
-              <div class="form-group row">
-                <input type="hidden" name="committee" value="{{committeeId}}">
-                <input type="hidden" name="seat" value="{{name}}">
-                <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
-              </div>
-            </form>
+  <div class="tab-content">
+    {{#each committees}}
+      <div class="tab-pane committee" id="committee-{{id}}" role="tabpanel" aria-labelledby="committee-{{id}}-tab">
+        {{#assign "committeeName"}}{{name}}{{/assign}}
+        {{#assign "committeeId"}}{{id}}{{/assign}}
+        <h4 class="m-2 text-center">{{description}}</h4>
+        <form class="form-inline w-50 mx-auto" action="{{path "committee" id}}" method="POST" autocomplete="off">
+          <div class="form-group w-100">
+            <label for="voterQuery-{{id}}">Eligible to vote:</label>
+            <div id="voterQuery-{{id}}" class="queryControl w-75 ml-2"
+                 data-value="{{voterQuery}}"></div>
           </div>
-        </div>
-        {{#or (eq @last "last") (eq 2 (remainder @index 3))}}
-        </div>
-        {{/or}}
-      {{/each}}
+        </form>
+        <table class="m-3 table table-bordered">
+          <tbody>
+          {{#each seats}}
+            <tr class="0" data-name="{{name}}">
+              <td>Seat {{name}}</td>
+              <td>
+                <form class="form-inline" action="{{path "seat" committeeName name}}" method="POST"
+                      autocomplete="off">
+                  <div class="form-group text-center col-12">
+                    <label for="candidateQuery-{{committeeId}}-{{name}}">Eligible to stand:</label>
+                    <div id="candidateQuery-{{committeeId}}-{{name}}" class="queryControl d-inline-block w-75 ml-2"
+                         data-value="{{query}}">
+                    </div>
+                  </div>
+                </form>
+              </td>
+              <td>
+                <form class="form-inline justify-content-center" method="post" action="{{path "adminElections"}}">
+                  <div class="form-group row">
+                    <input type="hidden" name="seatId" value="{{id}}">
+                    <input class="startElection btn btn-outline-success" type="submit" value="Start Election">
+                  </div>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{/each}}
   </div>
-{{/each}}
-</div>
 {{> footer.hbs}}
 
 

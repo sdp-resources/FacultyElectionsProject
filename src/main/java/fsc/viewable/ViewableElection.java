@@ -44,10 +44,6 @@ public class ViewableElection {
     return query;
   }
 
-  public Collection<ViewableCandidate> getCandidates() {
-    return candidates;
-  }
-
   public Collection<ViewableVoter> getVoters() {
     return voters;
   }

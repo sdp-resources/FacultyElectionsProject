@@ -4,7 +4,7 @@ public class CreateElection {
   private long electionId;
 
   public CreateElection(long seatId) {
-    electionId = TestContext.app.createElection(seatId).electionID;
+    electionId = TestContext.app.createElection(seatId, null).electionID;
   }
 
   public long getElectionId() {

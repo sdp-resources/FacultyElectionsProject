@@ -160,4 +160,12 @@ public abstract class Interactor {
   public Response execute(EditNamedQueryRequest request) {
     return delegate(request);
   }
+
+  public Response execute(RemoveVoterRequest request) {
+    return delegate(request);
+  }
+
+  public Response execute(GetElectionResultsRequest request) {
+    return delegate(request);
+  }
 }

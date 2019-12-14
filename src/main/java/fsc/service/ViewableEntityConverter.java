@@ -14,7 +14,7 @@ public class ViewableEntityConverter {
   public ViewableEntityConverter() { }
 
   private QueryStringConverter queryStringConverter = new QueryStringConverter();
-  private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+  private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-mm-yyy hh:mm");
 
   private String convert(Division division) {
     return division.getName();
@@ -60,7 +60,7 @@ public class ViewableEntityConverter {
 
   public ViewableVoteRecord convert(VoteRecord voteRecord) {
     return new ViewableVoteRecord(
-          convert(voteRecord.getDate()),
+          voteRecord.getDate(),
           voteRecord.getRecordId(),
           voteRecord.getVotes());
   }

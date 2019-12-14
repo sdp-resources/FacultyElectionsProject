@@ -9,6 +9,7 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.service.*;
 import fsc.viewable.*;
+import fsc.voting.ElectionRecord;
 
 import java.util.Collection;
 import java.util.List;
@@ -133,8 +134,8 @@ public class AppContext {
                                                               changes)));
   }
 
-  public Response addCandidate(Long electionId, String name) {
-    return getResponse(requestFactory.addCandidate(electionId, name));
+  public Response addCandidate(Long electionId, String name, String token) {
+    return getResponse(withToken(token, requestFactory.addCandidate(electionId, name)));
   }
 
   public Response<ViewableSeat> addSeat(
@@ -152,24 +153,26 @@ public class AppContext {
     return getResponse(withToken(token, requestFactory.viewActiveElections()));
   }
 
-  public Response<Collection<ViewableElection>> getAllElections() {
-    return getResponse(requestFactory.viewAllElections());
+  public Response<Collection<ViewableElection>> getAllElections(String token) {
+    return getResponse(withToken(token, requestFactory.viewAllElections()));
   }
 
-  public Response<ViewableElection> createElection(long seatId) {
-    return getResponse(requestFactory.createElection(seatId));
+  public Response<ViewableElection> createElection(long seatId, String token) {
+    return getResponse(withToken(token, requestFactory.createElection(seatId)));
   }
 
-  public Response setElectionState(Long electionId, String state) {
-    return getResponse(requestFactory.setElectionState(electionId, state));
+  public Response setElectionState(Long electionId, String state, String token) {
+    return getResponse(withToken(token, requestFactory.setElectionState(electionId, state)));
   }
 
-  public Response<ViewableElection> viewElection(Long electionId) {
-    return getResponse(requestFactory.viewElection(electionId));
+  public Response<ViewableElection> viewElection(Long electionId, String token) {
+    return getResponse(withToken(token, requestFactory.viewElection(electionId)));
   }
 
-  public Response<ViewableVoter> addVoter(String username, Long electionId) {
-    return getResponse(requestFactory.addVoter(username, electionId));
+  public Response<ViewableVoter> addVoter(
+        Long electionId, String username, String token
+  ) {
+    return getResponse(withToken(token, requestFactory.addVoter(username, electionId)));
   }
 
   public Response<List<ViewableVoteRecord>> getAllVotes(Long electionId) {
@@ -208,5 +211,17 @@ public class AppContext {
 
   public <T> Response<T> editNamedQuery(String token, String name, String queryString) {
     return getResponse(withToken(token, requestFactory.editNamedQuery(name, queryString)));
+  }
+
+  public Response removeCandidate(Long electionid, String username, String token) {
+    return getResponse(withToken(token, requestFactory.removeCandidate(electionid, username)));
+  }
+
+  public Response removeVoter(Long electionid, String username, String token) {
+    return getResponse(withToken(token, requestFactory.removeVoter(electionid, username)));
+  }
+
+  public Response<ElectionRecord> getElectionResults(long electionID, String token) {
+    return getResponse(withToken(token, requestFactory.getElectionResults(electionID)));
   }
 }

@@ -2,10 +2,12 @@ package webserver;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
+import fsc.entity.Election;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -19,6 +21,14 @@ public class MyHandlebarsTemplateEngineTest {
   public void setUp() {
     engine = new MyHandlebarsTemplateEngine();
     handlebars = engine.getHandlebars();
+  }
+
+  @Test
+  public void datetimeHelperWorks() throws IOException {
+    assertTemplateInContextProduces(
+          "{{datetime this 'dd-MM-yyyy hh:mm'}}",
+          LocalDateTime.of(2019, 2, 3, 4, 22),
+          "03-02-2019 04:22");
   }
 
   @Test
@@ -38,16 +48,26 @@ public class MyHandlebarsTemplateEngineTest {
 
   }
 
+  @Test
+  public void electionStatesAreRead() throws IOException {
+    assertTemplateInContextProduces(
+          "{{#each this}}{{this}} {{/each}}",
+          List.of(Election.State.values()),
+          "Setup DecideToStand Vote Closed ");
+  }
+
+  @Test
+  public void electionStatesCanCompareToString() throws IOException {
+    assertTemplateInContextProduces(
+          "{{#eq this.string 'Vote'}}yes{{/eq}}",
+          Election.State.Vote,
+          "yes");
+  }
+
   private void assertTemplateInContextProduces(String template, Object context, String expected)
         throws IOException {
     Template compiled = handlebars.compileInline(template);
     String result = compiled.apply(context);
     assertEquals(expected, result);
-  }
-
-  private Object contextWithN(final int n) {
-    return new Object() {
-      public int getN() { return n; }
-    };
   }
 }
