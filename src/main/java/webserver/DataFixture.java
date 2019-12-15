@@ -54,7 +54,7 @@ public class DataFixture {
     Profile wilson = addProfile("Theresa Wilson", "wilsont", "Natural Sciences", "untenured");
     Profile johnson = addProfile("Kate Johnson", "johnsonk", "Humanities", "tenured");
     Profile stokes = addProfile("Kay Stokes", "stokes", "Arts and Letters", "administrator");
-    addProfile("Barb Wahl", "wahl", "Natural Sciences", "tenured");
+    Profile wahl = addProfile("Barb Wahl", "wahl", "Natural Sciences", "tenured");
     addProfile("Uschi Appelt", "appelt", "Arts and Letters", "administrator");
     Committee cof = addCommittee("CoF", "Committee of the Faculty", isTenuredOrUntenured);
     Committee fec = addCommittee("FEC", "Faculty Evaluation Committee", isTenuredOrUntenured);
@@ -128,6 +128,9 @@ public class DataFixture {
     Election election4 = addElection(fecTenured3, Election.State.DecideToStand,
                                      List.of(johnson),
                                      List.of(wilson, johnson, stokes));
+    Election election5 = addElection(fecUntenured1, Election.State.Vote,
+                                     List.of(skiadas, wilson, johnson, stokes, wahl),
+                                     List.of(skiadas, wilson, johnson, stokes, wahl));
     addVoteRecord(election2, skiadas, List.of(wilson, johnson, stokes));
     addVoteRecord(election2, wilson, List.of(johnson, stokes, skiadas));
     addVoteRecord(election2, stokes, List.of(skiadas, johnson));

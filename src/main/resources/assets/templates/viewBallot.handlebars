@@ -1,5 +1,24 @@
 {{> header.hbs}}
-
+<div id="confirmationWindow" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Casting your Vote</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to cast a vote for the following candidate ranking:</p>
+        <ol id="votesInModal"></ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="$('#voteForm').submit();">Submit Vote</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row mt-8 pt-2">
   <div class="col-sm-4">
     <div class="card">
@@ -8,6 +27,7 @@
         <ul id="nonselected" class="list-group list-group-flush">
           {{#each candidates}}
             <li data-candidate="{{username}}"
+                data-fullname="{{name}}"
                 draggable="true" id="candidate-{{username}}"
                 class="candidate btn btn-outline-dark btn-block text-left">
               <div class="media">
@@ -26,10 +46,13 @@
   <div class="col-sm-4">
     <div class="card">
       <h4 class="card-header">Selected
-        <form action="{{path 'ballot' electionId}}" method="POST" class="float-right">
+        <form id="voteForm" action="{{path 'ballot' electionId}}" method="POST" class="float-right">
           <input type="hidden" name="voterId" value="{{voterId}}">
           <input type="hidden" name="votes" id="votes" value="">
-          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+          <button type="button" class="btn btn-primary btn-sm" id="confirmationButton"
+                  data-toggle="modal" data-target="#confirmationWindow">Submit
+          </button>
+          <button type="submit" class="btn btn-primary btn-sm" hidden>Submit</button>
         </form>
       </h4>
       <div class="card-body">
@@ -50,144 +73,145 @@
 {{> footer.hbs}}
 
 {{#*inline "javascripts"}}
-<script>
-  $(function () {
-    const $nonselected = $("#nonselected");
-    const $selected = $("#selected");
+  <script>
+    $(function () {
+      const $nonselected = $("#nonselected");
+      const $selected = $("#selected");
 
-    $nonselected.on("click", "li", e => addAtIndex(e.currentTarget));
-    $selected.on("click", "li", e => deselect(e.currentTarget));
-    setupDragAndDrop();
+      $nonselected.on("click", "li", e => addAtIndex(e.currentTarget));
+      $selected.on("click", "li", e => deselect(e.currentTarget));
+      setupDragAndDrop();
 
-    function markAsSelected(elem) {
-      $(elem).addClass('selected').find(".media-body")
-              .append("<span class='order badge badge-pill badge-secondary float-right'></span>");
-    }
-
-    function addAtIndex(elem, index) {
-      const $selectedCandidates = $selected.find(".candidate");
-      if (!index) {
-        index = $selectedCandidates.length + 1;
+      function markAsSelected(elem) {
+        $(elem).addClass('selected').find(".media-body")
+                .append("<span class='order badge badge-pill badge-secondary float-right'></span>");
       }
-      if (index === 1) {
-        $selected.prepend(elem);
-      } else {
-        $selectedCandidates.eq(index - 2).after(elem);
-      }
-      markAsSelected(elem);
-      renumber();
-    }
 
-    function deselect(elem) {
-      $nonselected.prepend(elem);
-      $(elem).removeClass('selected').find(".order").remove();
-      renumber();
-    }
-
-    function renumber() {
-      $("#selected li").each((index, elem) => {
-        $(elem).find(".order").text(index + 1);
-      });
-      updateHiddenField();
-    }
-
-    function getTransferItem(e) {
-      const transferItemId = e.dataTransfer.getData('text/plain');
-      return $(document.getElementById(transferItemId));
-    }
-
-    function prepareDrag(e) {
-      e.dataTransfer.setData('text/plain', e.currentTarget.id);
-      e.dataTransfer.setDragImage($(e.currentTarget).find("img")[0], 0, 0);
-    }
-
-    function getCurrentOrder($currentTarget) {
-      return parseInt($currentTarget.find(".order").text());
-    }
-
-    function insertTransferItemRelativetoCurrent($transfer, $current) {
-      if (!$transfer.hasClass('selected')) {
-        markAsSelected($transfer);
-        $current.before($transfer);
-      } else {
-        const targetOrder = getCurrentOrder($current);
-        const transferOrder = getCurrentOrder($transfer);
-        if (targetOrder < transferOrder) {
-          $current.before($transfer);
-        } else if (targetOrder > transferOrder) {
-          $current.after($transfer);
+      function addAtIndex(elem, index) {
+        const $selectedCandidates = $selected.find(".candidate");
+        if (!index) {
+          index = $selectedCandidates.length + 1;
         }
-      }
-    }
-
-    document.addEventListener('dragend', e => clearDragTargets());
-
-    function clearDragTargets() {
-      $('.dragTarget').removeClass('dragTarget');
-    }
-
-    function setDragTarget(target) {
-      clearDragTargets();
-      $(target).addClass('dragTarget');
-    }
-
-    function setupDragAndDrop() {
-      const selectedParent = document.getElementById("selected").parentNode;
-      const nonselectedParent = document.getElementById("nonselected").parentNode;
-      const allElements = document.getElementsByClassName("candidate");
-
-      selectedParent.addEventListener('dragenter', e => {
-        e.preventDefault();
-        setDragTarget(e.currentTarget);
-      });
-      selectedParent.addEventListener('dragover', e => e.preventDefault());
-
-      nonselectedParent.addEventListener('dragenter', e => {
-        e.preventDefault();
-        setDragTarget(e.currentTarget);
-      });
-      nonselectedParent.addEventListener('dragover', e => e.preventDefault());
-
-      selectedParent.addEventListener('drop', e => {
-        const $transferItem = getTransferItem(e);
-        if ($transferItem.hasClass('selected')) {
-          return false;
+        if (index === 1) {
+          $selected.prepend(elem);
+        } else {
+          $selectedCandidates.eq(index - 2).after(elem);
         }
-        markAsSelected($transferItem);
-        $(e.currentTarget).find("#selected").append($transferItem);
+        markAsSelected(elem);
         renumber();
-      });
-      nonselectedParent.addEventListener('drop', e => {
-        deselect(getTransferItem(e));
-        e.preventDefault();
-      });
+      }
 
-      for (const el of allElements) {
-        el.addEventListener('dragstart', e => prepareDrag(e));
-        el.addEventListener('dragenter', e => {
+      function deselect(elem) {
+        $nonselected.prepend(elem);
+        $(elem).removeClass('selected').find(".order").remove();
+        renumber();
+      }
+
+      function renumber() {
+        $("#selected li").each((index, elem) => {
+          $(elem).find(".order").text(index + 1);
+        });
+        updateHiddenField();
+      }
+
+      function getTransferItem(e) {
+        const transferItemId = e.dataTransfer.getData('text/plain');
+        return $(document.getElementById(transferItemId));
+      }
+
+      function prepareDrag(e) {
+        e.dataTransfer.setData('text/plain', e.currentTarget.id);
+        e.dataTransfer.setDragImage($(e.currentTarget).find("img")[0], 0, 0);
+      }
+
+      function getCurrentOrder($currentTarget) {
+        return parseInt($currentTarget.find(".order").text());
+      }
+
+      function insertTransferItemRelativetoCurrent($transfer, $current) {
+        if (!$transfer.hasClass('selected')) {
+          markAsSelected($transfer);
+          $current.before($transfer);
+        } else {
+          const targetOrder = getCurrentOrder($current);
+          const transferOrder = getCurrentOrder($transfer);
+          if (targetOrder < transferOrder) {
+            $current.before($transfer);
+          } else if (targetOrder > transferOrder) {
+            $current.after($transfer);
+          }
+        }
+      }
+
+      document.addEventListener('dragend', e => clearDragTargets());
+
+      function clearDragTargets() {
+        $('.dragTarget').removeClass('dragTarget');
+      }
+
+      function setDragTarget(target) {
+        clearDragTargets();
+        $(target).addClass('dragTarget');
+      }
+
+      function setupDragAndDrop() {
+        const selectedParent = document.getElementById("selected").parentNode;
+        const nonselectedParent = document.getElementById("nonselected").parentNode;
+        const allElements = document.getElementsByClassName("candidate");
+
+        selectedParent.addEventListener('dragenter', e => {
           e.preventDefault();
-          e.stopPropagation();
           setDragTarget(e.currentTarget);
         });
-        el.addEventListener('dragover', e => e.preventDefault());
-        el.addEventListener('drop', e => {
-          const $currentTarget = $(e.currentTarget);
-          if ($currentTarget.hasClass('selected')) {
-            e.stopPropagation();
-            insertTransferItemRelativetoCurrent(getTransferItem(e), $currentTarget);
-            renumber();
-          }
-          // nonselected will handle this drop
-        });
-      }
-    }
+        selectedParent.addEventListener('dragover', e => e.preventDefault());
 
-    function updateHiddenField() {
-      let names = $("#selected li")
-              .map((i, el) => $(el).data("candidate"))
-              .toArray().join(",");
-      $("#votes").val(names);
-    }
-  });
-</script>
+        nonselectedParent.addEventListener('dragenter', e => {
+          e.preventDefault();
+          setDragTarget(e.currentTarget);
+        });
+        nonselectedParent.addEventListener('dragover', e => e.preventDefault());
+
+        selectedParent.addEventListener('drop', e => {
+          const $transferItem = getTransferItem(e);
+          if ($transferItem.hasClass('selected')) {
+            return false;
+          }
+          markAsSelected($transferItem);
+          $(e.currentTarget).find("#selected").append($transferItem);
+          renumber();
+        });
+        nonselectedParent.addEventListener('drop', e => {
+          deselect(getTransferItem(e));
+          e.preventDefault();
+        });
+
+        for (const el of allElements) {
+          el.addEventListener('dragstart', e => prepareDrag(e));
+          el.addEventListener('dragenter', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            setDragTarget(e.currentTarget);
+          });
+          el.addEventListener('dragover', e => e.preventDefault());
+          el.addEventListener('drop', e => {
+            const $currentTarget = $(e.currentTarget);
+            if ($currentTarget.hasClass('selected')) {
+              e.stopPropagation();
+              insertTransferItemRelativetoCurrent(getTransferItem(e), $currentTarget);
+              renumber();
+            }
+            // nonselected will handle this drop
+          });
+        }
+      }
+
+      function updateHiddenField() {
+        const selectedLi = $("#selected li");
+        const usernames = selectedLi.map((i, el) => $(el).data("candidate"));
+        const fullnames = selectedLi.map((i, el) => $(el).data("fullname"));
+        $("#votes").val(usernames.toArray().join(","));
+        $("#votesInModal").html(fullnames.map((i, el) => "<li>" + el + "</li>").toArray().join("\n"));
+      }
+    });
+  </script>
 {{/inline}}
