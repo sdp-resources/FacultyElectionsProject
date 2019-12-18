@@ -30,7 +30,7 @@ public class WebClients {
 
   static WebClient getActiveElectionClient() {
     for (Election election : ServerTest.router.getGateway().getAllElections()) {
-      if (election.isInVoteState()) {
+      if (election.getState().isVote()) {
         for (Voter voter : election.getVoters()) {
           if (voter.getProfile().getUsername().equals("wilsont") && !voter.hasVoted()) {
             HashMap<String, String> parameters = new HashMap<>();

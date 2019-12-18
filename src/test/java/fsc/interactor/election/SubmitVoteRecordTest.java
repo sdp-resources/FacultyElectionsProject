@@ -36,7 +36,7 @@ public class SubmitVoteRecordTest extends ElectionTest {
   @Before
   public void setup() {
     election = EntityStub.simpleElectionWithCandidates();
-    election.setState(Election.State.Vote);
+    election.setState(State.Vote);
     profile = EntityStub.getProfile(0);
     voter = new Voter(profile, election);
     voter.setVoterId(VOTER_ID);
@@ -98,15 +98,15 @@ public class SubmitVoteRecordTest extends ElectionTest {
   @Test
   public void whenElectionIsNotInVoteMode_returnError() {
     addCandidate(election, candidate);
-    election.setState(Election.State.Setup);
+    election.setState(State.Setup);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
     assertEquals(false, electionGateway.hasSaved);
     assertEquals(false, voter.hasVoted());
-    election.setState(Election.State.DecideToStand);
+    election.setState(State.DecideToStand);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
     assertEquals(false, electionGateway.hasSaved);
     assertEquals(false, voter.hasVoted());
-    election.setState(Election.State.Closed);
+    election.setState(State.Closed);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
     assertEquals(false, electionGateway.hasSaved);
     assertEquals(false, voter.hasVoted());

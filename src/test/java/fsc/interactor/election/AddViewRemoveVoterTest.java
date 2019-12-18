@@ -1,8 +1,6 @@
 package fsc.interactor.election;
 
-import fsc.entity.Election;
-import fsc.entity.Profile;
-import fsc.entity.Voter;
+import fsc.entity.*;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -101,7 +99,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
   public void whenAddingAnExistingProfileWithInvalidElectionState_throwError() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(profile);
-    election.setState(Election.State.DecideToStand);
+    election.setState(State.Closed);
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);
     response = interactor.handle(addRequest);
@@ -166,7 +164,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
   public void whenRemovingAnExistingVoterFromInvalidElectionState_throwError() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(profile);
-    election.setState(Election.State.DecideToStand);
+    election.setState(State.Closed);
     election.addVoter(entityFactory.createVoter(profile, election));
     interactor = new ElectionInteractor(electionGateway, null,
                                         profileGateway, entityFactory);

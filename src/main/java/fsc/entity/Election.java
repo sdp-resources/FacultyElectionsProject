@@ -17,36 +17,12 @@ public class Election {
   private Collection<Voter> voters = new ArrayList<>();
   private Collection<VoteRecord> voteRecords = new ArrayList<>();
 
-  // TODO: Election states
-  // 0. DONE Election state can be changed with ChangeElectionStateRequest
-  // 1. Setup:
-  //    - DONE Admin can do BallotChangeRequest
-  //    - DONE Admin can do AddCandidateRequest
-  //    - DONE Admin can do RemoveCandidateRequest
-  //    - DONE Candidates do not see DTS status
-  //    - DONE Voters cannot vote
-  // 2. DecideToStand:
-  //    - DONE Candidate can view and change their DTS status
-  //    - DONE Admin cannot change candidates or add/remove candidates
-  //    - DONE Voters cannot vote
-  // 3. Vote:
-  //    - DONE Candidates that did not decide are automatically accepted (email notification?)
-  //    - DONE Voters can see the election and vote
-  //    - DONE Candidates cannot change their DTS status
-  //    - DONE Admin cannot change candidates or add/remove candidates
-  // 4. Closed:
-  //    - Stores the election tally record
-  //    - DONE Voters cannot vote
-  //    - DONE Candidates cannot change their DTS status
-  //    - DONE Admin cannot change candidates or add/remove candidates
-  //    - Admin can view election results
-
   public Election() { }
 
   public Election(Seat seat) {
     this.seat = seat;
     this.candidateQuery = seat.getCandidateQuery();
-    this.state = State.Setup;
+    this.setState(State.Setup);
     this.date = LocalDateTime.now();
   }
 
@@ -146,22 +122,6 @@ public class Election {
     this.voteRecords = voteRecords;
   }
 
-  public boolean isInSetupState() {
-    return state.equals(State.Setup);
-  }
-
-  public boolean isActive() {
-    return state.equals(State.DecideToStand) || state.equals(State.Vote);
-  }
-
-  public boolean isInVoteState() {
-    return state.equals(State.Vote);
-  }
-
-  public boolean isInDecideToStandState() {
-    return state.equals(State.DecideToStand);
-  }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -180,12 +140,5 @@ public class Election {
     this.voteRecords.add(voteRecord);
   }
 
-  public enum State {
-    Setup, DecideToStand, Vote, Closed;
-
-    public String getString() {
-      return this.toString();
-    }
-  }
 }
 

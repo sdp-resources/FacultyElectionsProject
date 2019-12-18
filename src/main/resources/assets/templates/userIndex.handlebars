@@ -23,7 +23,7 @@
     {{#each elections}}
       <div class="card">
         <h5 class="card-header">{{election.seat.name}}
-          {{#eq election.state "DecideToStand"}}
+          {{#if election.state.decideToStand}}
             {{> candidateStatus.hbs candidateStatus classes="float-right"}}
           {{else}}
             {{#if voter}}
@@ -33,11 +33,11 @@
                 <i class="float-right text-warning fas fa-person-booth"></i>
               {{/if}}
             {{/if}}
-          {{/eq}}
+          {{/if}}
         </h5>
       <div class="card-body p-2 m-1">
         <h6 class="card-subtitle sr-only">state: {{election.state}}</h6>
-        {{#eq election.state "DecideToStand"}}
+        {{#if election.state.decideToStand}}
           {{#eq candidateStatus "null"}}
             <p class="card-text">You are not a candidate.</p>
           {{else}}
@@ -50,8 +50,8 @@
                 </div>
               </form>
           {{/eq}}
-        {{/eq}}
-        {{#eq election.state "Vote"}}
+        {{/if}}
+        {{#if election.state.vote}}
           <div class="card-text">
             {{#if voter}}
               {{#if voter.voted}}
@@ -66,7 +66,7 @@
               <p class="card-text">You are not eligible to vote.</p>
             {{/if}}
           </div>
-        {{/eq}}
+        {{/if}}
       </div>
 
     </div>

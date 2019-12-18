@@ -1,8 +1,6 @@
 package fsc.interactor.election;
 
-import fsc.entity.Committee;
-import fsc.entity.Election;
-import fsc.entity.Profile;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.ElectionInteractor;
@@ -39,11 +37,11 @@ public class ViewActiveElectionsRequestTest extends ElectionTest {
     profiles = new Profile[]{EntityStub.getProfile(1), EntityStub.getProfile(2)};
     electionSetup = EntityStub.simpleElectionWithCandidates(profiles[0]);
     electionDTS = EntityStub.simpleElectionWithCandidates(profiles[0]);
-    electionDTS.setState(Election.State.DecideToStand);
+    electionDTS.setState(State.DecideToStand);
     electionVote = EntityStub.simpleElectionWithCandidates(profiles[0]);
-    electionVote.setState(Election.State.Vote);
+    electionVote.setState(State.Vote);
     electionClosed = EntityStub.simpleElectionWithCandidates(profiles[0]);
-    electionClosed.setState(Election.State.Closed);
+    electionClosed.setState(State.Closed);
     elections = List.of(electionSetup, electionDTS, electionVote, electionClosed);
     activeElections = List.of(electionDTS, electionVote);
     request = new ViewActiveElectionsRequest();

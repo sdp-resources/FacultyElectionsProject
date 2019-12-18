@@ -1,6 +1,6 @@
 package fsc.interactor.election;
 
-import fsc.entity.Election;
+import fsc.entity.State;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.gateway.committee.AcceptingCommitteeGatewaySpy;
@@ -45,7 +45,7 @@ public class CreateElectionInteractionTest extends ElectionTest {
     assertTrue(electionGateway.hasSaved);
     ViewableElection createdElection = response.getValues();
     assertElectionIdEquals(createdElection.electionID, ELECTION_ID);
-    assertEquals(Election.State.Setup, electionGateway.addedElection.getState());
+    assertEquals(State.Setup, electionGateway.addedElection.getState());
   }
 
   @Test

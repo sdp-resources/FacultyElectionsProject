@@ -1,9 +1,7 @@
 package webserver;
 
 import com.github.jknack.handlebars.*;
-import com.github.jknack.handlebars.context.FieldValueResolver;
-import com.github.jknack.handlebars.context.JavaBeanValueResolver;
-import com.github.jknack.handlebars.context.MapValueResolver;
+import com.github.jknack.handlebars.context.*;
 import com.github.jknack.handlebars.helper.AssignHelper;
 import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.helper.StringHelpers;
@@ -38,6 +36,7 @@ public class MyHandlebarsTemplateEngine extends HandlebarsTemplateEngine {
     registerHelper("remainder", new RemainderHelper());
     registerHelper("formatResult", new ResultFormattingHelper());
     registerHelper("length", new LengthHelper());
+    handlebars.registerHelpers(ElectionStateHelpers.class);
   }
 
   public <T> void registerHelper(String name, Helper<T> helper) {

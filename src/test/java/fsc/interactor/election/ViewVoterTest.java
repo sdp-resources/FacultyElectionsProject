@@ -33,7 +33,7 @@ public class ViewVoterTest extends ElectionTest {
     election = EntityStub.simpleElectionWithCandidates(profiles[0]);
     voter = new Voter(profiles[0], election);
     election.addVoter(voter);
-    election.setState(Election.State.Vote);
+    election.setState(State.Vote);
     request = new ViewVoterRequest(election.getID(), profiles[0].getUsername());
   }
 

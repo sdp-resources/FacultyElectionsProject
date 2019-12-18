@@ -2,6 +2,7 @@ package fsc.interactor.election;
 
 import fsc.entity.Election;
 import fsc.entity.Profile;
+import fsc.entity.State;
 import fsc.entity.query.Query;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
@@ -44,11 +45,11 @@ public class EditBallotQueryInteractorTest extends ElectionTest {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     ExistingProfileGatewaySpy profileGateway = new ExistingProfileGatewaySpy(providedProfile);
     interactor = new ElectionInteractor(electionGateway, null, profileGateway, entityFactory);
-    election.setState(Election.State.DecideToStand);
+    election.setState(State.DecideToStand);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
-    election.setState(Election.State.Vote);
+    election.setState(State.Vote);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
-    election.setState(Election.State.Closed);
+    election.setState(State.Closed);
     assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
     assertFalse(electionGateway.hasSaved);
     assertEquals(Query.never(), election.getCandidateQuery());

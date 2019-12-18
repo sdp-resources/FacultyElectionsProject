@@ -127,7 +127,7 @@ public class RoutesTest extends ServerTest {
   public void loggedInUserCanDecideToStand() {
     WebClient client = WebClients.normalLoggedInClient();
     for (Election election : router.getGateway().getAllElections()) {
-      if (election.isInDecideToStandState() && election.hasCandidate("skiadas")) {
+      if (election.getState().isDecideToStand() && election.hasCandidate("skiadas")) {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("decideToStand", "Willing");
         client.followPost(Path.decideToStand(election), parameters)
@@ -143,7 +143,7 @@ public class RoutesTest extends ServerTest {
   @Test
   public void loggedInUserCanFollowBallotLink() {
     for (Election election : router.getGateway().getAllElections()) {
-      if (election.isInVoteState()) {
+      if (election.getState().isVote()) {
         for (Voter voter : election.getVoters()) {
           if (voter.getProfile().getUsername().equals("skiadas") && !voter.hasVoted()) {
             HashMap<String, String> parameters = new HashMap<>();
@@ -172,7 +172,7 @@ public class RoutesTest extends ServerTest {
   }
 
   private void checkThatVoterCanSeeBallotLink(WebClient client, Election election) {
-    if (election.isInVoteState()) {
+    if (election.getState().isVote()) {
       for (Voter voter : election.getVoters()) {
         if (voter.getProfile().getUsername().equals("skiadas")) {
           String formLink = Matcher.attribute("form", "action", Path.ballot(election.getID()));
@@ -188,7 +188,7 @@ public class RoutesTest extends ServerTest {
   }
 
   private void checkThatCandidateCanSeeDTSLink(WebClient client, Election election) {
-    if (election.isInDecideToStandState() && election.hasCandidate("skiadas")) {
+    if (election.getState().isDecideToStand() && election.hasCandidate("skiadas")) {
       client.assertMatch(
             Matcher.attribute("form", "action", Path.decideToStand(election.getID())));
     }

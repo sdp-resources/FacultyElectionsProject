@@ -1,6 +1,7 @@
 package fsc.viewable;
 
 import fsc.entity.Candidate;
+import fsc.entity.State;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 public class ViewableElection {
 
   public final long electionID;
-  public final String state;
+  public final State state;
   public final ViewableSeat seat;
   public final String query;
   public final Collection<ViewableCandidate> candidates;
@@ -17,7 +18,7 @@ public class ViewableElection {
   public final Collection<ViewableVoteRecord> votes;
 
   public ViewableElection(
-        long electionID, String state, ViewableSeat seat,
+        long electionID, State state, ViewableSeat seat,
         String query, Collection<ViewableCandidate> candidates,
         Collection<ViewableVoter> voters,
         Collection<ViewableVoteRecord> votes
@@ -33,10 +34,6 @@ public class ViewableElection {
 
   public long getElectionID() {
     return electionID;
-  }
-
-  public String getState() {
-    return state;
   }
 
   public ViewableSeat getSeat() {

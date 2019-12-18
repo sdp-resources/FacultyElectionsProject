@@ -1,7 +1,7 @@
 package webserver;
 
 import fsc.app.AppContext;
-import fsc.entity.Election;
+import fsc.entity.State;
 import fsc.response.Response;
 import fsc.viewable.ViewableElection;
 import fsc.viewable.ViewableProfile;
@@ -45,7 +45,7 @@ public class ElectionRequestHandler extends RequestHandler {
                                               .getProfilesMatchingQuery("all", session.token)
                                               .getValues();
     modelSet("election", election);
-    modelSet("states", Arrays.asList(Election.State.values()));
+    modelSet("states", Arrays.asList(State.values()));
     modelSet("missingCandidates", filterProfilesExcluding(allProfiles,
                                                           election.candidates,
                                                           c -> c.profile));

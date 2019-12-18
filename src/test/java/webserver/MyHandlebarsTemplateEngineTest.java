@@ -2,7 +2,7 @@ package webserver;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
-import fsc.entity.Election;
+import fsc.entity.State;
 import fsc.voting.VoteTarget;
 import fsc.voting.VotingRoundResult;
 import org.junit.Before;
@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static fsc.entity.State.DecideToStand;
+import static fsc.entity.State.Vote;
 import static org.junit.Assert.assertEquals;
 
 public class MyHandlebarsTemplateEngineTest {
@@ -23,6 +25,25 @@ public class MyHandlebarsTemplateEngineTest {
   public void setUp() {
     engine = new MyHandlebarsTemplateEngine();
     handlebars = engine.getHandlebars();
+  }
+
+  @Test
+  public void electionStateAccessWorks() throws IOException {
+    assertTemplateInContextProduces("{{#if decideToStand}}x{{/if}}",
+                                    DecideToStand,
+                                    "x");
+    assertTemplateInContextProduces("{{#if decideToStand}}{{/if}}",
+                                    Vote,
+                                    "");
+    assertTemplateInContextProduces("{{#if (canChangeCandidates this)}}x{{/if}}",
+                                    DecideToStand,
+                                    "x");
+    assertTemplateInContextProduces("{{#if (canChangeCandidates this)}}x{{/if}}",
+                                    Vote,
+                                    "");
+    assertTemplateInContextProduces("{{#if (canChangeVoters this)}}x{{/if}}",
+                                    DecideToStand,
+                                    "x");
   }
 
   @Test
@@ -82,7 +103,7 @@ public class MyHandlebarsTemplateEngineTest {
   public void electionStatesAreRead() throws IOException {
     assertTemplateInContextProduces(
           "{{#each this}}{{this}} {{/each}}",
-          List.of(Election.State.values()),
+          List.of(State.values()),
           "Setup DecideToStand Vote Closed ");
   }
 
@@ -90,7 +111,7 @@ public class MyHandlebarsTemplateEngineTest {
   public void electionStatesCanCompareToString() throws IOException {
     assertTemplateInContextProduces(
           "{{#eq this.string 'Vote'}}yes{{/eq}}",
-          Election.State.Vote,
+          Vote,
           "yes");
   }
 

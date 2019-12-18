@@ -44,7 +44,7 @@ public class Voter {
   }
 
   public boolean canVote() {
-    return election.isInVoteState();
+    return election.getState().isVote();
   }
 
   public void setVoted(boolean voted) {

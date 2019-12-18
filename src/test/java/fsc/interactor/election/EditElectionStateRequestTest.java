@@ -2,6 +2,7 @@ package fsc.interactor.election;
 
 import fsc.entity.Candidate;
 import fsc.entity.Election;
+import fsc.entity.State;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
 import fsc.mock.gateway.election.ProvidedElectionGatewaySpy;
@@ -12,7 +13,7 @@ import fsc.response.ResponseFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import static fsc.entity.Election.State.*;
+import static fsc.entity.State.*;
 import static org.junit.Assert.*;
 
 public class EditElectionStateRequestTest extends ElectionTest {
@@ -52,7 +53,7 @@ public class EditElectionStateRequestTest extends ElectionTest {
   @Test
   public void whenElectionExistsAndStateIsValid_transitionToNewState() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
-    Election.State state = DecideToStand;
+    State state = DecideToStand;
     request = new EditElectionStateRequest(election.getID(), state.toString());
     interactor = new ElectionInteractor(electionGateway, null,
                                         null, entityFactory);

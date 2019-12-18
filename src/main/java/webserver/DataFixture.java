@@ -116,19 +116,19 @@ public class DataFixture {
     Seat budgFin2 = addSeat("Budget-Finance-2", isActiveAndNotChaplain, budgFin);
     Seat enrollMarket1 = addSeat("Enrollment-Marketing-1", isActiveAndNotChaplain, enrollMarket);
     Seat enrollMarket2 = addSeat("Enrollment-Marketing-2", isActiveAndNotChaplain, enrollMarket);
-    Election election1 = addElection(fecTenured1, Election.State.DecideToStand,
+    Election election1 = addElection(fecTenured1, State.DecideToStand,
                                      List.of(skiadas, wilson, johnson, stokes),
                                      List.of(skiadas, wilson, johnson, stokes));
-    Election election2 = addElection(fecUntenured1, Election.State.Vote,
+    Election election2 = addElection(fecUntenured1, State.Vote,
                                      List.of(skiadas, wilson, johnson, stokes),
                                      List.of(skiadas, wilson, johnson, stokes));
-    Election election3 = addElection(fecTenured2, Election.State.Closed,
+    Election election3 = addElection(fecTenured2, State.Closed,
                                      List.of(skiadas),
                                      List.of(skiadas, wilson, johnson, stokes));
-    Election election4 = addElection(fecTenured3, Election.State.DecideToStand,
+    Election election4 = addElection(fecTenured3, State.DecideToStand,
                                      List.of(johnson),
                                      List.of(wilson, johnson, stokes));
-    Election election5 = addElection(fecUntenured1, Election.State.Vote,
+    Election election5 = addElection(fecUntenured2, State.Vote,
                                      List.of(skiadas, wilson, johnson, stokes, wahl),
                                      List.of(skiadas, wilson, johnson, stokes, wahl));
     addVoteRecord(election2, skiadas, List.of(wilson, johnson, stokes));
@@ -186,7 +186,7 @@ public class DataFixture {
   }
 
   private Election addElection(
-        Seat seat, Election.State state,
+        Seat seat, State state,
         List<Profile> candidates,
         List<Profile> voters
   ) {
@@ -196,7 +196,7 @@ public class DataFixture {
     for (Profile profile : candidates) {
       Candidate candidate = new Candidate(profile, election);
       election.addCandidate(candidate);
-      if (!election.isInDecideToStandState()) {
+      if (!election.getState().isDecideToStand()) {
         candidate.setStatus(Candidate.Status.Willing);
       }
     }

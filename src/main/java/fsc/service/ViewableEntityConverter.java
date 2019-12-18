@@ -71,8 +71,7 @@ public class ViewableEntityConverter {
 
   public ViewableElection convert(Election election) {
     return new ViewableElection(election.getID(),
-                                election.getState().toString(),
-                                convert(election.getSeat()),
+                                election.getState(), convert(election.getSeat()),
                                 convert(election.getCandidateQuery()),
                                 convertCandidates(election.getCandidates()),
                                 convertVoters(election.getVoters()),

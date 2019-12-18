@@ -59,7 +59,6 @@ public class UserRequestHandler extends RequestHandler {
     private final ViewableElection election;
     private final String candidateStatus;
     private final ViewableVoter voter;
-    private final boolean inDecideToStand;
 
     public PersonalizedElection(
           ViewableElection election, Candidate.Status candidateStatus, ViewableVoter voter
@@ -67,7 +66,6 @@ public class UserRequestHandler extends RequestHandler {
       this.election = election;
       this.candidateStatus = String.valueOf(candidateStatus);
       this.voter = voter;
-      this.inDecideToStand = false;
     }
 
     public ViewableElection getElection() {
@@ -81,14 +79,5 @@ public class UserRequestHandler extends RequestHandler {
     public ViewableVoter getVoter() {
       return voter;
     }
-
-    public boolean isInDecideToStand() {
-      return election.state.equals("DecideToStand");
-    }
-
-    public boolean isInVote() {
-      return election.state.equals("Vote");
-    }
   }
-
 }

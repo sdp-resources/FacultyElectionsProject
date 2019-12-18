@@ -15,7 +15,7 @@ public class ViewElections {
 
   private List<List<String>> getListFromElection(ViewableElection election) {
     return List.of(List.of("seat name", election.seat.name),
-                   List.of("state", election.state),
+                   List.of("state", election.state.getString()),
                    List.of("number of candidates", String.valueOf(election.candidates.size())),
                    List.of("number of voters", String.valueOf(election.voters.size())),
                    List.of("number of votes", String.valueOf(election.votes.size())),

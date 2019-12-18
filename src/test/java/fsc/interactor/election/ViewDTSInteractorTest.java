@@ -1,8 +1,6 @@
 package fsc.interactor.election;
 
-import fsc.entity.Candidate;
-import fsc.entity.Election;
-import fsc.entity.Profile;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
@@ -36,7 +34,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
         throws ElectionGateway.NoProfileInBallotException {
     election.getCandidates().add(entityFactory.createCandidate(profile,
                                                                election));
-    election.setState(Election.State.DecideToStand);
+    election.setState(State.DecideToStand);
     Candidate candidate = election.getCandidateByUsername(profile.getUsername());
     candidate.setStatus(Candidate.Status.Willing);
     gateway = new ProvidedElectionGatewaySpy(election);
@@ -48,7 +46,7 @@ public class ViewDTSInteractorTest extends ElectionTest {
 
   @Test
   public void whenUserIsNotCandidate_errorReturned() {
-    election.setState(Election.State.DecideToStand);
+    election.setState(State.DecideToStand);
     gateway = new ProvidedElectionGatewaySpy(election);
     interactor = new ElectionInteractor(gateway, null, null, null);
     Response response = interactor.handle(request);

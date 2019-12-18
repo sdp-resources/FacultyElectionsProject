@@ -1,8 +1,6 @@
 package fsc.interactor.fetcher;
 
-import fsc.entity.Candidate;
-import fsc.entity.Election;
-import fsc.entity.Profile;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
@@ -18,13 +16,13 @@ public class ElectionBuilder extends DelegatingBuilder<Election, Response> {
     super(builder);
   }
 
-  public ElectionBuilder reportImproperStateIf(Function<Election, Boolean> isInState) {
-    return newWithBuilder(builder.escapeIf(isInState,
+  public ElectionBuilder reportImproperStateIf(Function<State, Boolean> pred) {
+    return newWithBuilder(builder.escapeIf(e -> pred.apply(e.getState()),
                                            ResponseFactory.improperElectionState()));
   }
 
-  public ElectionBuilder reportImproperStateUnless(Function<Election, Boolean> isInState) {
-    return newWithBuilder(builder.escapeUnless(isInState,
+  public ElectionBuilder reportImproperStateUnless(Function<State, Boolean> pred) {
+    return newWithBuilder(builder.escapeUnless(e -> pred.apply(e.getState()),
                                                ResponseFactory.improperElectionState()));
   }
 

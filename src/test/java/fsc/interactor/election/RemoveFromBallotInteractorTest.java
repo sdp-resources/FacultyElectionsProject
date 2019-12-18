@@ -2,6 +2,7 @@ package fsc.interactor.election;
 
 import fsc.entity.Election;
 import fsc.entity.Profile;
+import fsc.entity.State;
 import fsc.gateway.ProfileGateway;
 import fsc.interactor.ElectionInteractor;
 import fsc.mock.EntityStub;
@@ -88,11 +89,9 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
                                         profileGateway, entityFactory);
     election.getCandidates().add(entityFactory.createCandidate(profile,
                                                                election));
-    election.setState(Election.State.Vote);
+    election.setState(State.Vote);
     Assert.assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
-    election.setState(Election.State.DecideToStand);
-    Assert.assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
-    election.setState(Election.State.Closed);
+    election.setState(State.Closed);
     Assert.assertEquals(ResponseFactory.improperElectionState(), interactor.handle(request));
     assertThat(election.getCandidateProfiles(), hasItem(profile));
     Assert.assertFalse(electionGateway.hasSaved);

@@ -46,8 +46,8 @@ public class ElectionFetcher extends CommitteeFetcher {
     }
   }
 
-  public ElectionBuilder fetchElectionInSetupState(Long electionId) {
-    return fetchElection(electionId).reportImproperStateUnless(Election::isInSetupState);
+  public ElectionBuilder fetchElectionInValidChangeVoterState(Long electionId) {
+    return fetchElection(electionId).reportImproperStateUnless(State::canChangeVoters);
   }
 
   public VoterBuilder fetchVoter(long voterId) {
@@ -101,9 +101,9 @@ public class ElectionFetcher extends CommitteeFetcher {
     return entityFactory.createElection(seat);
   }
 
-  public Builder<Election.State, Response> getStateFromString(String state) {
+  public Builder<State, Response> getStateFromString(String state) {
     try {
-      return Builder.ofValue(Election.State.valueOf(state));
+      return Builder.ofValue(State.valueOf(state));
     } catch (java.lang.IllegalArgumentException e) {
       return Builder.ofResponse(ResponseFactory.invalidElectionState());
     }
@@ -144,7 +144,7 @@ public class ElectionFetcher extends CommitteeFetcher {
   public Builder<Collection<Election>, Response> fetchActiveElections() {
     Collection<Election> activeElections =
           electionGateway.getAllElections()
-                         .stream().filter(Election::isActive)
+                         .stream().filter(e -> e.getState().isActive())
                          .collect(Collectors.toList());
     return Builder.ofValue(activeElections);
   }
