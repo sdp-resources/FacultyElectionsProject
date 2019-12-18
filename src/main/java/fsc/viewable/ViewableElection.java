@@ -1,7 +1,10 @@
 package fsc.viewable;
 
+import fsc.entity.Candidate;
+
 import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ViewableElection {
 
@@ -42,6 +45,11 @@ public class ViewableElection {
 
   public String getQuery() {
     return query;
+  }
+
+  public Collection<ViewableCandidate> getUndecidedCandidates() {
+    return candidates.stream().filter(c -> c.status.equals(Candidate.Status.NoAnswer))
+                     .collect(Collectors.toList());
   }
 
   public Collection<ViewableVoter> getVoters() {
