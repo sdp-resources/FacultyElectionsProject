@@ -1,5 +1,6 @@
 package fixtures;
 
+import dbGateway.RedisStore;
 import fsc.app.AppContext;
 import fsc.entity.session.Session;
 import fsc.entity.session.UnauthenticatedSession;
@@ -150,7 +151,7 @@ class AppContextWrapper {
     private Session session = new UnauthenticatedSession();
 
     TestableAppContext(Gateway gateway) {
-      super(gateway);
+      super(gateway, new RedisStore());
     }
 
     public <T> Response<T> getResponse(Request request) {

@@ -17,6 +17,7 @@
           <element id="dir-copy" path="$PROJECT_DIR$/out/production/resources" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: redis.clients:jedis:3.2.0" />
           <element id="library" level="project" name="Gradle: org.json:json:20180813" />
           <element id="library" level="project" name="Gradle: com.sparkjava:spark-template-handlebars:2.7.1" />
           <element id="library" level="project" name="Gradle: com.sparkjava:spark-core:2.9.1" />
@@ -30,6 +31,7 @@
           <element id="library" level="project" name="Gradle: com.github.jknack:handlebars-guava-cache:4.0.6" />
           <element id="library" level="project" name="Gradle: com.github.jknack:handlebars:4.1.2" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.27" />
+          <element id="library" level="project" name="Gradle: org.apache.commons:commons-pool2:2.6.2" />
           <element id="library" level="project" name="Gradle: org.eclipse.jetty:jetty-webapp:9.4.18.v20190429" />
           <element id="library" level="project" name="Gradle: org.eclipse.jetty.websocket:websocket-server:9.4.18.v20190429" />
           <element id="library" level="project" name="Gradle: org.eclipse.jetty:jetty-servlet:9.4.18.v20190429" />

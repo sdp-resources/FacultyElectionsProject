@@ -1,8 +1,6 @@
 package fsc.gateway;
 
-import fsc.entity.Election;
-import fsc.entity.VoteRecord;
-import fsc.entity.Voter;
+import fsc.entity.*;
 
 import java.util.Collection;
 
@@ -16,6 +14,7 @@ public interface ElectionGateway {
   Collection<Election> getAllElections();
   Voter getVoter(long voterId) throws InvalidVoterException;
   void addVoter(Voter voter) throws ExistingVoterException;
+  void removeCandidate(Candidate candidate);
   class InvalidElectionIDException extends Exception {
     public InvalidElectionIDException() {}
   }

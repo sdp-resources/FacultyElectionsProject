@@ -1,8 +1,6 @@
 package fsc.mock.gateway.election;
 
-import fsc.entity.Election;
-import fsc.entity.VoteRecord;
-import fsc.entity.Voter;
+import fsc.entity.*;
 import fsc.gateway.ElectionGateway;
 
 import java.util.Collection;
@@ -41,5 +39,9 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
   }
 
   public void addVoter(Voter voter) { }
+
+  public void removeCandidate(Candidate candidate) {
+    candidate.getElection().removeCandidate(candidate.getProfile());
+  }
 
 }

@@ -7,6 +7,7 @@ public class SessionGatewaySpy extends SessionGatewayStub {
   public boolean hasSaved = false;
 
   private AuthenticatedSession storedSession;
+  public AuthenticatedSession renewedSession;
 
   public SessionGatewaySpy() {}
 
@@ -28,7 +29,7 @@ public class SessionGatewaySpy extends SessionGatewayStub {
   }
 
   @Override
-  public void save() {
-    hasSaved = true;
+  public void renew(AuthenticatedSession session) {
+    renewedSession = session;
   }
 }

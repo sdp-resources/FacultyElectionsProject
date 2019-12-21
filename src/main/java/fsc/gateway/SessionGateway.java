@@ -5,15 +5,16 @@ import fsc.entity.session.AuthenticatedSession;
 public interface SessionGateway {
   void addSession(AuthenticatedSession session);
   AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException;
-  default AuthenticatedSession getActiveSession(String token)
+  void renew(AuthenticatedSession session);
+
+  default AuthenticatedSession getAndRenewIfActive(String token)
         throws InvalidOrExpiredTokenException {
     AuthenticatedSession session = getSession(token);
-    if (session.hasExpired()) {
-      throw new InvalidOrExpiredTokenException();
-    }
+    if (session.hasExpired()) throw new InvalidOrExpiredTokenException();
+    renew(session);
 
     return session;
   }
-  void save();
+
   class InvalidOrExpiredTokenException extends Exception {}
 }

@@ -103,7 +103,9 @@ public class ElectionRequestHandler extends RequestHandler {
       return redirectWithFlash(Path.adminElection(electionid), "Voter " + username + " added");
     }
     return redirectWithFlash(Path.adminElection(electionid), response);
-  }  public Object deleteCandidate() {
+  }
+
+  public Object deleteCandidate() {
     requireSessionAndAdminRole();
     Long electionid = getRequestParameterLong("electionId");
     String username = getRequestParameter("username");

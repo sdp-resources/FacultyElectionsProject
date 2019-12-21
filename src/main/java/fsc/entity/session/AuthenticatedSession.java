@@ -1,23 +1,21 @@
 package fsc.entity.session;
 
+import fsc.MyTime;
 import fsc.service.Authorizer;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class AuthenticatedSession implements Session {
-  public static final Duration STANDARD_SESSION_DURATION = Duration.ofMinutes(30);
   private Authorizer.Role role;
   private String username;
   private String token;
 
-  private LocalDateTime expirationTime;
+  private long expirationTime;
 
   public AuthenticatedSession() {}
 
   public AuthenticatedSession(
-        Authorizer.Role role, String username, String token, LocalDateTime expirationTime
+        Authorizer.Role role, String username, String token, long expirationTime
   ) {
     this.role = role;
     this.username = username;
@@ -37,9 +35,9 @@ public class AuthenticatedSession implements Session {
     return role;
   }
 
-  public LocalDateTime getExpirationTime() { return expirationTime; }
+  public long getExpirationTime() { return expirationTime; }
 
-  public void setExpirationTime(LocalDateTime expirationTime) {
+  public void setExpirationTime(long expirationTime) {
     this.expirationTime = expirationTime;
   }
 
@@ -56,10 +54,6 @@ public class AuthenticatedSession implements Session {
     return this.username.equals(username);
   }
 
-  public boolean hasExpired() {
-    return getExpirationTime().isBefore(LocalDateTime.now());
-  }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -67,7 +61,7 @@ public class AuthenticatedSession implements Session {
     return role == that.role &&
                  username.equals(that.username) &&
                  token.equals(that.token) &&
-                 expirationTime.equals(that.expirationTime);
+                 expirationTime == that.expirationTime;
   }
 
   public int hashCode() {
@@ -84,10 +78,10 @@ public class AuthenticatedSession implements Session {
   }
 
   public void setStandardExpirationTime() {
-    setExpirationTime(standardExpirationTime());
+    setExpirationTime(MyTime.standardExpirationTime());
   }
 
-  public LocalDateTime standardExpirationTime() {
-    return LocalDateTime.now().plus(STANDARD_SESSION_DURATION);
+  public boolean hasExpired() {
+    return MyTime.hasExpired(getExpirationTime());
   }
 }

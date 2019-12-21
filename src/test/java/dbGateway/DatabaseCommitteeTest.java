@@ -6,6 +6,7 @@ import fsc.entity.Seat;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.gateway.Gateway;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -26,6 +27,30 @@ public class DatabaseCommitteeTest extends BasicDatabaseTest {
       assertEquals(List.of(committee), gateway.getCommittees());
       assertEquals(true, gateway.hasCommittee(COMMITTEE_NAME));
       assertEquals(committee, getCommitteeOrNull(gateway, COMMITTEE_NAME));
+    });
+  }
+
+  @Test
+  public void canEditCommitteeProperties() {
+    saveTheCommittee();
+    withNewGateway(gateway -> {
+      try {
+        Committee committee = gateway.getCommittee(this.committee.getId());
+        committee.setName("new name");
+        gateway.save();
+      } catch (CommitteeGateway.UnknownCommitteeException e) {
+        e.printStackTrace();
+        Assert.fail();
+      }
+    });
+    withNewGateway(gateway -> {
+      try {
+        Committee committee = gateway.getCommittee(this.committee.getId());
+        assertEquals("new name", committee.getName());
+      } catch (CommitteeGateway.UnknownCommitteeException e) {
+        e.printStackTrace();
+        Assert.fail();
+      }
     });
   }
 

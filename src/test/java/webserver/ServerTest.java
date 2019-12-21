@@ -24,7 +24,7 @@ public class ServerTest extends Server {
   private static void startServer() {
     router = new TestableRouter();
     router.setupRoutes("");
-    new DataFixture(router.gateway).populateDatabase();
+    new DataFixture(router.getGateway()).populateDatabase();
   }
 
   private static boolean isRunning() {
@@ -53,7 +53,7 @@ public class ServerTest extends Server {
 
   public static class TestableRouter extends Router {
     public Gateway getGateway() {
-      return gateway;
+      return super.getGateway();
     }
 
     public void setupRoutes(String resourcePath) {

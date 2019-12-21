@@ -4,7 +4,6 @@ import fsc.entity.*;
 import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
-import fsc.entity.session.AuthenticatedSession;
 import fsc.gateway.Gateway;
 import fsc.gateway.QueryGateway;
 import fsc.service.query.*;
@@ -223,15 +222,6 @@ public class InMemoryGateway implements Gateway {
     // TODO
   }
 
-  public void addSession(AuthenticatedSession session) {
-    // TODO
-  }
-
-  public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
-    // TODO
-    return null;
-  }
-
   public void save() {
     addIdsToElections();
   }
@@ -264,6 +254,10 @@ public class InMemoryGateway implements Gateway {
     voters.add(voter);
     voter.setVoterId(voterId++);
     voter.getElection().addVoter(voter);
+  }
+
+  public void removeCandidate(Candidate candidate) {
+    candidate.getElection().removeCandidate(candidate.getProfile());
   }
 
   private boolean hasVoter(Profile profile, Election election) {

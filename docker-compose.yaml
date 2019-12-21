@@ -1,0 +1,33 @@
+version: "3.7"
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  data:
+
+services:
+  db:
+    networks:
+      - backend
+    image: mariadb:10.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  server:
+    networks:
+      - backend
+    build:
+      context: build/install
+      dockerfile: ../../Dockerfile
+    environment:
+      DB_HOST: "fec_db_1"
+      DB_NAME: "testdb"
+    ports:
+      - 4567:4567
+    depends_on:
+      - db
+    image: fecelections:latest

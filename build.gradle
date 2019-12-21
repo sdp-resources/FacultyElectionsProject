@@ -1,4 +1,5 @@
 plugins {
+    id 'idea'
     id 'java'
     id 'war'
     id 'application'
@@ -20,6 +21,7 @@ dependencies {
     testCompile 'org.jsoup:jsoup:1.12.1'
     testCompile files('src/fitnesse/fitnesse-standalone.jar')
 
+    implementation 'redis.clients:jedis:3.2.0'
     implementation 'org.json:json:20180813'
     implementation 'com.sparkjava:spark-core:2.9.1'
     implementation 'com.sparkjava:spark-template-handlebars:2.7.1'

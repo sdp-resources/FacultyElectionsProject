@@ -12,8 +12,8 @@
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="show_sql" value="true"/>
-            <property name="format_sql" value="false" />
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="false" />
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
         </properties>
     </persistence-unit>
@@ -22,7 +22,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <mapping-file>META-INF/orm.xml</mapping-file>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://fec_db/testdb?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://${db.host}/${db.name}?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
             <property name="hibernate.connection.username" value="haris"/>
             <property name="hibernate.connection.password" value="something"/>
             <property name="hibernate.connection.autocommit" value="false"/>

@@ -1,12 +1,11 @@
 package webserver;
 
-import fsc.entity.Committee;
-import fsc.entity.Election;
-import fsc.entity.Voter;
+import fsc.entity.*;
 import fsc.entity.query.Query;
 import fsc.gateway.CommitteeGateway;
 import fsc.response.ErrorResponse;
 import fsc.service.query.QueryStringConverter;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -135,7 +134,7 @@ public class RoutesTest extends ServerTest {
               .followGet(Path.user())
               .assertResponseCodeIs(200);
         // TODO: Find a way to check this?
-//              .assertMatch(Matcher.contains("Candidate status: Willing"));
+        //              .assertMatch(Matcher.contains("Candidate status: Willing"));
       }
     }
   }
@@ -270,6 +269,31 @@ public class RoutesTest extends ServerTest {
               .assertResponseCodeIs(200)
               .assertMatch(Matcher.contains("isActive"))
               .assertMatch(Matcher.contains("notChaplain"));
+  }
+
+  @Test
+  public void adminCanRemoveThenAddCandidate() {
+    for (Election election : router.getGateway().getAllElections()) {
+      if (election.getState().canChangeCandidates() &&
+                !election.getCandidates().isEmpty()) {
+        Candidate candidate = getACandidate(election);
+        Long electionId = election.getID();
+        String username = candidate.getProfile().getUsername();
+        WebClients.adminLoggedInClient()
+                  .followPost(Path.candidateDelete(electionId, username),
+                              new HashMap<>())
+                  .assertResponseCodeIs(302)
+                  .followPost(Path.candidateAdd(electionId),
+                              Map.of("username", username))
+                  .assertResponseCodeIs(302);
+        return;
+      }
+    }
+    Assert.fail("No election found where we can change candidates. Please add one for testing.");
+  }
+
+  private Candidate getACandidate(Election election) {
+    return election.getCandidates().iterator().next();
   }
 
   private void assertInvalidInputReturnsMessageContaining(String input, String output) {

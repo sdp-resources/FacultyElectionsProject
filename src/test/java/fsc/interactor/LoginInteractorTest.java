@@ -12,7 +12,6 @@ import fsc.viewable.ViewableSession;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class LoginInteractorTest {
 
@@ -54,6 +53,5 @@ public class LoginInteractorTest {
     assertEquals(authenticator.token, viewableSession.token);
     assertEquals(sessionGateway.addedSession.getToken(), viewableSession.token);
     assertEquals(expectedRole, sessionGateway.addedSession.getRole());
-    assertTrue(sessionGateway.hasSaved);
   }
 }

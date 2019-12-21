@@ -30,7 +30,9 @@ public class CommitteeFetcher extends ProfileFetcher {
     committeeGateway.addCommittee(committee);
   }
 
-  public <T> void save(T entity) { save(); }
+  public <T> void save(T entity) {
+    save();
+  }
 
   public void save() {
     committeeGateway.save();

@@ -1,26 +1,20 @@
 package dbGateway;
 
+import fsc.MyTime;
 import fsc.entity.session.AuthenticatedSession;
-import fsc.gateway.SessionGateway;
-import fsc.service.Authorizer;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+import static fsc.service.Authorizer.Role.ROLE_ADMIN;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-public class DatabaseSessionsTest extends BasicDatabaseTest {
+public class DatabaseSessionsTest {
 
-  private AuthenticatedSession session = new AuthenticatedSession(
-        Authorizer.Role.ROLE_ADMIN,
-        "admin",
-        "aToken",
-        LocalDateTime.now());
+  private AuthenticatedSession session = makeSession("aToken", MyTime.minutesFromNow(10));
+  private RedisStore anotherGateway = new RedisStore();
+  private RedisStore gateway = new RedisStore();
 
   @Test
-  public void canAddSession() throws SessionGateway.InvalidOrExpiredTokenException {
+  public void canAddSession() {
     saveSession();
     AuthenticatedSession session2 = anotherGateway.getSession(session.getToken());
     assertEquals(session, session2);
@@ -29,28 +23,21 @@ public class DatabaseSessionsTest extends BasicDatabaseTest {
   @Test
   public void outOfDateSessionsGetCleanedUpWhenMethodGetsCalled() {
     AuthenticatedSession currentSession = makeSession("valid",
-                                                      LocalDateTime.now().plusMinutes(10));
+                                                      MyTime.minutesFromNow(10));
     AuthenticatedSession expiredSession = makeSession("expired",
-                                                      LocalDateTime.now().minusMinutes(10));
+                                                      MyTime.minutesAgo(10));
     gateway.addSession(currentSession);
     gateway.addSession(expiredSession);
-    gateway.commit();
-    gateway.cleanUpSessions();
 
-    List<AuthenticatedSession> sessions = anotherGateway.getAllSessions();
-    assertEquals(1, sessions.size());
-    for (AuthenticatedSession session : sessions) {
-      assertTrue(session.hasExpired());
-    }
+    assertEquals(null, gateway.getSession(expiredSession.getToken()));
+    assertEquals(currentSession, gateway.getSession(currentSession.getToken()));
   }
 
-  private AuthenticatedSession makeSession(String token, LocalDateTime expires) {
-    return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN, "admin", token, expires);
+  private AuthenticatedSession makeSession(String token, long expires) {
+    return new AuthenticatedSession(ROLE_ADMIN, "admin", token, expires);
   }
 
   private void saveSession() {
     gateway.addSession(session);
-    gateway.commit();
   }
-
 }

@@ -4,6 +4,7 @@ import fsc.entity.Candidate;
 import fsc.entity.EntityFactory;
 import fsc.entity.SimpleEntityFactory;
 import fsc.gateway.Gateway;
+import fsc.gateway.SessionGateway;
 import fsc.interactor.*;
 import fsc.request.Request;
 import fsc.response.Response;
@@ -21,23 +22,23 @@ public class AppContext {
   public Gateway gateway;
   public Interactor interactor;
 
-  public AppContext(Gateway gateway) {
+  public AppContext(Gateway gateway, SessionGateway sessionGateway) {
     this.gateway = gateway;
-    this.interactor = loadInteractors(gateway);
+    this.interactor = loadInteractors(gateway, sessionGateway);
   }
 
   public static EntityFactory getEntityFactory() {
     return entityFactory;
   }
 
-  public Interactor loadInteractors(Gateway gateway) {
+  public Interactor loadInteractors(Gateway gateway, SessionGateway sessionGateway) {
     SessionCreator sessionCreator = new SessionCreator();
     Authenticator authenticator = new DelegatingAuthenticator(
           new SQLAuthenticator(gateway, sessionCreator),
           new LDAPAuthenticator(sessionCreator));
-    return new AuthenticatingInteractor(gateway)
+    return new AuthenticatingInteractor(sessionGateway)
                  .append(new AuthorizingInteractor(gateway))
-                 .append(new LoginInteractor(gateway, authenticator, gateway))
+                 .append(new LoginInteractor(sessionGateway, authenticator, gateway))
                  .append(new DivisionInteractor(gateway, getEntityFactory()))
                  .append(new ContractTypeInteractor(gateway, getEntityFactory()))
                  .append(new ProfileInteractor(gateway, getEntityFactory(),

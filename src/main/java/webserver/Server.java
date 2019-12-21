@@ -12,7 +12,7 @@ public class Server implements SparkApplication {
     Spark.port(readServerPort());
     router.setupRoutes("");
 
-    new DataFixture(router.gateway).populateDatabase();
+    new DataFixture(router.getGateway()).populateDatabase();
   }
 
   private static int readServerPort() {

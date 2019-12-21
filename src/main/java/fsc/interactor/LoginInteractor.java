@@ -28,14 +28,12 @@ public class LoginInteractor extends Interactor {
   }
 
   public Response execute(LoginRequest request) {
+    // TODO: Convert to builder pattern?
     Credentials credentials = new Credentials(request.username, request.password);
     Session session = authenticator.authenticateWithCredentials(credentials);
-    if (!session.isAuthenticated()) {
-      return ResponseFactory.invalidCredentials();
-    }
+    if (!session.isAuthenticated()) return ResponseFactory.invalidCredentials();
     AuthenticatedSession authenticatedSession = (AuthenticatedSession) session;
     sessionGateway.addSession(authenticatedSession);
-    sessionGateway.save();
     return ResponseFactory.ofAuthenticatedSession(authenticatedSession);
   }
 

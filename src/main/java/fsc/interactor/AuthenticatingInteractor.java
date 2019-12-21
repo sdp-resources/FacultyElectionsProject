@@ -28,8 +28,6 @@ public class AuthenticatingInteractor extends Interactor {
     }
   }
 
-  // TODO: How to handle timed out requests and the database?
-  // Need to periodically clean them?
   private Session authenticate(Request request)
         throws SessionGateway.InvalidOrExpiredTokenException {
     return request.token == null ? new UnauthenticatedSession()
@@ -38,11 +36,7 @@ public class AuthenticatingInteractor extends Interactor {
 
   private AuthenticatedSession getActiveSession(String token)
         throws SessionGateway.InvalidOrExpiredTokenException {
-    AuthenticatedSession session = sessionGateway.getActiveSession(token);
-    session.setStandardExpirationTime();
-    sessionGateway.save();
-
-    return session;
+    return sessionGateway.getAndRenewIfActive(token);
   }
 
 }

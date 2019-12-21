@@ -1,5 +1,6 @@
 package dbGateway;
 
+import fsc.MyTime;
 import fsc.entity.PasswordRecord;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.gateway.SessionGateway;
@@ -7,9 +8,6 @@ import fsc.response.Response;
 import fsc.service.Authorizer;
 import fsc.viewable.ViewableSession;
 import org.junit.Test;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -47,16 +45,14 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
   }
 
   private void adjustSessionExpiryTimeToTenMinutes(String token) {
-    withNewGateway(gateway -> {
-      try {
-        gateway.begin();
-        AuthenticatedSession session = gateway.getSession(token);
-        session.setExpirationTime(tenMinutesFromNow());
-        gateway.save();
-      } catch (SessionGateway.InvalidOrExpiredTokenException e) {
-        throw new RuntimeException("failed");
-      }
-    });
+    try {
+      SessionGateway sessionGateway = new RedisStore();
+      AuthenticatedSession session = sessionGateway.getSession(token);
+      sessionGateway.renew(session);
+    } catch (
+            SessionGateway.InvalidOrExpiredTokenException e) {
+      throw new RuntimeException("failed");
+    }
   }
 
   private void submitCorrectNewContractTypeRequest(String token) {
@@ -73,23 +69,18 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
   }
 
   private void examineSessionExpiryTimeIsAtThirtyMinutes(String token) {
-    withNewGateway(gateway -> {
       try {
-        AuthenticatedSession session = gateway.getSession(token);
+        SessionGateway sessionGateway = new RedisStore();
+        AuthenticatedSession session = sessionGateway.getSession(token);
         assertDifferenceWithinOneMinute(session.getExpirationTime(),
-                                        LocalDateTime.now().plusMinutes(30));
+                                        MyTime.minutesFromNow(30));
       } catch (SessionGateway.InvalidOrExpiredTokenException e) {
         throw new RuntimeException("failed");
       }
-    });
   }
 
-  private void assertDifferenceWithinOneMinute(LocalDateTime time1, LocalDateTime time2) {
-    assertTrue(Duration.between(time1, time2).abs().getSeconds() <= 60);
-  }
-
-  private LocalDateTime tenMinutesFromNow() {
-    return LocalDateTime.now().plusMinutes(10);
+  private void assertDifferenceWithinOneMinute(long time1, long time2) {
+    assertTrue(MyTime.withinOneMinute(time1, time2));
   }
 
 }

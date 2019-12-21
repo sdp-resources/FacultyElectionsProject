@@ -4,24 +4,19 @@ import fsc.entity.*;
 import fsc.entity.query.NamedQuery;
 import fsc.entity.query.Query;
 import fsc.entity.query.QueryValidationResult;
-import fsc.entity.session.AuthenticatedSession;
 import fsc.gateway.Gateway;
 import fsc.service.query.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DatabaseBackedGateway implements Gateway {
-  public static final int SESSION_CLEANUP_THRESHOLD = 1000;
   private final EntityManager entityManager;
   private EntityFactory basicFactory = new SimpleEntityFactory();
   private EntityFactory entityFactory;
   private NameValidator dbValidator = new GatewayBackedQueryValidator(this);
-  private AtomicInteger addSessionRequests = new AtomicInteger(0);
 
   public DatabaseBackedGateway(EntityManager entityManager) {
     this.entityManager = entityManager;
@@ -177,7 +172,7 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public Collection<VoteRecord> getAllVotes(Election election) {
-    entityManager.refresh(election);
+    refresh(election);
     return election.getVoteRecords();
   }
 
@@ -194,6 +189,12 @@ public class DatabaseBackedGateway implements Gateway {
 
   public void addVoter(Voter voter) {
     persist(voter);
+  }
+
+  public void removeCandidate(Candidate candidate) {
+    Election election = candidate.getElection();
+    entityManager.remove(candidate);
+    election.removeCandidate(candidate.getProfile());
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
@@ -259,49 +260,6 @@ public class DatabaseBackedGateway implements Gateway {
   public void addPasswordRecord(PasswordRecord record) {
     persist(record);
   }
-
-  public void addSession(AuthenticatedSession session) {
-    if (timeToCleanUpSessions()) {
-      cleanUpSessions();
-    }
-    persist(session);
-  }
-
-  public void deleteSession(String token) {
-    try {
-      AuthenticatedSession session = getSession(token);
-      entityManager.remove(session);
-    } catch (InvalidOrExpiredTokenException e) {
-    }
-  }
-
-  public void cleanUpSessions() {
-    begin();
-    CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-    CriteriaDelete<AuthenticatedSession> delete = builder.createCriteriaDelete(AuthenticatedSession.class);
-    Root<AuthenticatedSession> root = delete.from(AuthenticatedSession.class);
-    delete.where(builder.greaterThan(root.get("expirationTime"), LocalDateTime.now()));
-    entityManager.createQuery(delete).executeUpdate();
-    commit();
-  }
-
-  private boolean timeToCleanUpSessions() {
-    boolean shouldCleanup = addSessionRequests.incrementAndGet() > SESSION_CLEANUP_THRESHOLD;
-    if (shouldCleanup) { addSessionRequests.set(0); }
-    return shouldCleanup;
-  }
-
-  public AuthenticatedSession getSession(String token) throws InvalidOrExpiredTokenException {
-    AuthenticatedSession session = find(AuthenticatedSession.class, token);
-    if (session == null) throw new InvalidOrExpiredTokenException();
-
-    return session;
-  }
-
-  public List<AuthenticatedSession> getAllSessions() {
-    return entityManager.createQuery("SELECT s FROM AuthenticatedSession s").getResultList();
-  }
-
 
   public void save() {
     commit();

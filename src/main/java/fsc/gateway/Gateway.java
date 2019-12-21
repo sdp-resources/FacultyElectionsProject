@@ -5,7 +5,7 @@ import fsc.service.query.NameValidator;
 
 public interface Gateway
       extends ProfileGateway, ContractTypeGateway, DivisionGateway, ElectionGateway,
-                    CommitteeGateway, QueryGateway, PasswordGateway,  SessionGateway {
+                    CommitteeGateway, QueryGateway, PasswordGateway {
   EntityFactory getEntityFactory();
   void begin();
   void commit();

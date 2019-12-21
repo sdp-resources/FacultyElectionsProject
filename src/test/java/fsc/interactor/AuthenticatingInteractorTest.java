@@ -1,5 +1,6 @@
 package fsc.interactor;
 
+import fsc.MyTime;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.UnauthenticatedSession;
 import fsc.mock.SimpleInteractorSpy;
@@ -10,8 +11,6 @@ import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.service.Authorizer;
 import org.junit.Test;
-
-import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
@@ -77,35 +76,24 @@ public class AuthenticatingInteractorTest {
   @Test
   public void whenSessionIsAuthenticated_ItsExpirationDateIsUpdatedToThirtyMinutesFromNow() {
     AuthenticatedSession session = currentSession();
-    LocalDateTime oldTime = session.getExpirationTime();
     sessionGatewaySpy = new SessionGatewaySpy(session);
     interactor = new AuthenticatingInteractor(sessionGatewaySpy);
     request.token = "aToken";
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.cannotHandle(), response);
-    LocalDateTime newTime = session.getExpirationTime();
-    assertTrue(newTime.isAfter(oldTime));
-    assertTrue(sessionGatewaySpy.hasSaved);
-
+    assertEquals(sessionGatewaySpy.renewedSession, session);
   }
 
   private AuthenticatedSession currentSession() {
     return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN,
                                     "admin", "aToken",
-                                    tenMinutesFromNow());
+                                    MyTime.minutesFromNow(10));
   }
 
   private AuthenticatedSession expiredSession() {
     return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN,
                                     "admin", "aToken",
-                                    tenMinutesAgo());
+                                    MyTime.minutesAgo(10));
   }
 
-  private LocalDateTime tenMinutesFromNow() {
-    return LocalDateTime.now().plusMinutes(10);
-  }
-
-  private LocalDateTime tenMinutesAgo() {
-    return LocalDateTime.now().minusMinutes(10);
-  }
 }

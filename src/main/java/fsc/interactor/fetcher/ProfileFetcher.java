@@ -22,8 +22,8 @@ public class ProfileFetcher {
 
   public Builder<Profile, Response> fetchProfile(String username) {
     try {
-      Profile voterProfile = profileGateway.getProfile(username);
-      return Builder.ofValue(voterProfile);
+      Profile profile = profileGateway.getProfile(username);
+      return Builder.ofValue(profile);
     } catch (ProfileGateway.InvalidProfileUsernameException e) {
       return Builder.ofResponse(ResponseFactory.unknownProfileName());
     }

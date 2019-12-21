@@ -13,5 +13,5 @@ public class SessionGatewayStub implements SessionGateway {
     return null;
   }
 
-  public void save() {}
+  public void renew(AuthenticatedSession session) {}
 }

@@ -2,10 +2,14 @@ package webserver;
 
 public class PersistentUnitLocator {
   public static String get() {
-    String use_local_db = System.getenv("USE_LOCAL_DB");
-    if (use_local_db != null && use_local_db.equals("true")) {
+    String fec_env = System.getenv("FEC_ENV");
+    if (fec_env == null) {fec_env = "DEV";}
+    if (fec_env.toLowerCase().equals("dev")) {
       return "inmemoryH2";
+    } else if (fec_env.toLowerCase().equals("prod")) {
+        return "testInDocker";
+    } else {
+      throw new RuntimeException("Unknown environment: " + fec_env);
     }
-    return "testInDocker";
   }
 }

@@ -6,14 +6,14 @@ import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.Session;
 import fsc.entity.session.UnauthenticatedSession;
 import fsc.service.Authorizer;
-
-import java.time.LocalDateTime;
+import fsc.service.SessionCreator;
 
 public class EntityStub {
 
   private static EntityFactory entityFactory = new SimpleEntityFactory();
   private static long seatId = 0;
   private static long ELECTION_ID = 0;
+  private static SessionCreator sessionCreator = new SessionCreator();
 
   public static Query query() {
     return Query.always();
@@ -49,20 +49,14 @@ public class EntityStub {
   }
 
   public static AuthenticatedSession adminSession() {
-    return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN, "admin",
-                                    "token", anHourFromNow());
+    return sessionCreator.createSession(Authorizer.Role.ROLE_ADMIN, "admin");
   }
 
   public static AuthenticatedSession userSession(String username) {
-    return new AuthenticatedSession(Authorizer.Role.ROLE_USER, username,
-                                    "token", anHourFromNow());
+    return sessionCreator.createSession(Authorizer.Role.ROLE_USER, username);
   }
 
   public static Session unauthenticatedSession() {
     return new UnauthenticatedSession();
-  }
-
-  public static LocalDateTime anHourFromNow() {
-    return LocalDateTime.now().plusHours(1);
   }
 }

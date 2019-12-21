@@ -2,20 +2,17 @@ package fsc.mock;
 
 import fsc.entity.session.AuthenticatedSession;
 import fsc.entity.session.Session;
-import fsc.service.Authenticator;
-import fsc.service.Authorizer;
-import fsc.service.Credentials;
-
-import java.time.LocalDateTime;
+import fsc.service.*;
 
 public class AcceptingAuthenticatorSpy implements Authenticator {
   public String token;
 
   public Session authenticateWithCredentials(Credentials credentials) {
-    token = "a token";
-    return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN,
-                                    credentials.getUsername(),
-                                    token,
-                                    LocalDateTime.now().plusHours(1));
+    AuthenticatedSession session = new SessionCreator().createSession(
+          Authorizer.Role.ROLE_ADMIN,
+          credentials.getUsername()
+    );
+    token = session.getToken();
+    return session;
   }
 }

@@ -63,9 +63,13 @@ public class ElectionFetcher extends CommitteeFetcher {
   }
 
   public Builder<Election, Response> removeProfile(Election election, Profile profile) {
-    election.removeCandidate(profile);
-    return Builder.ofValue(election);
-
+    try {
+      Candidate candidate = election.getCandidateByUsername(profile.getUsername());
+      electionGateway.removeCandidate(candidate);
+      return Builder.ofValue(election);
+    } catch (ElectionGateway.NoProfileInBallotException e) {
+      return Builder.ofResponse(ResponseFactory.invalidCandidate());
+    }
   }
 
   public Builder<Election, Response> addProfileToElection(Election election, Profile profile) {

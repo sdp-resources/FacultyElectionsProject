@@ -65,7 +65,7 @@ public class RemoveFromBallotInteractorTest extends ElectionTest {
                                         profileGateway, entityFactory);
     Response response = interactor.handle(request);
 
-    assertEquals(ResponseFactory.success(), response);
+    assertEquals(ResponseFactory.invalidCandidate(), response);
   }
 
   @Test
