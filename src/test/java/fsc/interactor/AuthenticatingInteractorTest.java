@@ -45,7 +45,7 @@ public class AuthenticatingInteractorTest {
     SimpleInteractorSpy interactor2 = new SimpleInteractorSpy("1");
     interactor = (AuthenticatingInteractor) new AuthenticatingInteractor(sessionGatewaySpy)
                                                   .append(interactor2);
-    request.token = "aToken";
+    request.token = session.getToken();
     interactor.handle(request);
     assertEquals(session, request.getSession());
     assertTrue(interactor2.handleCalled);
@@ -56,7 +56,7 @@ public class AuthenticatingInteractorTest {
     AuthenticatedSession session = expiredSession();
     sessionGatewaySpy = new SessionGatewaySpy(session);
     interactor = new AuthenticatingInteractor(sessionGatewaySpy);
-    request.token = "aToken";
+    request.token = session.getToken();
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.invalidSession(), response);
   }
@@ -66,7 +66,7 @@ public class AuthenticatingInteractorTest {
     AuthenticatedSession session = currentSession();
     sessionGatewaySpy = new SessionGatewaySpy(session);
     interactor = new AuthenticatingInteractor(sessionGatewaySpy);
-    request.token = "aToken";
+    request.token = session.getToken();
     request.setSession(new UnauthenticatedSession());
     Response response = interactor.handle(request);
     assertEquals(ResponseFactory.cannotHandle(), response);
@@ -87,13 +87,13 @@ public class AuthenticatingInteractorTest {
   private AuthenticatedSession currentSession() {
     return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN,
                                     "admin", "aToken",
-                                    MyTime.minutesFromNow(10));
+                                    MyTime.fromNow(10));
   }
 
   private AuthenticatedSession expiredSession() {
     return new AuthenticatedSession(Authorizer.Role.ROLE_ADMIN,
                                     "admin", "aToken",
-                                    MyTime.minutesAgo(10));
+                                    MyTime.beforeNow(10));
   }
 
 }

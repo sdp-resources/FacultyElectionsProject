@@ -23,8 +23,7 @@ public class RedisStore implements SessionGateway {
 
   public void addSession(AuthenticatedSession session) {
     jedis.set(session.getToken(), sessionConverter.serialize(session));
-    long unixTime = session.getExpirationTime();
-    jedis.expireAt(session.getToken(), unixTime);
+    jedis.expireAt(session.getToken(), session.getExpirationTime().toEpochSecond());
   }
 
   public AuthenticatedSession getSession(String token) {

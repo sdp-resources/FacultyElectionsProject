@@ -82,7 +82,7 @@ public class ViewableEntityConverter {
     return new ViewableSession(session.getUsername(),
                                session.getRole().toString(),
                                session.getToken(),
-                               session.getExpirationTime());
+                               session.getExpirationTime().format());
   }
 
   private Collection<ViewableVoter> convertVoters(Collection<Voter> voters) {

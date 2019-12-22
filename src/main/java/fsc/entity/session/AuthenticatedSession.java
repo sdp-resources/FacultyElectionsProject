@@ -9,13 +9,12 @@ public class AuthenticatedSession implements Session {
   private Authorizer.Role role;
   private String username;
   private String token;
-
-  private long expirationTime;
+  private MyTime expirationTime;
 
   public AuthenticatedSession() {}
 
   public AuthenticatedSession(
-        Authorizer.Role role, String username, String token, long expirationTime
+        Authorizer.Role role, String username, String token, MyTime expirationTime
   ) {
     this.role = role;
     this.username = username;
@@ -35,12 +34,7 @@ public class AuthenticatedSession implements Session {
     return role;
   }
 
-  public long getExpirationTime() { return expirationTime; }
-
-  public void setExpirationTime(long expirationTime) {
-    this.expirationTime = expirationTime;
-  }
-
+  public MyTime getExpirationTime() { return expirationTime; }
 
   public boolean isAuthenticated() {
     return true;
@@ -61,7 +55,7 @@ public class AuthenticatedSession implements Session {
     return role == that.role &&
                  username.equals(that.username) &&
                  token.equals(that.token) &&
-                 expirationTime == that.expirationTime;
+                 expirationTime.equals(that.expirationTime);
   }
 
   public int hashCode() {
@@ -78,7 +72,7 @@ public class AuthenticatedSession implements Session {
   }
 
   public void setStandardExpirationTime() {
-    setExpirationTime(MyTime.standardExpirationTime());
+    expirationTime = MyTime.sessionStandard();
   }
 
   public boolean hasExpired() {

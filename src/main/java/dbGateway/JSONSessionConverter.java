@@ -1,5 +1,6 @@
 package dbGateway;
 
+import fsc.MyTime;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.service.Authorizer;
 import org.json.JSONException;
@@ -9,7 +10,7 @@ public class JSONSessionConverter {
   public String serialize(AuthenticatedSession session) {
     JSONObject json = new JSONObject();
     json.put("token", session.getToken());
-    json.put("expires", session.getExpirationTime());
+    json.put("expires", session.getExpirationTime().toEpochSecond());
     json.put("role", session.getRole());
     json.put("username", session.getUsername());
     return json.toString();
@@ -23,7 +24,7 @@ public class JSONSessionConverter {
       Authorizer.Role role = Authorizer.Role.valueOf(sessionJSON.getString("role"));
       long expires = sessionJSON.getLong("expires");
       String token = sessionJSON.getString("token");
-      return new AuthenticatedSession(role, username, token, expires);
+      return new AuthenticatedSession(role, username, token, MyTime.fromEpoch(expires));
     } catch (JSONException | IllegalArgumentException e) {
       return null;
     }

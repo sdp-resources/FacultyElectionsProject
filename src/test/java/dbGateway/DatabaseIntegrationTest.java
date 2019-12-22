@@ -72,14 +72,13 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
       try {
         SessionGateway sessionGateway = new RedisStore();
         AuthenticatedSession session = sessionGateway.getSession(token);
-        assertDifferenceWithinOneMinute(session.getExpirationTime(),
-                                        MyTime.minutesFromNow(30));
+        assertDifferenceWithinOneMinute(session.getExpirationTime(), MyTime.fromNow(30));
       } catch (SessionGateway.InvalidOrExpiredTokenException e) {
         throw new RuntimeException("failed");
       }
   }
 
-  private void assertDifferenceWithinOneMinute(long time1, long time2) {
+  private void assertDifferenceWithinOneMinute(MyTime time1, MyTime time2) {
     assertTrue(MyTime.withinOneMinute(time1, time2));
   }
 

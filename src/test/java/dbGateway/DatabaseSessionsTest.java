@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DatabaseSessionsTest {
 
-  private AuthenticatedSession session = makeSession("aToken", MyTime.minutesFromNow(10));
+  private AuthenticatedSession session = makeSession("aToken", MyTime.fromNow(10));
   private RedisStore anotherGateway = new RedisStore();
   private RedisStore gateway = new RedisStore();
 
@@ -22,10 +22,8 @@ public class DatabaseSessionsTest {
 
   @Test
   public void outOfDateSessionsGetCleanedUpWhenMethodGetsCalled() {
-    AuthenticatedSession currentSession = makeSession("valid",
-                                                      MyTime.minutesFromNow(10));
-    AuthenticatedSession expiredSession = makeSession("expired",
-                                                      MyTime.minutesAgo(10));
+    AuthenticatedSession currentSession = makeSession("valid", MyTime.fromNow(10));
+    AuthenticatedSession expiredSession = makeSession("expired", MyTime.beforeNow(10));
     gateway.addSession(currentSession);
     gateway.addSession(expiredSession);
 
@@ -33,7 +31,7 @@ public class DatabaseSessionsTest {
     assertEquals(currentSession, gateway.getSession(currentSession.getToken()));
   }
 
-  private AuthenticatedSession makeSession(String token, long expires) {
+  private AuthenticatedSession makeSession(String token, MyTime expires) {
     return new AuthenticatedSession(ROLE_ADMIN, "admin", token, expires);
   }
 
