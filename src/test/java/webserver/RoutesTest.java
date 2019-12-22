@@ -284,9 +284,13 @@ public class RoutesTest extends ServerTest {
                   .followPost(Path.candidateDelete(electionId, username),
                               new HashMap<>())
                   .assertResponseCodeIs(302)
+                  .followTheRedirect()
+                  .assertFlashMatches(Matcher.contains("removed"))
                   .followPost(Path.candidateAdd(electionId),
                               Map.of("username", username))
-                  .assertResponseCodeIs(302);
+                  .assertResponseCodeIs(302)
+                  .followTheRedirect()
+                  .assertFlashMatches(Matcher.contains("added"));
         return;
       }
     }
