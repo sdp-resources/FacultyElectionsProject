@@ -18,5 +18,5 @@ public enum ElectionStateHelpers implements Helper<State> {
       return state.canChangeVoters();
     }
 
-  };
+  }
 }

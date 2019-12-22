@@ -34,14 +34,6 @@ public class ProvidingQueryGatewaySpy implements QueryGateway {
     return false;
   }
 
-  public Query getQuery(String name) {
-    requestedName = name;
-    for (NamedQuery namedQuery : namedQueries) {
-      if (namedQuery.name.equals(name)) { return namedQuery.query; }
-    }
-    return null;
-  }
-
   public NamedQuery getNamedQuery(String name) throws UnknownQueryNameException {
     requestedName = name;
     for (NamedQuery namedQuery : namedQueries) {

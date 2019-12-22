@@ -117,7 +117,7 @@ public class RoutesTest extends ServerTest {
                                                queryStringConverter.toString(queries.get(name))))
                 .followPost(Path.queryNamed(name), parameters)
                 .assertRedirectsTo(Path.queryNamed(name));
-      assertEquals(Query.has("contract", "untenured"), router.getGateway().getQuery(name));
+      assertEquals(Query.has("contract", "untenured"), router.getGateway().getNamedQuery(name).query);
     }
 
   }

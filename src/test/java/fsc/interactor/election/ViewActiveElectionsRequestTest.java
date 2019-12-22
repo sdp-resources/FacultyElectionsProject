@@ -10,10 +10,11 @@ import fsc.mock.gateway.profile.ExistingProfileGatewaySpy;
 import fsc.request.ViewActiveElectionsRequest;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
-import gateway.InMemoryGateway;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -49,7 +50,7 @@ public class ViewActiveElectionsRequestTest extends ElectionTest {
 
   @Test
   public void allElectionThatAreNotClosedAreShown() {
-    ElectionGateway electionGateway = new InMemoryGateway();
+    ElectionGateway electionGateway = new SimpleElectionGateway();
     for (Election election : elections) {
       electionGateway.addElection(election);
     }
@@ -59,5 +60,52 @@ public class ViewActiveElectionsRequestTest extends ElectionTest {
                                         profileGateway, entityFactory);
     response = interactor.handle(request);
     assertEquals(ResponseFactory.ofElectionList(activeElections), response);
+  }
+
+  private static class SimpleElectionGateway implements ElectionGateway {
+    private List<Election> elections = new ArrayList<>();
+
+    public void save() {
+
+    }
+
+    public void addElection(Election election) {
+      elections.add(election);
+    }
+
+    public void addVoteRecord(VoteRecord voteRecord) {
+
+    }
+
+    public VoteRecord getVoteRecord(long recordId) {
+      return null;
+    }
+
+    public Election getElection(long electionID) throws InvalidElectionIDException {
+      for (Election election : elections) {
+        if (election.getID().equals(electionID)) { return election; }
+      }
+      throw new InvalidElectionIDException();
+    }
+
+    public Collection<VoteRecord> getAllVotes(Election election) {
+      return null;
+    }
+
+    public Collection<Election> getAllElections() {
+      return elections;
+    }
+
+    public Voter getVoter(long voterId) {
+      return null;
+    }
+
+    public void addVoter(Voter voter) {
+
+    }
+
+    public void removeCandidate(Candidate candidate) {
+
+    }
   }
 }

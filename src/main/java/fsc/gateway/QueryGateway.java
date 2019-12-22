@@ -9,7 +9,6 @@ import java.util.Map;
 public interface QueryGateway {
   void addQuery(String name, Query query);
   boolean hasQuery(String name);
-  Query getQuery(String name);
   NamedQuery getNamedQuery(String name) throws UnknownQueryNameException;
   QueryValidationResult validateQueryString(String queryString);
   void save();

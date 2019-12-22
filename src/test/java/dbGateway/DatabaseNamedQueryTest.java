@@ -27,7 +27,7 @@ public class DatabaseNamedQueryTest extends BasicDatabaseTest {
     assertEquals(1, namedQueries.size());
     assertEquals(query, namedQueries.get(IS_TENURED));
     assertEquals(true, anotherGateway.hasQuery(IS_TENURED));
-    assertEquals(query, anotherGateway.getQuery(IS_TENURED));
+    assertEquals(query, anotherGateway.getNamedQuery(IS_TENURED).query);
   }
 
   @Test

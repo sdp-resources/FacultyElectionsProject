@@ -17,12 +17,10 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(ViewElectionRequest request) {
-    // TODO
-    return true;
+    return isAuthorizedAsAdmin(request);
   }
 
   public Object visit(LoginRequest request) {
-    // TODO
     return true;
   }
 

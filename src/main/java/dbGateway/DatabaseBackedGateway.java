@@ -227,12 +227,6 @@ public class DatabaseBackedGateway implements Gateway {
 
   }
 
-  public Query getQuery(String name) {
-    NamedQuery query = find(NamedQuery.class, name);
-
-    return query.query;
-  }
-
   public NamedQuery getNamedQuery(String name) throws UnknownQueryNameException {
     NamedQuery query = find(NamedQuery.class, name);
     if  (query == null) { throw new UnknownQueryNameException(); }
