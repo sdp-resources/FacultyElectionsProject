@@ -59,7 +59,8 @@
       </div>
     </form>
     <div>
-      <a href="mailto:?subject=Decide to stand for {{election.seat.name}}&Bcc={{#each election.undecidedCandidates}}{{#neq @index 0}},{{/neq}}{{profile.username}}@hanover.edu{{/each}}">
+      <a href="mailto:?subject=Decide to stand for {{election.seat.name}}&Bcc={{#each
+            election.undecidedCandidates}}{{#neq @index 0}},{{/neq}}{{profile.username}}@hanover.edu{{/each}}">
       Email undecided candidates</a>
     </div>
     <table class="table table-condensed w-50">
@@ -236,6 +237,7 @@
       </div>
     {{/eq}}
   </div>
+</div>
 {{> footer.hbs}}
 {{#block "stylesheets"}}
     <link rel="stylesheet" href="css/bootstrap-select.min.css">

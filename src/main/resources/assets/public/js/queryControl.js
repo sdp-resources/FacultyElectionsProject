@@ -124,7 +124,7 @@
                 this.saveTheEdit();
             }
         }
-    }
+    };
     Q.Control.prototype.saveTheEdit = function saveTheEdit() {
         this.input.val(this.validEntry);
         this.disableEdit();
