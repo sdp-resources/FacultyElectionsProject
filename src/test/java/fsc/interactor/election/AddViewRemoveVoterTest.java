@@ -82,7 +82,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
   }
 
   @Test
-  public void whenAddingVoterThatAlreadyExists_returnTheVoter() {
+  public void whenAddingVoterThatAlreadyExists_throwError() {
     ProvidedElectionGatewaySpy electionGateway = new ProvidedElectionGatewaySpy(election);
     electionGateway.provideVoter(voter);
     interactor = new ElectionInteractor(electionGateway, null,

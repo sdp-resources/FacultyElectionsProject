@@ -166,7 +166,7 @@ public class ElectionFetcher extends CommitteeFetcher {
     if (voter == null) {
       return Builder.ofResponse(ResponseFactory.voterMissing());
     }
-    election.removeVoter(voter);
+    electionGateway.removeVoter(voter);
     return Builder.ofValue(voter);
   }
 

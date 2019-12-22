@@ -117,7 +117,8 @@ public class RoutesTest extends ServerTest {
                                                queryStringConverter.toString(queries.get(name))))
                 .followPost(Path.queryNamed(name), parameters)
                 .assertRedirectsTo(Path.queryNamed(name));
-      assertEquals(Query.has("contract", "untenured"), router.getGateway().getNamedQuery(name).query);
+      assertEquals(Query.has("contract", "untenured"),
+                   router.getGateway().getNamedQuery(name).query);
     }
 
   }
@@ -290,6 +291,35 @@ public class RoutesTest extends ServerTest {
       }
     }
     Assert.fail("No election found where we can change candidates. Please add one for testing.");
+  }
+
+  @Test
+  public void adminCanRemoveThenAddVoter() {
+    for (Election election : router.getGateway().getAllElections()) {
+      if (election.getState().canChangeVoters() &&
+                !election.getVoters().isEmpty()) {
+        Voter voter = getAVoter(election);
+        Long electionId = election.getID();
+        String username = voter.getProfile().getUsername();
+        WebClients.adminLoggedInClient()
+                  .followPost(Path.voterDelete(electionId, username),
+                              new HashMap<>())
+                  .assertResponseCodeIs(302)
+                  .followTheRedirect()
+                  .assertFlashMatches(Matcher.contains("removed"))
+                  .followPost(Path.voterAdd(electionId),
+                              Map.of("username", username))
+                  .assertResponseCodeIs(302)
+                  .followTheRedirect()
+                  .assertFlashMatches(Matcher.contains("added"));
+        return;
+      }
+    }
+    Assert.fail("No election found where we can change voters. Please add one for testing.");
+  }
+
+  private Voter getAVoter(Election election) {
+    return election.getVoters().iterator().next();
   }
 
   private Candidate getACandidate(Election election) {

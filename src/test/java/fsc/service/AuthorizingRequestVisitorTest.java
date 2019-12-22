@@ -179,6 +179,10 @@ public class AuthorizingRequestVisitorTest {
 
     }
 
+    public void removeVoter(Voter voter) {
+
+    }
+
     public List<Division> getAvailableDivisions() {
       return null;
     }

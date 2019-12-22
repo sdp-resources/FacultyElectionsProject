@@ -77,8 +77,7 @@ public class DatabaseBackedGateway implements Gateway {
     query.setParameter(nameParam, name);
 
     List<Committee> resultList = query.getResultList();
-    if (resultList.isEmpty())
-      throw new UnknownCommitteeException();
+    if (resultList.isEmpty()) { throw new UnknownCommitteeException(); }
     return resultList.get(0);
   }
 
@@ -187,14 +186,43 @@ public class DatabaseBackedGateway implements Gateway {
     return voter;
   }
 
-  public void addVoter(Voter voter) {
+  public void addVoter(Voter voter) throws ExistingVoterException {
+    if (voterExists(voter.getElection(), voter.getProfile())) {
+      throw new ExistingVoterException();
+    }
     persist(voter);
+  }
+
+  private boolean voterExists(Election election, Profile profile) {
+    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+    CriteriaQuery<Voter> q = cb.createQuery(Voter.class);
+    Root<Voter> c = q.from(Voter.class);
+    ParameterExpression<Profile> profileParam = cb.parameter(Profile.class);
+    ParameterExpression<Election> electionParam = cb.parameter(Election.class);
+    Predicate[] predicates = new Predicate[2];
+    predicates[0] = cb.equal(c.get("election"), electionParam);
+    predicates[1] = cb.equal(c.get("profile"), profileParam);
+    q.select(c).where(predicates);
+    TypedQuery<Voter> query = entityManager.createQuery(q);
+    query.setParameter(electionParam, election);
+    query.setParameter(profileParam, profile);
+
+    List<Voter> resultList = query.getResultList();
+
+    return !resultList.isEmpty();
   }
 
   public void removeCandidate(Candidate candidate) {
     Election election = candidate.getElection();
     entityManager.remove(candidate);
     election.removeCandidate(candidate.getProfile());
+  }
+
+  public void removeVoter(Voter voter) {
+    Election election = voter.getElection();
+    entityManager.remove(voter);
+    election.removeVoter(voter);
   }
 
   public Profile getProfile(String username) throws InvalidProfileUsernameException {
@@ -229,14 +257,14 @@ public class DatabaseBackedGateway implements Gateway {
 
   public NamedQuery getNamedQuery(String name) throws UnknownQueryNameException {
     NamedQuery query = find(NamedQuery.class, name);
-    if  (query == null) { throw new UnknownQueryNameException(); }
+    if (query == null) { throw new UnknownQueryNameException(); }
     return query;
   }
 
   public QueryValidationResult validateQueryString(String queryString) {
-      QueryStringParserFactory parserFactory = new ValidatingQueryStringParserFactory(dbValidator);
-      QueryStringConverter queryStringConverter = new QueryStringConverter(parserFactory);
-      return queryStringConverter.validateQueryString(queryString);
+    QueryStringParserFactory parserFactory = new ValidatingQueryStringParserFactory(dbValidator);
+    QueryStringConverter queryStringConverter = new QueryStringConverter(parserFactory);
+    return queryStringConverter.validateQueryString(queryString);
   }
 
   public PasswordRecord getPasswordRecordFor(String username) throws UnknownUsernameException {

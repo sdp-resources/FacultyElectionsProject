@@ -44,4 +44,6 @@ public class RejectingElectionGatewaySpy implements ElectionGateway {
     candidate.getElection().removeCandidate(candidate.getProfile());
   }
 
+  public void removeVoter(Voter voter) { }
+
 }

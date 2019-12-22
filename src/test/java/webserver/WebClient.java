@@ -55,7 +55,7 @@ public class WebClient {
   protected void prepareConnection(
         String url, String method, Map<String, String> parameters, boolean followRedirects
   ) {
-    this.url = normalize(url);
+    this.setUrl(url);
     this.method = method;
     connection = Jsoup.connect(this.url);
     connection.method(Connection.Method.valueOf(this.method));
@@ -69,7 +69,7 @@ public class WebClient {
   }
 
   private String normalize(String url) {
-    return url.matches("^http") ? url : base + url;
+    return url.matches("^http.*") ? url : (base + url);
   }
 
   public void execute() {
@@ -91,7 +91,11 @@ public class WebClient {
   }
 
   public Element getElement(String selector) {
-    return document.selectFirst(selector);
+    return getElement(selector, document);
+  }
+
+  public Element getElement(String selector, Element within) {
+    return within.selectFirst(selector);
   }
 
   public void addParameter(String parameter, String value) {
@@ -145,5 +149,22 @@ public class WebClient {
   WebClient assertNoMatch(String selector) {
     TestCase.assertNull(getElement(selector));
     return this;
+  }
+
+  public WebClient followTheRedirect() {
+    return followGet(getResponseHeader("Location"));
+  }
+
+  private void setUrl(String url) {
+    this.url = normalize(url);
+  }
+
+  public WebClient assertFlashMatches(String selector) {
+    assertNotNull(getElement(selector, getFlash()));
+    return this;
+  }
+
+  private Element getFlash() {
+    return document.getElementById("flash");
   }
 }

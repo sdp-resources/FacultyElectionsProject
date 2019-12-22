@@ -94,7 +94,11 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
                                             "Natural Sciences", "tenured");
     gateway.addProfile(profile);
     Voter voter = gateway.getEntityFactory().createVoter(profile, election);
-    gateway.addVoter(voter);
+    try {
+      gateway.addVoter(voter);
+    } catch (ElectionGateway.ExistingVoterException e) {
+      throw new RuntimeException("shouldn't be adding voter twice");
+    }
     gateway.save();
     gateway.commit();
     return voter;

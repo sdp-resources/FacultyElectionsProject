@@ -15,6 +15,7 @@ public interface ElectionGateway {
   Voter getVoter(long voterId) throws InvalidVoterException;
   void addVoter(Voter voter) throws ExistingVoterException;
   void removeCandidate(Candidate candidate);
+  void removeVoter(Voter voter);
   class InvalidElectionIDException extends Exception {
     public InvalidElectionIDException() {}
   }

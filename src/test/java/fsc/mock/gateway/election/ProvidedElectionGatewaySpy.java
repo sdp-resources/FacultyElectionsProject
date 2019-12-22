@@ -77,6 +77,10 @@ public class ProvidedElectionGatewaySpy implements ElectionGateway {
     candidate.getElection().removeCandidate(candidate.getProfile());
   }
 
+  public void removeVoter(Voter voter) {
+
+  }
+
   private boolean voterExists(Voter voter) {
     for (Voter storedVoter : storedElection.getVoters()) {
       if (storedVoter.getProfile().equals(voter.getProfile()) &&

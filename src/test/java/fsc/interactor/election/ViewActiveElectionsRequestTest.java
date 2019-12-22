@@ -100,12 +100,10 @@ public class ViewActiveElectionsRequestTest extends ElectionTest {
       return null;
     }
 
-    public void addVoter(Voter voter) {
+    public void addVoter(Voter voter) { }
 
-    }
+    public void removeCandidate(Candidate candidate) { }
 
-    public void removeCandidate(Candidate candidate) {
-
-    }
+    public void removeVoter(Voter voter) { }
   }
 }

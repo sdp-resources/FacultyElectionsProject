@@ -52,4 +52,6 @@ public class AddedElectionGatewaySpy implements ElectionGateway {
     candidate.getElection().removeCandidate(candidate.getProfile());
   }
 
+  public void removeVoter(Voter voter) { }
+
 }
