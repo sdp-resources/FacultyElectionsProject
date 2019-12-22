@@ -15,7 +15,7 @@ public class RedisStoreTest {
 
   @Before
   public void setUp() {
-    store = new RedisStore();
+    store = new RedisStore("localhost");
     creator = new SessionCreator();
   }
 

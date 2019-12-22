@@ -10,6 +10,7 @@ import spark.Spark;
 
 public class Router {
   private String persistenceUnit = "inmemoryH2";
+  private String redishost = "localhost";
 
   public void setupRoutes(String resourcePath) {
     // TODO: add edit committee path for changing committee details
@@ -190,8 +191,12 @@ public class Router {
     this.persistenceUnit = persistenceUnit;
   }
 
+  public void setRedishost(String redishost) {
+    this.redishost = redishost;
+  }
+
   public AppContext getAppContext() {
-    return new AppContext(getGateway(), new RedisStore());
+    return new AppContext(getGateway(), new RedisStore(redishost));
   }
 
   protected Gateway getGateway() {

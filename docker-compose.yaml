@@ -17,17 +17,26 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    container_name: "fec_db"
+  sessionStore:
+    networks:
+      - frontend
+    image: redis:5.0
+    container_name: "fec_sessionStore"
   server:
     networks:
       - backend
+      - frontend
     build:
       context: build/install
       dockerfile: ../../Dockerfile
     environment:
-      DB_HOST: "fec_db_1"
+      DB_HOST: "fec_db"
       DB_NAME: "testdb"
+      SESSION_STORE: "fec_sessionStore"
     ports:
       - 4567:4567
     depends_on:
       - db
+      - sessionStore
     image: fecelections:latest

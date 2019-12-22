@@ -9,8 +9,8 @@ public class RedisStore implements SessionGateway {
   private Jedis jedis;
   private JSONSessionConverter sessionConverter = new JSONSessionConverter();
 
-  public RedisStore() {
-    jedis = new Jedis("localhost");
+  public RedisStore(String hostname) {
+    jedis = new Jedis(hostname);
   }
 
   public void set(String key, String value) {

@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 public class DatabaseSessionsTest {
 
   private AuthenticatedSession session = makeSession("aToken", MyTime.fromNow(10));
-  private RedisStore anotherGateway = new RedisStore();
-  private RedisStore gateway = new RedisStore();
+  private RedisStore anotherGateway = new RedisStore("localhost");
+  private RedisStore gateway = new RedisStore("localhost");
 
   @Test
   public void canAddSession() {

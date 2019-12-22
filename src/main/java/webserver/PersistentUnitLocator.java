@@ -12,4 +12,9 @@ public class PersistentUnitLocator {
       throw new RuntimeException("Unknown environment: " + fec_env);
     }
   }
+
+  public static String getSessionHost() {
+    String sessionHost = System.getenv("SESSION_STORE");
+    return sessionHost == null ? "localhost" : sessionHost;
+  }
 }

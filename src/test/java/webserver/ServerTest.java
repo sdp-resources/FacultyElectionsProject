@@ -1,6 +1,5 @@
 package webserver;
 
-import fsc.gateway.Gateway;
 import org.junit.BeforeClass;
 import spark.Spark;
 
@@ -52,10 +51,6 @@ public class ServerTest extends Server {
   }
 
   public static class TestableRouter extends Router {
-    public Gateway getGateway() {
-      return super.getGateway();
-    }
-
     public void setupRoutes(String resourcePath) {
       Spark.port(4568);
       super.setPersistenceUnit(PersistentUnitLocator.get());

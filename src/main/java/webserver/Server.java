@@ -9,6 +9,7 @@ public class Server implements SparkApplication {
   public static void main(String[] args) {
     Router router = new Router();
     router.setPersistenceUnit(PersistentUnitLocator.get());
+    router.setRedishost(PersistentUnitLocator.getSessionHost());
     Spark.port(readServerPort());
     router.setupRoutes("");
 

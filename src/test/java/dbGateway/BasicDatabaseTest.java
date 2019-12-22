@@ -30,12 +30,13 @@ public abstract class BasicDatabaseTest {
   }
 
   protected <T> T returnWithNewContext(Function<AppContext, T> tasks) {
-    return returnWithNewGateway(gateway -> tasks.apply(new AppContext(gateway, new RedisStore())));
+    return returnWithNewGateway(gateway -> tasks.apply(new AppContext(gateway, new RedisStore(
+          "localhost"))));
 
   }
 
   protected void withNewContext(Consumer<AppContext> tasks) {
-    withNewGateway(gateway -> tasks.accept(new AppContext(gateway, new RedisStore())));
+    withNewGateway(gateway -> tasks.accept(new AppContext(gateway, new RedisStore("localhost"))));
 
   }
 

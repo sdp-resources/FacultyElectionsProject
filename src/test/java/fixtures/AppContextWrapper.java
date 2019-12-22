@@ -151,7 +151,7 @@ class AppContextWrapper {
     private Session session = new UnauthenticatedSession();
 
     TestableAppContext(Gateway gateway) {
-      super(gateway, new RedisStore());
+      super(gateway, new RedisStore("localhost"));
     }
 
     public <T> Response<T> getResponse(Request request) {
