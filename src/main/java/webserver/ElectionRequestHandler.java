@@ -5,7 +5,7 @@ import fsc.entity.State;
 import fsc.response.Response;
 import fsc.viewable.ViewableElection;
 import fsc.viewable.ViewableProfile;
-import fsc.voting.ElectionRecord;
+import fsc.voting.FullElectionRecord;
 import spark.Request;
 
 import java.util.Arrays;
@@ -55,8 +55,8 @@ public class ElectionRequestHandler extends RequestHandler {
     return serveTemplate("/adminElection.handlebars");
   }
 
-  private ElectionRecord getElectionResults(long electionID) {
-    Response<ElectionRecord> electionResults = appContext.getElectionResults(electionID,
+  private FullElectionRecord getElectionResults(long electionID) {
+    Response<FullElectionRecord> electionResults = appContext.getElectionResults(electionID,
                                                                              session.token);
     return electionResults.getValues();
   }

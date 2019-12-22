@@ -10,7 +10,7 @@ import fsc.request.Request;
 import fsc.response.Response;
 import fsc.service.*;
 import fsc.viewable.*;
-import fsc.voting.ElectionRecord;
+import fsc.voting.FullElectionRecord;
 
 import java.util.Collection;
 import java.util.List;
@@ -222,7 +222,7 @@ public class AppContext {
     return getResponse(withToken(token, requestFactory.removeVoter(electionid, username)));
   }
 
-  public Response<ElectionRecord> getElectionResults(long electionID, String token) {
+  public Response<FullElectionRecord> getElectionResults(long electionID, String token) {
     return getResponse(withToken(token, requestFactory.getElectionResults(electionID)));
   }
 }

@@ -36,255 +36,263 @@
          aria-controls="results" aria-selected="false">Results</a>
     </li>
   </ul>
-  <div class="tab-content">
-    <div class="tab-pane active" id="candidates" role="tabpanel" aria-labelledby="candidates-tab">
-      <h4>Candidates</h4>
-      <form action="{{path 'candidateAdd' election.electionID}}" class="w-50" method="post">
-        <div class="form-group">
-          <select name="username" id="addCandidate"
-                  class="form-control selectpicker w-75"
-                  title="User to add ..."
-                  data-live-search="true">
-            {{#each missingCandidates}}
-              <option value="{{username}}">{{name}}</option>
-            {{/each}}
-          </select>
-          {{#if (canChangeCandidates election.state)}}
-            <button type="submit" class="btn btn-primary">Add Candidate</button>
-          {{else}}
-            <button type="submit" class="btn btn-primary" disabled
-                    title="Candidates can only be added in Setup or DecideToStand phases">Add Candidate
-            </button>
-          {{/if}}
-        </div>
-      </form>
-      <div>
-        <a href="mailto:?subject=Decide to stand for {{election.seat.name}}&Bcc={{#each
-              election.undecidedCandidates}}{{#neq @index 0}},{{/neq}}{{profile.username}}@hanover.edu{{/each}}">
-        Email undecided candidates</a>
+<div class="tab-content">
+  <div class="tab-pane active" id="candidates" role="tabpanel" aria-labelledby="candidates-tab">
+    <h4>Candidates</h4>
+    <form action="{{path 'candidateAdd' election.electionID}}" class="w-50" method="post">
+      <div class="form-group">
+        <select name="username" id="addCandidate"
+                class="form-control selectpicker w-75"
+                title="User to add ..."
+                data-live-search="true">
+          {{#each missingCandidates}}
+            <option value="{{username}}">{{name}}</option>
+          {{/each}}
+        </select>
+        {{#if (canChangeCandidates election.state)}}
+          <button type="submit" class="btn btn-primary">Add Candidate</button>
+        {{else}}
+          <button type="submit" class="btn btn-primary" disabled
+                  title="Candidates can only be added in Setup or DecideToStand phases">Add Candidate
+          </button>
+        {{/if}}
       </div>
-      <table class="table table-condensed w-50">
-        <thead>
-        <tr>
-          <th class="w-75">Name</th>
-          <th class="w-25 text-center">Status</th>
-          <th class="w-25">Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each election.candidates}}
-          <tr>
-            <td>{{profile.name}}</td>
-            <td class="text-center">{{> candidateStatus.hbs status.string}}</td>
-            <td class="text-center">
-              <form action="{{path "candidateDelete" election.electionID profile.username}}"
-                    method="post">
-                {{#if (canChangeCandidates election.state)}}
-                  <button class="btn btn-danger"><i class="fas fa-times"></i></button>
-                {{else}}
-                  <button class="btn btn-danger" disabled
-                          title="Candidates can only be removed during Setup or DecideToStand phases">
-                    <i class="fas fa-times"></i>
-                  </button>
-                {{/if}}
-              </form>
-            </td>
-          </tr>
-        {{/each}}
-        </tbody>
-      </table>
+    </form>
+    <div>
+      <a href="mailto:?subject=Decide to stand for {{election.seat.name}}&Bcc={{#each
+            election.undecidedCandidates}}{{#neq @index 0}},{{/neq}}{{profile.username}}@hanover.edu{{/each}}">
+      Email undecided candidates</a>
     </div>
-    <div class="tab-pane" id="voters" role="tabpanel" aria-labelledby="voters-tab">
-      <h4>Voters</h4>
-      <form action="{{path 'voterAdd' election.electionID}}" class="w-50" method="post">
-        <div class="form-group">
-          <select name="username" id="addVoter"
-                  class="form-control selectpicker w-75"
-                  title="User to add ..."
-                  data-live-search="true">
-            {{#each missingVoters}}
-              <option value="{{username}}">{{name}}</option>
-            {{/each}}
-          </select>
-          {{#if (canChangeVoters election.state)}}
-            <button type="submit" class="btn btn-primary">Add Voter</button>
-          {{else}}
-            <button type="submit" class="btn btn-primary" disabled
-                    title="Voters can only be added in Setup phase">Add Voter
-            </button>
-          {{/if}}
-        </div>
-      </form>
-      <table class="table table-condensed w-50">
-        <thead>
+    <table class="table table-condensed w-50">
+      <thead>
+      <tr>
+        <th class="w-75">Name</th>
+        <th class="w-25 text-center">Status</th>
+        <th class="w-25">Remove</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#each election.candidates}}
         <tr>
-          <th class="w-75">Name</th>
-          <th class="w-25 text-center">Voted</th>
-          <th class="w-25">Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each election.voters}}
-          <tr>
-            <td>{{profile.name}}</td>
-            <td class="text-center">
-              {{#if voted}}
-                <i class="text-success fas fa-person-booth"></i>
+          <td>{{profile.name}}</td>
+          <td class="text-center">{{> candidateStatus.hbs status.string}}</td>
+          <td class="text-center">
+            <form action="{{path "candidateDelete" election.electionID profile.username}}"
+                  method="post">
+              {{#if (canChangeCandidates election.state)}}
+                <button class="btn btn-danger"><i class="fas fa-times"></i></button>
               {{else}}
-                <i class="text-warning fas fa-person-booth"></i>
+                <button class="btn btn-danger" disabled
+                        title="Candidates can only be removed during Setup or DecideToStand phases">
+                  <i class="fas fa-times"></i>
+                </button>
               {{/if}}
-            </td>
-            <td class="text-center">
-              <form action="{{path "voterDelete" election.electionID profile.username}}"
-                    method="post">
-                {{#if (canChangeVoters election.state)}}
-                  <button class="btn btn-danger"><i class="fas fa-times"></i></button>
-                {{else}}
-                  <button class="btn btn-danger" disabled
-                          title="Voters can only be removed during Setup phase">
-                    <i class="fas fa-times"></i>
-                  </button>
-                {{/if}}
-              </form>
-            </td>
-          </tr>
-        {{/each}}
-        </tbody>
-      </table>
-    </div>
-    <div class="tab-pane" id="records" role="tabpanel" aria-labelledby="records-tab">
-      <h4>Vote Records</h4>
-      <table class="table table-condensed w-100">
-        <thead>
-        <tr>
-          <th style="width: 5%;">id</th>
-          <th class="w-25 text-center">timestamp</th>
-          <th class="w-50">votes</th>
+            </form>
+          </td>
         </tr>
-        </thead>
-        <tbody>
-        {{#each election.votes}}
-          <tr>
-            <td>{{recordId}}</td>
-            <td class="text-center">{{datetime timestamp "dd-MM-yyyy hh:mm"}}</td>
-            <td>{{join votes " "}}</td>
-          </tr>
-        {{/each}}
-        </tbody>
-      </table>
-    </div>
-    <div class="tab-pane" id="results" role="tabpanel" aria-labelledby="results-tab">
-      <h4>Vote results</h4>
-      {{#eq (length results.rounds) 0}}
-        <p>No vote results yet.</p>
-      {{else}}
-        <div id="resultsAccordion" class="accordion">
-          {{#each results.rounds}}
-            <div class="card mb-0">
-              <div class="card-header collapsed" id="round{{@index}}" data-toggle="collapse"
-                   data-target="#collapse{{@index}}" aria-expanded="true"
-                   aria-controls="collapse{{@index}}">
-                <a class="card-title"> {{formatResult result}}</a>
-              </div>
-              <div id="collapse{{@index}}" class="collapse"
-                   aria-labelledby="round{{@index}}"
-                   data-parent="#resultsAccordion">
-                <div class="card-body votingRound row">
-                  <div class="col">
-                    <table class="votesTbl table table-condensed">
-                      <thead>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane" id="voters" role="tabpanel" aria-labelledby="voters-tab">
+    <h4>Voters</h4>
+    <form action="{{path 'voterAdd' election.electionID}}" class="w-50" method="post">
+      <div class="form-group">
+        <select name="username" id="addVoter"
+                class="form-control selectpicker w-75"
+                title="User to add ..."
+                data-live-search="true">
+          {{#each missingVoters}}
+            <option value="{{username}}">{{name}}</option>
+          {{/each}}
+        </select>
+        {{#if (canChangeVoters election.state)}}
+          <button type="submit" class="btn btn-primary">Add Voter</button>
+        {{else}}
+          <button type="submit" class="btn btn-primary" disabled
+                  title="Voters can only be added in Setup phase">Add Voter
+          </button>
+        {{/if}}
+      </div>
+    </form>
+    <table class="table table-condensed w-50">
+      <thead>
+      <tr>
+        <th class="w-75">Name</th>
+        <th class="w-25 text-center">Voted</th>
+        <th class="w-25">Remove</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#each election.voters}}
+        <tr>
+          <td>{{profile.name}}</td>
+          <td class="text-center">
+            {{#if voted}}
+              <i class="text-success fas fa-person-booth"></i>
+            {{else}}
+              <i class="text-warning fas fa-person-booth"></i>
+            {{/if}}
+          </td>
+          <td class="text-center">
+            <form action="{{path "voterDelete" election.electionID profile.username}}"
+                  method="post">
+              {{#if (canChangeVoters election.state)}}
+                <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+              {{else}}
+                <button class="btn btn-danger" disabled
+                        title="Voters can only be removed during Setup phase">
+                  <i class="fas fa-times"></i>
+                </button>
+              {{/if}}
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane" id="records" role="tabpanel" aria-labelledby="records-tab">
+    <h4>Vote Records</h4>
+    <table class="table table-condensed w-100">
+      <thead>
+      <tr>
+        <th style="width: 5%;">id</th>
+        <th class="w-25 text-center">timestamp</th>
+        <th class="w-50">votes</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#each election.votes}}
+        <tr>
+          <td>{{recordId}}</td>
+          <td class="text-center">{{datetime timestamp "dd-MM-yyyy hh:mm"}}</td>
+          <td>{{join votes " "}}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+<div class="tab-pane" id="results" role="tabpanel" aria-labelledby="results-tab">
+  <h4>Vote results</h4>
+{{#eq (length results.electionRecords) 0}}
+    <p>No vote results yet.</p>
+{{else}}
+  <div id="resultsAccordion">
+  {{#each results.electionRecords}}
+    {{#assign "recordId"}}electionRecord{{@index}}{{/assign}}
+      <div id="electionRecord{{@index}}" class="electionRecord accordion mt-3">
+        <h3>Round {{@index}}: winner {{winner}}</h3>
+        {{#each rounds}}
+          <div class="card mb-0">
+            <div class="card-header collapsed" id="round{{@index}}" data-toggle="collapse"
+                 data-target="#collapse{{@index}}" aria-expanded="true"
+                 aria-controls="collapse{{@index}}">
+              <a class="card-title"> {{formatResult result}}</a>
+            </div>
+            <div id="collapse{{@index}}" class="collapse"
+                 aria-labelledby="round{{@index}}"
+                 data-parent="#{{recordId}}">
+              <div class="card-body votingRound row">
+                <div class="col">
+                  <table class="votesTbl table table-condensed">
+                    <thead>
+                    <tr>
+                      <td>Vote</td>
+                      <td colspan="{{length rankedTallies}}" class="text-center">Rankings</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each votes}}
                       <tr>
-                        <td>Vote</td>
-                        <td colspan="{{length rankedTallies}}" class="text-center">Rankings</td>
+                        <td>{{@index}}</td>
+                        {{#each this}}
+                          <td><span class="vote vote-{{this}} vote-{{@index}} badge badge-pill">{{this}}</span>
+                          </td>
+                        {{/each}}
                       </tr>
-                      </thead>
-                      <tbody>
-                      {{#each votes}}
-                        <tr>
-                          <td>{{@index}}</td>
-                          {{#each this}}
-                            <td><span class="vote vote-{{this}} vote-{{@index}} badge badge-pill">{{this}}</span></td>
-                          {{/each}}
-                        </tr>
-                      {{/each}}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="col">
-                    <table class="rankedTalliesTbl table table-condensed">
-                      <thead>
+                    {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col">
+                  <table class="rankedTalliesTbl table table-condensed">
+                    <thead>
+                    <tr>
+                      <td>Candidate</td>
+                      <td colspan="{{length rankedTallies}}" class="text-center">Votes per rank</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each sortedCandidateTallies}}
                       <tr>
-                        <td>Candidate</td>
-                        <td colspan="{{length rankedTallies}}" class="text-center">Votes per rank</td>
+                        <td class="candidate" data-candidate="{{target}}">{{target}}</td>
+                        {{#each rankCounts}}
+                          <td class="candidate" data-candidate="{{target}}"
+                              data-ranking="{{@index}}">{{this}}</td>
+                        {{/each}}
                       </tr>
-                      </thead>
-                      <tbody>
-                      {{#each sortedCandidateTallies}}
-                        <tr>
-                          <td class="candidate" data-candidate="{{target}}">{{target}}</td>
-                          {{#each rankCounts}}
-                            <td class="candidate" data-candidate="{{target}}" data-ranking="{{@index}}">{{this}}</td>
-                          {{/each}}
-                        </tr>
-                      {{/each}}
-                      </tbody>
-                    </table>
-                  </div>
+                    {{/each}}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-          {{/each}}
-        </div>
-      {{/eq}}
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
     </div>
+  {{/eq}}
   </div>
-{{> footer.hbs}}
-{{#block "stylesheets"}}
-    <link rel="stylesheet" href="css/bootstrap-select.min.css">
-    <style type="text/css">
-      .accordion .card-header {
-        cursor: pointer;
-      }
-
-      .card-title::before {
-        display: none;
-      }
-
-      .accordion .card-title::before {
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        content: "\f068";
-      }
-
-      .accordion .collapsed .card-title::before {
-        /* symbol for "collapsed" panels */
-        content: "\f067";
-      }
-    </style>
-{{/block}}
-{{#block "javascripts"}}
-    <script src="js/bootstrap-select.min.js"></script>
-    <script>
-      $(() => {
-        $(".rankedTalliesTbl .candidate").hover(toggleHighlight, toggleHighlight);
-
-        function toggleHighlight(e) {
-          const $targetEl = $(e.currentTarget);
-          const round = $targetEl.closest('.votingRound');
-          const candidate = $targetEl.data("candidate");
-          const ranking = $targetEl.data("ranking");
-          const prefix = ".vote-";
-          let selector = prefix + candidate;
-          if (ranking != null) {
-            selector += prefix + ranking;
-          }
-          round.find(selector).toggleClass("badge-primary");
+  </div>
+  {{> footer.hbs}}
+  {{#block "stylesheets"}}
+      <link rel="stylesheet" href="css/bootstrap-select.min.css">
+      <style type="text/css">
+        .accordion .card-header {
+          cursor: pointer;
         }
-      });
-    </script>
-    <script>
-      $(function () {
-        $(window.location.hash +'-tab').trigger('click');
-      })
-    </script>
-{{/block}}
+
+        .card-title::before {
+          display: none;
+        }
+
+        .accordion .card-title::before {
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 900;
+          content: "\f068";
+        }
+
+        .accordion .collapsed .card-title::before {
+          /* symbol for "collapsed" panels */
+          content: "\f067";
+        }
+      </style>
+  {{/block}}
+  {{#block "javascripts"}}
+      <script src="js/bootstrap-select.min.js"></script>
+      <script>
+        $(() => {
+          $(".rankedTalliesTbl .candidate").hover(toggleHighlight, toggleHighlight);
+
+          function toggleHighlight(e) {
+            const $targetEl = $(e.currentTarget);
+            const round = $targetEl.closest('.votingRound');
+            const candidate = $targetEl.data("candidate");
+            const ranking = $targetEl.data("ranking");
+            const prefix = ".vote-";
+            let selector = prefix + candidate;
+            if (ranking != null) {
+              selector += prefix + ranking;
+            }
+            round.find(selector).toggleClass("badge-primary");
+          }
+        });
+      </script>
+      <script>
+        $(function () {
+          $(window.location.hash + '-tab').trigger('click');
+        })
+      </script>
+  {{/block}}

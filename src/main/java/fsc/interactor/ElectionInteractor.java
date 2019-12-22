@@ -100,7 +100,7 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(GetElectionResultsRequest request) {
     return electionFetcher.fetchElectionResults(request.electionID)
-          .resolveWith(ResponseFactory::ofElectionRecord);
+          .resolveWith(ResponseFactory::ofFullElectionRecord);
   }
 
   public Response execute(ViewVoteRecordRequest request) {

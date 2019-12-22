@@ -23,6 +23,12 @@ public class ElectionRecord extends AbstractList<VotingRound> {
     }
   }
 
+  public VoteTarget getWinner() {
+    VotingRoundResult lastResult = getLastResult();
+    if (lastResult instanceof WinVotingRoundResult) { return lastResult.getCandidate(); }
+    throw new RuntimeException("Last round should have had a winner, but did not!");
+  }
+
   private void eliminateACandidate() {
     VoteTarget candidate = getLastResult().getCandidate();
     votes.forEach(vote -> vote.remove(candidate));

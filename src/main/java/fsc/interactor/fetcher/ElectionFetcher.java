@@ -8,7 +8,7 @@ import fsc.gateway.ProfileGateway;
 import fsc.response.Response;
 import fsc.response.ResponseFactory;
 import fsc.utils.builder.Builder;
-import fsc.voting.ElectionRecord;
+import fsc.voting.FullElectionRecord;
 import fsc.voting.Vote;
 
 import java.util.ArrayList;
@@ -170,20 +170,20 @@ public class ElectionFetcher extends CommitteeFetcher {
     return Builder.ofValue(voter);
   }
 
-  public Builder<ElectionRecord, Response> fetchElectionResults(long electionID) {
+  public Builder<FullElectionRecord, Response> fetchElectionResults(long electionID) {
     return fetchElection(electionID)
                  .mapThrough(this::retrieveRecord);
   }
 
-  private Builder<ElectionRecord, Response> retrieveRecord(Election e) {
+  private Builder<FullElectionRecord, Response> retrieveRecord(Election e) {
     List<Vote> votes = e.getVoteRecords().stream()
                         .map(VoteRecord::getVotes)
                         .map(Vote::fromUsernames)
                         .collect(Collectors.toList());
 
-    ElectionRecord electionRecord = new ElectionRecord(votes);
-    electionRecord.runElection();
-    return Builder.ofValue(electionRecord);
+    FullElectionRecord fullElectionRecord = new FullElectionRecord(votes);
+    fullElectionRecord.runElection();
+    return Builder.ofValue(fullElectionRecord);
   }
 
   public class VoteRecordPair {

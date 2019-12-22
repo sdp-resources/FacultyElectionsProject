@@ -54,6 +54,41 @@ public class VotingTest {
 
   }
 
+  @Test
+  public void MultipleRoundsWorkProperly() {
+    // TODO: Need better test here, with case of ties
+    assertVotes_produceTotalResults(
+          List.of(Vote.of(cA, cB, cC),
+                  Vote.of(cC, cB, cA),
+                  Vote.of(cB, cC, cA),
+                  Vote.of(cB, cC, cA),
+                  Vote.of(cA, cC, cB)),
+          List.of(
+                List.of(VotingRoundResult.eliminate(cC),
+                        VotingRoundResult.win(cB)),
+                List.of(VotingRoundResult.win(cC)),
+                List.of(VotingRoundResult.win(cA)))
+    );
+  }
+
+  private void assertVotes_produceTotalResults(
+        List<Vote> votes, List<List<VotingRoundResult>> results
+  ) {
+    FullElectionRecord record = new FullElectionRecord(Vote.snapshot(votes));
+    record.runElection();
+    List<ElectionRecord> electionRecords = record.getElectionRecords();
+    assertEquals(results.size(), electionRecords.size());
+    Iterator<List<VotingRoundResult>> expected = results.iterator();
+    for (ElectionRecord electionRecord: electionRecords) {
+      assertTrue(expected.hasNext());
+      Iterator<VotingRoundResult> nextRound = expected.next().iterator();
+      for (VotingRound round : electionRecord) {
+        assertTrue(nextRound.hasNext());
+        assertEquals(nextRound.next(), round.getResult());
+      }
+    }
+  }
+
   private void assertVotes_produceResults(List<Vote> votes, List<VotingRoundResult> results) {
     ElectionRecord record = new ElectionRecord(Vote.snapshot(votes));
     record.runElection();
@@ -62,7 +97,6 @@ public class VotingTest {
     for (VotingRound round : record) {
       assertTrue(expected.hasNext());
       assertEquals(expected.next(), round.getResult());
-
     }
   }
 }

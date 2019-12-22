@@ -6,7 +6,7 @@ import fsc.entity.query.QueryValidationResult;
 import fsc.entity.session.AuthenticatedSession;
 import fsc.service.ViewableEntityConverter;
 import fsc.viewable.*;
-import fsc.voting.ElectionRecord;
+import fsc.voting.FullElectionRecord;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ResponseFactory {
     return new ViewResponse<>(entityConverter.convertProfiles(profiles));
   }
 
-  public static Response ofElectionRecord(ElectionRecord record) {
+  public static Response ofFullElectionRecord(FullElectionRecord record) {
     return new ViewResponse<>(record);
   }
   public static Response ofProfile(Profile profile) {
