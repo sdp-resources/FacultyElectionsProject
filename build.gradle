@@ -3,6 +3,7 @@ plugins {
     id 'java'
     id 'war'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.4.6'
 }
 
 group 'edu.hanover'
@@ -36,4 +37,8 @@ dependencies {
 
 application {
     mainClassName = 'webserver.Server'
+}
+
+pitest {
+    targetClasses = ['fsc.*', 'gateway.*', 'webserver.*', 'dbGateway.*']
 }

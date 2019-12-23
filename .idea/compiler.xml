@@ -5,9 +5,6 @@
       <profile default="true" name="Default" enabled="true">
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="MyAnnotationProfile" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="facultyElections.main" target="11" />
