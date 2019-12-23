@@ -12,7 +12,16 @@ public interface VotingRoundResult {
   static VotingRoundResult tied(VoteTarget... candidates) {
     return new DrawVotingResult(candidates);
   }
-  VoteTarget getCandidate();
+  static VotingRoundResult tiedForFirst(VoteTarget... candidates) {
+    return new TiedForFirstResult(candidates);
+  }
+  default Collection<VoteTarget> getCandidatesToEliminate() {
+    return List.of();
+  }
+  default Collection<VoteTarget> getWinners() {
+    return List.of();
+  }
+
 
   class EliminationVotingRoundResult implements VotingRoundResult {
     public final VoteTarget candidate;
@@ -36,8 +45,8 @@ public interface VotingRoundResult {
       return "Eliminated{" + candidate + '}';
     }
 
-    public VoteTarget getCandidate() {
-      return candidate;
+    public Collection<VoteTarget> getCandidatesToEliminate() {
+      return List.of(candidate);
     }
   }
 
@@ -61,8 +70,8 @@ public interface VotingRoundResult {
       return "Winner{" + candidate + '}';
     }
 
-    public VoteTarget getCandidate() {
-      return candidate;
+    public Collection<VoteTarget> getWinners() {
+      return List.of(candidate);
     }
   }
 
@@ -88,10 +97,31 @@ public interface VotingRoundResult {
       return "Draw{" + candidates + '}';
     }
 
-    public VoteTarget getCandidate() {
-      Iterator<VoteTarget> iterator = candidates.iterator();
-      if (iterator.hasNext()) { return iterator.next(); }
-      throw new RuntimeException("Should not have NO candidates tied to last");
+    public Collection<VoteTarget> getCandidatesToEliminate() {
+      return candidates;
+    }
+  }
+
+  class TiedForFirstResult implements VotingRoundResult {
+    public Set<VoteTarget> candidates;
+
+    TiedForFirstResult(VoteTarget[] candidates) {
+      this.candidates = new HashSet<>(Arrays.asList(candidates));
+    }
+
+    public Collection<VoteTarget> getWinners() {
+      return candidates;
+    }
+
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      TiedForFirstResult that = (TiedForFirstResult) o;
+      return Objects.equals(candidates, that.candidates);
+    }
+
+    public int hashCode() {
+      return Objects.hash(candidates);
     }
   }
 }

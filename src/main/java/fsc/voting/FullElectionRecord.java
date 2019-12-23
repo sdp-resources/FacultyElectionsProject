@@ -1,6 +1,7 @@
 package fsc.voting;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class FullElectionRecord {
@@ -17,14 +18,22 @@ public class FullElectionRecord {
   }
 
   public void runElection() {
-    List<Vote> localVotes = Vote.snapshot(votes);
-    while(localVotes.size() > 0) {
-      ElectionRecord electionRecord = new ElectionRecord(Vote.snapshot(localVotes));
-      electionRecord.runElection();
-      electionRecords.add(electionRecord);
-      VoteTarget lastRoundWinner = electionRecord.getWinner();
-      localVotes.forEach(vote -> vote.remove(lastRoundWinner));
-      localVotes = Vote.snapshot(localVotes);
-    }
+    continueElectionWithVotes(Vote.snapshot(votes));
   }
+
+  private void continueElectionWithVotes(List<Vote> localVotes) {
+    if (localVotes.size() == 0) return;
+    for (VoteTarget winner : addNewRecordAndGetWinners(localVotes)) {
+      localVotes.forEach(vote -> vote.remove(winner));
+    }
+    continueElectionWithVotes(Vote.snapshot(localVotes));
+  }
+
+  private Collection<VoteTarget> addNewRecordAndGetWinners(List<Vote> localVotes) {
+    ElectionRecord electionRecord = new ElectionRecord(localVotes);
+    electionRecord.runElection();
+    electionRecords.add(electionRecord);
+    return electionRecord.getFinalWinners();
+  }
+
 }

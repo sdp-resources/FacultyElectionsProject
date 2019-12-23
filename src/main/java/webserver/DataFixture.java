@@ -133,7 +133,7 @@ public class DataFixture {
                                      List.of(skiadas, wilson, johnson, stokes, wahl));
     addVoteRecord(election2, skiadas, List.of(wilson, johnson, stokes));
     addVoteRecord(election2, wilson, List.of(johnson, stokes, skiadas));
-    addVoteRecord(election2, stokes, List.of(skiadas, johnson));
+    addVoteRecord(election2, stokes, List.of(stokes, johnson));
   }
 
   private Query queryFromString(String queryString) {

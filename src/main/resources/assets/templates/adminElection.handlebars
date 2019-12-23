@@ -182,17 +182,16 @@
   {{#each results.electionRecords}}
     {{#assign "recordId"}}electionRecord{{@index}}{{/assign}}
       <div id="electionRecord{{@index}}" class="electionRecord accordion mt-3">
-        <h3>Round {{@index}}: winner {{winner}}</h3>
+    <h3>Round {{@index}}: {{formatResult lastResult}}</h3>
         {{#each rounds}}
           <div class="card mb-0">
             <div class="card-header collapsed" id="round{{@index}}" data-toggle="collapse"
-                 data-target="#collapse{{@index}}" aria-expanded="true"
-                 aria-controls="collapse{{@index}}">
+                 data-target="#collapse{{recordId}}-{{@index}}" aria-expanded="true"
+                 aria-controls="collapse{{recordId}}-{{@index}}">
               <a class="card-title"> {{formatResult result}}</a>
             </div>
-            <div id="collapse{{@index}}" class="collapse"
-                 aria-labelledby="round{{@index}}"
-                 data-parent="#{{recordId}}">
+            <div id="collapse{{recordId}}-{{@index}}" class="collapse"
+                 aria-labelledby="round{{@index}}">
               <div class="card-body votingRound row">
                 <div class="col">
                   <table class="votesTbl table table-condensed">

@@ -27,7 +27,14 @@ class VotingRound {
   }
 
   private VotingRoundResult resultFromTiedForLast(VoteTarget[] candidates) {
-    return candidates.length == 1 ? lastCandidateEliminated() : VotingRoundResult.tied(candidates);
+    if (candidates.length == 1) {
+      return lastCandidateEliminated();
+    } else if (candidates.length == rankedTallies.size()) {
+      return VotingRoundResult.tiedForFirst(candidates);
+    } else {
+      return VotingRoundResult.tied(candidates);
+
+    }
   }
 
   private VotingRoundResult lastCandidateEliminated() {

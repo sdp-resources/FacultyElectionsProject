@@ -1,17 +1,13 @@
 package fsc.voting;
 
-import fsc.voting.VotingRoundResult.WinVotingRoundResult;
-
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ElectionRecord extends AbstractList<VotingRound> {
   private List<VotingRound> rounds = new ArrayList<>();
   private List<Vote> votes;
 
   public ElectionRecord(List<Vote> votes) {
-    this.votes = votes;
+    this.votes = Vote.snapshot(votes);
   }
 
   public void runElection() {
@@ -23,22 +19,25 @@ public class ElectionRecord extends AbstractList<VotingRound> {
     }
   }
 
-  public VoteTarget getWinner() {
-    VotingRoundResult lastResult = getLastResult();
-    if (lastResult instanceof WinVotingRoundResult) { return lastResult.getCandidate(); }
-    throw new RuntimeException("Last round should have had a winner, but did not!");
+  public Collection<VoteTarget> getFinalWinners() {
+    Collection<VoteTarget> winners = getLastResult().getWinners();
+    if (winners.size() == 0) {
+      throw new RuntimeException("Last round should have had a winner, but did not!");
+    }
+    return winners;
   }
 
   private void eliminateACandidate() {
-    VoteTarget candidate = getLastResult().getCandidate();
-    votes.forEach(vote -> vote.remove(candidate));
+    for (VoteTarget candidate : getLastResult().getCandidatesToEliminate()) {
+      votes.forEach(vote -> vote.remove(candidate));
+    }
   }
 
   private boolean lastRoundHadWinner() {
-    return getLastResult() instanceof WinVotingRoundResult;
+    return getLastResult().getWinners().size() > 0;
   }
 
-  private VotingRoundResult getLastResult() {
+  public VotingRoundResult getLastResult() {
     return lastRound().getResult();
   }
 

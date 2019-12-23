@@ -78,6 +78,9 @@ public class MyHandlebarsTemplateEngine extends HandlebarsTemplateEngine {
 
   private class ResultFormattingHelper implements Helper<VotingRoundResult> {
     public Object apply(VotingRoundResult context, Options options) throws IOException {
+      if (context == null) {
+        throw new RuntimeException("FormatHelper context should not be null");
+      }
       if (context instanceof WinVotingRoundResult) {
         WinVotingRoundResult winResult = (WinVotingRoundResult) context;
         return "Won: " + winResult.candidate;
@@ -93,7 +96,14 @@ public class MyHandlebarsTemplateEngine extends HandlebarsTemplateEngine {
                                 .map(VoteTarget::toString)
                                 .collect(Collectors.joining(" "));
       }
-      throw new IOException("Unknown class for voting round result");
+      if (context instanceof TiedForFirstResult) {
+        TiedForFirstResult tiedForFirst = (TiedForFirstResult) context;
+        return "Tied for first: " + tiedForFirst.candidates
+                                          .stream()
+                                          .map(VoteTarget::toString)
+                                          .collect(Collectors.joining(" "));
+      }
+      throw new IOException("Unknown class for voting round result: " + context.getClass());
     }
   }
 

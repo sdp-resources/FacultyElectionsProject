@@ -72,6 +72,10 @@ public class MyHandlebarsTemplateEngineTest {
           "{{formatResult this}}",
           VotingRoundResult.eliminate(VoteTarget.from("x")),
           "Eliminated: x");
+    assertTemplateInContextProduces(
+          "{{formatResult this}}",
+          VotingRoundResult.tiedForFirst(VoteTarget.from("x"), VoteTarget.from("y")),
+          "Tied for first: x y");
   }
 
   @Test
