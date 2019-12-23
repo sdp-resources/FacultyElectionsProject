@@ -40,5 +40,5 @@ application {
 }
 
 pitest {
-    targetClasses = ['fsc.*', 'gateway.*', 'webserver.*', 'dbGateway.*']
+    targetClasses = ['fsc.*', 'webserver.*', 'dbGateway.*']
 }
