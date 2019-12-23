@@ -74,7 +74,6 @@ public class Candidate {
     this.status = Status.valueOf(status);
   }
 
-  // TODO: Should be happening from Status internally??
   public boolean hasAccepted() {
     return status.equals(Status.Willing);
   }

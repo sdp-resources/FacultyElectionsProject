@@ -67,6 +67,12 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public Committee getCommitteeByName(String name) throws UnknownCommitteeException {
+    Committee committee = getCommitteeOrNull(name);
+    if (committee == null) { throw new UnknownCommitteeException(); }
+    return committee;
+  }
+
+  private Committee getCommitteeOrNull(String name) {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
     CriteriaQuery<Committee> q = cb.createQuery(Committee.class);
@@ -77,8 +83,7 @@ public class DatabaseBackedGateway implements Gateway {
     query.setParameter(nameParam, name);
 
     List<Committee> resultList = query.getResultList();
-    if (resultList.isEmpty()) { throw new UnknownCommitteeException(); }
-    return resultList.get(0);
+    return resultList.isEmpty() ? null : resultList.get(0);
   }
 
   public Committee getCommittee(Long id) throws UnknownCommitteeException {
@@ -104,13 +109,8 @@ public class DatabaseBackedGateway implements Gateway {
   }
 
   public boolean hasCommittee(String name) {
-    //TODO: Cleanup
-    try {
-      getCommitteeByName(name);
-      return true;
-    } catch (UnknownCommitteeException e) {
-      return false;
-    }
+    Committee committee = getCommitteeOrNull(name);
+    return committee != null;
   }
 
   public void addSeat(Seat seat) {

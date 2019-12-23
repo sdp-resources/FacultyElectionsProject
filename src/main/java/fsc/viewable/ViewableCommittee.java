@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class ViewableCommittee {
-  // TODO Fix model context so that we don't  need all these
-  //  getters just for handlebars
   public Long id;
   public String name;
   public String description;
@@ -21,22 +19,6 @@ public class ViewableCommittee {
     this.seats = seats;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public List<ViewableSeat> getSeats() {
-    return seats;
-  }
-
-  public String getVoterQuery() {
-    return voterQuery;
-  }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -48,9 +30,5 @@ public class ViewableCommittee {
 
   public int hashCode() {
     return Objects.hash(name, description, seats);
-  }
-
-  public Long getId() {
-    return id;
   }
 }

@@ -10,15 +10,15 @@ public class ThenCanFindProfiles {
   }
 
   public String fullname() {
-    return profile.getName();
+    return profile.name;
   }
 
   public String division() {
-    return profile.getDivision();
+    return profile.division;
   }
 
   public String contractType() {
-    return profile.getContract();
+    return profile.contract;
   }
 }
 

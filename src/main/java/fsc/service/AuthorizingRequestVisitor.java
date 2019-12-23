@@ -37,7 +37,6 @@ public class AuthorizingRequestVisitor implements RequestVisitor {
   }
 
   public Object visit(ViewVoterRequest request) {
-    // TODO: Test it
     return isAuthorizedAsAdminOrUser(request, request.username);
   }
 

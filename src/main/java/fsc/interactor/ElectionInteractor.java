@@ -180,11 +180,9 @@ public class ElectionInteractor extends Interactor {
   }
 
   private void automaticallyAddUndecidedCandidates(Election election) {
-    // TODO: Allow listeners to react
     for (Candidate candidate : election.getCandidates()) {
       if (candidate.hasNotResponded()) { candidate.setStatusAccepted(); }
     }
-
   }
 
   private Builder<Election, Response> createElection(Seat seat) {

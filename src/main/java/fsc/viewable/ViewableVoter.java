@@ -17,18 +17,6 @@ public class ViewableVoter {
     this.voted = voted;
   }
 
-  public long getVoterId() {
-    return voterId;
-  }
-
-  public long getElectionId() {
-    return electionId;
-  }
-
-  public boolean isVoted() {
-    return voted;
-  }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

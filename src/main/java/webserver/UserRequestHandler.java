@@ -31,7 +31,7 @@ public class UserRequestHandler extends RequestHandler {
   }
 
   private PersonalizedElection personalize(ViewableElection election) {
-    String username = session.getUsername();
+    String username = session.username;
     Candidate.Status candidateStatus = getCandidateStatusMatching(election, username);
     ViewableVoter voter = getVoterMatching(election, username);
     return new PersonalizedElection(election, candidateStatus, voter);

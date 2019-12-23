@@ -15,14 +15,6 @@ public class ViewableProfile {
     this.contract = contract;
   }
 
-  public String getName() { return name; }
-
-  public String getUsername() { return username; }
-
-  public String getDivision() { return division; }
-
-  public String getContract() { return contract; }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

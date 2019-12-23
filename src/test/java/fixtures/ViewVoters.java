@@ -22,7 +22,7 @@ public class ViewVoters {
   }
 
   private List<List<String>> getListFromVoter(ViewableVoter voter) {
-    return List.of(List.of("name", voter.profile.getUsername()),
+    return List.of(List.of("name", voter.profile.username),
                    List.of("electionId", String.valueOf(voter.electionId)),
                    List.of("voted", String.valueOf(voter.voted)),
                    List.of("voterId", String.valueOf(voter.voterId)));

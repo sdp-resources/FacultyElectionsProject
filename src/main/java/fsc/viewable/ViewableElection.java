@@ -32,18 +32,6 @@ public class ViewableElection {
     this.votes = votes;
   }
 
-  public long getElectionID() {
-    return electionID;
-  }
-
-  public ViewableSeat getSeat() {
-    return seat;
-  }
-
-  public String getQuery() {
-    return query;
-  }
-
   public Collection<ViewableCandidate> getUndecidedCandidates() {
     return candidates.stream().filter(c -> c.status.equals(Candidate.Status.NoAnswer))
                      .collect(Collectors.toList());
@@ -51,14 +39,6 @@ public class ViewableElection {
 
   public Collection<ViewableVoter> getPendingVoters() {
     return voters.stream().filter(c -> !c.voted).collect(Collectors.toList());
-  }
-
-  public Collection<ViewableVoter> getVoters() {
-    return voters;
-  }
-
-  public Collection<ViewableVoteRecord> getVotes() {
-    return votes;
   }
 
   public boolean equals(Object o) {

@@ -51,7 +51,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     assertTrue(electionGateway.hasSaved);
     assertNotNull(electionGateway.submittedVoter);
     ViewableVoter responseVoter = response.getValues();
-    assertEquals(USERNAME, responseVoter.profile.getUsername());
+    assertEquals(USERNAME, responseVoter.profile.username);
     assertElectionIdEquals(responseVoter.electionId, election.getID());
   }
 
@@ -145,7 +145,7 @@ public class AddViewRemoveVoterTest extends ElectionTest {
     assertTrue(response.isSuccessful());
     assertTrue(electionGateway.hasSaved);
     ViewableVoter responseVoter = response.getValues();
-    assertEquals(USERNAME, responseVoter.profile.getUsername());
+    assertEquals(USERNAME, responseVoter.profile.username);
   }
 
   @Test

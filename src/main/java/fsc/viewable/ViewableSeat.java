@@ -15,22 +15,6 @@ public class ViewableSeat {
     this.profile = profile;
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getQuery() {
-    return query;
-  }
-
-  public ViewableProfile getProfile() {
-    return profile;
-  }
-
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
