@@ -31,7 +31,8 @@ public class QueryValidationHandler extends RequestHandler {
   public Object validateQuery() {
     setTypeToJSON();
     String queryString = getRequestParameter("query");
-    fsc.response.Response<ViewableValidationResult> response = appContext.validateQueryString(queryString);
+    fsc.response.Response<ViewableValidationResult> response = appContext.validateQueryString(
+          queryString);
     ViewableValidationResult result = response.getValues();
     return result.isValid ? validResponse(result) : invalidResponse(result);
   }

@@ -7,7 +7,7 @@ public class PersistentUnitLocator {
     if (fec_env.toLowerCase().equals("dev")) {
       return "inmemoryH2";
     } else if (fec_env.toLowerCase().equals("prod")) {
-        return "testInDocker";
+      return "testInDocker";
     } else {
       throw new RuntimeException("Unknown environment: " + fec_env);
     }

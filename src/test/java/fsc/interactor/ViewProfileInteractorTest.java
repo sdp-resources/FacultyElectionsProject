@@ -30,7 +30,6 @@ public class ViewProfileInteractorTest {
     assertEquals(ResponseFactory.ofProfile(profile), response);
   }
 
-
   @Test
   public void whenViewingMissingProfile_returnErrorResponse() {
     InvalidProfileGatewaySpy gatewaySpy = new InvalidProfileGatewaySpy();

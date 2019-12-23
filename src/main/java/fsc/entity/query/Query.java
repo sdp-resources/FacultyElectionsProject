@@ -29,7 +29,6 @@ public abstract class Query implements Serializable {
     return new NotQuery(query);
   }
 
-
   public static NamedQuery named(String name) {
     return named(name, null);
   }

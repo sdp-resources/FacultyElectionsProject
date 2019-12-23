@@ -87,10 +87,13 @@ class QueryStringTokenizer {
 
   private void advanceLocation(int token) {
     switch (token) {
-      case TT_WORD: location += tokenizer.sval.length(); return;
-      case '"': location += tokenizer.sval.length() + 2; return;
+      case TT_WORD: location += tokenizer.sval.length();
+        return;
+      case '"': location += tokenizer.sval.length() + 2;
+        return;
       case '(':
-      case ')': location += 1; return;
+      case ')': location += 1;
+        return;
       case TT_EOF: return;
     }
   }

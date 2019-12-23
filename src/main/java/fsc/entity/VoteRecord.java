@@ -42,7 +42,7 @@ public class VoteRecord {
   }
 
   public boolean someProfilesAreNotCandidates() {
-    for (String username: votes) {
+    for (String username : votes) {
       if (!getElection().hasCandidate(username)) { return true; }
     }
     return false;

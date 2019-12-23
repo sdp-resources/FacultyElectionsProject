@@ -54,7 +54,7 @@ public class SerializerTest {
     String contract = "Tenured";
 
     Profile originalProfile = entityFactory
-                                        .createProfile(name, username, division, contract);
+                                    .createProfile(name, username, division, contract);
 
     Profile generatedProfile = serializer
                                      .stringToProfile(serializer.profileToString(originalProfile));

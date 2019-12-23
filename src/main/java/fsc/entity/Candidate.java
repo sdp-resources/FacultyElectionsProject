@@ -125,8 +125,8 @@ public class Candidate {
   public int hashCode() {
     return Objects.hash(candidateId, profile, election, status);
   }
-  private static class CandidateId implements Serializable {
 
+  private static class CandidateId implements Serializable {
 
     private String username;
     private Long electionId;

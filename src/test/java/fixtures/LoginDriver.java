@@ -16,7 +16,7 @@ public class LoginDriver {
 
   public boolean makeRequestWithToken(String token) {
     try {
-      return TestContext.app.addContractType("aType" +  token, token);
+      return TestContext.app.addContractType("aType" + token, token);
     } catch (Exception e) {
       return false;
     }

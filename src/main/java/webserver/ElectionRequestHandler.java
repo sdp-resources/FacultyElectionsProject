@@ -57,7 +57,7 @@ public class ElectionRequestHandler extends RequestHandler {
 
   private FullElectionRecord getElectionResults(long electionID) {
     Response<FullElectionRecord> electionResults = appContext.getElectionResults(electionID,
-                                                                             session.token);
+                                                                                 session.token);
     return electionResults.getValues();
   }
 
@@ -89,7 +89,8 @@ public class ElectionRequestHandler extends RequestHandler {
     String username = getRequestParameter("username");
     Response response = appContext.removeVoter(electionid, username, session.token);
     if (response.isSuccessful()) {
-      return redirectWithFlash(Path.adminElection(electionid) + "#voters", "Voter " + username + " removed");
+      return redirectWithFlash(Path.adminElection(electionid) + "#voters",
+                               "Voter " + username + " removed");
     }
     return redirectWithFlash(Path.adminElection(electionid) + "#voters", response);
   }
@@ -100,7 +101,8 @@ public class ElectionRequestHandler extends RequestHandler {
     String username = getRequestParameter("username");
     Response response = appContext.addVoter(electionid, username, session.token);
     if (response.isSuccessful()) {
-      return redirectWithFlash(Path.adminElection(electionid) + "#voters", "Voter " + username + " added");
+      return redirectWithFlash(Path.adminElection(electionid) + "#voters",
+                               "Voter " + username + " added");
     }
     return redirectWithFlash(Path.adminElection(electionid) + "#voters", response);
   }

@@ -73,7 +73,7 @@ public class QueryStringConverterTest {
 
   private void assertStringParserCorrespondsToQuery(String string, Query query)
         throws QueryStringParser.QueryParseException {
-    assertEquals(query.simplify(),queryStringConverter.fromString(string).simplify());
+    assertEquals(query.simplify(), queryStringConverter.fromString(string).simplify());
   }
 
 }

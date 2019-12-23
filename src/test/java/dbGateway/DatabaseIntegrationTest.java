@@ -69,13 +69,13 @@ public class DatabaseIntegrationTest extends BasicDatabaseTest {
   }
 
   private void examineSessionExpiryTimeIsAtThirtyMinutes(String token) {
-      try {
-        SessionGateway sessionGateway = new RedisStore("localhost");
-        AuthenticatedSession session = sessionGateway.getSession(token);
-        assertDifferenceWithinOneMinute(session.getExpirationTime(), MyTime.fromNow(30));
-      } catch (SessionGateway.InvalidOrExpiredTokenException e) {
-        throw new RuntimeException("failed");
-      }
+    try {
+      SessionGateway sessionGateway = new RedisStore("localhost");
+      AuthenticatedSession session = sessionGateway.getSession(token);
+      assertDifferenceWithinOneMinute(session.getExpirationTime(), MyTime.fromNow(30));
+    } catch (SessionGateway.InvalidOrExpiredTokenException e) {
+      throw new RuntimeException("failed");
+    }
   }
 
   private void assertDifferenceWithinOneMinute(MyTime time1, MyTime time2) {

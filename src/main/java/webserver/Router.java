@@ -201,7 +201,7 @@ public class Router {
 
   protected Gateway getGateway() {
     return DatabaseBackedGatewayFactory
-                            .getInstance(persistenceUnit)
-                            .obtainGateway();
+                 .getInstance(persistenceUnit)
+                 .obtainGateway();
   }
 }

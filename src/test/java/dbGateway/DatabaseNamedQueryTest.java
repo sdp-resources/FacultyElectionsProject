@@ -35,7 +35,8 @@ public class DatabaseNamedQueryTest extends BasicDatabaseTest {
         throws QueryStringParser.QueryParseException {
     saveBothQueries();
     QueryStringConverter converter =
-          new QueryStringConverter(new ValidatingQueryStringParserFactory(gateway.getNameValidator()));
+          new QueryStringConverter(
+                new ValidatingQueryStringParserFactory(gateway.getNameValidator()));
     Query resultQuery = converter.fromString(IS_TENURED + " and " + IS_NAT_SCI);
     assertEquals(Query.all(Query.named(IS_TENURED, query),
                            Query.named(IS_NAT_SCI, divisionQuery)),

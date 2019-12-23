@@ -38,7 +38,8 @@ public class CreateElectionInteractionTest extends ElectionTest {
   public void testCorrectElectionCreation() {
     electionGateway = new AddedElectionGatewaySpy(ELECTION_ID);
     AcceptingCommitteeGatewaySpy committeeGateway = new AcceptingCommitteeGatewaySpy();
-    interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway, entityFactory);
+    interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway,
+                                        entityFactory);
     response = interactor.handle(request);
     assertTrue(response.isSuccessful());
     assertEquals(request.seatId, (long) electionGateway.addedElection.getSeat().getId());
@@ -52,7 +53,8 @@ public class CreateElectionInteractionTest extends ElectionTest {
   public void whenSeatMissingThenReturnsErrorResponse() {
     electionGateway = new AddedElectionGatewaySpy(2);
     RejectingCommitteeGatewaySpy committeeGateway = new RejectingCommitteeGatewaySpy();
-    interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway, entityFactory);
+    interactor = new ElectionInteractor(electionGateway, committeeGateway, profileGateway,
+                                        entityFactory);
     response = interactor.handle(request);
     assertEquals(ResponseFactory.unknownSeatName(), response);
     assertNull(electionGateway.addedElection);

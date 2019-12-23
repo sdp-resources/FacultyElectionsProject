@@ -36,7 +36,7 @@ class JSONClient extends WebClient {
     return this;
   }
 
-    JSONClient assertServedTypeIsJSON() {
+  JSONClient assertServedTypeIsJSON() {
     assertThat(response.header("content-type"), containsString("application/json"));
     return this;
   }

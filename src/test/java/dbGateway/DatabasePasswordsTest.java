@@ -2,7 +2,8 @@ package dbGateway;
 
 import fsc.entity.PasswordRecord;
 import fsc.gateway.PasswordGateway;
-import fsc.service.*;
+import fsc.service.Authorizer;
+import fsc.service.Credentials;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

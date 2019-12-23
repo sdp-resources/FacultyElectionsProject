@@ -18,6 +18,7 @@ public class Path {
   static String validate() {
     return join("validate");
   }
+
   static String queryAll() { return join("admin", "query"); }
 
   public static String queryNamed() {
@@ -31,6 +32,7 @@ public class Path {
   static String user() {
     return join("user");
   }
+
   static String ballot() {
     return ballot(":electionId");
   }
@@ -51,7 +53,7 @@ public class Path {
     return join("admin", "committee");
   }
 
-  static  String committee() {
+  static String committee() {
     return committee(":committeeName");
   }
 
@@ -79,7 +81,7 @@ public class Path {
     return join("admin", "seat", committeeName, seatName);
   }
 
-  static String ballot(String name) { return join("ballot", name ); }
+  static String ballot(String name) { return join("ballot", name); }
 
   static String ballot(Long electionID) {
     return join("ballot", String.valueOf(electionID));
@@ -150,6 +152,6 @@ public class Path {
   }
 
   public static String voterDelete(Long electionId, String username) {
-    return voterDelete( String.valueOf(electionId), username);
+    return voterDelete(String.valueOf(electionId), username);
   }
 }

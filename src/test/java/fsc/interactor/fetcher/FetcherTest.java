@@ -58,10 +58,10 @@ public class FetcherTest {
     electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, null);
     Response response = ((Builder<Election, Response>) electionFetcher
                                                              .fetchElection(election.getID()))
-                                       .resolveWith(election1 -> {
-                                         assertEquals(election, election1);
-                                         return ResponseFactory.success();
-                                       });
+                              .resolveWith(election1 -> {
+                                assertEquals(election, election1);
+                                return ResponseFactory.success();
+                              });
     assertEquals(ResponseFactory.success(), response);
   }
 
@@ -72,7 +72,7 @@ public class FetcherTest {
     election.setID((long) 3);
     Response response = ((Builder<Election, Response>) electionFetcher
                                                              .fetchElection(election.getID()))
-                                       .resolveWith(election1 -> failTest());
+                              .resolveWith(election1 -> failTest());
     assertEquals(ResponseFactory.unknownElectionID(), response);
   }
 
@@ -80,9 +80,10 @@ public class FetcherTest {
   public void whenGivenInvalidVoterId_voterFetcherReturnsError() {
     profileGateway = new InvalidProfileGatewaySpy();
     electionGateway = new ProvidedElectionGatewaySpy(election);
-    electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null, new SimpleEntityFactory());
+    electionFetcher = new ElectionFetcher(electionGateway, profileGateway, null,
+                                          new SimpleEntityFactory());
     Response response = electionFetcher.fetchVoter(5)
-                                      .resolveWith(voter -> failTest());
+                                       .resolveWith(voter -> failTest());
     assertEquals(ResponseFactory.invalidVoter(), response);
   }
 

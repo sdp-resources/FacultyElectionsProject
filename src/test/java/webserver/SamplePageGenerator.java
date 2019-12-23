@@ -4,6 +4,7 @@ import fsc.entity.Election;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.file.FileSystem;
 import java.nio.file.*;
 import java.util.Collection;
 
@@ -32,7 +33,8 @@ public class SamplePageGenerator extends ServerTest {
                     WebClients.adminLoggedInClient().followGet(Path.adminElections()));
     for (Election election : getElections()) {
       writePageToFile("admin/adminElection" + election.getID() + ".html",
-                      WebClients.adminLoggedInClient().followGet(Path.adminElection(election.getID())));
+                      WebClients.adminLoggedInClient()
+                                .followGet(Path.adminElection(election.getID())));
     }
     try {
       writePageToFile("voting.html",

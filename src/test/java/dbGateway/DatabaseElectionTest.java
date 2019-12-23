@@ -42,8 +42,8 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
     }
     gateway.begin();
     Profile profile2 = gateway.getEntityFactory()
-                             .createProfile("Theresa  Wilson", "wilsont",
-                                            "Natural Sciences", "tenure-track");
+                              .createProfile("Theresa  Wilson", "wilsont",
+                                             "Natural Sciences", "tenure-track");
     gateway.addProfile(profile2);
     Candidate candidate2 = gateway.getEntityFactory().createCandidate(profile2, election);
     election.addCandidate(candidate2);
@@ -60,7 +60,7 @@ public class DatabaseElectionTest extends BasicDatabaseTest {
     assertEquals(1, anotherGatewayElection.getVoters().size());
     assertEquals(voter, anotherGateway.getVoter(voter.getVoterId()));
     for (Voter voter1 : anotherGatewayElection.getVoters()) {
-      assertEquals(voter,  voter1);
+      assertEquals(voter, voter1);
       assertEquals(election, voter1.getElection());
       assertEquals(false, voter1.hasVoted());
     }

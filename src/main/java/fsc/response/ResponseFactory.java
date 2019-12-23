@@ -22,6 +22,7 @@ public class ResponseFactory {
   public static Response ofFullElectionRecord(FullElectionRecord record) {
     return new ViewResponse<>(record);
   }
+
   public static Response ofProfile(Profile profile) {
     return new ViewResponse<>(entityConverter.convert(profile));
   }
@@ -86,7 +87,7 @@ public class ResponseFactory {
     return new ErrorResponse(ErrorResponse.RESOURCE_EXISTS);
   }
 
-  public static <S>Response<S> notAuthorized() {
+  public static <S> Response<S> notAuthorized() {
     return new ErrorResponse<>(ErrorResponse.NOT_AUTHORIZED);
   }
 

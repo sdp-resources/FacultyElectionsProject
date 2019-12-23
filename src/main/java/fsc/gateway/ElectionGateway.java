@@ -24,7 +24,7 @@ public interface ElectionGateway {
 
   class InvalidVoterException extends Exception {}
 
-  class ExistingVoterException extends Exception { }
+  class ExistingVoterException extends Exception {}
 
   class NoProfileInBallotException extends Exception {}
 }

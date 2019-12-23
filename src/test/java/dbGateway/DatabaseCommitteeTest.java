@@ -68,8 +68,9 @@ public class DatabaseCommitteeTest extends BasicDatabaseTest {
                CommitteeGateway.UnknownSeatNameException {
     saveCommitteeSeatAndProfile();
     String newName = returnWithNewGateway(this::changeSeatInformation);
-    assertSeatHasGivenQueryAndProfile(anotherGateway.getSeatByCommitteeAndSeatName(COMMITTEE_NAME, newName),
-                                      Query.never(), profile);
+    assertSeatHasGivenQueryAndProfile(
+          anotherGateway.getSeatByCommitteeAndSeatName(COMMITTEE_NAME, newName),
+          Query.never(), profile);
   }
 
   private void assertSeatHasGivenQueryAndProfile(

@@ -106,7 +106,6 @@ public class DatabaseBasicBehaviorTest {
     assertFalse(manager.getTransaction().isActive());
   }
 
-
   private PasswordRecord aPasswordRecord() {
     return PasswordRecord.create("admin", "something", Authorizer.Role.ROLE_ADMIN);
   }

@@ -54,25 +54,25 @@ public class AddPasswordRecordInteractionTest {
   }
 
   //  @Test
-//  public void authorizationAccepted_givesTokenAndRole() {
-//    String username = "admin";
-//    String password = "1234";
-//    LoginRequest request = new LoginRequest(username, password);
-//
-//    Authorizer.Role expectedRole = Authorizer.Role.ROLE_ADMIN;
-//
-//    AcceptingAuthenticatorSpy authenticator = new AcceptingAuthenticatorSpy();
-//    sessionGateway = new SessionGatewaySpy();
-//    interactor = new LoginInteractor(sessionGateway, authenticator, null);
-//
-//    Response response = interactor.handle(request);
-//
-//    ViewableSession viewableSession = response.getValues();
-//
-//    assertEquals(expectedRole.toString(), viewableSession.role);
-//    assertEquals(authenticator.token, viewableSession.token);
-//    assertEquals(sessionGateway.addedSession.getToken(), viewableSession.token);
-//    assertEquals(expectedRole, sessionGateway.addedSession.getRole());
-//    assertTrue(sessionGateway.hasSaved);
-//  }
+  //  public void authorizationAccepted_givesTokenAndRole() {
+  //    String username = "admin";
+  //    String password = "1234";
+  //    LoginRequest request = new LoginRequest(username, password);
+  //
+  //    Authorizer.Role expectedRole = Authorizer.Role.ROLE_ADMIN;
+  //
+  //    AcceptingAuthenticatorSpy authenticator = new AcceptingAuthenticatorSpy();
+  //    sessionGateway = new SessionGatewaySpy();
+  //    interactor = new LoginInteractor(sessionGateway, authenticator, null);
+  //
+  //    Response response = interactor.handle(request);
+  //
+  //    ViewableSession viewableSession = response.getValues();
+  //
+  //    assertEquals(expectedRole.toString(), viewableSession.role);
+  //    assertEquals(authenticator.token, viewableSession.token);
+  //    assertEquals(sessionGateway.addedSession.getToken(), viewableSession.token);
+  //    assertEquals(expectedRole, sessionGateway.addedSession.getRole());
+  //    assertTrue(sessionGateway.hasSaved);
+  //  }
 }

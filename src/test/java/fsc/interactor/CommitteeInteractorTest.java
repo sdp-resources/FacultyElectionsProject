@@ -54,5 +54,4 @@ public class CommitteeInteractorTest {
     assertEquals(ResponseFactory.resourceExists(), response);
   }
 
-
 }

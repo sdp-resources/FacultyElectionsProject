@@ -18,7 +18,9 @@ public class SessionCreator {
     return createSession(role, username, token, STANDARD_DURATION_MINS);
   }
 
-  private AuthenticatedSession createSession(Role role, String username, String token, long minutes) {
+  private AuthenticatedSession createSession(
+        Role role, String username, String token, long minutes
+  ) {
     return new AuthenticatedSession(role, username, token, generateExpiryDate(minutes));
   }
 

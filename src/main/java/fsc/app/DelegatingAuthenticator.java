@@ -2,12 +2,13 @@ package fsc.app;
 
 import fsc.entity.session.Session;
 import fsc.entity.session.UnauthenticatedSession;
-import fsc.service.*;
+import fsc.service.Authenticator;
+import fsc.service.Credentials;
 
 public class DelegatingAuthenticator implements Authenticator {
   private Authenticator[] authenticators;
 
-  public DelegatingAuthenticator(Authenticator ...authenticators) {
+  public DelegatingAuthenticator(Authenticator... authenticators) {
 
     this.authenticators = authenticators;
   }

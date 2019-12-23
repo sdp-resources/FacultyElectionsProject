@@ -48,8 +48,10 @@ public class ProfileFetcher {
     return profilesSet.size() != profiles.size();
   }
 
-  public Builder<Profile, Response> makeProfile(String name, String username, String division,
-                                       String contract) {
+  public Builder<Profile, Response> makeProfile(
+        String name, String username, String division,
+        String contract
+  ) {
     return Builder.ofValue(
           entityFactory.createProfile(name, username, division, contract));
   }

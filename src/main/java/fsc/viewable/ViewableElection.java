@@ -51,7 +51,7 @@ public class ViewableElection {
                  Objects.equals(query, that.query) &&
                  Objects.equals(candidates, that.candidates) &&
                  Objects.equals(voters, that.voters) &&
-                 Objects.equals(votes, that.votes) ;
+                 Objects.equals(votes, that.votes);
   }
 
   public int hashCode() {

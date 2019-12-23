@@ -15,10 +15,10 @@ public class ViewVoters {
 
   public List<List<List<String>>> query() {
     return TestContext.app.viewElection(electionId)
-                          .voters
-                          .stream()
-                          .map(this::getListFromVoter)
-                          .collect(Collectors.toList());
+                 .voters
+                 .stream()
+                 .map(this::getListFromVoter)
+                 .collect(Collectors.toList());
   }
 
   private List<List<String>> getListFromVoter(ViewableVoter voter) {

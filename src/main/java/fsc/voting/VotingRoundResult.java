@@ -22,7 +22,6 @@ public interface VotingRoundResult {
     return List.of();
   }
 
-
   class EliminationVotingRoundResult implements VotingRoundResult {
     public final VoteTarget candidate;
 

@@ -22,7 +22,8 @@ public class EditCommitteeInteractorTest {
 
   @Test
   public void changeOnNonexistantCommitteeGivesErrorResponse() {
-    interactor = new CommitteeInteractor(new RejectingCommitteeGatewaySpy(), null, entityFactory, null);
+    interactor = new CommitteeInteractor(new RejectingCommitteeGatewaySpy(), null, entityFactory,
+                                         null);
     HashMap<String, Object> changes = new HashMap<>();
     changes.put("name", "steering wheel");
     EditCommitteeRequest request = new EditCommitteeRequest(0, changes);

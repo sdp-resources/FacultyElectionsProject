@@ -32,16 +32,16 @@ public class ElectionBuilder extends DelegatingBuilder<Election, Response> {
   }
 
   public Builder<Candidate, Response> retrieveCandidate(String username) {
-      return mapThrough(election -> {
-        try {
-          return Builder.ofValue(election.getCandidateByUsername(username));
-        } catch (ElectionGateway.NoProfileInBallotException e) {
-          return Builder.ofResponse(ResponseFactory.invalidCandidate());
-        }
-      });
+    return mapThrough(election -> {
+      try {
+        return Builder.ofValue(election.getCandidateByUsername(username));
+      } catch (ElectionGateway.NoProfileInBallotException e) {
+        return Builder.ofResponse(ResponseFactory.invalidCandidate());
+      }
+    });
   }
 
   public Builder<Collection<Profile>, Response> getCandidateProfiles() {
-     return builder.mapThrough(Builder.lift(Election::getCandidateProfiles));
+    return builder.mapThrough(Builder.lift(Election::getCandidateProfiles));
   }
 }

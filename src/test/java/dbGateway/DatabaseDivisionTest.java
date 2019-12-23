@@ -21,7 +21,7 @@ public class DatabaseDivisionTest extends BasicDatabaseTest {
 
   private void saveTheDivision() {
     division = gateway.getEntityFactory()
-                     .createDivision("Natural Sciences");
+                      .createDivision("Natural Sciences");
     gateway.addDivision(division);
     gateway.commit();
   }

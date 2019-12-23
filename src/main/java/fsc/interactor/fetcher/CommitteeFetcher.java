@@ -21,7 +21,7 @@ public class CommitteeFetcher extends ProfileFetcher {
         CommitteeGateway committeeGateway, ProfileGateway profileGateway,
         EntityFactory entityFactory
   ) {
-    super(profileGateway,  entityFactory);
+    super(profileGateway, entityFactory);
     this.committeeGateway = committeeGateway;
     this.entityFactory = entityFactory;
   }
@@ -61,7 +61,6 @@ public class CommitteeFetcher extends ProfileFetcher {
       return Builder.ofResponse(ResponseFactory.unknownSeatName());
     }
   }
-
 
   public Builder<Committee, Response> makeCommittee(
         String name, String description, Query voterQuery

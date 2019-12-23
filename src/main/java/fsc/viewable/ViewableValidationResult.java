@@ -17,7 +17,7 @@ public class ViewableValidationResult {
       this.isValid = true;
       this.message = ((ValidQueryResult) result).normalizedQueryString;
       this.expandedString = ((ValidQueryResult) result).expandedQueryString;
-    } else if (result  instanceof InvalidQueryResult) {
+    } else if (result instanceof InvalidQueryResult) {
       this.isValid = false;
       this.message = ((InvalidQueryResult) result).errorMessage;
       this.expandedString = null;

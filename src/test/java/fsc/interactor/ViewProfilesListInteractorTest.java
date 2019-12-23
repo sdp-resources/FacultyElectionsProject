@@ -32,7 +32,8 @@ public class ViewProfilesListInteractorTest {
     profile2 = EntityStub.getProfile(1);
     profile3 = EntityStub.getProfile(2);
     profileGatewaySpy = new ProfileGatewayStub(profile1, profile2, profile3);
-    interactor = new ProfileInteractor(profileGatewaySpy, new SimpleEntityFactory(), new AcceptingNameValidator());
+    interactor = new ProfileInteractor(profileGatewaySpy, new SimpleEntityFactory(),
+                                       new AcceptingNameValidator());
   }
 
   @Test

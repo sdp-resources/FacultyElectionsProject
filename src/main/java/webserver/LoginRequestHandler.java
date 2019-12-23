@@ -23,10 +23,10 @@ public class LoginRequestHandler extends RequestHandler {
   }
 
   Object processPostLogin() {
-    fsc.response.Response<ViewableSession> response = appContext.login(getRequestParameter("username"),
-                                                      getRequestParameter("password"));
-    if (!response.isSuccessful())
-      return redirectWithFlash(Path.login(), response);
+    fsc.response.Response<ViewableSession> response = appContext
+                                                            .login(getRequestParameter("username"),
+                                                                   getRequestParameter("password"));
+    if (!response.isSuccessful()) { return redirectWithFlash(Path.login(), response); }
 
     ViewableSession session = response.getValues();
     storeSession(session);

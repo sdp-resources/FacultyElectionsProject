@@ -20,7 +20,7 @@ public class ViewElections {
                    List.of("number of voters", String.valueOf(election.voters.size())),
                    List.of("number of votes", String.valueOf(election.votes.size())),
                    List.of("electionId", String.valueOf(election.electionID))
-          );
+    );
 
   }
 

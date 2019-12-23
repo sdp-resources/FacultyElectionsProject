@@ -4,7 +4,8 @@ public class EditNamedQueryRequest extends Request {
   public final String name;
   public final String queryString;
 
-  public EditNamedQueryRequest(String name, String queryString) {super();
+  public EditNamedQueryRequest(String name, String queryString) {
+    super();
     this.name = name;
     this.queryString = queryString;
   }

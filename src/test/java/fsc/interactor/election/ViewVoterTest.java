@@ -29,7 +29,7 @@ public class ViewVoterTest extends ElectionTest {
 
   @Before
   public void setUp() {
-    profiles = new Profile[]{ EntityStub.getProfile(1), EntityStub.getProfile(2) };
+    profiles = new Profile[]{EntityStub.getProfile(1), EntityStub.getProfile(2)};
     election = EntityStub.simpleElectionWithCandidates(profiles[0]);
     voter = new Voter(profiles[0], election);
     election.addVoter(voter);

@@ -100,7 +100,7 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(GetElectionResultsRequest request) {
     return electionFetcher.fetchElectionResults(request.electionID)
-          .resolveWith(ResponseFactory::ofFullElectionRecord);
+                          .resolveWith(ResponseFactory::ofFullElectionRecord);
   }
 
   public Response execute(ViewVoteRecordRequest request) {
@@ -129,7 +129,8 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(AddVoterRequest request) {
     return electionFetcher.fetchProfile(request.username)
-                          .bindWith(electionFetcher.fetchElectionInValidChangeVoterState(request.electionId),
+                          .bindWith(electionFetcher
+                                          .fetchElectionInValidChangeVoterState(request.electionId),
                                     electionFetcher::createVoter)
                           .mapThrough(electionFetcher::addVoter)
                           .perform(electionFetcher::save)
@@ -138,7 +139,8 @@ public class ElectionInteractor extends Interactor {
 
   public Response execute(RemoveVoterRequest request) {
     return electionFetcher.fetchProfile(request.username)
-                          .bindWith(electionFetcher.fetchElectionInValidChangeVoterState(request.electionId),
+                          .bindWith(electionFetcher
+                                          .fetchElectionInValidChangeVoterState(request.electionId),
                                     electionFetcher::removeVoter)
                           .perform(electionFetcher::save)
                           .resolveWith(ResponseFactory::ofVoter);
