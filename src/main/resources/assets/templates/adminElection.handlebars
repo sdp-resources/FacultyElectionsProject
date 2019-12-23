@@ -115,6 +115,11 @@
         {{/if}}
       </div>
     </form>
+    <div>
+      <a href="mailto:?subject=Voting for {{election.seat.name}}&Bcc={{#each
+            election.pendingVoters}}{{#neq @index 0}},{{/neq}}{{profile.username}}@hanover.edu{{/each}}">
+      Email pending voters</a>
+    </div>
     <table class="table table-condensed w-50">
       <thead>
       <tr>

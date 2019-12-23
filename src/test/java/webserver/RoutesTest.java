@@ -133,9 +133,8 @@ public class RoutesTest extends ServerTest {
         client.followPost(Path.decideToStand(election), parameters)
               .assertRedirectsTo(Path.user())
               .followGet(Path.user())
-              .assertResponseCodeIs(200);
-        // TODO: Find a way to check this?
-        //              .assertMatch(Matcher.contains("Candidate status: Willing"));
+              .assertResponseCodeIs(200)
+              .assertFlashMatches(Matcher.contains("elected to stand"));
       }
     }
   }

@@ -49,6 +49,10 @@ public class ViewableElection {
                      .collect(Collectors.toList());
   }
 
+  public Collection<ViewableVoter> getPendingVoters() {
+    return voters.stream().filter(c -> !c.voted).collect(Collectors.toList());
+  }
+
   public Collection<ViewableVoter> getVoters() {
     return voters;
   }
